@@ -1,4 +1,4 @@
-enabled: false
-status: deferred
-reason: 初版本只生成 reports/final_summary.md，不生成论文草稿或终稿
-replacement: reports/final_summary.md
+enabled: true
+status: draft
+reason: demo 开启论文流程：基于已归档产物生成 draft_paper.md（paper-writer 以助手角色直接撰写），校验通过后生成终稿
+replacement: reports/paper/draft_paper.md
