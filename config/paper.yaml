@@ -2,3 +2,77 @@ enabled: true
 status: draft
 reason: demo 开启论文流程：基于已归档产物生成 draft_paper.md（paper-writer 以助手角色直接撰写），校验通过后生成终稿
 replacement: reports/paper/draft_paper.md
+draft_output: reports/paper/draft_paper.md
+output: reports/paper/final_paper.md
+
+# 《全国大学生数学建模竞赛人工智能工具使用规定（2026年试行）》第 3 条：
+# 参赛队应在论文「参考文献」之前设置「AI 工具使用声明」，两种表述二选一。
+# 第 4 条：使用 AI 工具的，支撑材料须包含《AI 工具使用详情.pdf》（文件名固定）。
+ai_declaration:
+  used: true
+  purposes: "文献检索与元数据核验、模型与公式推导辅助、代码实现与调试、结果一致性检查、语言润色"
+  detail_filename: "AI 工具使用详情.pdf"
+  detail_required_in_support: true
+  detail:
+    output: "reports/support/AI 工具使用详情.pdf"
+    markdown_output: "reports/support/AI 工具使用详情.md"
+    font: "C:/Windows/Fonts/simhei.ttf"
+    title: "AI 工具使用详情"
+    subtitle: "2026 年高教社杯全国大学生数学建模竞赛 · C 题  微网与外部电网电力调控策略"
+    # {key} 占位符由脚本按运行环境自动填充；未知占位符会直接报错，避免带着未填项提交。
+    tools:
+      - name: "DeepSeek Harness（dsh）"
+        version: "{dsh_version}（headless profile）"
+        role: "本地 Agent 运行时：按阶段组装提示词、回收结构化响应、驱动工作流状态机"
+      - name: "DeepSeek 大语言模型"
+        version: "{dsh_model}"
+        role: "上述各阶段 Agent 的底层生成模型，通过 dsh headless profile 调用"
+      - name: "GitHub Copilot（VS Code 扩展，本会话模型 DeepSeek V4 Flash）"
+        version: "随扩展自动更新，未固定版本号"
+        role: "人机结对：环境配置、脚本编写与调试、题面与附件格式解析、终端操作"
+    purposes:
+      - "题面解析与工作流拆解：划分小问、登记全局符号表、检查小问间依赖"
+      - "文献检索与元数据核验：生成候选文献池并核验题录信息"
+      - "假设显式化：把题面未给出的口径写成可版本化的假设条目并标注依据"
+      - "模型与公式推导辅助：起草目标函数、约束与求解思路，供人工判断取舍"
+      - "求解代码实现与调试：编写与修改求解脚本、排查运行错误"
+      - "计算结果的一致性检查：量纲、边界、约束残差与常识性核对"
+      - "图表生成脚本：绘图样式统一与图形文件产出"
+      - "论文初稿组织与语言润色：按模板组织章节、统一符号与编号、润色行文"
+      - "环境与流程操作：依赖安装、目录整理、命令执行等工程性工作"
+    prompting:
+      - "分阶段结构化提示词：每个阶段 Agent 只接收当前阶段的输入清单、约束条件和输出要求，不接触后续阶段的答案"
+      - "强制结构化输出：响应必须是符合 config/agent_response.schema.json 的 JSON，由 harness 校验后才允许改动状态"
+      - "状态机与 AI 解耦：工作流状态只能由 harness 的 commands 推进，模型不能直接编辑 runtime/workflow_state.json"
+      - "要求可核验依据：结论须指明数据出处（附件与行列）、公式编号或文献 ID，禁止无出处的断言"
+      - "要求显式失败：信息不足时必须报告缺口并按失败类型路由，不允许编造数据或结论"
+    examples:
+      - label: "示例 1（题面解析）"
+        text: "输入：request/problem.md 全题面 + 附件结构说明。要求：拆解小问，输出 JSON 形式的题目理解、小问清单与全局符号表；对题面未给定的口径只能登记为待定假设，不得自行取值。模型输出经 harness 校验后写入 problems/<id>/problem_understanding.md。"
+      - label: "示例 2（计算与核验）"
+        text: "输入：已接受的假设版本与公式版本、求解脚本、任务输出目录。要求：在隔离 task 中运行并给出约束残差、可行性结论和异常项；禁止修改假设或公式。结果由 sanity-checker 阶段独立复核，未通过则退回重做。"
+    review:
+      - "版本门禁：假设与公式的每个版本都需显式 ACCEPT/REJECT，模型不能自行放行"
+      - "结构化校验：Agent 响应必须通过 JSON schema 校验，命令批次失败时整体回滚状态"
+      - "计算隔离：计算在独立 task 与独立输出目录中运行，避免覆盖既有结果"
+      - "独立复核：sanity-checker 对数量级、边界、约束残差和常识性做检查；引用与图表在论文校验阶段做双向闭合检查"
+      - "人工审查：所有 AI 生成的假设、公式、代码、结果和论文文字均逐项人工复核，确认与题面、数据和实际运行结果一致后才进入下一阶段"
+      - "不采用即丢弃：与数据、题面或运行结果冲突的 AI 输出一律退回重做，不得直接作为结论"
+      - "语言润色只改表述，不改变技术内容与数值结果"
+
+# 《论文格式规范》第五条：附录必须含支撑材料文件列表和建模用到的全部完整、可运行源程序代码。
+appendix:
+  required: true
+  support_material_roots:
+    - "reports/support"
+  source_globs:
+    - "problems/{problem_id}/**/code/**/*.py"
+    - "problems/{problem_id}/**/code/**/*.m"
+    - "problems/{problem_id}/**/code/**/*.R"
+    - "problems/{problem_id}/**/code/**/*.jl"
+  no_support_statement: "本论文没有支撑材料。"
+  no_program_statement: "本论文没有用到程序。"
+  # 只有当队伍确实没有支撑材料 / 没有用到程序时，才把下列开关改为 true；
+  # 否则附录校验会拒绝一个未真正产出内容的附录。
+  no_support_confirmed: false
+  no_program_confirmed: false

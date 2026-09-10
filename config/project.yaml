@@ -2,10 +2,10 @@ project_id: automm_project
 language: zh-CN
 mode: full_auto
 paths_file: config/paths.yaml
-active_problem: ""
+active_problem: "microgrid_2025"
 request_file: request/problem.md
 metadata:
-  competition_name: ""
-  year: ""
+  competition_name: "2026 年高教社杯全国大学生数学建模竞赛 C 题：微网与外部电网电力调控策略"
+  year: "2026"
   team_name: ""
   team_members: []

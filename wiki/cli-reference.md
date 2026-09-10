@@ -44,6 +44,22 @@ python scripts/archive_artifacts.py --problem-id demo
 
 最终摘要命令当前承担归档索引构建。只有小问总结和跨问审查闭合后才执行。
 
+## 论文与支撑材料
+
+```text
+python scripts/build_paper.py draft --with-appendix
+python scripts/build_paper.py appendix
+python scripts/build_paper.py validate --draft reports/paper/draft_paper.md
+python scripts/build_paper.py final --approval-file <approval.json>
+python scripts/build_ai_usage_detail.py
+python scripts/build_ai_usage_detail.py --facts-only
+```
+
+- `draft` 按 `config/paper.yaml` 生成论文草稿；`--with-appendix` 同时拼上附录。正文顺序为「模型评价与不足 → AI 工具使用声明 → 参考文献 → 附录」，AI 声明必须位于参考文献之前。
+- `appendix` 可对已有草稿重新拼装附录（支撑材料文件列表 + 内联源程序代码），重复执行不会产生多份附录。
+- `validate` 除引用/图表闭合外，还校验 AI 工具使用声明的位置与表述、附录是否真正含文件列表与源程序。
+- `build_ai_usage_detail.py` 按《人工智能工具使用规定（2026 年试行）》第 4 条生成支撑材料 `reports/support/AI 工具使用详情.pdf`（同时输出同名 Markdown 供校对）；内容取自 `config/paper.yaml` 的 `ai_declaration.detail`，`{key}` 占位符由运行环境自动填充，未填项直接报错。
+
 ## 邮件和控制
 
 ```text

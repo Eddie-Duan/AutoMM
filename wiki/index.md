@@ -16,6 +16,7 @@
 
 - [`configuration.md`](configuration.md)：配置覆盖关系和关键开关。
 - [`agents-and-skills.md`](agents-and-skills.md)：专职 Agent、Skill 和结构化返回协议。
+- [`工作流.md`](工作流.md)：13 个阶段与 Agent 提示词文件的映射、例外及人工介入点。
 - [`assumptions-formulations.md`](assumptions-formulations.md)：假设版本与公式版本。
 - [`literature-citations.md`](literature-citations.md)：文献池、证据等级和引用闭合。
 - [`compute-tasks.md`](compute-tasks.md)：本地任务、并发、去重和后续远端后端。

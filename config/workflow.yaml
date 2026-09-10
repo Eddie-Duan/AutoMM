@@ -40,3 +40,18 @@ flags:
 lock:
   path: runtime/locks/orchestrator.lock
   stale_after_minutes: 60
+
+
+#1. problem_understanding	problem-decomposer	拆解小问、符号表、依赖图
+#2. literature_review	literature-researcher	文献检索、建文献池
+#3. assumption_definition	assumption-manager	定义建模假设（版本化）
+#4. mathematical_formulation	mathematical-formulator	建立数学模型（版本化）
+#5. implementation	implementation-agent	写求解代码
+#6. computation	resource-manager	提交隔离计算任务
+#7. sanity_check	sanity-checker	L1-L6 合理性检查
+#8. visualization	visualization-agent	生成图表
+#9. robustness（可选）	robustness-analyst	敏感性/鲁棒性分析
+#10. ablation（可选）	ablation-analyst	消融实验
+#11. locally_completed	—	小问完成
+#12. cross_question_review	cross-question-reviewer	全题跨小问一致性审查
+#13. completed → 汇总/论文	build_final_summary / build_paper	研究汇总 + 论文

@@ -14,6 +14,119 @@ from automm.state import load_state
 
 CITATION_RE = re.compile(r"\[@([A-Za-z0-9_.:-]+)\]")
 
+# 《全国大学生数学建模竞赛人工智能工具使用规定（2026年试行）》第 3 条：
+# 论文须在「参考文献」之前设置「AI 工具使用声明」，表述二选一。
+AI_DECLARATION_HEADING = "## AI 工具使用声明"
+AI_DECLARATION_UNUSED = "本参赛队在竞赛过程中未使用任何 AI 工具。"
+AI_DECLARATION_USED_PREFIX = "本参赛队在竞赛过程中使用了 AI 工具"
+AI_DECLARATION_USED = AI_DECLARATION_USED_PREFIX + "，主要用于{purposes}，详细使用情况见支撑材料。"
+AI_DETAIL_FILENAME = "AI 工具使用详情.pdf"
+
+
+def ai_declaration_section(config: dict) -> str:
+    """按 AI 工具使用规定第 3 条生成声明段落；两种表述二选一。"""
+    item = config.get("ai_declaration") or {}
+    if not item.get("used", True):
+        statement = AI_DECLARATION_UNUSED
+    else:
+        purposes = str(item.get("purposes") or "").strip()
+        if not purposes:
+            raise SystemExit(
+                "config/paper.yaml 的 ai_declaration.purposes 不能为空："
+                "使用 AI 工具时必须填写简要用途（规定第 3 条第（2）项）。"
+            )
+        statement = AI_DECLARATION_USED.format(purposes=purposes)
+    return f"{AI_DECLARATION_HEADING}\n\n{statement}"
+
+
+# 论文格式规范第五条：附录必须含支撑材料文件列表与建模用到的全部完整、可运行源程序代码。
+LANGUAGE_BY_SUFFIX = {
+    ".py": "python",
+    ".m": "matlab",
+    ".r": "r",
+    ".jl": "julia",
+    ".c": "c",
+    ".cpp": "cpp",
+    ".java": "java",
+    ".sh": "bash",
+    ".ps1": "powershell",
+    ".sql": "sql",
+    ".ipynb": "json",
+}
+
+DEFAULT_SOURCE_GLOBS = (
+    "problems/{problem_id}/**/code/**/*.py",
+    "problems/{problem_id}/**/code/**/*.m",
+    "problems/{problem_id}/**/code/**/*.R",
+    "problems/{problem_id}/**/code/**/*.jl",
+)
+
+
+def _fence(content: str) -> str:
+    ticks = "```"
+    while ticks in content:
+        ticks += "`"
+    return ticks
+
+
+def _source_files(problem_id: str, patterns: list[str] | tuple[str, ...]) -> list[Path]:
+    found: dict[str, Path] = {}
+    for pattern in patterns:
+        for path in ROOT.glob(str(pattern).format(problem_id=problem_id)):
+            if path.is_file():
+                found[relative(path)] = path
+    return [found[key] for key in sorted(found)]
+
+
+def _support_files(roots: list[str]) -> list[Path]:
+    found: dict[str, Path] = {}
+    for item in roots:
+        path = ROOT / item
+        if not path.is_dir():
+            continue
+        for child in path.rglob("*"):
+            if child.is_file():
+                found[relative(child)] = child
+    return [found[key] for key in sorted(found)]
+
+
+def appendix_section(problem_id: str, config: dict) -> str:
+    """生成附录：支撑材料文件列表 + 建模源程序代码。"""
+    appendix = config.get("appendix") or {}
+    lines = ["## 附录", "", "### 附录 A 支撑材料文件列表", ""]
+    support = _support_files(appendix.get("support_material_roots") or ["reports/support"])
+    if support:
+        lines += ["| 文件 | 字节 |", "|---|---|"]
+        lines += [f"| `{relative(path)}` | {path.stat().st_size} |" for path in support]
+    elif appendix.get("no_support_confirmed", False):
+        lines += [appendix.get("no_support_statement", "本论文没有支撑材料。")]
+    else:
+        lines += ["（附录 A 尚未生成：未发现支撑材料文件。）"]
+    lines += ["", "### 附录 B 建模源程序代码", ""]
+    sources = _source_files(problem_id, appendix.get("source_globs") or DEFAULT_SOURCE_GLOBS)
+    if sources:
+        for index, path in enumerate(sources, 1):
+            code = path.read_text(encoding="utf-8", errors="replace").rstrip()
+            fence = _fence(code)
+            language = LANGUAGE_BY_SUFFIX.get(path.suffix.lower(), "text")
+            lines += [f"#### B.{index} `{relative(path)}`", "", f"{fence}{language}", code, fence, ""]
+    elif appendix.get("no_program_confirmed", False):
+        lines += [appendix.get("no_program_statement", "本论文没有用到程序。"), ""]
+    else:
+        lines += ["（附录 B 尚未生成：未发现源程序代码。）", ""]
+    return "\n".join(lines).rstrip() + "\n"
+
+
+def splice_appendix(draft_path: Path, appendix: str) -> None:
+    """把附录接到正文末尾（参考文献之后）；重复调用不会产生多份附录。"""
+    text = draft_path.read_text(encoding="utf-8")
+    marker = "\n## 附录"
+    if marker in text:
+        text = text[: text.index(marker)].rstrip() + "\n\n"
+    else:
+        text = text.rstrip() + "\n\n"
+    draft_path.write_text(text + appendix, encoding="utf-8")
+
 
 def active_problem_id(value: str | None) -> str:
     problem_id = value or load_state().get("active_problem")
@@ -22,7 +135,7 @@ def active_problem_id(value: str | None) -> str:
     return problem_id
 
 
-def draft(problem_id: str, output_arg: str | None) -> Path:
+def draft(problem_id: str, output_arg: str | None, *, with_appendix: bool = False) -> Path:
     config = read_yaml(ROOT / "config" / "paper.yaml")
     problem = load_problem(problem_id)
     metadata = read_yaml(ROOT / "config" / "project.yaml").get("metadata", {})
@@ -46,6 +159,7 @@ def draft(problem_id: str, output_arg: str | None) -> Path:
         or "> 待补充并按 GB/T 7714 校验。"
     )
     title = metadata.get("competition_name") or problem_id
+    ai_declaration = ai_declaration_section(config)
     text = f"""# {title}
 
 ## 摘要
@@ -69,16 +183,21 @@ def draft(problem_id: str, output_arg: str | None) -> Path:
 
 > 待撰写。
 
+{ai_declaration}
+
 ## 参考文献
 
 {reference_text}
 """
     output = resolve_project_path(output_arg or config.get("draft_output", "reports/paper/draft_paper.md"))
     write_text(output, text)
+    if with_appendix:
+        splice_appendix(output, appendix_section(problem_id, config))
     return output
 
 
 def validate(problem_id: str, draft_path: Path, *, update_problem_status: bool = True) -> dict:
+    config = read_yaml(ROOT / "config" / "paper.yaml")
     text = draft_path.read_text(encoding="utf-8")
     errors: list[str] = []
     if "> 待" in text or "{{" in text or "}}" in text:
@@ -86,6 +205,33 @@ def validate(problem_id: str, draft_path: Path, *, update_problem_status: bool =
     for heading in ("## 摘要", "## 1 问题重述与符号说明", "## 参考文献"):
         if heading not in text:
             errors.append(f"缺少章节：{heading}")
+    if AI_DECLARATION_HEADING not in text:
+        errors.append(f"缺少章节：{AI_DECLARATION_HEADING}（规定第 3 条要求在参考文献之前设置）")
+    elif "## 参考文献" in text:
+        ai_index = text.index(AI_DECLARATION_HEADING)
+        reference_index = text.index("## 参考文献")
+        if ai_index > reference_index:
+            errors.append("AI 工具使用声明必须位于参考文献之前")
+        else:
+            block = text[ai_index:reference_index]
+            if AI_DECLARATION_UNUSED not in block and AI_DECLARATION_USED_PREFIX not in block:
+                errors.append("AI 工具使用声明必须采用规定第 3 条的两种表述之一")
+    if (config.get("appendix") or {}).get("required", False):
+        appendix = config.get("appendix") or {}
+        if "## 附录" not in text:
+            errors.append("缺少章节：## 附录（格式规范第五条要求附录含支撑材料文件列表与源程序）")
+        else:
+            block = text[text.index("## 附录") :]
+            if "支撑材料文件列表" not in block:
+                errors.append("附录缺少支撑材料文件列表（格式规范第五条）")
+            elif "|---|---|" not in block and not (
+                appendix.get("no_support_confirmed", False) and "本论文没有支撑材料" in block
+            ):
+                errors.append("附录 A 未列出任何支撑材料文件（格式规范第五条）")
+            if "```" not in block and not (
+                appendix.get("no_program_confirmed", False) and "本论文没有用到程序" in block
+            ):
+                errors.append("附录未内联任何源程序代码（格式规范第五条）")
     problem = load_problem(problem_id)
     for question_id in problem["questions"]:
         if question_id not in text:
@@ -167,22 +313,28 @@ def main() -> None:
         raise SystemExit("DISABLED: 初版本不提供论文生成，只生成 reports/final_summary.md")
     parser = argparse.ArgumentParser(description="AutoMM 论文构建")
     sub = parser.add_subparsers(dest="action", required=True)
-    for name in ("draft", "validate", "final"):
+    for name in ("draft", "validate", "final", "appendix"):
         command = sub.add_parser(name)
         command.add_argument("--problem-id")
         command.add_argument("--draft")
         command.add_argument("--output")
         if name == "final":
             command.add_argument("--approval-file")
+        if name == "draft":
+            command.add_argument("--with-appendix", action="store_true")
     args = parser.parse_args()
     problem_id = active_problem_id(args.problem_id)
     if args.action == "draft":
-        print(relative(draft(problem_id, args.output)))
+        print(relative(draft(problem_id, args.output, with_appendix=args.with_appendix)))
         return
     config = read_yaml(ROOT / "config" / "paper.yaml")
     draft_path = resolve_project_path(
         args.draft or config.get("draft_output", "reports/paper/draft_paper.md"), must_exist=True
     )
+    if args.action == "appendix":
+        splice_appendix(draft_path, appendix_section(problem_id, config))
+        print(relative(draft_path))
+        return
     if args.action == "validate":
         result = validate(problem_id, draft_path)
         print(json.dumps(result, ensure_ascii=False, indent=2))

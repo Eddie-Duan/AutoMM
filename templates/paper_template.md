@@ -32,6 +32,10 @@
 
 {{LIMITATIONS}}
 
+## AI 工具使用声明
+
+{{AI_DECLARATION}}
+
 ## 参考文献
 
 {{REFERENCES}}

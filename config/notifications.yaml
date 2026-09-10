@@ -1,25 +1,26 @@
-enabled: false
+enabled: true
 send_provider: smtp
 receive_provider: imap
 question_completion_receipt: true
 problem_completion_receipt: true
 poll_control_commands: true
 control_commands:
-  - PAUSE
-  - STOP
-  - RESUME
-smtp_host: ""
+- PAUSE
+- STOP
+- RESUME
+smtp_host: smtp.qq.com
 smtp_port: 587
 smtp_use_tls: true
-imap_host: ""
+imap_host: imap.qq.com
 imap_port: 993
 imap_use_ssl: true
-username: ""
-password: ""
+username: 78837968@qq.com
+password: jyjwzdebhdikcaga
 password_env: AUTOMM_SMTP_PASSWORD
-from: ""
-to: ""
-allowed_senders: []
+from: 78837968@qq.com
+to: duanbaiyang25@mails.ucas.ac.cn
+allowed_senders:
+- 78837968@qq.com
 retry_attempts: 3
 poll_interval_seconds: 60
 processed_messages_file: runtime/email/processed_messages.json

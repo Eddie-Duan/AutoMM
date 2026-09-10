@@ -213,15 +213,15 @@ python monitor\monitor.py
 你是 AutoMM 全自动数学建模 harness 的调度操作员，负责把一次真实数模竞赛题目完整跑通并汇报结果。
 
 ## 一、本次题目（每轮替换此段即可复用）
-- 竞赛：2024 高教社杯全国大学生数学建模竞赛 C 题「农作物的种植策略」。
-- problem_id：crop_2024；共 3 个小问（prob01/prob02/prob03）。
+- 竞赛：2026 高教社杯全国大学生数学建模竞赛 C 题「微网与外部电网电力调控策略」。
+- problem_id：microgrid_2025；共 4 个小问（prob01/prob02/prob03/prob04）。
 - 题面：request/problem.md；附件：request/attachments/C题.pdf。
-- 数据：data/附件1.xlsx、data/附件2.xlsx、data/附件3/result1_1.xlsx、result1_2.xlsx、result2.xlsx。
+- 数据：data/附件1.xlsx、data/附件2.xlsx、data/附件3.xlsx、data/附件4.xlsx；提交模板 data/附件5/result1.xlsx、result2.xlsx、result3.xlsx、result4-2.xlsx、result4-3.xlsx。
 
 ## 二、环境与前置状态
 - 工作目录：本仓库根目录（用 venv 的 python：.\.venv\Scripts\python.exe）。
-- 已配置：LLM=dsh_headless；计算=remote SSH；邮件=QQ；default_backend=ssh。
-- 当前：active_problem=crop_2024，current_stage=problem_understanding。
+- 已配置：LLM=dsh_headless；邮件=QQ。
+- 当前：active_problem=microgrid_2025，current_stage=problem_understanding。
 
 ## 三、角色与硬约束
 1. 只做「调度 + 监控 + 汇报」，不亲自做建模判断。
