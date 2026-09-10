@@ -42,7 +42,7 @@ figures:
   font: Microsoft YaHei
   style_config: config/visualization.yaml
   included_in_summary: true
-  included_in_paper: false
+  included_in_paper: true
   quality_report: problems/microgrid_2025/prob01/versions/assumption_v003/figures/prob01_fig_netload_arbitrage_d9700035cd.quality.json
   quality_status: passed
   visual_review:
@@ -67,7 +67,7 @@ figures:
   font: Microsoft YaHei
   style_config: config/visualization.yaml
   included_in_summary: true
-  included_in_paper: false
+  included_in_paper: true
   quality_report: problems/microgrid_2025/prob01/versions/assumption_v003/figures/prob01_fig_dispatch_profile_e1b9b885da.quality.json
   quality_status: passed
   visual_review:
@@ -93,7 +93,7 @@ figures:
   font: Microsoft YaHei
   style_config: config/visualization.yaml
   included_in_summary: true
-  included_in_paper: false
+  included_in_paper: true
   quality_report: problems/microgrid_2025/prob01/versions/assumption_v003/figures/prob01_fig_soc_trajectory_8b40330c06.quality.json
   quality_status: passed
   visual_review:
@@ -222,7 +222,7 @@ figures:
   font: Microsoft YaHei
   style_config: config/visualization.yaml
   included_in_summary: true
-  included_in_paper: false
+  included_in_paper: true
   quality_report: problems/microgrid_2025/prob01/versions/assumption_v003/figures/prob01_fig_cost_bounds_5a1a905c2f.quality.json
   quality_status: passed
   visual_review:
