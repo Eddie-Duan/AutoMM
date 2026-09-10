@@ -1,0 +1,26 @@
+# prob01 ablation task 级配置
+# 生成者：ablation-analyst（动作 act-8fc1f3e5e410428c）；阶段：ablation（config/workflow.yaml 的 mandatory_stages）
+# 用途：提交隔离计算 task 时作为 --config-path；effective_config 将其合并到全局配置之上（仅影响本 task）。
+compute:
+  default_backend: local
+  max_local_concurrent_tasks: 1
+  memory_per_worker_gb: 2
+  task_timeout_seconds: 900
+  timeout_retry_attempts: 2
+  retry:
+    infrastructure_transient: 2
+    code_runtime: 1
+    model_revision: 2
+  resource_notes:
+    device: cpu
+    gpu_required: false
+    concurrent_gpu_tasks: 0
+    note: "prob01 ablation 为 1 个基线 LP + 1 个 144 二元 MILP + 4 档 SOC 离散化 DP + 结构消融 LP，全部 CPU HiGHS/DP，单次 LP <1 s、MILP 数秒、峰值内存 <500 MB；不占用单卡 GPU"
+    worker_launch_mode: "supervised（继承 config/compute.yaml；detached 在本环境会被沙箱回收）"
+solver:
+  name: highs
+  interface: "scipy.optimize.linprog(method='highs') + scipy.optimize.milp(HiGHS) + 自实现确定性 DP"
+  device: cpu
+  time_limit_seconds: 60
+  deterministic: true
+  seed: 20260910

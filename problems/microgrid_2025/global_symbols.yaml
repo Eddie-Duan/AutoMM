@@ -1,1 +1,297 @@
-symbols: []
+# 全局符号表（problem-decomposer 建立，阶段 problem_understanding）
+# 规则：
+#   1. 符号在整题范围内唯一；不同小问不得出现同名不同义符号。
+#   2. 后续阶段如需新增符号，必须在本表追加登记（或使用带小问前缀的局部符号），
+#      并由 sanity L5（跨小问共同符号检查）复核。
+#   3. kind 取值：index（指标/集合）、parameter（参数）、decision（决策变量）、
+#      derived（派生量）；first_question 记录首次出现的小问。
+#   4. 本表只登记符号与口径，不固定建模假设；与题面歧义相关的条目在 notes 中指向
+#      problem_understanding.md 的 A1–A16。
+problem_id: microgrid_2025
+generated_by: problem-decomposer
+stage: problem_understanding
+ambiguity_ref: problems/microgrid_2025/problem_understanding.md
+symbols:
+  # ---------- 指标与集合 ----------
+  - symbol: t
+    latex: "t"
+    meaning_zh: "一天内的 10 分钟时段序号"
+    unit: "-"
+    kind: index
+    domain: "t ∈ {1, 2, …, 144}，顺序与附件 1/2/4 的数据列顺序及 resultN.xlsx 模板的时间段列一一对应"
+    first_question: prob01
+    notes: "附件时间戳与模板时间段标签存在 10 分钟错位，对应约定见 A1；未取得裁定前不得改变顺序。"
+  - symbol: d
+    latex: "d"
+    meaning_zh: "日期序号（自然日）"
+    unit: "-"
+    kind: index
+    domain: "d ∈ {2025-01-01, …, 2025-12-31}；结果需覆盖的子集 D_req 见下"
+    first_question: prob02
+    notes: "prob01 为单日问题，不使用日期维度。"
+  - symbol: k
+    latex: "k"
+    meaning_zh: "光伏发电功率预报的时效序号（小时）"
+    unit: "h"
+    kind: index
+    domain: "k ∈ {1, 2, …, 24}"
+    first_question: prob03
+    notes: "『预报 k 小时』的整点对齐与降尺度口径见 A6。"
+  - symbol: m
+    latex: "m"
+    meaning_zh: "光伏预报发布时刻"
+    unit: "-"
+    kind: index
+    domain: "m ∈ {0:00, 6:00, 12:00, 18:00}"
+    first_question: prob03
+    notes: "prob02 无预报、仅用实际值。"
+  - symbol: n_t
+    latex: "n_t"
+    meaning_zh: "一天的 10 分钟时段数"
+    unit: "段"
+    kind: parameter
+    domain: "n_t = 144"
+    first_question: prob01
+    notes: ""
+
+  # ---------- 时间/尺度参数 ----------
+  - symbol: Delta_t
+    latex: "\\Delta t"
+    meaning_zh: "单个决策时段长度"
+    unit: "h"
+    kind: parameter
+    domain: "Delta_t = 1/6 ≈ 0.1667"
+    first_question: prob01
+    notes: "功率(kW) → 电量(kWh) 的换算系数；量纲一致性由 sanity L3 复核（A12）。"
+
+  # ---------- 储能参数（附录 1） ----------
+  - symbol: P_ch_max
+    latex: "P^{ch}_{max}"
+    meaning_zh: "储能最大充电功率"
+    unit: "kW"
+    kind: parameter
+    domain: "P_ch_max = 5000"
+    first_question: prob01
+    notes: "折算为每时段充电量上界 P_ch_max·Delta_t（A12）。"
+  - symbol: P_dis_max
+    latex: "P^{dis}_{max}"
+    meaning_zh: "储能最大放电功率"
+    unit: "kW"
+    kind: parameter
+    domain: "P_dis_max = 5000"
+    first_question: prob01
+    notes: "折算为每时段放电量上界 P_dis_max·Delta_t（A12）。"
+  - symbol: E_cap_max
+    latex: "E^{cap}_{max}"
+    meaning_zh: "储能设备最大容量"
+    unit: "kWh"
+    kind: parameter
+    domain: "E_cap_max = 12000"
+    first_question: prob01
+    notes: "与运行上界 E_max 不同：E_max 是避免过充的运行上界。"
+  - symbol: E_min
+    latex: "E_{min}"
+    meaning_zh: "储电量运行下界"
+    unit: "kWh"
+    kind: parameter
+    domain: "E_min = 1200"
+    first_question: prob01
+    notes: ""
+  - symbol: E_max
+    latex: "E_{max}"
+    meaning_zh: "储电量运行上界"
+    unit: "kWh"
+    kind: parameter
+    domain: "E_max = 10800"
+    first_question: prob01
+    notes: "对应约束 E_min ≤ E_soc ≤ E_max。"
+  - symbol: eta_ch
+    latex: "\\eta_{ch}"
+    meaning_zh: "储能充电效率"
+    unit: "-"
+    kind: parameter
+    domain: "eta_ch = 0.9"
+    first_question: prob01
+    notes: "效率在状态转移中的作用位置待定（A3）。"
+  - symbol: eta_dis
+    latex: "\\eta_{dis}"
+    meaning_zh: "储能放电效率"
+    unit: "-"
+    kind: parameter
+    domain: "eta_dis = 0.9"
+    first_question: prob01
+    notes: "效率在状态转移中的作用位置待定（A3）。"
+  - symbol: E_init
+    latex: "E_{init}"
+    meaning_zh: "2025-01-01 0:00 的储电量（附录 1 初值）"
+    unit: "kWh"
+    kind: parameter
+    domain: "E_init = 6000"
+    first_question: prob01
+    notes: "其在 prob01 与 prob02–04 的使用方式（是否作为每日 0:00 值、是否跨日递推）见 A2/A15。"
+
+  # ---------- 数据参数 ----------
+  - symbol: price
+    latex: "p_{d,t}"
+    meaning_zh: "外网电价"
+    unit: "元/kWh"
+    kind: parameter
+    domain: "prob01/prob02/prob03：附件 1 的同一条日价格曲线逐日重复；prob04：附件 4 的逐日逐时段实时电价"
+    first_question: prob01
+    notes: "prob04 的价格可观测性（0:00 是否已知全天价格）见 A8。"
+  - symbol: load
+    latex: "L_{d,t}"
+    meaning_zh: "小区负载功率"
+    unit: "kW"
+    kind: parameter
+    domain: "prob01：附件 1；prob02–04：附件 2『小区负载』"
+    first_question: prob01
+    notes: "负载电量 = load·Delta_t。"
+  - symbol: pv_act
+    latex: "PV^{act}_{d,t}"
+    meaning_zh: "光伏发电实际功率"
+    unit: "kW"
+    kind: parameter
+    domain: "附件 2『光伏发电实际功率』，取值 ≥ 0"
+    first_question: prob02
+    notes: "prob01 使用附件 1 的光伏预测功率，不用实际值。"
+  - symbol: pv_fc
+    latex: "PV^{fc}_{d,m,k}"
+    meaning_zh: "光伏发电功率预报值（d 日 m 时刻发布的 k 小时提前量预报）"
+    unit: "kW"
+    kind: parameter
+    domain: "附件 3；m ∈ {0:00, 6:00, 12:00, 18:00}，k ∈ {1..24}，取值 ≥ 0"
+    first_question: prob03
+    notes: "整点对齐与 10 分钟降尺度口径见 A6；年末跨日至 2026-01-01 的边界见 A6。"
+  - symbol: alpha_em
+    latex: "\\alpha_{em}"
+    meaning_zh: "紧急购电电价相对交易时刻电价的倍数"
+    unit: "-"
+    kind: parameter
+    domain: "alpha_em = 5"
+    first_question: prob02
+    notes: ""
+  - symbol: beta_def
+    latex: "\\beta_{def}"
+    meaning_zh: "计划购电量高于调整购电量部分的违约电价倍数"
+    unit: "-"
+    kind: parameter
+    domain: "beta_def = 0.5"
+    first_question: prob03
+    notes: "计费方向与比较基准待定（A7）。"
+  - symbol: beta_over
+    latex: "\\beta_{over}"
+    meaning_zh: "调整购电量高于计划购电量时超出部分的电价倍数"
+    unit: "-"
+    kind: parameter
+    domain: "beta_over = 1.5"
+    first_question: prob03
+    notes: "与 beta_def 的分段结算口径待定（A7）。"
+
+  # ---------- 决策变量 ----------
+  - symbol: b
+    latex: "b_{d,t}"
+    meaning_zh: "计划购电量（0:00 制定的当天计划）"
+    unit: "kWh"
+    kind: decision
+    domain: "b_{d,t} ≥ 0"
+    first_question: prob01
+    notes: "prob01 为单日，写作 b_t。"
+  - symbol: q_adj
+    latex: "q^{adj}_{d,t}"
+    meaning_zh: "调整购电量（非 0:00 预报时刻对购电量的调整）"
+    unit: "kWh"
+    kind: decision
+    domain: "q_adj_{d,t} ≥ 0（亦可建模为带符号增量，待定 A7）"
+    first_question: prob03
+    notes: "与 b 的结算关系待定（A7）。"
+  - symbol: q_em
+    latex: "q^{em}_{d,t}"
+    meaning_zh: "紧急购电量（微网供电低于负载时的补足购电）"
+    unit: "kWh"
+    kind: decision
+    domain: "q_em_{d,t} ≥ 0"
+    first_question: prob02
+    notes: "能否用于储能充电待定（A5）。"
+  - symbol: c_ch
+    latex: "c_{d,t}"
+    meaning_zh: "储能充电量"
+    unit: "kWh"
+    kind: decision
+    domain: "0 ≤ c_{d,t} ≤ P_ch_max·Delta_t"
+    first_question: prob01
+    notes: "按位置一一对应的时段口径见 A1。"
+  - symbol: q_dis
+    latex: "q^{dis}_{d,t}"
+    meaning_zh: "储能放电量"
+    unit: "kWh"
+    kind: decision
+    domain: "0 ≤ q_dis_{d,t} ≤ P_dis_max·Delta_t"
+    first_question: prob01
+    notes: "与购电量 b、充电量 c_ch 区分；是否禁止同时充放电待定。"
+  - symbol: E_soc
+    latex: "E_{d,t}"
+    meaning_zh: "时段末的储能储电量（状态变量）"
+    unit: "kWh"
+    kind: decision
+    domain: "E_min ≤ E_{d,t} ≤ E_max；E_{d,0} 为当天 0:00 储电量"
+    first_question: prob01
+    notes: "prob01 附加周期约束 E_{d,0} = E_{d,144}（H6）。"
+  - symbol: q_spill
+    latex: "s_{d,t}"
+    meaning_zh: "弃光/盈余电量（候选变量，尚未固定是否引入）"
+    unit: "kWh"
+    kind: decision
+    domain: "q_spill_{d,t} ≥ 0（若引入）"
+    first_question: prob02
+    notes: "是否引入见 A13；不引入时功率平衡以不等式表达。"
+
+  # ---------- 派生量 ----------
+  - symbol: C_plan
+    latex: "C^{plan}"
+    meaning_zh: "计划购电费用"
+    unit: "元"
+    kind: derived
+    domain: "≥ 0"
+    first_question: prob01
+    notes: "prob01 的总费用即 C_plan。"
+  - symbol: C_adj
+    latex: "C^{adj}"
+    meaning_zh: "调整购电量相关费用（含 0.5× 违约与 1.5× 超出两部分）"
+    unit: "元"
+    kind: derived
+    domain: "≥ 0（方向待定 A7）"
+    first_question: prob03
+    notes: ""
+  - symbol: C_em
+    latex: "C^{em}"
+    meaning_zh: "紧急购电费用"
+    unit: "元"
+    kind: derived
+    domain: "≥ 0"
+    first_question: prob02
+    notes: ""
+  - symbol: C_total
+    latex: "C^{total}"
+    meaning_zh: "总购电费用"
+    unit: "元"
+    kind: derived
+    domain: "C_total = C_plan + C_em + C_adj（问题 1 无后两项）"
+    first_question: prob01
+    notes: "表 1『全天购电费』的口径待定（A11）。"
+  - symbol: D_req
+    latex: "D_{req}"
+    meaning_zh: "结果文件要求覆盖的日期集合"
+    unit: "-"
+    kind: index
+    domain: "D_req = {2025-02-01, …, 2025-12-31}，共 334 天"
+    first_question: prob02
+    notes: "与数据覆盖集合 D_full 不同，原因见 A2。"
+  - symbol: D_full
+    latex: "D_{full}"
+    meaning_zh: "附件 2/3/4 数据覆盖的日期集合"
+    unit: "-"
+    kind: index
+    domain: "D_full = {2025-01-01, …, 2025-12-31}，共 365 天"
+    first_question: prob02
+    notes: "1 月数据可用于（若采用滚动口径时的）储能预热；见 A2。"

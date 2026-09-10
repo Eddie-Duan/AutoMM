@@ -1,0 +1,107 @@
+{
+  "schema": "automm.sanity.machine",
+  "level": "level_6",
+  "problem_id": "microgrid_2025",
+  "question_id": "prob01",
+  "assumption_version": "assumption_v003",
+  "formulation_version": "formulation_v001",
+  "checked_at": "2026-09-10T13:52:00+00:00",
+  "action_id": "act-4694208eb3ce490d",
+  "object": {
+    "stage": "robustness",
+    "task_id": "238db2418a6b1aed432b",
+    "attempt": 1,
+    "task_status": "succeeded",
+    "returncode": 0,
+    "output_directory": "problems/microgrid_2025/prob01/versions/assumption_v003/robustness/results/prob01_v003_robust_run001",
+    "cases_total": 948,
+    "cases_infeasible": 1,
+    "seed": 20260910,
+    "device": "cpu",
+    "gpu_required": false
+  },
+  "overall": "PASS_WITH_WARNING",
+  "stability_grade": "稳定",
+  "criteria": {
+    "S1_core_feasible_rate": {
+      "value": 1.0,
+      "threshold": 0.95,
+      "passed": true
+    },
+    "S1_parameter_family_feasible_rate": {
+      "value": 1.0,
+      "threshold": 0.99,
+      "passed": true
+    },
+    "S2_oat_max_abs_relative_change": {
+      "value": 0.088848,
+      "threshold": 0.25,
+      "passed": true
+    },
+    "S3_noise_joint20_half_width": {
+      "value": 0.115132,
+      "threshold": 0.2,
+      "passed": true
+    },
+    "S3_noise_joint20_mean_shift": {
+      "value": 0.065288,
+      "threshold": 0.1,
+      "passed": true
+    },
+    "S4_order_stability": {
+      "value": true,
+      "threshold": true,
+      "passed": true
+    },
+    "S5_sign_and_elasticity": {
+      "value": true,
+      "threshold": true,
+      "passed": true
+    },
+    "S6_solver_consistency": {
+      "value": 0.0,
+      "threshold": 1e-06,
+      "passed": true
+    }
+  },
+  "criteria_failed": [],
+  "baseline_gate_passed": true,
+  "hard_gates": {
+    "key_assumption_citation": "passed=true（errors=[]）",
+    "physical_and_economic_common_sense": "passed（费用量级 10^4、套利方向正确、η/P_max/E 界单调方向合理）",
+    "cross_question_consistency": "not_applicable（L5 触发条件为所有小问 locally completed）"
+  },
+  "independent_verification": {
+    "method": "runtime/actions/act-4694208eb3ce490d/evidence/verify_level6.py（只读、不重解 LP）",
+    "checks_total": 84,
+    "checks_failed": 0,
+    "verdict": "PASS"
+  },
+  "automated_scope": {
+    "method": "scripts/run_sanity_check.py（输出重定向到本动作 evidence/auto_scope，未覆盖版本目录）",
+    "automated_status": "PASS_WITH_WARNING",
+    "failures": 0
+  },
+  "routing": {
+    "failure_type": null,
+    "return_to_stage": null,
+    "blocking_reasons": [],
+    "recommended_next_stage": "ablation"
+  },
+  "warnings": [
+    "D-R1（预注册统计量偏离）：S3 用全距半宽 0.115132，预注册为 2.5–97.5 分位半宽 0.096675；两者均 ≤0.20、判定不变，引用 L6 区间须注明实际统计量。",
+    "D-R2：S2 对全部 OAT 网格取最大（含 E_init ±50%、E_min −50%/+100%），为预注册超集，更保守。",
+    "D-R3：噪声样本未记录扰动后输入摘要指纹，仅有 (source, σ, index) 与因子均值；可复现性由固定 seed 20260910 + 固定样本序保证。",
+    "D-R4/D-R5/D-R6：龙卷风图图例名义 ±20% 与实际取值不符；结构情景图缺 buycap_3000（不可行）；spider 横轴按自身网格半跨度归一化。",
+    "§8.6：sell_price ≥0.50 元/kWh 情景售出 12,293.617 kWh > 物理盈余上限 6,247.963 kWh（AS08 的 s_t 界不够紧）；accepted 基线不受影响，该情景结论不得用于论文售电收入。",
+    "buy_cap=3000 kW 下 accepted 计划不可行（accepted 解购电峰值 8,458.83 kW）：AS15「无购电上限」是强简化，已按预注册记为情景发现。",
+    "结转 L1–L4：文献池未逐篇读正文、AS06「5000 kW 作用侧」无文献支撑、C1/E1·C2/E2·C3/E3 登记欠账、表 2 相位说明、LP 最优面非唯一、A2/A6/A7/A8/A9 未裁定。"
+  ],
+  "evidence": [
+    "runtime/actions/act-4694208eb3ce490d/evidence/verify_level6.py",
+    "runtime/actions/act-4694208eb3ce490d/evidence/verify_level6_out.json",
+    "runtime/actions/act-4694208eb3ce490d/evidence/verify_level6_stdout.txt",
+    "runtime/actions/act-4694208eb3ce490d/evidence/key_assumptions_L6_out.json",
+    "runtime/actions/act-4694208eb3ce490d/evidence/auto_scope/machine_sanity.json"
+  ]
+}

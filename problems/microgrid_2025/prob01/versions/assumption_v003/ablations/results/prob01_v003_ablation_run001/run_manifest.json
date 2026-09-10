@@ -1,0 +1,56 @@
+{
+  "stage": "ablation",
+  "question_id": "prob01",
+  "assumption_version": "assumption_v003",
+  "formulation_version": "formulation_v001",
+  "task_id": "c1faaa09dedfb103c598",
+  "output_directory": "problems/microgrid_2025/prob01/versions/assumption_v003/ablations/results/prob01_v003_ablation_run001",
+  "input_md5": "dbe06f92517431228efcc26e3e796ef9",
+  "reference_run002_sha256": "b083ac3b812c10ff008ad7734b9c774c3e1fb0a57c5ffb17d5c87f82749c7010",
+  "seed": 20260910,
+  "dp_steps_kwh": [
+    400.0,
+    200.0,
+    100.0,
+    50.0
+  ],
+  "time_limit_seconds": 60.0,
+  "families": [
+    "A_baseline_LP",
+    "B_milp",
+    "C_dp",
+    "D_no_periodic",
+    "E_no_spill",
+    "F_eta_placement"
+  ],
+  "cases_total": 12,
+  "cases_infeasible": 0,
+  "figures": [
+    "ablation_model_cost.png",
+    "ablation_dp_granularity.png",
+    "ablation_waterfall.png",
+    "ablation_complexity_tradeoff.png"
+  ],
+  "code_sha256": {
+    "ablation_prob01.py": "03203e0107b1471016cbc20d1f24cb8a6ba02c8ce8628c804e7174e29b6271f3"
+  },
+  "accepted_code_sha256": {
+    "prob01_model.py": "55e30e5e6ad329772ebde856048a1062431eaed599f1a17230489ac341e58575",
+    "prob01_io.py": "f1c3ec7d2d74afbb8db00a74c8a242b217b4c39dd8375b3abe518179e20b2f0a"
+  },
+  "device": "cpu",
+  "gpu_required": false,
+  "baseline_check": true,
+  "accepted_impl_cross_check": {
+    "ran": true,
+    "accepted_objective_yuan": 35126.948589,
+    "generic_objective_yuan": 35126.948589,
+    "relative_diff": 0.0,
+    "passed": true,
+    "accepted_checks_failed": []
+  },
+  "criteria_failed": [],
+  "checks_failed": [],
+  "outcome": "completed",
+  "wall_clock_seconds": 2.063
+}

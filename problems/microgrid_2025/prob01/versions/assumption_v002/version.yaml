@@ -1,0 +1,330 @@
+version: assumption_v002
+status: accepted
+created_at: '2026-09-10T10:55:22.739104+00:00'
+parent_version: assumption_v001
+assumptions:
+- id: AS01
+  title: 时间戳与时段的位置对齐（裁定 A1）
+  statement: 附件 1/2/4 的 144 个数据点与 resultN.xlsx 的 144 个时间段按位置一一对应，附件时间戳为 对应 10 分钟区间的左端点：位置
+    i 的数据点（时间戳 tau_i = 10i 分钟，tau_1 = 0:10，…， tau_144 = 0:00+1 = 24:00）代表区间 [tau_i,
+    tau_i + 10min)。因此 prob01 的计划窗为 0:10 → 24:10（144 个等长时段）；result1『计划购电量』第 i 行填区间
+    i 的购电量； 表 1 的『10:00-10:10』取位置 i=60（附件时间戳 10:00）。
+  type: 离散化约定（数据生成）
+  key: false
+  criticality: high
+  evidence_type: team_decision
+  reference_ids: []
+  basis: 题面附录 2「表中的 0:00+1 表示第二天凌晨 0:00，即当天 24:00」；result1.xlsx 模板实测 （144 行标签为 0:10-0:20
+    … 0:00+1-0:10+1，含末行、无 0:00-0:10 行）；本动作独立探针 （evidence/probe_a1_alignment.py）逐行核对：模板第
+    i 行左端点与附件第 i 个时间戳 0 错位。 该约定是唯一能同时填满模板 144 行且保持标签字面正确的读法；属题面/数据事实层约定， 文献不参与裁定，故不绑定文献。
+  applicability: prob01；同时约束 prob02–prob04 的同类对齐。
+  bias_if_invalid: 若改用『时间戳=区间右端点』，则表 1 的 10:00-10:10 会取附件 10:10 行（i=61，电价 0.9919、负载
+    5897.4793、光伏 6599.3808），且模板末行 0:00+1-0:10+1 无对应数据、 须外推，整体错位一格。
+  validation: sanity L1 核对 result1 行数与标签；L3 抽查表 1 数值可与附件 1 对应行对账。
+  relations: 决定 AS10（首末状态）与 AS13（表 2 聚合）的口径。
+  status: accepted
+- id: AS02
+  title: 附件 1 是独立代表性单日（事实 A16）
+  statement: 附件 1 的电价、小区负载、光伏预测功率构成一条独立代表性单日曲线，不等于附件 2 中任何 一天；prob01 只使用附件 1，不得替换为附件
+    2 的某天。
+  type: 边界条件（数据范围）
+  key: false
+  criticality: medium
+  evidence_type: agent_inference
+  reference_ids: []
+  basis: problem_understanding.md A16 的探针核验（负载最接近 2025-04-07、光伏最接近 2025-03-20，均不相等）。
+  applicability: prob01 全部；prob02–prob04 用附件 2/3/4，不复用本单日曲线。
+  bias_if_invalid: 若误当作某真实日，会把单日代表性问题与逐日问题混同。
+  validation: 对账 result1 输入指纹（附件 1 md5 dbe06f92517431228efcc26e3e796ef9）。
+  relations: 与 AS14（无售电）共同确定 prob01 的输入边界。
+  status: accepted
+- id: AS03a
+  title: 目标口径为全天计划购电费最小（团队裁定 D9 后的量纲口径）
+  statement: 目标函数为 min Σ_{t=1..144} p_t · b_t，其中 p_t 为附件 1 电价（元/kWh），b_t 为计划购电量（kWh，本身已含时间因子，不再乘
+    Δt）。全天计划购电费 C_plan = Σ_t p_t·b_t，单位元；全文（含模型骨架与 prob02–prob04 沿用）不得再出现 p_t·b_t·Δt
+    形式。
+  type: 决策偏好（目标口径）
+  key: true
+  criticality: high
+  evidence_type: team_decision
+  reference_ids:
+  - ref-lee-2020-purchase-cost-lp
+  - ref-olivieri-2020-residential-bess
+  basis: 题面问题 1「尽可能节省微网的购电费用」给出目标口径；团队裁定 D9 进一步固定量纲：b_t 以 kWh 计，故 p_t·b_t 已是元，v001
+    中的 ·Δt 为多余因子（硬错误）。ref-lee-2020-purchase-cost-lp、ref-olivieri-2020-residential-bess
+    仅支撑「购电/运行费用最小可写成线性目标」这一形式，不参与口径选择。
+  applicability: prob01；prob02–prob04 沿用同口径并追加紧急购电/调整结算费用项。
+  bias_if_invalid: 若沿用 v001 的 p_t·b_t·Δt 旧口径，费用数值整体缩小 6 倍（探针实测下界 20622.73 元 → 3437.12
+    元，量级掉到 10^3 元），与费用量级自述矛盾；最优调度不变（正常数缩放不改变 argmin），但全部费用结论失真。
+  validation: 量纲检查 p_t[元/kWh]×b_t[kWh]=元；探针 evidence/probe_d9_units.py 给出费用可行区间 [20623,
+    48052] 元（量级 10^4 元）。
+  relations: 由原 AS03 拆分而来（团队裁定）；与 AS13（表 1 填报口径）、AS12（线性模型族）一致。
+  status: accepted
+- id: AS03b
+  title: 不纳入电池折旧/退化成本项（显式项目假设）
+  statement: 主目标不引入循环寿命/折旧/退化成本项；附录 1 未给折旧系数与循环寿命，无法标定，故该简化写成显式 project_assumption，不以任何形式隐藏。
+  type: 决策偏好（成本项边界）
+  key: true
+  criticality: high
+  evidence_type: project_assumption
+  reference_ids:
+  - ref-zhang-2015-dayahead-degradation
+  - ref-rawa-2023-mg-stochastic
+  basis: ref-zhang-2015-dayahead-degradation、ref-rawa-2023-mg-stochastic 为反向证据：日前调度常把电池退化/折旧纳入目标，说明「省略折旧」是需要显式声明的项目假设而非文献事实；附录
+    1 无可标定折旧参数。
+  applicability: prob01；折旧影响按 D7 备选 C 在 robustness 中作为情景量化。
+  bias_if_invalid: 省略折旧会高估充放电频次、使购电费偏低（真实全寿命成本更高）；方向明确，留给 robustness 量化。
+  validation: robustness 中对目标加入单位循环成本/吞吐成本情景，观察充放电次数与费用变化方向。
+  relations: 与 AS03a 构成原 AS03 的拆分；与 AS07（互补性可省）共同支撑纯 LP 可解性。
+  status: accepted
+- id: AS04
+  title: 功率平衡等式与「供电不低于负载」口径（裁定 A5）
+  statement: 每个时段满足能量平衡 b_t + PV_t·Δt + q_dis_t = L_t·Δt + c_t + s_t，且 s_t ≥ 0、 0
+    ≤ s_t ≤ PV_t·Δt；由此实际供给 = b_t + q_dis_t + (PV_t·Δt − s_t) = L_t·Δt + c_t ≥ L_t·Δt，
+    即题面「微网提供的电能不可低于小区负载」自动成立，且充电不与负载竞争。不采用 『净供给 ≥ 负载』（b_t + PV_t·Δt + q_dis_t − c_t
+    ≥ L_t·Δt）的弱口径。
+  type: 机理（功率平衡/边界条件）
+  key: true
+  criticality: high
+  evidence_type: literature_fact
+  reference_ids:
+  - ref-moradi-2018-standalone
+  - ref-csee-2023-mg-ems-review
+  - ref-heydari-2016-lpsp
+  - ref-zeinalzadeh-2017-loadshed-curtail
+  basis: ref-moradi-2018-standalone / ref-csee-2023-mg-ems-review 支持供需平衡为微网 EMS 基本约束；
+    ref-heydari-2016-lpsp 支持供电可靠性可显式约束（确定性硬约束为其特例）； ref-zeinalzadeh-2017-loadshed-curtail
+    支持供电不足与出力盈余两方向的不平衡建模。
+  applicability: prob01（无紧急购电）；prob02 起平衡式右侧追加紧急购电量 q_em。
+  bias_if_invalid: 若采用弱口径，会把充电电量算作「供给」的一部分，人为放松可行性并可能制造以低价购电充电 再高价放电的账面套利，费用被系统性低估。
+  validation: sanity L1 检查逐时段平衡残差（含 s_t）≤ 1e-6；L4 检查供给 ≥ 负载。
+  relations: 与 AS08（s_t 变量）、AS07（充放电互补）联合定义可行域。
+  status: accepted
+- id: AS05
+  title: 90% 充放电效率的作用位置（裁定 A3）
+  statement: 储能状态转移取 E_t = E_{t-1} + η_ch · c_t − q_dis_t / η_dis，其中 η_ch = η_dis
+    = 0.9 （充、放两侧各按 90% 计，往返效率 81%），E_t、c_t、q_dis_t 单位均为 kWh。
+  type: 机理简化（效率模型）
+  key: true
+  criticality: high
+  evidence_type: literature_fact
+  reference_ids:
+  - ref-vykhodtsev-2022-bess-review
+  - ref-huang-2022-dynamic-efficiency
+  - ref-jamroen-2023-soc-sizing
+  - ref-arima-2024-rte-profile
+  basis: 附录 1 只给「充放电效率为 90%」，未说明作用位置；ref-vykhodtsev-2022-bess-review 综述 BESS 效率/SOC
+    建模方法，ref-huang-2022-dynamic-efficiency、ref-arima-2024-rte-profile 说明常效率是简化、往返效率随
+    SOC/退化变化，ref-jamroen-2023-soc-sizing 说明 SOC 管理对 经济性/可靠性的作用。两侧 90% 是题面最常见的工程读法。
+  applicability: prob01–prob04；效率扰动留待 robustness。
+  bias_if_invalid: 若题面本意为「往返效率 90%」（单侧 √0.9≈0.9487），本假设会低估可用能量、抬高购电费； 若只应作用于单侧，则 SOC
+    轨迹与费用偏差方向相反（见 D2 利弊）。
+  validation: 量纲检查（三项均 kWh）；极限检验 η→1 退化为无损储能；robustness 扰动 η∈{0.85,0.9,0.95}。
+  relations: 与 AS06（SOC 区间）、AS07（互补性）共同决定储能可行域。
+  status: accepted
+- id: AS06
+  title: SOC 运行区间与充放电功率上限
+  statement: 对所有时段 E_min = 1200 ≤ E_t ≤ 10800 = E_max；0 ≤ c_t ≤ P_ch_max·Δt = 5000/6
+    ≈ 833.33 kWh； 0 ≤ q_dis_t ≤ P_dis_max·Δt ≈ 833.33 kWh。E_cap_max = 12000 kWh 仅作为设备最大容量登记，
+    运行上界取 10800 kWh。
+  type: 边界条件（设备约束）
+  key: true
+  criticality: high
+  evidence_type: literature_fact
+  reference_ids:
+  - ref-shen-2026-peak-valley
+  - ref-alguhi-2025-bess-operation
+  - ref-valibeygi-2020-battery-dispatch-soc
+  basis: 附录 1 的题面硬参数（12000/5000/1200-10800）；ref-shen-2026-peak-valley 的显式约束集 （功率限值
+    + SOC + 充放电状态 + 日能量平衡）、ref-alguhi-2025-bess-operation 的 24h MILP 充放电动态与 SOC 约束、ref-valibeygi-2020-battery-dispatch-soc
+    的 SOC 显式状态变量， 均为同类标准写法。
+  applicability: prob01–prob04。
+  bias_if_invalid: 若把功率上限直接当电量上限（不乘 Δt），可行域会被放大 6 倍，结果不可信。
+  validation: sanity L2/L3 检查 E_t∈[1200,10800] 与 c_t、q_dis_t 上界；量纲 kW×h→kWh。
+  relations: 依赖 AS09（Δt）；与 AS05 共同约束 E 的转移。
+  status: accepted
+- id: AS07
+  title: 不显式强制同时充放电互补，模型保持 LP
+  statement: 不引入二元变量强制 c_t · q_dis_t = 0；理论上在 η_ch·η_dis = 0.81 < 1 且 p_t > 0 时同时
+    充放电被「少充少放」严格支配，故 LP 最优解自然满足互补性。必须把该性质写成显式声明， 并在 sanity 中检查残差 Σ_t c_t·q_dis_t 与同时充放时段数，而非默认成立。
+  type: 机理简化（可行域）
+  key: true
+  criticality: high
+  evidence_type: literature_fact
+  reference_ids:
+  - ref-wang-2024-complementarity
+  - ref-nazir-2023-realizable-dispatch
+  basis: ref-wang-2024-complementarity 给出储能互补约束的精确松弛方法；ref-nazir-2023-realizable-dispatch
+    说明不引入互补（二元）约束也能保证调度物理可实现的条件。两者支持「先解 LP、再验证」。
+  applicability: prob01（纯 LP）；若 sanity 发现残差非零，则转 MILP（见 D6）。
+  bias_if_invalid: 若最优解出现同时充放电且未被发现，SOC 轨迹与效率损失被低估；极端情况下可被用于套利而 虚增可行性。
+  validation: sanity L1 统计同充放时段数与残差；必要时加二元变量重解对比目标值。
+  relations: 决定 AS12 的模型族选择；与 AS05、AS08 联动。
+  status: accepted
+- id: AS08
+  title: 显式引入弃光/盈余变量 s_t
+  statement: 引入 s_t ≥ 0（kWh）表示光伏盈余中未被负载/储能消纳、也未上网的部分，满足 0 ≤ s_t ≤ PV_t·Δt，目标函数中系数为
+    0（弃光无收益、无惩罚）。附件 1 光伏峰值 7612.32 kW 高于负载峰值 5958.97 kW，故该变量在部分时段必然被激活。
+  type: 机理（不平衡建模）
+  key: true
+  criticality: high
+  evidence_type: literature_fact
+  reference_ids:
+  - ref-grimaldi-2025-arbitrage-curtail
+  - ref-qing-2025-pv-curtailment
+  - ref-zeinalzadeh-2017-loadshed-curtail
+  basis: ref-grimaldi-2025-arbitrage-curtail（套利优化中显式处理可再生弃电）、 ref-qing-2025-pv-curtailment（弃光率作为约束/指标）、
+    ref-zeinalzadeh-2017-loadshed-curtail（弃电与切负荷同时最小化）。题面未给售电渠道， 故弃光不产生收益。
+  applicability: prob01–prob04。
+  bias_if_invalid: 若不设 s_t 而只写不等式，会出现余额不闭合或隐性售电（相当于免费上网），费用被低估； 若给 s_t 正收益，则引入题面未给的售电收入。
+  validation: sanity L1 检查逐时段平衡（含 s_t）残差与 s_t 的非负性/上界；统计弃光总量。
+  relations: 与 AS04 的能量平衡配平；与 AS07 共同支撑 LP。
+  status: accepted
+- id: AS09
+  title: 时间离散与 kW→kWh 换算
+  statement: 单个决策时段长度 Δt = 1/6 h；功率量（L_t、PV_t，kW）乘以 Δt 得该时段电量（kWh）； 储能充/放电决策变量本身以
+    kWh 表示（c_t = P_ch,t·Δt 的口径）。
+  type: 数值近似（离散化）
+  key: true
+  criticality: high
+  evidence_type: agent_inference
+  reference_ids:
+  - ref-lin-2024-tou-industrial
+  - ref-wongwut-2017-tou-prosumer
+  basis: 依据为数据事实：附件 1 为 10 分钟粒度、恰好 144 行（探针 evidence/probe_d9_units.py 复核），Δt = 1/6
+    h 是唯一自然取法，故证据类型按团队裁定改为 agent_inference（由数据粒度推出的离散化口径）。ref-lin-2024-tou-industrial、ref-wongwut-2017-tou-prosumer
+    的逐时段运行优化保留为口径旁证，不再作为本条的证据类型依据（团队裁定：不因文献门禁而抬高证据类型）。
+  applicability: prob01–prob04。
+  bias_if_invalid: 单位错配会使全部电量与费用系统性偏离 6 倍，属硬错误。
+  validation: sanity L3 量纲检查；对账表 1 全天购电量量级（净负荷 55541.97 kWh 为下界参考）。
+  relations: 与 AS01（位置对齐）共同定义时段；是 AS06 上界换算的前提。
+  status: accepted
+- id: AS10
+  title: 计划窗首末储电量闭合（日周期约束）
+  statement: 以计划窗首个时段之前的储电量为 E_0（对应模板首行起点）、末个时段之后的储电量为 E_144 （对应模板末行终点），加入日周期约束 E_0
+    = E_144。在 AS01 的左端点口径下计划窗恰为 24h， 故该约束等价于题面「储能设备在 0:00 和 24:00 的储电量相同」。
+  type: 边界条件（初边值）
+  key: true
+  criticality: high
+  evidence_type: literature_fact
+  reference_ids:
+  - ref-shen-2026-peak-valley
+  - ref-alguhi-2025-bess-operation
+  - ref-valibeygi-2020-battery-dispatch-soc
+  basis: 题面问题 1 明确要求 0:00 与 24:00 储电量相同；ref-shen-2026-peak-valley 的「日能量平衡」、 ref-alguhi-2025-bess-operation
+    的 24h 调度、ref-valibeygi-2020-battery-dispatch-soc 的 SOC 状态变量均支持把终端状态作为显式约束。
+  applicability: prob01（H6）；prob02–prob04 的跨日口径见 A2，尚未在本问裁定。
+  bias_if_invalid: 缺少周期约束时，模型会把储能放空（或充满）以套利，储电量轨迹与表 2 末值失真，且次日 不可持续。
+  validation: sanity L1 检查 |E_144 − E_0| ≤ 1e-6；表 2 的 0:00/24:00 储电量须相等。
+  relations: 依赖 AS01 的窗口口径；与 AS11（初值 6000）共同固定 E_0。
+  status: accepted
+- id: AS11
+  title: prob01 的 0:00 储电量取 6000 kWh（裁定 A15）
+  statement: E_0 = E_init = 6000 kWh（附录 1 给出的 2025-01-01 0:00 电量），并把 prob01 视作该周期
+    的代表日；由 AS10 得 E_144 = 6000 kWh。
+  type: 边界条件（初值）
+  key: false
+  criticality: high
+  evidence_type: team_decision
+  reference_ids: []
+  basis: 附录 1 明示「2025 年 1 月 1 日 0:00 的电量为 6000 kWh」；问题 1 只要求首末相同而未另给初值， 取题面唯一可用初值是最小假设。属题面硬参数，不经文献裁定，故不绑定文献。
+  applicability: prob01；prob02–prob04 是否每日重置 6000 或跨日滚动见 A2（本问不裁定）。
+  bias_if_invalid: 若取其他初值（如区间中点 6000 恰为 [1200,10800] 中点，亦可论证），因周期约束下最优费用 对初值水平不敏感（仅改变套利深度），影响方向有限；但表
+    2 的 0:00/24:00 数值会变。
+  validation: 表 2 的 0:00 与 24:00 储电量均报 6000 kWh；robustness 可扫描初值。
+  relations: 与 AS10 联立确定端点状态。
+  status: accepted
+- id: AS12
+  title: 模型族为单日确定性线性规划
+  statement: prob01 建模为 144 时段的确定性 LP：连续变量 b_t、c_t、q_dis_t、s_t、E_t；目标线性、 约束线性。若 AS07
+    的互补性验证失败则升级为含二元变量的 MILP，但默认走 LP。
+  type: 数值近似（模型族）
+  key: true
+  criticality: high
+  evidence_type: literature_fact
+  reference_ids:
+  - ref-csee-2023-mg-ems-review
+  - ref-carpinelli-2013-dayahead-ilp
+  - ref-ignat-2019-cost-dayahead
+  - ref-alamir-2025-dayahead-multimg
+  basis: ref-csee-2023-mg-ems-review（微网 EMS 方法综述）、ref-carpinelli-2013-dayahead-ilp、
+    ref-ignat-2019-cost-dayahead、ref-alamir-2025-dayahead-multimg 表明日前/单日含储能调度 的标准方法族为
+    LP/MILP，且确定性线性模型足以覆盖 prob01。
+  applicability: prob01；prob04 的波动电价若采用完全信息口径仍为 LP（可观测性见 A8）。
+  bias_if_invalid: 若问题实际需要随机/鲁棒优化（电价或光伏不确定），确定性 LP 的结果乐观。
+  validation: 检查求解器状态为 optimal、目标值与对偶/残差一致；与 MILP 版本对比（如启用）。
+  relations: 依赖 AS07；求解器默认 CPU（HiGHS），不需要 GPU。
+  status: accepted
+- id: AS13
+  title: 表 1/表 2 的汇总与填报口径（A10/A11）
+  statement: 表 1「全天购电量」= Σ_t b_t（kWh）；「全天购电费」= Σ_t p_t·b_t = C_plan（元；prob01 无紧急/调整费用项，A11
+    的歧义在本问不可区分）。表 2 的 6 个 4 小时时段按模板行位置聚合：第 b 块 = 计划购电量第 24(b−1)+1 … 24b 行（b=1..6），充电量
+    = Σ c_t、放电量 = Σ q_dis_t 分别列示、不冲抵；「0:00 储电量」= E_0、「24:00 储电量」= E_144。
+  type: 决策偏好（报告口径）
+  key: false
+  criticality: medium
+  evidence_type: team_decision
+  reference_ids: []
+  basis: result1.xlsx 模板实测（计划购电量 144 行、充放电量 6 个 4 小时行 + 0:00/24:00 两格）；题面表 1/表 2 结构。
+  applicability: prob01；prob02–prob04 沿用并扩展。
+  bias_if_invalid: 若把同段充放电冲抵后只报净量，会丢失「同时充放」信息并与表 2「充电量/放电量」两列语义不符；若用时钟 0:00-4:00 严格切分，会与
+    AS01 的 10 分钟相位冲突（见 D1/D8）。（v001 此处误写 D1/D7，团队裁定按笔误修正为 D1/D8。）
+  validation: sanity L1 核对 144 行与 6 块的行索引映射；表 1/表 2 与 xlsx 内容一致。
+  relations: 依赖 AS01（相位）与 AS10（端点状态）。
+  status: accepted
+- id: AS14
+  title: 不计静置损耗与自放电（A4）
+  statement: 题面未给出自放电率，储能仅在充放电时损失能量，静置时 E 保持不变（无额外参数）。
+  type: 机理简化
+  key: false
+  criticality: low
+  evidence_type: common_sense
+  reference_ids: []
+  basis: 附录 1 参数表中无自放电/静置损耗项；引入会需要无法标定的额外参数。
+  applicability: prob01–prob04。
+  bias_if_invalid: 真实自放电会使实际储电量略低于模型值，费用被轻微低估（方向明确、量级小）。
+  validation: robustness 可加 0.01%/h 自放电情景观察费用变化。
+  relations: 影响 AS10 的周期闭合精度。
+  status: accepted
+- id: AS15
+  title: 外网购电无功率上限、余电不上网（A14／部分 A13）
+  statement: 不建模外网购电的功率/容量上限（题面未给），b_t ≥ 0 且无上界；不建模余电上网或售电收益， 光伏盈余只能被储能吸收或以 s_t 弃掉。
+  type: 边界条件（系统范围）
+  key: false
+  criticality: medium
+  evidence_type: project_assumption
+  reference_ids: []
+  basis: 题面只给出电价而无联络线容量；题面非孤岛微网允许向储能充电但未提售电渠道。
+  applicability: prob01–prob04；若后续发现题面隐含容量需修订本假设并新建版本。
+  bias_if_invalid: 若实际联络线容量有限，最优解会出现不可执行的购电尖峰，费用被低估； 若允许售电，费用会被高估（未计售电收入）。
+  validation: 检查最优 b_t 是否出现不合理的极端尖峰；sanity L4 检查供给可靠性。
+  relations: 与 AS08（弃光）互补。
+  status: accepted
+- id: AS16
+  title: prob01 采用单日确定性口径，不做随机/多情景优化
+  statement: 问题 1 的题设「每天的电价和小区负载相同，同时给出光伏发电功率一天的预测数据」意味着 输入被视作确定的预测值；prob01 不引入光伏预测误差分布或鲁棒集。
+  type: 边界条件（不确定性处理）
+  key: false
+  criticality: medium
+  evidence_type: project_assumption
+  reference_ids:
+  - ref-rawa-2023-mg-stochastic
+  basis: 题面把光伏数据表述为「预测数据」并直接要求给出计划；ref-rawa-2023-mg-stochastic 指出确定性运行与随机调度是两条谱系，本题问题
+    1 只要求前者。
+  applicability: prob01；prob03 的预报误差与 prob04 的电价可观测性另行裁定。
+  bias_if_invalid: 预测偏差会使实际供给不足（prob02 起由紧急购电兜底），prob01 的费用被低估。
+  validation: 该口径是题面既定，不做反驳实验；留待 prob03/04 讨论不确定性。
+  relations: 与 AS12（确定性 LP）一致。
+  status: accepted
+formulation_versions: []
+active_formulation: null
+accepted_formulation: null
+tasks: []
+sanity_status: pending
+conclusion_id: ''
+conclusion_version: 0
+conclusion_hash: ''
+decision_reason: assumption_v002 已按团队裁定（D1–D8 采纳 A、D9 量纲硬错误修正、AS03 拆分、AS09 改标 agent_inference、AS13
+  笔误修正、AS11 维持）完成 17 条假设；10 条关键假设均绑定 verified+used 文献，check_key_assumptions 自查 passed=true；D9
+  费用口径已由独立探针复核（费用区间 [20623, 48052] 元，量级 10^4）。建议进入 mathematical_formulation。
+decided_at: '2026-09-10T11:05:03.974329+00:00'

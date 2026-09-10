@@ -1,4 +1,11 @@
 default_backend: local
+# 本地 worker 启动方式：supervised（Runner 原地运行，生命周期与 Runner 一致）
+# 或 detached（subprocess.Popen 派生独立进程）。
+# 在受限沙箱/短命 shell 调用中（如 DSH 工具调用结束时的进程树回收），detached 子进程会在
+# 父调用结束时被回收，worker 在启动数秒内消失并产生 failure_type=interrupted
+# （已由 act-6a8ebb7c3b474c7d 的两个独立探针复现）；因此默认 supervised。
+# detached 仅当 Runner 在沙箱外的常驻终端/daemon 中运行时才可靠。
+worker_launch_mode: supervised
 max_local_concurrent_tasks: 4
 max_remote_concurrent_tasks: 2
 duplicate_task_policy: block

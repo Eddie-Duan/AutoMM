@@ -29,6 +29,27 @@ def stages(problem_id: str | None = None, question_id: str | None = None) -> lis
     return list(config_section("workflow", problem_id, question_id).get("stages", []))
 
 
+def use_supervised_worker(problem_id: str | None = None, question_id: str | None = None) -> bool:
+    """本地计算 worker 是否以 supervised（Runner 原地运行）方式启动。
+
+    `config/compute.yaml` 的 `worker_launch_mode` 控制，缺省 supervised。原因：detached
+    方式用 `subprocess.Popen` 派生独立进程，在受限沙箱/短命 shell 调用中会随父调用结束
+    被进程树回收，worker 启动数秒内即消失（failure_type=interrupted）。
+    """
+    mode = str(config_section("compute", problem_id, question_id).get("worker_launch_mode", "supervised"))
+    return mode.strip().lower() != "detached"
+
+
+def mandatory_stages(problem_id: str | None = None, question_id: str | None = None) -> set[str]:
+    """必须执行（不接受 skipped）的条件阶段。
+
+    `config/workflow.yaml` 的 `mandatory_stages` 控制；默认空集（即所有条件阶段可跳过）。
+    团队把 robustness / ablation 设为必做时，Harness 会在三处强制：
+    record_optional_stage 拒绝 skipped、next_action 不因 skipped 推进、本地完成门禁报错。
+    """
+    return set(config_section("workflow", problem_id, question_id).get("mandatory_stages", []) or [])
+
+
 def _action(policy: str, action: str, reason: str, **fields: Any) -> dict[str, Any]:
     return {"policy": policy, "action": action, "reason": reason, **fields}
 
@@ -77,7 +98,7 @@ def next_action() -> dict[str, Any]:
         )
     queued = [task for task in all_tasks if task.get("status") == "queued"]
     if queued:
-        started = start_queued()
+        started = start_queued(supervised=use_supervised_worker())
         return _action(
             "P2",
             "start_queued_compute",
@@ -244,7 +265,11 @@ def next_action() -> dict[str, Any]:
         return _action("P5", "advance_stage", "robustness 已完成，进入 Level 6 sanity", problem_id=problem_id, question_id=question_id, stage="sanity_check")
 
     optional = manifest.get("optional_stages", {}).get(stage)
-    if optional and optional.get("decision") in {"skip", "skipped"}:
+    if (
+        optional
+        and optional.get("decision") in {"skip", "skipped"}
+        and stage not in mandatory_stages(problem_id, question_id)
+    ):
         return _action(
             "P5",
             "advance_stage",
@@ -400,8 +425,11 @@ def validate_local_completion(problem_id: str, question_id: str) -> None:
         decision = item.get("decision")
         if decision not in {"complete", "completed", "skip", "skipped"}:
             errors.append(f"{stage} 尚未完成或跳过")
-        if decision in {"skip", "skipped"} and not str(item.get("reason", "")).strip():
-            errors.append(f"{stage} 跳过但未记录理由")
+        if decision in {"skip", "skipped"}:
+            if not str(item.get("reason", "")).strip():
+                errors.append(f"{stage} 跳过但未记录理由")
+            if stage in mandatory_stages(problem_id, question_id):
+                errors.append(f"{stage} 已配置为必做（workflow.mandatory_stages），不允许 skipped，必须 completed")
     required_artifacts = tuple(config_section("gates", problem_id, question_id).get("required_artifacts_for_local_completion", []))
     missing = [name for name in required_artifacts if not manifest.get("artifacts", {}).get(name)]
     if missing:
@@ -465,6 +493,11 @@ def record_optional_stage(problem_id: str, question_id: str, stage: str, decisio
         raise ValueError("decision 只能是 completed 或 skipped")
     if decision == "skipped" and not reason.strip():
         raise ValueError("跳过可选阶段必须说明理由")
+    if decision == "skipped" and stage in mandatory_stages(problem_id, question_id):
+        raise ValueError(
+            f"阶段 {stage} 已配置为必做（config/workflow.yaml: workflow.mandatory_stages），"
+            "不接受 skipped；请执行实验并记录 completed"
+        )
     path, manifest = question_manifest(problem_id, question_id)
     manifest.setdefault("optional_stages", {})[stage] = {"decision": decision, "reason": reason}
     manifest.setdefault("artifacts", {})[stage] = decision == "completed"

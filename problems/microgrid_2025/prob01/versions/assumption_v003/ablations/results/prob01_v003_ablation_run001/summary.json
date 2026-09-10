@@ -1,0 +1,139 @@
+{
+  "baseline_objective_yuan": 35126.948589,
+  "criteria": {
+    "C1_baseline_reproduction": {
+      "value": 0.0,
+      "threshold": 1e-06,
+      "passed": true
+    },
+    "C2_milp_lossless": {
+      "value": 0.0,
+      "mip_gap": 0.0,
+      "threshold": 1e-06,
+      "passed": true,
+      "direction_ok": true
+    },
+    "C3_dp_route_consistency": {
+      "value": 0.007906095722956422,
+      "threshold": 0.01,
+      "passed": true,
+      "relative_range_ok": true,
+      "dp_not_better_than_lp": true,
+      "monotone_in_step": true
+    },
+    "C4_structural_direction": {
+      "D_no_periodic_relative_diff": -0.063116308761709,
+      "E_no_spill_relative_diff": 0.0,
+      "threshold": 1e-06,
+      "passed": true,
+      "D_direction_ok": true,
+      "E_direction_ok": true
+    },
+    "C5_eta_placement": {
+      "costs": {
+        "F_place_both": 35126.948589,
+        "F_place_charge_only": 33416.530707,
+        "F_place_discharge_only": 34168.609929,
+        "F_place_round_trip": 33801.495542
+      },
+      "accepted_is_most_conservative": true,
+      "max_abs_relative_diff": 0.04869246976196557,
+      "threshold": 0.1,
+      "passed": true,
+      "relative_diff": {
+        "F_place_both": 0.0,
+        "F_place_charge_only": -0.048692,
+        "F_place_discharge_only": -0.027282,
+        "F_place_round_trip": -0.037733
+      }
+    },
+    "C6_constraint_satisfaction": {
+      "failed_cases": {},
+      "milp_zero_simultaneous": true,
+      "passed": true
+    },
+    "C7_interpretability": {
+      "arbitrage_direction_ok": true,
+      "baseline_simultaneous_periods": 0,
+      "passed": true
+    }
+  },
+  "criteria_failed": [],
+  "technical_debt": [
+    "F 效率作用位置族固定 c/q 上限（833.3333/750.0000），与 robustness eta_placement 族按情景重算上限的口径不同，两者数值不可互换引用（plan.md §3.6/§3.9）"
+  ],
+  "conclusions": {
+    "K1_model_family_independent": {
+      "milp_matches_lp": true,
+      "dp50_relative_diff": 0.007906095722956422,
+      "supported": true
+    },
+    "K2_structural_contribution": {
+      "periodic_constraint_value_yuan": 2217.083333,
+      "spill_variable_value_yuan": 0.0,
+      "D_relative_diff": -0.063116308761709,
+      "E_relative_diff": 0.0,
+      "supported": true
+    },
+    "K3_eta_placement": {
+      "relative_diff": {
+        "F_place_both": 0.0,
+        "F_place_charge_only": -0.048692,
+        "F_place_discharge_only": -0.027282,
+        "F_place_round_trip": -0.037733
+      },
+      "accepted_is_most_conservative": true,
+      "supported": true
+    }
+  },
+  "dp_granularity": [
+    {
+      "step_kwh": 400.0,
+      "label": "C_dp_h400",
+      "grid_points": 25,
+      "transitions": 90000,
+      "objective_yuan": 37616.519995,
+      "relative_diff": 0.07087354598115055,
+      "solve_seconds": 0.0095,
+      "feasible": true
+    },
+    {
+      "step_kwh": 200.0,
+      "label": "C_dp_h200",
+      "grid_points": 49,
+      "transitions": 345744,
+      "objective_yuan": 36203.04215,
+      "relative_diff": 0.030634416145585163,
+      "solve_seconds": 0.0153,
+      "feasible": true
+    },
+    {
+      "step_kwh": 100.0,
+      "label": "C_dp_h100",
+      "grid_points": 97,
+      "transitions": 1354896,
+      "objective_yuan": 35688.917531,
+      "relative_diff": 0.01599822827127034,
+      "solve_seconds": 0.0387,
+      "feasible": true
+    },
+    {
+      "step_kwh": 50.0,
+      "label": "C_dp_h050",
+      "grid_points": 193,
+      "transitions": 5363856,
+      "objective_yuan": 35404.665607,
+      "relative_diff": 0.007906095722956422,
+      "solve_seconds": 0.3308,
+      "feasible": true
+    }
+  ],
+  "cases_total": 12,
+  "cases_infeasible": 0,
+  "robustness_reference": {
+    "source": "robustness/results/prob01_v003_robust_run001/summary.json（只读复用，未重跑）",
+    "stability_grade": "稳定",
+    "S1_S6_all_passed": true,
+    "dominant_parameter": "eta（|ΔC|/C* ≤ 0.088885）"
+  }
+}

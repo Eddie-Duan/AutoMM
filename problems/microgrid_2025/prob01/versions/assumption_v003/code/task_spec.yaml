@@ -1,0 +1,90 @@
+# prob01 隔离计算 task 规格（computation 阶段由 resource-manager 提交）
+# 生成者：implementation-agent（初版动作 act-0f8555fda45b4e1f；本动作 act-fd5e1868958f4329 重做并修订）
+# 依据：agents/implementation-agent.md、agents/resource-manager.md、PROJECT.md、config/gates.yaml
+# 说明：本文件只是**规格**，implementation 阶段不得自行创建 task；task 由 Runner/tasks.py 确定性创建。
+#
+# 修订记录（act-fd5e1868958f4329，2026-09-10）：
+#   1) 修复 run_prob01.build_tables 的表 1 标签校验缺陷：初版拿「附件时间戳 = 10:00」去比对
+#      「模板区间标签 = 10:00-10:10」，恒为 False；144 时段正式运行会在求解后以 exit 4
+#      （硬检查失败）终止且不写任何产物（12/24 时段探针因 position > periods 而不触发该分支，
+#      所以初版静态检查未能暴露）。现改为同时校验「附件时间戳 = 区间左端点」与
+#      「模板行标签 = 完整区间」，并新增**不求解**的 144 时段表 1/表 2/模板填报路径静态探针。
+#   2) attempt-001（task b87194aa7fada61ee0d8）以 failure_type=interrupted 结束（worker 生命周期
+#      被沙箱进程树回收），属 infrastructure_transient；按 resource-manager.md「重试必须创建新
+#      attempt 和新 output_directory，不能覆盖旧结果」，本次 output_directory 由 ..._run001
+#      改为 ..._run002。
+#   3) config/compute.yaml 已置 worker_launch_mode=supervised（Runner 原地运行 worker）；该改动
+#      会改变 config_hash，从而产生新的 task_id，旧 task 记录原样保留、不被覆盖。
+spec_version: 1
+problem_id: microgrid_2025
+question_id: prob01
+stage: computation
+assumption_version: assumption_v003
+formulation_version: formulation_v001
+backend: local
+working_directory: "."
+code_path: problems/microgrid_2025/prob01/versions/assumption_v003/code
+config_path: problems/microgrid_2025/prob01/versions/assumption_v003/code/task_config.yaml
+input_path: data
+output_directory: problems/microgrid_2025/prob01/versions/assumption_v003/results/prob01_v003_f001_run002
+timeout_seconds: 300
+seed: null
+gpu_required: false
+device: cpu
+gpu_serial_constraint: "本 task 不使用 GPU，故不占用单卡 GPU 串行额度；若未来引入 GPU 路径必须单卡串行"
+worker_launch_mode: supervised
+command:
+  - ".venv/Scripts/python.exe"
+  - "problems/microgrid_2025/prob01/versions/assumption_v003/code/run_prob01.py"
+  - "--data"
+  - "data/附件1.xlsx"
+  - "--template"
+  - "data/附件5/result1.xlsx"
+  - "--output"
+  - "problems/microgrid_2025/prob01/versions/assumption_v003/results/prob01_v003_f001_run002"
+  - "--periods"
+  - "144"
+  - "--time-limit"
+  - "60"
+submit_hint:
+  tool: scripts/compute_dispatcher.py
+  subcommand: submit
+  notes:
+    - "若 .venv/Scripts/python.exe 无法解析，resource-manager 应改用当前 Runner 解释器（sys.executable）或项目 venv 的绝对路径；不得改用缺少 scipy/pandas/openpyxl 的解释器。"
+    - "--output 的取值必须与 output_directory 完全一致（tasks.make_task_spec 会强校验）。"
+    - "禁止 --periods 小于 144；探针模式只允许在 implementation/静态检查中使用，不得作为交付结果。"
+    - "必须由 Runner 以 worker_launch_mode=supervised（in-process）启动；detached 在本环境会被沙箱回收（见 attempt-001 证据）。"
+    - "output_directory 与 attempt-001 不同（run002），submit 时无需 --force；若因 task_id 未变而报重复，须先确认 config_hash 是否已随 compute.yaml 变化。"
+inputs_readonly:
+  - data/附件1.xlsx
+  - data/附件5/result1.xlsx
+  - data/（作为 input_path 整体参与 input_hash）
+expected_outputs:
+  - result1.xlsx
+  - solver_status.json
+  - solution.json
+  - tables.json
+  - run_manifest.json
+expected_runtime:
+  wall_clock_seconds_max: 60
+  memory_mb_max: 500
+  device: cpu
+expected_failure_conditions:
+  - exit_code: 2
+    meaning: "solver 未返回最优（infeasible/unbounded/time_limit），solver_status.json 的 feasible_incumbent=false"
+    route: "route_compute_failure -> implementation-agent 复核 formulation 与数据"
+  - exit_code: 3
+    meaning: "附件 1 或模板结构与 accepted 假设不一致（表头/行数/非有限值）"
+    route: "needs_revision -> mathematical_formulation 或 assumption_definition"
+  - exit_code: 4
+    meaning: "硬约束或恒等式检查失败（残差 > 1e-6、模板/附件标签与 AS01 位置口径不符）"
+    route: "needs_revision -> implementation 修复或 mathematical_formulation 复核"
+  - exit_code: 1
+    meaning: "未捕获异常（Python 运行时错误）"
+    route: "code_runtime -> implementation-agent 修复代码"
+acceptance_hint:
+  - "solver_status.json: status=0、feasible_incumbent=true、等式残差 <= 1e-6"
+  - "solution.json: checks_failed 为空；(I1)/(I2) 残差 <= 1e-6；同时充放时段数 = 0；费用为 10^4 元量级"
+  - "tables.json: 表 1 六时段行位置 60/72/84/96/108/120，且 attachment_timestamp 为区间左端点、template_label 为完整区间"
+  - "tables.json: 表 2 六块各 24 行；0:00/24:00 = E_0/E_144 = 6000 kWh"
+  - "run_manifest.json: code_sha256、input md5、device=cpu、seed=null 齐备，供 sanity/robustness 追踪"

@@ -1,0 +1,51 @@
+{
+  "stage": "robustness",
+  "question_id": "prob01",
+  "assumption_version": "assumption_v003",
+  "formulation_version": "formulation_v001",
+  "task_id": "238db2418a6b1aed432b",
+  "output_directory": "problems/microgrid_2025/prob01/versions/assumption_v003/robustness/results/prob01_v003_robust_run001",
+  "input_md5": "dbe06f92517431228efcc26e3e796ef9",
+  "reference_run002_sha256": "b083ac3b812c10ff008ad7734b9c774c3e1fb0a57c5ffb17d5c87f82749c7010",
+  "seed": 20260910,
+  "noise_samples_per_setting": 100,
+  "families": [
+    "baseline",
+    "buy_cap",
+    "d10",
+    "depreciation",
+    "emax",
+    "emin",
+    "eta",
+    "eta_placement",
+    "init",
+    "noise",
+    "pmax",
+    "self_discharge",
+    "sell_price",
+    "solver"
+  ],
+  "cases_total": 948,
+  "cases_infeasible": 1,
+  "figures": [
+    "robustness_tornado.png",
+    "robustness_response_curves.png",
+    "robustness_noise_ecdf.png",
+    "robustness_scenarios.png",
+    "robustness_spider.png"
+  ],
+  "code_sha256": {
+    "robustness_prob01.py": "e8dd8f1565cf8b2017090e33a188fb46b2d2c89d2f8091036022564d8bf33ea6"
+  },
+  "device": "cpu",
+  "gpu_required": false,
+  "baseline_check": true,
+  "criteria_failed": [],
+  "checks_failed": [],
+  "outcome": "completed",
+  "wall_clock_seconds": 15.326,
+  "accepted_code_sha256": {
+    "prob01_model.py": "55e30e5e6ad329772ebde856048a1062431eaed599f1a17230489ac341e58575",
+    "prob01_io.py": "f1c3ec7d2d74afbb8db00a74c8a242b217b4c39dd8375b3abe518179e20b2f0a"
+  }
+}

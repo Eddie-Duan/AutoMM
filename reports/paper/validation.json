@@ -1,0 +1,42 @@
+{
+  "checked_at": "2026-09-10T11:34:52.280366+00:00",
+  "problem_id": "microgrid_2025",
+  "draft": ".tmp/draft_check.md",
+  "status": "NEEDS_REVISION",
+  "errors": [
+    "正文仍包含待写占位符",
+    "附录缺少支撑材料文件列表（格式规范第五条）",
+    "附录未内联任何源程序代码（格式规范第五条）",
+    "prob01 没有任何图表进入论文",
+    "prob02 没有任何图表进入论文",
+    "prob03 没有任何图表进入论文",
+    "prob04 没有任何图表进入论文"
+  ],
+  "citation_ids_used": [
+    "ref-alamir-2025-dayahead-multimg",
+    "ref-alguhi-2025-bess-operation",
+    "ref-arima-2024-rte-profile",
+    "ref-carpinelli-2013-dayahead-ilp",
+    "ref-csee-2023-mg-ems-review",
+    "ref-grimaldi-2025-arbitrage-curtail",
+    "ref-heydari-2016-lpsp",
+    "ref-huang-2022-dynamic-efficiency",
+    "ref-ignat-2019-cost-dayahead",
+    "ref-jamroen-2023-soc-sizing",
+    "ref-lee-2020-purchase-cost-lp",
+    "ref-lin-2024-tou-industrial",
+    "ref-moradi-2018-standalone",
+    "ref-nazir-2023-realizable-dispatch",
+    "ref-olivieri-2020-residential-bess",
+    "ref-qing-2025-pv-curtailment",
+    "ref-rawa-2023-mg-stochastic",
+    "ref-shen-2026-peak-valley",
+    "ref-valibeygi-2020-battery-dispatch-soc",
+    "ref-vykhodtsev-2022-bess-review",
+    "ref-wang-2024-complementarity",
+    "ref-wongwut-2017-tou-prosumer",
+    "ref-zeinalzadeh-2017-loadshed-curtail",
+    "ref-zhang-2015-dayahead-degradation"
+  ],
+  "included_figure_count": 0
+}

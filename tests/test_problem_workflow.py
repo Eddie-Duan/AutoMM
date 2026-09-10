@@ -14,7 +14,14 @@ from automm.problems import (
     question_manifest,
 )
 from automm.state import apply_control, load_state
-from automm.workflow import next_action, record_conclusion, record_sanity, transition
+from automm.workflow import (
+    next_action,
+    record_conclusion,
+    record_optional_stage,
+    record_sanity,
+    transition,
+    validate_local_completion,
+)
 
 pytestmark = pytest.mark.unit
 
@@ -184,3 +191,51 @@ def test_completed_robustness_does_not_rerun_visualization_or_robustness(
 
     assert action["action"] == "advance_stage"
     assert action["stage"] == "sanity_check"
+
+
+def _force_stage(problem_id: str, question_id: str, stage: str) -> None:
+    from automm.state import save_state
+
+    state = load_state()
+    state["current_stage"] = stage
+    save_state(state, event="test_setup")
+    path, manifest = question_manifest(problem_id, question_id)
+    manifest["stage"] = stage
+    write_yaml(path, manifest)
+
+
+def test_mandatory_stage_rejects_skipped_decision(initialized_problem: tuple[str, Path]) -> None:
+    problem_id, _ = initialized_problem
+    for stage in ("robustness", "ablation"):
+        with pytest.raises(ValueError, match="不接受 skipped"):
+            record_optional_stage(problem_id, "prob01", stage, "skipped", "本模型不适用")
+
+
+def test_mandatory_stage_accepts_completed_decision(initialized_problem: tuple[str, Path]) -> None:
+    problem_id, _ = initialized_problem
+    manifest = record_optional_stage(problem_id, "prob01", "robustness", "completed", "")
+    assert manifest["optional_stages"]["robustness"]["decision"] == "completed"
+    assert manifest["artifacts"]["robustness"] is True
+
+
+def test_skipped_mandatory_stage_does_not_advance(initialized_problem: tuple[str, Path]) -> None:
+    problem_id, _ = initialized_problem
+    _force_stage(problem_id, "prob01", "robustness")
+    path, manifest = question_manifest(problem_id, "prob01")
+    manifest["optional_stages"]["robustness"] = {"decision": "skipped", "reason": "手工写入"}
+    write_yaml(path, manifest)
+
+    action = next_action()
+
+    assert action["action"] == "run_agent"
+    assert action["agent"] == "robustness-analyst"
+
+
+def test_skipped_mandatory_stage_blocks_local_completion(initialized_problem: tuple[str, Path]) -> None:
+    problem_id, _ = initialized_problem
+    path, manifest = question_manifest(problem_id, "prob01")
+    manifest["optional_stages"]["robustness"] = {"decision": "skipped", "reason": "手工写入"}
+    write_yaml(path, manifest)
+
+    with pytest.raises(RuntimeError, match="不允许 skipped"):
+        validate_local_completion(problem_id, "prob01")

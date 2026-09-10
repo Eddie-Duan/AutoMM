@@ -128,6 +128,81 @@ def splice_appendix(draft_path: Path, appendix: str) -> None:
     draft_path.write_text(text + appendix, encoding="utf-8")
 
 
+def _demote_headings(block: str) -> str:
+    """把团队裁定块内的标题降级，避免与论文章节同级。"""
+    out = []
+    for line in block.splitlines():
+        if line.startswith("### "):
+            out.append("##### " + line[4:])
+        elif line.startswith("## "):
+            out.append("#### " + line[3:])
+        else:
+            out.append(line)
+    return "\n".join(out)
+
+
+RULING_HEADING_RE = re.compile(r"^##\s*(待团队选定的决策点|团队裁定|团队勘误)")
+
+
+def _team_ruling_blocks(assumptions_md: Path) -> list[str]:
+    """抽取 assumptions.md 中「待团队选定的决策点」/「团队裁定」/「团队勘误」小节。
+
+    这三节是 harness 规定的固定落点，集中承载关键建模口径的备选、推荐与团队取舍，
+    正是论文「数据与建模假设」一章应当披露的内容。标题必须**独占一行且位于行首**，
+    避免把正文/引用块里提到的标题字样误当成小节开头。
+    """
+    if not assumptions_md.is_file():
+        return []
+    lines = assumptions_md.read_text(encoding="utf-8").splitlines()
+    starts = [index for index, line in enumerate(lines) if RULING_HEADING_RE.match(line)]
+    blocks: list[str] = []
+    for position, start in enumerate(starts):
+        end = starts[position + 1] if position + 1 < len(starts) else len(lines)
+        chunk: list[str] = []
+        for line in lines[start:end]:
+            if chunk and line.strip() == "---":
+                break
+            chunk.append(line)
+        blocks.append("\n".join(chunk).rstrip())
+    return [block for block in blocks if block]
+
+
+def assumptions_section(problem_id: str, config: dict) -> str:
+    """汇总已接受的假设版本：假设总览表（带 [@引用ID]）+ 团队裁定口径披露。"""
+    problem = load_problem(problem_id)
+    lines: list[str] = []
+    rulings: list[str] = []
+    for question_id in problem["questions"]:
+        _, manifest = question_manifest(problem_id, question_id)
+        version = int(manifest.get("active_assumption_version", 0))
+        if not version:
+            lines += [f"### {question_id} 的建模假设", "", "（该小问尚无已接受的假设版本。）", ""]
+            continue
+        version_dir = problem_dir(problem_id) / question_id / "versions" / f"assumption_v{version:03d}"
+        entries = read_yaml(version_dir / "version.yaml").get("assumptions") or []
+        lines += [f"### {question_id} 的建模假设（`assumption_v{version:03d}`，共 {len(entries)} 条）", ""]
+        if entries:
+            lines += ["| 编号 | 假设 | 关键 | 证据类型 | 支撑文献 |", "|---|---|---|---|---|"]
+            for item in entries:
+                statement = " ".join(str(item.get("statement", "")).split()).replace("|", "\\|")
+                if len(statement) > 180:
+                    statement = statement[:180] + "…"
+                refs = "、".join(f"[@{ref}]" for ref in (item.get("reference_ids") or [])) or "—"
+                key_flag = "是" if item.get("key") else "否"
+                lines.append(
+                    f"| {item.get('id', '?')} | {statement} | {key_flag} "
+                    f"| `{item.get('evidence_type', '')}` | {refs} |"
+                )
+            lines.append("")
+        rulings += _team_ruling_blocks(version_dir / "assumptions.md")
+    if rulings:
+        lines += ["### 关键建模口径的备选与团队取舍", ""]
+        for block in rulings:
+            lines.append(_demote_headings(block))
+            lines.append("")
+    return "\n".join(lines).rstrip() + "\n"
+
+
 def active_problem_id(value: str | None) -> str:
     problem_id = value or load_state().get("active_problem")
     if not problem_id:
@@ -160,6 +235,7 @@ def draft(problem_id: str, output_arg: str | None, *, with_appendix: bool = Fals
     )
     title = metadata.get("competition_name") or problem_id
     ai_declaration = ai_declaration_section(config)
+    assumptions = assumptions_section(problem_id, config)
     text = f"""# {title}
 
 ## 摘要
@@ -172,7 +248,7 @@ def draft(problem_id: str, output_arg: str | None, *, with_appendix: bool = Fals
 
 ## 2 数据与建模假设
 
-> 汇总各小问已接受假设版本；关键假设必须带 `[@引用ID]`。
+{assumptions}
 
 {chr(10).join(sections)}
 ## {len(sections) + 3} 敏感性、鲁棒性与消融分析

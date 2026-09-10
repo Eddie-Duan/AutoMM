@@ -1,0 +1,82 @@
+# prob01 robustness 隔离计算 task 规格
+# 生成者：robustness-analyst（动作 act-edd4595657bb4bea）；阶段：robustness
+# 依据：agents/robustness-analyst.md、skills/robustness-study/SKILL.md、knowledge/robustness-ablation.md、
+#       config/workflow.yaml（robustness 属 mandatory_stages，不得 skipped）
+# 说明：本文件是**规格**；task 由 scripts/compute_dispatcher.py submit 经 tasks.make_task_spec/submit_task
+#       确定性创建（status=queued），再由 Runner 以 worker_launch_mode=supervised 原地运行。
+#       Agent 不自行代跑，也不在短命 shell 内调用 start_queued。
+spec_version: 1
+problem_id: microgrid_2025
+question_id: prob01
+stage: robustness
+assumption_version: assumption_v003
+formulation_version: formulation_v001
+backend: local
+working_directory: "."
+code_path: problems/microgrid_2025/prob01/versions/assumption_v003/robustness/code
+config_path: problems/microgrid_2025/prob01/versions/assumption_v003/robustness/code/task_config.yaml
+input_path: data
+output_directory: problems/microgrid_2025/prob01/versions/assumption_v003/robustness/results/prob01_v003_robust_run001
+timeout_seconds: 900
+seed: 20260910
+gpu_required: false
+device: cpu
+gpu_serial_constraint: "本 task 不使用 GPU，故不占用单卡 GPU 串行额度"
+worker_launch_mode: supervised
+command:
+  - ".venv/Scripts/python.exe"
+  - "problems/microgrid_2025/prob01/versions/assumption_v003/robustness/code/robustness_prob01.py"
+  - "--input"
+  - "data/附件1.xlsx"
+  - "--output"
+  - "problems/microgrid_2025/prob01/versions/assumption_v003/robustness/results/prob01_v003_robust_run001"
+  - "--seed"
+  - "20260910"
+  - "--samples"
+  - "100"
+  - "--families"
+  - "all"
+submit_hint:
+  tool: scripts/compute_dispatcher.py
+  subcommand: submit
+  notes:
+    - "必须由 Runner 以 supervised（in-process）启动；detached 会被沙箱进程树回收。"
+    - "--output 必须与 output_directory 完全一致（make_task_spec 强校验）。"
+    - "output_directory 必须位于 assumption_v003 目录内（make_task_spec 强校验）。"
+    - "input_path=data 使附件 1/2/3/4/5 全部进入 input_hash；只读，不修改。"
+inputs_readonly:
+  - data/附件1.xlsx
+  - data/（作为 input_path 整体参与 input_hash）
+  - problems/microgrid_2025/prob01/versions/assumption_v003/results/prob01_v003_f001_run002/solution.json（基线复现闸门，只读）
+expected_outputs:
+  - baseline_check.json
+  - solver_status.json
+  - raw_samples.jsonl
+  - summary.json
+  - sensitivity.json
+  - run_manifest.json
+  - figures/robustness_tornado.png
+  - figures/robustness_response_curves.png
+  - figures/robustness_noise_ecdf.png
+  - figures/robustness_scenarios.png
+  - figures/robustness_spider.png
+expected_runtime:
+  wall_clock_seconds_max: 900
+  memory_mb_max: 500
+  device: cpu
+expected_failure_conditions:
+  - exit_code: 4
+    meaning: "基线复现闸门失败：本实验代码与 accepted run002 结果不一致，整批作废"
+    route: "needs_revision -> implementation/robustness 复核模型口径"
+  - exit_code: 3
+    meaning: "输入结构或情景族参数非法"
+    route: "needs_revision -> robustness 修复代码"
+  - exit_code: 1
+    meaning: "未捕获异常（Python 运行时错误）"
+    route: "code_runtime -> robustness-analyst 修复代码后新 attempt + 新 output_directory"
+acceptance_hint:
+  - "solver_status.json: feasible_incumbent=true、baseline_check_passed=true"
+  - "baseline_check.json: 6 项相对差均 ≤ 1e-6"
+  - "raw_samples.jsonl: 每样本一行、无 NaN/Inf；失败样本保留"
+  - "summary.json: S1–S6 判定与 structural_findings 齐备；stability_grade 有明确分级"
+  - "run_manifest.json: task_id、code_sha256、输入 md5、seed、样本计数、耗时齐备"

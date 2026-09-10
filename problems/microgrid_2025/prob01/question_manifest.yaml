@@ -1,44 +1,89 @@
 problem_id: microgrid_2025
 question_id: prob01
-status: not_started
-stage: problem_understanding
+status: locally_completed
+stage: locally_completed
 dependencies: []
-active_assumption_version: 0
-active_formulation_version: 0
-accepted_formulation_version: 0
+active_assumption_version: 3
+active_formulation_version: 1
+accepted_formulation_version: 1
 consecutive_rejections: 0
 literature_refreshes: 0
 literature_refresh_required: false
 conclusion:
-  conclusion_id: ''
-  version: 0
-  content_hash: ''
+  conclusion_id: prob01-concl-001
+  version: 2
+  content_hash: 6fb260491cb70450c0ea71608b59271f51d99a002737d0b3ed46a1bb1b8888d6
+  updated_at: '2026-09-10T14:21:16.728678+00:00'
 sanity:
-  level_1_4: pending
+  level_1_4: PASS_WITH_WARNING
   level_5: pending
-  level_6: not_applicable
+  level_6: PASS_WITH_WARNING
 optional_stages:
   robustness:
-    decision: pending
-    reason: ''
+    decision: completed
+    reason: robustness 已完成（mandatory_stages，未跳过）：隔离 task 238db2418a6b1aed432b 成功、基线复现闸门通过、948
+      个情景中 947 可行、预注册判据 S1–S6 全部通过、stability_grade=稳定；产物 plan.md/task_submission.md/code/results（948
+      样本 + 5 图 + 6 汇总文件）/report.md 齐备且追踪链完整（输入 md5 与 accepted 代码 sha256 均未变、run002
+      未被覆盖）。
   ablation:
-    decision: pending
-    reason: ''
+    decision: completed
+    reason: ablation 为 config/workflow.yaml 的 mandatory_stages，未跳过：隔离 task c1faaa09dedfb103c598（succeeded、supervised、CPU、exit
+      0）产出 ablations/results/prob01_v003_ablation_run001 齐备（12 case 全可行、baseline_check/comparison/dp_granularity/raw_cases/summary/solver_status/run_manifest
+      + 4 张 task 原始图）；团队裁定 A1 的 A–F 六项全部实跑，预注册判据 C1–C7 全通过且 criteria_failed=[]，独立复核
+      56/56 断言通过；plan.md（预注册）、task_submission.md（含结果消费登记）、code/、report.md（对比表 + 5
+      维度 + 结论三问 + robustness 边界与冲突 + 技术债）与登记版图件（figures.yaml + 4/4 自动质检与视觉复核 passed）全部落盘，输入
+      md5 与 accepted 产物哈希未变、run002 未被覆盖。
 artifacts:
-  problem_understanding: false
-  literature: false
-  assumptions: false
-  formulation: false
-  implementation: false
-  computation: false
-  visualization: false
-  sanity_check: false
-  robustness: false
-  ablation: false
+  problem_understanding: true
+  literature: true
+  assumptions: true
+  formulation: true
+  implementation: true
+  computation: true
+  visualization: true
+  sanity_check: true
+  robustness: true
+  ablation: true
   cross_question_review: false
 notification:
-  sent: false
-  attempts: 0
+  sent: true
+  attempts: 2
+  status: sent
+  sent_at: '2026-09-10T14:20:30.713427+00:00'
 stale:
   value: false
   caused_by: []
+accepted_assumption_version: 3
+sanity_history:
+- at: '2026-09-10T12:56:44.045539+00:00'
+  level: level_1_4
+  status: PASS_WITH_WARNING
+  reason: L1-L4 验收 task 1300a936c4d95653f9d1 / run002：L1 产物齐备、输入 md5 未变、追踪链完整；L2 独立回代
+    68 项全通过（等式残差 4.547e-13、E∈[1200,10800]、c≤833.3333、q≤750.0000、两侧功率≤5000 kW、(I1)/(I2)≤4.6e-12、同充放=0）；L3
+    目标 min Σp_t·b_t 不带 Δt、矩阵 720/288/720/1151/144 与 formulation §3.8 一致、表 1 六时段与表
+    2 六块及 result1.xlsx 与序列逐项一致；L4 费用 35126.95 元落在 [20622.73,48052.05]、套利方向合理、关键假设文献门禁
+    passed=true。技术债：文献仅元数据/摘要级、AS06 口径无文献支撑、C1/C2/C3 登记欠账、表 2 相位说明、LP 最优面非唯一，均已登记为
+    warnings，无硬门禁失败。
+  failure_type: null
+- at: '2026-09-10T13:00:46.550453+00:00'
+  level: level_1_4
+  status: PASS_WITH_WARNING
+  reason: sanity_check 阶段正式复核（act-f01ed23959c44dd4）：对 task 1300a936c4d95653f9d1 /
+    run002 的只读复核与 act-8d27775ff3714942 逐位一致——独立回代 68 项全通过（等式残差 4.547e-13、E∈[1200,10800]、c≤833.3333、q≤750.0000、两侧功率≤5000
+    kW、(I1)/(I2)≤4.6e-12、同充放=0）、L1 追踪链 17 项全通过（代码 sha256 三方一致、输入 md5 未变、run001 未被复用）、关键假设文献门禁
+    passed=true；L3 目标 min Σp_t·b_t 不带 Δt、矩阵 720/288/720/1151/144 与 formulation §3.8
+    一致、表 1/表 2/result1.xlsx 与序列逐项一致；L4 费用 35126.95 元落在 [20622.73,48052.05] 元、套利方向合理。技术债见
+    warnings，无硬门禁失败。
+  failure_type: null
+- at: '2026-09-10T13:53:43.731278+00:00'
+  level: level_6
+  status: PASS_WITH_WARNING
+  reason: prob01 Level 6 独立复核（act-4694208eb3ce490d）：对象为 robustness/results/prob01_v003_robust_run001（task
+    238db2418a6b1aed432b，succeeded/supervised/CPU）。84 项独立只读断言 verdict=PASS、checks_failed=0；预注册
+    S1–S6 全部通过（S1 核心族 934/934、参数族 34/34；S2 max|ΔC|/C*=0.088848；S3 全距半宽 0.115132、均值偏移
+    0.065288；S4 934/934 方向不反转；S5 弹性符号全部符合；S6 求解器相对差 0.0），criteria_failed=[]、stability_grade=稳定；基线
+    6 项与 run002 逐位一致、追踪链（输入 md5/run002 sha256/代码 sha256）全部未变；947/948 可行，唯一不可行 buycap_3000
+    属结构族且已按预注册保留计入分母；三类『看似越界』量已归因（自放电恒等式残差、各族自身界、d10_yi 被否口径越限复现）。技术债：D-R1 S3 统计量偏离预注册（0.115132
+    vs 0.096675，均≤0.20）、D-R2 覆盖超集、D-R3 噪声样本缺输入指纹、D-R4/D-R5/D-R6 图件口径、§8.6 售电情景非物理、buy_cap
+    3000 kW 不可行、结转的文献/AS06/上游登记/A2–A9 warnings。无硬门禁失败，判 PASS_WITH_WARNING 并推进至 ablation。
+  failure_type: null

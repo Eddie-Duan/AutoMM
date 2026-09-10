@@ -1,1 +1,344 @@
-figures: []
+figures:
+- stable_id: prob01_fig_input_profile_dc7b2e52af
+  problem_id: microgrid_2025
+  question_id: prob01
+  assumption_version: assumption_v003
+  formulation_version: formulation_v001
+  task_id: 1300a936c4d95653f9d1
+  kind: input_profile
+  title: prob01 代表性单日输入：负载、光伏与电价（附件 1，144 时段）
+  caption: 上：附件 1 的负载功率 L_t 与光伏预测功率 PV_t（kW）；下：电价 p_t（元/kWh）。X 轴为位置口径（AS01 左端点：第 i
+    段 = [10(i−1), 10i) min，刻度为附件时间戳）；计划窗按模板为 0:10→24:10，相对自然日整体前移 10 分钟。数据来源：assumption_v003
+    / formulation_v001 / task 1300a936c4d95653f9d1 / run002。
+  path: problems/microgrid_2025/prob01/versions/assumption_v003/figures/prob01_fig_input_profile_dc7b2e52af.png
+  source_data: problems/microgrid_2025/prob01/versions/assumption_v003/results/prob01_v003_f001_run002/solution.json
+  source_hash: 6bc50828e4b78034b62a7810efb9f7600ba3e2dbcffef151955ad8a48d8d4768
+  script: problems/microgrid_2025/prob01/versions/assumption_v003/figures/plot_prob01_figures.py
+  font: Microsoft YaHei
+  style_config: config/visualization.yaml
+  included_in_summary: true
+  included_in_paper: false
+  quality_report: problems/microgrid_2025/prob01/versions/assumption_v003/figures/prob01_fig_input_profile_dc7b2e52af.quality.json
+  quality_status: passed
+  visual_review:
+    status: passed
+    reason: 视觉复核通过：Microsoft YaHei 字体正常无方框；双面板共享 X 轴（位置口径，刻度为附件时间戳）；上轴单位 kW、下轴单位 元/kWh
+      明确；负载/光伏图例 2 项不遮挡曲线；电价区间注记置于左上空白。自动质检 passed（1820×1496）。
+    reviewed_at: '2026-09-10T13:08:54.019890+00:00'
+- stable_id: prob01_fig_netload_arbitrage_d9700035cd
+  problem_id: microgrid_2025
+  question_id: prob01
+  assumption_version: assumption_v003
+  formulation_version: formulation_v001
+  task_id: 1300a936c4d95653f9d1
+  kind: netload_arbitrage
+  title: 净负荷与电价分位：光伏盈余窗口与储能充放电价位
+  caption: 上：净负荷电量 (L_t−PV_t)·Δt（kWh/10min），绿色为光伏盈余时段；下：电价与 25%/75% 分位线，三角标记充电（▲）与放电（▼）发生的时段。用于说明储能在低价时段充电、高价时段放电的套利动机。X
+    轴为 AS01 左端点位置口径（计划窗 0:10→24:10）。
+  path: problems/microgrid_2025/prob01/versions/assumption_v003/figures/prob01_fig_netload_arbitrage_d9700035cd.png
+  source_data: problems/microgrid_2025/prob01/versions/assumption_v003/results/prob01_v003_f001_run002/solution.json
+  source_hash: 6bc50828e4b78034b62a7810efb9f7600ba3e2dbcffef151955ad8a48d8d4768
+  script: problems/microgrid_2025/prob01/versions/assumption_v003/figures/plot_prob01_figures.py
+  font: Microsoft YaHei
+  style_config: config/visualization.yaml
+  included_in_summary: true
+  included_in_paper: false
+  quality_report: problems/microgrid_2025/prob01/versions/assumption_v003/figures/prob01_fig_netload_arbitrage_d9700035cd.quality.json
+  quality_status: passed
+  visual_review:
+    status: passed
+    reason: 视觉复核通过：光伏盈余时段用绿色填充并以 0 基准线区分，盈余 30/144 计数正确；25%/75% 分位（0.4363/0.9845）虚线可比；充放电三角标记计数
+      45/37 正确；图例移至坐标轴外下方、注记置于零线下方空白，无重叠。自动质检 passed（1820×1459）。
+    reviewed_at: '2026-09-10T13:08:54.052407+00:00'
+- stable_id: prob01_fig_dispatch_profile_e1b9b885da
+  problem_id: microgrid_2025
+  question_id: prob01
+  assumption_version: assumption_v003
+  formulation_version: formulation_v001
+  task_id: 1300a936c4d95653f9d1
+  kind: dispatch_profile
+  title: 最优计划：购电量与充放电安排
+  caption: 上：最优计划购电量 b_t（kWh/10min，面积）；下：充电 c_t（向上，绿）与放电 q_dis_t（向下，橙）。充电集中在凌晨低价时段、放电集中在午间与晚间高价时段；全程无同时充放电（AS07，互补残差
+    = 0）。单位与量纲按 AS03a/D9：Σ p_t·b_t 直接为元，不乘 Δt。
+  path: problems/microgrid_2025/prob01/versions/assumption_v003/figures/prob01_fig_dispatch_profile_e1b9b885da.png
+  source_data: problems/microgrid_2025/prob01/versions/assumption_v003/results/prob01_v003_f001_run002/solution.json
+  source_hash: 6bc50828e4b78034b62a7810efb9f7600ba3e2dbcffef151955ad8a48d8d4768
+  script: problems/microgrid_2025/prob01/versions/assumption_v003/figures/plot_prob01_figures.py
+  font: Microsoft YaHei
+  style_config: config/visualization.yaml
+  included_in_summary: true
+  included_in_paper: false
+  quality_report: problems/microgrid_2025/prob01/versions/assumption_v003/figures/prob01_fig_dispatch_profile_e1b9b885da.quality.json
+  quality_status: passed
+  visual_review:
+    status: passed
+    reason: 视觉复核通过：上轴购电面积（Σb=59482.70 kWh，C*=35126.95 元与 solution.json 一致）、下轴充电向上/放电向下且符号语义在图例明示；峰值注记移至中上空白，避开
+      22:00 后购电尖峰；无同时充放电与 AS07 互补残差=0 一致。自动质检 passed（1820×1460）。
+    reviewed_at: '2026-09-10T13:08:54.083837+00:00'
+- stable_id: prob01_fig_soc_trajectory_8b40330c06
+  problem_id: microgrid_2025
+  question_id: prob01
+  assumption_version: assumption_v003
+  formulation_version: formulation_v001
+  task_id: 1300a936c4d95653f9d1
+  kind: soc_trajectory
+  title: 储电量轨迹与运行区间：区间内运行且日周期闭合
+  caption: 最优解的时段末储电量 E_t（kWh）轨迹：先充电至接近 9750/10800 kWh，再在高峰时段放电至 1200 kWh 附近，末段回升至
+    6000 kWh 使日周期闭合（E_144 = E_0 = 6000，AS10/AS11）。虚线为运行上下界 E_min = 1200、E_max = 10800
+    kWh（AS06）；0:00/24:00 为计划窗首/末状态（AS01 左端点口径，计划窗 0:10→24:10）。
+  path: problems/microgrid_2025/prob01/versions/assumption_v003/figures/prob01_fig_soc_trajectory_8b40330c06.png
+  source_data: problems/microgrid_2025/prob01/versions/assumption_v003/results/prob01_v003_f001_run002/solution.json
+  source_hash: 6bc50828e4b78034b62a7810efb9f7600ba3e2dbcffef151955ad8a48d8d4768
+  script: problems/microgrid_2025/prob01/versions/assumption_v003/figures/plot_prob01_figures.py
+  font: Microsoft YaHei
+  style_config: config/visualization.yaml
+  included_in_summary: true
+  included_in_paper: false
+  quality_report: problems/microgrid_2025/prob01/versions/assumption_v003/figures/prob01_fig_soc_trajectory_8b40330c06.quality.json
+  quality_status: passed
+  visual_review:
+    status: passed
+    reason: 视觉复核通过（首轮已修正）：E_t 曲线与 E_min=1200 / E_max=10800 / E_0=E_144=6000 三组参考线区分清晰；E_0
+      按给定初值 6000 kWh、E_144 按序列末值 6000.0 kWh 标注且箭头不压曲线；|E_144−E_0|=0。自动质检 passed（1820×1100，尺寸异常已修复）。
+    reviewed_at: '2026-09-10T13:08:54.115881+00:00'
+- stable_id: prob01_fig_energy_balance_5a49223b71
+  problem_id: microgrid_2025
+  question_id: prob01
+  assumption_version: assumption_v003
+  formulation_version: formulation_v001
+  task_id: 1300a936c4d95653f9d1
+  kind: energy_balance
+  title: 逐时段供需构成：供给来源堆叠与需求总量完全重合
+  caption: 堆叠面积为供给侧三项之和（购电 b_t、光伏实际消纳 PV_tΔt−s_t、储能放电 q_dis_t），黑色虚线为需求侧（负载 L_tΔt +
+    充电 c_t）；两者逐时段重合验证电量平衡 (R1) 闭合（残差 ~1e-13）。最优解弃光 Σs_t = 0（光伏盈余全部被储能吸收），故光伏消纳等于 PV_tΔt。
+  path: problems/microgrid_2025/prob01/versions/assumption_v003/figures/prob01_fig_energy_balance_5a49223b71.png
+  source_data: problems/microgrid_2025/prob01/versions/assumption_v003/results/prob01_v003_f001_run002/solution.json
+  source_hash: 6bc50828e4b78034b62a7810efb9f7600ba3e2dbcffef151955ad8a48d8d4768
+  script: problems/microgrid_2025/prob01/versions/assumption_v003/figures/plot_prob01_figures.py
+  font: Microsoft YaHei
+  style_config: config/visualization.yaml
+  included_in_summary: true
+  included_in_paper: false
+  quality_report: problems/microgrid_2025/prob01/versions/assumption_v003/figures/prob01_fig_energy_balance_5a49223b71.quality.json
+  quality_status: passed
+  visual_review:
+    status: passed
+    reason: 视觉复核通过：三项供给堆叠（购电/光伏消纳/放电）与需求虚线（负载+充电）逐时段完全重合，残差 5.68e-13 kWh、Σs_t=0 注记位于右上空白；图例
+      2 列不压 12:00 尖峰。自动质检 passed（1820×1100）。
+    reviewed_at: '2026-09-10T13:08:54.148107+00:00'
+- stable_id: prob01_fig_price_action_3d_1e765c22c2
+  problem_id: microgrid_2025
+  question_id: prob01
+  assumption_version: assumption_v003
+  formulation_version: formulation_v001
+  task_id: 1300a936c4d95653f9d1
+  kind: price_action_3d
+  title: 调度轨迹三维视图：时段 × 电价 × 净放电
+  caption: 三维散点+连线：X = 时段序号 i，Y = 电价 p_t（元/kWh），Z = 净放电 q_dis_t − c_t（kWh/10min，正值放电、负值充电），颜色对应净放电量。视角
+    elev=20°、azim=−62°，用于展示调度在「时间—价格—动作」三维空间中的轨迹结构；投影歧义由配套二维图 price_action_2d 消除。
+  path: problems/microgrid_2025/prob01/versions/assumption_v003/figures/prob01_fig_price_action_3d_1e765c22c2.png
+  source_data: problems/microgrid_2025/prob01/versions/assumption_v003/results/prob01_v003_f001_run002/solution.json
+  source_hash: 6bc50828e4b78034b62a7810efb9f7600ba3e2dbcffef151955ad8a48d8d4768
+  script: problems/microgrid_2025/prob01/versions/assumption_v003/figures/plot_prob01_figures.py
+  font: Microsoft YaHei
+  style_config: config/visualization.yaml
+  included_in_summary: true
+  included_in_paper: false
+  quality_report: problems/microgrid_2025/prob01/versions/assumption_v003/figures/prob01_fig_price_action_3d_1e765c22c2.quality.json
+  quality_status: passed
+  visual_review:
+    status: passed
+    reason: 三维专项复核通过：elev=20°/azim=−62° 下三轴刻度与标签完整，色标与 Z 轴（净放电）同义，连线给出时序方向；自遮挡仅限同一时段散点簇，不影响「低电价↔负净放电、高电价↔正净放电」趋势判读，且已生成配套二维投影；未用于定量判读。自动质检
+      passed（1613×1344）。
+    reviewed_at: '2026-09-10T13:08:54.181899+00:00'
+- stable_id: prob01_fig_price_action_2d_1075b2c7cb
+  problem_id: microgrid_2025
+  question_id: prob01
+  assumption_version: assumption_v003
+  formulation_version: formulation_v001
+  task_id: 1300a936c4d95653f9d1
+  kind: price_action_2d
+  title: 三维轨迹的二维投影：电价—净放电关系
+  caption: price_action_3d 的配套二维投影：横轴电价 p_t（元/kWh），纵轴净放电 q_dis_t − c_t（kWh/10min），颜色为时段（h，按
+    0:10→24:10 计划窗的中值）。左下方（低电价）集中充电、右上方（高电价）集中放电，与前两分位套利结构一致；配套图消除三维视角下的遮挡与深度辨识歧义。
+  path: problems/microgrid_2025/prob01/versions/assumption_v003/figures/prob01_fig_price_action_2d_1075b2c7cb.png
+  source_data: problems/microgrid_2025/prob01/versions/assumption_v003/results/prob01_v003_f001_run002/solution.json
+  source_hash: 6bc50828e4b78034b62a7810efb9f7600ba3e2dbcffef151955ad8a48d8d4768
+  script: problems/microgrid_2025/prob01/versions/assumption_v003/figures/plot_prob01_figures.py
+  font: Microsoft YaHei
+  style_config: config/visualization.yaml
+  included_in_summary: true
+  included_in_paper: false
+  quality_report: problems/microgrid_2025/prob01/versions/assumption_v003/figures/prob01_fig_price_action_2d_1075b2c7cb.quality.json
+  quality_status: passed
+  visual_review:
+    status: passed
+    reason: 视觉复核通过：作为 price_action_3d 的配套二维投影，横轴电价、纵轴净放电、颜色为时段(h)，色标可读；零线分隔充放电符号，低电价充电/高电价放电方向正确，与分位结构一致，消除三维投影歧义。自动质检
+      passed（1820×1100）。
+    reviewed_at: '2026-09-10T13:08:54.212273+00:00'
+- stable_id: prob01_fig_block_summary_5801062f6e
+  problem_id: microgrid_2025
+  question_id: prob01
+  assumption_version: assumption_v003
+  formulation_version: formulation_v001
+  task_id: 1300a936c4d95653f9d1
+  kind: block_summary
+  title: 表 2 汇总：6 个 4 小时块充放电量与计划窗端点储电量
+  caption: 表 2 六个 4 小时块的充电量（绿）与放电量（橙）分别列示、不冲抵（AS13/D8）；块 k 对应 result1 行 24(k−1)+1…24k。计划窗首/末储电量均为
+    6000.0 kWh（E_0 = E_144，AS10/AS11；按 AS01 左端点口径，0:00/24:00 为计划窗首/末状态，计划窗为 0:10→24:10）。数值取自
+    tables.json（来源 solution.json 序列）。
+  path: problems/microgrid_2025/prob01/versions/assumption_v003/figures/prob01_fig_block_summary_5801062f6e.png
+  source_data: problems/microgrid_2025/prob01/versions/assumption_v003/results/prob01_v003_f001_run002/solution.json
+    + problems/microgrid_2025/prob01/versions/assumption_v003/results/prob01_v003_f001_run002/tables.json
+  source_hash: 181b077cec5baf71e2369b423d285540c8cf854247958d3a651e8f3299426440
+  script: problems/microgrid_2025/prob01/versions/assumption_v003/figures/plot_prob01_figures.py
+  font: Microsoft YaHei
+  style_config: config/visualization.yaml
+  included_in_summary: true
+  included_in_paper: false
+  quality_report: problems/microgrid_2025/prob01/versions/assumption_v003/figures/prob01_fig_block_summary_5801062f6e.quality.json
+  quality_status: passed
+  visual_review:
+    status: passed
+    reason: 视觉复核通过（首轮已修正）：6 个 4 小时块充/放电分组柱带数值标注（充放电分别列示不冲抵，AS13/D8），块值与 tables.json
+      一致（Σ充电 20740.67、Σ放电 16799.94 kWh）；端点储电量注记移至左上空白，不压柱体与数值；0:00/24:00 均为 6000.0
+      kWh 且相位口径已在注记说明。自动质检 passed（1820×1100）。
+    reviewed_at: '2026-09-10T13:08:54.242747+00:00'
+- stable_id: prob01_fig_cost_bounds_5a1a905c2f
+  problem_id: microgrid_2025
+  question_id: prob01
+  assumption_version: assumption_v003
+  formulation_version: formulation_v001
+  task_id: 1300a936c4d95653f9d1
+  kind: cost_bounds
+  title: 费用量级检验：最优解落在解析可行区间内
+  caption: 最优全天购电费 C* = 35126.95 元（蓝）落在解析下界 20622.73 元（p_min·N）与无储能构造可行解上界 48052.05
+    元之间，量级为 10⁴ 元，符合 D9 量纲口径（若误乘 Δt 会落入 10³ 元量级即硬错误）。数值取自 solution.json 的 checks（analytic_lower_bound
+    / analytic_upper_bound / objective_yuan）。
+  path: problems/microgrid_2025/prob01/versions/assumption_v003/figures/prob01_fig_cost_bounds_5a1a905c2f.png
+  source_data: problems/microgrid_2025/prob01/versions/assumption_v003/results/prob01_v003_f001_run002/solution.json
+  source_hash: 6bc50828e4b78034b62a7810efb9f7600ba3e2dbcffef151955ad8a48d8d4768
+  script: problems/microgrid_2025/prob01/versions/assumption_v003/figures/plot_prob01_figures.py
+  font: Microsoft YaHei
+  style_config: config/visualization.yaml
+  included_in_summary: true
+  included_in_paper: false
+  quality_report: problems/microgrid_2025/prob01/versions/assumption_v003/figures/prob01_fig_cost_bounds_5a1a905c2f.quality.json
+  quality_status: passed
+  visual_review:
+    status: passed
+    reason: 视觉复核通过：最优点 35126.95 元（竖虚线）落在解析下界 20622.73 元与无储能构造上界 48052.05 元之间，三值均标注、区间底纹与相对位置（52.9%）注记清晰，量级
+      10^4 元符合 D9 口径。自动质检 passed（1820×1100）。
+    reviewed_at: '2026-09-10T13:08:54.274590+00:00'
+- stable_id: prob01_fig_model_cost_comparison_4c21fa4ed1
+  problem_id: microgrid_2025
+  question_id: prob01
+  assumption_version: assumption_v003
+  formulation_version: formulation_v001
+  task_id: c1faaa09dedfb103c598
+  kind: model_cost_comparison
+  title: 模型族与结构消融的费用对比（A–F 全部实跑，含 DP 四档粒度）
+  caption: 左：12 个对照的全天购电费 C（元），红虚线为 accepted LP 的 $C^*$=35126.948589 元；右：相对 $C^*$
+    的百分比变化（负值表示比 accepted LP 更省）。A/B/E/F_place_both 与 $C^*$ 完全相同；C 族（SOC 离散化 DP）随网格加密单调逼近；D（去掉日周期约束）因末状态可放空至
+    1200 kWh 而最省（−6.312%）。数据来源：task c1faaa09dedfb103c598 的 comparison.json（未重新求解）。
+  path: problems/microgrid_2025/prob01/versions/assumption_v003/ablations/figures/ablation_model_cost.png
+  source_data: problems/microgrid_2025/prob01/versions/assumption_v003/ablations/results/prob01_v003_ablation_run001/comparison.json
+    + problems/microgrid_2025/prob01/versions/assumption_v003/ablations/results/prob01_v003_ablation_run001/dp_granularity.json
+  source_hash: 47d18c1aed186b0503095630f1e15f961855253b043b186dd5839e02444653fc
+  script: problems/microgrid_2025/prob01/versions/assumption_v003/ablations/figures/plot_ablation_figures.py
+  font: Microsoft YaHei
+  style_config: config/visualization.yaml
+  included_in_summary: true
+  included_in_paper: true
+  quality_report: problems/microgrid_2025/prob01/versions/assumption_v003/ablations/figures/ablation_model_cost.quality.json
+  quality_status: passed
+  visual_review:
+    status: passed
+    reason: 视觉复核通过：左面板 12 个对照的全天购电费柱与红色虚线 C*=35126.95 元并列，右面板为相对 C* 的百分比偏差（负值=更省）；中文标题/轴标签/单位（元、%）完整无方框，x
+      轴标签旋转 55° 不重叠，A_baseline_LP 用主色区分，图例不遮挡柱体；数值与 comparison.json 逐项一致（D −6.312%、DP
+      +0.791%~+7.087%、F −2.728%~−4.869%）。自动质检 passed（2046×876）。
+    reviewed_at: '2026-09-10T14:19:11.885623+00:00'
+- stable_id: prob01_fig_dp_granularity_bias_32d09e54b4
+  problem_id: microgrid_2025
+  question_id: prob01
+  assumption_version: assumption_v003
+  formulation_version: formulation_v001
+  task_id: c1faaa09dedfb103c598
+  kind: dp_granularity_bias
+  title: 离散化 DP 粒度-偏差曲线：h=400/200/100/50 kWh 的费用偏差
+  caption: 红色虚线为 accepted LP 的 $C^*$=35126.948589 元；蓝点为 SOC 离散化 DP 在各状态步长下的最优值，标注相对
+    $C^*$ 的偏差：+7.087%（h=400）、+3.063%（h=200）、+1.600%（h=100）、+0.791%（h=50），随步长减小单调下降且恒
+    ≥ $C^*$（网格受限下 DP 是精确最优）。预注册判据 C3 要求 h=50 的偏差 ∈[0,1%]，实测 +0.791% 通过，余量约 0.21 个百分点。数据来源：task
+    c1faaa09dedfb103c598 的 dp_granularity.json。
+  path: problems/microgrid_2025/prob01/versions/assumption_v003/ablations/figures/ablation_dp_granularity.png
+  source_data: problems/microgrid_2025/prob01/versions/assumption_v003/ablations/results/prob01_v003_ablation_run001/comparison.json
+    + problems/microgrid_2025/prob01/versions/assumption_v003/ablations/results/prob01_v003_ablation_run001/dp_granularity.json
+  source_hash: 47d18c1aed186b0503095630f1e15f961855253b043b186dd5839e02444653fc
+  script: problems/microgrid_2025/prob01/versions/assumption_v003/ablations/figures/plot_ablation_figures.py
+  font: Microsoft YaHei
+  style_config: config/visualization.yaml
+  included_in_summary: true
+  included_in_paper: true
+  quality_report: problems/microgrid_2025/prob01/versions/assumption_v003/ablations/figures/ablation_dp_granularity.quality.json
+  quality_status: passed
+  visual_review:
+    status: passed
+    reason: 视觉复核通过：对数横轴 4 档步长（50/100/200/400 kWh）与线性纵轴（DP 目标值，元）刻度完整，四个点标注 +0.791%/+1.600%/+3.063%/+7.087%
+      不被曲线或图例遮挡，红色虚线为 accepted LP C*=35126.95 元且与曲线分离可读；中文轴标签无方框。自动质检 passed（1488×876）。
+    reviewed_at: '2026-09-10T14:19:11.929674+00:00'
+- stable_id: prob01_fig_ablation_waterfall_3ff46a5abd
+  problem_id: microgrid_2025
+  question_id: prob01
+  assumption_version: assumption_v003
+  formulation_version: formulation_v001
+  task_id: c1faaa09dedfb103c598
+  kind: ablation_waterfall
+  title: 消融瀑布图：日周期约束、弃光变量与效率作用位置的经济贡献
+  caption: $\Delta C$ = 对照费用 − accepted LP 的 $C^*$（元）；正值=更贵，负值=更省。D_no_periodic（去掉
+    $E_0=E_{144}$）−2217.08 元即日周期约束的经济价值；E_no_spill（删除弃光变量 $s_t$）与 B_milp（互补二元）、F_place_both
+    均为 +0.00 元（不改变最优值）；C 族 DP 为离散化偏差（+277.72 ~ +2489.57 元）；F 族单侧/往返效率口径分别比 accepted
+    的两侧 0.9 省 958.34 / 1325.45 / 1710.42 元。数据来源：comparison.json。
+  path: problems/microgrid_2025/prob01/versions/assumption_v003/ablations/figures/ablation_waterfall.png
+  source_data: problems/microgrid_2025/prob01/versions/assumption_v003/ablations/results/prob01_v003_ablation_run001/comparison.json
+    + problems/microgrid_2025/prob01/versions/assumption_v003/ablations/results/prob01_v003_ablation_run001/dp_granularity.json
+  source_hash: 47d18c1aed186b0503095630f1e15f961855253b043b186dd5839e02444653fc
+  script: problems/microgrid_2025/prob01/versions/assumption_v003/ablations/figures/plot_ablation_figures.py
+  font: Microsoft YaHei
+  style_config: config/visualization.yaml
+  included_in_summary: true
+  included_in_paper: true
+  quality_report: problems/microgrid_2025/prob01/versions/assumption_v003/ablations/figures/ablation_waterfall.quality.json
+  quality_status: passed
+  visual_review:
+    status: passed
+    reason: 视觉复核通过（相较 task 原图已修正文本遮挡）：横轴 ΔC（元）左右留白 ×1.45/×1.35，最左数值标签 −2217.08 不再压
+      y 轴标签，全部 12 条数值标签（+2489.57…−2217.08）完整可读；正负值用主色/警示色区分并配 0 基准线；D_no_periodic
+      的经济价值 2217.08 元与 summary.json 的 K2 一致。自动质检 passed（1740×876）。
+    reviewed_at: '2026-09-10T14:19:11.973849+00:00'
+- stable_id: prob01_fig_complexity_tradeoff_abc05773af
+  problem_id: microgrid_2025
+  question_id: prob01
+  assumption_version: assumption_v003
+  formulation_version: formulation_v001
+  task_id: c1faaa09dedfb103c598
+  kind: complexity_tradeoff
+  title: 复杂度-费用权衡：各对照的变量规模与求解时间
+  caption: 横轴为求解时间（s，对数轴），纵轴为全天购电费（元）；点标注给出对照编号与变量数。DP 族变量数最少（25–193）但目标值最差（离散化偏差）；B_milp
+    变量数最多（864，含 144 个二元变量）而目标值与 accepted LP 相同；结构性对照（D/E/F）变量数均为 720（E 为 576，删除 $s_t$）。全部
+    case 在 60 s 预算内完成。数据来源：comparison.json 的 complexity 字段（solve_seconds）。
+  path: problems/microgrid_2025/prob01/versions/assumption_v003/ablations/figures/ablation_complexity_tradeoff.png
+  source_data: problems/microgrid_2025/prob01/versions/assumption_v003/ablations/results/prob01_v003_ablation_run001/comparison.json
+    + problems/microgrid_2025/prob01/versions/assumption_v003/ablations/results/prob01_v003_ablation_run001/dp_granularity.json
+  source_hash: 47d18c1aed186b0503095630f1e15f961855253b043b186dd5839e02444653fc
+  script: problems/microgrid_2025/prob01/versions/assumption_v003/ablations/figures/plot_ablation_figures.py
+  font: Microsoft YaHei
+  style_config: config/visualization.yaml
+  included_in_summary: true
+  included_in_paper: false
+  quality_report: problems/microgrid_2025/prob01/versions/assumption_v003/ablations/figures/ablation_complexity_tradeoff.quality.json
+  quality_status: passed
+  visual_review:
+    status: passed
+    reason: 视觉复核通过（相较 task 原图已修正点标注重叠/截断）：对数横轴（求解时间 s）与线性纵轴（目标值 元）刻度完整，12 个点标注按确定性偏移分列、C_dp_h400
+      标注不再被上边界截断，cluster（A/E/F_both）标签互不重叠；图例与红色虚线不遮挡数据点。自动质检 passed（1596×948）。
+    reviewed_at: '2026-09-10T14:19:12.019483+00:00'

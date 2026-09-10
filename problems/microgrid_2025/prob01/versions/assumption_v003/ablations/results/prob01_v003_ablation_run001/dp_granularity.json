@@ -1,0 +1,45 @@
+{
+  "reference_objective_yuan": 35126.948589,
+  "points": [
+    {
+      "step_kwh": 400.0,
+      "label": "C_dp_h400",
+      "grid_points": 25,
+      "transitions": 90000,
+      "objective_yuan": 37616.519995,
+      "relative_diff": 0.07087354598115055,
+      "solve_seconds": 0.0095,
+      "feasible": true
+    },
+    {
+      "step_kwh": 200.0,
+      "label": "C_dp_h200",
+      "grid_points": 49,
+      "transitions": 345744,
+      "objective_yuan": 36203.04215,
+      "relative_diff": 0.030634416145585163,
+      "solve_seconds": 0.0153,
+      "feasible": true
+    },
+    {
+      "step_kwh": 100.0,
+      "label": "C_dp_h100",
+      "grid_points": 97,
+      "transitions": 1354896,
+      "objective_yuan": 35688.917531,
+      "relative_diff": 0.01599822827127034,
+      "solve_seconds": 0.0387,
+      "feasible": true
+    },
+    {
+      "step_kwh": 50.0,
+      "label": "C_dp_h050",
+      "grid_points": 193,
+      "transitions": 5363856,
+      "objective_yuan": 35404.665607,
+      "relative_diff": 0.007906095722956422,
+      "solve_seconds": 0.3308,
+      "feasible": true
+    }
+  ]
+}

@@ -1,0 +1,281 @@
+# formulation_v001 / prob01 参数表
+# 生成者：mathematical-formulator（动作 act-6a4453e99d654790）
+# 规则：只登记参数与口径，不重定义 global_symbols.yaml 中的符号；
+#       q_dis 的上界按团队裁定 D10（口径丙）取 750.00，已显式覆盖符号表中 833.33 的旧写法（见 conflicts）。
+version: formulation_v001
+question_id: prob01
+problem_id: microgrid_2025
+assumption_version: assumption_v003
+stage: mathematical_formulation
+action_id: act-6a4453e99d654790
+
+time_basis:
+  n_t: 144
+  delta_t: 0.16666666666666666
+  delta_t_exact: "1/6"
+  horizon_hours: 24
+  block_rows: 24
+  window: "0:10 -> 24:10（AS01 左端点口径；计划窗首/末状态 E_0 / E_144）"
+
+parameters:
+  - name: n_t
+    symbol: n_t
+    value: 144
+    unit: 段
+    kind: index_size
+    source: 附件1 数据行数（144 行 / 10 分钟粒度）
+    assumption_refs: [AS01, AS09]
+  - name: delta_t
+    symbol: Delta_t
+    value: 0.16666666666666666
+    unit: h
+    kind: parameter
+    source: 附件1 的 10 分钟粒度与 144 行；24h/144
+    assumption_refs: [AS01, AS09]
+  - name: price_curve
+    symbol: price
+    value: "附件1 第 2 列（144 维向量）"
+    unit: 元/kWh
+    kind: parameter_vector
+    source: data/附件1.xlsx（只读，md5 dbe06f92517431228efcc26e3e796ef9）
+    assumption_refs: [AS02]
+  - name: load_curve
+    symbol: load
+    value: "附件1 第 3 列（144 维向量），∈ [3309.39, 5958.97]"
+    unit: kW
+    kind: parameter_vector
+    source: data/附件1.xlsx（只读）
+    assumption_refs: [AS02, AS09]
+  - name: pv_forecast_curve
+    symbol: pv_fc
+    value: "附件1 第 4 列（144 维向量），∈ [0.00, 7612.32]"
+    unit: kW
+    kind: parameter_vector
+    source: data/附件1.xlsx（只读）
+    assumption_refs: [AS02, AS09, AS16]
+  - name: p_min
+    symbol: p_min
+    value: 0.3713
+    unit: 元/kWh
+    kind: derived
+    source: min(price_curve)（探针实测）
+    assumption_refs: [AS03a]
+  - name: p_max
+    symbol: p_max
+    value: 1.3952
+    unit: 元/kWh
+    kind: derived
+    source: max(price_curve)（探针实测）
+    assumption_refs: [AS03a]
+  - name: eta_ch
+    symbol: eta_ch
+    value: 0.9
+    unit: "-"
+    kind: parameter
+    source: 附录 1「充放电效率为 90%」；作用位置按团队裁定 D2（两侧各 90%）
+    assumption_refs: [AS05]
+  - name: eta_dis
+    symbol: eta_dis
+    value: 0.9
+    unit: "-"
+    kind: parameter
+    source: 附录 1；作用位置按团队裁定 D2
+    assumption_refs: [AS05]
+  - name: eta_round_trip
+    symbol: eta_ch*eta_dis
+    value: 0.81
+    unit: "-"
+    kind: derived
+    source: 0.9 x 0.9；决定恒等式 (I1)/(I2) 的 0.19 = 1 - 0.81
+    assumption_refs: [AS05]
+  - name: P_max
+    symbol: P_max
+    value: 5000
+    unit: kW
+    kind: parameter
+    source: 附录 1「最大充放电功率为 5000 kW」；作用侧按团队裁定 D10 取并网点侧与电池侧的交集
+    assumption_refs: [AS06]
+  - name: c_cap
+    symbol: c_ch_upper
+    value: 833.3333333333334
+    unit: kWh
+    kind: derived_bound
+    source: "min(P_max*delta_t, P_max*delta_t/eta_ch) = min(833.3333, 925.9259)；并网点侧为紧侧"
+    assumption_refs: [AS06, AS09]
+  - name: q_dis_cap
+    symbol: q_dis_upper
+    value: 750.0
+    unit: kWh
+    kind: derived_bound
+    source: "min(P_max*delta_t, P_max*delta_t*eta_dis) = min(833.3333, 750.0000)；电池侧为紧侧（D10 口径丙）"
+    assumption_refs: [AS06, AS09]
+  - name: c_cap_dc_side_registered
+    value: 925.9259259259259
+    unit: kWh
+    kind: registered_relaxed_bound
+    status: not_enforced
+    source: 电池侧充电上限（较松），仅登记以说明交集推导，不施加
+    assumption_refs: [AS06]
+  - name: q_dis_cap_ac_side_registered
+    value: 833.3333333333334
+    unit: kWh
+    kind: registered_relaxed_bound
+    status: not_enforced
+    source: 并网点侧放电上限（较松），仅登记以说明交集推导，不施加
+    assumption_refs: [AS06]
+  - name: E_cap_max
+    symbol: E_cap_max
+    value: 12000
+    unit: kWh
+    kind: parameter
+    source: 附录 1「最大容量 12000 kWh」（设备容量，非运行上界）
+    assumption_refs: [AS06]
+  - name: E_min
+    symbol: E_min
+    value: 1200
+    unit: kWh
+    kind: parameter
+    source: 附录 1「电量必须保持在 1200-10800 kWh 之间」
+    assumption_refs: [AS06]
+  - name: E_max
+    symbol: E_max
+    value: 10800
+    unit: kWh
+    kind: parameter
+    source: 附录 1
+    assumption_refs: [AS06]
+  - name: E_init
+    symbol: E_init
+    value: 6000
+    unit: kWh
+    kind: parameter
+    source: 附录 1「2025-01-01 0:00 的电量为 6000 kWh」；prob01 视作代表日
+    assumption_refs: [AS10, AS11]
+  - name: E_terminal
+    value: 6000
+    unit: kWh
+    kind: constraint_rhs
+    source: 日周期约束 E_144 = E_0 = E_init（题面 H6）
+    assumption_refs: [AS10, AS11]
+  - name: c_battery_side_power_max
+    value: 4500
+    unit: kW
+    kind: derived
+    source: eta_ch * c_cap / delta_t = 0.9 * 833.3333 / (1/6)；随充电约束自动满足
+    assumption_refs: [AS05, AS06]
+  - name: q_battery_side_power_max
+    value: 5000
+    unit: kW
+    kind: derived
+    source: q_dis_cap / (eta_dis * delta_t) = 750.0 / 0.15；D10 紧侧
+    assumption_refs: [AS05, AS06]
+  - name: N_net_load_energy
+    symbol: N
+    value: 55541.9723912037
+    unit: kWh
+    kind: derived_data
+    source: sum_t (load_t - pv_t) * delta_t（探针实测）
+    assumption_refs: [AS02, AS09]
+  - name: total_load_energy
+    value: 111024.80813657407
+    unit: kWh
+    kind: derived_data
+    source: sum_t load_t * delta_t
+    assumption_refs: [AS09]
+  - name: total_pv_energy
+    value: 55482.83574537037
+    unit: kWh
+    kind: derived_data
+    source: sum_t pv_t * delta_t
+    assumption_refs: [AS09]
+
+index_mappings:
+  table1_slot_rows:
+    "10:00-10:10": 60
+    "12:00-12:10": 72
+    "14:00-14:10": 84
+    "16:00-16:10": 96
+    "18:00-18:10": 108
+    "20:00-20:10": 120
+  table1_full_day:
+    energy: "sum_t b_t"
+    cost: "sum_t p_t * b_t"
+  table2_blocks:
+    block_1: "rows 1-24"
+    block_2: "rows 25-48"
+    block_3: "rows 49-72"
+    block_4: "rows 73-96"
+    block_5: "rows 97-120"
+    block_6: "rows 121-144"
+  table2_endpoints:
+    "0:00": "E_0"
+    "24:00": "E_144"
+
+objective:
+  sense: minimize
+  expression: "sum_{t=1..144} p_t * b_t"
+  unit: 元
+  forbidden_forms:
+    - "sum_t p_t * b_t * delta_t（v001 旧口径，量纲 元*h，偏小 6 倍，D9 已修正）"
+  assumption_refs: [AS03a]
+
+relaxation_checks:
+  reference_tolerance: 1e-6
+  lower_bound_yuan: 20622.7344
+  upper_no_storage_spill_yuan: 48052.0466
+  upper_no_storage_full_pv_spill_yuan: 88319.3614
+  note: "最优费用必须落在 [20622.73, 48052.05] 元；若落在 10^3 元即量纲硬错误"
+
+reference_values:
+  role: reference_check_only
+  source: runtime/actions/act-6a4453e99d654790/evidence/probe_formulation_checks_out.txt
+  note: "以下为 formulations 阶段自检值，正式结果以 implementation/computation 阶段产物为准"
+  C_plan_yuan: 35126.9486
+  sum_b_kwh: 59482.6990
+  sum_c_kwh: 20740.6661
+  sum_q_dis_kwh: 16799.9396
+  sum_spill_kwh: 0.0
+  max_c_kwh: 833.3333
+  max_q_dis_kwh: 715.6530
+  E_trajectory_range_kwh: [1200.0, 10800.0]
+  E_144_kwh: 6000.0
+  equality_residual_max: 4.55e-13
+  identity_I1_residual: -3.638e-12
+  identity_I2_residual: 2.183e-11
+  simultaneous_charge_discharge_sum: 0.0
+  milp_objective_yuan: 35126.9486
+  milp_gap: 0.0
+  heuristic_price_tercile_yuan: 44214.0071
+  heuristic_regret_percent: 25.869
+
+solver:
+  primary: "scipy.optimize.linprog(method='highs')"
+  device: cpu
+  gpu_required: false
+  deterministic: true
+  seed: null
+  time_limit_seconds: 60
+  notes:
+    - "本问为确定性 LP，不使用 GPU；task spec 须注明不占用单卡 GPU（GPU 规则仅约束真正使用 GPU 的任务）"
+    - "记录 solver status、迭代数、目标值、约束残差与代码 hash；PASS 不依赖逐点解唯一性"
+  verification_oracle: "互补性 MILP（u_t ∈ {0,1}，M_c=833.3333，M_q=750.0000），仅作对照"
+
+conflicts:
+  - id: C1
+    with: problems/microgrid_2025/global_symbols.yaml
+    detail: "符号表把 q_dis 域写作 P_dis_max*Delta_t（833.33 kWh），与团队裁定 D10/AS06 的 750.00 kWh 冲突"
+    resolution: "按团队裁定 D10（效力最高）取 750.00；建议 cross_question_review 或 problem-decomposer 更新符号表 domain"
+  - id: C2
+    with: problems/microgrid_2025/global_symbols.yaml
+    detail: "符号表登记 q_spill 的 first_question 为 prob02 且注『尚未固定是否引入』，但 AS08/D4 已在 prob01 引入 s_t"
+    resolution: "本 formulation 在 prob01 使用 s_t（含义不变）；首次出现小问的登记口径需更正"
+  - id: C3
+    with: problems/microgrid_2025/prob01/versions/assumption_v003/version.yaml
+    detail: "AS08 的 statement 保留『该变量在部分时段必然被激活』，与 assumptions.md/探针实测 Σs_t = 0 不一致"
+    resolution: "按『变量保留、最优解允许取 0』执行；措辞建议下一版修正，不影响模型与结果"
+
+decision_points_adopted:
+  D1: "A —— 单层完整 LP（HiGHS），连续变量；MILP 仅作验证 oracle"
+  D2: "A —— 沿用 AS01 左端点口径，计划窗 0:10->24:10，表 2 端点报计划窗首/末状态"
+  D3: "A —— 显式弃光变量 s_t ∈ [0, PV_t*delta_t]，目标系数 0"
+  D4: "A + C —— 主目标只含购电费；折旧/效率情景留待 robustness（可选阶段）"

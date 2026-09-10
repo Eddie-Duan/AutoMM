@@ -42,3 +42,14 @@ notification:
 stale:
   value: false
   caused_by: []
+stale_history:
+- cleared_at: '2026-09-10T14:21:53.751771+00:00'
+  reason: 团队收尾修正：prob01 结论由团队整合版 v2（含 ablation 结论，conclusion_id=prob01-concl-001）覆盖
+    v1（v1 由 ablation-analyst 于 act-b0cec516722840f3 登记，原文保存在 runtime/transactions.jsonl），record_conclusion
+    依设计触发 mark_downstream_stale。但 prob02–prob04 尚未 started（status=not_started、artifacts
+    全 false），不存在可失效的下游产物；该标记还会把 stage 从 problem_understanding 误置为 assumption_definition，使小问启动时被
+    stale 分支越过理解/文献阶段。故清除 stale 并恢复 stage=problem_understanding。prob01 的结论 v2 仍需在
+    prob02 启动时按 dependency_graph 的 propagates 清单显式承接（单日功率平衡形式、储能状态转移、日购电费用目标结构）。
+  caused_by:
+  - question_id: prob01
+    conclusion_hash: 6fb260491cb70450c0ea71608b59271f51d99a002737d0b3ed46a1bb1b8888d6

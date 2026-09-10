@@ -1,0 +1,14 @@
+{
+  "solver_lp": "scipy.optimize.linprog(method='highs')",
+  "solver_milp": "scipy.optimize.milp(HiGHS)",
+  "solver_dp": "deterministic dynamic programming (no solver)",
+  "device": "cpu",
+  "gpu_required": false,
+  "seed": 20260910,
+  "time_limit_seconds": 60.0,
+  "baseline_feasible": true,
+  "feasible_incumbent": true,
+  "baseline_check_passed": true,
+  "cases_total": 12,
+  "cases_infeasible": 0
+}

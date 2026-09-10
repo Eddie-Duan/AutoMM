@@ -1,0 +1,27 @@
+# prob01 computation task 级配置
+# 生成者：implementation-agent（初版动作 act-0f8555fda45b4e1f；本动作 act-fd5e1868958f4329 复核，内容不变并补注）
+# 用途：resource-manager 提交隔离计算 task 时作为 --config-path 传入；
+#       effective_config 会把它合并到全局配置之上（仅影响本 task）。
+compute:
+  default_backend: local
+  max_local_concurrent_tasks: 1
+  memory_per_worker_gb: 2
+  task_timeout_seconds: 300
+  timeout_retry_attempts: 2
+  retry:
+    infrastructure_transient: 2
+    code_runtime: 1
+    model_revision: 2
+  resource_notes:
+    device: cpu
+    gpu_required: false
+    concurrent_gpu_tasks: 0
+    note: "prob01 为 144 时段确定性 LP，CPU HiGHS 求解，<1 s、内存 <50 MB；不占用单卡 GPU"
+    worker_launch_mode: "supervised（继承 config/compute.yaml；detached 在本环境会被沙箱回收，见 task_spec.yaml 修订记录）"
+solver:
+  name: highs
+  interface: "scipy.optimize.linprog(method='highs')"
+  device: cpu
+  time_limit_seconds: 60
+  deterministic: true
+  seed: null

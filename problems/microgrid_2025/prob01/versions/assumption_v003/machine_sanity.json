@@ -1,0 +1,143 @@
+{
+  "checked_at": "2026-09-10T12:53:43.375275+00:00",
+  "directory": "problems/microgrid_2025/prob01/versions/assumption_v003",
+  "task_id": "1300a936c4d95653f9d1",
+  "task_status": "succeeded",
+  "automated_scope": [
+    "L1",
+    "L2-finite"
+  ],
+  "automated_status": "PASS_WITH_WARNING",
+  "failures": [],
+  "warnings": [
+    "文献池 25 条未逐篇读正文（21 元数据级 + 4 摘要级）；仅支撑框架级主张，公式级/定量级引用须取得全文后再用。",
+    "AS06「5000 kW 作用侧」为 team_decision（D10），无文献支撑，不得包装为文献支持。",
+    "C1/E1、C2/E2、C3/E3 上游登记/措辞尚未回写（global_symbols.yaml、version.yaml），待 cross_question_review 更正；下游已按 E1/E2/E3 执行。",
+    "表 2 的「0:00-4:00」等为模板行位置聚合（物理窗 0:10→24:10 相位前移 10 分钟），论文/图注须显式说明一次。",
+    "LP 最优面可能不唯一（E 上下界两端均活跃）；验收以约束残差 + (I1)/(I2) + 目标值 + 表 1/表 2 为准。",
+    "tables.json 块和按 6 位小数舍入、result1.xlsx 为全精度，差 <1e-6，属显示精度问题。",
+    "A2/A6/A7/A8/A9 仍未裁定且属 prob02–prob04，本问未越界处理。"
+  ],
+  "quality_status": "degraded_review",
+  "numeric_files": [
+    {
+      "path": "problems/microgrid_2025/prob01/versions/assumption_v003/results/prob01_v003_f001_run002/run_manifest.json",
+      "numeric_count": 17,
+      "finite": true,
+      "missing_numeric_count": 0,
+      "infinite_numeric_count": 0,
+      "empty_numeric": false,
+      "minimum": 0.0,
+      "maximum": 59482.698998
+    },
+    {
+      "path": "problems/microgrid_2025/prob01/versions/assumption_v003/results/prob01_v003_f001_run002/solution.json",
+      "numeric_count": 1344,
+      "finite": true,
+      "missing_numeric_count": 0,
+      "infinite_numeric_count": 0,
+      "empty_numeric": false,
+      "minimum": -3.637978807091713e-12,
+      "maximum": 59482.698998
+    },
+    {
+      "path": "problems/microgrid_2025/prob01/versions/assumption_v003/results/prob01_v003_f001_run002/solver_status.json",
+      "numeric_count": 5,
+      "finite": true,
+      "missing_numeric_count": 0,
+      "infinite_numeric_count": 0,
+      "empty_numeric": false,
+      "minimum": 0.0,
+      "maximum": 35126.948589
+    },
+    {
+      "path": "problems/microgrid_2025/prob01/versions/assumption_v003/results/prob01_v003_f001_run002/tables.json",
+      "numeric_count": 28,
+      "finite": true,
+      "missing_numeric_count": 0,
+      "infinite_numeric_count": 0,
+      "empty_numeric": false,
+      "minimum": 0.0,
+      "maximum": 59482.698998
+    }
+  ],
+  "manual_levels_pending": [
+    "L2-model-constraints",
+    "L3",
+    "L4",
+    "L5",
+    "L6-conditional"
+  ],
+  "overall_status": "PASS_WITH_WARNING",
+  "levels": {
+    "level_1_file_and_run_integrity": {
+      "status": "PASS",
+      "evidence": "task succeeded/rc0，产物齐备，输入 md5 未变，追踪链完整"
+    },
+    "level_2_numeric_and_constraints": {
+      "status": "PASS",
+      "evidence": "约束残差 ≤5e-13；E∈[1200,10800]；c≤833.3333；q≤750.0000；两侧功率≤5000 kW；(I1)/(I2) ≤4.6e-12"
+    },
+    "level_3_dimension_and_formula": {
+      "status": "PASS",
+      "evidence": "目标 min Σp_t·b_t（无 Δt）；矩阵 720/288/720/1151/144 与 formulation §3.8 一致；表1/表2/result1.xlsx 与序列一致"
+    },
+    "level_4_common_sense_and_literature": {
+      "status": "PASS_WITH_WARNING",
+      "evidence": "费用落在 [20622.73,48052.05] 元；套利方向合理；关键假设文献门禁 passed=true；文献仅元数据/摘要级"
+    },
+    "level_5_cross_question": {
+      "status": "NOT_APPLICABLE",
+      "evidence": "触发条件为所有小问 locally completed；prob02-04 未开始"
+    },
+    "level_6_robustness": {
+      "status": "NOT_APPLICABLE",
+      "evidence": "触发条件为 after_robustness；robustness 决策仍 pending"
+    }
+  },
+  "independent_recheck": {
+    "script": "runtime/actions/act-8d27775ff3714942/evidence/independent_sanity.py",
+    "output": "runtime/actions/act-8d27775ff3714942/evidence/independent_sanity_out.json",
+    "status": "PASS",
+    "failures": [],
+    "checks_total": 68,
+    "summary": {
+      "objective_yuan": 35126.948589289634,
+      "total_purchase_kwh": 59482.69899835391,
+      "total_charge_kwh": 20740.66613168725,
+      "total_discharge_kwh": 16799.939566666668,
+      "net_load_kwh": 55541.97243333333,
+      "max_charge_kwh": 833.3333333333333,
+      "max_discharge_kwh": 715.6530333333333,
+      "max_side_power_kw": 5000.0,
+      "E_min": 1200.0,
+      "E_max": 10800.0,
+      "analytic_lower_bound": 20622.734364496668,
+      "no_storage_upper_bound": 48052.046590846665,
+      "input_md5": "dbe06f92517431228efcc26e3e796ef9"
+    },
+    "arbitrage": {
+      "charge_share_in_cheapest_20pct_price": 0.5545,
+      "discharge_share_in_priciest_20pct_price": 0.6368,
+      "corr_price_charge": -0.4458,
+      "corr_price_discharge": 0.5919
+    }
+  },
+  "gate_checks": {
+    "key_assumption_citation": {
+      "passed": true,
+      "detail": "check_key_assumptions passed=true, errors=[]"
+    },
+    "physical_and_economic_common_sense": {
+      "passed": true,
+      "detail": "费用区间/量级/套利方向/供给≥负载均通过"
+    },
+    "cross_question_consistency": {
+      "passed": null,
+      "detail": "L5 未触发（prob01 为首问）"
+    }
+  },
+  "failure_type": null,
+  "return_to_stage": null,
+  "blocking_reasons": []
+}

@@ -1,0 +1,78 @@
+{
+  "table1": {
+    "slots": [
+      {
+        "slot": "10:00-10:10",
+        "position": 60,
+        "attachment_timestamp": "10:00",
+        "template_label": "10:00-10:10",
+        "label_matches": true,
+        "purchase_kwh": 0.0
+      },
+      {
+        "slot": "12:00-12:10",
+        "position": 72,
+        "attachment_timestamp": "12:00",
+        "template_label": "12:00-12:10",
+        "label_matches": true,
+        "purchase_kwh": 486.4029
+      },
+      {
+        "slot": "14:00-14:10",
+        "position": 84,
+        "attachment_timestamp": "14:00",
+        "template_label": "14:00-14:10",
+        "label_matches": true,
+        "purchase_kwh": 0.0
+      },
+      {
+        "slot": "16:00-16:10",
+        "position": 96,
+        "attachment_timestamp": "16:00",
+        "template_label": "16:00-16:10",
+        "label_matches": true,
+        "purchase_kwh": 394.931483
+      },
+      {
+        "slot": "18:00-18:10",
+        "position": 108,
+        "attachment_timestamp": "18:00",
+        "template_label": "18:00-18:10",
+        "label_matches": true,
+        "purchase_kwh": 636.982617
+      },
+      {
+        "slot": "20:00-20:10",
+        "position": 120,
+        "attachment_timestamp": "20:00",
+        "template_label": "20:00-20:10",
+        "label_matches": true,
+        "purchase_kwh": 0.0
+      }
+    ],
+    "all_day_energy_kwh": 59482.698998,
+    "all_day_cost_yuan": 35126.948589
+  },
+  "table2": {
+    "block_charge_kwh": [
+      4500.0,
+      833.333333,
+      4787.964288,
+      5286.035177,
+      0.0,
+      5333.333333
+    ],
+    "block_discharge_kwh": [
+      0.0,
+      6365.8412,
+      1702.996983,
+      91.101383,
+      5780.131883,
+      2859.868117
+    ],
+    "storage_0_00_kwh": 6000.0,
+    "storage_24_00_kwh": 6000.0,
+    "clock_semantics": true,
+    "note": "0:00/24:00 为计划窗首/末状态（AS01 左端点口径）；探针模式下仅为截断窗端点"
+  }
+}

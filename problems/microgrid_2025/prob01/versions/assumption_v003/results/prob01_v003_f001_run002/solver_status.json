@@ -1,0 +1,15 @@
+{
+  "status": 0,
+  "message": "Optimization terminated successfully. (HiGHS Status 7: Optimal)",
+  "solver": "highs",
+  "iterations": 364,
+  "objective_yuan": 35126.948589,
+  "feasible_incumbent": true,
+  "mip_gap": null,
+  "device": "cpu",
+  "gpu_required": false,
+  "seed": null,
+  "equality_residual_max": 4.547473508864641e-13,
+  "bound_violation_max": 0.0,
+  "deterministic": true
+}

@@ -1,3 +1,802 @@
 question_id: prob01
-dry: false
-items: []
+dry: true
+items:
+- id: ref-zhang-2015-dayahead-degradation
+  title: An improved charging/discharging strategy of lithium batteries considering
+    depreciation cost in day-ahead microgrid scheduling
+  authors: Zhang Zhong, Wang Jianxue, Wang Xiuli
+  year: 2015
+  source: Energy Conversion and Management
+  doi: 10.1016/j.enconman.2015.07.079
+  url: https://doi.org/10.1016/j.enconman.2015.07.079
+  authority: A
+  verification_level: metadata
+  summary: 面向微网日前调度，提出考虑锂电池折旧成本的改进充放电策略，把电池损耗纳入日前调度决策（据标题与期刊层级，本轮未取得摘要）。
+  applicable_conditions: 日前（0:00 制定）计划、锂电储能、可在目标中加入折旧/寿命成本参数的情形。
+  supports: H1 目标口径：现有日前微网调度普遍把电池折旧成本纳入目标函数。本题 prob01 题面目标仅为购电费，故「不计折旧」必须写成显式 project_assumption
+    而非默认事实。
+  differences: 该文以折旧成本为改进对象；本题未给出电池循环/折旧参数，无法标定折旧系数，只能作为「取舍需显式声明」的依据。
+  claim_types:
+  - literature_fact
+  - agent_inference
+  status: used
+  decision_reason: 支撑 H1：说明「目标是否含电池折旧」在文献中是显式建模选择；prob01 略去折旧需在假设中声明并留待 robustness
+    检验。元数据经 Crossref 核验。
+  fingerprint: 10.1016/j.enconman.2015.07.079
+  verified: true
+  verification_provider: crossref
+  verification_error: null
+  added_at: '2026-09-10T10:37:29.550223+00:00'
+  round_id: rnd-9cbe3f07562c
+  verified_at: '2026-09-10T10:37:44.643528+00:00'
+  verified_title:
+  - An improved charging/discharging strategy of lithium batteries considering depreciation
+    cost in day-ahead microgrid scheduling
+  decided_at: '2026-09-10T10:38:07.447891+00:00'
+- id: ref-olivieri-2020-residential-bess
+  title: Optimization of residential battery energy storage system scheduling for
+    cost and emissions reductions
+  authors: Olivieri Zachary T., McConky Katie
+  year: 2020
+  source: Energy and Buildings
+  doi: 10.1016/j.enbuild.2020.109787
+  url: https://doi.org/10.1016/j.enbuild.2020.109787
+  authority: A
+  verification_level: metadata
+  summary: 对住宅电池储能系统调度做优化，在运行约束下同时考虑降低用电成本与排放（据标题与期刊层级，本轮未取得摘要）。
+  applicable_conditions: 给定价格信号与负荷曲线、以电池充放电为决策的逐时段调度。
+  supports: H1/H8：电池储能「逐时段调度 + 成本最小」是成熟的标准优化问题，可形式化为线性/混合整数规划。
+  differences: 住宅尺度、含排放目标；本题为单一微网、单目标购电费最小，规模与目标更简单。
+  claim_types:
+  - literature_fact
+  - agent_inference
+  status: used
+  decision_reason: 支撑 H1/H8：确认「储能逐时段成本最小调度」为标准优化问题族。元数据经 Crossref 核验。
+  fingerprint: 10.1016/j.enbuild.2020.109787
+  verified: true
+  verification_provider: crossref
+  verification_error: null
+  added_at: '2026-09-10T10:37:29.604084+00:00'
+  round_id: rnd-9cbe3f07562c
+  verified_at: '2026-09-10T10:37:45.399885+00:00'
+  verified_title:
+  - Optimization of residential battery energy storage system scheduling for cost
+    and emissions reductions
+  decided_at: '2026-09-10T10:38:07.533234+00:00'
+- id: ref-alguhi-2025-bess-operation
+  title: Optimal Operation of Battery Energy Storage Systems in Microgrid-Connected
+    Distribution Networks for Economic Efficiency and Grid Security
+  authors: Alguhi Ahmed A., Alotaibi Majed A.
+  year: 2025
+  source: Energies
+  doi: 10.3390/en18236335
+  url: https://doi.org/10.3390/en18236335
+  authority: A
+  verification_level: abstract_oa
+  summary: 建立微网并网下 BESS 的 24 小时最优经济运行 MILP：目标为最小化总运行成本，显式包含充放电动态、BESS 退化、SOC 约束、电价信号与网络运行限值，并优化微网与配网之间的功率交换。
+  applicable_conditions: 24 小时调度时域；MILP 建模；含 SOC 约束、充放电动态与电价信号；节点电压/馈线等网络约束在本题中不存在。
+  supports: H1（目标为 24h 运行成本最小）、H3/H4（显式 SOC 约束与充放电动态）、H5（MILP 中如何处理充放电状态）。其 24h 滚动/单日调度框架与
+    prob01 的「每天 0:00 制定当天计划」一致。
+  differences: 该文含配电网潮流/电压约束与退化成本，本题无网络拓扑、无退化参数；其成本最小化含网络目标，本题仅为购电费。
+  claim_types:
+  - literature_fact
+  status: used
+  decision_reason: 摘要直接给出「24h 成本最小 MILP + SOC 约束 + 充放电动态 + 电价信号」的标准结构，是 prob01 模型结构的核心
+    A 级依据。摘要经开放获取核验。
+  fingerprint: 10.3390/en18236335
+  verified: true
+  verification_provider: crossref
+  verification_error: null
+  added_at: '2026-09-10T10:37:29.661972+00:00'
+  round_id: rnd-9cbe3f07562c
+  verified_at: '2026-09-10T10:37:46.484800+00:00'
+  verified_title:
+  - Optimal Operation of Battery Energy Storage Systems in Microgrid-Connected Distribution
+    Networks for Economic Efficiency and Grid Security
+  decided_at: '2026-09-10T10:38:07.625685+00:00'
+- id: ref-lin-2024-tou-industrial
+  title: Evaluation and optimization for integrated photo-voltaic and battery energy
+    storage systems under time-of-use pricing in the industrial park
+  authors: Lin Yangshu, Shao Yuhao, Yang Chao, Guo Wenxuan, Liu Weijie, Zheng Chenghang,
+    Gao Xiang
+  year: 2024
+  source: Journal of Energy Storage
+  doi: 10.1016/j.est.2024.113614
+  url: https://doi.org/10.1016/j.est.2024.113614
+  authority: A
+  verification_level: metadata
+  summary: 在分时电价（TOU）下评估并优化工业园区光伏 + 电池储能系统的容量与运行（据标题与期刊层级，本轮未取得摘要）。
+  applicable_conditions: TOU 电价、光伏与电池联合、以经济性为目标的评估/优化。
+  supports: H1/H7：TOU 价差下「低价充电、高价放电」的套利是光伏-储能经济优化的核心机制；与本题 prob01 的电价曲线和逐时段电量口径直接对应。
+  differences: 该文面向工业园区并含容量配置；本题为给定容量的纯运行优化，且电价与负荷为附件给定的单日曲线。
+  claim_types:
+  - literature_fact
+  - agent_inference
+  status: used
+  decision_reason: 支撑 H1/H7：TOU 套利型「购电-充放电」联合优化的直接 A 级案例，机制与 prob01 一致。元数据经 Crossref
+    核验。
+  fingerprint: 10.1016/j.est.2024.113614
+  verified: true
+  verification_provider: crossref
+  verification_error: null
+  added_at: '2026-09-10T10:37:29.715185+00:00'
+  round_id: rnd-9cbe3f07562c
+  verified_at: '2026-09-10T10:37:47.630709+00:00'
+  verified_title:
+  - Evaluation and optimization for integrated photo-voltaic and battery energy storage
+    systems under time-of-use pricing in the industrial park
+  decided_at: '2026-09-10T10:38:07.721279+00:00'
+- id: ref-shen-2026-peak-valley
+  title: A Multi-Objective Optimization Framework for Optimal Configuration of Battery
+    Energy Storage System in Peak Shaving and Valley Filling Scenarios
+  authors: Shen Fangfei, Luo Quanming
+  year: 2026
+  source: Applied Sciences
+  doi: 10.3390/app16052357
+  url: https://doi.org/10.3390/app16052357
+  authority: A
+  verification_level: abstract_oa
+  summary: 提出 BESS 峰谷套利配置的多目标优化框架，显式包含功率限值、SOC、充放电状态与「日能量平衡」约束，并考虑投资/运行维护/退役与环境收益；用
+    MOPSO 求 Pareto 前沿、TOPSIS 选点，基于典型 24h 负荷曲线给出最优配置。
+  applicable_conditions: 含 SOC 与充放电状态约束、日能量平衡的 24h 调度/配置；负荷曲线为日周期。
+  supports: H4：明确把「SOC 约束 + 功率限值 + 充放电状态 + 日能量平衡」作为标准约束集，其中「日能量平衡」为本题 H6（prob01 的
+    0:00=24:00 储电量相同）提供同族依据；H7（24h 逐时/逐段口径）。
+  differences: 该文目标是配置容量（多目标、投资口径），本题容量给定、目标为购电费；其「日能量平衡」是运行约束而非本题的题面硬约束，但约束形式可迁移。
+  claim_types:
+  - literature_fact
+  - agent_inference
+  status: used
+  decision_reason: 摘要直接确认 SOC/功率/充放电状态/日能量平衡的约束组合，支撑 H4 与 H6 的约束写法；MOPSO 属配置层，不用于
+    prob01。摘要经开放获取核验。
+  fingerprint: 10.3390/app16052357
+  verified: true
+  verification_provider: crossref
+  verification_error: null
+  added_at: '2026-09-10T10:37:29.773297+00:00'
+  round_id: rnd-9cbe3f07562c
+  verified_at: '2026-09-10T10:37:48.852758+00:00'
+  verified_title:
+  - A Multi-Objective Optimization Framework for Optimal Configuration of Battery
+    Energy Storage System in Peak Shaving and Valley Filling Scenarios
+  decided_at: '2026-09-10T10:38:07.815091+00:00'
+- id: ref-rawa-2023-mg-stochastic
+  title: Optimal operation and stochastic scheduling of renewable energy of a microgrid
+    with optimal sizing of battery energy storage considering cost reduction
+  authors: Rawa Muhyaddin, Al-Turki Yusuf, Sedraoui Khaled, Dadfar Sajjad, Khaki Mehrdad
+  year: 2023
+  source: Journal of Energy Storage
+  doi: 10.1016/j.est.2022.106475
+  url: https://doi.org/10.1016/j.est.2022.106475
+  authority: A
+  verification_level: metadata
+  summary: 研究含可再生能源微网的最优运行/随机调度与 BESS 最优容量，目标为降低成本（据标题与期刊层级，本轮未取得摘要）。
+  applicable_conditions: 微网运行调度 + 储能容量；含可再生能源不确定性的随机调度情形。
+  supports: H8：微网「运行调度 + 储能」的标准优化建模族；其确定性运行部分对应 prob01，随机部分对应后续 prob02–04 的演进方向。
+  differences: 该文含容量优化与随机性；prob01 为容量给定、参数确定性的单日问题，仅取其确定性与约束结构。
+  claim_types:
+  - literature_fact
+  - agent_inference
+  status: used
+  decision_reason: 支撑 H8 的模型族划分：确定性运行（prob01）与随机调度（后续小问）在同一论文族内，便于后续口径演进。元数据经 Crossref
+    核验。
+  fingerprint: 10.1016/j.est.2022.106475
+  verified: true
+  verification_provider: crossref
+  verification_error: null
+  added_at: '2026-09-10T10:37:29.833749+00:00'
+  round_id: rnd-9cbe3f07562c
+  verified_at: '2026-09-10T10:37:49.998102+00:00'
+  verified_title:
+  - Optimal operation and stochastic scheduling of renewable energy of a microgrid
+    with optimal sizing of battery energy storage considering cost reduction
+  decided_at: '2026-09-10T10:38:07.917506+00:00'
+- id: ref-moradi-2018-standalone
+  title: Optimization and energy management of a standalone hybrid microgrid in the
+    presence of battery storage system
+  authors: Moradi Hadis, Esfahanian Mahdi, Abtahi Amir, Zilouchian Ali
+  year: 2018
+  source: Energy
+  doi: 10.1016/j.energy.2018.01.016
+  url: https://doi.org/10.1016/j.energy.2018.01.016
+  authority: A
+  verification_level: metadata
+  summary: 研究含电池储能的混合微网优化与能量管理，建立以经济性为目标的调度/容量优化模型（据标题与期刊层级，本轮未取得摘要）。
+  applicable_conditions: 含光伏/储能/负荷的微网能量管理与优化；供需平衡为基本约束。
+  supports: H2：微网能量管理必须满足供需（功率）平衡这一基本约束；本题的「微网提供电能 ≥ 负载」是其不等式/等式形式。
+  differences: 该文可能是孤岛/独立系统（standalone），本题为非孤岛式（可与外网交易），平衡式中增加购电项。
+  claim_types:
+  - literature_fact
+  - agent_inference
+  status: used
+  decision_reason: 支撑 H2 的功率平衡约束为微网能量管理的标准组成；孤岛与并网的区别需在本题平衡式中显式处理购电项。元数据经 Crossref
+    核验。
+  fingerprint: 10.1016/j.energy.2018.01.016
+  verified: true
+  verification_provider: crossref
+  verification_error: null
+  added_at: '2026-09-10T10:37:29.894622+00:00'
+  round_id: rnd-9cbe3f07562c
+  verified_at: '2026-09-10T10:37:51.171165+00:00'
+  verified_title:
+  - Optimization and energy management of a standalone hybrid microgrid in the presence
+    of battery storage system
+  decided_at: '2026-09-10T10:38:08.033600+00:00'
+- id: ref-vykhodtsev-2022-bess-review
+  title: A review of modelling approaches to characterize lithium-ion battery energy
+    storage systems in techno-economic analyses of power systems
+  authors: Vykhodtsev Anton V., Jang Darren, Wang Qianpu, Rosehart William, Zareipour
+    Hamidreza
+  year: 2022
+  source: Renewable and Sustainable Energy Reviews
+  doi: 10.1016/j.rser.2022.112584
+  url: https://doi.org/10.1016/j.rser.2022.112584
+  authority: A
+  verification_level: metadata
+  summary: 综述电力系统技术经济分析中刻画锂离子电池储能的各种建模方法（含效率、SOC、退化等表征方式）（据标题与期刊层级，本轮未取得摘要）。
+  applicable_conditions: 电力系统技术经济分析中的 BESS 建模；需要在精度与可解性之间取舍。
+  supports: H3：为「效率如何进入状态转移、SOC 如何约束、退化是否建模」提供方法级综述依据，支撑 prob01 选择常效率线性模型的合理性讨论与适用边界。
+  differences: 综述覆盖多类模型（含非线性/退化模型），本题 prob01 只取常效率线性模型这一最简分支，需在假设中声明简化。
+  claim_types:
+  - literature_fact
+  - agent_inference
+  status: used
+  decision_reason: H3（效率建模）最合适的方法级 A 级综述来源；用于说明常效率模型是技术经济分析中的常用简化分支。元数据经 Crossref
+    核验。
+  fingerprint: 10.1016/j.rser.2022.112584
+  verified: true
+  verification_provider: crossref
+  verification_error: null
+  added_at: '2026-09-10T10:37:29.961223+00:00'
+  round_id: rnd-9cbe3f07562c
+  verified_at: '2026-09-10T10:37:52.716239+00:00'
+  verified_title:
+  - A review of modelling approaches to characterize lithium-ion battery energy storage
+    systems in techno-economic analyses of power systems
+  decided_at: '2026-09-10T10:38:08.136151+00:00'
+- id: ref-jamroen-2023-soc-sizing
+  title: The role of state-of-charge management in optimal techno-economic battery
+    energy storage sizing for off-grid residential photovoltaic systems
+  authors: Jamroen Chaowanan, Vongkoon Pokkrong
+  year: 2023
+  source: Journal of Energy Storage
+  doi: 10.1016/j.est.2023.108246
+  url: https://doi.org/10.1016/j.est.2023.108246
+  authority: A
+  verification_level: metadata
+  summary: 研究离网住宅光伏系统中 SOC 管理对 BESS 技术经济容量优化的作用，强调 SOC 运行区间/管理策略对经济性与可靠性的影响（据标题与期刊层级，本轮未取得摘要）。
+  applicable_conditions: 光伏 + 电池系统；SOC 需维持在规定区间；技术经济优化。
+  supports: H4：SOC 运行区间（本题 1200–10800 kWh）是储能调度的关键运行约束，SOC 管理策略直接影响可行域与经济性。
+  differences: 该文为离网系统且关注容量优化；本题容量给定、并网可购电，SOC 区间作为硬约束存在。
+  claim_types:
+  - literature_fact
+  - agent_inference
+  status: used
+  decision_reason: 支撑 H4：SOC 区间作为运行约束的标准依据，与附录 1 的 1200–10800 kWh 运行区间对应。元数据经 Crossref
+    核验。
+  fingerprint: 10.1016/j.est.2023.108246
+  verified: true
+  verification_provider: crossref
+  verification_error: null
+  added_at: '2026-09-10T10:37:30.030062+00:00'
+  round_id: rnd-9cbe3f07562c
+  verified_at: '2026-09-10T10:37:53.913299+00:00'
+  verified_title:
+  - The role of state-of-charge management in optimal techno-economic battery energy
+    storage sizing for off-grid residential photovoltaic systems
+  decided_at: '2026-09-10T10:38:08.251175+00:00'
+- id: ref-huang-2022-dynamic-efficiency
+  title: Optimal Configuration of Fire-Storage Capacity Considering Dynamic Charge-Discharge
+    Efficiency of Hybrid Energy Storage
+  authors: Huang Hongbo, Wang Hui, Cai Yang, Chen Xiwei, Li Tingting
+  year: 2022
+  source: Frontiers in Energy Research
+  doi: 10.3389/fenrg.2022.950521
+  url: https://doi.org/10.3389/fenrg.2022.950521
+  authority: A
+  verification_level: abstract_oa
+  summary: 指出容量配置中采用「常效率模型」会误判储能实际运行状态并导致不合理的容量分配，因而建立考虑混合储能动态充放电效率的优化配置模型，给出充放电功率与效率之间的函数关系。
+  applicable_conditions: 关注效率随功率/SOC 变化的储能优化；配置或运行层。
+  supports: H3：直接说明「常效率」是简化假设，且该简化在效率强非线性时会带来偏差。为 prob01 采用附录 1 给定的定值 90% 效率提供适用边界，并提示需在
+    robustness 中检验效率扰动。
+  differences: 该文研究混合储能容量配置并建模动态效率；本题附录 1 只给单一 90% 定值，只能采用常效率，但必须声明该简化的边界。
+  claim_types:
+  - literature_fact
+  - agent_inference
+  status: used
+  decision_reason: 为 H3 的常效率简化提供反面对照（A 级、含摘要），支撑「效率取定值属工程简化」并在假设中声明边界。摘要经开放获取核验。
+  fingerprint: 10.3389/fenrg.2022.950521
+  verified: true
+  verification_provider: crossref
+  verification_error: null
+  added_at: '2026-09-10T10:37:30.101465+00:00'
+  round_id: rnd-9cbe3f07562c
+  verified_at: '2026-09-10T10:37:54.836807+00:00'
+  verified_title:
+  - Optimal Configuration of Fire-Storage Capacity Considering Dynamic Charge-Discharge
+    Efficiency of Hybrid Energy Storage
+  decided_at: '2026-09-10T10:38:08.364728+00:00'
+- id: ref-wang-2024-complementarity
+  title: An exact relaxation method for complementarity constraints of energy storages
+    in power grid optimization problems
+  authors: Wang Qi, Wu Wenchuan, Lin Chenhui, Xu Shuwei, Wang Siyuan, Tian Jian
+  year: 2024
+  source: Applied Energy
+  doi: 10.1016/j.apenergy.2024.123592
+  url: https://doi.org/10.1016/j.apenergy.2024.123592
+  authority: A
+  verification_level: metadata
+  summary: 针对电网优化中储能的互补约束（充放电不能同时发生），提出精确松弛方法，在避免二元变量或减轻 MILP 负担的同时保证解满足物理互补性（据标题与期刊层级，本轮未取得摘要）。
+  applicable_conditions: 含储能的电网/微网优化；需要处理充放电互补性或希望避免整数变量。
+  supports: H5：为「同一时段是否允许同时充放电」给出可核验的建模依据与松弛/互补处理路线，支撑 prob01 显式声明该约束或说明可省条件。
+  differences: 该文面向电网优化并提出精确松弛算法；本题规模极小（144 段线性），可先不做松弛而直接分析常效率下同时充放电的非最优性。
+  claim_types:
+  - literature_fact
+  - agent_inference
+  status: used
+  decision_reason: H5（充放电互补性）最贴合的 A 级方法来源；用于论证「何时可省互补约束、何时必须显式处理」。元数据经 Crossref 核验。
+  fingerprint: 10.1016/j.apenergy.2024.123592
+  verified: true
+  verification_provider: crossref
+  verification_error: null
+  added_at: '2026-09-10T10:37:30.173467+00:00'
+  round_id: rnd-9cbe3f07562c
+  verified_at: '2026-09-10T10:37:55.998161+00:00'
+  verified_title:
+  - An exact relaxation method for complementarity constraints of energy storages
+    in power grid optimization problems
+  decided_at: '2026-09-10T10:38:08.483661+00:00'
+- id: ref-nazir-2023-realizable-dispatch
+  title: Guaranteeing a Physically Realizable Battery Dispatch Without Charge-Discharge
+    Complementarity Constraints
+  authors: Nazir Nawaf, Almassalkhi Mads
+  year: 2023
+  source: IEEE Transactions on Smart Grid
+  doi: 10.1109/tsg.2021.3109805
+  url: https://doi.org/10.1109/tsg.2021.3109805
+  authority: A
+  verification_level: metadata
+  summary: 研究在不显式引入充放电互补（二元）约束的情况下，如何保证电池调度解物理可实现，给出交替/分层调度与可实现性条件（据标题与期刊层级，本轮未取得摘要）。
+  applicable_conditions: 电池储能调度；希望避免 MILP 二元变量或规避互补约束的情形。
+  supports: H5：说明在何种条件下 LP 松弛解可实现、何时需额外机制，支撑 prob01「先做 LP、再检验是否同时充放电」的技术路线。
+  differences: 该文提出具体可实现性机制，面向电网调度；本题可在求解后直接检查 c_t·q_dis_t=0 的残差，机制复杂度不必照搬。
+  claim_types:
+  - literature_fact
+  - agent_inference
+  status: used
+  decision_reason: 与 Wang(2024) 互补，支撑 H5 的「避免不必要整数化」判断，为 prob01 采用 LP 提供 A 级依据。元数据经
+    Crossref 核验。
+  fingerprint: 10.1109/tsg.2021.3109805
+  verified: true
+  verification_provider: crossref
+  verification_error: null
+  added_at: '2026-09-10T10:37:30.244714+00:00'
+  round_id: rnd-9cbe3f07562c
+  verified_at: '2026-09-10T10:37:56.803640+00:00'
+  verified_title:
+  - Guaranteeing a Physically Realizable Battery Dispatch Without Charge-Discharge
+    Complementarity Constraints
+  decided_at: '2026-09-10T10:38:08.608100+00:00'
+- id: ref-grimaldi-2025-arbitrage-curtail
+  title: Techno-economic optimization of utility-scale battery storage integration
+    with a wind farm for wholesale energy arbitrage considering wind curtailment and
+    battery degradation
+  authors: Grimaldi Alberto, Minuto Francesco Demetrio, Perol Alessandro, Casagrande
+    Silvia, Lanzini Andrea
+  year: 2025
+  source: Journal of Energy Storage
+  doi: 10.1016/j.est.2025.115500
+  url: https://doi.org/10.1016/j.est.2025.115500
+  authority: A
+  verification_level: metadata
+  summary: 对风电-电池系统做技术经济优化，在套利收益中同时考虑弃风限电与电池退化（据标题与期刊层级，本轮未取得摘要）。
+  applicable_conditions: 可再生出力超过可消纳/可存储能力时存在弃电；储能用于能量套利。
+  supports: H6：当可再生出力大于「负荷 + 充电能力」时，需显式处理盈余/弃电；弃电量与储能容量、功率限值耦合。直接对应本题附件 1/2 中光伏 >
+    负载的 10130 个时段。
+  differences: 该文是风电-电池批发市场套利；本题是光伏-微网零售 TOU 购电，且余电不得售出（题面未给售电渠道）。
+  claim_types:
+  - literature_fact
+  - agent_inference
+  status: used
+  decision_reason: 支撑 H6：可再生盈余必须显式建模（弃电变量或不等式），避免功率平衡不闭合；A 级同行评议来源。元数据经 Crossref 核验。
+  fingerprint: 10.1016/j.est.2025.115500
+  verified: true
+  verification_provider: crossref
+  verification_error: null
+  added_at: '2026-09-10T10:37:30.326545+00:00'
+  round_id: rnd-9cbe3f07562c
+  verified_at: '2026-09-10T10:37:57.793471+00:00'
+  verified_title:
+  - Techno-economic optimization of utility-scale battery storage integration with
+    a wind farm for wholesale energy arbitrage considering wind curtailment and battery
+    degradation
+  decided_at: '2026-09-10T10:38:08.728490+00:00'
+- id: ref-qing-2025-pv-curtailment
+  title: An Optimization for Capacity Configuration of Photovoltaic - Energy Storage
+    Microgrid Considering the Solar Power Curtailment Rate
+  authors: Qing Jiayuan, Jing Shi, Zhao Yincheng, Zhang Sen, Wan Hao, Cao Yihang
+  year: 2025
+  source: 2025 7th Asia Energy and Electrical Engineering Symposium (AEEES)
+  doi: 10.1109/aeees64634.2025.11019406
+  url: https://doi.org/10.1109/aeees64634.2025.11019406
+  authority: B
+  verification_level: metadata
+  summary: 在光伏-储能微网容量配置优化中显式引入光伏弃电率（solar power curtailment rate）作为约束/指标（据标题与会议层级，本轮未取得摘要）。
+  applicable_conditions: 光伏出力可能超出消纳能力的微网配置/运行。
+  supports: H6：弃光率是可被显式约束/度量的量，支撑把「盈余不售出」写成弃光变量或不等式的建模选择。
+  differences: 该文用于容量配置并以弃电率为约束；本题 prob01 容量给定，弃光只是平衡式的盈余项，不设弃光率上限。
+  claim_types:
+  - literature_fact
+  - agent_inference
+  status: used
+  decision_reason: 为 H6 提供直接以弃光率建模的 B 级案例，与 Grimaldi(2025) 构成互补。元数据经 Crossref 核验。
+  fingerprint: 10.1109/aeees64634.2025.11019406
+  verified: true
+  verification_provider: crossref
+  verification_error: null
+  added_at: '2026-09-10T10:37:30.405212+00:00'
+  round_id: rnd-9cbe3f07562c
+  verified_at: '2026-09-10T10:37:58.604102+00:00'
+  verified_title:
+  - An Optimization for Capacity Configuration of Photovoltaic - Energy Storage Microgrid
+    Considering the Solar Power Curtailment Rate
+  decided_at: '2026-09-10T10:38:08.849113+00:00'
+- id: ref-zeinalzadeh-2017-loadshed-curtail
+  title: Minimizing risk of load shedding and renewable energy curtailment in a microgrid
+    with energy storage
+  authors: Zeinalzadeh Ashkan, Gupta Vijay
+  year: 2017
+  source: 2017 American Control Conference (ACC)
+  doi: 10.23919/acc.2017.7963474
+  url: https://doi.org/10.23919/acc.2017.7963474
+  authority: B
+  verification_level: metadata
+  summary: 在含储能的微网中，同时最小化切负荷与可再生弃电的风险（据标题与会议层级，本轮未取得摘要）。
+  applicable_conditions: 微网中同时存在供电不足（切负荷）与可再生盈余（弃电）两类偏差的情形。
+  supports: H2/H6：把「供电不足」与「出力盈余」作为两个方向的不平衡显式处理；本题 prob01 要求供给不低于负载（对应切负荷禁止），盈余则表现为弃光。
+  differences: 该文以风险（概率型）为目标、面向运行控制；本题 prob01 为确定性、以费用为目标，仅取其不平衡建模思想。
+  claim_types:
+  - literature_fact
+  - agent_inference
+  status: used
+  decision_reason: 支撑 H2/H6 的「双向不平衡」建模视角，说明为何平衡式需写成可含松弛/盈余的形式。元数据经 Crossref 核验。
+  fingerprint: 10.23919/acc.2017.7963474
+  verified: true
+  verification_provider: crossref
+  verification_error: null
+  added_at: '2026-09-10T10:37:30.490413+00:00'
+  round_id: rnd-9cbe3f07562c
+  verified_at: '2026-09-10T10:37:59.387292+00:00'
+  verified_title:
+  - Minimizing risk of load shedding and renewable energy curtailment in a microgrid
+    with energy storage
+  decided_at: '2026-09-10T10:38:08.986904+00:00'
+- id: ref-heydari-2016-lpsp
+  title: Optimization of a biomass-based photovoltaic power plant for an off-grid
+    application subject to loss of power supply probability concept
+  authors: Heydari Ali, Askarzadeh Alireza
+  year: 2016
+  source: Applied Energy
+  doi: 10.1016/j.apenergy.2015.12.095
+  url: https://doi.org/10.1016/j.apenergy.2015.12.095
+  authority: A
+  verification_level: metadata
+  summary: 在离网生物质-光伏电站优化中采用供电不足概率（LPSP）概念约束可靠性（据标题与期刊层级，本轮未取得摘要）。
+  applicable_conditions: 离网/独立供电系统的可靠性约束；以供电不足概率度量。
+  supports: H2：供电可靠性可用显式指标（LPSP）约束，本题的「微网提供电能不可低于负载」是其确定性极限形式（LPSP=0）。
+  differences: 该文为离网系统、可靠性是概率约束；本题为非孤岛式、可靠性为每时段的确定性硬约束（可紧急购电）。
+  claim_types:
+  - literature_fact
+  - agent_inference
+  status: used
+  decision_reason: 支撑 H2：说明供电可靠性在文献中是可显式约束的对象，本题取确定性硬约束是其特例。元数据经 Crossref 核验。
+  fingerprint: 10.1016/j.apenergy.2015.12.095
+  verified: true
+  verification_provider: crossref
+  verification_error: null
+  added_at: '2026-09-10T10:37:30.574686+00:00'
+  round_id: rnd-9cbe3f07562c
+  verified_at: '2026-09-10T10:38:00.360669+00:00'
+  verified_title:
+  - Optimization of a biomass-based photovoltaic power plant for an off-grid application
+    subject to loss of power supply probability concept
+  decided_at: '2026-09-10T10:38:09.115955+00:00'
+- id: ref-csee-2023-mg-ems-review
+  title: 'Microgrid Energy Management with Energy Storage Systems: A Review'
+  authors: (CSEE Journal of Power and Energy Systems，Crossref 未返回作者字段)
+  year: 2023
+  source: CSEE Journal of Power and Energy Systems
+  doi: 10.17775/cseejpes.2022.04290
+  url: https://doi.org/10.17775/cseejpes.2022.04290
+  authority: A
+  verification_level: metadata
+  summary: 综述含储能系统的微网能量管理（EMS）的目标、约束与求解方法族（据标题与期刊层级，Crossref 未返回作者与摘要）。
+  applicable_conditions: 微网 EMS 的方法选择与建模框架；含储能。
+  supports: H8：为「确定性优化（LP/MILP）是微网 EMS 的基础方法族之一」提供综述级依据；H2/H3 的标准约束可在此类综述中定位。
+  differences: 综述覆盖随机/鲁棒/学习类方法；prob01 只采用确定性分支，其余方法留给后续小问。
+  claim_types:
+  - literature_fact
+  - agent_inference
+  status: used
+  decision_reason: H8 的综述级方法学依据（A 级）；元数据经 Crossref 核验，未取得摘要，故仅作方法框架级引用。
+  fingerprint: 10.17775/cseejpes.2022.04290
+  verified: true
+  verification_provider: crossref
+  verification_error: null
+  added_at: '2026-09-10T10:37:30.664106+00:00'
+  round_id: rnd-9cbe3f07562c
+  verified_at: '2026-09-10T10:38:01.126671+00:00'
+  verified_title:
+  - 'Microgrid Energy Management with Energy Storage Systems: A Review'
+  decided_at: '2026-09-10T10:38:09.242033+00:00'
+- id: ref-lee-2020-purchase-cost-lp
+  title: Power Purchase Cost Minimization in Radial Microgrid Network with Linear
+    Programming
+  authors: Lee Lae Yeop, Choi Seong Gon
+  year: 2020
+  source: 2020 International Conference on Information and Communication Technology
+    Convergence (ICTC)
+  doi: 10.1109/ictc49870.2020.9289431
+  url: https://doi.org/10.1109/ictc49870.2020.9289431
+  authority: B
+  verification_level: metadata
+  summary: 用线性规划在辐射状微网中最小化购电成本（据标题与会议层级，本轮未取得摘要）。
+  applicable_conditions: 以购电费用为目标的微网线性规划；存在网络约束时含辐射网络。
+  supports: H1/H8：直接支持「购电费用最小」这一目标可写成线性规划；本题 prob01 无网络约束，是其简化特例。
+  differences: 该文含辐射网络约束；本题无网络拓扑，购电成本目标直接由购电量与电价线性构成。
+  claim_types:
+  - literature_fact
+  status: used
+  decision_reason: 目标函数口径「购电费用最小 = 线性目标」的直接 B 级依据，与 prob01 完全对应。元数据经 Crossref 核验。
+  fingerprint: 10.1109/ictc49870.2020.9289431
+  verified: true
+  verification_provider: crossref
+  verification_error: null
+  added_at: '2026-09-10T10:37:30.757168+00:00'
+  round_id: rnd-9cbe3f07562c
+  verified_at: '2026-09-10T10:38:01.903509+00:00'
+  verified_title:
+  - Power Purchase Cost Minimization in Radial Microgrid Network with Linear Programming
+  decided_at: '2026-09-10T10:38:09.378036+00:00'
+- id: ref-carpinelli-2013-dayahead-ilp
+  title: 'The GREAT project: Integer linear programming-based day-ahead optimal scheduling
+    of a DC microgrid'
+  authors: Carpinelli G., Bracale A., Caramia P.
+  year: 2013
+  source: 2013 12th International Conference on Environment and Electrical Engineering
+  doi: 10.1109/eeeic.2013.6549581
+  url: https://doi.org/10.1109/eeeic.2013.6549581
+  authority: B
+  verification_level: metadata
+  summary: 用整数线性规划对直流微网做日前最优调度（据标题与会议层级，本轮未取得摘要）。
+  applicable_conditions: 日前（0:00 制定）调度；含整数决策的微网优化。
+  supports: H8：支持「日前调度 = 线性/整数线性规划」的建模范式，与 prob01 的「每天 0:00 制定当天计划」一致。
+  differences: 该文为直流微网并可能含机组启停等整数决策；本题 prob01 原则上为纯 LP（无整数变量），整数化只在与互补性相关的备选方案中出现。
+  claim_types:
+  - literature_fact
+  - agent_inference
+  status: used
+  decision_reason: 支撑 H8：日前微网调度的标准 LP/ILP 范式；提示本题需说明为何无需整数变量。元数据经 Crossref 核验。
+  fingerprint: 10.1109/eeeic.2013.6549581
+  verified: true
+  verification_provider: crossref
+  verification_error: null
+  added_at: '2026-09-10T10:37:30.853030+00:00'
+  round_id: rnd-9cbe3f07562c
+  verified_at: '2026-09-10T10:38:02.671506+00:00'
+  verified_title:
+  - 'The GREAT project: Integer linear programming-based day-ahead optimal scheduling
+    of a DC microgrid'
+  decided_at: '2026-09-10T10:38:09.520335+00:00'
+- id: ref-ignat-2019-cost-dayahead
+  title: Cost Optimization and Day-Ahead Scheduling for a Renewable Energy Microgrid
+  authors: Ignat Andreea, Petreus Dorin, Lazar Eniko
+  year: 2019
+  source: 2019 42nd International Spring Seminar on Electronics Technology (ISSE)
+  doi: 10.1109/isse.2019.8810290
+  url: https://doi.org/10.1109/isse.2019.8810290
+  authority: B
+  verification_level: metadata
+  summary: 对可再生能源微网做成本优化与日前调度（据标题与会议层级，本轮未取得摘要）。
+  applicable_conditions: 含可再生能源的微网日前成本优化。
+  supports: H1/H8：把「成本优化」与「日前调度」结合的标准案例，支撑 prob01 的目标与决策节奏。
+  differences: 会议论文、细节有限；本题仅用作范式旁证，不作为参数来源。
+  claim_types:
+  - literature_fact
+  - agent_inference
+  status: used
+  decision_reason: H1/H8 的补充旁证；元数据经 Crossref 核验，未取得摘要，故仅作范式级引用。
+  fingerprint: 10.1109/isse.2019.8810290
+  verified: true
+  verification_provider: crossref
+  verification_error: null
+  added_at: '2026-09-10T10:37:30.946523+00:00'
+  round_id: rnd-9cbe3f07562c
+  verified_at: '2026-09-10T10:38:03.420392+00:00'
+  verified_title:
+  - Cost Optimization and Day-Ahead Scheduling for a Renewable Energy Microgrid
+  decided_at: '2026-09-10T10:38:09.656581+00:00'
+- id: ref-alamir-2025-dayahead-multimg
+  title: Optimized Day-Ahead Scheduling of Cooperative Multi-Microgrid with Demand
+    Response and Shapley Value-Based Cost Allocation
+  authors: Alamir Nehmedo, Kamel Salah
+  year: 2025
+  source: 2025 26th International Middle East Power Systems Conference (MEPCON)
+  doi: 10.1109/mepcon66918.2026.11360115
+  url: https://doi.org/10.1109/mepcon66918.2026.11360115
+  authority: B
+  verification_level: metadata
+  summary: 对合作型多微网做优化日前调度，含需求响应与基于 Shapley 值的成本分摊（据标题与会议层级，本轮未取得摘要）。
+  applicable_conditions: 多主体微网、需求响应、成本分摊的日前调度。
+  supports: H8：确认「日前调度 + 成本最小」在微网文献中的主流地位；其单微网子问题与 prob01 同族。
+  differences: 该文为多微网合作与成本分摊，含需求响应；本题为单一微网、无需求响应、无分摊。
+  claim_types:
+  - literature_fact
+  - agent_inference
+  status: used
+  decision_reason: H8 的补充旁证（同类日前调度问题族）。元数据经 Crossref 核验。
+  fingerprint: 10.1109/mepcon66918.2026.11360115
+  verified: true
+  verification_provider: crossref
+  verification_error: null
+  added_at: '2026-09-10T10:37:31.036105+00:00'
+  round_id: rnd-9cbe3f07562c
+  verified_at: '2026-09-10T10:38:04.208518+00:00'
+  verified_title:
+  - Optimized Day-Ahead Scheduling of Cooperative Multi-Microgrid with Demand Response
+    and Shapley Value-Based Cost Allocation
+  decided_at: '2026-09-10T10:38:09.802010+00:00'
+- id: ref-valibeygi-2020-battery-dispatch-soc
+  title: Optimal Battery Dispatch and Real-Time State of Charge Tracking for Microgrid
+    Applications
+  authors: Valibeygi Amir, de Callafon Raymond A.
+  year: 2020
+  source: 2020 American Control Conference (ACC)
+  doi: 10.23919/acc45564.2020.9148016
+  url: https://doi.org/10.23919/acc45564.2020.9148016
+  authority: B
+  verification_level: metadata
+  summary: 研究微网中电池的最优调度与实时 SOC 跟踪（据标题与会议层级，本轮未取得摘要）。
+  applicable_conditions: 电池调度需跟踪目标 SOC；含 SOC 状态变量。
+  supports: H4：SOC 作为状态变量需被调度并受约束；支撑把储电量轨迹显式建模为状态变量并输出（对应本题表 2 的储电量）。
+  differences: 该文强调实时跟踪控制；本题 prob01 为日前一次性优化，只要满足逐时 SOC 约束与日周期约束。
+  claim_types:
+  - literature_fact
+  - agent_inference
+  status: used
+  decision_reason: 支撑 H4：SOC 作为显式状态变量是电池调度的标准做法，对应表 2 需输出储电量。元数据经 Crossref 核验。
+  fingerprint: 10.23919/acc45564.2020.9148016
+  verified: true
+  verification_provider: crossref
+  verification_error: null
+  added_at: '2026-09-10T10:37:31.137268+00:00'
+  round_id: rnd-9cbe3f07562c
+  verified_at: '2026-09-10T10:38:04.996915+00:00'
+  verified_title:
+  - Optimal Battery Dispatch and Real-Time State of Charge Tracking for Microgrid
+    Applications
+  decided_at: '2026-09-10T10:38:09.942581+00:00'
+- id: ref-wongwut-2017-tou-prosumer
+  title: Optimum hourly operation of a prosumer with battery energy storage system
+    under time-of-use pricing
+  authors: Wongwut Kamolwan, Nuchprayoon Somboon
+  year: 2017
+  source: 2017 IEEE PES Asia-Pacific Power and Energy Engineering Conference (APPEEC)
+  doi: 10.1109/appeec.2017.8308997
+  url: https://doi.org/10.1109/appeec.2017.8308997
+  authority: B
+  verification_level: metadata
+  summary: 研究分时电价下含电池储能的产消者逐小时最优运行（据标题与会议层级，本轮未取得摘要）。
+  applicable_conditions: TOU 电价；逐小时（时段）运行优化；含储能。
+  supports: H1/H7：TOU 下逐时段运行优化是直接对应 prob01 的问题形式，支持「低价充、高价放」的时段套利目标与离散时段口径。
+  differences: 该文为产消者（可能含售电）；本题微网不售电，仅购电，且时段粒度为 10 分钟。
+  claim_types:
+  - literature_fact
+  - agent_inference
+  status: used
+  decision_reason: 支撑 H1/H7：TOU 逐时段储能运行优化的 B 级直接案例。元数据经 Crossref 核验。
+  fingerprint: 10.1109/appeec.2017.8308997
+  verified: true
+  verification_provider: crossref
+  verification_error: null
+  added_at: '2026-09-10T10:37:31.260226+00:00'
+  round_id: rnd-9cbe3f07562c
+  verified_at: '2026-09-10T10:38:05.820260+00:00'
+  verified_title:
+  - Optimum hourly operation of a prosumer with battery energy storage system under
+    time-of-use pricing
+  decided_at: '2026-09-10T10:38:10.090504+00:00'
+- id: ref-baloyi-2021-tou-arbitrage
+  title: Sizing and Selection of Battery Energy Storage System for Time of Use Arbitrage
+    in a Commercial Building in South Africa
+  authors: Baloyi T., Chowdhury S.
+  year: 2021
+  source: 2021 IEEE PES/IAS PowerAfrica
+  doi: 10.1109/powerafrica52236.2021.9543436
+  url: https://doi.org/10.1109/powerafrica52236.2021.9543436
+  authority: B
+  verification_level: metadata
+  summary: 为南非商业建筑分时电价套利选择并配置 BESS（据标题与会议层级，本轮未取得摘要）。
+  applicable_conditions: TOU 套利场景；建筑负荷 + 储能。
+  supports: H1：TOU 价差套利是储能配置与运行的经济动机，支撑本题「储能在电价低时充电、高时放电」的机制假设。
+  differences: 该文关注容量选型；prob01 容量给定，仅做运行优化。
+  claim_types:
+  - literature_fact
+  - agent_inference
+  status: used
+  decision_reason: H1 套利机制的补充案例（B 级）。元数据经 Crossref 核验。
+  fingerprint: 10.1109/powerafrica52236.2021.9543436
+  verified: true
+  verification_provider: crossref
+  verification_error: null
+  added_at: '2026-09-10T10:37:31.368232+00:00'
+  round_id: rnd-9cbe3f07562c
+  verified_at: '2026-09-10T10:38:06.571543+00:00'
+  verified_title:
+  - Sizing and Selection of Battery Energy Storage System for Time of Use Arbitrage
+    in a Commercial Building in South Africa
+  decided_at: '2026-09-10T10:38:10.243363+00:00'
+- id: ref-arima-2024-rte-profile
+  title: Profile of Round-Trip Efficiency of Lithium-Ion Battery Energy Storage System
+  authors: Arima Masahito, Lin Lei, Fukui Masahiro
+  year: 2024
+  source: ECS Meeting Abstracts
+  doi: 10.1149/ma2024-012371mtgabs
+  url: https://doi.org/10.1149/ma2024-012371mtgabs
+  authority: C
+  verification_level: abstract_oa
+  summary: 研究锂离子 BESS 的往返效率（RTE）曲线，指出 RTE 同时取决于电池（FCC、OCV、内阻）与逆变器效率，并会随复用与退化而变化，因此逐台
+    BESS 的 RTE 曲线难以简单刻画。
+  applicable_conditions: 关注往返效率随 SOC/退化/设备差异变化的情形。
+  supports: H3：说明「单一常数效率 90%」是对 RTE 曲线的简化；支撑在 prob01 中把效率定值作为 project_assumption 并在
+    robustness 中做效率扰动。
+  differences: 会议摘要（C 级），无完整方法细节；本题附录 1 直接给定 90%，不需自行估计 RTE 曲线。
+  claim_types:
+  - literature_fact
+  - agent_inference
+  status: used
+  decision_reason: 作为 H3 效率简化的 C 级辅助证据（含摘要），仅用于说明常效率假设的边界，不用于标定参数。摘要经开放获取核验。
+  fingerprint: 10.1149/ma2024-012371mtgabs
+  verified: true
+  verification_provider: crossref
+  verification_error: null
+  added_at: '2026-09-10T10:37:31.478858+00:00'
+  round_id: rnd-9cbe3f07562c
+  verified_at: '2026-09-10T10:38:07.365904+00:00'
+  verified_title:
+  - Profile of Round-Trip Efficiency of Lithium-Ion Battery Energy Storage System
+  decided_at: '2026-09-10T10:38:10.394263+00:00'
+rounds:
+- round_id: rnd-9cbe3f07562c
+  query: prob01 单日确定性购电/储能调度：TOU 峰谷套利目标、功率平衡与供电可靠性、储能 SOC 动态与充放电效率、容量/功率/日周期约束、充放电互补性、弃光盈余与超发处理、日前调度
+    LP/MILP 方法族
+  status: completed
+  started_at: '2026-09-10T10:37:29.501219+00:00'
+  added_ids:
+  - ref-zhang-2015-dayahead-degradation
+  - ref-olivieri-2020-residential-bess
+  - ref-alguhi-2025-bess-operation
+  - ref-lin-2024-tou-industrial
+  - ref-shen-2026-peak-valley
+  - ref-rawa-2023-mg-stochastic
+  - ref-moradi-2018-standalone
+  - ref-vykhodtsev-2022-bess-review
+  - ref-jamroen-2023-soc-sizing
+  - ref-huang-2022-dynamic-efficiency
+  - ref-wang-2024-complementarity
+  - ref-nazir-2023-realizable-dispatch
+  - ref-grimaldi-2025-arbitrage-curtail
+  - ref-qing-2025-pv-curtailment
+  - ref-zeinalzadeh-2017-loadshed-curtail
+  - ref-heydari-2016-lpsp
+  - ref-csee-2023-mg-ems-review
+  - ref-lee-2020-purchase-cost-lp
+  - ref-carpinelli-2013-dayahead-ilp
+  - ref-ignat-2019-cost-dayahead
+  - ref-alamir-2025-dayahead-multimg
+  - ref-valibeygi-2020-battery-dispatch-soc
+  - ref-wongwut-2017-tou-prosumer
+  - ref-baloyi-2021-tou-arbitrage
+  - ref-arima-2024-rte-profile
+  finished_at: '2026-09-10T10:38:10.594151+00:00'
+  dry_reason: all_candidates_decided
+dry_reason: all_candidates_decided

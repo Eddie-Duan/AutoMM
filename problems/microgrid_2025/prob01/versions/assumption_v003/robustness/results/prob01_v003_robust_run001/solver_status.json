@@ -1,0 +1,12 @@
+{
+  "solver": "scipy.optimize.linprog",
+  "method": "highs",
+  "device": "cpu",
+  "gpu_required": false,
+  "seed": 20260910,
+  "baseline_feasible": true,
+  "feasible_incumbent": true,
+  "baseline_check_passed": true,
+  "cases_total": 948,
+  "cases_infeasible": 1
+}

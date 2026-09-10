@@ -29,7 +29,13 @@ stages:
   - locally_completed
   - cross_question_review
   - completed
-optional_stages:
+# 条件阶段（robustness / ablation）的性质判定。
+# optional_stages 中的阶段允许 Agent 记录 skipped + 理由后跳过（Harness 放行）。
+# mandatory_stages 中的阶段必须 completed：Harness 会拒绝 skipped，并且
+#   (1) record_optional_stage 命令抛错；(2) next_action 不会因 skipped 而推进阶段；
+#   (3) 本地完成门禁报错。团队裁定：本题 robustness 与 ablation 均为必做。
+optional_stages: []
+mandatory_stages:
   - robustness
   - ablation
 flags:
@@ -50,8 +56,8 @@ lock:
 #6. computation	resource-manager	提交隔离计算任务
 #7. sanity_check	sanity-checker	L1-L6 合理性检查
 #8. visualization	visualization-agent	生成图表
-#9. robustness（可选）	robustness-analyst	敏感性/鲁棒性分析
-#10. ablation（可选）	ablation-analyst	消融实验
+#9. robustness（必做）	robustness-analyst	敏感性/鲁棒性分析
+#10. ablation（必做）	ablation-analyst	消融实验
 #11. locally_completed	—	小问完成
 #12. cross_question_review	cross-question-reviewer	全题跨小问一致性审查
 #13. completed → 汇总/论文	build_final_summary / build_paper	研究汇总 + 论文
