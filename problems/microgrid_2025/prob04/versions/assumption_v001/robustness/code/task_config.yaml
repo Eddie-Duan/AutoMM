@@ -1,0 +1,47 @@
+# prob04 robustness 隔离计算 task 级配置 —— 链 4-2
+# 生成者：robustness-analyst（动作 act-6d9ecf00777a4b96）；阶段：robustness（config/workflow.yaml: mandatory_stages，不得 skipped）
+# 用途：由 scripts/compute_dispatcher.py submit 时作为 --config-path 传入；
+#       effective_config 会把它合并到全局配置之上（仅影响本 task）。
+# 关键：chain_scope 使本文件的 config_hash 与 task_config_4-3.yaml 不同 ——
+#       automm.tasks.compute_task_id 的身份不含 output_directory/command，两链若共用同一 config
+#       会算出同一 task_id（implementation.md 的 C11 框架级发现），故必须分开。
+chain_scope: "4-2"
+compute:
+  default_backend: local
+  max_local_concurrent_tasks: 1
+  memory_per_worker_gb: 2
+  task_timeout_seconds: 5400
+  timeout_retry_attempts: 2
+  retry:
+    infrastructure_transient: 3
+    code_runtime: 2
+    model_revision: 2
+  resource_notes:
+    device: cpu
+    gpu_required: false
+    concurrent_gpu_tasks: 0
+    note: >-
+      prob04 链 4-2 robustness 共 162 个情景 = baseline(compact) 1 + baseline_full(四段式) 1 +
+      参数 OAT 34 + 预测机制 2 + 输入扰动 8 + 求解器 3 + 结构约束 13 + 输入噪声 4 族 × 25 = 100。
+      每情景为一次全年逐日 LP（365 天 × 144 时段 = 52,560 时段；compact 每层 2 次 LP、full 每层 4 次）。
+      本动作实测（权威）：365 天 compact 基线探针 baseline = **6.26 s**、baseline_full（四段式 +
+      evaluate/build_tables + 19 项闸门 + 表 1 逐格 + T7 审计对账）= **13.05 s**，两者合计墙钟 20.5 s；
+      34 天全矩阵探针 70 情景共 39.8 s。按 6.3 s/情景 × 162 情景 ⇒ 整批预计 ≈ **1,100–1,300 s**；
+      timeout 设 5,400 s、整批 --max-wall-seconds 3,000 s 留 ≥2 倍余量。
+      CPU HiGHS，**不占单卡 GPU 串行额度**；本机内存偏低，单 worker 串行，不安排并发。
+    worker_launch_mode: "supervised（继承 config/compute.yaml；detached 在本环境会被沙箱回收）"
+solver:
+  name: highs
+  interface: "scipy.optimize.linprog(method='highs')"
+  device: cpu
+  time_limit_seconds: 60
+  deterministic: true
+  seed: 20260911
+  notes:
+    - "seed 只用于输入噪声与 bootstrap 的确定性可复现；模型本身是确定性 LP，不含随机源。"
+    - "全部情景一律使用 AS21（承 prob03 T7-1/T7-5）的字典序 tie-break；--mode compact 只跳过 ② 字面加权式与 ④ 退化探测两个诊断环节，提交解仍为 ③ 字典序。"
+    - "baseline_full 情景用未修改的四段式与 accepted run002 逐项对账；闸门失败即整批作废。"
+robustness:
+  mode: compact
+  tiebreak_rule: "AS21 统一规则；compact 只跳过 ②④ 诊断，提交解 = ③ 字典序（本动作已实测 compact 与 full 的 throughput/主目标逐位一致）"
+  reference_dir: problems/microgrid_2025/prob04/versions/assumption_v001/results/prob04_v001_f001_4-2_run002

@@ -1,0 +1,308 @@
+{
+  "reference_dir": "problems\\microgrid_2025\\prob04\\versions\\assumption_v001\\results\\prob04_v001_f001_4-2_run002",
+  "totals": [
+    {
+      "name": "D_full.objective_yuan",
+      "value": 14755884.322036,
+      "reference": 14755884.322036,
+      "relative_diff": 0.0
+    },
+    {
+      "name": "D_full.cost_plan_yuan",
+      "value": 14755884.322036,
+      "reference": 14755884.322036,
+      "relative_diff": 0.0
+    },
+    {
+      "name": "D_full.cost_adj_yuan",
+      "value": 0.0,
+      "reference": 0.0,
+      "relative_diff": 0.0
+    },
+    {
+      "name": "D_full.cost_em_yuan",
+      "value": 0.0,
+      "reference": 0.0,
+      "relative_diff": 0.0
+    },
+    {
+      "name": "D_full.total_plan_kwh",
+      "value": 22710690.474366,
+      "reference": 22710690.474366,
+      "relative_diff": 0.0
+    },
+    {
+      "name": "D_full.total_purchase_kwh",
+      "value": 22710690.474366,
+      "reference": 22710690.474366,
+      "relative_diff": 0.0
+    },
+    {
+      "name": "D_full.total_q_em_kwh",
+      "value": 0.0,
+      "reference": 0.0,
+      "relative_diff": 0.0
+    },
+    {
+      "name": "D_full.total_spill_kwh",
+      "value": 990168.090312,
+      "reference": 990168.090312,
+      "relative_diff": 0.0
+    },
+    {
+      "name": "D_full.storage_final_kwh",
+      "value": 1200.0,
+      "reference": 1200.0,
+      "relative_diff": 0.0
+    },
+    {
+      "name": "D_req.cost_total_yuan",
+      "value": 13006411.041148,
+      "reference": 13006411.041148,
+      "relative_diff": 0.0
+    },
+    {
+      "name": "D_req.cost_plan_yuan",
+      "value": 13006411.041148,
+      "reference": 13006411.041148,
+      "relative_diff": 0.0
+    },
+    {
+      "name": "D_req.cost_adj_yuan",
+      "value": 0.0,
+      "reference": 0.0,
+      "relative_diff": 0.0
+    },
+    {
+      "name": "D_req.cost_em_yuan",
+      "value": 0.0,
+      "reference": 0.0,
+      "relative_diff": 0.0
+    },
+    {
+      "name": "D_req.total_plan_kwh",
+      "value": 20241516.374467,
+      "reference": 20241516.374467,
+      "relative_diff": 0.0
+    },
+    {
+      "name": "D_req.total_purchase_kwh",
+      "value": 20241516.374467,
+      "reference": 20241516.374467,
+      "relative_diff": 0.0
+    },
+    {
+      "name": "D_req.total_q_em_kwh",
+      "value": 0.0,
+      "reference": 0.0,
+      "relative_diff": 0.0
+    },
+    {
+      "name": "D_req.total_charge_kwh",
+      "value": 6906098.890467,
+      "reference": 6906098.890467,
+      "relative_diff": 0.0
+    },
+    {
+      "name": "D_req.total_spill_kwh",
+      "value": 990168.090312,
+      "reference": 990168.090312,
+      "relative_diff": 0.0
+    },
+    {
+      "name": "D_req.storage_final_kwh",
+      "value": 1200.0,
+      "reference": 1200.0,
+      "relative_diff": 0.0
+    }
+  ],
+  "worst_relative_diff": 0.0,
+  "table1_rows": [
+    {
+      "date": "2025-03-20",
+      "slot": "10:00-10:10",
+      "reference_kwh": 0.0,
+      "full_mode_kwh": 0.0
+    },
+    {
+      "date": "2025-03-20",
+      "slot": "12:00-12:10",
+      "reference_kwh": 558.311667,
+      "full_mode_kwh": 558.311667
+    },
+    {
+      "date": "2025-03-20",
+      "slot": "14:00-14:10",
+      "reference_kwh": 0.0,
+      "full_mode_kwh": 0.0
+    },
+    {
+      "date": "2025-03-20",
+      "slot": "16:00-16:10",
+      "reference_kwh": 507.324167,
+      "full_mode_kwh": 507.324167
+    },
+    {
+      "date": "2025-03-20",
+      "slot": "18:00-18:10",
+      "reference_kwh": 0.0,
+      "full_mode_kwh": 0.0
+    },
+    {
+      "date": "2025-03-20",
+      "slot": "20:00-20:10",
+      "reference_kwh": 726.368333,
+      "full_mode_kwh": 726.368333
+    },
+    {
+      "date": "2025-06-21",
+      "slot": "10:00-10:10",
+      "reference_kwh": 0.0,
+      "full_mode_kwh": 0.0
+    },
+    {
+      "date": "2025-06-21",
+      "slot": "12:00-12:10",
+      "reference_kwh": 0.0,
+      "full_mode_kwh": 0.0
+    },
+    {
+      "date": "2025-06-21",
+      "slot": "14:00-14:10",
+      "reference_kwh": 0.0,
+      "full_mode_kwh": 0.0
+    },
+    {
+      "date": "2025-06-21",
+      "slot": "16:00-16:10",
+      "reference_kwh": 27.005,
+      "full_mode_kwh": 27.005
+    },
+    {
+      "date": "2025-06-21",
+      "slot": "18:00-18:10",
+      "reference_kwh": 0.0,
+      "full_mode_kwh": 0.0
+    },
+    {
+      "date": "2025-06-21",
+      "slot": "20:00-20:10",
+      "reference_kwh": 0.0,
+      "full_mode_kwh": 0.0
+    },
+    {
+      "date": "2025-09-23",
+      "slot": "10:00-10:10",
+      "reference_kwh": 0.0,
+      "full_mode_kwh": 0.0
+    },
+    {
+      "date": "2025-09-23",
+      "slot": "12:00-12:10",
+      "reference_kwh": 380.02125,
+      "full_mode_kwh": 380.02125
+    },
+    {
+      "date": "2025-09-23",
+      "slot": "14:00-14:10",
+      "reference_kwh": 0.0,
+      "full_mode_kwh": 0.0
+    },
+    {
+      "date": "2025-09-23",
+      "slot": "16:00-16:10",
+      "reference_kwh": 493.5825,
+      "full_mode_kwh": 493.5825
+    },
+    {
+      "date": "2025-09-23",
+      "slot": "18:00-18:10",
+      "reference_kwh": 2.645,
+      "full_mode_kwh": 2.645
+    },
+    {
+      "date": "2025-09-23",
+      "slot": "20:00-20:10",
+      "reference_kwh": 61.911667,
+      "full_mode_kwh": 61.911667
+    },
+    {
+      "date": "2025-12-21",
+      "slot": "10:00-10:10",
+      "reference_kwh": 0.0,
+      "full_mode_kwh": 0.0
+    },
+    {
+      "date": "2025-12-21",
+      "slot": "12:00-12:10",
+      "reference_kwh": 906.683333,
+      "full_mode_kwh": 906.683333
+    },
+    {
+      "date": "2025-12-21",
+      "slot": "14:00-14:10",
+      "reference_kwh": 0.0,
+      "full_mode_kwh": 0.0
+    },
+    {
+      "date": "2025-12-21",
+      "slot": "16:00-16:10",
+      "reference_kwh": 795.930417,
+      "full_mode_kwh": 795.930417
+    },
+    {
+      "date": "2025-12-21",
+      "slot": "18:00-18:10",
+      "reference_kwh": 712.633333,
+      "full_mode_kwh": 712.633333
+    },
+    {
+      "date": "2025-12-21",
+      "slot": "20:00-20:10",
+      "reference_kwh": 30.268333,
+      "full_mode_kwh": 30.268333
+    }
+  ],
+  "table1_max_abs_diff_kwh": 0.0,
+  "t7_full_mode": [
+    {
+      "key": "layers",
+      "full_mode": 365,
+      "reference": 365
+    },
+    {
+      "key": "max_primary_relative_change",
+      "full_mode": 5e-10,
+      "reference": 5.000009106204042e-10
+    },
+    {
+      "key": "lexicographic_committed_layers",
+      "full_mode": 365,
+      "reference": 365
+    },
+    {
+      "key": "fallback_committed_layers",
+      "full_mode": 0,
+      "reference": 0
+    },
+    {
+      "key": "degenerate_layers",
+      "full_mode": 364,
+      "reference": 364
+    },
+    {
+      "key": "layers_with_remaining_multiplicity",
+      "full_mode": 365,
+      "reference": 365
+    },
+    {
+      "key": "layers_with_unknown_multiplicity",
+      "full_mode": 0,
+      "reference": 0
+    }
+  ],
+  "t7_mismatch_keys": [],
+  "baseline_full_available": true,
+  "passed": true,
+  "rule": "19 项总量（D_full 9 项取 solution.json、D_req 10 项取 run_manifest.json）相对差 ≤ 1e-6；表 1 四日期六时段最大绝对差 ≤ 1e-5 kWh；四段式 T7 审计与 run002 逐项一致；baseline_full 必须存在（否则闸门判失败）"
+}

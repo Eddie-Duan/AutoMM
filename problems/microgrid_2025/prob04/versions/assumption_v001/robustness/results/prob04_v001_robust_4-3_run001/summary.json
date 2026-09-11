@@ -1,0 +1,676 @@
+{
+  "chain": "4-3",
+  "scenario_count": 198,
+  "sample_count": 198,
+  "solved_count": 195,
+  "failed_count": 3,
+  "failures": [
+    {
+      "scenario": "buy_cap_4500kW",
+      "family": "structural",
+      "type": "solver_not_optimal",
+      "status": 2,
+      "identity_failed": []
+    },
+    {
+      "scenario": "buy_cap_4000kW",
+      "family": "structural",
+      "type": "solver_not_optimal",
+      "status": 2,
+      "identity_failed": []
+    },
+    {
+      "scenario": "buy_cap_3500kW",
+      "family": "structural",
+      "type": "solver_not_optimal",
+      "status": 2,
+      "identity_failed": []
+    }
+  ],
+  "baseline": {
+    "objective_yuan": 17181202.515506,
+    "delivery_cost_total_yuan": 15289050.714738,
+    "cost_plan_yuan": 14854264.372169,
+    "cost_adj_yuan": 587335.46566,
+    "cost_em_yuan": 1739602.677677,
+    "total_q_em_kwh": 410453.995927,
+    "t7": {
+      "layers": 1460,
+      "max_primary_relative_change": 5e-10,
+      "all_layers_invariance_passed": true,
+      "total_shrinks": 0,
+      "lexicographic_committed_layers": 1460,
+      "fallback_committed_layers": 0,
+      "degenerate_layers": 1459,
+      "max_degeneracy_degree": 263,
+      "layers_with_remaining_multiplicity": 0,
+      "layers_with_unknown_multiplicity": 1460,
+      "probe_coverage": 0.0,
+      "throughput_primary_only_kwh": 37143089.109777,
+      "throughput_tiebreak_kwh": 35313228.984743,
+      "throughput_reduced_kwh": 1829860.125034,
+      "max_baseline_trajectory_change_kwh": 3728.317407
+    }
+  },
+  "criteria": {
+    "chain": "4-3",
+    "S1": {
+      "pass": true,
+      "rule": "受判子集 {baseline, param, solver, noise} 的每层 LP status=0、层残差 ≤ 1e-6（相对 ≤1e-8）、界违反 ≤1e-6、结算/状态/跨日残差 ≤1e-6、费用分解残差 ≤1e-6；可行率 = 100% 且无恒等式失败",
+      "detail": {
+        "judged": 170,
+        "solved": 170,
+        "feasible_rate": 1.0,
+        "failed_scenarios": [],
+        "identity_failed_scenarios": []
+      }
+    },
+    "S2": {
+      "pass": true,
+      "rule": "4-2：max|Σq_em| ≤ 1e-9 kWh 且 days_with_emergency = 0；4-3：Σq_em > 0 且落在基准的 [0.25×, 4×] 机制完好带内（窄带 [0.5×, 2×] 越界逐样本披露，见 CF-10）",
+      "detail": {
+        "chain": "4-3",
+        "baseline_total_q_em_kwh": 410453.995927,
+        "band_kwh": [
+          102613.498982,
+          1641815.983708
+        ],
+        "band_rule": "机制完好带 [0.25×, 4×]（CF-10：Σq_em 是 max(0,·) 泛函，σ=10% 输入扰动会系统性抬高它）",
+        "min_total_q_em_kwh": 404201.444938,
+        "max_total_q_em_kwh": 837192.510757,
+        "out_of_band_scenarios": [],
+        "narrow_band_kwh": [
+          205226.997964,
+          820907.991854
+        ],
+        "narrow_band_excursions": [
+          {
+            "scenario": "noise_white_10_001",
+            "family": "noise_white_10",
+            "total_q_em_kwh": 837192.510757
+          },
+          {
+            "scenario": "noise_white_10_003",
+            "family": "noise_white_10",
+            "total_q_em_kwh": 821048.823275
+          },
+          {
+            "scenario": "noise_white_10_004",
+            "family": "noise_white_10",
+            "total_q_em_kwh": 825258.531091
+          },
+          {
+            "scenario": "noise_white_10_005",
+            "family": "noise_white_10",
+            "total_q_em_kwh": 824728.504663
+          },
+          {
+            "scenario": "noise_white_10_006",
+            "family": "noise_white_10",
+            "total_q_em_kwh": 828958.472864
+          },
+          {
+            "scenario": "noise_white_10_007",
+            "family": "noise_white_10",
+            "total_q_em_kwh": 823691.904355
+          },
+          {
+            "scenario": "noise_white_10_009",
+            "family": "noise_white_10",
+            "total_q_em_kwh": 825588.756536
+          },
+          {
+            "scenario": "noise_white_10_010",
+            "family": "noise_white_10",
+            "total_q_em_kwh": 821611.841447
+          },
+          {
+            "scenario": "noise_white_10_012",
+            "family": "noise_white_10",
+            "total_q_em_kwh": 821629.519176
+          },
+          {
+            "scenario": "noise_white_10_014",
+            "family": "noise_white_10",
+            "total_q_em_kwh": 821433.428422
+          },
+          {
+            "scenario": "noise_white_10_016",
+            "family": "noise_white_10",
+            "total_q_em_kwh": 828262.865969
+          },
+          {
+            "scenario": "noise_white_10_020",
+            "family": "noise_white_10",
+            "total_q_em_kwh": 825727.523846
+          },
+          {
+            "scenario": "noise_white_10_021",
+            "family": "noise_white_10",
+            "total_q_em_kwh": 834341.601704
+          },
+          {
+            "scenario": "noise_white_10_023",
+            "family": "noise_white_10",
+            "total_q_em_kwh": 826511.650956
+          },
+          {
+            "scenario": "noise_white_10_025",
+            "family": "noise_white_10",
+            "total_q_em_kwh": 821292.59942
+          }
+        ],
+        "note": "4-3 的 Σq_em > 0 由「决策层光伏预报 vs 结算层实际」缺口驱动，属统计与机制归因（承 prob03 C7/C8）"
+      }
+    },
+    "S3": {
+      "pass": true,
+      "rule": "K3 的参数方向在 OAT 端点对上不反转（相对容差 1e-6·max(|C_base|,1)）",
+      "detail": {
+        "groups": [
+          {
+            "group": "eta_both",
+            "direction": "参数上升 ⇒ 费用不增",
+            "points": [
+              {
+                "scenario": "eta_both_0p72",
+                "level": 0.72,
+                "cost_total_yuan": 19190478.937949
+              },
+              {
+                "scenario": "eta_both_0p855",
+                "level": 0.855,
+                "cost_total_yuan": 17675367.060194
+              },
+              {
+                "scenario": "eta_both_0p945",
+                "level": 0.945,
+                "cost_total_yuan": 16733533.617756
+              },
+              {
+                "scenario": "eta_both_0p99",
+                "level": 0.99,
+                "cost_total_yuan": 16253273.345253
+              }
+            ],
+            "reversals": [],
+            "passed": true
+          },
+          {
+            "group": "eta_ch",
+            "direction": "参数上升 ⇒ 费用不增",
+            "points": [
+              {
+                "scenario": "eta_ch_0p81",
+                "level": 0.81,
+                "cost_total_yuan": 17561948.263822
+              },
+              {
+                "scenario": "eta_ch_0p99",
+                "level": 0.99,
+                "cost_total_yuan": 16893812.38742
+              }
+            ],
+            "reversals": [],
+            "passed": true
+          },
+          {
+            "group": "eta_dis",
+            "direction": "参数上升 ⇒ 费用不增",
+            "points": [
+              {
+                "scenario": "eta_dis_0p81",
+                "level": 0.81,
+                "cost_total_yuan": 17814921.780828
+              },
+              {
+                "scenario": "eta_dis_0p99",
+                "level": 0.99,
+                "cost_total_yuan": 16596837.843088
+              }
+            ],
+            "reversals": [],
+            "passed": true
+          },
+          {
+            "group": "alpha_em",
+            "direction": "参数上升 ⇒ 费用不降",
+            "points": [
+              {
+                "scenario": "alpha_em_4",
+                "level": 4.0,
+                "cost_total_yuan": 16833281.979971
+              },
+              {
+                "scenario": "alpha_em_4p5",
+                "level": 4.5,
+                "cost_total_yuan": 17007242.247739
+              },
+              {
+                "scenario": "alpha_em_4p75",
+                "level": 4.75,
+                "cost_total_yuan": 17094222.381623
+              },
+              {
+                "scenario": "alpha_em_5p25",
+                "level": 5.25,
+                "cost_total_yuan": 17268182.64939
+              },
+              {
+                "scenario": "alpha_em_5p5",
+                "level": 5.5,
+                "cost_total_yuan": 17355162.783274
+              },
+              {
+                "scenario": "alpha_em_6",
+                "level": 6.0,
+                "cost_total_yuan": 17529123.051042
+              }
+            ],
+            "reversals": [],
+            "passed": true
+          },
+          {
+            "group": "e_init",
+            "direction": "无方向预注册（诊断）",
+            "points": [
+              {
+                "scenario": "e_init_4800",
+                "level": 4800.0,
+                "cost_total_yuan": 17181684.263568
+              },
+              {
+                "scenario": "e_init_5400",
+                "level": 5400.0,
+                "cost_total_yuan": 17181447.531954
+              },
+              {
+                "scenario": "e_init_5700",
+                "level": 5700.0,
+                "cost_total_yuan": 17181324.843955
+              },
+              {
+                "scenario": "e_init_6300",
+                "level": 6300.0,
+                "cost_total_yuan": 17181083.450073
+              },
+              {
+                "scenario": "e_init_6600",
+                "level": 6600.0,
+                "cost_total_yuan": 17180960.433507
+              },
+              {
+                "scenario": "e_init_7200",
+                "level": 7200.0,
+                "cost_total_yuan": 17180733.111656
+              }
+            ],
+            "reversals": [],
+            "passed": null
+          },
+          {
+            "group": "p_max",
+            "direction": "参数上升 ⇒ 费用不增",
+            "points": [
+              {
+                "scenario": "p_max_4000",
+                "level": 4000.0,
+                "cost_total_yuan": 17319051.018177
+              },
+              {
+                "scenario": "p_max_4500",
+                "level": 4500.0,
+                "cost_total_yuan": 17236872.152014
+              },
+              {
+                "scenario": "p_max_4750",
+                "level": 4750.0,
+                "cost_total_yuan": 17205936.395725
+              },
+              {
+                "scenario": "p_max_5250",
+                "level": 5250.0,
+                "cost_total_yuan": 17162855.087541
+              },
+              {
+                "scenario": "p_max_5500",
+                "level": 5500.0,
+                "cost_total_yuan": 17153551.395396
+              },
+              {
+                "scenario": "p_max_6000",
+                "level": 6000.0,
+                "cost_total_yuan": 17142088.491935
+              }
+            ],
+            "reversals": [],
+            "passed": true
+          },
+          {
+            "group": "e_min",
+            "direction": "参数上升 ⇒ 费用不降",
+            "points": [
+              {
+                "scenario": "e_min_960",
+                "level": 960.0,
+                "cost_total_yuan": 17117873.722464
+              },
+              {
+                "scenario": "e_min_1080",
+                "level": 1080.0,
+                "cost_total_yuan": 17148867.959382
+              },
+              {
+                "scenario": "e_min_1320",
+                "level": 1320.0,
+                "cost_total_yuan": 17213789.971982
+              },
+              {
+                "scenario": "e_min_1440",
+                "level": 1440.0,
+                "cost_total_yuan": 17248404.854538
+              }
+            ],
+            "reversals": [],
+            "passed": true
+          },
+          {
+            "group": "e_max",
+            "direction": "参数上升 ⇒ 费用不增",
+            "points": [
+              {
+                "scenario": "e_max_8640",
+                "level": 8640.0,
+                "cost_total_yuan": 17877547.298696
+              },
+              {
+                "scenario": "e_max_9720",
+                "level": 9720.0,
+                "cost_total_yuan": 17510117.096153
+              },
+              {
+                "scenario": "e_max_11880",
+                "level": 11880.0,
+                "cost_total_yuan": 16904944.656885
+              },
+              {
+                "scenario": "e_max_12000",
+                "level": 12000.0,
+                "cost_total_yuan": 16875660.768994
+              }
+            ],
+            "reversals": [],
+            "passed": true
+          },
+          {
+            "group": "beta",
+            "direction": "参数上升 ⇒ 费用不降",
+            "points": [
+              {
+                "scenario": "beta_m20",
+                "level": 0.4,
+                "cost_total_yuan": 17063735.422374
+              },
+              {
+                "scenario": "beta_m10",
+                "level": 0.45,
+                "cost_total_yuan": 17122468.96894
+              },
+              {
+                "scenario": "beta_p10",
+                "level": 0.55,
+                "cost_total_yuan": 17239936.062072
+              },
+              {
+                "scenario": "beta_p20",
+                "level": 0.6,
+                "cost_total_yuan": 17298669.608638
+              }
+            ],
+            "reversals": [],
+            "passed": true
+          },
+          {
+            "group": "kappa_bounds",
+            "direction": "无方向预注册（诊断）",
+            "points": [
+              {
+                "scenario": "kappa_bounds_wide",
+                "level": 0.0,
+                "cost_total_yuan": 17181202.515506
+              },
+              {
+                "scenario": "kappa_bounds_tight",
+                "level": 1.0,
+                "cost_total_yuan": 17181202.515506
+              }
+            ],
+            "reversals": [],
+            "passed": null
+          }
+        ]
+      }
+    },
+    "S4": {
+      "pass": false,
+      "rule": "每个噪声族 n ≥ 25、交付期 C_total 相对标准差 ≤ 5%、95% CI 半宽 ≤ 5%、max|z| ≤ 4、无失败样本；每族均值相对基线 ≤ 5%；**同一 σ 档内**族间均值差 ≤ 3%（跨 σ 档只披露，见 CF-10）",
+      "detail": {
+        "families": [
+          "noise_white_5",
+          "noise_white_10",
+          "noise_day_5",
+          "noise_joint_day_5",
+          "noise_pvfc_5"
+        ],
+        "violations": [
+          "noise_white_10:mean_vs_baseline=0.105919073"
+        ],
+        "family_mean_relative_vs_baseline": {
+          "noise_white_5": 0.037451086,
+          "noise_white_10": 0.105919073,
+          "noise_day_5": 0.036715245,
+          "noise_joint_day_5": 0.040364668,
+          "noise_pvfc_5": 0.03449976
+        },
+        "family_mean_spread_sigma5_group": 0.005654244,
+        "family_mean_spread_all_groups_disclosure": 0.067954324,
+        "sigma5_families": [
+          "noise_white_5",
+          "noise_day_5",
+          "noise_joint_day_5",
+          "noise_pvfc_5"
+        ]
+      }
+    },
+    "S5": {
+      "pass": true,
+      "rule": "三种求解器设置全部可行且残差合格；链级费用最大相对差 ≤ 1%",
+      "detail": {
+        "scenarios": [
+          "solver_highs_ds",
+          "solver_highs_ipm",
+          "solver_highs_nopresolve"
+        ],
+        "infeasible": [],
+        "solver_max_relative": 0.000436256,
+        "t7_6_registered_relative": 0.0001
+      }
+    },
+    "S6": {
+      "pass": true,
+      "rule": "buy_cap 全档均产出状态并给出分链分界（或全域结论）；terminal_e_6000 产出数值",
+      "detail": {
+        "buy_cap_levels": 12,
+        "buy_cap_bracket": {
+          "feasible_kw": [
+            5000.0,
+            5500.0,
+            6000.0,
+            6500.0,
+            7000.0,
+            7500.0,
+            8000.0,
+            9000.0,
+            10326.0
+          ],
+          "bracket_kw": [
+            4500.0,
+            5000.0
+          ]
+        },
+        "buy_cap_infeasible": [
+          3500.0,
+          4000.0,
+          4500.0
+        ],
+        "terminal_e_6000": {
+          "scenario": "terminal_e_6000",
+          "family": "structural",
+          "group": "structural",
+          "label": "决策链末端储电量强制 = 6000 kWh（AS03 验证建议）",
+          "ok": true,
+          "failure": null,
+          "params": {},
+          "structural": {
+            "terminal_e_kwh": 6000.0
+          },
+          "solver": {},
+          "buy_cap_kw": null,
+          "objective_yuan": 17184472.015508,
+          "delivery_cost_total_yuan": 15292320.214739,
+          "delta_delivery_relative": 0.000213846,
+          "total_q_em_kwh": 410453.995927,
+          "storage_final_kwh": 6000.0,
+          "seconds": 19.783302
+        },
+        "note": "分链重新实测；不得引用 prob02 的 β ∈ (4218.75, 4375.00] kW 或 prob03 的 [4375.0, 5000.0] kW"
+      }
+    },
+    "S7": {
+      "pass": true,
+      "rule": "预测机制族（PF-DUAL/PF-HIST）与价格类输入扰动全部跑通并给出 ΔC_total；回测同时给出 MAE/MAPE/RMSE/bias/P50/P90/P99（E-F5）",
+      "detail": {
+        "scenarios": [
+          "predictor_pf_dual",
+          "predictor_pf_hist",
+          "kappa_frozen_1",
+          "price_level_m10",
+          "price_level_p10",
+          "price_noise_w5",
+          "load_noise_w5",
+          "pv_act_noise_w5",
+          "price_noise_w10",
+          "load_noise_w10",
+          "pv_act_noise_w10",
+          "pv_forecast_bias_m10",
+          "pv_forecast_bias_p10",
+          "pv_forecast_noise_w10",
+          "pv_forecast_noise_w20"
+        ],
+        "failures": [],
+        "backtest_metrics_complete": true
+      }
+    },
+    "failed": [
+      "S4"
+    ],
+    "stability_grade": "条件稳定（需给出适用边界）",
+    "baseline_delivery_cost_yuan": 15289050.714738,
+    "delivery_magnitude_band_yuan": [
+      3000000.0,
+      50000000.0
+    ]
+  },
+  "stability_grade": "条件稳定（需给出适用边界）",
+  "failed_criteria": [
+    "S4"
+  ],
+  "structural_findings": {
+    "buy_cap_feasibility_bracket_kw": {
+      "feasible_kw": [
+        5000.0,
+        5500.0,
+        6000.0,
+        6500.0,
+        7000.0,
+        7500.0,
+        8000.0,
+        9000.0,
+        10326.0
+      ],
+      "bracket_kw": [
+        4500.0,
+        5000.0
+      ]
+    },
+    "buy_cap_infeasible_kw": [
+      3500.0,
+      4000.0,
+      4500.0
+    ],
+    "terminal_e_6000": {
+      "scenario": "terminal_e_6000",
+      "family": "structural",
+      "group": "structural",
+      "label": "决策链末端储电量强制 = 6000 kWh（AS03 验证建议）",
+      "ok": true,
+      "failure": null,
+      "params": {},
+      "structural": {
+        "terminal_e_kwh": 6000.0
+      },
+      "solver": {},
+      "buy_cap_kw": null,
+      "objective_yuan": 17184472.015508,
+      "delivery_cost_total_yuan": 15292320.214739,
+      "delta_delivery_relative": 0.000213846,
+      "total_q_em_kwh": 410453.995927,
+      "storage_final_kwh": 6000.0,
+      "seconds": 19.783302
+    },
+    "mechanism_sensitivity": [
+      {
+        "group": "param",
+        "scenarios": 40,
+        "max_abs_relative": 0.116946204,
+        "mean_abs_relative": 0.013740217,
+        "max_abs_delta_yuan": 2009276.422443
+      },
+      {
+        "group": "predictor",
+        "scenarios": 3,
+        "max_abs_relative": 0.001817796,
+        "mean_abs_relative": 0.001211864,
+        "max_abs_delta_yuan": 31231.927603
+      },
+      {
+        "group": "input",
+        "scenarios": 12,
+        "max_abs_relative": 0.225255759,
+        "mean_abs_relative": 0.076288873,
+        "max_abs_delta_yuan": 3870164.807546
+      },
+      {
+        "group": "solver",
+        "scenarios": 3,
+        "max_abs_relative": 0.000436256,
+        "mean_abs_relative": 0.000156302,
+        "max_abs_delta_yuan": 7495.394825
+      }
+    ],
+    "kappa_clip_events_total": 196
+  },
+  "figures": [
+    "robustness_prob04_43_tornado.png",
+    "robustness_prob04_43_response_curves.png",
+    "robustness_prob04_43_noise_ecdf.png",
+    "robustness_prob04_43_buy_cap_curve.png",
+    "robustness_prob04_43_scenarios.png",
+    "robustness_prob04_43_spider.png",
+    "robustness_prob04_43_mechanism_sensitivity.png"
+  ],
+  "wall_seconds": 4052.818232,
+  "budget_exceeded": false,
+  "probe_mode": false,
+  "max_local_concurrent_tasks_note": "CPU HiGHS，单 worker 串行；不占单卡 GPU 串行额度"
+}

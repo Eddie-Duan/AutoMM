@@ -758,3 +758,75 @@
 - **含义不变声明**：本勘误只做**事实登记、口径冻结与锚点新增**，不改任何 `AS*` 正文、决策点与「推荐」行；
   `E-F4` 的新增锚点属 `ablation` 对照运行；`result4-2.xlsx`/`result4-3.xlsx` 与论文表 1/2/3 仍按 `AS12` 主口径出数；
   **不需要 `v002`、不需要任何重算**。
+
+## 团队勘误 E-F6–E-F9（prob04 `robustness` 阶段的过程事实、Harness 缺陷与稳定性反例；团队，2026-09-11）
+
+> **性质**：**团队勘误 + 过程事实登记**。不改任何 `AS*` 正文、决策点（`D1`–`D12`）与「推荐」行；
+> 不改任何主结果口径；**不修 Harness 代码**（缺陷以纪律规避并在报告中披露）。
+> 依据：`AGENTS.md`「任何 Harness invariant 都必须严格失败；模型计算的非关键故障应按 failure class 恢复或降级审查」，
+> 以及 prob03 `T7-4`（**禁止为使判据通过而调参/放宽判据**）。
+
+### E-F6（Harness 缺陷，强制披露）：`supervised` 模式 + `reconcile_tasks()` 会误杀运行中的本地任务
+
+- **现象**：`prob04` `robustness` 的 4-3 任务 `5713b0a24eedeac9f000`（`created 14:05:09.6Z`、`started 14:08:09.8Z`）
+  在 **`14:09:29.2Z` 被写成 `failed(interrupted, failure_class=infrastructure_transient)`**，`message=「worker PID 不存在且未写入终态」`；
+  而其**真实 worker 进程始终存活**并继续计算至 `15:15:47.8Z`，随后该任务**自行补写为 `succeeded / returncode=0 / feasible_incumbent=true`**。
+- **根因（已定位到代码）**：
+  1. `config/compute.yaml: worker_launch_mode = supervised`；`scripts/automm/tasks.py::start_queued()` 的 supervised 分支
+     **在 runner/harness 进程内**执行 `task_worker.run(task_id)`（`tasks.py:322-327`），任务记录的 `pid` 因此是**那个 harness 进程**
+     （本次 `37212`，命令行为 `harness.py next-action --json`），而**不是** `task_worker.py`；
+  2. `tasks.py::worker_alive()` 除校验 pid 存活与 `worker_create_time` 外，**还要求进程命令行含 `task_worker.py --task-id <id>`**；
+     该条件在 supervised 模式下**恒不成立**，故 `worker_alive()` 恒为 `False`；
+  3. 于是任何一次 `reconcile_tasks()`（本例由 `14:08:09Z` 的 `harness.py control RESUME --source cli` 触发）
+     都会把**仍在运行的本地任务**判为 `failed`；且 `reconcile_tasks()` **只降级、不提升**，
+     终态只能由原写入者在子进程真正退出后补写（本例 `15:15:47.8Z` 已完成自愈）。
+- **一般化结论（必须写入报告）**：**在 `supervised` 模式下，计算进行期间的任何 `RESUME`/`reconcile_tasks()` 都会把运行中任务误判为
+  `failed(infrastructure_transient)`。** 本问 4-2 任务 `953eeb1e0b004171cad9` 只因当时未被对账而幸免（其记录同为 supervised 形态）。
+- **后果（已发生的浪费，须披露）**：4-2 于 `14:25:41.7Z` 成功后，`robustness-analyst` 于
+  `14:25:42 / 14:29:26 / 14:35:05 / 14:39:29 / 14:44:01` 被**连续唤醒 5 次无效动作**（每次仅 `append_ledger`、
+  无任何实证内容；`recovery.total_rounds=6, productive_rounds=0`），根因即 4-3 被误判失败、阶段无法收尾。
+  团队于本地 22:52 主动 `harness.py control PAUSE --source cli` 止住空转。
+- **纪律（强制）**：**凡有本地任务处于 `running`，禁止 `RESUME`/`reconcile_tasks()`**；解除暂停前必须先确认无运行中任务
+  （或接受该任务被误判、并在其真实收尾后核对终态）。**本缺陷未修，禁止在计算期以 `RESUME` 试图"催进度"。**
+- **对账修复记录（未执行，留痕）**：团队预置了证据优先的对账脚本（`--execute` 只在"现状确为 `failed`"且 198/198 完成标记
+  + 产物齐全 + 无在飞动作时写入）。实际执行时**前置条件未过**（任务已自愈为 `succeeded`），脚本**按纪律拒绝写入** ⇒
+  **未对 Harness 运行态做任何修改**；`status.json` 中仅残留一句过期 `message`（自愈写入为 patch 语义、未删除旧键），
+  **只影响可读性、不影响判读**，团队决定**保留该痕迹**并在本勘误中披露。
+
+### E-F7（证据纪律）：上述 5 条空转 `append_ledger` 条目不得作为证据引用
+
+- 涉及动作：`act-6e395f67061f4990` / `act-458dccfaed454c5b` / `act-6141343749294f00` / `act-47b6bc4fe0b44c88` / `act-0a5a93765e2141e7`
+  （本地 22:25–22:52 区间）。它们的 `hypothesis/setup/result/sanity/conclusion/next` **不含任何计算或验证内容**。
+- 论文、`sanity_check`、`cross_question_review` 与任何下游阶段：**不得引用**这 5 条作为"已做过的鲁棒性工作"或"结论"；
+  它们的作用仅为**过程留痕**（并已在本勘误 `E-F6` 中给出成因）。
+
+### E-F8（事实登记，防止误判"产物不全"）：`trajectories/` 是**抽样保存**，不是每情景一份
+
+- 实测：4-2 = `62` 份 / 162 情景；4-3 = `70` 份 / 198 情景；`raw_samples.jsonl` 则**每情景一条**
+  （4-2 = 162 行、4-3 = 198 行）。
+- ⇒ 验收/审查时**不得**以「`trajectories` 份数 < 情景数」判为产物缺失；轨迹仅对代表性情景落盘。
+
+### E-F9（稳定性反例登记，强制披露）：4-3 链 `S4` 未过，稳定档为「条件稳定（需给出适用边界）」
+
+- **过程事实**（`results/prob04_v001_robust_4-3_run001`，`status=0`、`baseline_check_passed=true`、`probe_mode=false`、`seed=20260911`、`device=cpu`）：
+  `scenario_count=198`、`solved_count=195`、`failed_count=3`、`lp_calls_total=284700`、`wall_seconds=4052.818232`、`budget_exceeded=false`。
+- **3 个"失败"是设计内的负对照，不是缺陷**：`buy_cap_3500kW` / `buy_cap_4000kW` / `buy_cap_4500kW`，族 `structural`，
+  `type=solver_not_optimal`、`status=2`（HiGHS 判不可行），`identity_failed=[]`；脚本据此定出购电上限可行域
+  `bracket_kw=[4500, 5000]`、`feasible_kw ≥ 5000`（`structural_findings.buy_cap_feasibility_bracket_kw`）。
+  `S1` 的受判子集（`judged=170`）**全部求解成功、可行率 100%、无恒等式失败** ⇒ **可行性结论不受影响**。
+- **`S1`/`S2` PASS、基线闸门 PASS；`S4` FAIL，`failed_criteria=["S4"]`，`stability_grade=条件稳定（需给出适用边界）`**：
+  - 违反项：**`noise_white_10` 族均值相对基线 = +10.59%**，超 `S4` 预注册的「每族均值相对基线 ≤ 5%」；
+  - 其余噪声族达标：`noise_white_5` +3.75%、`noise_day_5` +3.67%、`noise_joint_day_5` +4.04%、`noise_pvfc_5` +3.45%；
+  - 同一 `σ=5%` 档内族间均值差 = **0.57%**（≤ 3% 达标）；跨 σ 档差值 6.80% 仅按 `CF-10` **披露**、不作判据；
+  - `S2` 机制带完好（`Σq^em` 落在基准 `410,453.995927 kWh` 的 `[0.25×, 4×]` 带内、`out_of_band_scenarios=[]`），
+    窄带 `[0.5×, 2×]` 越界样本（`noise_white_10` 族）按 `CF-10` 逐样本披露。
+- **结论口径（强制）**：`4-3` 链在 **σ ≤ 5% 的输入扰动下条件稳定**；**σ = 10% 价格白噪声属超设计工况**，
+  必须**给出适用边界**并解释机制（`Σq^em` 是 `max(0,·)` 泛函 ⇒ σ 增大系统性抬高紧急购电，见 `CF-10`）；
+  **禁止**通过调参、放宽判据或挑选指标使 `S4` "通过"（承 `T7-4`）。
+- **两链差异（须在报告中解释）**：4-2 为 `162/162` 全成功、稳定档 **`稳定`**；4-3 为 `195/198`、稳定档 **`条件稳定`**。
+  两链共用同一价格预测器与结算口径，差异来自 4-3 的 **0:00 + 6:00/12:00/18:00 调整层**与 **0.5×/1.5× 分段结算 + 5× 紧急购电**，
+  故 4-3 对价格扰动更敏感 —— 该差异**必须**在 `robustness` 报告与论文中显式给出，**不得**只报一条链的稳定档。
+
+- **含义不变声明**：本节只做**过程事实、缺陷与反例登记**，不改任何 `AS*` 正文、决策点与「推荐」行；
+  `result4-2.xlsx`/`result4-3.xlsx` 与论文表 1/2/3 仍按 `AS12` 主口径出数；**不需要 `v002`、不需要任何重算**；
+  下游 `robustness` 报告与 `ablation` **必须**引用本节 `E-F6`（缺陷与纪律）、`E-F9`（稳定档与适用边界）。

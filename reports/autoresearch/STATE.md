@@ -4,19 +4,19 @@
 
 ## 基本状态
 
-- 更新时间：2026-09-11T13:43:15.049208+00:00
-- 控制状态：running
+- 更新时间：2026-09-11T14:53:09.429004+00:00
+- 控制状态：paused
 - 活动题目：microgrid_2025
 - 当前小问：prob04
 - 当前阶段：robustness
 
 ## 任务
 
-cancelled=1 | failed=4 | succeeded=13
+cancelled=3 | failed=5 | succeeded=14
 
 ## 最近动作
 
-act-a752e4172fdd43b4: run_agent
+act-349ae5622a894079: poll_email
 
 ## 警告
 
@@ -700,6 +700,61 @@ act-a752e4172fdd43b4: run_agent
 - V8（口径边界）：全部图件数值来自 run002（accepted）；run001 仅作审计负对照，未被任何图件引用。两链预测器回测文件逐字节相同，图注已声明两链共用同一预测器与同一回测协议（AS13）。
 - V9（环境事实，如实登记）：本动作目录的 evidence/ 下出现两个非本会话写入的只读探针文件（probe_fig_manifest.py / probe_fig_manifest_out.json、probe_schema_cmds.py），内容与本动作范围一致（图表 manifest 与 agent_response schema 的命令键审计），其结果（49 条登记、prob04 11 条、尺寸与质检状态）与本动作落盘状态一致。本会话未修改其内容，也未据其改变任何产物；若存在同一 action_id 的并发实例，请 Runner 注意双提交风险（本会话只提交一份响应）。
 - V10（lint 边界）：出图脚本与 evidence 探针脚本按文件级 `# ruff: noqa: E501` 豁免行长规则——文件内含大量中文图注/说明长字符串，折行会损害图注与 manifest 的可读性；其余规则（E/F/I）全部通过（`ruff check` All checks passed）。本项与既有 prob03 出图脚本（未豁免、18 条 E501）的处理方式不同，特此登记以便团队统一口径。
+- 首次提交的两个 task（4-2 = e47fb8e85a4dac704970、4-3 = 5feb24bf28c15ae3facd，code_hash c2858e01…）已用 compute_dispatcher.py cancel-queued 取消并以新 task_id 重新提交：原因是本动作在**批次开始运行前**按先导证据完成了 CF-10 的判据改写，脚本 sha256 变化，若不取消则『磁盘代码 ≠ task 记录的 code_hash』。取消时两个 output_directory 均不存在（未产生任何产物），无覆盖风险；cancelled 状态保留在 runtime/tasks/ 作为审计轨迹。
+- CF-10 是对**预注册阈值**的批次前校准（不是事后修改）：S2（4-3）的机制完好带由 [0.5×,2×] 放宽为 [0.25×,4×] 并把窄带越界降级为逐样本披露；S4 的族间均值比较由全部族改为同 σ 档并新增基線锚定。两处均已在 plan.md §3/§7 与代码中登记，且先导证据（probe_all34_43 + recheck_criteria_cf10_out.json）留在本动作 evidence 目录。下一阶段的报告必须**同时**披露窄带越界样本与跨 σ 档的族均值差。
+- 先导探针窗口（34 天，交付期仅 3 天）与交付窗口（334 天）不同：探针中 S4 的 std/CI 超限与 noise_white_10 均值相对基线 +12.2% 均属小窗口放大效应，不能作为 365 天批次的不稳健结论；反之，正式批次若出现同类超限，才应登记为该族不稳健。任何引用都必须标注窗口与链。
+- 脚本对 365 天探针强制要求 --probe（否则输出路径自证断言会拒绝 robustness/results 之外的目录并返回 exit 3）。该开关只影响 run_manifest.probe_mode 与 evaluate 的硬检查开关，不影响任何数值；正式批量（--days 365 不带 --probe）不受影响。
+- κ_m 截断界族（4-3 的放宽 [0.25,4.0] 与收紧 [0.75,1.25]）预期为**近零响应的诊断情景**：基准 [0.5,2.0] 在全期 1460 个 κ 记录中截断 0 次，故该族的作用是证明截断机制未被触发，不得据此宣称 κ_m 不敏感。
+- 4-3 的整批预计 4400–5000 s（约 73–83 min），与 4-2 串行后合计约 90–105 min；若任一 task 以 exit 5（预算耗尽）或超时结束，必须用新 attempt + 新 output_directory（..._run002）重跑并登记新 task_id，**不得**删减冻结的扰动矩阵来凑完成。
+- 承接欠账继续结转且本动作未越界代写：shared/problem_understanding.md §7/§10 仍把 A8 记为『待裁定』（C4-1）；prob01/assumption_v003 的 AS08『必然被激活』措辞（C4-7/E3）；D10 的『5000 kW 作用侧』文献缺口（C4-6）；N1/N2/N5 对上一版登记数值的更正（下游一律以 sanity_report.md 为准）；V1–V10 的图件口径。
+- 本动作的探针数值（含 19 项总量、表 1 逐格对账、Σq_em、购电上限分界）**只作代码与闸门自检**，不得作为论文或 sanity 的交付数值；正式数值一律以两个隔离 task 的产物为准。
+- prob04 robustness 4-3 链 task 5713b0a24eedeac9f000 的 failed/interrupted 终态是 reconcile 误判：其 supervised worker（pid 37212）当时仍在运行并持续写入 robustness/results/prob04_v001_robust_4-3_run001（raw_samples.jsonl 58/198、最新 solver_highs_ds）。该终态不得作为 4-3 失败的结论，也不得据此与在途批次并发重跑或覆盖 run001。
+- 计算进行中不要执行 reconcile/list（scripts/compute_dispatcher.py 的 reconcile/list 内部会调用 reconcile_tasks），否则 supervised 在途任务会被误标 failure_type=interrupted；本次 4-2（Runner pid 42916）与 4-3（Runner pid 37212）并发即由 4-2 的 Runner 在 next_action() 顶部 reconcile 时误判 4-3 造成。
+- 4-2 的 S1–S7 全 PASS 与 stability_grade=稳定 是 4-2 专属结论；在 4-3 产物就绪前不得当作 prob04 robustness 的阶段结论，也不得替代 4-3 的分链判据（AGENTS.md 阶段级强制要求 5）。
+- 4-2 的 K7 方向性反例须在 report.md 按 T7-4 如实登记并给机制解释（4-2 决策层用附件 2 实际值，价格侧不确定性只经 PF-PERSIST 与闭式结算层传导），禁止为凑『价格预报误差为第一不确定性源』而改口径或删除不利样本。
+- 4-2 的 buy_cap 全域可行（含 3500 kW）为 4-2 专属分链结论：不得引用 prob02 的 β∈(4218.75, 4375.00] kW、prob03 的 [4375.0, 5000.0] kW 或 4-3 的分链分界，也不得跨链互写（R5/E9、CF-7）。
+- robustness 图件不登记为交付图表（不调用 record_figure_review）；4-2 的 7 张图（tornado/response_curves/noise_ecdf/buy_cap_curve/scenarios/spider/mechanism_sensitivity）只作实验证据，且其数值未与 4-3 合并。
+- 本动作只读：未创建/提交任何 task、未启动 worker、未写 results/、未修改 plan.md（冻结声明禁止事后修改）、未改 accepted 代码与 data/、未直接编辑 runtime/workflow_state.json；证据见 runtime/actions/act-6e395f67061f4990/evidence/robustness_wake_incident_and_42_verify.md。
+- 结转欠账继续有效（本动作不越界代改）：question_manifest.conclusion.conclusion_id/version/content_hash 仍为空（locally_completed 门禁会报错）；shared/problem_understanding.md §7/§10 仍把 A8 记为『待裁定』（C4-1）；prob01/assumption_v003 的 AS08『必然被激活』措辞（C4-7/E3）与 D10『5000 kW 作用侧』文献缺口（C4-6）待 cross_question_review 回写；prob04 池 24 条文献均未逐篇阅读正文（15 abstract_oa + 9 metadata），本阶段只读复核未新增任何公式级/定量级文献主张。
+- 链 4-3 robustness 产物未就绪（task 5713b0a24eedeac9f000 在途、其 status.json 被 reconcile 误判为 failed/interrupted，worker pid 37212 实际存活、进度 73/198、预计还需 40–45 min）⇒ robustness 阶段本唤醒不能收尾；本动作未调用 record_optional_stage(completed)、未迁移阶段、未写 report.md、未写交付值。
+- 下一次唤醒（robustness 收尾）清单：读 4-3 的 baseline_check.json/summary.json/sensitivity.json/solver_status.json/run_manifest.json/figures/，核 baseline_check.passed=true 与 criteria.S1–S7、stability_grade；分链汇总 OAT 龙卷、噪声 95% CI、求解器量级、**分链 buy_cap 分界**（4-2 已实测 (4500,5000] kW）、terminal_e_6000 差额、PF-DUAL/PF-HIST/kappa_frozen_1 与输入扰动族的 ΔC_total/ΔC_price；判 K7（含 4-2 已登记反例）与 K8；再写 report.md（含 §1.4 机制分界新发现、CF-1–CF-10 与 N1–N5/V1–V10 承接、技术债与披露项，图件按 plan.md §5 不登记为交付图表），最后 record_optional_stage(robustness, completed) + append_ledger + transition(target_stage="sanity_check")。
+- **K7 方向性反例必须如实登记，禁止强凑**：4-2 上 predictor 0.2392% 与 price_noise_w10 1.938% 均低于 eta_both 13.2377%（max 口径），仅 mean 口径成立（input 2.87% > param 1.55%）。report.md 须按 T7-4 给出反例、机制解释与适用边界，不得修改判据、统计量或口径。
+- **预测机制族只有一条独立决策轴（防重复计数）**：PF-DUAL 与 PF-HIST 的决策价逐日只差正标量 k_d=μ_d/level（实测相对残差 ≤3.34e-16），因计划层目标对 p̂ 正齐次而决策等价、b 与 C^act 逐位相同；这不是实现缺陷、不需重跑，但 report.md 不得把它们当作两个独立敏感性来源，也不得据 E-F5 的精度表推出任一预测器在决策上更保守/更激进。
+- **buy_cap 阈值必须分链表述、不得跨问引用**：4-2 全域可行（机制分界 (4500,5000] kW 表现为 q_em 被激活）、4-3 可行/不可行分界 ∈ (4500,5000] kW；不得引用 prob02 的 β∈(4218.75,4375.00] kW 或 prob03 的 [4375.0,5000.0] kW。4-2 的 3 个 buy_cap 恒等式失败样本（4500/4000/3500 kW）已按 plan.md §4.9 保留、未静默删除，且不计入 S1/S2 受判子集。
+- 4-3 的 buy_cap 结构族读数取自**尚未写出终态**的 raw_samples.jsonl/trajectories（ok 字段为在途值），**不是可引用判据**；必须以最终 summary.json 的 criteria.S6 与 sensitivity.json:buy_cap 重新核对后才可写入 report.md 或论文。
+- 本动作的两个只读探针（probe_predictor_override.py、probe_dual_hist_proportional.py）在隔离 task 之外运行，只导入 accepted 预测器与 robustness 代码并读 data/附件4.xlsx，未写任何产物；其数值属**诊断证据**，不得作为论文或 sanity 的交付数值。探针在 4-3 在途期间短暂占用约 1 个 CPU 核（合计 <30 s），未干预在途 worker。
+- plan.md 的 §0 适用性决定、K1–K8、S1–S7、扰动矩阵、样本量、种子、失败处理、边界与 CF-1–CF-10 已在跑数前冻结，**事后不得修改**；如需修订须新建计划版本并保留旧计划与结果。本动作只读，未改 plan.md。
+- 承接欠账继续结转、本动作不越界代写：C4-1/C4-2/C4-3/C4-6/C4-7/C4-10（上游文档欠账）、D8（上游文档）、D9（\"5000 kW 作用侧\"为 team_decision、四池文献无一条涉及）、N1–N5/V1–V10（sanity/visualization 技术债）、AS23 静置损耗（plan.md §0 判定不适用/不做，须在 report.md 登记并指向 formulation 下一版）。
+- 本环境的 orchestrator 为一次性唤醒模式且外部驱动会连续重复调用 run_once：在 4-3 在途期间，robustness 阶段仍会被反复唤醒（每次唤醒均无新命令可执行）。属已知机制（supervised 任务无法跨唤醒保持 running 状态，故 next_action 不会返回 wait_for_compute），不是失败；不得由本 Agent 在短命 shell 内代跑 start_queued，也不得手动 reconcile。
+- 本动作给出的全部 4-3 数值均为**在途 raw_samples.jsonl 原始行读数**，是诊断证据（early-warning），**不是**可引用判据，**不得**作为论文或 sanity 的交付数值，也不得作为 S1–S7 的判定依据；权威数值一律以 4-3 的 baseline_check.json / summary.json / sensitivity.json / solver_status.json 与 figures/ 为准；不一致时以权威产物为准并登记在途读数偏差。
+- task 5713b0a24eedeac9f000 的 status.json 仍残留 reconcile 误判（status=failed / failure_type=interrupted），而 worker 存活且持续写盘：不得据此判定 4-3 失败，不得并发提交重跑或覆盖 run001；计算进行中**不得**执行 reconcile/list（会再次把在途任务误标为 interrupted）；也不得由本 Agent 在短命 shell 内代跑 start_queued。
+- S4 在 4-3 侧可能非 PASS（noise_white_5 族均值 +3.75% 已接近 ≤5% 阈值，σ=10% 档预计越界）：该降级路径已在 plan.md §3 预注册，正式越界时须如实登记分级降级与该族的适用边界，**不得**删除不利样本、**不得**事后放宽阈值或改口径。同时须避免把该降级误报为求解失败：identity_failed=0、受判样本可行，属 AS18 的结构性代价。
+- K7 的 max 口径反例在两链均成立（价格预报误差 < 设备参数族）：报告须按 T7-4 登记反例 + 机制解释 + 适用边界；禁止为凑单调/凑结论而改判据、改统计量或改口径。E-F5 的指标纪律（MAE/MAPE/P50 与 RMSE/P90/P99 成对给出、禁止只报单一指标）在报告中必须落实。
+- PF-DUAL 与 PF-HIST 在两链上逐位相同（决策等价，非缺陷、不需重跑）：报告不得将其当作两个独立敏感性来源（重复计数），也不得由 E-F5 的精度表推出「换 PF-DUAL 比换 PF-HIST 更保守/更激进」；若团队需要第二条独立预测轴，只能由 ablation 的 PF-AR 提供（AS08）。
+- 可用内存偏低（既有登记：约 1.9 GB 可用，memory_slots_raw=0，effective_workers 被下限强制为 1）：不得安排多 worker 并发，也不得把 config/compute.yaml 的上限 4 当作本环境可用值；不得终止在途 4-3 worker 以免丢失已完成的 87 个情景。
+- 本动作**未**收尾 robustness 阶段：optional_stages.robustness.decision 仍为 pending、artifacts.robustness=false；未调用 record_optional_stage、未迁移 sanity_check、未写 report.md、未登记图件（plan.md §5 已冻结 robustness 图件不登记为交付图表）。
+- 本环境的 orchestrator 为一次性唤醒模式且外部驱动会连续重复调用 run_once：4-3 在途期间 robustness 仍会被反复唤醒，每次唤醒可能无新命令可执行（本次已是第 4 次）。属已知机制（supervised 任务无法跨唤醒保持 running 状态），不是失败；不得由本 Agent 代跑 start_queued，也不得手动 reconcile。
+- 承接欠账继续结转、本动作不越界代写：C4-1/C4-2/C4-3/C4-6/C4-7/C4-10（上游文档欠账）、D8、D9（「5000 kW 作用侧」为 team_decision、四池文献无一条涉及）、N1–N5/V1–V10（sanity/visualization 技术债）仍待 cross_question_review 回写；question_manifest.yaml 的 conclusion.conclusion_id/version/content_hash 仍为空（locally_completed 门禁会报错）；make_task_spec 预检 ruff=unavailable 属既有登记项，不得当作失败。
+- 链 4-3 robustness 产物未就绪（task 5713b0a24eedeac9f000 在途；status.json 被 reconcile 误判为 failed/interrupted，而 worker 存活且 raw_samples.jsonl 持续增长、ETA ≈ 23:19）⇒ robustness 阶段本唤醒不能收尾；未调用 record_optional_stage(completed)、未迁移阶段、未写 report.md、未写任何交付值。下一次唤醒应安排在 4-3 终态写盘之后。
+- 4-3 的 status.json 为 reconcile 误判：不得据此判定 4-3 失败、不得并发提交 ..._4-3_run002（worker_alive() 对 supervised 任务恒为 false、并发闸门拦不住）、不得终止在途 worker；计算进行中不得执行 reconcile/list（会把在途任务再次误标为 interrupted），也不得由本 Agent 在短命 shell 内代跑 start_queued。若下一次唤醒时 worker 已消失而 run001 仍缺 summary.json，按 plan.md §4.9 用新 attempt + 新 output_directory ..._4-3_run002 重跑（不覆盖 run001）并登记新 task_id 与失败指纹。
+- 本动作 findings 中所有 4-3 数值均为在途 raw_samples.jsonl 原始行读数（诊断/early-warning），不得作为论文或 sanity 的交付数值，也不得作为 S1–S7 的判定依据；权威值一律以 4-3 的 baseline_check.json / summary.json / sensitivity.json / solver_status.json / figures/ 为准，不一致时以权威产物为准并登记「在途读数偏差」。
+- S4 早期预警（noise_white_10 族均值 +10.6572%，超 5% 阈值）：越界路径已在 plan.md §3 预注册——超阈值即登记该族为不稳健、分级降级，不得删除不利样本、不得事后放宽阈值或改口径；同时不得误报为求解失败（identity_failed=0、受判样本可行），须给出「对光伏侧不稳健、对价格侧稳健」的适用边界并将其归因于 AS18 的结构性代价。
+- K7 的 max 口径反例在 4-2 与 4-3 上同向成立（价格预报误差 < 设备参数族）：报告须按 T7-4 如实登记反例、机制解释与适用边界，禁止为凑单调性改判据、改统计量或改口径；E-F5 的「MAE/MAPE/P50 与 RMSE/P90/P99 成对给出、禁止只报单一指标」必须在 report.md 落地。
+- PF-DUAL 与 PF-HIST 在两链上决策等价（D_req 逐位相同，非实现缺陷、不需重跑），但 delta_c_price 不等（ΔC_price 非决策不变量）：报告不得把二者当作两个独立敏感性来源（重复计数），也不得由 E-F5 的精度表推出「某预测器更保守/更激进」。
+- 4-2 的 buy_cap「全域可行」（S6 可行性无分界）与「q_em 机制激活区间 (4500,5000] kW」是两件事，报告必须分开写；该阈值是 4-2 专属，不得与 prob02 的 β∈(4218.75,4375.00] kW 或 prob03 的 [4375.0,5000.0] kW 互引或外推（CF-7/D10/E9）。
+- e_init 在两链交付期响应均为 0（4-2 六档 D_req 全同；4-3 六档 D_req 全同），两链均不得把 e_init 当作有效敏感参数；κ_m 截断界族的零响应只证明截断未被触发，不得据此宣称 κ_m 不敏感。
+- 本动作未写 report.md、未调用 record_optional_stage、未迁移到 sanity_check/ablation、未登记图件、未写 robustness/results/、未触碰 accepted 代码与 data/、未改 plan.md（其冻结声明禁止事后修改）、未改任何假设/公式/结果/日志/结论历史；robustness 阶段仍为 pending。
+- 证据文件（均已落盘，可被下一次唤醒直接复用）：runtime/actions/act-47b6bc4fe0b44c88/evidence/ 下的 probe_42_report_ready.py、probe_42_report_ready_out.txt、probe_43_inflight_scan2.py、probe_43_inflight_scan2_out.txt、rob04_42_report_ready_and_43_inflight.md（含 4-2 终态 report-ready 全套读数与 4-3 在途预警及「收尾清单」）。
+- 本环境 orchestrator 为一次性唤醒模式：task 能否执行取决于下一次外部唤醒，queued/在途属正常排队而非失败；本 Agent 不代跑、不手动 reconcile。结转欠账继续：question_manifest.conclusion 三字段仍为空（locally_completed 门禁会报错）；C4-1/C4-2/C4-3/C4-6/C4-7/C4-10、D8、D9（「5000 kW 作用侧」为 team_decision、prob01–prob04 四池文献无一条涉及）、N1–N5/V1–V10、AS23 静置损耗（plan.md §0 判定不做，须在 report.md 登记并指向 formulation 下一版）均待 cross_question_review 处理；prob04 池 24 条文献均未逐篇阅读正文，不得引用公式级/定量级主张。
+- robustness 阶段本唤醒不能收尾：链 4-3 的隔离 task 5713b0a24eedeac9f000 仍在运行（22:51:30 = 128/198，worker pid 35152 存活，ETA ≈ 23:15），晚于本动作 1800 s 硬顶（23:14:03）。阶段 decision 保持 pending，artifacts.robustness 仍为 false。
+- task 5713b0a24eedeac9f000 的 status.json 为 reconcile 误判的假 failed（failure_type=interrupted、message=『worker PID 不存在且未写入终态』）：判活不能只看 status.json 的 pid，须同时看 raw_samples.jsonl 行数/mtime 是否增长并以完整命令行核对进程；worker 仍在写盘，任务结束时会以终态覆写 status.json 自愈。不得据此假 failed 立即补提 ..._4-3_run002（会与在途 worker 并发并污染 run001），也不得手动 reconcile/list。
+- 链 4-3 的 S4 预计 FAIL（noise_white_10 族均值相对基线 +10.57%，远超 5% 锚定阈值）⇒ 4-3 的 stability_grade 预计降为「条件稳定」；该降级路径早已在 plan.md §3 预注册，须在 report.md 给出适用边界（对光伏侧误差不稳健、对价格侧误差稳健），禁止删除不利样本或事后放宽阈值（T7-4）。权威判定一律以 4-3 的 summary.json 为准。
+- K7（价格预报误差是主口径第一不确定性源）的 max 口径在两链上均不成立（4-2：价格类 0.2392%–1.9378% < eta_both 13.2377%；4-3：0.1711%–1.7593% < eta_both 11.7004%），须按 T7-4 如实登记反例 + 机制解释 + 适用边界；mean 口径成立。禁止为凑 K7 改判据、统计量或口径。
+- 口径提醒（写入 report.md 时不得混用）：① S3 龙卷用全期 |ΔC|/C_base，S4 用交付期 C_total 的族统计量，两口径不同须分别标注；② ΔC_price 不是决策不变量（PF-DUAL 与 PF-HIST 的 cost_total 逐位相同而 delta_c_price_yuan 不等），不得跨预测器变体比较；③ 4-2 的 q_em 机制激活区间 (4500,5000] kW 与 S6 的「12 档全域可行」是两件事；④ e_init 两链均无有效响应，不得当敏感参数。
+- 本节所有 4-3 数值均为在途 raw_samples.jsonl 原始行读数，只作 early-warning，不得作为论文或 sanity 的交付数值，也不得作为 S1–S7 的判定依据；权威值一律以 4-3 的 summary.json / sensitivity.json / baseline_check.json 为准，若与在途读数不一致以权威产物为准并登记为『在途读数偏差』。
+- 若下一次唤醒时 4-3 的 worker 已消失而 run001 仍缺 summary.json，须按 plan.md §4.9 用新 attempt + 新 output_directory（..._4-3_run002）重跑，不得覆盖 run001，并登记新 task_id 与失败指纹。
+- robustness 图件按 plan.md §5 不登记为交付图表（不调用 record_figure_review）；本阶段不写任何交付值、不触碰 data/附件5/ 与 results/prob04_v001_f001_*。
+- 结转技术债（不在本阶段处理）：CF-1（D2-B 的跨日 MPC 与 R-2 的 S-RH 指派冲突，本阶段不跑并指向 ablation）、CF-3/AS23（静置损耗属建模口径变更，本阶段不增设、指向 formulation 下一版）、CF-9（C4-1/C4-2/C4-3/C4-6/C4-7/C4-10、D8、N1–N5、V1–V10 继续结转）、D10「5000 kW 作用侧」文献缺口（论文不得包装为文献支持）。
 
 ## 阻塞项
 
@@ -707,4 +762,4 @@ act-a752e4172fdd43b4: run_agent
 
 ## 下次唤醒
 
-2026-09-11T13:53:15.049190+00:00
+2026-09-11T15:03:09.428990+00:00

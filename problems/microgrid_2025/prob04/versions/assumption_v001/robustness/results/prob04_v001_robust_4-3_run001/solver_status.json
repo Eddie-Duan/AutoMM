@@ -1,0 +1,24 @@
+{
+  "chain": "4-3",
+  "status": 0,
+  "message": "robustness 实验批完成",
+  "solver": "scipy.optimize.linprog(method='highs')",
+  "feasible_incumbent": true,
+  "baseline_check_passed": true,
+  "probe_mode": false,
+  "device": "cpu",
+  "gpu_required": false,
+  "seed": 20260911,
+  "days": 365,
+  "scenario_count": 198,
+  "solved_count": 195,
+  "failed_count": 3,
+  "lp_calls_total": 284700,
+  "layer_seconds_total": 2202.184727,
+  "wall_seconds": 4052.818232,
+  "budget_exceeded": false,
+  "stability_grade": "条件稳定（需给出适用边界）",
+  "failed_criteria": [
+    "S4"
+  ]
+}
