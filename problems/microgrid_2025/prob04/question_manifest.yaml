@@ -1,7 +1,7 @@
 problem_id: microgrid_2025
 question_id: prob04
-status: not_started
-stage: problem_understanding
+status: active
+stage: literature_review
 dependencies: []
 active_assumption_version: 0
 active_formulation_version: 0
@@ -25,7 +25,7 @@ optional_stages:
     decision: pending
     reason: ''
 artifacts:
-  problem_understanding: false
+  problem_understanding: true
   literature: false
   assumptions: false
   formulation: false

@@ -1,0 +1,11 @@
+{
+  "anchor_source": "prob02 accepted computation（只读；F7/C10）",
+  "anchor_full_yuan": 13758182.573724,
+  "anchor_delivery_yuan": 12233050.830708,
+  "m3_full_yuan": 13758182.573724,
+  "m3_delivery_yuan": 12233050.830708,
+  "full_relative": 0.0,
+  "delivery_relative": 0.0,
+  "passed": true,
+  "note": "上游数值只作校验，不作为本问交付值（B0/F7/D8-A）"
+}

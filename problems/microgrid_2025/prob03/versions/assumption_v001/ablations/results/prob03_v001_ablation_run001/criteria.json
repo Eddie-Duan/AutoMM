@@ -1,0 +1,79 @@
+{
+  "checks": [
+    {
+      "id": "C1",
+      "passed": true,
+      "detail": "基线闸门 passed=True，未通过项 []"
+    },
+    {
+      "id": "C8",
+      "passed": true,
+      "detail": "表 3 交付一致性未通过项 []"
+    },
+    {
+      "id": "C2",
+      "passed": true,
+      "detail": "M2a 相对差 0.0（阈值 1e-8，T8：回归检查）；M2b 差额（跨日携带价值，结构性发现、非缺陷）-818915.5629730001 元"
+    },
+    {
+      "id": "C3",
+      "passed": false,
+      "detail": "M8（独立实现、同求解器设置）相对差 2.1672146396890143e-05（阈值 1e-8）；M8b（独立实现 + highs-ds/presolve=False）相对差 1.6756114994072834e-05。若链级超阈值，机制是团队 T7-3 已登记的「主目标最优面上仍有吞吐量多重最优」（run003 审计 1024/1460 层 throughput_unique=False）+ 状态传播，量级与 T7-6 的 2.2566e-04 同阶；实现正确性由补充检查 C3L（同一输入逐层等价，≤1e-9）单独判定。**不修改 C3 阈值。**"
+    },
+    {
+      "id": "C4",
+      "passed": true,
+      "detail": "M3=13758182.573724 ≤ M1=16179176.145228 ≤ M4=16505833.062742"
+    },
+    {
+      "id": "C5",
+      "passed": true,
+      "detail": "M5b=16179766.212646 ≤ M5a=16179575.041038 ≤ M1=16179176.145228；单调性成立=False。若为 False，按 T7-4 不得强行凑单调性，须如实登记「近视滚动 + LP 退化」反例机制（M5a/M5b 均已成功执行=True）"
+    },
+    {
+      "id": "C6",
+      "passed": true,
+      "detail": "M6 oracle 4 日 12 层最大相对损失 3e-12；降级登记 D6-A：4 个指定日 × 3 个调整层的日尺度 MILP oracle + 全年 LP 损失界（引理 L5）"
+    },
+    {
+      "id": "C7",
+      "passed": true,
+      "detail": "缺项 []；PLAN-EXP 按 T6 撤销：M7·PLAN-EXP 按团队 T6 **撤销**：AS15/AS16 的确定性、无预报误差分布口径下，计划层对未来的唯"
+    },
+    {
+      "id": "C9",
+      "passed": true,
+      "detail": "q_em 归因抽样 ≥3 且 C_adj 两分段可复算"
+    },
+    {
+      "id": "C10",
+      "passed": true,
+      "detail": "全期相对差 0.0，交付期相对差 0.0"
+    }
+  ],
+  "criteria_failed": [
+    "C3"
+  ],
+  "supplementary_checks": [
+    {
+      "id": "C3L",
+      "passed": true,
+      "detail": "逐层等价性：比较 16 层，未通过 []；阈值 1e-09"
+    }
+  ],
+  "supplementary_failed": [],
+  "thresholds": {
+    "C1": "基线闸门（相对/绝对 ≤1e-6）",
+    "C2": "|ΔC|/C(M1) ≤ 1e-8（只判 M2a）",
+    "C3": "|ΔC|/C(M1) ≤ 1e-8",
+    "C4": "C(M3) ≤ C(M1) ≤ C(M4)",
+    "C5": "C(M5b) ≤ C(M5a) ≤ C(M1)（T7-4：允许登记反例机制）",
+    "C6": "M6 相对损失 ≤ 1e-7（D6-A 降级须登记）",
+    "C7": "M7 全量差额落盘；PLAN-EXP 按 T6 撤销",
+    "C8": "表 3 标签与能量 ≤1e-6 逐格一致",
+    "C9": "q_em 归因 + C_adj 两分段复算",
+    "C10": "M3 相对 prob02 锚点 ≤ 1e-6"
+  },
+  "note": "判据与阈值在跑数前写入 ablations/plan.md，事后不得修改（未通过项如实登记）。",
+  "m1_delivery_yuan": 14540616.335652
+}

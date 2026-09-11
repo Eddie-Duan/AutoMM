@@ -1,0 +1,810 @@
+{
+  "reference": "6de708bbd2d3dd273013",
+  "tolerance": 1e-06,
+  "checks": [
+    {
+      "name": "total.objective_yuan",
+      "value": 16179176.145228,
+      "expected": 16179176.145228,
+      "relative_diff": 0.0,
+      "absolute_diff": 0.0,
+      "passed": true,
+      "note": ""
+    },
+    {
+      "name": "total.cost_plan_yuan",
+      "value": 13885669.475555,
+      "expected": 13885669.475555,
+      "relative_diff": 0.0,
+      "absolute_diff": 0.0,
+      "passed": true,
+      "note": ""
+    },
+    {
+      "name": "total.cost_adj_yuan",
+      "value": 563098.132533,
+      "expected": 563098.132533,
+      "relative_diff": 0.0,
+      "absolute_diff": 0.0,
+      "passed": true,
+      "note": ""
+    },
+    {
+      "name": "total.cost_em_yuan",
+      "value": 1730408.537141,
+      "expected": 1730408.537141,
+      "relative_diff": 0.0,
+      "absolute_diff": 0.0,
+      "passed": true,
+      "note": ""
+    },
+    {
+      "name": "total.delivery_cost_yuan",
+      "value": 14540616.335652,
+      "expected": 14540616.335652,
+      "relative_diff": 0.0,
+      "absolute_diff": 0.0,
+      "passed": true,
+      "note": ""
+    },
+    {
+      "name": "total.total_purchase_kwh",
+      "value": 20842142.600809,
+      "expected": 20842142.600809,
+      "relative_diff": 0.0,
+      "absolute_diff": 0.0,
+      "passed": true,
+      "note": ""
+    },
+    {
+      "name": "total.total_q_em_kwh",
+      "value": 391274.485914,
+      "expected": 391274.485914,
+      "relative_diff": 0.0,
+      "absolute_diff": 0.0,
+      "passed": true,
+      "note": ""
+    },
+    {
+      "name": "total.total_spill_kwh",
+      "value": 2087727.847547,
+      "expected": 2087727.847547,
+      "relative_diff": 0.0,
+      "absolute_diff": 0.0,
+      "passed": true,
+      "note": ""
+    },
+    {
+      "name": "total.storage_final_kwh",
+      "value": 1200.0,
+      "expected": 1200.0,
+      "relative_diff": 0.0,
+      "absolute_diff": 0.0,
+      "passed": true,
+      "note": ""
+    },
+    {
+      "name": "table1.2025-03-20.10:00-10:10",
+      "value": 0.0,
+      "expected": 0.0,
+      "relative_diff": 0.0,
+      "absolute_diff": 0.0,
+      "passed": true,
+      "note": ""
+    },
+    {
+      "name": "table1.2025-03-20.12:00-12:10",
+      "value": 553.563366667,
+      "expected": 553.563367,
+      "relative_diff": 6.02e-10,
+      "absolute_diff": 3.33e-07,
+      "passed": true,
+      "note": ""
+    },
+    {
+      "name": "table1.2025-03-20.14:00-14:10",
+      "value": 0.0,
+      "expected": 0.0,
+      "relative_diff": 0.0,
+      "absolute_diff": 0.0,
+      "passed": true,
+      "note": ""
+    },
+    {
+      "name": "table1.2025-03-20.16:00-16:10",
+      "value": 641.129716667,
+      "expected": 641.129717,
+      "relative_diff": 5.2e-10,
+      "absolute_diff": 3.33e-07,
+      "passed": true,
+      "note": ""
+    },
+    {
+      "name": "table1.2025-03-20.18:00-18:10",
+      "value": 682.353333333,
+      "expected": 682.353333,
+      "relative_diff": 4.89e-10,
+      "absolute_diff": 3.33e-07,
+      "passed": true,
+      "note": ""
+    },
+    {
+      "name": "table1.2025-03-20.20:00-20:10",
+      "value": -0.0,
+      "expected": -0.0,
+      "relative_diff": 0.0,
+      "absolute_diff": 0.0,
+      "passed": true,
+      "note": ""
+    },
+    {
+      "name": "table2.2025-03-20.charge_block_0",
+      "value": 9000.000000003,
+      "expected": 9000.0,
+      "relative_diff": 0.0,
+      "absolute_diff": 3e-09,
+      "passed": true,
+      "note": ""
+    },
+    {
+      "name": "table2.2025-03-20.discharge_block_0",
+      "value": 0.0,
+      "expected": 0.0,
+      "relative_diff": 0.0,
+      "absolute_diff": 0.0,
+      "passed": true,
+      "note": ""
+    },
+    {
+      "name": "table2.2025-03-20.charge_block_1",
+      "value": 1666.666666667,
+      "expected": 1666.666667,
+      "relative_diff": 2e-10,
+      "absolute_diff": 3.33e-07,
+      "passed": true,
+      "note": ""
+    },
+    {
+      "name": "table2.2025-03-20.discharge_block_1",
+      "value": 5987.312563833,
+      "expected": 5987.312564,
+      "relative_diff": 2.8e-11,
+      "absolute_diff": 1.67e-07,
+      "passed": true,
+      "note": ""
+    },
+    {
+      "name": "table2.2025-03-20.charge_block_2",
+      "value": 407.250938165,
+      "expected": 407.250938,
+      "relative_diff": 4.06e-10,
+      "absolute_diff": 1.65e-07,
+      "passed": true,
+      "note": ""
+    },
+    {
+      "name": "table2.2025-03-20.discharge_block_2",
+      "value": 2313.919813889,
+      "expected": 2313.919814,
+      "relative_diff": 4.8e-11,
+      "absolute_diff": 1.11e-07,
+      "passed": true,
+      "note": ""
+    },
+    {
+      "name": "table2.2025-03-20.charge_block_3",
+      "value": 9628.058727227,
+      "expected": 9628.058727,
+      "relative_diff": 2.4e-11,
+      "absolute_diff": 2.27e-07,
+      "passed": true,
+      "note": ""
+    },
+    {
+      "name": "table2.2025-03-20.discharge_block_3",
+      "value": 250.650927496,
+      "expected": 250.650927,
+      "relative_diff": 1.978e-09,
+      "absolute_diff": 4.96e-07,
+      "passed": true,
+      "note": ""
+    },
+    {
+      "name": "table2.2025-03-20.charge_block_4",
+      "value": 522.570958329,
+      "expected": 522.570958,
+      "relative_diff": 6.3e-10,
+      "absolute_diff": 3.29e-07,
+      "passed": true,
+      "note": ""
+    },
+    {
+      "name": "table2.2025-03-20.discharge_block_4",
+      "value": 5728.063849997,
+      "expected": 5728.06385,
+      "relative_diff": 1e-12,
+      "absolute_diff": 3e-09,
+      "passed": true,
+      "note": ""
+    },
+    {
+      "name": "table2.2025-03-20.charge_block_5",
+      "value": 0.0,
+      "expected": 0.0,
+      "relative_diff": 0.0,
+      "absolute_diff": 0.0,
+      "passed": true,
+      "note": ""
+    },
+    {
+      "name": "table2.2025-03-20.discharge_block_5",
+      "value": 2911.93615,
+      "expected": 2911.93615,
+      "relative_diff": 0.0,
+      "absolute_diff": 0.0,
+      "passed": true,
+      "note": ""
+    },
+    {
+      "name": "table2.2025-03-20.storage_0_00",
+      "value": 1199.999999998,
+      "expected": 1200.0,
+      "relative_diff": 2e-12,
+      "absolute_diff": 2e-09,
+      "passed": true,
+      "note": ""
+    },
+    {
+      "name": "table2.2025-03-20.storage_24_00",
+      "value": 1200.0,
+      "expected": 1200.0,
+      "relative_diff": 0.0,
+      "absolute_diff": 0.0,
+      "passed": true,
+      "note": ""
+    },
+    {
+      "name": "table1.2025-06-21.10:00-10:10",
+      "value": 0.0,
+      "expected": 0.0,
+      "relative_diff": 0.0,
+      "absolute_diff": 0.0,
+      "passed": true,
+      "note": ""
+    },
+    {
+      "name": "table1.2025-06-21.12:00-12:10",
+      "value": 0.0,
+      "expected": 0.0,
+      "relative_diff": 0.0,
+      "absolute_diff": 0.0,
+      "passed": true,
+      "note": ""
+    },
+    {
+      "name": "table1.2025-06-21.14:00-14:10",
+      "value": 0.0,
+      "expected": 0.0,
+      "relative_diff": 0.0,
+      "absolute_diff": 0.0,
+      "passed": true,
+      "note": ""
+    },
+    {
+      "name": "table1.2025-06-21.16:00-16:10",
+      "value": 112.922733333,
+      "expected": 112.922733,
+      "relative_diff": 2.952e-09,
+      "absolute_diff": 3.33e-07,
+      "passed": true,
+      "note": ""
+    },
+    {
+      "name": "table1.2025-06-21.18:00-18:10",
+      "value": 396.158466667,
+      "expected": 396.158467,
+      "relative_diff": 8.41e-10,
+      "absolute_diff": 3.33e-07,
+      "passed": true,
+      "note": ""
+    },
+    {
+      "name": "table1.2025-06-21.20:00-20:10",
+      "value": 0.0,
+      "expected": 0.0,
+      "relative_diff": 0.0,
+      "absolute_diff": 0.0,
+      "passed": true,
+      "note": ""
+    },
+    {
+      "name": "table2.2025-06-21.charge_block_0",
+      "value": 1409.411021284,
+      "expected": 1409.411021,
+      "relative_diff": 2.01e-10,
+      "absolute_diff": 2.84e-07,
+      "passed": true,
+      "note": ""
+    },
+    {
+      "name": "table2.2025-06-21.discharge_block_0",
+      "value": 0.0,
+      "expected": 0.0,
+      "relative_diff": 0.0,
+      "absolute_diff": 0.0,
+      "passed": true,
+      "note": ""
+    },
+    {
+      "name": "table2.2025-06-21.charge_block_1",
+      "value": 833.333333333,
+      "expected": 833.333333,
+      "relative_diff": 4e-10,
+      "absolute_diff": 3.33e-07,
+      "passed": true,
+      "note": ""
+    },
+    {
+      "name": "table2.2025-06-21.discharge_block_1",
+      "value": 913.172060752,
+      "expected": 913.172061,
+      "relative_diff": 2.72e-10,
+      "absolute_diff": 2.48e-07,
+      "passed": true,
+      "note": ""
+    },
+    {
+      "name": "table2.2025-06-21.charge_block_2",
+      "value": 305.114340165,
+      "expected": 305.11434,
+      "relative_diff": 5.4e-10,
+      "absolute_diff": 1.65e-07,
+      "passed": true,
+      "note": ""
+    },
+    {
+      "name": "table2.2025-06-21.discharge_block_2",
+      "value": 0.0,
+      "expected": 0.0,
+      "relative_diff": 0.0,
+      "absolute_diff": 0.0,
+      "passed": true,
+      "note": ""
+    },
+    {
+      "name": "table2.2025-06-21.charge_block_3",
+      "value": 9115.003027579,
+      "expected": 9115.003028,
+      "relative_diff": 4.6e-11,
+      "absolute_diff": 4.21e-07,
+      "passed": true,
+      "note": ""
+    },
+    {
+      "name": "table2.2025-06-21.discharge_block_3",
+      "value": 0.0,
+      "expected": 0.0,
+      "relative_diff": 0.0,
+      "absolute_diff": 0.0,
+      "passed": true,
+      "note": ""
+    },
+    {
+      "name": "table2.2025-06-21.charge_block_4",
+      "value": 131.177858333,
+      "expected": 131.177858,
+      "relative_diff": 2.541e-09,
+      "absolute_diff": 3.33e-07,
+      "passed": true,
+      "note": ""
+    },
+    {
+      "name": "table2.2025-06-21.discharge_block_4",
+      "value": 6154.1006163,
+      "expected": 6154.100616,
+      "relative_diff": 4.9e-11,
+      "absolute_diff": 3e-07,
+      "passed": true,
+      "note": ""
+    },
+    {
+      "name": "table2.2025-06-21.charge_block_5",
+      "value": 0.0,
+      "expected": 0.0,
+      "relative_diff": 0.0,
+      "absolute_diff": 0.0,
+      "passed": true,
+      "note": ""
+    },
+    {
+      "name": "table2.2025-06-21.discharge_block_5",
+      "value": 2485.899383333,
+      "expected": 2485.899383,
+      "relative_diff": 1.34e-10,
+      "absolute_diff": 3.33e-07,
+      "passed": true,
+      "note": ""
+    },
+    {
+      "name": "table2.2025-06-21.storage_0_00",
+      "value": 1200.000000254,
+      "expected": 1200.0,
+      "relative_diff": 2.12e-10,
+      "absolute_diff": 2.54e-07,
+      "passed": true,
+      "note": ""
+    },
+    {
+      "name": "table2.2025-06-21.storage_24_00",
+      "value": 1200.000000228,
+      "expected": 1200.0,
+      "relative_diff": 1.9e-10,
+      "absolute_diff": 2.28e-07,
+      "passed": true,
+      "note": ""
+    },
+    {
+      "name": "table1.2025-09-23.10:00-10:10",
+      "value": 0.0,
+      "expected": 0.0,
+      "relative_diff": 0.0,
+      "absolute_diff": 0.0,
+      "passed": true,
+      "note": ""
+    },
+    {
+      "name": "table1.2025-09-23.12:00-12:10",
+      "value": 358.668516667,
+      "expected": 358.668517,
+      "relative_diff": 9.29e-10,
+      "absolute_diff": 3.33e-07,
+      "passed": true,
+      "note": ""
+    },
+    {
+      "name": "table1.2025-09-23.14:00-14:10",
+      "value": 0.0,
+      "expected": 0.0,
+      "relative_diff": 0.0,
+      "absolute_diff": 0.0,
+      "passed": true,
+      "note": ""
+    },
+    {
+      "name": "table1.2025-09-23.16:00-16:10",
+      "value": 550.185183333,
+      "expected": 550.185183,
+      "relative_diff": 6.06e-10,
+      "absolute_diff": 3.33e-07,
+      "passed": true,
+      "note": ""
+    },
+    {
+      "name": "table1.2025-09-23.18:00-18:10",
+      "value": 752.645,
+      "expected": 752.645,
+      "relative_diff": 0.0,
+      "absolute_diff": 0.0,
+      "passed": true,
+      "note": ""
+    },
+    {
+      "name": "table1.2025-09-23.20:00-20:10",
+      "value": 61.911666667,
+      "expected": 61.911667,
+      "relative_diff": 5.384e-09,
+      "absolute_diff": 3.33e-07,
+      "passed": true,
+      "note": ""
+    },
+    {
+      "name": "table2.2025-09-23.charge_block_0",
+      "value": 9000.0,
+      "expected": 9000.0,
+      "relative_diff": 0.0,
+      "absolute_diff": 0.0,
+      "passed": true,
+      "note": ""
+    },
+    {
+      "name": "table2.2025-09-23.discharge_block_0",
+      "value": 0.0,
+      "expected": 0.0,
+      "relative_diff": 0.0,
+      "absolute_diff": 0.0,
+      "passed": true,
+      "note": ""
+    },
+    {
+      "name": "table2.2025-09-23.charge_block_1",
+      "value": 1666.666666667,
+      "expected": 1666.666667,
+      "relative_diff": 2e-10,
+      "absolute_diff": 3.33e-07,
+      "passed": true,
+      "note": ""
+    },
+    {
+      "name": "table2.2025-09-23.discharge_block_1",
+      "value": 6077.776583333,
+      "expected": 6077.776583,
+      "relative_diff": 5.5e-11,
+      "absolute_diff": 3.33e-07,
+      "passed": true,
+      "note": ""
+    },
+    {
+      "name": "table2.2025-09-23.charge_block_2",
+      "value": 4228.432373045,
+      "expected": 4228.432373,
+      "relative_diff": 1.1e-11,
+      "absolute_diff": 4.5e-08,
+      "passed": true,
+      "note": ""
+    },
+    {
+      "name": "table2.2025-09-23.discharge_block_2",
+      "value": 1920.520491667,
+      "expected": 1920.520492,
+      "relative_diff": 1.74e-10,
+      "absolute_diff": 3.33e-07,
+      "passed": true,
+      "note": ""
+    },
+    {
+      "name": "table2.2025-09-23.charge_block_3",
+      "value": 5723.53258044,
+      "expected": 5723.53258,
+      "relative_diff": 7.7e-11,
+      "absolute_diff": 4.4e-07,
+      "passed": true,
+      "note": ""
+    },
+    {
+      "name": "table2.2025-09-23.discharge_block_3",
+      "value": 315.909425823,
+      "expected": 315.909426,
+      "relative_diff": 5.6e-10,
+      "absolute_diff": 1.77e-07,
+      "passed": true,
+      "note": ""
+    },
+    {
+      "name": "table2.2025-09-23.charge_block_4",
+      "value": 312.487516662,
+      "expected": 312.487517,
+      "relative_diff": 1.08e-09,
+      "absolute_diff": 3.38e-07,
+      "passed": true,
+      "note": ""
+    },
+    {
+      "name": "table2.2025-09-23.discharge_block_4",
+      "value": 5639.999999997,
+      "expected": 5640.0,
+      "relative_diff": 1e-12,
+      "absolute_diff": 3e-09,
+      "passed": true,
+      "note": ""
+    },
+    {
+      "name": "table2.2025-09-23.charge_block_5",
+      "value": 0.0,
+      "expected": 0.0,
+      "relative_diff": 0.0,
+      "absolute_diff": 0.0,
+      "passed": true,
+      "note": ""
+    },
+    {
+      "name": "table2.2025-09-23.discharge_block_5",
+      "value": 3000.0,
+      "expected": 3000.0,
+      "relative_diff": 0.0,
+      "absolute_diff": 0.0,
+      "passed": true,
+      "note": ""
+    },
+    {
+      "name": "table2.2025-09-23.storage_0_00",
+      "value": 1200.0,
+      "expected": 1200.0,
+      "relative_diff": 0.0,
+      "absolute_diff": 0.0,
+      "passed": true,
+      "note": ""
+    },
+    {
+      "name": "table2.2025-09-23.storage_24_00",
+      "value": 1200.0,
+      "expected": 1200.0,
+      "relative_diff": 0.0,
+      "absolute_diff": 0.0,
+      "passed": true,
+      "note": ""
+    },
+    {
+      "name": "table1.2025-12-21.10:00-10:10",
+      "value": 0.0,
+      "expected": 0.0,
+      "relative_diff": 0.0,
+      "absolute_diff": 0.0,
+      "passed": true,
+      "note": ""
+    },
+    {
+      "name": "table1.2025-12-21.12:00-12:10",
+      "value": 954.537833333,
+      "expected": 954.537833,
+      "relative_diff": 3.49e-10,
+      "absolute_diff": 3.33e-07,
+      "passed": true,
+      "note": ""
+    },
+    {
+      "name": "table1.2025-12-21.14:00-14:10",
+      "value": 0.0,
+      "expected": 0.0,
+      "relative_diff": 0.0,
+      "absolute_diff": 0.0,
+      "passed": true,
+      "note": ""
+    },
+    {
+      "name": "table1.2025-12-21.16:00-16:10",
+      "value": 806.735183333,
+      "expected": 806.735183,
+      "relative_diff": 4.13e-10,
+      "absolute_diff": 3.33e-07,
+      "passed": true,
+      "note": ""
+    },
+    {
+      "name": "table1.2025-12-21.18:00-18:10",
+      "value": 712.633333333,
+      "expected": 712.633333,
+      "relative_diff": 4.68e-10,
+      "absolute_diff": 3.33e-07,
+      "passed": true,
+      "note": ""
+    },
+    {
+      "name": "table1.2025-12-21.20:00-20:10",
+      "value": 30.268333333,
+      "expected": 30.268333,
+      "relative_diff": 1.1013e-08,
+      "absolute_diff": 3.33e-07,
+      "passed": true,
+      "note": ""
+    },
+    {
+      "name": "table2.2025-12-21.charge_block_0",
+      "value": 9000.000000003,
+      "expected": 9000.0,
+      "relative_diff": 0.0,
+      "absolute_diff": 3e-09,
+      "passed": true,
+      "note": ""
+    },
+    {
+      "name": "table2.2025-12-21.discharge_block_0",
+      "value": 0.0,
+      "expected": 0.0,
+      "relative_diff": 0.0,
+      "absolute_diff": 0.0,
+      "passed": true,
+      "note": ""
+    },
+    {
+      "name": "table2.2025-12-21.charge_block_1",
+      "value": 2325.111955556,
+      "expected": 2325.111956,
+      "relative_diff": 1.91e-10,
+      "absolute_diff": 4.44e-07,
+      "passed": true,
+      "note": ""
+    },
+    {
+      "name": "table2.2025-12-21.discharge_block_1",
+      "value": 1426.801586062,
+      "expected": 1426.801586,
+      "relative_diff": 4.4e-11,
+      "absolute_diff": 6.2e-08,
+      "passed": true,
+      "note": ""
+    },
+    {
+      "name": "table2.2025-12-21.charge_block_2",
+      "value": 5639.895652649,
+      "expected": 5639.895653,
+      "relative_diff": 6.2e-11,
+      "absolute_diff": 3.51e-07,
+      "passed": true,
+      "note": ""
+    },
+    {
+      "name": "table2.2025-12-21.discharge_block_2",
+      "value": 7383.012208333,
+      "expected": 7383.012208,
+      "relative_diff": 4.5e-11,
+      "absolute_diff": 3.33e-07,
+      "passed": true,
+      "note": ""
+    },
+    {
+      "name": "table2.2025-12-21.charge_block_3",
+      "value": 7580.766219051,
+      "expected": 7580.766219,
+      "relative_diff": 7e-12,
+      "absolute_diff": 5.1e-08,
+      "passed": true,
+      "note": ""
+    },
+    {
+      "name": "table2.2025-12-21.discharge_block_3",
+      "value": 2432.263005681,
+      "expected": 2432.263006,
+      "relative_diff": 1.31e-10,
+      "absolute_diff": 3.19e-07,
+      "passed": true,
+      "note": ""
+    },
+    {
+      "name": "table2.2025-12-21.charge_block_4",
+      "value": -4e-09,
+      "expected": -0.0,
+      "relative_diff": 4.19e-09,
+      "absolute_diff": 4e-09,
+      "passed": true,
+      "note": ""
+    },
+    {
+      "name": "table2.2025-12-21.discharge_block_4",
+      "value": 5797.47423333,
+      "expected": 5797.474233,
+      "relative_diff": 5.7e-11,
+      "absolute_diff": 3.3e-07,
+      "passed": true,
+      "note": ""
+    },
+    {
+      "name": "table2.2025-12-21.charge_block_5",
+      "value": 0.0,
+      "expected": 0.0,
+      "relative_diff": 0.0,
+      "absolute_diff": 0.0,
+      "passed": true,
+      "note": ""
+    },
+    {
+      "name": "table2.2025-12-21.discharge_block_5",
+      "value": 2842.525766667,
+      "expected": 2842.525767,
+      "relative_diff": 1.17e-10,
+      "absolute_diff": 3.33e-07,
+      "passed": true,
+      "note": ""
+    },
+    {
+      "name": "table2.2025-12-21.storage_0_00",
+      "value": 1199.999999998,
+      "expected": 1200.0,
+      "relative_diff": 2e-12,
+      "absolute_diff": 2e-09,
+      "passed": true,
+      "note": ""
+    },
+    {
+      "name": "table2.2025-12-21.storage_24_00",
+      "value": 1200.0,
+      "expected": 1200.0,
+      "relative_diff": 0.0,
+      "absolute_diff": 0.0,
+      "passed": true,
+      "note": ""
+    }
+  ],
+  "checks_failed": [],
+  "passed": true,
+  "label_check": true
+}

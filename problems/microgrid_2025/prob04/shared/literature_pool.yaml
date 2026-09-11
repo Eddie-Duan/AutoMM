@@ -1,3 +1,834 @@
 question_id: prob04
-dry: false
-items: []
+dry: true
+items:
+- id: ref-krishnamurthy-2018-arbitrage-da-rt
+  title: Energy Storage Arbitrage Under Day-Ahead and Real-Time Price Uncertainty
+  authors:
+  - Dheepak Krishnamurthy
+  - Canan Uckun
+  - Zhi Zhou
+  - Prakash R. Thimmapuram
+  - Audun Botterud
+  year: 2018
+  source: IEEE Transactions on Power Systems
+  doi: 10.1109/tpwrs.2017.2685347
+  url: https://doi.org/10.1109/tpwrs.2017.2685347
+  authority: A
+  verification_level: abstract_oa
+  summary: 把储能持有者的套利收益最大化写成考虑日前电价与实时电价双重不确定性的随机规划，用于市场投标与运行决策及储能经济性估计；在真实市场价格数据上，随机投标方法显著优于确定性基准。
+  applicable_conditions: 价格逐时段波动且存在日前/实时两个价格阶段；决策者需在价格不确定下做充放电与投标。
+  supports: F1 + F5：支撑 prob04 两条链『价格是逐时段波动的不确定输入，储能充放电决策以其为驱动』这一建模对象；也支撑 4-2 链的日前—实时价差视角。不支撑任何具体预测误差分布或系数取值。
+  differences: 该文是储能持有者的随机投标问题（含金融市场头寸）；本问是单一微网价格接受者的确定性 LP 主口径（A8-(b) 点预测），不确定性处理只在
+    ablation 作对照。其数值不可引用。
+  claim_types:
+  - literature_fact
+  - agent_inference
+  status: used
+  decision_reason: 支撑 F1/F5：为『实时波动电价下储能套利/购电决策』提供 A 级、与 A8-(b)（价格不确定、需预测）最贴近的机制与建模先例；仅用其机制级结论，不用其数值。
+  fingerprint: 10.1109/tpwrs.2017.2685347
+  verified: true
+  verification_provider: crossref
+  verification_error: null
+  added_at: '2026-09-11T11:47:19.554471+00:00'
+  round_id: rnd-c7c0a57a97ea
+  verified_at: '2026-09-11T11:47:22.193848+00:00'
+  verified_title:
+  - Energy Storage Arbitrage Under Day-Ahead and Real-Time Price Uncertainty
+  decided_at: '2026-09-11T11:47:44.615735+00:00'
+- id: ref-staffell-2016-maximising-storage-value
+  title: Maximising the value of electricity storage
+  authors:
+  - Iain Staffell
+  - Mazda Rustomji
+  year: 2016
+  source: Journal of Energy Storage
+  doi: 10.1016/j.est.2016.08.010
+  url: https://doi.org/10.1016/j.est.2016.08.010
+  authority: A
+  verification_level: abstract_oa
+  summary: 给出兼顾套利与备用的储能收益最大化算法，并分别在『完美预知价格（perfect foresight）』与『无预知（no foresight）』两种信息下计算利润；摘要报告无预知情形可获得最优利润的
+    75–95%，并指出英国电池系统参与备用市场可使利润增至三倍。
+  applicable_conditions: 需要量化『价格信息完整度』对储能收益的影响；价格序列可用于事后最优基准。
+  supports: F1 + F2c：为『完美预知 vs 无预知』给出可核验的对照范式与量级方向（无预知仍可获大部分最优收益），是 A8-(a) 被否后『决策用预测价、结算用实际价』的误差代价评估锚点。
+  differences: 英国的套利+备用市场、单一电池/风电场案例；本问为单一微网、无备用市场、无售电，且 75–95% 是该文案例数值，不得引用为本问结论或标定。
+  claim_types:
+  - literature_fact
+  - agent_inference
+  status: used
+  decision_reason: 支撑 F2c：A8-(b) 要求披露『价格预报误差的代价』，该文提供『完美预知 vs 无预知』的成熟对照设计（A 级、摘要明确）。其百分比仅作方向性参考。
+  fingerprint: 10.1016/j.est.2016.08.010
+  verified: true
+  verification_provider: crossref
+  verification_error: null
+  added_at: '2026-09-11T11:47:19.606512+00:00'
+  round_id: rnd-c7c0a57a97ea
+  verified_at: '2026-09-11T11:47:23.226803+00:00'
+  verified_title:
+  - Maximising the value of electricity storage
+  decided_at: '2026-09-11T11:47:44.922336+00:00'
+- id: ref-antweiler-2021-storage-microeconomics
+  title: 'Microeconomic models of electricity storage: Price Forecasting, arbitrage
+    limits, curtailment insurance, and transmission line utilization'
+  authors:
+  - Werner Antweiler
+  year: 2021
+  source: Energy Economics
+  doi: 10.1016/j.eneco.2021.105390
+  url: https://doi.org/10.1016/j.eneco.2021.105390
+  authority: A
+  verification_level: metadata
+  summary: 以微观经济学模型讨论电力储能的价格预测、套利上限、弃电保险与线路利用率（据标题与期刊层级；本轮未取得摘要）。
+  applicable_conditions: 储能套利的理论上限与价格预测在储能价值中的作用。
+  supports: F1 + F2c：支撑『套利收益存在由价格序列决定的上限，价格预测精度直接决定可实现收益』这一分析框架。
+  differences: 微观经济学/市场均衡视角；本问为确定性 LP 工程优化，不含均衡与线路约束。仅元数据级证据。
+  claim_types:
+  - literature_fact
+  status: used
+  decision_reason: 支撑 F2c 的『套利上限 + 价格预测价值』框架（A 级期刊，第二独立来源）；仅元数据级证据，引用限于框架定位。
+  fingerprint: 10.1016/j.eneco.2021.105390
+  verified: true
+  verification_provider: crossref
+  verification_error: null
+  added_at: '2026-09-11T11:47:19.658045+00:00'
+  round_id: rnd-c7c0a57a97ea
+  verified_at: '2026-09-11T11:47:24.205228+00:00'
+  verified_title:
+  - 'Microeconomic models of electricity storage: Price Forecasting, arbitrage limits,
+    curtailment insurance, and transmission line utilization'
+  decided_at: '2026-09-11T11:47:45.210687+00:00'
+- id: ref-paulauskas-2024-battery-scheduling-arbitrage
+  title: Battery Scheduling Optimization and Potential Revenue for Residential Storage
+    Price Arbitrage
+  authors:
+  - Nerijus Paulauskas
+  - Vsevolod Kapustin
+  year: 2024
+  source: Batteries
+  doi: 10.3390/batteries10070251
+  url: https://doi.org/10.3390/batteries10070251
+  authority: B
+  verification_level: abstract_oa
+  summary: 用优化模型在 Nord Pool 日前价格上计算住宅储能的套利收益，显式包含电池容量、充放电效率与最大充放电功率；结果显示（10 kWh 电池）10
+    kW 版本总收益更高、5 kW 版本单位循环收益更高。
+  applicable_conditions: 给定价格曲线与储能参数（容量、效率、功率界）时最大化套利收益。
+  supports: F1：直接对应本问 4-2 链的结构——按价格曲线做充放电调度、目标为收益/成本、约束为容量/效率/功率（与 AS05/AS06 的 η、c、q_dis
+    界同构）。
+  differences: 住宅单电池、只做日前价格套利、无负载/光伏/紧急购电；本问是微网含负载与光伏的购电成本最小化。其区域收益数值不可引用。
+  claim_types:
+  - literature_fact
+  - agent_inference
+  status: used
+  decision_reason: 支撑 F1：为『按价格曲线的储能充放电调度 + 容量/效率/功率约束』提供可核验的近期实例（B 级 MDPI，结构性一致）；数值不可引用。
+  fingerprint: 10.3390/batteries10070251
+  verified: true
+  verification_provider: crossref
+  verification_error: null
+  added_at: '2026-09-11T11:47:19.716716+00:00'
+  round_id: rnd-c7c0a57a97ea
+  verified_at: '2026-09-11T11:47:25.011123+00:00'
+  verified_title:
+  - Battery Scheduling Optimization and Potential Revenue for Residential Storage
+    Price Arbitrage
+  decided_at: '2026-09-11T11:47:45.473342+00:00'
+- id: ref-zhang-2021-arbitrage-technologies
+  title: Arbitrage analysis for different energy storage technologies and strategies
+  authors:
+  - Xinjing Zhang
+  - Chao Qin
+  - Eric Loth
+  - Yujie Xu
+  - Xuezhi Zhou
+  - Haisheng Chen
+  year: 2021
+  source: Energy Reports
+  doi: 10.1016/j.egyr.2021.09.009
+  url: https://doi.org/10.1016/j.egyr.2021.09.009
+  authority: B
+  verification_level: abstract_oa
+  summary: 提出按价格曲线与往返效率确定充放电时段以最大化套利收益的方法，并在加州市场比较锂电、压缩空气与抽水蓄能的潜在收益与盈亏平衡成本。
+  applicable_conditions: 价格曲线已知时，以充放电时段为决策、以往返效率为参数的套利收益/成本计算。
+  supports: F1：支撑『价格曲线 → 充放电时段 → 收益』的确定性优化建模范式，并支撑往返效率是收益的关键参数（对应本问 η=0.9 的工程简化）。
+  differences: 技术经济比较而非调度模型；不含微网负载/光伏平衡与紧急购电。其收益与成本数值不可引用。
+  claim_types:
+  - literature_fact
+  - agent_inference
+  status: used
+  decision_reason: 支撑 F1 的确定性套利计算范式（B 级，摘要明确）；用于框架级引用。
+  fingerprint: 10.1016/j.egyr.2021.09.009
+  verified: true
+  verification_provider: crossref
+  verification_error: null
+  added_at: '2026-09-11T11:47:19.774505+00:00'
+  round_id: rnd-c7c0a57a97ea
+  verified_at: '2026-09-11T11:47:26.045033+00:00'
+  verified_title:
+  - Arbitrage analysis for different energy storage technologies and strategies
+  decided_at: '2026-09-11T11:47:45.742277+00:00'
+- id: ref-komorowska-2024-liion-price-arbitrage
+  title: Economic viability of Li-ion batteries based on the price arbitrage in the
+    European day-ahead markets
+  authors:
+  - Aleksandra Komorowska
+  - Piotr Olczak
+  year: 2024
+  source: Energy
+  doi: 10.1016/j.energy.2023.130009
+  url: https://doi.org/10.1016/j.energy.2023.130009
+  authority: A
+  verification_level: abstract_oa
+  summary: 分析 22 个欧洲市场 7 年日前价格，指出可再生能源增长导致电价波动上升，并给出各市场的充放电时段集合、循环次数与套利利润；当前资本成本下
+    NPV 均为负。
+  applicable_conditions: 用长历史价格序列刻画价格波动与套利机会的分布。
+  supports: F3：支撑『高可再生渗透提高电价波动，从而放大储能套利机会』这一事实性方向，为附件 4 的日内高波动提供一般性背景（不用于标定本问价格）。
+  differences: 跨国长期投资评估（NPV）；本问为单微网 334 天运行成本最小化、不计折旧。其市场排序与 NPV 不可引用。
+  claim_types:
+  - literature_fact
+  - agent_inference
+  status: used
+  decision_reason: 支撑 F3 的价格波动性事实（A 级、摘要明确）；只作机制级背景，不用于标定附件 4 或本问费用。
+  fingerprint: 10.1016/j.energy.2023.130009
+  verified: true
+  verification_provider: crossref
+  verification_error: null
+  added_at: '2026-09-11T11:47:19.833114+00:00'
+  round_id: rnd-c7c0a57a97ea
+  verified_at: '2026-09-11T11:47:27.038343+00:00'
+  verified_title:
+  - Economic viability of Li-ion batteries based on the price arbitrage in the European
+    day-ahead markets
+  decided_at: '2026-09-11T11:47:46.018163+00:00'
+- id: ref-campillo-2016-rtp-residential
+  title: Is real-time electricity pricing suitable for residential users without demand-side
+    management?
+  authors:
+  - Javier Campillo
+  - Erik Dahlquist
+  - Fredrik Wallin
+  - Iana Vassileva
+  year: 2016
+  source: Energy
+  doi: 10.1016/j.energy.2016.04.105
+  url: https://doi.org/10.1016/j.energy.2016.04.105
+  authority: A
+  verification_level: metadata
+  summary: 讨论在没有需求侧管理的情况下实时电价对居民用户是否合适（据标题与期刊层级；本轮未取得摘要）。
+  applicable_conditions: 评估实时电价对不具备主动响应能力主体的经济影响。
+  supports: F3：支撑『实时电价的收益/风险取决于主体是否具备主动调度能力（本问即储能+购电优化）』这一定位，用于说明本问为何必须显式建模储能响应。
+  differences: 居民用电视角、无储能优化模型；本问为微网购电优化。仅元数据级证据。
+  claim_types:
+  - literature_fact
+  status: used
+  decision_reason: 支撑 F3 的 RTP 适用性背景（A 级期刊）；仅元数据级证据，引用限于定位。
+  fingerprint: 10.1016/j.energy.2016.04.105
+  verified: true
+  verification_provider: crossref
+  verification_error: null
+  added_at: '2026-09-11T11:47:19.894735+00:00'
+  round_id: rnd-c7c0a57a97ea
+  verified_at: '2026-09-11T11:47:27.852304+00:00'
+  verified_title:
+  - Is real-time electricity pricing suitable for residential users without demand-side
+    management?
+  decided_at: '2026-09-11T11:47:46.328599+00:00'
+- id: ref-chitsaz-2018-price-forecast-btm-storage
+  title: Electricity Price Forecasting for Operational Scheduling of Behind-the-Meter
+    Storage Systems
+  authors:
+  - Hamed Chitsaz
+  - Payam Zamani-Dehkordi
+  - Hamidreza Zareipour
+  - Palak P. Parikh
+  year: 2018
+  source: IEEE Transactions on Smart Grid
+  doi: 10.1109/tsg.2017.2717282
+  url: https://doi.org/10.1109/tsg.2017.2717282
+  authority: A
+  verification_level: abstract_oa
+  summary: 为实时市场提出价格预测策略：用高分辨率数据与小时数据分别驱动两个不同预测步长的模型，并提出『小时内滚动时域』框架提供价格预测更新，具备价格尖峰检测能力；用安大略市场真实数据从统计与经济两个角度评估，并把预测结果接入微网内电池储能的调度优化。
+  applicable_conditions: 储能运行调度需要实时价格预测，且预测可在日内的滚动时刻被更新。
+  supports: F2a + F2b + F2d：直接支撑 A8-(b) 的三项要求——(i) 价格预测器必须显式建模（不同步长/不同模型）；(ii) 预测精度需从统计与经济两方面评估；(iii)
+    4-3 链 6:00/12:00/18:00 的『滚动更新价格预测』有成熟先例。
+  differences: 实时市场日前/日内两尺度、安大略数据；本问价格为附件 4 的 10 分钟序列、预测器由团队指定候选族，且主口径为点预测+确定性 LP。其精度数值不可引用。
+  claim_types:
+  - literature_fact
+  - agent_inference
+  status: used
+  decision_reason: 支撑 F2a/F2b/F2d：是 A8-(b) 决策与 4-3 滚动调整层最贴近的 A 级先例（摘要明确给出滚动更新与预测→调度闭环）；数值不可引用。
+  fingerprint: 10.1109/tsg.2017.2717282
+  verified: true
+  verification_provider: crossref
+  verification_error: null
+  added_at: '2026-09-11T11:47:19.958805+00:00'
+  round_id: rnd-c7c0a57a97ea
+  verified_at: '2026-09-11T11:47:28.623102+00:00'
+  verified_title:
+  - Electricity Price Forecasting for Operational Scheduling of Behind-the-Meter Storage
+    Systems
+  decided_at: '2026-09-11T11:47:46.610272+00:00'
+- id: ref-tschora-2022-da-price-forecasting-ml
+  title: Electricity price forecasting on the day-ahead market using machine learning
+  authors:
+  - Léonard Tschora
+  - Erwan Pierre
+  - Marc Plantevit
+  - Céline Robardet
+  year: 2022
+  source: Applied Energy
+  doi: 10.1016/j.apenergy.2022.118752
+  url: https://doi.org/10.1016/j.apenergy.2022.118752
+  authority: A
+  verification_level: metadata
+  summary: 研究日前市场的电价预测，比较多种机器学习方法（据标题与期刊层级；本轮未取得摘要）。
+  applicable_conditions: 日前电价预测的模型族选择与精度比较。
+  supports: F2a：支撑『历史价格+日历/时段特征驱动的回归/机器学习预测器』是电价预测的主流模型族，为 A8-(b) 的候选预测器（历史同时段均值/前一日同时段/季节×时段/回归或
+    AR）提供模型族定位。
+  differences: 日前市场、ML 方法比较；本问只要求显式给出一个可回测的点预测器，不要求 ML 建模。仅元数据级证据。
+  claim_types:
+  - literature_fact
+  status: used
+  decision_reason: 支撑 F2a 的模型族定位（A 级期刊）；仅元数据级证据，不用于标定预测精度。
+  fingerprint: 10.1016/j.apenergy.2022.118752
+  verified: true
+  verification_provider: crossref
+  verification_error: null
+  added_at: '2026-09-11T11:47:20.023355+00:00'
+  round_id: rnd-c7c0a57a97ea
+  verified_at: '2026-09-11T11:47:29.965487+00:00'
+  verified_title:
+  - Electricity price forecasting on the day-ahead market using machine learning
+  decided_at: '2026-09-11T11:47:46.871890+00:00'
+- id: ref-lago-2018-spot-price-deep-learning
+  title: 'Forecasting spot electricity prices: Deep learning approaches and empirical
+    comparison of traditional algorithms'
+  authors:
+  - Jesus Lago
+  - Fjo De Ridder
+  - Bart De Schutter
+  year: 2018
+  source: Applied Energy
+  doi: 10.1016/j.apenergy.2018.02.069
+  url: https://doi.org/10.1016/j.apenergy.2018.02.069
+  authority: A
+  verification_level: abstract_oa
+  summary: 提出 4 种深度学习电价预测模型，并对 27 种常见方法做系统基准比较；结论包括机器学习在总体上优于统计模型、移动平均项不提升精度、混合模型不优于其更简单的对应模型。
+  applicable_conditions: 需要在多个预测器之间做公平基准比较（含简单基准与复杂模型）。
+  supports: F2a + F2b：支撑『价格预测器应给出与简单基准的对比、且简单模型常常不劣于复杂模型』，为 A8-(b) 的『候选预测器族 + 滚动回测比较』提供方法学依据（避免只报一个复杂模型）。
+  differences: 多市场小时级电价、以预测精度为目标；本问是 10 分钟粒度、以决策费用为目标。其精度排名不可引用。
+  claim_types:
+  - literature_fact
+  - agent_inference
+  status: used
+  decision_reason: 支撑 F2a/F2b 的基准比较纪律（A 级、摘要明确）；用于要求预测器族对比与简单基准，不引用其精度数值。
+  fingerprint: 10.1016/j.apenergy.2018.02.069
+  verified: true
+  verification_provider: crossref
+  verification_error: null
+  added_at: '2026-09-11T11:47:20.091859+00:00'
+  round_id: rnd-c7c0a57a97ea
+  verified_at: '2026-09-11T11:47:31.320209+00:00'
+  verified_title:
+  - 'Forecasting spot electricity prices: Deep learning approaches and empirical comparison
+    of traditional algorithms'
+  decided_at: '2026-09-11T11:47:47.177704+00:00'
+- id: ref-kapoor-2023-nz-price-forecasting
+  title: 'Electricity price forecasting in New Zealand: A comparative analysis of
+    statistical and machine learning models with feature selection'
+  authors:
+  - Gaurav Kapoor
+  - Nuttanan Wichitaksorn
+  year: 2023
+  source: Applied Energy
+  doi: 10.1016/j.apenergy.2023.121446
+  url: https://doi.org/10.1016/j.apenergy.2023.121446
+  authority: A
+  verification_level: abstract_oa
+  summary: 对日度电价预测系统比较统计模型（GARCH/SV 及其 t 分布变体）与机器学习模型（LSTM/GRU/XGBoost/LEAR/DNN），并检验
+    LASSO、互信息、递归特征消除等特征选择；最优模型相对 LEAR 基准把 sMAPE 与 MASE 改善 2%–3%。
+  applicable_conditions: 预测器族与特征集的比较评估，需要明确的误差指标（sMAPE/MASE）。
+  supports: F2b：支撑『价格预测必须以明确误差指标（相对误差与缩放误差并报）做滚动评估，并以简单基准为对照』，直接对应 A8-(b) 的『MAE/MAPE/分位数』回测要求。
+  differences: 日度价格、新西兰市场；本问为 10 分钟粒度、候选预测器更简单。其 sMAPE/MASE 改善幅度不可引用。
+  claim_types:
+  - literature_fact
+  - agent_inference
+  status: used
+  decision_reason: 支撑 F2b 的误差指标与基准对照纪律（A 级、摘要明确）；不引用其精度数值。
+  fingerprint: 10.1016/j.apenergy.2023.121446
+  verified: true
+  verification_provider: crossref
+  verification_error: null
+  added_at: '2026-09-11T11:47:20.162561+00:00'
+  round_id: rnd-c7c0a57a97ea
+  verified_at: '2026-09-11T11:47:32.339829+00:00'
+  verified_title:
+  - 'Electricity price forecasting in New Zealand: A comparative analysis of statistical
+    and machine learning models with feature selection'
+  decided_at: '2026-09-11T11:47:47.498915+00:00'
+- id: ref-ibebuchi-2025-daep-endogenous-predictors
+  title: 'Day-Ahead Energy Price Forecasting with Machine Learning: Role of Endogenous
+    Predictors'
+  authors:
+  - Chibuike Chiedozie Ibebuchi
+  year: 2025
+  source: Forecasting
+  doi: 10.3390/forecast7020018
+  url: https://doi.org/10.3390/forecast7020018
+  authority: B
+  verification_level: abstract_oa
+  summary: 用 XGBoost 做 24 小时提前量的日前电价预测，采用自定义滚动窗口交叉验证（24 小时验证块逐日滑动、共 2372 折），报告中位 MAE
+    6.26 USD/MWh、RMSE 8.27 USD/MWh；强调静态训练—测试划分不足、需要集成与滚动评估，并把预测接入投标决策。
+  applicable_conditions: 需要『滚动窗口回测』且只用预测时点可得信息的预测评估。
+  supports: F2b + F2d：直接支撑 A8-(b) 的『用 2025 全年做滚动回测、只用 t 日之前信息』这一纪律（滚动窗口交叉验证是标准做法），并支撑预测—决策耦合（forecast
+    → bidding）。
+  differences: 小时级、加州 ISO；本问为 10 分钟粒度、预测器候选更简单。其 MAE/RMSE 数值不可引用。
+  claim_types:
+  - literature_fact
+  - agent_inference
+  status: used
+  decision_reason: 支撑 F2b 的滚动回测方法论（B 级 MDPI，摘要明确给出滚动窗口与只用历史信息）；数值不可引用。
+  fingerprint: 10.3390/forecast7020018
+  verified: true
+  verification_provider: crossref
+  verification_error: null
+  added_at: '2026-09-11T11:47:20.235509+00:00'
+  round_id: rnd-c7c0a57a97ea
+  verified_at: '2026-09-11T11:47:33.334530+00:00'
+  verified_title:
+  - 'Day-Ahead Energy Price Forecasting with Machine Learning: Role of Endogenous
+    Predictors'
+  decided_at: '2026-09-11T11:47:47.834581+00:00'
+- id: ref-myttenaere-2016-mape-regression
+  title: Mean Absolute Percentage Error for regression models
+  authors:
+  - Arnaud de Myttenaere
+  - Boris Golden
+  - Bénédicte Le Grand
+  - Fabrice Rossi
+  year: 2016
+  source: Neurocomputing
+  doi: 10.1016/j.neucom.2015.12.114
+  url: https://doi.org/10.1016/j.neucom.2015.12.114
+  authority: A
+  verification_level: metadata
+  summary: 系统分析回归模型下平均绝对百分比误差（MAPE）的性质与偏置问题（据标题与期刊层级；本轮未取得摘要）。
+  applicable_conditions: 使用 MAPE 作为预测精度指标时需要说明其统计性质与局限。
+  supports: F2b：支撑『MAPE 作为相对误差指标有其偏置与不对称性，应同时报告 MAE 等绝对指标』这一方法学告诫，对应 A8-(b) 要求同时报告
+    MAE/MAPE/分位数。
+  differences: 一般回归统计理论；本问只借用其指标选择告诫，不引用具体结论。仅元数据级证据。
+  claim_types:
+  - literature_fact
+  status: used
+  decision_reason: 支撑 F2b 的误差指标纪律（A 级期刊、标题级证据足以支撑『MAPE 需谨慎并配 MAE』这一常识性主张）；仅元数据级。
+  fingerprint: 10.1016/j.neucom.2015.12.114
+  verified: true
+  verification_provider: crossref
+  verification_error: null
+  added_at: '2026-09-11T11:47:20.312151+00:00'
+  round_id: rnd-c7c0a57a97ea
+  verified_at: '2026-09-11T11:47:34.126828+00:00'
+  verified_title:
+  - Mean Absolute Percentage Error for regression models
+  decided_at: '2026-09-11T11:47:48.176453+00:00'
+- id: ref-mathaba-2014-price-forecast-benefit
+  title: Analysing the economic benefit of electricity price forecast in industrial
+    load scheduling
+  authors:
+  - Tebello Mathaba
+  - Xiaohua Xia
+  - Jiangfeng Zhang
+  year: 2014
+  source: Electric Power Systems Research
+  doi: 10.1016/j.epsr.2014.05.008
+  url: https://doi.org/10.1016/j.epsr.2014.05.008
+  authority: B
+  verification_level: metadata
+  summary: 分析电价预测在工业负荷调度中的经济收益（据标题与期刊层级；本轮未取得摘要）。
+  applicable_conditions: 量化『价格预测精度 → 调度成本』的经济价值。
+  supports: F2c：支撑『价格预测的价值应以调度成本/收益的增量来度量』，对应 A8-(b) 要求的『价格预报误差的代价』（决策用预测价、结算用实际价的两套费用分解）。
+  differences: 工业负荷调度（可平移负荷）；本问为储能充放电与购电，机制可迁移、结论不可引用。仅元数据级证据。
+  claim_types:
+  - literature_fact
+  status: used
+  decision_reason: 支撑 F2c 的『预测精度→经济收益』评估形式（B 级期刊）；仅元数据级证据，引用限于形式。
+  fingerprint: 10.1016/j.epsr.2014.05.008
+  verified: true
+  verification_provider: crossref
+  verification_error: null
+  added_at: '2026-09-11T11:47:20.387360+00:00'
+  round_id: rnd-c7c0a57a97ea
+  verified_at: '2026-09-11T11:47:34.984063+00:00'
+  verified_title:
+  - Analysing the economic benefit of electricity price forecast in industrial load
+    scheduling
+  decided_at: '2026-09-11T11:47:48.518953+00:00'
+- id: ref-hodge-2018-forecast-value-storage
+  title: The combined value of wind and solar power forecasting improvements and electricity
+    storage
+  authors:
+  - Bri-Mathias Hodge
+  - Carlo Brancucci Martinez-Anido
+  - Qin Wang
+  - Erol Chartan
+  - Anthony Florita
+  - Juha Kiviluoma
+  year: 2018
+  source: Applied Energy
+  doi: 10.1016/j.apenergy.2017.12.120
+  url: https://doi.org/10.1016/j.apenergy.2017.12.120
+  authority: A
+  verification_level: metadata
+  summary: 分析可再生出力预测改进与储能的联合价值（据标题与期刊层级；本轮未取得摘要）。
+  applicable_conditions: 预测精度提升与储能配置/调度的交互价值评估。
+  supports: F2c：支撑『预测改进的价值与储能的存在相互耦合，必须联合评估』，对应本问 4-3 中『光伏预报误差（承 prob03 F2/F3）』与『价格预报误差（A8-(b)）』两类误差并存时的费用归因。
+  differences: 风电/光伏出力预测 + 系统级储能价值；本问的价格预测误差与光伏预报误差作用在不同层级。仅元数据级证据。
+  claim_types:
+  - literature_fact
+  status: used
+  decision_reason: 支撑 F2c 的『预测价值需与储能联合评估』（A 级期刊）；仅元数据级证据，引用限于框架。
+  fingerprint: 10.1016/j.apenergy.2017.12.120
+  verified: true
+  verification_provider: crossref
+  verification_error: null
+  added_at: '2026-09-11T11:47:20.468035+00:00'
+  round_id: rnd-c7c0a57a97ea
+  verified_at: '2026-09-11T11:47:36.084384+00:00'
+  verified_title:
+  - The combined value of wind and solar power forecasting improvements and electricity
+    storage
+  decided_at: '2026-09-11T11:47:48.851668+00:00'
+- id: ref-akbari-2019-stochastic-robust-arbitrage
+  title: A hybrid stochastic-robust optimization approach for energy storage arbitrage
+    in day-ahead and real-time markets
+  authors:
+  - Alireza Akbari-Dibavar
+  - Kazem Zare
+  - Sayyad Nojavan
+  year: 2019
+  source: Sustainable Cities and Society
+  doi: 10.1016/j.scs.2019.101600
+  url: https://doi.org/10.1016/j.scs.2019.101600
+  authority: B
+  verification_level: metadata
+  summary: 对日前与实时市场中的储能套利提出随机—鲁棒混合优化方法（据标题与期刊层级；本轮未取得摘要）。
+  applicable_conditions: 价格不确定下用随机/鲁棒方法处理储能套利，作为确定性主口径的对照。
+  supports: F6：支撑『随机/鲁棒优化是价格不确定下储能套利的标准对照口径』，对应 A8-(b) 第 4 条『鲁棒优化/场景随机放 ablation 作对照、不得喧宾夺主』。
+  differences: 该文以随机—鲁棒为主口径；本问主口径是点预测+确定性 LP，随机/鲁棒只在 ablation。仅元数据级证据。
+  claim_types:
+  - literature_fact
+  status: used
+  decision_reason: 支撑 F6 的 ablation 对照口径定位（B 级期刊）；仅元数据级证据，不用于主口径选择。
+  fingerprint: 10.1016/j.scs.2019.101600
+  verified: true
+  verification_provider: crossref
+  verification_error: null
+  added_at: '2026-09-11T11:47:20.549882+00:00'
+  round_id: rnd-c7c0a57a97ea
+  verified_at: '2026-09-11T11:47:37.103180+00:00'
+  verified_title:
+  - A hybrid stochastic-robust optimization approach for energy storage arbitrage
+    in day-ahead and real-time markets
+  decided_at: '2026-09-11T11:47:49.193657+00:00'
+- id: ref-jiang-2015-hour-ahead-bidding-adp
+  title: Optimal Hour-Ahead Bidding in the Real-Time Electricity Market with Battery
+    Storage Using Approximate Dynamic Programming
+  authors:
+  - Daniel R. Jiang
+  - Warren B. Powell
+  year: 2015
+  source: INFORMS Journal on Computing
+  doi: 10.1287/ijoc.2015.0640
+  url: https://doi.org/10.1287/ijoc.2015.0640
+  authority: A
+  verification_level: abstract_oa
+  summary: 把电池储能在小时前市场的投标写成动态规划，用近似动态规划（ADP）求收益型投标策略，并给出不依赖价格过程分布的无分布变体；用 NYISO 历史实时价格训练策略并与最优基准比较。
+  applicable_conditions: 需要在不完全价格信息下做序贯/小时前决策，并与完全信息最优基准比较。
+  supports: F2d + F6：支撑『信息在时间上逐步揭示时的决策』与『以完全信息最优为基准量化信息缺失代价』这两种范式，对应 A8-(b) 的『当天电价到结算时才可知』与
+    ablation 中的对照基线。
+  differences: 小时前投标 + ADP/RL，且考虑小时初末储能状态；本问主口径为确定性 LP + 滚动更新点预测，不引入 RL。其收益数值不可引用。
+  claim_types:
+  - literature_fact
+  - agent_inference
+  status: used
+  decision_reason: 支撑 F2d/F6 的『信息逐步揭示』与『完全信息基准』范式（A 级、摘要明确）；不用于主口径。
+  fingerprint: 10.1287/ijoc.2015.0640
+  verified: true
+  verification_provider: crossref
+  verification_error: null
+  added_at: '2026-09-11T11:47:20.638177+00:00'
+  round_id: rnd-c7c0a57a97ea
+  verified_at: '2026-09-11T11:47:37.902821+00:00'
+  verified_title:
+  - Optimal Hour-Ahead Bidding in the Real-Time Electricity Market with Battery Storage
+    Using Approximate Dynamic Programming
+  decided_at: '2026-09-11T11:47:49.558804+00:00'
+- id: ref-khani-2015-online-adaptive-rtod
+  title: Online Adaptive Real-Time Optimal Dispatch of Privately Owned Energy Storage
+    Systems Using Public-Domain Electricity Market Prices
+  authors:
+  - Hadi Khani
+  - Mohammad R. Dadash Zadeh
+  year: 2015
+  source: IEEE Transactions on Power Systems
+  doi: 10.1109/tpwrs.2014.2336753
+  url: https://doi.org/10.1109/tpwrs.2014.2336753
+  authority: A
+  verification_level: abstract_oa
+  summary: 把公开市场预售电价当作预测价、事后小时价当作实际价，用 MILP 建立储能的实时最优调度（RTOD）；实测表明公开价格预测的不准确性显著降低储能收益，并据此提出在线自适应算法显著提升收益。
+  applicable_conditions: 『预测价决策 + 实际价结算』分离，且可用历史价格在线修正目标。
+  supports: F2c + F2d：直接支撑 A8-(b) 的核心口径——决策层用（公开可得、可能不准的）预测价、结算用实际价，且预测误差会显著侵蚀收益；并支撑『用滚动可得的历史价格在线修正』的对照思路。
+  differences: 竞争性市场的储能套利（压缩空气储能）、以时前/事后价格为预测/实际；本问为微网购电成本最小化、价格为附件 4。其收益提升幅度不可引用。
+  claim_types:
+  - literature_fact
+  - agent_inference
+  status: used
+  decision_reason: 支撑 F2c 的『预测价决策/实际价结算 + 预测误差代价』（A 级、摘要明确给出预测不准显著降低收益）；是本问决策—结算分离口径的强证据。
+  fingerprint: 10.1109/tpwrs.2014.2336753
+  verified: true
+  verification_provider: crossref
+  verification_error: null
+  added_at: '2026-09-11T11:47:20.729143+00:00'
+  round_id: rnd-c7c0a57a97ea
+  verified_at: '2026-09-11T11:47:38.721166+00:00'
+  verified_title:
+  - Online Adaptive Real-Time Optimal Dispatch of Privately Owned Energy Storage Systems
+    Using Public-Domain Electricity Market Prices
+  decided_at: '2026-09-11T11:47:49.923900+00:00'
+- id: ref-scharff-2016-elbas-intraday
+  title: Trading behaviour on the continuous intraday market Elbas
+  authors:
+  - Richard Scharff
+  - Mikael Amelin
+  year: 2016
+  source: Energy Policy
+  doi: 10.1016/j.enpol.2015.10.045
+  url: https://doi.org/10.1016/j.enpol.2015.10.045
+  authority: A
+  verification_level: metadata
+  summary: 研究连续日内市场 Elbas 的交易行为（据标题与期刊层级；本轮未取得摘要）。
+  applicable_conditions: 日内/连续市场作为对日前计划的修正机制。
+  supports: F4：支撑『存在日内市场可在信息更新后修正日前头寸』这一制度事实，对应 4-3 链 6:00/12:00/18:00 调整层的机制定位（承
+    prob03 D1/B1）。
+  differences: 北欧连续日内市场的交易行为分析；本问把调整压缩为 3 个固定时刻的确定性再优化。仅元数据级证据。
+  claim_types:
+  - literature_fact
+  status: used
+  decision_reason: 支撑 F4 的日内修正机制存在性（A 级期刊）；仅元数据级证据，引用限于机制。
+  fingerprint: 10.1016/j.enpol.2015.10.045
+  verified: true
+  verification_provider: crossref
+  verification_error: null
+  added_at: '2026-09-11T11:47:20.820837+00:00'
+  round_id: rnd-c7c0a57a97ea
+  verified_at: '2026-09-11T11:47:39.811987+00:00'
+  verified_title:
+  - Trading behaviour on the continuous intraday market Elbas
+  decided_at: '2026-09-11T11:47:50.283690+00:00'
+- id: ref-bottieau-2020-imbalance-settlement-forecast
+  title: Very-Short-Term Probabilistic Forecasting for a Risk-Aware Participation
+    in the Single Price Imbalance Settlement
+  authors:
+  - Jeremie Bottieau
+  - Louis Hubert
+  - Zacharie De Greve
+  - Francois Vallee
+  - Jean-Francois Toubeau
+  year: 2020
+  source: IEEE Transactions on Power Systems
+  doi: 10.1109/tpwrs.2019.2940756
+  url: https://doi.org/10.1109/tpwrs.2019.2940756
+  authority: A
+  verification_level: abstract_oa
+  summary: 针对欧洲『单一不平衡价』结算机制，用编解码深度模型给出不平衡信号的概率预测，并把预测分布用于风险感知的鲁棒双层优化；结果显示概率预测优于现有工具，风险感知调度在保守与风险偏好间取得权衡并提升收益。
+  applicable_conditions: 不平衡/偏差按（单一）结算价结算，且参与者需要预测不平衡信号与价格。
+  supports: F4：支撑『偏差结算机制下，计划与实际之间的不平衡量必须显式建模并可优化』，与 4-3 的 0.5×/1.5× 分段结算同属『偏差 → 费用』范式（具体系数由题面给定，文献不标定）。
+  differences: 单一不平衡价 + 概率预测 + 鲁棒双层；本问是确定性分段结算（0.5×/1.5×）、无报价与风险目标。其收益与精度数值不可引用。
+  claim_types:
+  - literature_fact
+  - agent_inference
+  status: used
+  decision_reason: 支撑 F4 的偏差结算建模范式（A 级、摘要明确）；不支撑 0.5×/1.5× 的具体系数（题面硬给定）。
+  fingerprint: 10.1109/tpwrs.2019.2940756
+  verified: true
+  verification_provider: crossref
+  verification_error: null
+  added_at: '2026-09-11T11:47:20.910948+00:00'
+  round_id: rnd-c7c0a57a97ea
+  verified_at: '2026-09-11T11:47:40.622525+00:00'
+  verified_title:
+  - Very-Short-Term Probabilistic Forecasting for a Risk-Aware Participation in the
+    Single Price Imbalance Settlement
+  decided_at: '2026-09-11T11:47:50.647160+00:00'
+- id: ref-yang-2023-da-rt-shared-storage
+  title: Day-ahead and real-time market bidding and scheduling strategy for wind power
+    participation based on shared energy storage
+  authors:
+  - Xiyun Yang
+  - Liwei Fan
+  - Xiangjun Li
+  - Lingzhuochao Meng
+  year: 2023
+  source: Electric Power Systems Research
+  doi: 10.1016/j.epsr.2022.108903
+  url: https://doi.org/10.1016/j.epsr.2022.108903
+  authority: B
+  verification_level: abstract_oa
+  summary: 两阶段策略：第一阶段在风电出力与电价不确定下优化日前市场投标功率，第二阶段基于日前中标量与实际出力，通过共享储能充放电服务最大化多风电场日前+实时净收益；案例显示共享储能可显著降低实时市场偏差惩罚并提高收益。
+  applicable_conditions: 日前计划 + 实时结算的两阶段结构，且储能用于削减实时偏差。
+  supports: F4 + F5：支撑『日前计划 → 实时偏差结算』的两阶段结构与『储能可降低偏差惩罚』这一机制，直接对应 4-2/4-3 两条链共同的日前—实时结构。
+  differences: 风电场 + 共享储能、含报价博弈（量子遗传算法）；本问为单一微网价格接受者、确定性 LP。其收益与偏差削减幅度不可引用。
+  claim_types:
+  - literature_fact
+  - agent_inference
+  status: used
+  decision_reason: 支撑 F4/F5 的两阶段与偏差惩罚机制（B 级、摘要明确）；数值不可引用。
+  fingerprint: 10.1016/j.epsr.2022.108903
+  verified: true
+  verification_provider: crossref
+  verification_error: null
+  added_at: '2026-09-11T11:47:21.012237+00:00'
+  round_id: rnd-c7c0a57a97ea
+  verified_at: '2026-09-11T11:47:41.435805+00:00'
+  verified_title:
+  - Day-ahead and real-time market bidding and scheduling strategy for wind power
+    participation based on shared energy storage
+  decided_at: '2026-09-11T11:47:51.007624+00:00'
+- id: ref-yang-2020-deviation-penalty-distribution
+  title: A Penalty Scheme for Mitigating Uninstructed Deviation of Generation Outputs
+    From Variable Renewables in a Distribution Market
+  authors:
+  - Jiajia Yang
+  - Zhao Yang Dong
+  - Fushuan Wen
+  - Qixin Chen
+  - Fengji Luo
+  - Weijia Liu
+  - Junpeng Zhan
+  year: 2020
+  source: IEEE Transactions on Smart Grid
+  doi: 10.1109/tsg.2020.2993049
+  url: https://doi.org/10.1109/tsg.2020.2993049
+  authority: A
+  verification_level: abstract_oa
+  summary: 在配电市场中对『实时出力/需求与市场成交量的偏差』提出惩罚方案，并纳入储能的调频服务；证明通过合理设置惩罚价可将市场波动控制在期望限值内，且机制可实现非负市场盈余。
+  applicable_conditions: 存在『实时量 vs 计划/成交量的偏差』并对其施加惩罚电价。
+  supports: F4：支撑『偏差量按惩罚价结算，且惩罚价水平会影响偏差行为』这一制度与建模形式，为 4-3 的 0.5×/1.5× 双向分段结算提供机制依据（系数本身由题面给定）。
+  differences: 配电市场机制设计 + 调频服务；本问为单一微网确定性结算、无市场出清与调频。其惩罚价设置结论不可引用。
+  claim_types:
+  - literature_fact
+  - agent_inference
+  status: used
+  decision_reason: 支撑 F4 的偏差惩罚形式（A 级、摘要明确）；不支撑具体系数。
+  fingerprint: 10.1109/tsg.2020.2993049
+  verified: true
+  verification_provider: crossref
+  verification_error: null
+  added_at: '2026-09-11T11:47:21.128425+00:00'
+  round_id: rnd-c7c0a57a97ea
+  verified_at: '2026-09-11T11:47:42.264455+00:00'
+  verified_title:
+  - A Penalty Scheme for Mitigating Uninstructed Deviation of Generation Outputs From
+    Variable Renewables in a Distribution Market
+  decided_at: '2026-09-11T11:47:51.371398+00:00'
+- id: ref-oconnor-2025-conformal-price-forecast
+  title: Conformal Prediction for electricity price forecasting in the day-ahead and
+    real-time balancing market
+  authors:
+  - Ciaran O'Connor
+  - Mohamed Bahloul
+  - Roberto Rossi
+  - Steven Prestwich
+  - Andrea Visentin
+  year: 2025
+  source: Energy and AI
+  doi: 10.1016/j.egyai.2025.100571
+  url: https://doi.org/10.1016/j.egyai.2025.100571
+  authority: A
+  verification_level: abstract_oa
+  summary: 用保形预测（Conformal Prediction）为日前与实时平衡市场提供带预测区间的概率价格预测，区间更窄且覆盖率更高；并把预测区间接入电池储能的模拟交易算法，在日前与平衡市场均提升财务回报。
+  applicable_conditions: 需要给出价格预测不确定性的区间（分位数）并评估其对储能交易收益的影响。
+  supports: F2b + F6：支撑 A8-(b) 要求的『报告 MAE/MAPE/分位数』中的分位数口径，并为『预测不确定性的量化及其对储能收益的影响』提供
+    A 级方法学先例（作为 ablation 的对照方向）。
+  differences: 保形预测/集成区间模型、小时级日前+平衡市场；本问主口径为点预测 + 确定性 LP，区间只作评估与 ablation。其收益提升数值不可引用。
+  claim_types:
+  - literature_fact
+  - agent_inference
+  status: used
+  decision_reason: 支撑 F2b 的分位数口径与 F6 的不确定性对照（A 级、摘要明确）；不改变主口径（点预测+确定性 LP）。
+  fingerprint: 10.1016/j.egyai.2025.100571
+  verified: true
+  verification_provider: crossref
+  verification_error: null
+  added_at: '2026-09-11T11:47:21.237440+00:00'
+  round_id: rnd-c7c0a57a97ea
+  verified_at: '2026-09-11T11:47:43.285439+00:00'
+  verified_title:
+  - Conformal Prediction for electricity price forecasting in the day-ahead and real-time
+    balancing market
+  decided_at: '2026-09-11T11:47:51.746911+00:00'
+- id: ref-hai-2025-microgrid-price-ems
+  title: Energy management of a microgrid with integration of renewable energy sources
+    considering energy storage systems with electricity price
+  authors:
+  - Tao Hai
+  - Narinderjit Singh Sawaran Singh
+  - Farah Jamal
+  year: 2025
+  source: Journal of Energy Storage
+  doi: 10.1016/j.est.2024.115191
+  url: https://doi.org/10.1016/j.est.2024.115191
+  authority: B
+  verification_level: metadata
+  summary: 研究含可再生能源与储能、并考虑电价的微网能量管理（据标题与期刊层级；本轮未取得摘要）。
+  applicable_conditions: 微网 EMS 中把电价与储能调度纳入同一优化框架。
+  supports: F7：为 prob04 池提供『微网 EMS + 可再生 + 储能 + 电价』的问题族定位独立来源，保证本池自洽（check_key_assumptions
+    只读本小问池）。
+  differences: 面向微网 EMS 的一般框架；不含本问的紧迫购电 5×、0.5×/1.5× 与附件 4 口径。仅元数据级证据。
+  claim_types:
+  - literature_fact
+  status: used
+  decision_reason: 支撑 F7 的问题族定位，保证 prob04 池对『微网 EMS + 电价』自洽；仅元数据级证据。
+  fingerprint: 10.1016/j.est.2024.115191
+  verified: true
+  verification_provider: crossref
+  verification_error: null
+  added_at: '2026-09-11T11:47:21.348973+00:00'
+  round_id: rnd-c7c0a57a97ea
+  verified_at: '2026-09-11T11:47:44.516776+00:00'
+  verified_title:
+  - Energy management of a microgrid with integration of renewable energy sources
+    considering energy storage systems with electricity price
+  decided_at: '2026-09-11T11:47:52.135520+00:00'
+rounds:
+- round_id: rnd-c7c0a57a97ea
+  query: prob04 实时波动电价（附件 4）下的储能调度与购电策略：实时电价下的储能套利与确定性优化建模、价格可观测性与电价预测（预测器族、滚动回测与
+    MAE/MAPE/分位数评估、预测误差的经济代价、决策—结算分离、6:00/12:00/18:00 滚动更新）、价格波动与尖峰、日前—实时两结算与偏差/不平衡结算惩罚、价格不确定性下的随机/鲁棒/在线对照口径、微网
+    EMS 问题族定位
+  status: completed
+  started_at: '2026-09-11T11:47:19.504228+00:00'
+  added_ids:
+  - ref-krishnamurthy-2018-arbitrage-da-rt
+  - ref-staffell-2016-maximising-storage-value
+  - ref-antweiler-2021-storage-microeconomics
+  - ref-paulauskas-2024-battery-scheduling-arbitrage
+  - ref-zhang-2021-arbitrage-technologies
+  - ref-komorowska-2024-liion-price-arbitrage
+  - ref-campillo-2016-rtp-residential
+  - ref-chitsaz-2018-price-forecast-btm-storage
+  - ref-tschora-2022-da-price-forecasting-ml
+  - ref-lago-2018-spot-price-deep-learning
+  - ref-kapoor-2023-nz-price-forecasting
+  - ref-ibebuchi-2025-daep-endogenous-predictors
+  - ref-myttenaere-2016-mape-regression
+  - ref-mathaba-2014-price-forecast-benefit
+  - ref-hodge-2018-forecast-value-storage
+  - ref-akbari-2019-stochastic-robust-arbitrage
+  - ref-jiang-2015-hour-ahead-bidding-adp
+  - ref-khani-2015-online-adaptive-rtod
+  - ref-scharff-2016-elbas-intraday
+  - ref-bottieau-2020-imbalance-settlement-forecast
+  - ref-yang-2023-da-rt-shared-storage
+  - ref-yang-2020-deviation-penalty-distribution
+  - ref-oconnor-2025-conformal-price-forecast
+  - ref-hai-2025-microgrid-price-ems
+  finished_at: '2026-09-11T11:47:52.524151+00:00'
+  dry_reason: all_candidates_decided
+dry_reason: all_candidates_decided

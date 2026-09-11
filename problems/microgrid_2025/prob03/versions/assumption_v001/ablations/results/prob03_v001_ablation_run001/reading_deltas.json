@@ -1,0 +1,38 @@
+{
+  "complete": true,
+  "missing": [],
+  "deltas": {
+    "M7_D2B": {
+      "delta_total_yuan": -53422.53665,
+      "delta_total_d2a_recost_yuan": 198839.792217,
+      "delta_plan_yuan": -252262.329125,
+      "delta_adj_yuan": 124443.765714,
+      "delta_em_yuan": 74396.02676,
+      "delta_q_em_kwh": 26999.473468,
+      "delivery_delta_total_yuan": -51440.064218,
+      "own_reading": "B"
+    },
+    "M7_D2C": {
+      "delta_total_yuan": -53422.53665,
+      "delta_total_d2a_recost_yuan": 198839.792217,
+      "delta_plan_yuan": -0.000258,
+      "delta_adj_yuan": -127818.563153,
+      "delta_em_yuan": 74396.02676,
+      "delta_q_em_kwh": 26999.473468,
+      "delivery_delta_total_yuan": -51440.064218,
+      "own_reading": "C"
+    },
+    "M7_D5B": {
+      "delta_total_yuan": 2561954.05744,
+      "delta_total_d2a_recost_yuan": 2561954.05744,
+      "delta_plan_yuan": 213784.019954,
+      "delta_adj_yuan": -77613.077881,
+      "delta_em_yuan": 2425783.115366,
+      "delta_q_em_kwh": 550595.185575,
+      "delivery_delta_total_yuan": 2289709.687325,
+      "own_reading": "A"
+    }
+  },
+  "plan_exp_reason": "M7·PLAN-EXP 按团队 T6 **撤销**：AS15/AS16 的确定性、无预报误差分布口径下，计划层对未来的唯一无偏代理就是 0:00 预报 ⇒ q = b、偏差项与 q_em 均为 0，PLAN-EXP 与 T1 主口径 min Σp·b 恒等退化。角色由 M5（加密决策时刻族）承接。**不执行、不伪造数值**。",
+  "d2b_d2c_identity_note": "读法 B 的总费用 p·min(b,q) + 0.5p(b−q)⁺ = p·b − 0.5p(b−q)⁺ = 读法 C 的总费用，两式代数恒等；两 case 总费用相同属预期，已作为发现登记。"
+}

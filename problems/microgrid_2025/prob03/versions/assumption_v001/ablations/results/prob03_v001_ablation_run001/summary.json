@@ -1,0 +1,103 @@
+{
+  "run_id": "prob03_v001_ablation_run001",
+  "days": 365,
+  "probe_mode": false,
+  "cases_ok": [
+    "M1",
+    "M2a",
+    "M2b",
+    "M3",
+    "M4",
+    "M5a",
+    "M5b",
+    "M7_D2B",
+    "M7_D2C",
+    "M7_D5B",
+    "M8",
+    "M8b"
+  ],
+  "cases_failed": [],
+  "criteria_failed": [
+    "C3"
+  ],
+  "criteria": [
+    {
+      "id": "C1",
+      "passed": true,
+      "detail": "基线闸门 passed=True，未通过项 []"
+    },
+    {
+      "id": "C8",
+      "passed": true,
+      "detail": "表 3 交付一致性未通过项 []"
+    },
+    {
+      "id": "C2",
+      "passed": true,
+      "detail": "M2a 相对差 0.0（阈值 1e-8，T8：回归检查）；M2b 差额（跨日携带价值，结构性发现、非缺陷）-818915.5629730001 元"
+    },
+    {
+      "id": "C3",
+      "passed": false,
+      "detail": "M8（独立实现、同求解器设置）相对差 2.1672146396890143e-05（阈值 1e-8）；M8b（独立实现 + highs-ds/presolve=False）相对差 1.6756114994072834e-05。若链级超阈值，机制是团队 T7-3 已登记的「主目标最优面上仍有吞吐量多重最优」（run003 审计 1024/1460 层 throughput_unique=False）+ 状态传播，量级与 T7-6 的 2.2566e-04 同阶；实现正确性由补充检查 C3L（同一输入逐层等价，≤1e-9）单独判定。**不修改 C3 阈值。**"
+    },
+    {
+      "id": "C4",
+      "passed": true,
+      "detail": "M3=13758182.573724 ≤ M1=16179176.145228 ≤ M4=16505833.062742"
+    },
+    {
+      "id": "C5",
+      "passed": true,
+      "detail": "M5b=16179766.212646 ≤ M5a=16179575.041038 ≤ M1=16179176.145228；单调性成立=False。若为 False，按 T7-4 不得强行凑单调性，须如实登记「近视滚动 + LP 退化」反例机制（M5a/M5b 均已成功执行=True）"
+    },
+    {
+      "id": "C6",
+      "passed": true,
+      "detail": "M6 oracle 4 日 12 层最大相对损失 3e-12；降级登记 D6-A：4 个指定日 × 3 个调整层的日尺度 MILP oracle + 全年 LP 损失界（引理 L5）"
+    },
+    {
+      "id": "C7",
+      "passed": true,
+      "detail": "缺项 []；PLAN-EXP 按 T6 撤销：M7·PLAN-EXP 按团队 T6 **撤销**：AS15/AS16 的确定性、无预报误差分布口径下，计划层对未来的唯"
+    },
+    {
+      "id": "C9",
+      "passed": true,
+      "detail": "q_em 归因抽样 ≥3 且 C_adj 两分段可复算"
+    },
+    {
+      "id": "C10",
+      "passed": true,
+      "detail": "全期相对差 0.0，交付期相对差 0.0"
+    }
+  ],
+  "supplementary_checks": [
+    {
+      "id": "C3L",
+      "passed": true,
+      "detail": "逐层等价性：比较 16 层，未通过 []；阈值 1e-09"
+    }
+  ],
+  "supplementary_failed": [],
+  "baseline_passed": true,
+  "anchor_passed": true,
+  "m6_oracle_passed": true,
+  "reading_deltas_complete": true,
+  "figures": [
+    "problems\\microgrid_2025\\prob03\\versions\\assumption_v001\\ablations\\results\\prob03_v001_ablation_run001\\figures\\ablation_model_cost.png",
+    "problems\\microgrid_2025\\prob03\\versions\\assumption_v001\\ablations\\results\\prob03_v001_ablation_run001\\figures\\ablation_reading_delta.png",
+    "problems\\microgrid_2025\\prob03\\versions\\assumption_v001\\ablations\\results\\prob03_v001_ablation_run001\\figures\\ablation_decision_density.png",
+    "problems\\microgrid_2025\\prob03\\versions\\assumption_v001\\ablations\\results\\prob03_v001_ablation_run001\\figures\\ablation_identities.png",
+    "problems\\microgrid_2025\\prob03\\versions\\assumption_v001\\ablations\\results\\prob03_v001_ablation_run001\\figures\\ablation_criteria.png"
+  ],
+  "technical_debt": [
+    "M6 按 D6-A 降级为 4 个指定日的日尺度 oracle + 全年 LP 损失界（引理 L5），非全年 MILP。",
+    "M7·PLAN-EXP 按团队 T6 撤销（确定性口径下与 min Σp·b 恒等退化），不执行、不伪造数值。",
+    "M7·D2-B 与 M7·D2-C 的总费用公式代数恒等（p·min(b,q) = p·b − p·u⁺），两条读数相同属预期。",
+    "M8 的独立性限于变量/行书写次序重排、消去弃光变量 s 与求解器设置（highs-ds/presolve=False）；tie-breaking 规则必须与 M1 完全一致（T7-5）。",
+    "C3 的链级阈值（|ΔC|/C ≤ 1e-8）与团队自己的 T7-3 审计冲突：run003 有 1024/1460 层在主目标最优面上仍有吞吐量多重最优（throughput_unique=False），故任何落在不同最优面点的独立实现都会经跨日状态传播改变链级总费用（量级 ~1e-4，与 T7-6 的 2.2566e-04 同阶）。本阶段**不修改 C3 阈值**：如实报告链级判定，并以补充检查 C3L（同一输入逐层等价，≤1e-9）单独判定实现正确性；该冲突须由团队在 cross_question_review 确认。",
+    "LP 最优面非唯一：本阶段只比对目标值、约束残差、(I1)/(I2)、题面指标与交付表，不比对逐点解唯一性。"
+  ],
+  "wall_seconds": 586.336422
+}

@@ -1,0 +1,290 @@
+{
+  "M1": {
+    "ok": true,
+    "identities": {
+      "i1_daily_max_abs": 7.9e-08,
+      "i2_daily_max_abs": 7.9e-08,
+      "continuity_max": 0.0,
+      "transition_max": 8.8e-08,
+      "settlement_max": 0.0,
+      "cost_decomposition_max": 0.0
+    },
+    "residuals": {
+      "settlement_balance_max": 0.0,
+      "state_transition_max": 8.8e-08,
+      "cross_day_continuity_max": 0.0,
+      "cost_decomposition_max": 0.0,
+      "layer_status_max": 0,
+      "layer_equality_residual_max": 8.8e-08,
+      "layer_equality_residual_relative_max": 2e-12,
+      "layer_inequality_residual_max": 3.5e-08,
+      "layer_inequality_residual_relative_max": 2e-12,
+      "layer_bound_violation_max": 7e-08
+    },
+    "failed": []
+  },
+  "M2a": {
+    "ok": true,
+    "identities": {
+      "i1_daily_max_abs": 7.9e-08,
+      "i2_daily_max_abs": 7.9e-08,
+      "continuity_max": 0.0,
+      "transition_max": 8.8e-08,
+      "settlement_max": 0.0,
+      "cost_decomposition_max": 0.0
+    },
+    "residuals": {
+      "settlement_balance_max": 0.0,
+      "state_transition_max": 8.8e-08,
+      "cross_day_continuity_max": 0.0,
+      "cost_decomposition_max": 0.0,
+      "layer_status_max": 0,
+      "layer_equality_residual_max": 8.8e-08,
+      "layer_equality_residual_relative_max": 2e-12,
+      "layer_inequality_residual_max": 3.5e-08,
+      "layer_inequality_residual_relative_max": 2e-12,
+      "layer_bound_violation_max": 7e-08
+    },
+    "failed": []
+  },
+  "M2b": {
+    "ok": true,
+    "identities": {
+      "i1_daily_max_abs": 7.9e-08,
+      "i2_daily_max_abs": 7.9e-08,
+      "continuity_max": 4800.000000002,
+      "transition_max": 8.8e-08,
+      "settlement_max": 0.0,
+      "cost_decomposition_max": 0.0
+    },
+    "residuals": {
+      "settlement_balance_max": 0.0,
+      "state_transition_max": 8.8e-08,
+      "cross_day_continuity_max": 4800.000000002,
+      "cost_decomposition_max": 0.0,
+      "layer_status_max": 0,
+      "layer_equality_residual_max": 8.8e-08,
+      "layer_equality_residual_relative_max": 2e-12,
+      "layer_inequality_residual_max": 3.5e-08,
+      "layer_inequality_residual_relative_max": 2e-12,
+      "layer_bound_violation_max": 7e-08
+    },
+    "failed": []
+  },
+  "M3": {
+    "ok": true,
+    "identities": {
+      "i1_daily_max_abs": 0.0,
+      "i2_daily_max_abs": 0.0,
+      "continuity_max": 0.0,
+      "transition_max": 0.0,
+      "settlement_max": 0.0,
+      "cost_decomposition_max": 0.0
+    },
+    "residuals": {
+      "settlement_balance_max": 0.0,
+      "state_transition_max": 0.0,
+      "cross_day_continuity_max": 0.0,
+      "cost_decomposition_max": 0.0,
+      "layer_status_max": 0,
+      "layer_equality_residual_max": 0.0,
+      "layer_equality_residual_relative_max": 0.0,
+      "layer_inequality_residual_max": 0.0,
+      "layer_inequality_residual_relative_max": 0.0,
+      "layer_bound_violation_max": 0.0
+    },
+    "failed": []
+  },
+  "M4": {
+    "ok": true,
+    "identities": {
+      "i1_daily_max_abs": 0.0,
+      "i2_daily_max_abs": 0.0,
+      "continuity_max": 0.0,
+      "transition_max": 0.0,
+      "settlement_max": 0.0,
+      "cost_decomposition_max": 0.0
+    },
+    "residuals": {
+      "settlement_balance_max": 0.0,
+      "state_transition_max": 0.0,
+      "cross_day_continuity_max": 0.0,
+      "cost_decomposition_max": 0.0,
+      "layer_status_max": 0,
+      "layer_equality_residual_max": 0.0,
+      "layer_equality_residual_relative_max": 0.0,
+      "layer_inequality_residual_max": 0.0,
+      "layer_inequality_residual_relative_max": 0.0,
+      "layer_bound_violation_max": 0.0
+    },
+    "failed": []
+  },
+  "M5a": {
+    "ok": true,
+    "identities": {
+      "i1_daily_max_abs": 8.4e-08,
+      "i2_daily_max_abs": 8.4e-08,
+      "continuity_max": 0.0,
+      "transition_max": 9.5e-08,
+      "settlement_max": 0.0,
+      "cost_decomposition_max": 0.0
+    },
+    "residuals": {
+      "settlement_balance_max": 0.0,
+      "state_transition_max": 9.5e-08,
+      "cross_day_continuity_max": 0.0,
+      "cost_decomposition_max": 0.0,
+      "layer_status_max": 0,
+      "layer_equality_residual_max": 9.7e-08,
+      "layer_equality_residual_relative_max": 1.6e-11,
+      "layer_inequality_residual_max": 9.1e-08,
+      "layer_inequality_residual_relative_max": 4e-12,
+      "layer_bound_violation_max": 9.7e-08
+    },
+    "failed": []
+  },
+  "M5b": {
+    "ok": true,
+    "identities": {
+      "i1_daily_max_abs": 8.6e-08,
+      "i2_daily_max_abs": 8.6e-08,
+      "continuity_max": 0.0,
+      "transition_max": 9.8e-08,
+      "settlement_max": 0.0,
+      "cost_decomposition_max": 0.0
+    },
+    "residuals": {
+      "settlement_balance_max": 0.0,
+      "state_transition_max": 9.8e-08,
+      "cross_day_continuity_max": 0.0,
+      "cost_decomposition_max": 0.0,
+      "layer_status_max": 0,
+      "layer_equality_residual_max": 9.9e-08,
+      "layer_equality_residual_relative_max": 1.6e-11,
+      "layer_inequality_residual_max": 9.9e-08,
+      "layer_inequality_residual_relative_max": 1.2e-11,
+      "layer_bound_violation_max": 1e-07
+    },
+    "failed": []
+  },
+  "M7_D5B": {
+    "ok": true,
+    "identities": {
+      "i1_daily_max_abs": 7.6e-08,
+      "i2_daily_max_abs": 7.6e-08,
+      "continuity_max": 0.0,
+      "transition_max": 8.5e-08,
+      "settlement_max": 0.0,
+      "cost_decomposition_max": 0.0
+    },
+    "residuals": {
+      "settlement_balance_max": 0.0,
+      "state_transition_max": 8.5e-08,
+      "cross_day_continuity_max": 0.0,
+      "cost_decomposition_max": 0.0,
+      "layer_status_max": 0,
+      "layer_equality_residual_max": 8.5e-08,
+      "layer_equality_residual_relative_max": 2e-12,
+      "layer_inequality_residual_max": 2.9e-08,
+      "layer_inequality_residual_relative_max": 1e-12,
+      "layer_bound_violation_max": 2.9e-08
+    },
+    "failed": []
+  },
+  "M7_D2B": {
+    "ok": true,
+    "identities": {
+      "i1_daily_max_abs": 0.0,
+      "i2_daily_max_abs": 0.0,
+      "continuity_max": 0.0,
+      "transition_max": 0.0,
+      "settlement_max": 0.0,
+      "cost_decomposition_max": 0.0
+    },
+    "residuals": {
+      "settlement_balance_max": 0.0,
+      "state_transition_max": 0.0,
+      "cross_day_continuity_max": 0.0,
+      "cost_decomposition_max": 0.0,
+      "layer_status_max": 0,
+      "layer_equality_residual_max": 0.0,
+      "layer_equality_residual_relative_max": 0.0,
+      "layer_inequality_residual_max": 0.0,
+      "layer_inequality_residual_relative_max": 0.0,
+      "layer_bound_violation_max": 0.0
+    },
+    "failed": []
+  },
+  "M7_D2C": {
+    "ok": true,
+    "identities": {
+      "i1_daily_max_abs": 0.0,
+      "i2_daily_max_abs": 0.0,
+      "continuity_max": 0.0,
+      "transition_max": 0.0,
+      "settlement_max": 0.0,
+      "cost_decomposition_max": 0.0
+    },
+    "residuals": {
+      "settlement_balance_max": 0.0,
+      "state_transition_max": 0.0,
+      "cross_day_continuity_max": 0.0,
+      "cost_decomposition_max": 0.0,
+      "layer_status_max": 0,
+      "layer_equality_residual_max": 0.0,
+      "layer_equality_residual_relative_max": 0.0,
+      "layer_inequality_residual_max": 0.0,
+      "layer_inequality_residual_relative_max": 0.0,
+      "layer_bound_violation_max": 0.0
+    },
+    "failed": []
+  },
+  "M8": {
+    "ok": true,
+    "identities": {
+      "i1_daily_max_abs": 7.9e-08,
+      "i2_daily_max_abs": 7.9e-08,
+      "continuity_max": 0.0,
+      "transition_max": 8.8e-08,
+      "settlement_max": 0.0,
+      "cost_decomposition_max": 0.0
+    },
+    "residuals": {
+      "settlement_balance_max": 0.0,
+      "state_transition_max": 8.8e-08,
+      "cross_day_continuity_max": 0.0,
+      "cost_decomposition_max": 0.0,
+      "layer_status_max": 0,
+      "layer_equality_residual_max": 8.8e-08,
+      "layer_equality_residual_relative_max": 2e-12,
+      "layer_inequality_residual_max": 6.1e-08,
+      "layer_inequality_residual_relative_max": 2e-12,
+      "layer_bound_violation_max": 9.4e-08
+    },
+    "failed": []
+  },
+  "M8b": {
+    "ok": true,
+    "identities": {
+      "i1_daily_max_abs": 0.0,
+      "i2_daily_max_abs": 0.0,
+      "continuity_max": 0.0,
+      "transition_max": 0.0,
+      "settlement_max": 0.0,
+      "cost_decomposition_max": 0.0
+    },
+    "residuals": {
+      "settlement_balance_max": 0.0,
+      "state_transition_max": 0.0,
+      "cross_day_continuity_max": 0.0,
+      "cost_decomposition_max": 0.0,
+      "layer_status_max": 0,
+      "layer_equality_residual_max": 0.0,
+      "layer_equality_residual_relative_max": 0.0,
+      "layer_inequality_residual_max": 0.0,
+      "layer_inequality_residual_relative_max": 0.0,
+      "layer_bound_violation_max": 6.7e-08
+    },
+    "failed": []
+  }
+}

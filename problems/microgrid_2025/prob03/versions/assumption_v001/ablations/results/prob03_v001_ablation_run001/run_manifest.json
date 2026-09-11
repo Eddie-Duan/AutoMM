@@ -1,0 +1,103 @@
+{
+  "problem_id": "microgrid_2025",
+  "question_id": "prob03",
+  "stage": "ablation",
+  "assumption_version": "assumption_v001",
+  "formulation_version": "formulation_v001",
+  "created_at": "2026-09-11T11:24:48.201932+00:00",
+  "days": 365,
+  "periods": 52560,
+  "seed": 20260910,
+  "input": {
+    "attachment1_md5": "dbe06f92517431228efcc26e3e796ef9",
+    "attachment2_md5": "bb3e493f804678de571575116eca1ae6",
+    "attachment3_md5": "e8dfee653d53a78c82198f657a01feb4",
+    "template_md5": "75be588e714646dde3102aa102382347"
+  },
+  "code_sha256": {
+    "ablation_prob03.py": "eaafc64e1cd23c82692b30fbb8dd4fcd5dbf3c9f61209d6317a3cbdea20138a6",
+    "__code_dir__": "3daa2149c8ed178e5c30c7150021cd7540edad299810b85f313d39f1d25e68f5"
+  },
+  "decision_sets": {
+    "M1": [
+      0,
+      6,
+      12,
+      18
+    ],
+    "M5a": [
+      0,
+      3,
+      6,
+      9,
+      12,
+      15,
+      18,
+      21
+    ],
+    "M5b": [
+      0,
+      1,
+      2,
+      3,
+      4,
+      5,
+      6,
+      7,
+      8,
+      9,
+      10,
+      11,
+      12,
+      13,
+      14,
+      15,
+      16,
+      17,
+      18,
+      19,
+      20,
+      21,
+      22,
+      23
+    ]
+  },
+  "parameters": {
+    "delta_t_h": 0.16666666666666666,
+    "eta_ch": 0.9,
+    "eta_dis": 0.9,
+    "alpha_em": 5.0,
+    "beta_def": 0.5,
+    "beta_over": 1.5,
+    "e_init_kwh": 6000.0,
+    "e_min_kwh": 1200.0,
+    "e_max_kwh": 10800.0,
+    "c_cap_kwh": 833.3333333333333,
+    "q_dis_cap_kwh": 750.0
+  },
+  "t7_tiebreak": {
+    "rule": "min [该层主目标] + ε·Σ_t(c_{d,t}+q_dis_{d,t})，ε = 1e-6·max(|该层主目标最优值|,1)/[n·(c_cap+q_dis_cap)]；所有层、所有模型 M1–M8 必须完全一致（团队 T7-1/T7-5）",
+    "eps_relative": 1e-06,
+    "invariance_tol": 1e-09
+  },
+  "cases": [
+    "M1",
+    "M2a",
+    "M2b",
+    "M3",
+    "M4",
+    "M5a",
+    "M5b",
+    "M7_D2B",
+    "M7_D2C",
+    "M7_D5B",
+    "M8",
+    "M8b"
+  ],
+  "checks_failed": [
+    "C3"
+  ],
+  "wall_seconds": 586.336422,
+  "gpu_required": false,
+  "device": "cpu"
+}

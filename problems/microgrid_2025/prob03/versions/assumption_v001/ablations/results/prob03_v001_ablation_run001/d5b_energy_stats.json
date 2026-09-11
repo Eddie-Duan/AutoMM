@@ -1,0 +1,42 @@
+{
+  "per_hour": {
+    "0": {
+      "periods": 52560,
+      "interp_energy_kwh": 20015051.6212,
+      "const_energy_kwh": 20015051.6212,
+      "mean_abs_diff_kwh": 45.443926619,
+      "max_abs_diff_kwh": 438.033180556,
+      "relative_diff": 0.0
+    },
+    "6": {
+      "periods": 39420,
+      "interp_energy_kwh": 20263776.723983,
+      "const_energy_kwh": 20034544.9049,
+      "mean_abs_diff_kwh": 54.436605124,
+      "max_abs_diff_kwh": 386.307069444,
+      "relative_diff": 0.011312393647
+    },
+    "12": {
+      "periods": 26280,
+      "interp_energy_kwh": 9858043.663783,
+      "const_energy_kwh": 8744947.5167,
+      "mean_abs_diff_kwh": 42.494922638,
+      "max_abs_diff_kwh": 366.648180556,
+      "relative_diff": 0.11291247889
+    },
+    "18": {
+      "periods": 13140,
+      "interp_energy_kwh": 141.861458,
+      "const_energy_kwh": 100.1375,
+      "mean_abs_diff_kwh": 0.003175339,
+      "max_abs_diff_kwh": 1.213541667,
+      "relative_diff": 0.294117647059
+    }
+  },
+  "note": "只统计各发布时刻的支配域（Π 有定义的时段）",
+  "total_interp_kwh": 50137013.870425,
+  "total_const_kwh": 48794644.1803,
+  "mean_abs_diff_kwh": 43.007854246,
+  "max_abs_diff_kwh": 438.033180556,
+  "relative_diff": 0.026774025545
+}

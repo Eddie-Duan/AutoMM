@@ -1,0 +1,42 @@
+{
+  "checks": [
+    {
+      "name": "table3.2025-03-20",
+      "intervals_match": true,
+      "total_kwh": 2062.489152778,
+      "expected_total_kwh": 2062.489153,
+      "total_match": true,
+      "interval_count": 5,
+      "passed": true
+    },
+    {
+      "name": "table3.2025-06-21",
+      "intervals_match": true,
+      "total_kwh": 840.356133333,
+      "expected_total_kwh": 840.356133,
+      "total_match": true,
+      "interval_count": 7,
+      "passed": true
+    },
+    {
+      "name": "table3.2025-09-23",
+      "intervals_match": true,
+      "total_kwh": 1150.194480556,
+      "expected_total_kwh": 1150.194481,
+      "total_match": true,
+      "interval_count": 9,
+      "passed": true
+    },
+    {
+      "name": "table3.2025-12-21",
+      "intervals_match": true,
+      "total_kwh": 352.514922222,
+      "expected_total_kwh": 352.514922,
+      "total_match": true,
+      "interval_count": 8,
+      "passed": true
+    }
+  ],
+  "checks_failed": [],
+  "passed": true
+}

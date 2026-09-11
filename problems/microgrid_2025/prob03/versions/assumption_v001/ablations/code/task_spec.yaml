@@ -1,0 +1,129 @@
+# prob03 ablation 隔离计算 task 规格
+# 生成者：ablation-analyst（动作 act-21277b914c24422a）；阶段：ablation（config/workflow.yaml 的 mandatory_stages，不得 skipped）
+# 依据：agents/ablation-analyst.md、skills/ablation-study/SKILL.md、config/workflow.yaml、config/gates.yaml、
+#       config/compute.yaml、本版本 ablations/plan.md（预注册，跑数前冻结）、
+#       prob03 团队裁定 B0–B7 / T1–T9 与团队勘误 R9–R19（E1–E9）。
+# 说明：本文件是**规格**；task 由 scripts/compute_dispatcher.py submit 经 tasks.make_task_spec/submit_task
+#       确定性创建（status=queued），再由 Runner 以 worker_launch_mode=supervised 原地运行。
+#       Agent 不自行代跑，也不在短命 shell 内调用 start_queued。
+spec_version: 1
+problem_id: microgrid_2025
+question_id: prob03
+stage: ablation
+assumption_version: assumption_v001
+formulation_version: formulation_v001
+backend: local
+working_directory: "."
+code_path: problems/microgrid_2025/prob03/versions/assumption_v001/ablations/code
+config_path: problems/microgrid_2025/prob03/versions/assumption_v001/ablations/code/task_config.yaml
+input_path: data
+output_directory: problems/microgrid_2025/prob03/versions/assumption_v001/ablations/results/prob03_v001_ablation_run001
+timeout_seconds: 7200
+seed: 20260910
+gpu_required: false
+device: cpu
+gpu_serial_constraint: "本 task 不使用 GPU，故不占用单卡 GPU 串行额度；本机可用内存偏低，单 worker 串行"
+worker_launch_mode: supervised
+command:
+  - ".venv/Scripts/python.exe"
+  - "problems/microgrid_2025/prob03/versions/assumption_v001/ablations/code/ablation_prob03.py"
+  - "--data"
+  - "data/附件1.xlsx"
+  - "--data2"
+  - "data/附件2.xlsx"
+  - "--data3"
+  - "data/附件3.xlsx"
+  - "--template"
+  - "data/附件5/result3.xlsx"
+  - "--reference"
+  - "problems/microgrid_2025/prob03/versions/assumption_v001/results/prob03_v001_f001_run003"
+  - "--output"
+  - "problems/microgrid_2025/prob03/versions/assumption_v001/ablations/results/prob03_v001_ablation_run001"
+  - "--days"
+  - "365"
+  - "--seed"
+  - "20260910"
+  - "--time-limit"
+  - "60"
+  - "--max-wall-seconds"
+  - "6600"
+  - "--milp-time-limit"
+  - "60"
+submit_hint:
+  tool: scripts/compute_dispatcher.py
+  subcommand: submit
+  notes:
+    - "必须由 Runner 以 supervised（in-process）启动；detached 会被沙箱进程树回收。"
+    - "--output 必须与 output_directory 完全一致（make_task_spec 强校验）。"
+    - "output_directory 必须位于 assumption_v001 目录内且提交前不存在（本规格路径为 ..._ablation_run001，未被占用）。"
+    - "input_path=data 使附件 1/2/3/5 全部进入 input_hash（只读，不修改）；附件 4 与 2026 年数据不使用。"
+inputs_readonly:
+  - data/附件1.xlsx
+  - data/附件2.xlsx
+  - data/附件3.xlsx
+  - data/附件5/result3.xlsx
+  - data/（作为 input_path 整体参与 input_hash）
+  - problems/microgrid_2025/prob03/versions/assumption_v001/code/（accepted M1，只读导入 prob03_model/prob03_io）
+  - problems/microgrid_2025/prob03/versions/assumption_v001/results/prob03_v001_f001_run003/{run_manifest.json,tables.json}（C1/C8 基线闸门，只读）
+  - problems/microgrid_2025/prob03/versions/assumption_v001/robustness/（只读，仅作边界引用，不混写）
+expected_outputs:
+  - baseline_check.json
+  - delivery_consistency.json
+  - solver_status.json
+  - comparison.json
+  - identities.json
+  - criteria.json
+  - anchor_check.json
+  - milp_oracle.json
+  - reading_deltas.json
+  - d5b_energy_stats.json
+  - explainability.json
+  - layer_equivalence.json
+  - raw_cases.jsonl
+  - summary.json
+  - run_manifest.json
+  - figures/ablation_model_cost.png
+  - figures/ablation_reading_delta.png
+  - figures/ablation_decision_density.png
+  - figures/ablation_identities.png
+  - figures/ablation_criteria.png
+  - M1/case.json
+  - M2a/case.json
+  - M2b/case.json
+  - M3/case.json
+  - M4/case.json
+  - M5a/case.json
+  - M5b/case.json
+  - M7_D2B/case.json
+  - M7_D2C/case.json
+  - M7_D5B/case.json
+  - M8/case.json
+  - M8b/case.json
+expected_runtime:
+  wall_clock_seconds_max: 7200
+  memory_mb_max: 2048
+  device: cpu
+expected_failure_conditions:
+  - exit_code: 4
+    meaning: "C1 基线复现闸门失败：通用链与 accepted run003 不一致，整批作废"
+    route: "needs_revision -> ablation-analyst/implementation 复核链实现与口径"
+  - exit_code: 3
+    meaning: "输入结构或参数非法（附件结构、日期序列、--days 越界）"
+    route: "needs_revision -> ablation-analyst 修复代码或参数"
+  - exit_code: 5
+    meaning: "墙钟预算耗尽（BudgetExceeded），已完成 case 的产物保留"
+    route: "resource-manager 以新 attempt + 新 output_directory 重跑，必要时减少 days 或提高 --max-wall-seconds"
+  - exit_code: 1
+    meaning: "未捕获异常（Python 运行时错误）"
+    route: "code_runtime -> ablation-analyst 修复代码后新 attempt + 新 output_directory"
+acceptance_hint:
+  - "solver_status.json: 12 个 case 的 ok/seconds/objective 齐备；失败 case 保留在 raw_cases.jsonl"
+  - "baseline_check.json: M1 的 9 项总量 + 4 个指定日期的表 1 六时段 + 表 2 六块与端点，相对/绝对差 ≤1e-6"
+  - "delivery_consistency.json: 表 3 紧急购电区间标签逐字符一致、能量 ≤1e-6（C8）"
+  - "criteria.json: C1–C10 判定与 supplementary_checks（C3L）齐备；未通过项不得事后改判据"
+  - "anchor_check.json: M3 全期/交付期相对 prob02 accepted 锚点 ≤1e-6（C10）"
+  - "milp_oracle.json: 4 个指定日 × 3 个调整层的 MILP 与 LP 目标相对差 ≤1e-7（C6，含 D6-A 降级登记）"
+  - "reading_deltas.json: M7·D2-B / D2-C / D5-B 的 ΔC/ΔC_plan/ΔC_em/ΔC_adj/ΔΣq_em 全部落盘；PLAN-EXP 按 T6 撤销"
+  - "layer_equivalence.json: C3L 逐层等价（≤1e-9）；若 C3 链级失败，须在 report.md 与 summary 技术债中显式登记 T7-3 机制"
+  - "run_manifest.json: task_id、code_sha256、输入 md5、参数、case 清单、耗时齐备"
+  - "figures/ 5 张 PNG；ablation 图件**不**登记为交付图表（团队 B5，不调用 record_figure_review）"

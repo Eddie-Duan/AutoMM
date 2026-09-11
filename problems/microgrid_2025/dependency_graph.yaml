@@ -38,7 +38,8 @@ edges:
   - 时间离散（144 × 10 分钟）与单位换算约定（Δt = 1/6 h；min Σ p·b 不带 Δt）
   - 平衡与可靠性形式（AS04 等式平衡 + 显式弃光 s）、储能状态转移与容量/功率约束（AS05/AS06）
   - 时间对齐与表格聚合口径（AS01 左端点/计划窗 0:10→24:10；AS13 模板行位置聚合、充放电不冲抵）
-  - 功率上限作用侧口径（AS06 + D10 口径丙 + 团队勘误 E1）：c ≤ 833.3333 kWh、q_dis ≤ 750.0000 kWh，两侧功率均 ≤ 5000 kW
+  - 功率上限作用侧口径（AS06 + D10 口径丙 + 团队勘误 E1）：c ≤ 833.3333 kWh、q_dis ≤ 750.0000 kWh，两侧功率均
+    ≤ 5000 kW
   received_in: problems/microgrid_2025/prob03/shared/problem_understanding.md
   received_at_action: act-d0daa84bf4d74bbb
   pending_decisions:
@@ -55,8 +56,22 @@ edges:
   version: 2
   content_hash: 6fb260491cb70450c0ea71608b59271f51d99a002737d0b3ed46a1bb1b8888d6
   propagates:
-  - 基础微网-储能-外网联合模型结构（问题 2/3 在波动电价下的重算基础）
-  note: prob04 不新增约束结构，只更换价格输入并重算 prob02/prob03。
+  - 基础微网-储能-外网联合模型结构（问题 2/3 在波动电价下的重算基础：等式功率平衡 + 显式弃光 s、储能状态转移
+    E_t = E_{t-1} + 0.9c − q_dis/0.9、E∈[1200,10800]、c ≤ 833.3333 / q_dis ≤ 750.0000 kWh、Δt = 1/6 h、
+    目标 min Σ p·b 元不乘 Δt、无购电上限/无售电/确定性）
+  - 计划窗与时间对齐口径（AS01 左端点 / 0:10 → 24:10）
+  received_in: problems/microgrid_2025/prob04/shared/problem_understanding.md
+  received_at_action: act-b680a52c76184c4b
+  pending_decisions:
+  - A8 价格可观测性（0:00 是否已知附件 4 全天电价；高优先，prob04 assumption_definition 必须裁定，
+    裁定前 mathematical_formulation 不得启动）
+  - A21 两条链（4-2/4-3）是否必须共用同一 A8 解读（新增）
+  - A22 结算倍数（5× / 0.5× / 1.5×）以附件 4 的 p_{d,t} 为基数（新增，登记性）
+  - A23 A8=(a) 时 4-2 的 q_em 是否恒零（承接 prob02 A17 的同构问题）
+  - D9-B prob03 登记的 prob04 前置条件（弃光界收紧为物理盈余 0 ≤ s ≤ max(0, PV·Δt − L·Δt)）
+  - A2 已由 prob02 assumption_v001 裁定（D1-B/D2-A/D8-A），prob04 承接不再重议
+  note: prob04 把价格输入由附件 1 换成附件 4，并按 4-2/4-3 两条链分别重算；不新增约束结构，但
+    A8 会改变信息集（原 note「只更换价格输入」已由 act-b680a52c76184c4b 更正）。
 - from: prob02
   to: prob03
   type: soft_conclusion_dependency
@@ -71,14 +86,17 @@ edges:
   received_in: problems/microgrid_2025/prob03/shared/problem_understanding.md
   received_at_action: act-d0daa84bf4d74bbb
   resolved_decisions:
-  - A2（逐日独立 vs 跨日滚动）已由 prob02 assumption_v001 裁定为滚动递推 + 终端自由（D1-B/D2-A/D8-A），本边状态由 pending 更正为已闭合
+  - A2（逐日独立 vs 跨日滚动）已由 prob02 assumption_v001 裁定为滚动递推 + 终端自由（D1-B/D2-A/D8-A），本边状态由
+    pending 更正为已闭合
   pending_decisions:
   - A6 附件 3 降尺度与年末边界 / A7 prob03 结算口径 / A9 附加预报时刻分析（属 prob03）
   - A19 prob03 信息集口径（高优先，新增）/ A20 调整购电量填报映射（新增）
   - A18 表 3 与紧急购电量工作表填报口径（prob02 登记，prob03 沿用）
   not_portable:
-  - prob02 A17（0:00 完全信息 + 无购电上限 ⇒ 最优 q_em ≡ 0）是 prob02 侧口径，不得直接移植到 prob03；prob03 的对应问题为 A19，表 3 可能非零
-  note: prob03 的紧急购电与逐日数据口径直接沿用 prob02 已 accepted 的结果；但信息结构（预报驱动）与 prob02 不同，须按 A19 单独裁定。
+  - prob02 A17（0:00 完全信息 + 无购电上限 ⇒ 最优 q_em ≡ 0）是 prob02 侧口径，不得直接移植到 prob03；prob03
+    的对应问题为 A19，表 3 可能非零
+  note: prob03 的紧急购电与逐日数据口径直接沿用 prob02 已 accepted 的结果；但信息结构（预报驱动）与 prob02 不同，须按 A19
+    单独裁定。
 - from: prob02
   to: prob04
   type: soft_conclusion_dependency
@@ -86,23 +104,42 @@ edges:
   version: 1
   content_hash: 4840a4d4f57e6d404c77a0d72a2c0c045cbbfeac231248e688daf7d656c4b798
   propagates:
-  - 紧急购电机制与结果表结构（result4-2 复用 result2 模板）
-  note: 问题 4 的"重算问题 2"直接引用 prob02 的结论。
+  - 紧急购电机制与结果表结构（α_em = 5 结算、q_em 只补负载缺口不用于充电；result4-2 复用 result2 模板与
+    三个工作表 计划购电量/充放电量/紧急购电量）
+  - 4-2 链的跨日衔接口径（A2：自 2025-01-01 以 E_init = 6000 kWh 滚动递推、1 月预热、终端自由、单一长时域 LP）
+  - 表 2 端点语义（R1：多日为逐日切片、随日变化）与购电上限阈值表述（R5，仅 prob02 口径）
+  received_in: problems/microgrid_2025/prob04/shared/problem_understanding.md
+  received_at_action: act-b680a52c76184c4b
+  pending_decisions:
+  - A8 价格可观测性（决定 4-2 的计划信息结构与 q_em 是否恒零）
+  - A23（承接 A17 的同构问题：A8=(a) + 无购电上限 ⇒ q_em ≡ 0 与题面表 3 展示意图的张力）
+  not_portable:
+  - prob02 A17（0:00 完全信息 + 无购电上限 ⇒ 最优 q_em ≡ 0）是 prob02 侧口径，不得直接移植到 4-2；
+    4-2 的对应问题为 A8/A23，A8 取 (b)/(c) 时 q_em 可能非零
+  note: 问题 4 的「重算问题 2」直接引用 prob02 的结论，但价格输入换成附件 4（p_{d,t}），故数值必然不同；
+    禁止用 result2.xlsx 的数值充当 result4-2.xlsx，也禁止把 result4-2.xlsx 写回 result2.xlsx
+    （两模板 md5 相同：b878ce2b016155f49486af25c51e8cab）。
 - from: prob03
   to: prob04
   type: soft_conclusion_dependency
-  conclusion_id: ''
-  version: 0
-  content_hash: ''
+  conclusion_id: prob03-concl-001
+  version: 1
+  content_hash: b2ba0e02db5a32fbef3d75a0a4f465993b54ab2aef840d3e8b0e149faaa2bdbf
   propagates:
   - 计划/调整双轨购电与 0.5× 违约、1.5× 超出结算框架
   - 多时刻预报的使用方式与降尺度规则
   - 是否引入其他预报时刻的分析结论（题面开放式提问，见 A9）
-  note: >-
-    问题 4 的"重算问题 3"直接引用 prob03 的结论（result4-3 复用 result3 模板）。
-    **模板陷阱（2026-09-11 补登记）**：`data/附件5/result4-3.xlsx` 与 `result3.xlsx` 的 md5 完全相同
-    （`75be588e714646dde3102aa102382347`），`result4-2.xlsx` 与 `result2.xlsx` 亦相同（`b878ce2b016155f49486af25c51e8cab`）——
-    故 prob04 **必须新写** `result4-3.xlsx` / `result4-2.xlsx`，**不得**覆盖 prob03 的 `result3.xlsx` 或 prob02 的 `result2.xlsx`。
-    另：prob03 的口径已由团队裁定 `B0–B7`（多模型对比与交叉验证）与 `T5–T8` 冻结，
-    其中 A9 的比较轴已定为**成本对照**（`M4`/`M5`，判据 `C4`/`C5`），**不以预报 RMSE 作比较轴**；
-    prob04 复用时应以 `prob03/versions/assumption_v001/assumptions.md` 的 B/T 组裁定与「团队勘误 E1–E7」为准。
+  received_in: problems/microgrid_2025/prob04/shared/problem_understanding.md
+  received_at_action: act-b680a52c76184c4b
+  pending_decisions:
+  - A8 价格可观测性（附件 4 电价在 0:00 是否全天已知；高优先，裁定前 mathematical_formulation 不得启动）
+  - A21 4-2 与 4-3 是否必须共用同一 A8 解读
+  - D9-B（prob03 D9 登记的 prob04 前置条件：弃光界收紧为物理盈余 0 ≤ s ≤ max(0, PV·Δt − L·Δt)）
+  - A22 结算倍数以附件 4 的 p_{d,t} 为基数（4-3 的 β_def·p / β_over·p 与 4-2 的 α_em·p）
+  note: 问题 4 的"重算问题 3"直接引用 prob03 的结论（result4-3 复用 result3 模板）。 **模板陷阱（2026-09-11
+    补登记）**：`data/附件5/result4-3.xlsx` 与 `result3.xlsx` 的 md5 完全相同 （`75be588e714646dde3102aa102382347`），`result4-2.xlsx`
+    与 `result2.xlsx` 亦相同（`b878ce2b016155f49486af25c51e8cab`）—— 故 prob04 **必须新写** `result4-3.xlsx`
+    / `result4-2.xlsx`，**不得**覆盖 prob03 的 `result3.xlsx` 或 prob02 的 `result2.xlsx`。
+    另：prob03 的口径已由团队裁定 `B0–B7`（多模型对比与交叉验证）与 `T5–T8` 冻结， 其中 A9 的比较轴已定为**成本对照**（`M4`/`M5`，判据
+    `C4`/`C5`），**不以预报 RMSE 作比较轴**； prob04 复用时应以 `prob03/versions/assumption_v001/assumptions.md`
+    的 B/T 组裁定与「团队勘误 E1–E7」为准。

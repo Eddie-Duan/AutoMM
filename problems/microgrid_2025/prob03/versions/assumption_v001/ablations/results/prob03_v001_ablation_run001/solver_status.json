@@ -1,0 +1,128 @@
+{
+  "cases": [
+    {
+      "case": "M1",
+      "ok": true,
+      "seconds": 37.888561,
+      "objective_yuan": 16179176.145228,
+      "delivery_cost_yuan": 14540616.335652,
+      "layers": 1460,
+      "identities_failed": [],
+      "error": null
+    },
+    {
+      "case": "M2a",
+      "ok": true,
+      "seconds": 44.602366,
+      "objective_yuan": 16179176.145228,
+      "delivery_cost_yuan": 14540616.335652,
+      "layers": 1460,
+      "identities_failed": [],
+      "error": null
+    },
+    {
+      "case": "M2b",
+      "ok": true,
+      "seconds": 39.724388,
+      "objective_yuan": 15360260.582255,
+      "delivery_cost_yuan": 13790470.180228,
+      "layers": 1460,
+      "identities_failed": [],
+      "error": null
+    },
+    {
+      "case": "M3",
+      "ok": true,
+      "seconds": 4.529591,
+      "objective_yuan": 13758182.573724,
+      "delivery_cost_yuan": 12233050.830708,
+      "layers": 0,
+      "identities_failed": [],
+      "error": null
+    },
+    {
+      "case": "M4",
+      "ok": true,
+      "seconds": 10.534055,
+      "objective_yuan": 16505833.062742,
+      "delivery_cost_yuan": 14788066.642523,
+      "layers": 365,
+      "identities_failed": [],
+      "error": null
+    },
+    {
+      "case": "M5a",
+      "ok": true,
+      "seconds": 69.902245,
+      "objective_yuan": 16179575.041038,
+      "delivery_cost_yuan": 14541015.231452,
+      "layers": 2920,
+      "identities_failed": [],
+      "error": null
+    },
+    {
+      "case": "M5b",
+      "ok": true,
+      "seconds": 194.788304,
+      "objective_yuan": 16179766.212646,
+      "delivery_cost_yuan": 14541187.024059,
+      "layers": 8760,
+      "identities_failed": [],
+      "error": null
+    },
+    {
+      "case": "M7_D5B",
+      "ok": true,
+      "seconds": 37.293417,
+      "objective_yuan": 18741130.202668,
+      "delivery_cost_yuan": 16830326.022977,
+      "layers": 1460,
+      "identities_failed": [],
+      "error": null
+    },
+    {
+      "case": "M7_D2B",
+      "ok": true,
+      "seconds": 37.909479,
+      "objective_yuan": 16125753.608578,
+      "delivery_cost_yuan": 14489176.271434,
+      "layers": 1460,
+      "identities_failed": [],
+      "error": null
+    },
+    {
+      "case": "M7_D2C",
+      "ok": true,
+      "seconds": 37.969773,
+      "objective_yuan": 16125753.608578,
+      "delivery_cost_yuan": 14489176.271434,
+      "layers": 1460,
+      "identities_failed": [],
+      "error": null
+    },
+    {
+      "case": "M8",
+      "ok": true,
+      "seconds": 38.021034,
+      "objective_yuan": 16178825.507754,
+      "delivery_cost_yuan": 14540364.713961,
+      "layers": 1460,
+      "identities_failed": [],
+      "error": null
+    },
+    {
+      "case": "M8b",
+      "ok": true,
+      "seconds": 29.004648,
+      "objective_yuan": 16179447.245364,
+      "delivery_cost_yuan": 14540758.392355,
+      "layers": 1460,
+      "identities_failed": [],
+      "error": null
+    }
+  ],
+  "wall_seconds": 584.935367,
+  "device": "cpu",
+  "gpu_required": false,
+  "solver": "scipy.optimize.linprog(method='highs') / scipy.optimize.milp"
+}

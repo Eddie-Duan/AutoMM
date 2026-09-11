@@ -23,6 +23,13 @@ revision_note: >-
   2026-09-11 按 prob03 团队勘误 E1–E5 补登记：新增符号 q（最终/结算购电量，E5，此前 formulation/implementation 已在使用但本表漏登记）；
   A19 指向写入 m 与 q_adj 的 notes；附件 3 日期列稀疏（E1）与 A6 的 RMSE 样本口径（E2/E3）
   登记于 prob03/shared/problem_understanding.md §2.1 与 prob03/versions/assumption_v001/assumptions.md 的「团队勘误」节。
+  act-b680a52c76184c4b（prob04 problem_understanding）复核后确认：本表**不新增、不修改任何符号的定义与域**；
+  prob04 的「一题两链」结构（4-2 ≙ 重算问题 2、4-3 ≙ 重算问题 3）与其对 price / alpha_em / beta_def /
+  beta_over / q_em / q / q_adj / C_adj 的**适用链**已写入各条目的 notes；A8（价格可观测性，高优先，prob04
+  assumption_definition 必须裁定，裁定前 mathematical_formulation 不得启动）、A21（两链是否共用同一 A8 解读）、
+  A22（结算倍数以附件 4 的 p_{d,t} 为基数）、A23（A8=(a) 时 4-2 的 q_em 是否恒零）与 D9-B（prob04 前置条件）
+  登记于 prob04/shared/problem_understanding.md §7 与 dependency_graph.yaml 的三条 prob04 入边。
+  团队裁定/团队勘误的效力仍高于本表旧登记；被更正的旧值保留在 notes 中作为审计痕迹。
 symbols:
   # ---------- 指标与集合 ----------
   - symbol: t
@@ -162,7 +169,9 @@ symbols:
     kind: parameter
     domain: "prob01/prob02/prob03：附件 1 的同一条日价格曲线逐日重复；prob04：附件 4 的逐日逐时段实时电价"
     first_question: prob01
-    notes: "prob04 的价格可观测性（0:00 是否已知全天价格）见 A8。"
+    notes: "prob04 的价格可观测性（0:00 是否已知全天价格）见 A8（高优先，prob04 assumption_definition 必须裁定）。
+      prob04 的价格来源唯一为 data/附件4.xlsx（md5 cf8762375436b281dc33b6432e441a6a，365 天 × 144 点），
+      4-2 与 4-3 两条链共用；附件 1 电价在 prob04 中作废（H10）。"
   - symbol: load
     latex: "L_{d,t}"
     meaning_zh: "小区负载功率"
@@ -194,7 +203,8 @@ symbols:
     kind: parameter
     domain: "alpha_em = 5"
     first_question: prob02
-    notes: ""
+    notes: "prob04 的 4-2 与 4-3 两条链均使用（紧急购电），但价格基数换为附件 4 的 p_{d,t}（H12/A22）；
+      4-2 无调整项，故 4-2 的费用分解为 C_total = C_plan + C_em。"
   - symbol: beta_def
     latex: "\\beta_{def}"
     meaning_zh: "计划购电量高于调整购电量部分的违约电价倍数"
@@ -202,7 +212,8 @@ symbols:
     kind: parameter
     domain: "beta_def = 0.5"
     first_question: prob03
-    notes: "计费方向与比较基准待定（A7）。"
+    notes: "计费方向与比较基准见 A7（prob03 已由团队裁定 B1-D2-A 闭合）。prob04 中**仅 4-3 链使用**（4-2 无调整机制）；
+      价格基数换为附件 4 的 p_{d,t}（H12/A22），且须与 β_over 的分段结算成对出现。"
   - symbol: beta_over
     latex: "\\beta_{over}"
     meaning_zh: "调整购电量高于计划购电量时超出部分的电价倍数"
@@ -210,7 +221,8 @@ symbols:
     kind: parameter
     domain: "beta_over = 1.5"
     first_question: prob03
-    notes: "与 beta_def 的分段结算口径待定（A7）。"
+    notes: "与 beta_def 的分段结算口径见 A7（prob03 已由团队裁定 B1-D2-A/B/C 闭合，B/C 为强制对照）。
+      prob04 中**仅 4-3 链使用**；价格基数换为附件 4 的 p_{d,t}（H12/A22）。"
 
   # ---------- 决策变量 ----------
   - symbol: b
@@ -234,6 +246,7 @@ symbols:
       B3-(iv) 的费用分解恒等式 C_total = C_plan + C_em + C_adj 亦以 b 与 q 的分段差定义（0.5·p·(b−q)^+ 与 1.5·p·(q−b)^+）。
       此前 prob03 的 formulation_v001 与 implementation 已在公式/代码中使用 q，本表漏登记，本次补入；含义以本条为准，
       prob04 复用该三层结构时不得另起新符号。
+      prob04 中 q **仅 4-3 链使用**（4-2 无调整机制，q ≡ b）；价格基数为附件 4 的 p_{d,t}。
   - symbol: q_adj
     latex: "q^{adj}_{d,t}"
     meaning_zh: "调整购电量（非 0:00 预报时刻对购电量的调整）"
@@ -244,7 +257,9 @@ symbols:
     notes: "与 b 的结算关系待定（A7）；result3.xlsx『调整购电量』335×147 每格填『最终购电量』还是『增量』、多次调整的覆盖规则见 A20。\
       2026-09-11：A7/A20 已由团队裁定 B1-D2/D3/D4 闭合（替代量 + 单次结算 + 不回溯；填报按 A20-A），本变量的结算关系以团队裁定为准；\
       其信息集口径见 A19（承载于符号 m）。A9 的「是否引入其他时刻预报」已由团队裁定 B6/AS18 冻结为成本对照 M4/M5，\
-      不得以预报 RMSE 作为跨发布时刻的比较轴（团队勘误 E3）。"
+      不得以预报 RMSE 作为跨发布时刻的比较轴（团队勘误 E3）。\
+      prob04 中该变量**仅 4-3 链使用**（4-2 无调整层）；价格基数为附件 4 的 p_{d,t}，降尺度与年末边界沿用
+      prob03 的 D5-A/D6-A，tie-break 沿用 T7-1/T9 的字典序规则。"
   - symbol: q_em
     latex: "q^{em}_{d,t}"
     meaning_zh: "紧急购电量（微网供电低于负载时的补足购电）"
@@ -257,6 +272,8 @@ symbols:
       表 3 的时间段合并与填报口径见 A18——两者均由 assumption_definition 裁定，本阶段不固定。
       该变量在 prob02 就必须保留（题面要求给出紧急购电结果），不得因预期恒零而删除。
       prob03 的信息结构由附件 3 预报驱动、与 prob02 不同，其对应问题为 A19（不得移植 A17），表 3 可能非零。
+      prob04 中 4-2 与 4-3 两条链**均保留该变量**：4-2 的信息结构由 A8（价格可观测性）决定，其「是否恒零」对应 A23；
+      4-3 沿用 prob03 的 D7-A/F3（决策层不激活、结算层由预报缺口产生）。价格基数为附件 4 的 5·p_{d,t}（A22）。
   - symbol: c_ch
     latex: "c_{d,t}"
     meaning_zh: "储能充电量"
@@ -317,9 +334,9 @@ symbols:
     meaning_zh: "调整购电量相关费用（含 0.5× 违约与 1.5× 超出两部分）"
     unit: "元"
     kind: derived
-    domain: "≥ 0（方向待定 A7）"
+    domain: "≥ 0（方向由 prob03 团队裁定 B1-D2-A 固定为成本项；B/C 读法为强制对照）"
     first_question: prob03
-    notes: ""
+    notes: "prob04 中**仅 4-3 链存在**（4-2 无调整机制，C_adj ≡ 0）；价格基数换为附件 4 的 p_{d,t}（H12/A22）。"
   - symbol: C_em
     latex: "C^{em}"
     meaning_zh: "紧急购电费用"
@@ -335,7 +352,8 @@ symbols:
     kind: derived
     domain: "C_total = C_plan + C_em + C_adj（问题 1 无后两项）"
     first_question: prob01
-    notes: "表 1『全天购电费』的口径待定（A11）。"
+    notes: "表 1『全天购电费』的口径（A11）已由 prob03 团队裁定 B1-D8-A 闭合：= C_total，正文补三分项。
+      prob04 分链：4-2 为 C_plan + C_em（无 C_adj），4-3 为 C_plan + C_em + C_adj，两条链必须分别报告且不得混记（H12）。"
   - symbol: D_req
     latex: "D_{req}"
     meaning_zh: "结果文件要求覆盖的日期集合"

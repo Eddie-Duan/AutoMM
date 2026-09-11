@@ -1,7 +1,7 @@
 problem_id: microgrid_2025
 question_id: prob03
-status: active
-stage: sanity_check
+status: locally_completed
+stage: locally_completed
 dependencies: []
 active_assumption_version: 1
 active_formulation_version: 1
@@ -10,13 +10,14 @@ consecutive_rejections: 0
 literature_refreshes: 0
 literature_refresh_required: false
 conclusion:
-  conclusion_id: ''
-  version: 0
-  content_hash: ''
+  conclusion_id: prob03-concl-001
+  version: 1
+  content_hash: b2ba0e02db5a32fbef3d75a0a4f465993b54ab2aef840d3e8b0e149faaa2bdbf
+  updated_at: '2026-09-11T11:31:51.021216+00:00'
 sanity:
   level_1_4: PASS_WITH_WARNING
   level_5: pending
-  level_6: not_applicable
+  level_6: PASS_WITH_WARNING
 optional_stages:
   robustness:
     decision: completed
@@ -27,8 +28,17 @@ optional_stages:
       §3 分级规则判「条件稳定（需给出适用边界）」；3 个失败情景全属结构族并已保留计入样本清单。无硬门禁失败（基线闸门 passed=true、追踪链三方哈希独立复现、独立复核
       38/38 断言通过、独立重解探针逐位复现），不返回 skipped。
   ablation:
-    decision: pending
-    reason: ''
+    decision: completed
+    reason: ablation 为 config/workflow.yaml 的 mandatory_stages，未跳过：隔离 task ca4f2a45aa49a45236e3（succeeded、attempt
+      1、supervised、CPU HiGHS、rc=0、365 天/52,560 时段、wall 584.94 s）产出 ablations/results/prob03_v001_ablation_run001
+      的 14 个汇总产物 + 12 个 M*/case.json + 5 张实验图，12/12 case 可行、cases_failed=[]；团队 B0–B7/T1–T9
+      全部落实（M7·PLAN-EXP 按 T6 撤销未执行）；预注册判据 C1/C2/C4/C5/C6/C7/C8/C9/C10 与补充检查 C3L PASS、C3
+      FAIL（M8 2.1672146e-05、M8b 1.6756115e-05，阈值 1e-8 未事后修改；归因团队 T7-3 已登记的最优面多重最优
+      + 跨日状态传播，C3L 逐层 0.0 单独承担实现正确性），criteria_failed=['C3']；C1 基线闸门 M1 与 run003 逐位一致、C10
+      跨问锚点 M3 == prob02 accepted（相对差 0.0）；ablations/report.md 已落盘（含模型×指标总表、C1–C10+C3L
+      判定、A9 结论、三问结论、与 robustness 的边界、冲突点/技术债/披露项），修正版图件 ablations/figures/ablation_identities_fixed.png
+      与只读复核证据（54/54 断言）已落盘；本动作独立只读复核未发现硬门禁失败（无 NaN/Inf、约束与恒等式通过、追踪链与输入 md5 未变、run003
+      未被覆盖）。ablation 图件按团队 B5/R24 不登记为交付图表。本阶段不返回 skipped。
 artifacts:
   problem_understanding: true
   literature: true
@@ -39,11 +49,13 @@ artifacts:
   visualization: true
   sanity_check: true
   robustness: true
-  ablation: false
+  ablation: true
   cross_question_review: false
 notification:
-  sent: false
-  attempts: 0
+  sent: true
+  attempts: 2
+  status: sent
+  sent_at: '2026-09-11T11:36:08.561326+00:00'
 stale:
   value: false
   caused_by: []
@@ -147,4 +159,25 @@ sanity_history:
     比值 5.000000、储能上下界均激活、Σq_em 非零、关键假设文献门禁独立复算通过）。L5/L6 not_applicable。无硬门禁失败；技术债见
     warnings（含 R10 值口径与 XML 字面口径的显式冲突登记：字面口径 run003 仍余 4,849 格 >6 位小数串，已证明为 openpyxl
     %.16g 浮点渲染、值等于 6 位小数舍入，属呈现层技术债、不得据此判失败）。不退回：failure_type=null、return_stage=null。
+  failure_type: null
+- at: '2026-09-11T10:46:20.831794+00:00'
+  level: level_6
+  status: PASS_WITH_WARNING
+  reason: prob03 Level 6 独立复核（act-c8604baca00c4d28，policy P3 level=level_6）：对象 robustness/results/prob03_v001_robust_run001（task
+    9d890669fb66a1bcc3ae，attempt 1、succeeded、rc=0、supervised、CPU HiGHS、probe_mode=false、mode=compact、days=365/periods=52560、seed=20260911、156
+    情景/153 成功/3 不可行（全属结构族）、wall 3437.37 s、budget_exceeded=false）。56 项独立只读断言全通过、checks_failed=[]；追踪链独立重算逐位一致（code_hash=a0aeee33…、input_hash=4343d799…（与
+    run003 task 同值）、config_hash=fa34218b…、source_config_hash=8bd56149…、task.json ≡
+    attempt-001-task.json、stderr 0 字节）；基线复现闸门 passed=true（9 项总量相对差 0.0、表 1 24/24 格
+    0.0 kWh、T7 审计 1460/5.0000409e-10/1460/0/1460/1024/1），并由本动作新 output_directory 的
+    full 模式探针独立复现。S1 PASS（144/144 可行、残差 ≤1.0e-7/9.9e-8、相对 ≤5e-12、layer_status_max=0）、S2
+    PASS（Σq_em 最小 364,259.065 kWh、q=b(i≤36)、同充放 0、q_em&c ≤0.106906393）、S3 PASS（8 族方向不反转）、S5
+    PASS（3/3 可行、max 1.3515e-3 ≤1%、>1e-3 登记 warning）、S6 PASS（buy_cap 夹逼 [4375.0,5000.0]
+    kW、terminal_e_6000 +3,325.625 元/+0.0228713%）；S4 FAIL 为唯一非 PASS，唯一违反项为跨 σ 档族间均值差
+    7.2946%（同 σ=5% 子集 0.0641%），按 plan.md §3 预注册规则判 stability_grade=条件稳定（需给出适用边界）。判据未事后修改。独立重解
+    12 情景（含 baseline_full、noise_white_10_007、e_init±20%、不可行端点）与 raw_samples.jsonl
+    9 字段逐位相同（max|Δ|=0.0）；run_sanity_check.py 在 evidence 副本上 L1/L2-finite：158 个数值文件/448,220
+    个数值 0 非有限值、failures=[]；跨问抽查 R11（+2,307,565.504944 元/+18.863%、交付期净负荷 17,939,189.494967
+    kWh）与 E9（分问分界）通过。新增技术债：buy_cap_10326kW 非绑定却低于基线 139.32 元（相对 −8.6e-6，属最优面选择、不得读成上限降费）、ci95_half_width_t
+    实为 1.96 正态乘子、trajectories 实际 153 个（含 100 噪声样本）与文档表述不一致、status.json 残留 reconcile
+    message 与 consumed=false 登记欠账。无硬门禁失败（无 NaN/Inf、约束/单位/追踪链通过、原始数据未改），failure_type=null、return_stage=null。
   failure_type: null

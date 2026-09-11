@@ -1,0 +1,58 @@
+{
+  "q_em_periods": 12164,
+  "q_em_days": 365,
+  "samples": [
+    {
+      "day_index": 113,
+      "period": 37,
+      "dominating_hour": 6,
+      "q_em_kwh": 304.75035,
+      "layer_forecast_surplus_kwh": 0.0,
+      "actual_shortage_kwh": 304.75035,
+      "forecast_used_kwh": 459.2546,
+      "actual_pv_kwh": 154.50425,
+      "attribution": "支配层预报盈余（=弃光 s）而实际短缺（=q_em）"
+    },
+    {
+      "day_index": 245,
+      "period": 37,
+      "dominating_hour": 6,
+      "q_em_kwh": 300.591983333,
+      "layer_forecast_surplus_kwh": 0.0,
+      "actual_shortage_kwh": 300.591983333,
+      "forecast_used_kwh": 413.032883333,
+      "actual_pv_kwh": 112.4409,
+      "attribution": "支配层预报盈余（=弃光 s）而实际短缺（=q_em）"
+    },
+    {
+      "day_index": 233,
+      "period": 37,
+      "dominating_hour": 6,
+      "q_em_kwh": 298.583366667,
+      "layer_forecast_surplus_kwh": 0.0,
+      "actual_shortage_kwh": 298.583366667,
+      "forecast_used_kwh": 459.878,
+      "actual_pv_kwh": 161.294633333,
+      "attribution": "支配层预报盈余（=弃光 s）而实际短缺（=q_em）"
+    },
+    {
+      "day_index": 0,
+      "period": 37,
+      "dominating_hour": 6,
+      "q_em_kwh": 0.445833333,
+      "layer_forecast_surplus_kwh": 0.0,
+      "actual_shortage_kwh": 0.445833333,
+      "forecast_used_kwh": 0.515316667,
+      "actual_pv_kwh": 0.069483333,
+      "attribution": "支配层预报盈余（=弃光 s）而实际短缺（=q_em）"
+    }
+  ],
+  "layer_forecast_surplus_nonneg_ratio": 1.0,
+  "cost_adj_segments": {
+    "under_delivery_cost_yuan": 0.0,
+    "over_delivery_cost_yuan": 563098.132533,
+    "sum_yuan": 563098.132533,
+    "recomputed_yuan": 563098.132533,
+    "residual": -0.0
+  }
+}

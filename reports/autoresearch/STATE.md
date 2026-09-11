@@ -4,19 +4,19 @@
 
 ## 基本状态
 
-- 更新时间：2026-09-11T10:37:53.180822+00:00
+- 更新时间：2026-09-11T11:41:26.946430+00:00
 - 控制状态：running
 - 活动题目：microgrid_2025
-- 当前小问：prob03
-- 当前阶段：sanity_check
+- 当前小问：prob04
+- 当前阶段：literature_review
 
 ## 任务
 
-cancelled=1 | failed=2 | succeeded=10
+cancelled=1 | failed=2 | succeeded=11
 
 ## 最近动作
 
-act-93a3075a9a494876: run_agent
+act-b680a52c76184c4b: run_agent
 
 ## 警告
 
@@ -534,6 +534,64 @@ act-93a3075a9a494876: run_agent
 - 本阶段噪声 σ=5%/10% 为诊断设定（非题面事实、非文献标定），95% CI 只用于外推边界，不得包装为真实预测误差的概率分布；不覆盖自放电/静置损耗（AS17，需新建假设版本）、多日弃光 s 的更紧界（A13）、预报误差分布假设（R11④ 属 ablation）。
 - 承接欠账（不在本动作越界代改）：question_manifest.yaml 的 conclusion.{conclusion_id,version,content_hash} 仍为空，须在 ablation 结束或 locally_completed 前补齐；prob01/assumption_v003/version.yaml 的 AS08「必然被激活」措辞（C3/E3）、D10「5000 kW 作用侧」文献缺口、R10 值口径 vs xlsx XML 字面口径、R1/R5 论文落点仍待 cross_question_review 权威回写；prob03 文献池 25 条 0 全文，任何公式级/定量级引用须取得全文后再用。
 - 探针纪律：本动作的独立重解探针（probe_resolve 3 情景、probe_buycap 4 情景）与 verify 脚本均在隔离 task 之外运行，只作判据证据，其数值不得作为论文或 sanity 的交付数值；正式数值一律以 task 9d890669fb66a1bcc3ae / prob03_v001_robust_run001 的产物为准。本环境 orchestrator 为一次性唤醒模式（config/orchestrator.yaml run_mode=one_shot），本动作未创建新 task。
+- prob03 level_6: prob03 Level 6 独立复核（act-c8604baca00c4d28，policy P3 level=level_6）：对象 robustness/results/prob03_v001_robust_run001（task 9d890669fb66a1bcc3ae，attempt 1、succeeded、rc=0、supervised、CPU HiGHS、probe_mode=false、mode=compact、days=365/periods=52560、seed=20260911、156 情景/153 成功/3 不可行（全属结构族）、wall 3437.37 s、budget_exceeded=false）。56 项独立只读断言全通过、checks_failed=[]；追踪链独立重算逐位一致（code_hash=a0aeee33…、input_hash=4343d799…（与 run003 task 同值）、config_hash=fa34218b…、source_config_hash=8bd56149…、task.json ≡ attempt-001-task.json、stderr 0 字节）；基线复现闸门 passed=true（9 项总量相对差 0.0、表 1 24/24 格 0.0 kWh、T7 审计 1460/5.0000409e-10/1460/0/1460/1024/1），并由本动作新 output_directory 的 full 模式探针独立复现。S1 PASS（144/144 可行、残差 ≤1.0e-7/9.9e-8、相对 ≤5e-12、layer_status_max=0）、S2 PASS（Σq_em 最小 364,259.065 kWh、q=b(i≤36)、同充放 0、q_em&c ≤0.106906393）、S3 PASS（8 族方向不反转）、S5 PASS（3/3 可行、max 1.3515e-3 ≤1%、>1e-3 登记 warning）、S6 PASS（buy_cap 夹逼 [4375.0,5000.0] kW、terminal_e_6000 +3,325.625 元/+0.0228713%）；S4 FAIL 为唯一非 PASS，唯一违反项为跨 σ 档族间均值差 7.2946%（同 σ=5% 子集 0.0641%），按 plan.md §3 预注册规则判 stability_grade=条件稳定（需给出适用边界）。判据未事后修改。独立重解 12 情景（含 baseline_full、noise_white_10_007、e_init±20%、不可行端点）与 raw_samples.jsonl 9 字段逐位相同（max|Δ|=0.0）；run_sanity_check.py 在 evidence 副本上 L1/L2-finite：158 个数值文件/448,220 个数值 0 非有限值、failures=[]；跨问抽查 R11（+2,307,565.504944 元/+18.863%、交付期净负荷 17,939,189.494967 kWh）与 E9（分问分界）通过。新增技术债：buy_cap_10326kW 非绑定却低于基线 139.32 元（相对 −8.6e-6，属最优面选择、不得读成上限降费）、ci95_half_width_t 实为 1.96 正态乘子、trajectories 实际 153 个（含 100 噪声样本）与文档表述不一致、status.json 残留 reconcile message 与 consumed=false 登记欠账。无硬门禁失败（无 NaN/Inf、约束/单位/追踪链通过、原始数据未改），failure_type=null、return_stage=null。
+- S4 FAIL 原样保留（预注册判据未事后修改）：唯一违反项 inter_family_mean_spread>3%（7.2946%），同 σ=5% 子集仅 0.0641%，族内离散度全部 ≪5%（std≤0.9236%、CI≤0.3621%、max|z|≤2.5502、0 失败）；按 plan.md §3 判 条件稳定（需给出适用边界）。论文引用 S4 FAIL 必须同时给出同 σ 子集差值，表述为『族内离散度 <1%，但期望费用随预测偏差幅度系统性上移（σ=5%≈+3.9%、σ=10%≈+11.2%）』，不得写成『模型对噪声不稳定』（DR-1）。
+- σ=5%/10% 与 ±5/10/20% 网格是诊断性设定（非题面事实、非文献标定），95% CI 只用于外推边界；本阶段只扰动结算层实际值（附件 2 负载/光伏，joint 族另加电价），决策层仍用未扰动的附件 3 预报 ⇒ 噪声族等价于『实现值 − 预报』的偏差测试，不是真实预测误差分布。
+- CF-1/F8（求解器最优面敏感性）：全年链级 highs-ipm = −1.3515e-3（>1e-3）、presolve=False = +1.1073e-4，属 T7-6 已登记机制的放大量级；Σq_em 亦随之变化（417,241.58 vs 406,353.05 kWh），引用时须成对引用，严禁用不同 tie-break/求解器设置的结果互相比对。
+- 本动作独立发现（新增技术债）：buy_cap_10326kW 档实际非绑定（基线计划购电峰值 10,023.98 kW < 上限 10,326 kW），但目标值仍比无上限基线低 139.32 元（相对 −8.6e-6）、交付期费用低 103.20 元 ⇒ 属 LP 最优面选择经跨日初值传播（同 T7-6 机制，量级远小于 1.3515e-3），不得读成『购电上限降低费用』；report.md §3.4 在该非绑定端点处需注明该机制。
+- 统计口径命名债（本动作新增）：sensitivity.json 的 ci95_half_width_t 实际用正态 1.96 乘子而非 t(24)=2.0639（实测隐含乘子 1.960000）；两种读法都远低于 5% 阈值，S4 判定不变，引用时须注明。
+- 文档/实现不一致（本动作新增，仅登记）：plan.md §6 与 report.md §10 把 trajectories/ 描述为『非噪声情景轨迹』，实现按 family!='noise' 判断（噪声族名为 noise_*），实际落盘 153 个（= 全部成功情景，含 100 个噪声样本）；可追溯性强于声明，论文引用噪声样本轨迹时须说明该口径。
+- 追踪链登记瑕疵（不构成失败）：task 9d890669fb66a1bcc3ae 的 status.json 终态为 succeeded/returncode=0（worker 自身终态写入），但残留 reconcile 误写的 message='worker PID 不存在且未写入终态'（supervised 模式写 pid=Runner pid，worker_alive() 语义问题）；权威证据为 stdout 末行与全套产物。task 的 consumed=false 属既有『robustness 阶段 run_agent 动作不消费终态 task』登记欠账，待 cross_question_review/归档闭合。
+- 图件与统计量口径（DR-2/DR-3/DR-4/DR-5/DR-6，代码与图像抽检确认）：tornado 图例与柱值（delta_min/delta_max）语义相反；排名统计量 max|ΔC| 与条形跨度不同源；spider 径向为单侧 max|ΔC|/C_total；相对标准差以族自身均值为分母；龙卷/OAT 用全期 C_total，响应曲线/ECDF/箱线/购电上限曲线与 S2/S6 判据用交付期 D_req（E6 口径必须随数字标注）；6 张图不登记为交付图表（未调用 record_figure_review）。
+- 结构族不计入 S1/S4：3 个不可行情景（buy_cap_3500/4218.75/4375 kW）保留在 raw_samples.jsonl 与 summary.failures 中、未静默删除；引用可行率须区分『受判 144/144』与『结构族 9/12 可行』（含 terminal_e_6000）两个分母。
+- E9/R5 跨问口径：prob03 的 (4375, 5000] kW 是决策层（0:00 预报、无 q_em 变量）可行上界夹逼，与 prob02 的 q_em 激活阈值 β∈(4218.75, 4375.00] kW 是不同物理量，不得混用或宣称一致；本问 AS14 无购电上限，R5 不触发。
+- 论文强制披露项（承接，本阶段只读、不代改）：R11（问题 3 交付期比问题 2 贵 +2,307,565.50 元/+18.863%，两问交付期净负荷逐位相同 17,939,189.49 kWh，不得声称更省）；R12（periods_with_q_em_and_charge=5,070 的机制与最小可复现示例）；R13（2025-02-01 0:00 储电量 7950 vs 1200 kWh 因信息集不同不可互比）；R1（表 2 端点语义须与 prob01 单日周期恒 6000 kWh 区分）；E6（D_full/D_req 与 Σb/Σq）；E7/T7-3（degenerate_layers=1460、remaining_multiplicity=1024、unknown=1 的 2025-10-12 18:00 层）；CF-6（compact 的 probe_coverage=0.0，退化类指标只以 baseline_full 的 full 模式 1460/1024/1 为准）。
+- 上游结转（本动作不越界代改）：prob01/assumption_v003/version.yaml 的 AS08『必然被激活』措辞（C3/E3）待 cross_question_review 权威回写；D10『5000 kW 作用侧』为 team_decision，prob01/02/03 三池文献无一条涉及，论文不得包装为文献支持；R10（值口径 vs xlsx XML 字面口径）继续有效。
+- 未覆盖边界（适用边界声明）：自放电/静置损耗（AS17，须新建假设版本）；多日弃光 s 的更紧界（A13）；预报误差分布假设与对冲收益量化（R11④ 属 ablation）；参数网格外推超界须重算（η∈[0.72,0.99]、α_em∈[4,6]、β 同比例 ±20%、P_max∈[4000,6000] kW、E∈[960,12000] kWh、E_init∈[4800,7200] kWh；噪声限于实现值相对预报的乘性偏差 ≤10%）。本阶段不改变 M1 任何主结果，run003 仍是唯一交付口径。
+- prob03 文献池 25 条全部 status=used 但 0 条全文（15 abstract_oa + 10 metadata）；robustness 报告未新增文献级主张，任何公式级/定量级引用须取得全文后使用；AS07/AS09/AS10 本质是题面与团队裁定口径，论文不得声称有文献支持该口径。
+- C3 与 T7-3 的预注册冲突（须团队在 cross_question_review 确认）：团队 B4-C3 要求链级 |ΔC(M8, M1)|/C(M1) ≤ 1e-8，但团队自己的 T7-3 审计（run003/t7_tiebreak.json）证明 1024/1460 层在主目标最优面上仍有吞吐量多重最优（throughput_unique=False），即 T7-1/T9 的字典序规则不能唯一确定提交点；M1 是跨日向前递推（F1），故任何落在不同最优面点的独立实现都会经状态传播改变链级总费用。探针实测 40 天 M8 7.99e-5、M8b 7.04e-5，与 T7-6 的 2.2566e-04 同阶。本阶段不修改 C3 阈值：如实报告链级判定，另以补充检查 C3L（同一输入逐层等价 ≤1e-9，探针实测 0.0）单独判定实现正确性。
+- M7·PLAN-EXP 按团队 T6 撤销，不执行、不伪造数值；B1/T1 中「另设 PLAN-EXP 对照」一款已由 T6 更正，「决策时刻密度」的角色由 M5 承接。
+- M6 按团队 D6-A 降级为「4 个指定日的日尺度 oracle + 全年 LP 损失界（引理 L5）」，非全年 MILP；若团队要求全年须按 D6-C 另起 case 并重估预算。
+- 本动作只完成 ablation「提交—执行—汇总」的第一步：尚未创建 task、未写 results/、未产生任何交付数值；record_optional_stage(ablation, completed) 与 question_manifest.conclusion 三字段须在隔离 task 结果就绪后的下一次唤醒补齐（后者是 locally_completed 门禁的硬要求）。
+- 隔离 task 一旦提交，其 supervised/queued 状态与产物消费属 Runner 职责：本环境 orchestrator 为 one_shot 唤醒模式，task 保持 queued 属正常排队而非失败；本 Agent 不自行代跑、不在短命 shell 内调用 start_queued。若以 timed_out/interrupted/非零退出结束，须按 resource-manager 规程用新 attempt + 新 output_directory（如 _ablation_run002）重跑，不得覆盖 _ablation_run001；退出码 4 表示 C1 基线闸门失败（整批作废）。
+- 探针（5/40/100 天、含 evidence/probe_* 与 evidence/probe_summary.md）数值一律不得作为论文或 sanity 的交付数值；正式数值一律以隔离 task 的 365 天产物为准。
+- M8 与 M1 的 tie-breaking 规则必须完全一致（T7-5）；不得因 C3 的链级差异而改用不同 tie-break 规则、调 ε 或更换求解器设置去凑同值——那会破坏 B5 公平性并掩盖 T7-3 已登记的退化事实。
+- LP 最优面非唯一（run003 审计 1024/1460 层 throughput_unique=False）：本阶段只比对目标值、约束残差、(I1)/(I2)、题面指标与交付表，不比对逐点解唯一性，也不得把对照之间的调度轨迹差异当作不稳定证据。
+- 本问为 CPU HiGHS/scipy.milp，gpu_required=false，不占用单卡 GPU 串行额度；本机可用内存偏低（实测 1.3–2.2 GB），故 task 固定 max_local_concurrent_tasks=1、memory_per_worker_gb=2、单 worker 串行。make_task_spec 的 PATH 预检记 ruff=unavailable（其内部只做 compileall），与本动作用项目 venv 显式 ruff 通过不矛盾。
+- ablation 图件属实验产物，按既有纪律不登记为交付图表（不调用 record_figure_review）；交付图表仍是 visualization 阶段已登记的 prob03 图件。与 robustness 的边界按 B6：参数扰动/输入噪声不在本阶段重复，robustness 的购电上限夹逼 (4375, 5000] kW 只作带出处引用，不得与 prob02 的 β ∈ (4218.75, 4375.00] kW 混用。
+- 结转技术债（本动作不越界代改）：prob03 文献池 25 条未逐篇阅读正文（21 条 Crossref 元数据级 + 4 条开放摘要），任何公式级/定量级引用须取得全文后使用；D10「5000 kW 作用侧」为 team_decision、现有文献池无一条涉及，论文不得包装为文献支持；C3/E3（prob01/assumption_v003 中 AS08「必然被激活」措辞）与 global_symbols 的登记欠账待 cross_question_review 回写。
+- C3 与 T7-3 的预注册冲突在跑数前已冻结登记（本动作不改阈值）：团队 B4-C3 要求链级 |ΔC(M8, M1)|/C(M1) ≤ 1e-8，但团队自己的 T7-3 审计（run003/t7_tiebreak.json）证明 1024/1460 层在主目标最优面上仍有吞吐量多重最优（throughput_unique=False），字典序规则不能唯一确定提交点，而 M1 为跨日向前递推（F1），任何落在不同最优面点的独立实现都会经状态传播改变链级总费用；本阶段如实报告链级判定，另以补充检查 C3L（同一输入逐层等价 ≤1e-9，探针实测 0.0）单独判定实现正确性。该冲突与 C3L 的定位须由团队在 cross_question_review 确认。
+- M7·PLAN-EXP 按团队 T6 撤销，本阶段不执行、不伪造数值；「决策时刻密度」这一角色由 M5a/M5b 承接，M6 按团队 D6-A 降级为「4 个指定日的日尺度 oracle + 全年 LP 损失界（引理 L5）」，非全年 MILP。
+- M2b 与 M1 的差额按 T8/C2 记为「跨日携带价值」结构性发现，**不得**判为实现错误或模型不稳定；M2a 与 M1 算法同构（F6/T8），C2 已降级为回归检查（阈值 1e-8 不变）。
+- 探针数值一律不得作为论文或 sanity 的交付数值：上一动作的 5/40/100 天探针（含 M8 链级 7.99e-5、M8b 7.04e-5、C3L 0.0、DP/M3/M4 等）与 evidence/probe_* 只用于代码与闸门自检；正式数值一律以隔离 task ca4f2a45aa49a45236e3 的 365 天产物为准。
+- 隔离 task 现为 queued：本环境 orchestrator 为一次性唤醒模式（config/orchestrator.yaml run_mode=one_shot），task 能否执行取决于下一次外部唤醒，queued 属正常排队而非失败；本 Agent 不自行代跑、不在短命 shell 内调用 start_queued。若该 task 以 interrupted/timed_out/非零退出结束，须按 agents/resource-manager.md 用**新 attempt + 新 output_directory**（如 ..._ablation_run002）重跑，**不得**覆盖 ..._ablation_run001，并把失败指纹记入 ablations/task_submission.md；退出码 4 表示 C1 基线闸门失败（整批作废），M6 的 MILP 失败/超时只使 C6 降级（D6-A 已允许）。
+- status.json 的 worker_mode 字段不可作为启动方式证据：submit_task（scripts/automm/tasks.py L276）无条件写入 worker_mode="supervised"；启动方式的权威来源是 config/compute.yaml 的 worker_launch_mode（经 workflow.use_supervised_worker() 读取），本动作实测为 true。supervised 模式下 worker_alive() 语义存在潜在误判，计算进行中**不要**手动执行 reconcile/list。
+- LP 最优面非唯一（run003 审计 1024/1460 层 throughput_unique=False、E7 的 layers_with_unknown_multiplicity=1 为 2025-10-12 18:00 调整层）：本阶段验收只比对目标值、约束残差、(I1)/(I2)、题面指标与交付表 1/2/3，**不比对逐点解唯一性**，也不得把对照之间的调度轨迹差异当作不稳定证据；T7-3/T7-6（tie-break 量级敏感性约 1e-4 相对量级）必须作为已知口径敏感性披露，禁止用不同 tie-break 的结果互相比对。
+- 与 robustness 的边界按团队 B6/E9：参数扰动、输入噪声、求解器压力与结构约束压力属 robustness，本阶段不重复；robustness 的决策层购电上限夹逼 (4375, 5000] kW 只作带出处引用，**不得**与 prob02 的 β ∈ (4218.75, 4375.00] kW 混用，本阶段不重跑 b 上限扫描。同时采购上限表述不得再写「低于 10,326 kW 强制 q_em>0」。
+- ablation 图件属实验产物，按既有纪律**不登记为交付图表**（不调用 record_figure_review）；交付图表仍是 prob03 visualization 阶段已登记的 8 张 included_in_paper 图。
+- 结转技术债（本动作不越界代改）：prob01/assumption_v003/version.yaml 的 AS08「必然被激活」措辞（C3/E3）与 global_symbols 的登记欠账待 cross_question_review 权威回写；prob03 文献池 25 条全部 status=used 但 0 条全文（15 abstract_oa + 10 metadata），任何公式级/定量级引用须取得全文后再用；D10「5000 kW 作用侧」为 team_decision、三池文献无一条涉及，论文不得包装为文献支持；A6/A7/A9/A5/A10/A11/A13/A14/A18 仍为推荐口径并保留决策点，本阶段不重裁。
+- 本动作只完成「提交—执行—汇总」的第一步：尚未产生任何交付数值，也未创建 worker 产物；worker 未来才会创建的 output_directory 及其内文件（baseline_check.json 等）**不计入**本响应的 artifacts_created。record_optional_stage(stage="ablation", decision="completed") 与 question_manifest.conclusion 三字段须在结果就绪后的下一次唤醒补齐（后者是 locally_completed 门禁的硬要求）。
+- 可用内存偏低（本动作实测可用 2.823 GB，占用 82.1%）：task 固定单 worker 串行、memory_per_worker_gb=2；不得在本环境安排多 worker 并发，也不得把 config/compute.yaml 的上限 4 当作本环境可用值。
+- C3 与团队 T7-3 的预注册冲突（跑数前已在 plan.md §3 冻结登记，本阶段**不修改阈值**）：团队 B4-C3 要求链级 |ΔC(M8,M1)|/C(M1) ≤ 1e-8，但团队自己的 T7-3 审计（run003/t7_tiebreak.json）证明 1024/1460 层在主目标最优面上仍有吞吐量多重最优（throughput_unique=False），T7-1/T9 的字典序规则不能唯一确定提交点；M1 是跨日向前递推（F1），故任何落在不同最优面点的独立实现都会经跨日状态传播改变链级总费用，本批实测 M8 2.1672146e-05、M8b 1.6756115e-05，与 T7-6 的 2.2566e-04 同阶。本阶段如实报 C3 FAIL（criteria_failed=['C3']），并以补充检查 C3L（同一输入逐层等价 ≤1e-9，实测 16/16 层 0.0）单独承担实现正确性判定；该冲突与 C3L 的定位须由团队在 cross_question_review 确认。
+- T9-② 的 fallback 说明义务未闭合（追踪链欠账，本动作新增登记）：M5a 的 fallback_committed_layers=1（1/2,920）、M5b=6（6/8,760），其余 case 均为 0；prob03_model._solve_with_tiebreak 在字典序重解未返回 status=0 时回落到加权式/基线解，而 task 产物只落盘计数、未落盘逐层 provenance（层 id、committed_solution、原因），故无法按 T9-② 逐个说明原因。影响面：所有 case 的 max_primary_relative_change ≤5.04e-10 ≤1e-9、all_layers_invariance_passed=true ⇒ 主目标未被改变，fallback 只影响最优面内的吞吐量取点；但 M5a/M5b 的数值可追溯性弱于 M1，论文引用其数值时须注明。若需闭合，须在后续版本增加逐层 t7 记录落盘（不改模型，只加字段）。
+- M3 的 t7.all_layers_invariance_passed=false 属**空集语义**：M3 是单一 52,560 时段 LP（实测 262,800 变量 / 105,120 等式行、420,479 非零），t7 列表为空，bool(t7) and all(...) 求值为 False。该字段对 M3 不适用，引用时不得读成「不变性验证失败」；建议后续版本对空层集输出 null/not_applicable。
+- task 原始图 figures/ablation_identities.png 存在字段口径错误（读 summary['identities'] 而非 summary['residuals']，三个系列被 or 0.0 与 1e-16 下限兜底为常数，真实残差 9.8e-08 与 M2b 的 4800.000000 不可见）。已按 prob01 A-DR6 先例另出报告级修正版 ablations/figures/ablation_identities_fixed.png（只读重绘，不覆盖原始图、不改 ablations/code/）；两版并存，论文引用恒等式残差必须以 residuals 字段与修正版图为准。
+- ablation 图件属实验产物，按团队 B5/R24 不登记为交付图表（未调用 record_figure_review）；交付图表仍是 prob03 visualization 阶段已登记的 8 张 included_in_paper 图。若论文需要 ablation 图，须另写公开版绘图脚本（只读 results 的 JSON）重绘并 record_figure_review。
+- LP 最优面非唯一（T7-3 结构性事实，必须如实报告、不得判失败）：本批 M1/M2a/M2b/M4/M7·D2-B/M7·D2-C/M7·D5-B/M8/M8b 的 degenerate_layers 分别为 1460/1460/1460/365/1460/1460/1460/1460/1460，layers_with_remaining_multiplicity=1024/1024/1024/365/1460/1460/1003/1023/1023，layers_with_unknown_multiplicity=1/1/1/0/0/0/4/1/2。本阶段验收只比对目标值、约束残差、(I1)/(I2)、题面指标与交付表，不比对逐点解唯一性，也不得把不同对照之间的调度轨迹差异当作不稳定证据；T7-6 的 tie-break 敏感性（约 1e-4 相对量级）必须作为已知口径敏感性披露，禁止用不同 tie-break/求解器设置的结果互相比对（T7-4/T7-5）。
+- 口径纪律（引用时必须随数字标注）：E6 —— run_manifest 的 total_*_kwh 为交付期 D_req（334 天）口径且 total_purchase_kwh 装的是 Σq 而非 Σb，stdout 摘要为 D_full（365 天）口径；本报告与 findings 中的费用已区分全期/交付期，kWh 类数字须同样标注。R10 —— 值口径（6 位小数舍入）与 xlsx XML 字面口径并存，run003 字面仍有 4,849 格 >6 位小数（openpyxl %.16g 渲染、差 ≤1e-13），论文只许写「按 6 位小数填报」。R1 —— 表 2 端点为多日滚动逐日切片（E_{d,0}=E_{d−1,144}，随日变化），须与 prob01 单日周期恒 6,000 kWh 显式区分一次，且不得与 AS01 左端点相位（计划窗 0:10→24:10）说明混用。
+- R11/R12/R13 属论文与 cross_question_review 必须落地的披露项：R11 不得声称「问题 3 比问题 2 更省」，须写明 +2,307,565.50 元（+18.863%）的成因是「决策用附件 3 预报、结算用附件 2 实际」且模型无对冲机制（T6 撤销 PLAN-EXP 的直接后果）；R12 须给出 periods_with_q_em_and_charge=5,070 的机制解释与最小可复现示例（2025-01-01 6:20–6:30）；R13 须写明 2025-02-01 0:00 储电量 prob02=7,950 / prob03=1,200 kWh 因信息集不同不可互比。本报告 §7.3 已登记，本阶段不代改论文。
+- E7/T7-3 的未定论层与 T9 阈值口径继续有效：run003 的 layers_with_unknown_multiplicity=1 唯一层为 adjustment/day_index=284（2025-10-12）/hour=18（主目标 0.0 ⇒ ε=1.754e-11 低于 HiGHS 对偶分辨率，属探测能力边界、不是缺陷）；求解器内部层残差为「绝对 1e-6 + 相对 1e-8」而层余额判据仍按 1e-8 执行（本批实测 ≤9.8e-08，落在 HiGHS 默认可行性容差 1e-7 内）。引用时不得据新口径放行任何超限值，也不得为求唯一性调 ε 或换 tie-break 规则。
+- 文献证据边界（E4）：prob03 文献池 25 条全部 status=used 但 0 条全文（15 abstract_oa + 10 metadata）；本阶段未新增文献级主张，任何公式级/定量级引用须先取得全文。AS07/AS09/AS10 本质是题面与团队裁定口径（B1/T1–T2），论文不得声称「有文献支持该口径」。D10「5000 kW 作用侧」为 team_decision（口径丙），prob01/02/03 三池文献无一条涉及，论文不得包装为文献支持。
+- 上游结转欠账（本动作不越界代改）：prob01/assumption_v003/version.yaml 中 AS08「该变量在部分时段必然被激活」措辞（团队勘误 C3/E3）与实测不符，权威回写待 cross_question_review；本阶段按「变量保留、最优解允许取 0」执行。A5/A9/A10/A11/A13/A14/A18 仍为 assumption_definition 推荐口径并保留决策点，本阶段未重裁。
+- 探针与数值纪律：本报告全部数值来自隔离 task ca4f2a45aa49a45236e3 的产物；本动作的只读复核探针与上一动作的 5/40/100 天探针数值一律不得作为论文或 sanity 的交付数值；论文主表一律以 run003（accepted M1）为准，本阶段数值只作对比与敏感性，不得替换主结果（B0）。本轮提交动作曾登记的探针数值（M8 链级 7.99e-5、M8b 7.04e-5、C3L 0.0 等）与本次 365 天正式产物（2.167e-05/1.676e-05/0.0）量级一致但**不得混用**。
+- 资源事实（本动作实测）：本机可用内存偏低、config/compute.yaml memory_slots=1，本 task 固定单 worker 串行（max_local_concurrent_tasks=1、memory_per_worker_gb=2）、device=cpu、gpu_required=false，未调用 nvidia-smi、未安装/升级 torch/CUDA、不占用单卡 GPU 串行额度；task 的 consumed=false 属既有「run_agent 动作不消费终态 task」登记欠账，可在 cross_question_review 或归档时统一闭合。本环境 orchestrator 为一次性唤醒模式（config/orchestrator.yaml run_mode=one_shot），本动作未创建新 task。
+- A8 未裁定前 mathematical_formulation 不得启动（前置阻塞项）：0:00 时附件 4 电价的已知程度直接决定 4-2/4-3 的信息集与模型结构；须由团队在 prob04 assumption_definition 阶段裁定并登记，并与 A21（两链是否共用同一 A8 解读）同批处理。
+- 模板陷阱（高风险误操作）：data/附件5/result4-2.xlsx 与 result2.xlsx、result4-3.xlsx 与 result3.xlsx 的 md5 完全相同，若把 prob02/prob03 的结果文件直接当模板写入或反向覆盖，破坏无法通过文件差异发现；prob04 必须新写并保持独立 output_directory。
+- 登记更正（已执行，留痕）：初版 prob04/shared/problem_understanding.md 把问题 4 写成单一问题（P4-1）、dependency_graph.yaml 的 prob01→prob04 边 note 写「只更换价格输入」（P4-2），均已在本次动作更正为强制两链结构；判据与阈值未变。
+- 禁移植与前置条件：prob02 的 A17（0:00 完全信息 + 无购电上限 ⇒ 最优 q_em ≡ 0）不得直接移植到 4-2（对应问题为 A8/A23）；prob03 D9 登记的 D9-B（弃光界收紧为物理盈余）必须在 prob04 assumption_definition 显式裁定，不得静默沿用 prob03 的 D9-A。
+- 结转技术债：prob01/assumption_v003/version.yaml 的 AS08「该变量在部分时段必然被激活」措辞与实测不符（prob01 E3 / prob03 §0.3 的 C3-E3），本动作不越界代改，权威回写仍待 cross_question_review。
+- 跨问引用纪律继续有效：E6（run_manifest 的 total_*_kwh 为交付期 D_req 口径且 total_purchase_kwh 装的是 Σq 而非 Σb）、E9（购电上限阈值必须分问分别表述）、R1（表 2 端点语义跨问区分）、T7-1/T9（所有层与所有模型统一 tie-break，提交解取字典序）在 prob04 两条链上均须遵守。
+- 本动作的探针数值（价格统计、日因子分解、能量量级）只用于假设裁定的诊断，不得作为论文或 sanity 的交付数值；正式数值一律以 computation 阶段隔离 task 的产物为准。
 
 ## 阻塞项
 
@@ -541,4 +599,4 @@ act-93a3075a9a494876: run_agent
 
 ## 下次唤醒
 
-2026-09-11T10:47:53.180801+00:00
+2026-09-11T11:51:26.946412+00:00

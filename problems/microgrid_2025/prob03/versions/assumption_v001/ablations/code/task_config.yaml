@@ -1,0 +1,41 @@
+# prob03 ablation task 级配置
+# 生成者：ablation-analyst（动作 act-21277b914c24422a）
+# 用途：compute_dispatcher submit 时作为 --config-path 传入；effective_config 会把它合并到全局配置之上
+#       （仅影响本 task）。
+# 依据：agents/ablation-analyst.md、skills/ablation-study/SKILL.md、config/workflow.yaml、
+#       config/gates.yaml、config/compute.yaml、本版本 ablations/plan.md（跑数前冻结）。
+compute:
+  default_backend: local
+  max_local_concurrent_tasks: 1
+  memory_per_worker_gb: 2
+  task_timeout_seconds: 7200
+  timeout_retry_attempts: 2
+  retry:
+    infrastructure_transient: 3
+    code_runtime: 2
+    model_revision: 2
+  resource_notes:
+    device: cpu
+    gpu_required: false
+    concurrent_gpu_tasks: 0
+    note: >-
+      prob03 ablation 在 accepted M1（三层顺序向前递推：365 天 × 4 层 = 1,460 次层 LP）之外，另跑
+      11 个对照 case（M2a/M2b/M3/M4/M5a/M5b/M7_D2B/M7_D2C/M7_D5B/M8/M8b）：M5b（每 1 小时决策）
+      为 365 × 25 = 9,125 层，是本批层数最多的 case；M3 为单一 52,560 时段 LP（262,800 变量 /
+      105,120 等式）；M6 为 4 个指定日 × 3 个调整层的日尺度 MILP（每层 216 个二元）。全部 CPU HiGHS，
+      **不使用 GPU**；本机可用内存偏低（实测 1.3–2.2 GB），故 max_local_concurrent_tasks=1、单 worker 串行。
+      40 天探针实测整批 74 s（M5b 占 37.7 s），按天数线性外推全年约 700–900 s，预算余量 ≥ 8 倍。
+solver:
+  name: highs
+  interface: "scipy.optimize.linprog(method='highs')；M6 用 scipy.optimize.milp；M8b 用 highs-ds + presolve=False"
+  device: cpu
+  time_limit_seconds: 60
+  deterministic: true
+  seed: null
+  notes:
+    - "time_limit_seconds 为**单层 LP** 时限；M3 使用 max(60, 300) s；整批另有 --max-wall-seconds 6600 s 墙钟预算。"
+    - "团队 T7-1/T9：所有层、所有模型（M1–M8）一律使用同一 tie-breaking 规则（提交解 = 主目标最优面上吞吐量最小的字典序解）。"
+    - "M8/M8b 的求解器设置差异是 T7-5 允许的唯一差异面；tie-breaking 规则与 M1 完全一致。"
+    - "M6 的 Big-M 由 F8 逐时段推导（u⁺ ≤ b、u⁻ ≤ q_max = L·Δt + 833.3333 + Π_m·Δt），不做放大调参。"
+    - "LP 最优面非唯一（run003 审计 1024/1460 层 throughput_unique=False）：验收以目标值、约束残差、"
+    - "(I1)/(I2)、题面指标与交付表为准，不比对逐点解唯一性；C3 的链级阈值与 T7-3 的冲突已在 plan.md 预注册。"
