@@ -1,0 +1,97 @@
+# prob02 robustness 隔离计算 task 规格
+# 生成者：robustness-analyst（动作 act-4bfd13cab5c9404f）；阶段：robustness（mandatory_stages，不得 skipped）
+# 依据：agents/robustness-analyst.md、skills/robustness-study/SKILL.md、knowledge/robustness-ablation.md、
+#       config/workflow.yaml（robustness 属 mandatory_stages）、本版本 robustness/plan.md（预注册）、
+#       prob02 团队裁定 B0/B5/D8-A（robustness 与 ablation 的边界）与勘误 R2/R5。
+# 说明：本文件是**规格**；task 由 scripts/compute_dispatcher.py submit 经 tasks.make_task_spec/submit_task
+#       确定性创建（status=queued），再由 Runner 以 worker_launch_mode=supervised 原地运行。
+#       Agent 不自行代跑，也不在短命 shell 内调用 start_queued。
+spec_version: 1
+problem_id: microgrid_2025
+question_id: prob02
+stage: robustness
+assumption_version: assumption_v001
+formulation_version: formulation_v001
+backend: local
+working_directory: "."
+code_path: problems/microgrid_2025/prob02/versions/assumption_v001/robustness/code
+config_path: problems/microgrid_2025/prob02/versions/assumption_v001/robustness/code/task_config.yaml
+input_path: data
+output_directory: problems/microgrid_2025/prob02/versions/assumption_v001/robustness/results/prob02_v001_robust_run001
+timeout_seconds: 5400
+seed: 20260910
+gpu_required: false
+device: cpu
+gpu_serial_constraint: "本 task 不使用 GPU，故不占用单卡 GPU 串行额度；本机可用内存偏低，单 worker 串行"
+worker_launch_mode: supervised
+command:
+  - ".venv/Scripts/python.exe"
+  - "problems/microgrid_2025/prob02/versions/assumption_v001/robustness/code/robustness_prob02.py"
+  - "--data"
+  - "data/附件1.xlsx"
+  - "--data2"
+  - "data/附件2.xlsx"
+  - "--reference"
+  - "problems/microgrid_2025/prob02/versions/assumption_v001/results/prob02_v001_f001_run002"
+  - "--output"
+  - "problems/microgrid_2025/prob02/versions/assumption_v001/robustness/results/prob02_v001_robust_run001"
+  - "--seed"
+  - "20260910"
+  - "--samples"
+  - "25"
+  - "--time-limit"
+  - "120"
+  - "--families"
+  - "all"
+submit_hint:
+  tool: scripts/compute_dispatcher.py
+  subcommand: submit
+  notes:
+    - "必须由 Runner 以 supervised（in-process）启动；detached 会被沙箱进程树回收。"
+    - "--output 必须与 output_directory 完全一致（make_task_spec 强校验）。"
+    - "output_directory 必须位于 assumption_v001 目录内（make_task_spec 强校验）。"
+    - "input_path=data 使附件 1/2/3/4/5 全部进入 input_hash；只读，不修改。"
+    - "--samples 25 表示每个噪声族 25 个样本，4 族合计 100（满足默认 ≥100 次随机实验）。"
+    - "禁止用 --days < 365 作为交付结果（该开关仅用于代码接口自检）。"
+inputs_readonly:
+  - data/附件1.xlsx
+  - data/附件2.xlsx
+  - data/（作为 input_path 整体参与 input_hash）
+  - problems/microgrid_2025/prob02/versions/assumption_v001/results/prob02_v001_f001_run002/{solution.json,tables.json,run_manifest.json,solver_status.json}（基线复现闸门，只读）
+  - problems/microgrid_2025/prob02/versions/assumption_v001/code/（accepted M1 参照，只读导入 prob02_io）
+expected_outputs:
+  - baseline_check.json
+  - solver_status.json
+  - raw_samples.jsonl
+  - trajectories/
+  - summary.json
+  - sensitivity.json
+  - run_manifest.json
+  - figures/robustness_tornado.png
+  - figures/robustness_response_curves.png
+  - figures/robustness_noise_ecdf.png
+  - figures/robustness_buy_cap_curve.png
+  - figures/robustness_scenarios.png
+  - figures/robustness_spider.png
+expected_runtime:
+  wall_clock_seconds_max: 5400
+  memory_mb_max: 1024
+  device: cpu
+expected_failure_conditions:
+  - exit_code: 4
+    meaning: "基线复现闸门失败：本实验参数化模型与 accepted run002 不一致，整批作废"
+    route: "needs_revision -> robustness-analyst/implementation 复核模型口径"
+  - exit_code: 3
+    meaning: "输入结构或情景族参数非法（附件结构、日期序列、未知族）"
+    route: "needs_revision -> robustness-analyst 修复代码或参数"
+  - exit_code: 1
+    meaning: "未捕获异常（Python 运行时错误）"
+    route: "code_runtime -> robustness-analyst 修复代码后新 attempt + 新 output_directory"
+acceptance_hint:
+  - "solver_status.json: feasible_incumbent=true、baseline_check_passed=true"
+  - "baseline_check.json: 8 项总量相对差均 ≤ 1e-6 且 4 个指定日期的全天量/表 1 六时段一致"
+  - "raw_samples.jsonl: 149 条样本（49 矩阵 + 100 噪声）、每样本一行、无 NaN/Inf；失败样本保留"
+  - "summary.json: S1–S6 判定、stability_grade、structural_findings（b_cap 阈值夹逼、s 界、售电与 α_em<1 边界）齐备"
+  - "summary.json.structural_findings.b_cap.threshold_bracket 与勘误 R5 的 β ∈ (4218.75, 4375.00] kW 交叉验证"
+  - "run_manifest.json: task_id、code_sha256、accepted_code_sha256、输入 md5、seed、样本计数、耗时齐备"
+  - "figures/ 6 张 PNG；robustness 图件不登记为交付图表（不调用 record_figure_review）"

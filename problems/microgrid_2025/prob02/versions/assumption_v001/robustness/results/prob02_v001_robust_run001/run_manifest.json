@@ -1,0 +1,84 @@
+{
+  "stage": "robustness",
+  "problem_id": "microgrid_2025",
+  "question_id": "prob02",
+  "assumption_version": "assumption_v001",
+  "formulation_version": "formulation_v001",
+  "model": "M1 + 参数/噪声/结构扰动",
+  "task_id": "f7a4e670b91ad469d771",
+  "output_directory": "problems/microgrid_2025/prob02/versions/assumption_v001/robustness/results/prob02_v001_robust_run001",
+  "probe_mode": false,
+  "input": {
+    "attachment1": "data/附件1.xlsx",
+    "attachment1_md5": "dbe06f92517431228efcc26e3e796ef9",
+    "attachment2": "data/附件2.xlsx",
+    "attachment2_md5": "bb3e493f804678de571575116eca1ae6",
+    "days": 365,
+    "periods": 52560
+  },
+  "reference": {
+    "dir": "C:/Users/DUANboyang/Desktop/AutoMM/problems/microgrid_2025/prob02/versions/assumption_v001/results/prob02_v001_f001_run002",
+    "task_id": "dc8afc3deb5477641b99",
+    "sha256": {
+      "solution.json": "1dbc100bb2af58fe3361eb64c5dace7c63c4eefc42a985f5c9ad91d4cf18d6b5",
+      "tables.json": "49c00bd6c9912cb7c9392b7ba8126a06c3c8df1f3071c51e8ae046761250b12f",
+      "run_manifest.json": "6e53b537919d87e323c491078de52ea488228b83a4b0485a09446293f3b1e57b",
+      "solver_status.json": "4e87f187204948c86baf5f26eeef18dad3c5a31fe05b7dd05b21ffff63d840e8"
+    }
+  },
+  "seed": 20260910,
+  "noise_samples_per_family": 25,
+  "noise_samples_total": 100,
+  "families": [
+    "alpha",
+    "alpha_lt1",
+    "b_cap",
+    "baseline",
+    "eta",
+    "eta_asym",
+    "ewin",
+    "init",
+    "noise_day_5",
+    "noise_joint_day_5",
+    "noise_white_10",
+    "noise_white_5",
+    "pmax",
+    "s_bound",
+    "s_sell",
+    "solver"
+  ],
+  "cases_total": 149,
+  "cases_infeasible": [],
+  "checks_failed": [
+    "S1",
+    "S5"
+  ],
+  "baseline_check": true,
+  "stability_grade": "脆弱（需缩小适用范围）",
+  "figures": [
+    "robustness_tornado.png",
+    "robustness_response_curves.png",
+    "robustness_noise_ecdf.png",
+    "robustness_buy_cap_curve.png",
+    "robustness_scenarios.png",
+    "robustness_spider.png"
+  ],
+  "code_sha256": {
+    "robustness_prob02.py": "2d098c2523f0c71848e339b2e2c442d3cefc8a646d9da426bdfeb0e6b99e4604"
+  },
+  "accepted_code_sha256": {
+    "prob02_model.py": "a1cebf40b41295cda4eae0a5409f5adf70c1342c6d4fb800b2e3af7ebb09d8d2",
+    "prob02_io.py": "10ea7e49508d54b72dfdf5e15494f019f9dd8096780afd5acdfc406393631892",
+    "run_prob02.py": "a3ff906a1493af6bf22e982066dfdf52546eb6b72f0a1812ecff1d817f8f749f"
+  },
+  "device": "cpu",
+  "gpu_required": false,
+  "gpu_serial_constraint": "本 task 不使用 GPU",
+  "environment": {
+    "python": "3.14.4",
+    "numpy": "2.5.2",
+    "platform": "Windows-11-10.0.26200-SP0"
+  },
+  "outcome": "completed_with_findings",
+  "wall_clock_seconds": 907.269
+}

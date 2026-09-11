@@ -1,0 +1,31 @@
+# prob02 robustness 隔离计算 task 级配置
+# 生成者：robustness-analyst（动作 act-4bfd13cab5c9404f）；阶段：robustness
+# 用途：由 scripts/compute_dispatcher.py submit 时作为 --config-path 传入；
+#       effective_config 会把它合并到全局配置之上（仅影响本 task）。
+compute:
+  default_backend: local
+  max_local_concurrent_tasks: 1
+  memory_per_worker_gb: 2
+  task_timeout_seconds: 5400
+  timeout_retry_attempts: 2
+  retry:
+    infrastructure_transient: 3
+    code_runtime: 2
+    model_revision: 2
+  resource_notes:
+    device: cpu
+    gpu_required: false
+    concurrent_gpu_tasks: 0
+    note: >-
+      prob02 robustness 共 49 个矩阵情景 + 100 个噪声样本 = 149 次全年 LP
+      （52,560 时段 / 315,360 变量 / 105,120 等式 / 473,039 非零元），CPU HiGHS。
+      本动作小探针实测单次全年 LP 7.89 s，预计整批 25–45 min；timeout 设 5,400 s 留足余量。
+      本机可用内存偏低，memory_slots=1，**不安排多 worker 并发**，单 worker 串行。
+    worker_launch_mode: "supervised（继承 config/compute.yaml；detached 在本环境会被沙箱回收）"
+solver:
+  name: highs
+  interface: "scipy.optimize.linprog(method='highs')"
+  device: cpu
+  time_limit_seconds: 120
+  deterministic: true
+  seed: 20260910

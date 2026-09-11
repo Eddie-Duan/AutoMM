@@ -11,6 +11,11 @@ problem_id: microgrid_2025
 generated_by: problem-decomposer
 stage: problem_understanding
 ambiguity_ref: problems/microgrid_2025/problem_understanding.md
+revision_note: >-
+  本表初版由 problem-decomposer 于 act-6ee27cd01ef4455a（prob01 problem_understanding）建立；
+  在 prob02 problem_understanding（act-7ab45b76b8634948）按团队勘误执行 E1/E2 回写，
+  并登记 prob02 新增符号。团队裁定/团队勘误（prob01 assumption_v003/assumptions.md 末节）
+  效力高于本表旧登记；被更正的旧值原样保留在 notes 中，不删除审计痕迹。
 symbols:
   # ---------- 指标与集合 ----------
   - symbol: t
@@ -53,6 +58,17 @@ symbols:
     domain: "n_t = 144"
     first_question: prob01
     notes: ""
+  - symbol: j
+    latex: "j"
+    meaning_zh: "紧急购电事件（连续时段合并后的时间段）序号"
+    unit: "-"
+    kind: index
+    domain: "j ∈ {1, 2, …, J_d}，J_d 为第 d 日紧急购电时间段数；J_d 可为 0"
+    first_question: prob02
+    notes: >-
+      题面表 4 示例为非等长区间（13:00-13:30、14:40-15:50、16:10-16:30），故需先把连续 10 分钟
+      紧急购电时段合并为区间再编号；合并规则与区间端点标签（相对 AS01 左端点口径）见 A18，待裁定。
+      J_d = 0 时的填报写法（0 / 空 / 「无」）亦在 A18 中裁定。
 
   # ---------- 时间/尺度参数 ----------
   - symbol: Delta_t
@@ -210,9 +226,12 @@ symbols:
     meaning_zh: "紧急购电量（微网供电低于负载时的补足购电）"
     unit: "kWh"
     kind: decision
-    domain: "q_em_{d,t} ≥ 0"
+    domain: "q_em_{d,t} ≥ 0；单价 = alpha_em·price = 5·p_{d,t}（元/kWh）"
     first_question: prob02
-    notes: "能否用于储能充电待定（A5）。"
+    notes: >-
+      能否用于储能充电待定（A5）；计划信息结构与「无购电上限 + 完全信息 ⇒ 最优 q_em ≡ 0」的推论见 A17，
+      表 3 的时间段合并与填报口径见 A18——两者均由 assumption_definition 裁定，本阶段不固定。
+      该变量在 prob02 就必须保留（题面要求给出紧急购电结果），不得因预期恒零而删除。
   - symbol: c_ch
     latex: "c_{d,t}"
     meaning_zh: "储能充电量"
@@ -226,9 +245,13 @@ symbols:
     meaning_zh: "储能放电量"
     unit: "kWh"
     kind: decision
-    domain: "0 ≤ q_dis_{d,t} ≤ P_dis_max·Delta_t"
+    domain: "0 ≤ q_dis_{d,t} ≤ min(P_dis_max·Delta_t, P_dis_max·Delta_t·eta_dis) = 750.00（口径丙：并网点侧与电池侧同时 ≤ 5000 kW，放电时电池侧为紧侧）"
     first_question: prob01
-    notes: "与购电量 b、充电量 c_ch 区分；是否禁止同时充放电待定。"
+    notes: >-
+      与购电量 b、充电量 c_ch 区分；是否禁止同时充放电待定。
+      团队勘误 E1（对应上报项 C1，2026-09-10）要求把上界由旧登记 833.33 更正为 750.00：
+      依据为团队裁定 D10 采用口径丙，属登记未同步而非新口径选择；prob01–prob04 统一。
+      prob01 accepted AS06 与 formulation_v001 §5.2 均按 750.00 执行，本表旧值 833.33 作废。
   - symbol: E_soc
     latex: "E_{d,t}"
     meaning_zh: "时段末的储能储电量（状态变量）"
@@ -236,15 +259,24 @@ symbols:
     kind: decision
     domain: "E_min ≤ E_{d,t} ≤ E_max；E_{d,0} 为当天 0:00 储电量"
     first_question: prob01
-    notes: "prob01 附加周期约束 E_{d,0} = E_{d,144}（H6）。"
+    notes: >-
+      prob01 附加周期约束 E_{d,0} = E_{d,144}（H6）。
+      prob02–prob04 的每日 0:00 储电量取值（每日独立 E_{d,0} = E_{d,144}，或自 2025-01-01
+      以 E_init 滚动递推、1 月作预热）见 A2，属高优先待裁定项；在裁定前不得把 prob01 的
+      E_0 = E_144 = 6000 kWh 直接当作 prob02 每日初值。
   - symbol: q_spill
     latex: "s_{d,t}"
-    meaning_zh: "弃光/盈余电量（候选变量，尚未固定是否引入）"
+    meaning_zh: "弃光/盈余电量"
     unit: "kWh"
     kind: decision
-    domain: "q_spill_{d,t} ≥ 0（若引入）"
-    first_question: prob02
-    notes: "是否引入见 A13；不引入时功率平衡以不等式表达。"
+    domain: "s_{d,t} ≥ 0，且 0 ≤ s_{d,t} ≤ PV_{d,t}·Delta_t"
+    first_question: prob01
+    notes: >-
+      团队勘误 E2（对应上报项 C2，2026-09-10）要求把 first_question 由旧登记 prob02 更正为 prob01：
+      prob01 accepted AS08 / 团队裁定 D4 采纳 A 已把 s_t 定为显式决策变量，属登记滞后而非新口径。
+      符号含义不变。多日小问的界是否够紧见 A13 与 robustness 的 A-DR5（sell_price ≥ 0.50 元/kWh 时
+      s_t ≤ PV·Δt 不够紧、出现 12293.617 kWh 的非物理售电，超过附件 1 物理盈余 6247.963 kWh）；
+      prob02 无售电收益时 s_t 目标系数为 0，该松弛不构成套利，但若后续引入售电须先收紧本界。
 
   # ---------- 派生量 ----------
   - symbol: C_plan

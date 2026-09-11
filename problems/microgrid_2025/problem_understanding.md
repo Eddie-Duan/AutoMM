@@ -140,3 +140,25 @@ data/附件5/result4-3.xlsx              75be588e714646dde3102aa102382347
 ## 11. 不阻塞声明
 
 以上歧义均可在题面与数据范围内通过假设版本化处理，**不构成人工阻塞**；若 `assumption_definition` 阶段判定 A2/A8 等存在互斥且无法由文献或数据裁决的建模目标，再按 `config/gates.yaml` 的 `human_model_choice` 上报。
+
+---
+
+## 12. prob02 承接与登记更正（追加于 act-7ab45b76b8634948）
+
+> 本节由 problem-decomposer 在 prob02 `problem_understanding` 动作中追加，**不改动 §1–§11 原文**。
+> 小问级细化见 `prob02/shared/problem_understanding.md`。
+
+1. **prob01 结论承接**：`dependency_graph.yaml` 的 `prob01 → prob02` 边（`prob01-concl-001` / v2 / hash `6fb260491cb70450c0ea71608b59271f51d99a002737d0b3ed46a1bb1b8888d6`）已在 prob02 显式承接，
+   并细化为可执行口径：AS01（左端点/计划窗 0:10→24:10）、AS03a（`min Σ p·b` 不带 Δt）、AS04（等式平衡 + 显式 `s`，prob02 左侧追加 `q_em`）、
+   AS05（两侧 90%）、AS06+D10+E1（`c ≤ 833.33`、`q_dis ≤ 750.00` kWh，两侧功率 ≤ 5000 kW）、AS08/E2（`s` 显式且 `first_question = prob01`）、
+   AS09（Δt = 1/6 h）、AS13（模板行位置聚合、充放电不冲抵）、AS15/AS16（无购电上限/无售电、确定性）。
+2. **团队勘误回写（权威落点）**：`global_symbols.yaml` 已按 E1 把 `q_dis` 域由 833.33 更正为 **750.00**、
+   按 E2 把 `q_spill.first_question` 由 prob02 更正为 **prob01**；旧值保留在 `notes` 中作为审计痕迹。E3（`version.yaml` 中 AS08 措辞）
+   **不在 problem-decomposer 职权内**，仍待 `cross_question_review` 回写，已在响应 warnings 中结转。
+3. **prob02 新增歧义**：A17（0:00 计划的信息结构；在 AS15 无购电上限 + 完全信息下最优 `q_em ≡ 0`，与题面「给出紧急购电结果」的解释冲突，必须裁定）、
+   A18（表 3 / `result2.xlsx` 紧急购电时间段合并与填报口径）。两者均**未在本阶段固定**。
+4. **A2 仍未裁定**：prob01 的 `E_0 = E_144 = 6000 kWh` 周期口径是 prob02 跨日/每日重置裁定的锚点，
+   须在 prob02 `assumption_definition`（`assumption_v001`）中裁定并登记；本阶段只登记数据事实（`D_req` = 334 天、`D_full` = 365 天）。
+5. **数据事实补充（只读探针复核）**：附件 2 = 两个工作表「小区负载」「光伏发电实际功率」，各 365 天 × 144 点，1/1–12/31 无缺日；
+   `result2.xlsx` 三个工作表为 335×147 / 20×6 / 11×3，`计划购电量` 末列为 `0:00-0:10+1`（与 AS01 左端点相位一致）、末两列为 `全天购电量`/`全天购电费`；
+   表 3 的四天 2025-03-20 / 06-21 / 09-23 / 12-21 均命中附件 2 日期索引且落在 `D_req` 内。

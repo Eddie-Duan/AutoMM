@@ -1,0 +1,95 @@
+# prob02 隔离计算 task 规格（computation 阶段由 resource-manager 提交）
+# 生成者：implementation-agent（动作 act-a4b3a442051e4b00）
+# 修订者：implementation-agent（动作 act-56d59165992142b3，run002）
+#   修订原因：sanity act-ca831716e72246eb 判 NEEDS_REVISION（交付格式：result2.xlsx 残留模板
+#   充放电量!A15=2025-12-31 / !E16='24:00'，根因 openpyxl cell(value=None) 静默 no-op）。
+#   已修复 prob02_io.py 的 _assign/_clear_rows 并新增保存前 format_residuals 硬门禁；
+#   按重跑纪律改用新 output_directory=..._run002（不得覆盖 run001）。
+# 依据：agents/implementation-agent.md、agents/resource-manager.md、PROJECT.md、config/gates.yaml、
+#       prob02 assumption_v001（AS01–AS13 + 团队勘误 R1–R4 + 团队裁定 B0–B5）与 formulation_v001 §7
+# 说明：本文件只是**规格**，implementation 阶段不得自行创建 task；task 由 Runner/tasks.py 确定性创建。
+#
+# 口径要点（不得逐问更改）：
+#   * 主口径 M1（团队裁定 B0）：全年 365 天 × 144 时段 = 52,560 时段的单一确定性 LP（跨日滚动、终端自由）；
+#   * 目标 min Σ(p·b + 5·p·q_em)，元，**不乘 Δt**（团队裁定 D9，硬错误信号见 failure 说明）；
+#   * c ≤ 833.3333、q_dis ≤ 750.0000（D10 口径丙 / 勘误 E1）、E ∈ [1200,10800]、E_0 = 6000、E_T 自由；
+#   * 只用附件 1 的电价列与附件 2 的实际负载/光伏；禁用附件 1 预测列、附件 3、附件 4（AS02 / B4）；
+#   * 结果文件 result2.xlsx 三个工作表按勘误 R3（时刻/储电量写在前两行）与 R4（紧急购电每日期至少 1 行）。
+spec_version: 1
+problem_id: microgrid_2025
+question_id: prob02
+stage: computation
+assumption_version: assumption_v001
+formulation_version: formulation_v001
+backend: local
+working_directory: "."
+code_path: problems/microgrid_2025/prob02/versions/assumption_v001/code
+config_path: problems/microgrid_2025/prob02/versions/assumption_v001/code/task_config.yaml
+input_path: data
+output_directory: problems/microgrid_2025/prob02/versions/assumption_v001/results/prob02_v001_f001_run002
+timeout_seconds: 900
+seed: null
+gpu_required: false
+device: cpu
+gpu_serial_constraint: "本 task 不使用 GPU，故不占用单卡 GPU 串行额度；若未来引入 GPU 路径必须单卡串行"
+worker_launch_mode: supervised
+command:
+  - ".venv/Scripts/python.exe"
+  - "problems/microgrid_2025/prob02/versions/assumption_v001/code/run_prob02.py"
+  - "--data"
+  - "data/附件1.xlsx"
+  - "--data2"
+  - "data/附件2.xlsx"
+  - "--template"
+  - "data/附件5/result2.xlsx"
+  - "--output"
+  - "problems/microgrid_2025/prob02/versions/assumption_v001/results/prob02_v001_f001_run002"
+  - "--days"
+  - "365"
+  - "--time-limit"
+  - "300"
+submit_hint:
+  tool: scripts/compute_dispatcher.py
+  subcommand: submit
+  notes:
+    - "若 .venv/Scripts/python.exe 无法解析，resource-manager 应改用当前 Runner 解释器（sys.executable）或项目 venv 的绝对路径；不得改用缺少 scipy/openpyxl/numpy 的解释器。"
+    - "--output 的取值必须与 output_directory 完全一致（tasks.make_task_spec 会强校验）。"
+    - "禁止 --days 小于 365；探针模式（--days < 365）只允许在 implementation/静态检查中使用，不得作为交付结果。"
+    - "必须由 Runner 以 worker_launch_mode=supervised（in-process）启动；detached 在本环境会被沙箱回收。"
+    - "本问为确定性 LP：seed=null，不读取任何随机源；重跑必须使用新的 output_directory（..._run002 等），不得覆盖既有结果。"
+inputs_readonly:
+  - data/附件1.xlsx
+  - data/附件2.xlsx
+  - data/附件5/result2.xlsx
+  - data/（作为 input_path 整体参与 input_hash）
+expected_outputs:
+  - result2.xlsx
+  - solver_status.json
+  - solution.json
+  - tables.json
+  - run_manifest.json
+expected_runtime:
+  wall_clock_seconds_max: 300
+  memory_mb_max: 1024
+  device: cpu
+expected_failure_conditions:
+  - exit_code: 2
+    meaning: "solver 未返回最优（infeasible/unbounded/time_limit），solver_status.json 的 feasible_incumbent=false"
+    route: "route_compute_failure -> implementation-agent 复核 formulation 与数据；不得伪报最优"
+  - exit_code: 3
+    meaning: "附件 1/附件 2/模板结构与 accepted 假设不一致（表头、行数、日期序列、模板工作表名/列数）"
+    route: "needs_revision -> mathematical_formulation 或 assumption_definition"
+  - exit_code: 4
+    meaning: "硬检查或模板标签校验失败（残差 > 1e-6、边界越界、Σq_em ≠ 0、表 1 位置口径不符、解析界/量级越界、result2.xlsx 填报残留 format_residuals 非空）"
+    route: "needs_revision -> implementation 修复或 mathematical_formulation 复核"
+  - exit_code: 1
+    meaning: "未捕获异常（Python 运行时错误）"
+    route: "code_runtime -> implementation-agent 修复代码"
+acceptance_hint:
+  - "solver_status.json: status=0、feasible_incumbent=true、等式残差 <= 1e-6、bound_violation_max <= 1e-6"
+  - "solution.json: checks_failed 为空；(I1)/(I2) 全期与交付期切片残差 <= 1e-6；跨日连续性残差 <= 1e-6；同充放时段数 = 0；Σq_em = 0（定理 T1）；交付期费用为 10^7 元量级（约 1.2233e7，formulation 探针值，不得当作验收目标值）"
+  - "solution.json.totals: max c <= 833.3333、max q_dis <= 750.0000、max_side_power_kw <= 5000、E ∈ [1200,10800]、E_0 = 6000"
+  - "tables.json: 4 个指定日期（2025-03-20/06-21/09-23/12-21）；表 1 六时段行位置 60/72/84/96/108/120 且 attachment_timestamp 为区间左端点、template_label 为完整区间；表 2 每日 6 块；表 3 主口径全为「无（0 kWh）」"
+  - "result2.xlsx: 计划购电量 335 行 × 147 列（334 天 × 144 时段 + 全天购电量 + 全天购电费）；充放电量 1 + 334×6 行且时刻/储电量在每日前两行；紧急购电量 335 行（每日期 1 行，时间段=—、购电量=0）"
+  - "run_manifest.json: workbook_info.format_residuals 必须为空（保存前的填报残留硬门禁；防御 openpyxl cell(value=None) 静默 no-op 复发）"
+  - "run_manifest.json: code_sha256、input md5（附件 1/2/模板）、device=cpu、seed=null、matrix_scale 齐备，供 sanity/ablation/robustness 追踪"

@@ -1,0 +1,688 @@
+{
+  "passed": true,
+  "items": [
+    {
+      "name": "objective_yuan",
+      "value": 13758182.573724441,
+      "reference": 13758182.573724,
+      "rel_diff": 3.208613477850135e-14,
+      "tolerance": 1e-06,
+      "passed": true
+    },
+    {
+      "name": "delivery_cost_yuan",
+      "value": 12233050.830708284,
+      "reference": 12233050.830708,
+      "rel_diff": 2.314402732410779e-14,
+      "tolerance": 1e-06,
+      "passed": true
+    },
+    {
+      "name": "total_purchase_kwh",
+      "value": 22657938.15743468,
+      "reference": 22657938.157435,
+      "rel_diff": 1.4139634570526728e-14,
+      "tolerance": 1e-06,
+      "passed": true
+    },
+    {
+      "name": "total_q_em_kwh",
+      "value": 0.0,
+      "reference": 0.0,
+      "rel_diff": 0.0,
+      "tolerance": 1e-06,
+      "passed": true
+    },
+    {
+      "name": "total_spill_kwh",
+      "value": 990168.0903121398,
+      "reference": 990168.090312,
+      "rel_diff": 1.412030976175907e-13,
+      "tolerance": 1e-06,
+      "passed": true
+    },
+    {
+      "name": "storage_final_kwh",
+      "value": 1200.0,
+      "reference": 1200.0,
+      "rel_diff": 0.0,
+      "tolerance": 1e-06,
+      "passed": true
+    },
+    {
+      "name": "max_purchase_power_kw",
+      "value": 10325.33,
+      "reference": 10325.33,
+      "rel_diff": 0.0,
+      "tolerance": 1e-06,
+      "passed": true
+    },
+    {
+      "name": "max_side_power_kw",
+      "value": 5000.0,
+      "reference": 5000.0,
+      "rel_diff": 0.0,
+      "tolerance": 1e-06,
+      "passed": true
+    }
+  ],
+  "spec_items": [
+    {
+      "name": "2025-03-20.all_day_energy_kwh",
+      "value": 61658.56288106996,
+      "reference": 61658.562881,
+      "abs_diff": 6.996560841798782e-08,
+      "passed": true
+    },
+    {
+      "name": "2025-03-20.all_day_cost_yuan",
+      "value": 37975.40085266311,
+      "reference": 37975.400853,
+      "abs_diff": 3.36891389451921e-07,
+      "passed": true
+    },
+    {
+      "name": "2025-03-20.slot_60",
+      "value": 0.0,
+      "reference": 0.0,
+      "abs_diff": 0.0,
+      "passed": true
+    },
+    {
+      "name": "2025-03-20.slot_72",
+      "value": 558.3116666666667,
+      "reference": 558.311667,
+      "abs_diff": 3.3333333249174757e-07,
+      "passed": true
+    },
+    {
+      "name": "2025-03-20.slot_84",
+      "value": 0.0,
+      "reference": 0.0,
+      "abs_diff": 0.0,
+      "passed": true
+    },
+    {
+      "name": "2025-03-20.slot_96",
+      "value": 507.32416666666677,
+      "reference": 507.324167,
+      "abs_diff": 3.3333321880490985e-07,
+      "passed": true
+    },
+    {
+      "name": "2025-03-20.slot_108",
+      "value": 682.3533333333332,
+      "reference": 682.353333,
+      "abs_diff": 3.3333321880490985e-07,
+      "passed": true
+    },
+    {
+      "name": "2025-03-20.slot_120",
+      "value": 0.0,
+      "reference": 0.0,
+      "abs_diff": 0.0,
+      "passed": true
+    },
+    {
+      "name": "2025-03-20.block_charge_0",
+      "value": 1666.6666666666665,
+      "reference": 1666.666667,
+      "abs_diff": 3.333334461785853e-07,
+      "passed": true
+    },
+    {
+      "name": "2025-03-20.block_discharge_0",
+      "value": 0.0,
+      "reference": 0.0,
+      "abs_diff": 0.0,
+      "passed": true
+    },
+    {
+      "name": "2025-03-20.block_charge_1",
+      "value": 833.3333333333333,
+      "reference": 833.333333,
+      "abs_diff": 3.3333321880490985e-07,
+      "passed": true
+    },
+    {
+      "name": "2025-03-20.block_discharge_1",
+      "value": 5862.6227833333305,
+      "reference": 5862.622783,
+      "abs_diff": 3.3333071769447997e-07,
+      "passed": true
+    },
+    {
+      "name": "2025-03-20.block_charge_2",
+      "value": 6291.457016666666,
+      "reference": 6291.457017,
+      "abs_diff": 3.333334461785853e-07,
+      "passed": true
+    },
+    {
+      "name": "2025-03-20.block_discharge_2",
+      "value": 2777.3772166666668,
+      "reference": 2777.377217,
+      "abs_diff": 3.333334461785853e-07,
+      "passed": true
+    },
+    {
+      "name": "2025-03-20.block_charge_3",
+      "value": 4689.682222016462,
+      "reference": 4689.682222,
+      "abs_diff": 1.646185410209e-08,
+      "passed": true
+    },
+    {
+      "name": "2025-03-20.block_discharge_3",
+      "value": 254.72278333333304,
+      "reference": 254.722783,
+      "abs_diff": 3.3333304827465327e-07,
+      "passed": true
+    },
+    {
+      "name": "2025-03-20.block_charge_4",
+      "value": 0.0,
+      "reference": 0.0,
+      "abs_diff": 0.0,
+      "passed": true
+    },
+    {
+      "name": "2025-03-20.block_discharge_4",
+      "value": 5728.063849999999,
+      "reference": 5728.06385,
+      "abs_diff": 9.094947017729282e-13,
+      "passed": true
+    },
+    {
+      "name": "2025-03-20.block_charge_5",
+      "value": 3503.184609053498,
+      "reference": 3503.184609,
+      "abs_diff": 5.3498297347687185e-08,
+      "passed": true
+    },
+    {
+      "name": "2025-03-20.block_discharge_5",
+      "value": 2911.93615,
+      "reference": 2911.93615,
+      "abs_diff": 0.0,
+      "passed": true
+    },
+    {
+      "name": "2025-03-20.storage_0_00",
+      "value": 8550.0,
+      "reference": 8550.0,
+      "abs_diff": 0.0,
+      "passed": true
+    },
+    {
+      "name": "2025-03-20.storage_24_00",
+      "value": 4352.866148148149,
+      "reference": 4352.866148,
+      "abs_diff": 1.4814850146649405e-07,
+      "passed": true
+    },
+    {
+      "name": "2025-06-21.all_day_energy_kwh",
+      "value": 38934.07248333333,
+      "reference": 38934.072483,
+      "abs_diff": 3.333261702209711e-07,
+      "passed": true
+    },
+    {
+      "name": "2025-06-21.all_day_cost_yuan",
+      "value": 20470.622812591668,
+      "reference": 20470.622813,
+      "abs_diff": 4.0833401726558805e-07,
+      "passed": true
+    },
+    {
+      "name": "2025-06-21.slot_60",
+      "value": 0.0,
+      "reference": 0.0,
+      "abs_diff": 0.0,
+      "passed": true
+    },
+    {
+      "name": "2025-06-21.slot_72",
+      "value": 0.0,
+      "reference": 0.0,
+      "abs_diff": 0.0,
+      "passed": true
+    },
+    {
+      "name": "2025-06-21.slot_84",
+      "value": 0.0,
+      "reference": 0.0,
+      "abs_diff": 0.0,
+      "passed": true
+    },
+    {
+      "name": "2025-06-21.slot_96",
+      "value": 27.004999999999995,
+      "reference": 27.005,
+      "abs_diff": 3.552713678800501e-15,
+      "passed": true
+    },
+    {
+      "name": "2025-06-21.slot_108",
+      "value": 385.9016666666667,
+      "reference": 385.901667,
+      "abs_diff": 3.333332756483287e-07,
+      "passed": true
+    },
+    {
+      "name": "2025-06-21.slot_120",
+      "value": 0.0,
+      "reference": 0.0,
+      "abs_diff": 0.0,
+      "passed": true
+    },
+    {
+      "name": "2025-06-21.block_charge_0",
+      "value": 0.0,
+      "reference": 0.0,
+      "abs_diff": 0.0,
+      "passed": true
+    },
+    {
+      "name": "2025-06-21.block_discharge_0",
+      "value": 0.0,
+      "reference": 0.0,
+      "abs_diff": 0.0,
+      "passed": true
+    },
+    {
+      "name": "2025-06-21.block_charge_1",
+      "value": 833.3333333333333,
+      "reference": 833.333333,
+      "abs_diff": 3.3333321880490985e-07,
+      "passed": true
+    },
+    {
+      "name": "2025-06-21.block_discharge_1",
+      "value": 1719.9539666666665,
+      "reference": 1719.953967,
+      "abs_diff": 3.333334461785853e-07,
+      "passed": true
+    },
+    {
+      "name": "2025-06-21.block_charge_2",
+      "value": 701.5952333333345,
+      "reference": 701.595233,
+      "abs_diff": 3.333344693601248e-07,
+      "passed": true
+    },
+    {
+      "name": "2025-06-21.block_discharge_2",
+      "value": 0.0,
+      "reference": 0.0,
+      "abs_diff": 0.0,
+      "passed": true
+    },
+    {
+      "name": "2025-06-21.block_charge_3",
+      "value": 9965.071433333333,
+      "reference": 9965.071433,
+      "abs_diff": 3.333334461785853e-07,
+      "passed": true
+    },
+    {
+      "name": "2025-06-21.block_discharge_3",
+      "value": 0.0,
+      "reference": 0.0,
+      "abs_diff": 0.0,
+      "passed": true
+    },
+    {
+      "name": "2025-06-21.block_charge_4",
+      "value": 0.0,
+      "reference": 0.0,
+      "abs_diff": 0.0,
+      "passed": true
+    },
+    {
+      "name": "2025-06-21.block_discharge_4",
+      "value": 6154.103416666665,
+      "reference": 6154.103417,
+      "abs_diff": 3.3333526516798884e-07,
+      "passed": true
+    },
+    {
+      "name": "2025-06-21.block_charge_5",
+      "value": 8166.666666666666,
+      "reference": 8166.666667,
+      "abs_diff": 3.3333435567328706e-07,
+      "passed": true
+    },
+    {
+      "name": "2025-06-21.block_discharge_5",
+      "value": 2485.896583333333,
+      "reference": 2485.896583,
+      "abs_diff": 3.333329914312344e-07,
+      "passed": true
+    },
+    {
+      "name": "2025-06-21.storage_0_00",
+      "value": 2361.059962962963,
+      "reference": 2361.059963,
+      "abs_diff": 3.7037352740298957e-08,
+      "passed": true
+    },
+    {
+      "name": "2025-06-21.storage_24_00",
+      "value": 8550.0,
+      "reference": 8550.0,
+      "abs_diff": 0.0,
+      "passed": true
+    },
+    {
+      "name": "2025-09-23.all_day_energy_kwh",
+      "value": 66265.42130905349,
+      "reference": 66265.421309,
+      "abs_diff": 5.349284037947655e-08,
+      "passed": true
+    },
+    {
+      "name": "2025-09-23.all_day_cost_yuan",
+      "value": 41351.89755144753,
+      "reference": 41351.897551,
+      "abs_diff": 4.4752960093319416e-07,
+      "passed": true
+    },
+    {
+      "name": "2025-09-23.slot_60",
+      "value": 0.0,
+      "reference": 0.0,
+      "abs_diff": 0.0,
+      "passed": true
+    },
+    {
+      "name": "2025-09-23.slot_72",
+      "value": 380.0212499999998,
+      "reference": 380.02125,
+      "abs_diff": 2.2737367544323206e-13,
+      "passed": true
+    },
+    {
+      "name": "2025-09-23.slot_84",
+      "value": 0.0,
+      "reference": 0.0,
+      "abs_diff": 0.0,
+      "passed": true
+    },
+    {
+      "name": "2025-09-23.slot_96",
+      "value": 493.5825,
+      "reference": 493.5825,
+      "abs_diff": 0.0,
+      "passed": true
+    },
+    {
+      "name": "2025-09-23.slot_108",
+      "value": 752.645,
+      "reference": 752.645,
+      "abs_diff": 0.0,
+      "passed": true
+    },
+    {
+      "name": "2025-09-23.slot_120",
+      "value": 61.91166666666663,
+      "reference": 61.911667,
+      "abs_diff": 3.3333336801888436e-07,
+      "passed": true
+    },
+    {
+      "name": "2025-09-23.block_charge_0",
+      "value": 1666.6666666666665,
+      "reference": 1666.666667,
+      "abs_diff": 3.333334461785853e-07,
+      "passed": true
+    },
+    {
+      "name": "2025-09-23.block_discharge_0",
+      "value": 0.0,
+      "reference": 0.0,
+      "abs_diff": 0.0,
+      "passed": true
+    },
+    {
+      "name": "2025-09-23.block_charge_1",
+      "value": 833.3333333333333,
+      "reference": 833.333333,
+      "abs_diff": 3.3333321880490985e-07,
+      "passed": true
+    },
+    {
+      "name": "2025-09-23.block_discharge_1",
+      "value": 6746.773249999999,
+      "reference": 6746.77325,
+      "abs_diff": 9.094947017729282e-13,
+      "passed": true
+    },
+    {
+      "name": "2025-09-23.block_charge_2",
+      "value": 5245.375776131685,
+      "reference": 5245.375776,
+      "abs_diff": 1.316848283750005e-07,
+      "passed": true
+    },
+    {
+      "name": "2025-09-23.block_discharge_2",
+      "value": 1896.6157166666662,
+      "reference": 1896.615717,
+      "abs_diff": 3.3333367355226073e-07,
+      "passed": true
+    },
+    {
+      "name": "2025-09-23.block_charge_3",
+      "value": 5923.777166255142,
+      "reference": 5923.777166,
+      "abs_diff": 2.551423676777631e-07,
+      "passed": true
+    },
+    {
+      "name": "2025-09-23.block_discharge_3",
+      "value": 403.62491666666654,
+      "reference": 403.624917,
+      "abs_diff": 3.333334461785853e-07,
+      "passed": true
+    },
+    {
+      "name": "2025-09-23.block_charge_4",
+      "value": 0.0,
+      "reference": 0.0,
+      "abs_diff": 0.0,
+      "passed": true
+    },
+    {
+      "name": "2025-09-23.block_discharge_4",
+      "value": 5639.999999999999,
+      "reference": 5640.0,
+      "abs_diff": 9.094947017729282e-13,
+      "passed": true
+    },
+    {
+      "name": "2025-09-23.block_charge_5",
+      "value": 8166.666666666666,
+      "reference": 8166.666667,
+      "abs_diff": 3.3333435567328706e-07,
+      "passed": true
+    },
+    {
+      "name": "2025-09-23.block_discharge_5",
+      "value": 3000.0,
+      "reference": 3000.0,
+      "abs_diff": 0.0,
+      "passed": true
+    },
+    {
+      "name": "2025-09-23.storage_0_00",
+      "value": 8550.0,
+      "reference": 8550.0,
+      "abs_diff": 0.0,
+      "passed": true
+    },
+    {
+      "name": "2025-09-23.storage_24_00",
+      "value": 8550.0,
+      "reference": 8550.0,
+      "abs_diff": 0.0,
+      "passed": true
+    },
+    {
+      "name": "2025-12-21.all_day_energy_kwh",
+      "value": 93770.21493971194,
+      "reference": 93770.21494,
+      "abs_diff": 2.880697138607502e-07,
+      "passed": true
+    },
+    {
+      "name": "2025-12-21.all_day_cost_yuan",
+      "value": 59717.364844708965,
+      "reference": 59717.364845,
+      "abs_diff": 2.9103102860972285e-07,
+      "passed": true
+    },
+    {
+      "name": "2025-12-21.slot_60",
+      "value": 0.0,
+      "reference": 0.0,
+      "abs_diff": 0.0,
+      "passed": true
+    },
+    {
+      "name": "2025-12-21.slot_72",
+      "value": 906.6833333333332,
+      "reference": 906.683333,
+      "abs_diff": 3.3333321880490985e-07,
+      "passed": true
+    },
+    {
+      "name": "2025-12-21.slot_84",
+      "value": 0.0,
+      "reference": 0.0,
+      "abs_diff": 0.0,
+      "passed": true
+    },
+    {
+      "name": "2025-12-21.slot_96",
+      "value": 795.9304166666667,
+      "reference": 795.930417,
+      "abs_diff": 3.3333333249174757e-07,
+      "passed": true
+    },
+    {
+      "name": "2025-12-21.slot_108",
+      "value": 712.6333333333333,
+      "reference": 712.633333,
+      "abs_diff": 3.3333333249174757e-07,
+      "passed": true
+    },
+    {
+      "name": "2025-12-21.slot_120",
+      "value": 30.268333333333203,
+      "reference": 30.268333,
+      "abs_diff": 3.3333320459405513e-07,
+      "passed": true
+    },
+    {
+      "name": "2025-12-21.block_charge_0",
+      "value": 1666.6666666666665,
+      "reference": 1666.666667,
+      "abs_diff": 3.333334461785853e-07,
+      "passed": true
+    },
+    {
+      "name": "2025-12-21.block_discharge_0",
+      "value": 0.0,
+      "reference": 0.0,
+      "abs_diff": 0.0,
+      "passed": true
+    },
+    {
+      "name": "2025-12-21.block_charge_1",
+      "value": 1666.6666666666665,
+      "reference": 1666.666667,
+      "abs_diff": 3.333334461785853e-07,
+      "passed": true
+    },
+    {
+      "name": "2025-12-21.block_discharge_1",
+      "value": 1425.0,
+      "reference": 1425.0,
+      "abs_diff": 0.0,
+      "passed": true
+    },
+    {
+      "name": "2025-12-21.block_charge_2",
+      "value": 5833.333333333333,
+      "reference": 5833.333333,
+      "abs_diff": 3.333334461785853e-07,
+      "passed": true
+    },
+    {
+      "name": "2025-12-21.block_discharge_2",
+      "value": 7889.999999999997,
+      "reference": 7890.0,
+      "abs_diff": 2.7284841053187847e-12,
+      "passed": true
+    },
+    {
+      "name": "2025-12-21.block_charge_3",
+      "value": 7574.209156378602,
+      "reference": 7574.209156,
+      "abs_diff": 3.7860172596992925e-07,
+      "passed": true
+    },
+    {
+      "name": "2025-12-21.block_discharge_3",
+      "value": 2220.1094166666667,
+      "reference": 2220.109417,
+      "abs_diff": 3.333334461785853e-07,
+      "passed": true
+    },
+    {
+      "name": "2025-12-21.block_charge_4",
+      "value": 0.0,
+      "reference": 0.0,
+      "abs_diff": 0.0,
+      "passed": true
+    },
+    {
+      "name": "2025-12-21.block_discharge_4",
+      "value": 5797.474233333332,
+      "reference": 5797.474233,
+      "abs_diff": 3.333325366838835e-07,
+      "passed": true
+    },
+    {
+      "name": "2025-12-21.block_charge_5",
+      "value": 8166.666666666666,
+      "reference": 8166.666667,
+      "abs_diff": 3.3333435567328706e-07,
+      "passed": true
+    },
+    {
+      "name": "2025-12-21.block_discharge_5",
+      "value": 2842.5257666666666,
+      "reference": 2842.525767,
+      "abs_diff": 3.333334461785853e-07,
+      "passed": true
+    },
+    {
+      "name": "2025-12-21.storage_0_00",
+      "value": 8550.0,
+      "reference": 8550.0,
+      "abs_diff": 0.0,
+      "passed": true
+    },
+    {
+      "name": "2025-12-21.storage_24_00",
+      "value": 8550.0,
+      "reference": 8550.0,
+      "abs_diff": 0.0,
+      "passed": true
+    }
+  ],
+  "reference_directory": "C:/Users/DUANboyang/Desktop/AutoMM/problems/microgrid_2025/prob02/versions/assumption_v001/results/prob02_v001_f001_run002"
+}

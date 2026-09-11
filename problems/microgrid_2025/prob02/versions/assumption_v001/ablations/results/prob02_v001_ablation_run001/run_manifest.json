@@ -1,0 +1,33 @@
+{
+  "problem_id": "microgrid_2025",
+  "question_id": "prob02",
+  "stage": "ablation",
+  "assumption_version": "assumption_v001",
+  "formulation_version": "formulation_v001",
+  "task_id": "5b87ce0a8d9e4706c82c",
+  "output_directory": "C:\\Users\\DUANboyang\\Desktop\\AutoMM\\problems\\microgrid_2025\\prob02\\versions\\assumption_v001\\ablations\\results\\prob02_v001_ablation_run001",
+  "days": 365,
+  "periods": 52560,
+  "seed": 20260910,
+  "device": "cpu",
+  "gpu_required": false,
+  "solver": "scipy.optimize.linprog/milp (HiGHS)",
+  "probe_mode": false,
+  "wall_clock_seconds": 401.33643270000175,
+  "model_count": 17,
+  "inputs": {
+    "attachment1_md5": "dbe06f92517431228efcc26e3e796ef9",
+    "attachment2_md5": "bb3e493f804678de571575116eca1ae6",
+    "reference_directory": "C:\\Users\\DUANboyang\\Desktop\\AutoMM\\problems\\microgrid_2025\\prob02\\versions\\assumption_v001\\results\\prob02_v001_f001_run002"
+  },
+  "baseline_check_passed": true,
+  "code_sha256": {
+    "ablation_prob02.py": "ba7b6c1406bef6ba6b57600ef7799345688139d846bdb5b3defd0941117bbbda",
+    "__code_dir__": "2cfeb65d86c2df76f1ad9d1825bb2bf50ea995fbc8ee611696f85a991f1903ac"
+  },
+  "environment": {
+    "python": "3.14.4",
+    "numpy": "2.5.2",
+    "platform": "Windows-11-10.0.26200-SP0"
+  }
+}

@@ -1,0 +1,93 @@
+{
+  "generated_at": "2026-09-11T02:47:51.414936+00:00",
+  "problem_id": "microgrid_2025",
+  "question_id": "prob02",
+  "assumption_version": "assumption_v001",
+  "formulation_version": "formulation_v001",
+  "task_id": "dc8afc3deb5477641b99",
+  "run": "problems/microgrid_2025/prob02/versions/assumption_v001/results/prob02_v001_f001_run002",
+  "font": "Microsoft YaHei",
+  "dpi": 180,
+  "source_solution_hash": "4bcf70250a945038e02c95c52a6070e1489824f847713c130a2620e642131c44",
+  "source_tables_hash": "3fbda879954f11cf38358a166805e95950330a682ceb9572238e7fa8a4e9d36d",
+  "figure_count": 11,
+  "figures": [
+    {
+      "stable_id": "prob02_fig_year_energy_flow_ed77b9f928",
+      "kind": "year_energy_flow",
+      "path": "problems/microgrid_2025/prob02/versions/assumption_v001/figures/prob02_fig_year_energy_flow_ed77b9f928.png",
+      "quality_status": "passed",
+      "source_data": "problems/microgrid_2025/prob02/versions/assumption_v001/results/prob02_v001_f001_run002/solution.json"
+    },
+    {
+      "stable_id": "prob02_fig_cost_price_rhythm_74725a2a9b",
+      "kind": "cost_price_rhythm",
+      "path": "problems/microgrid_2025/prob02/versions/assumption_v001/figures/prob02_fig_cost_price_rhythm_74725a2a9b.png",
+      "quality_status": "passed",
+      "source_data": "problems/microgrid_2025/prob02/versions/assumption_v001/results/prob02_v001_f001_run002/solution.json"
+    },
+    {
+      "stable_id": "prob02_fig_temporal_heatmap_2aa0a5f976",
+      "kind": "temporal_heatmap",
+      "path": "problems/microgrid_2025/prob02/versions/assumption_v001/figures/prob02_fig_temporal_heatmap_2aa0a5f976.png",
+      "quality_status": "passed",
+      "source_data": "problems/microgrid_2025/prob02/versions/assumption_v001/results/prob02_v001_f001_run002/solution.json"
+    },
+    {
+      "stable_id": "prob02_fig_soc_trajectory_eb0f77c2a5",
+      "kind": "soc_trajectory",
+      "path": "problems/microgrid_2025/prob02/versions/assumption_v001/figures/prob02_fig_soc_trajectory_eb0f77c2a5.png",
+      "quality_status": "passed",
+      "source_data": "problems/microgrid_2025/prob02/versions/assumption_v001/results/prob02_v001_f001_run002/solution.json"
+    },
+    {
+      "stable_id": "prob02_fig_energy_balance_b86f1c6e8b",
+      "kind": "energy_balance",
+      "path": "problems/microgrid_2025/prob02/versions/assumption_v001/figures/prob02_fig_energy_balance_b86f1c6e8b.png",
+      "quality_status": "passed",
+      "source_data": "problems/microgrid_2025/prob02/versions/assumption_v001/results/prob02_v001_f001_run002/solution.json"
+    },
+    {
+      "stable_id": "prob02_fig_rhythm_3d_9748be3c4f",
+      "kind": "rhythm_3d",
+      "path": "problems/microgrid_2025/prob02/versions/assumption_v001/figures/prob02_fig_rhythm_3d_9748be3c4f.png",
+      "quality_status": "passed",
+      "source_data": "problems/microgrid_2025/prob02/versions/assumption_v001/results/prob02_v001_f001_run002/solution.json"
+    },
+    {
+      "stable_id": "prob02_fig_rhythm_2d_a0abf87c17",
+      "kind": "rhythm_2d",
+      "path": "problems/microgrid_2025/prob02/versions/assumption_v001/figures/prob02_fig_rhythm_2d_a0abf87c17.png",
+      "quality_status": "passed",
+      "source_data": "problems/microgrid_2025/prob02/versions/assumption_v001/results/prob02_v001_f001_run002/solution.json"
+    },
+    {
+      "stable_id": "prob02_fig_spec_dates_a8ffbf1f32",
+      "kind": "spec_dates",
+      "path": "problems/microgrid_2025/prob02/versions/assumption_v001/figures/prob02_fig_spec_dates_a8ffbf1f32.png",
+      "quality_status": "passed",
+      "source_data": "problems/microgrid_2025/prob02/versions/assumption_v001/results/prob02_v001_f001_run002/solution.json + problems/microgrid_2025/prob02/versions/assumption_v001/results/prob02_v001_f001_run002/tables.json"
+    },
+    {
+      "stable_id": "prob02_fig_daily_coupling_3d_55ed1b8ea2",
+      "kind": "daily_coupling_3d",
+      "path": "problems/microgrid_2025/prob02/versions/assumption_v001/figures/prob02_fig_daily_coupling_3d_55ed1b8ea2.png",
+      "quality_status": "passed",
+      "source_data": "problems/microgrid_2025/prob02/versions/assumption_v001/results/prob02_v001_f001_run002/solution.json"
+    },
+    {
+      "stable_id": "prob02_fig_daily_coupling_2d_3069395b29",
+      "kind": "daily_coupling_2d",
+      "path": "problems/microgrid_2025/prob02/versions/assumption_v001/figures/prob02_fig_daily_coupling_2d_3069395b29.png",
+      "quality_status": "passed",
+      "source_data": "problems/microgrid_2025/prob02/versions/assumption_v001/results/prob02_v001_f001_run002/solution.json"
+    },
+    {
+      "stable_id": "prob02_fig_cost_bounds_ad7c3c0cc0",
+      "kind": "cost_bounds",
+      "path": "problems/microgrid_2025/prob02/versions/assumption_v001/figures/prob02_fig_cost_bounds_ad7c3c0cc0.png",
+      "quality_status": "passed",
+      "source_data": "problems/microgrid_2025/prob02/versions/assumption_v001/results/prob02_v001_f001_run002/solution.json"
+    }
+  ]
+}

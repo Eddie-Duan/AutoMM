@@ -40,8 +40,8 @@
 
 - `problem_understanding`：本文件 + 题目级 `problem_understanding.md`；
 - `literature`：`shared/literature.md` + `shared/literature_pool.yaml`（储能优化/峰谷套利相关文献池）；
-- `assumptions`：`versions/assumption_v001/assumption.yaml`（含 A1/A3/A5/A13/A15 的裁定）；
-- `formulation`：`versions/assumption_v001/formulations/formulation_v001/`（变量、目标、约束、求解器、可解性）；
+- `assumptions`：`versions/assumption_v003/assumptions.md`（accepted；含 A1/A3/A5/A13/A15 的裁定）；
+- `formulation`：`versions/assumption_v003/formulations/formulation_v001/`（变量、目标、约束、求解器、可解性）；
 - `implementation`：可运行代码 + 静态检查/小型探针记录；
 - `computation`：隔离 task 结果（`result1.xlsx`、目标值、求解器状态）；
 - `visualization`：储电量/购电量/价格曲线等图；

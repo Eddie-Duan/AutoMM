@@ -1,0 +1,89 @@
+{
+  "problem_id": "microgrid_2025",
+  "question_id": "prob02",
+  "assumption_version": "assumption_v001",
+  "formulation_version": "formulation_v001",
+  "stage": "computation",
+  "model": "M1",
+  "probe_mode": false,
+  "days": 365,
+  "periods": 52560,
+  "created_at": "2026-09-11T01:07:50.364455+00:00",
+  "task_id": "dc8afc3deb5477641b99",
+  "output_directory": "C:\\Users\\DUANboyang\\Desktop\\AutoMM\\problems\\microgrid_2025\\prob02\\versions\\assumption_v001\\results\\prob02_v001_f001_run002",
+  "device": "cpu",
+  "gpu_required": false,
+  "seed": null,
+  "deterministic": true,
+  "solver": "scipy.optimize.linprog(method='highs')",
+  "time_limit_seconds": 300.0,
+  "input": {
+    "attachment1": "C:\\Users\\DUANboyang\\Desktop\\AutoMM\\data\\附件1.xlsx",
+    "attachment1_md5": "dbe06f92517431228efcc26e3e796ef9",
+    "attachment1_periods": 144,
+    "attachment2": "C:\\Users\\DUANboyang\\Desktop\\AutoMM\\data\\附件2.xlsx",
+    "attachment2_md5": "bb3e493f804678de571575116eca1ae6",
+    "attachment2_days": 365,
+    "template": "C:\\Users\\DUANboyang\\Desktop\\AutoMM\\data\\附件5\\result2.xlsx",
+    "template_md5": "b878ce2b016155f49486af25c51e8cab",
+    "template_plan_rows": 334
+  },
+  "parameters": {
+    "delta_t_h": 0.16666666666666666,
+    "eta_ch": 0.9,
+    "eta_dis": 0.9,
+    "eta_round_trip": 0.81,
+    "alpha_em": 5.0,
+    "e_init_kwh": 6000.0,
+    "e_min_kwh": 1200.0,
+    "e_max_kwh": 10800.0,
+    "e_terminal": null,
+    "p_max_kw": 5000.0,
+    "c_cap_kwh": 833.3333333333333,
+    "q_dis_cap_kwh": 750.0,
+    "b_upper_kwh": null
+  },
+  "code_sha256": {
+    "prob02_io.py": "10ea7e49508d54b72dfdf5e15494f019f9dd8096780afd5acdfc406393631892",
+    "prob02_model.py": "a1cebf40b41295cda4eae0a5409f5adf70c1342c6d4fb800b2e3af7ebb09d8d2",
+    "run_prob02.py": "a3ff906a1493af6bf22e982066dfdf52546eb6b72f0a1812ecff1d817f8f749f",
+    "__code_dir__": "dba1db9f922ad48b9970888a681be0708fba77e136eda22b5f122fe3b8b80d0d"
+  },
+  "environment": {
+    "python": "3.14.4",
+    "numpy": "2.5.2",
+    "platform": "Windows-11-10.0.26200-SP0"
+  },
+  "outcome": "completed",
+  "matrix_scale": {
+    "variables": 315360,
+    "equality_constraints": 105120,
+    "variable_bounds": 315360,
+    "nonzero": 473039,
+    "integer_variables": 0
+  },
+  "workbook": "result2.xlsx",
+  "workbook_info": {
+    "plan_rows_filled": 334,
+    "plan_periods_per_row": 144,
+    "storage_blocks_filled": 2004,
+    "emergency_rows_filled": 334,
+    "storage_blocks": [
+      "0:00-4:00",
+      "4:00-8:00",
+      "8:00-12:00",
+      "12:00-16:00",
+      "16:00-20:00",
+      "20:00-24:00"
+    ],
+    "format_residuals": []
+  },
+  "delivery_days": 334,
+  "checks_failed": [],
+  "objective_yuan": 13758182.573724,
+  "delivery_cost_yuan": 12233050.830708,
+  "total_purchase_kwh": 22657938.157435,
+  "total_q_em_kwh": 0.0,
+  "total_spill_kwh": 990168.090312,
+  "storage_final_kwh": 1200.0
+}

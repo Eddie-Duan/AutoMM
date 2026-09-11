@@ -1,0 +1,101 @@
+# prob02 ablation 隔离计算 task 规格
+# 生成者：ablation-analyst（动作 act-d2b711aa1991482f）；阶段：ablation（mandatory_stages，不得 skipped）
+# 依据：agents/ablation-analyst.md、skills/ablation-study/SKILL.md、config/workflow.yaml、
+#       config/gates.yaml、config/compute.yaml、本版本 ablations/plan.md（预注册）、
+#       prob02 团队裁定 B0–B5 / D1–D8 与勘误 R1–R5。
+# 说明：本文件是**规格**；task 由 scripts/compute_dispatcher.py submit 经 tasks.make_task_spec/submit_task
+#       确定性创建（status=queued），再由 Runner 以 worker_launch_mode=supervised 原地运行。
+#       Agent 不自行代跑，也不在短命 shell 内调用 start_queued。
+spec_version: 1
+problem_id: microgrid_2025
+question_id: prob02
+stage: ablation
+assumption_version: assumption_v001
+formulation_version: formulation_v001
+backend: local
+working_directory: "."
+code_path: problems/microgrid_2025/prob02/versions/assumption_v001/ablations/code
+config_path: problems/microgrid_2025/prob02/versions/assumption_v001/ablations/code/task_config.yaml
+input_path: data
+output_directory: problems/microgrid_2025/prob02/versions/assumption_v001/ablations/results/prob02_v001_ablation_run001
+timeout_seconds: 7200
+seed: 20260910
+gpu_required: false
+device: cpu
+gpu_serial_constraint: "本 task 不使用 GPU，故不占用单卡 GPU 串行额度；本机可用内存偏低，单 worker 串行"
+worker_launch_mode: supervised
+command:
+  - ".venv/Scripts/python.exe"
+  - "problems/microgrid_2025/prob02/versions/assumption_v001/ablations/code/ablation_prob02.py"
+  - "--data"
+  - "data/附件1.xlsx"
+  - "--data2"
+  - "data/附件2.xlsx"
+  - "--reference"
+  - "problems/microgrid_2025/prob02/versions/assumption_v001/results/prob02_v001_f001_run002"
+  - "--output"
+  - "problems/microgrid_2025/prob02/versions/assumption_v001/ablations/results/prob02_v001_ablation_run001"
+  - "--seed"
+  - "20260910"
+  - "--days"
+  - "365"
+  - "--milp-time-limit"
+  - "300"
+submit_hint:
+  tool: scripts/compute_dispatcher.py
+  subcommand: submit
+  notes:
+    - "必须由 Runner 以 supervised（in-process）启动；detached 会被沙箱进程树回收。"
+    - "--output 必须与 output_directory 完全一致（make_task_spec 强校验）。"
+    - "output_directory 必须位于 assumption_v001 目录内（make_task_spec 强校验）。"
+    - "input_path=data 使附件 1/2/3/4/5 全部进入 input_hash（只读，不修改）；模型只用附件 1 的电价列与附件 2 的实际负载/光伏。"
+    - "全规模 MILP 由主脚本以 sys.executable 派生独立子进程运行（--only m3_full），以隔离内存与时限。"
+inputs_readonly:
+  - data/附件1.xlsx
+  - data/附件2.xlsx
+  - data/（作为 input_path 整体参与 input_hash）
+  - problems/microgrid_2025/prob02/versions/assumption_v001/results/prob02_v001_f001_run002/{solution.json,tables.json,run_manifest.json,solver_status.json}（C1 基线闸门，只读）
+  - problems/microgrid_2025/prob02/versions/assumption_v001/code/（accepted M1 参照，只读导入 prob02_io）
+expected_outputs:
+  - baseline_check.json
+  - solver_status.json
+  - comparison.json
+  - identities.json
+  - raw_cases.jsonl
+  - summary.json
+  - run_manifest.json
+  - figures/ablation_model_cost.png
+  - figures/ablation_b_cap_curve.png
+  - figures/ablation_structure_waterfall.png
+  - figures/ablation_complexity_tradeoff.png
+  - M1/case.json
+  - M2a/case.json
+  - M2b/case.json
+  - M3_full/case.json
+  - M4/case.json
+  - M5/case.json
+  - M6_B10326/case.json
+  - M6p_B4218_75/case.json
+  - M7/case.json
+expected_runtime:
+  wall_clock_seconds_max: 7200
+  memory_mb_max: 2048
+  device: cpu
+expected_failure_conditions:
+  - exit_code: 4
+    meaning: "C1 基线复现闸门失败：参数化模型与 accepted run002 不一致，整批作废"
+    route: "needs_revision -> ablation-analyst/implementation 复核模型口径"
+  - exit_code: 3
+    meaning: "输入结构或参数非法（附件结构、日期序列）"
+    route: "needs_revision -> ablation-analyst 修复代码或参数"
+  - exit_code: 1
+    meaning: "未捕获异常（Python 运行时错误）"
+    route: "code_runtime -> ablation-analyst 修复代码后新 attempt + 新 output_directory"
+acceptance_hint:
+  - "solver_status.json: feasible_incumbent=true、baseline_check_passed=true"
+  - "baseline_check.json: 8 项总量相对差 ≤ 1e-6 且 4 个指定日期的全天量/表 1 六时段/表 2 端点 ≤ 1e-6"
+  - "summary.json: C1–C7 判定与 K2 跨日携带价值齐备；未通过项与技术债显式登记，判据不得事后修改"
+  - "raw_cases.jsonl: 每个模型一行、无 NaN/Inf；失败 case 保留"
+  - "M6/M6′ 的 Σq_em 与总费用随 b 上限单调；β 夹逼与勘误 R5 的 (4218.75, 4375.00] kW 交叉验证"
+  - "run_manifest.json: task_id、code_sha256、输入 md5、seed、计数、耗时齐备"
+  - "figures/ 4 张 PNG；ablation 图件不登记为交付图表（团队裁定 B5，不调用 record_figure_review）"

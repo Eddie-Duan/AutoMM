@@ -1,0 +1,1434 @@
+{
+  "baseline_objective_yuan": 13758182.573724,
+  "baseline_delivery_cost_yuan": 12233050.830708,
+  "baseline_no_storage_cost_yuan": 18298592.366275,
+  "families": {
+    "alpha": {
+      "count": 6,
+      "feasible_count": 6,
+      "feasible_rate": 1.0,
+      "objective": {
+        "count": 6,
+        "mean": 13758182.573724,
+        "std": 0.0,
+        "min": 13758182.573724,
+        "p2_5": 13758182.573724,
+        "p25": 13758182.573724,
+        "median": 13758182.573724,
+        "p75": 13758182.573724,
+        "p97_5": 13758182.573724,
+        "max": 13758182.573724,
+        "ci95_mean": [
+          13758182.573724,
+          13758182.573724
+        ]
+      },
+      "relative_delta": {
+        "count": 6,
+        "mean": 0.0,
+        "std": 0.0,
+        "min": 0.0,
+        "p2_5": 0.0,
+        "p25": 0.0,
+        "median": 0.0,
+        "p75": 0.0,
+        "p97_5": 0.0,
+        "max": 0.0,
+        "ci95_mean": [
+          0.0,
+          0.0
+        ]
+      },
+      "delivery_relative_delta": {
+        "count": 6,
+        "mean": 0.0,
+        "std": 0.0,
+        "min": 0.0,
+        "p2_5": 0.0,
+        "p25": 0.0,
+        "median": 0.0,
+        "p75": 0.0,
+        "p97_5": 0.0,
+        "max": 0.0,
+        "ci95_mean": [
+          0.0,
+          0.0
+        ]
+      },
+      "checks_failed_union": [],
+      "labels": [
+        "alpha_em_4",
+        "alpha_em_4.5",
+        "alpha_em_4.75",
+        "alpha_em_5.25",
+        "alpha_em_5.5",
+        "alpha_em_6"
+      ]
+    },
+    "alpha_lt1": {
+      "count": 1,
+      "feasible_count": 1,
+      "feasible_rate": 1.0,
+      "objective": {
+        "count": 1,
+        "mean": 6879091.286862,
+        "std": 0.0,
+        "min": 6879091.286862,
+        "p2_5": 6879091.286862,
+        "p25": 6879091.286862,
+        "median": 6879091.286862,
+        "p75": 6879091.286862,
+        "p97_5": 6879091.286862,
+        "max": 6879091.286862,
+        "ci95_mean": [
+          6879091.286862,
+          6879091.286862
+        ]
+      },
+      "relative_delta": {
+        "count": 1,
+        "mean": -0.5,
+        "std": 0.0,
+        "min": -0.5,
+        "p2_5": -0.5,
+        "p25": -0.5,
+        "median": -0.5,
+        "p75": -0.5,
+        "p97_5": -0.5,
+        "max": -0.5,
+        "ci95_mean": [
+          -0.5,
+          -0.5
+        ]
+      },
+      "delivery_relative_delta": {
+        "count": 1,
+        "mean": -0.5,
+        "std": 0.0,
+        "min": -0.5,
+        "p2_5": -0.5,
+        "p25": -0.5,
+        "median": -0.5,
+        "p75": -0.5,
+        "p97_5": -0.5,
+        "max": -0.5,
+        "ci95_mean": [
+          -0.5,
+          -0.5
+        ]
+      },
+      "checks_failed_union": [
+        "analytic_lower_bound",
+        "q_em_zero_total"
+      ],
+      "labels": [
+        "alpha_em_0.50"
+      ]
+    },
+    "b_cap": {
+      "count": 10,
+      "feasible_count": 10,
+      "feasible_rate": 1.0,
+      "objective": {
+        "count": 10,
+        "mean": 16855195.847117,
+        "std": 5958343.262291,
+        "min": 13758182.573724,
+        "p2_5": 13758577.989346,
+        "p25": 13840659.699643,
+        "median": 14549925.291589,
+        "p75": 15562061.663119,
+        "p97_5": 30036707.697156,
+        "max": 32769611.572155,
+        "ci95_mean": [
+          14182293.687963,
+          20550350.146921
+        ]
+      },
+      "relative_delta": {
+        "count": 10,
+        "mean": 0.225103,
+        "std": 0.433076,
+        "min": 0.0,
+        "p2_5": 2.9e-05,
+        "p25": 0.005995,
+        "median": 0.057547,
+        "p75": 0.131113,
+        "p97_5": 1.183189,
+        "max": 1.381827,
+        "ci95_mean": [
+          0.030826,
+          0.493682
+        ]
+      },
+      "delivery_relative_delta": {
+        "count": 10,
+        "mean": 0.219409,
+        "std": 0.426428,
+        "min": 0.0,
+        "p2_5": 2.6e-05,
+        "p25": 0.005375,
+        "median": 0.054161,
+        "p75": 0.125242,
+        "p97_5": 1.163357,
+        "max": 1.361248,
+        "ci95_mean": [
+          0.029015,
+          0.48425
+        ]
+      },
+      "checks_failed_union": [
+        "analytic_upper_bound",
+        "q_em_zero_total"
+      ],
+      "labels": [
+        "b_cap_10326kW",
+        "b_cap_8459kW",
+        "b_cap_6000kW",
+        "b_cap_5000kW",
+        "b_cap_4375kW",
+        "b_cap_4218.75kW",
+        "b_cap_4000kW",
+        "b_cap_3750kW",
+        "b_cap_3000kW",
+        "b_cap_2000kW"
+      ]
+    },
+    "baseline": {
+      "count": 1,
+      "feasible_count": 1,
+      "feasible_rate": 1.0,
+      "objective": {
+        "count": 1,
+        "mean": 13758182.573724,
+        "std": 0.0,
+        "min": 13758182.573724,
+        "p2_5": 13758182.573724,
+        "p25": 13758182.573724,
+        "median": 13758182.573724,
+        "p75": 13758182.573724,
+        "p97_5": 13758182.573724,
+        "max": 13758182.573724,
+        "ci95_mean": [
+          13758182.573724,
+          13758182.573724
+        ]
+      },
+      "relative_delta": {
+        "count": 1,
+        "mean": 0.0,
+        "std": 0.0,
+        "min": 0.0,
+        "p2_5": 0.0,
+        "p25": 0.0,
+        "median": 0.0,
+        "p75": 0.0,
+        "p97_5": 0.0,
+        "max": 0.0,
+        "ci95_mean": [
+          0.0,
+          0.0
+        ]
+      },
+      "delivery_relative_delta": {
+        "count": 1,
+        "mean": 0.0,
+        "std": 0.0,
+        "min": 0.0,
+        "p2_5": 0.0,
+        "p25": 0.0,
+        "median": 0.0,
+        "p75": 0.0,
+        "p97_5": 0.0,
+        "max": 0.0,
+        "ci95_mean": [
+          0.0,
+          0.0
+        ]
+      },
+      "checks_failed_union": [],
+      "labels": [
+        "baseline"
+      ]
+    },
+    "eta": {
+      "count": 6,
+      "feasible_count": 6,
+      "feasible_rate": 1.0,
+      "objective": {
+        "count": 6,
+        "mean": 13919784.333176,
+        "std": 1170015.782396,
+        "min": 12723600.52869,
+        "p2_5": 12739000.576266,
+        "p25": 12961341.835989,
+        "median": 13767974.273298,
+        "p75": 14595695.563806,
+        "p97_5": 15572861.93149,
+        "max": 15695089.906241,
+        "ci95_mean": [
+          13112791.903762,
+          14823317.847194
+        ]
+      },
+      "relative_delta": {
+        "count": 6,
+        "mean": 0.011746,
+        "std": 0.085041,
+        "min": -0.075198,
+        "p2_5": -0.074078,
+        "p25": -0.057918,
+        "median": 0.000712,
+        "p75": 0.060874,
+        "p97_5": 0.131898,
+        "max": 0.140782,
+        "ci95_mean": [
+          -0.04691,
+          0.077418
+        ]
+      },
+      "delivery_relative_delta": {
+        "count": 6,
+        "mean": 0.012142,
+        "std": 0.085305,
+        "min": -0.074835,
+        "p2_5": -0.073718,
+        "p25": -0.057624,
+        "median": 0.000792,
+        "p75": 0.061072,
+        "p97_5": 0.133024,
+        "max": 0.142032,
+        "ci95_mean": [
+          -0.046648,
+          0.078329
+        ]
+      },
+      "checks_failed_union": [],
+      "labels": [
+        "eta_both_0.72",
+        "eta_both_0.81",
+        "eta_both_0.855",
+        "eta_both_0.945",
+        "eta_both_0.99",
+        "eta_both_1"
+      ]
+    },
+    "eta_asym": {
+      "count": 4,
+      "feasible_count": 4,
+      "feasible_rate": 1.0,
+      "objective": {
+        "count": 4,
+        "mean": 13781233.908642,
+        "std": 561819.026568,
+        "min": 13164544.256493,
+        "p2_5": 13187453.672434,
+        "p25": 13393638.4159,
+        "median": 13787569.190793,
+        "p75": 14175164.683535,
+        "p97_5": 14364244.165192,
+        "max": 14385252.996487,
+        "ci95_mean": [
+          13317273.696098,
+          14315223.558836
+        ]
+      },
+      "relative_delta": {
+        "count": 4,
+        "mean": 0.001675,
+        "std": 0.040835,
+        "min": -0.043148,
+        "p2_5": -0.041483,
+        "p25": -0.026497,
+        "median": 0.002136,
+        "p75": 0.030308,
+        "p97_5": 0.044051,
+        "max": 0.045578,
+        "ci95_mean": [
+          -0.032047,
+          0.040488
+        ]
+      },
+      "delivery_relative_delta": {
+        "count": 4,
+        "mean": 0.001733,
+        "std": 0.040942,
+        "min": -0.043475,
+        "p2_5": -0.041746,
+        "p25": -0.026185,
+        "median": 0.002187,
+        "p75": 0.030104,
+        "p97_5": 0.044439,
+        "max": 0.046032,
+        "ci95_mean": [
+          -0.031948,
+          0.040723
+        ]
+      },
+      "checks_failed_union": [],
+      "labels": [
+        "eta_ch_0.81",
+        "eta_dis_0.81",
+        "eta_ch_0.99",
+        "eta_dis_0.99"
+      ]
+    },
+    "ewin": {
+      "count": 3,
+      "feasible_count": 3,
+      "feasible_rate": 1.0,
+      "objective": {
+        "count": 3,
+        "mean": 14007470.236661,
+        "std": 435197.156201,
+        "min": 13689845.677725,
+        "p2_5": 13696805.391633,
+        "p25": 13759442.816808,
+        "median": 13829039.95589,
+        "p75": 14166282.516128,
+        "p97_5": 14469800.820343,
+        "max": 14503525.076367,
+        "ci95_mean": [
+          13689845.677725,
+          14503525.076367
+        ]
+      },
+      "relative_delta": {
+        "count": 3,
+        "mean": 0.018119,
+        "std": 0.031632,
+        "min": -0.004967,
+        "p2_5": -0.004461,
+        "p25": 9.2e-05,
+        "median": 0.00515,
+        "p75": 0.029662,
+        "p97_5": 0.051723,
+        "max": 0.054174,
+        "ci95_mean": [
+          -0.004967,
+          0.054174
+        ]
+      },
+      "delivery_relative_delta": {
+        "count": 3,
+        "mean": 0.018738,
+        "std": 0.032723,
+        "min": -0.005192,
+        "p2_5": -0.004663,
+        "p25": 9.4e-05,
+        "median": 0.005379,
+        "p75": 0.030704,
+        "p97_5": 0.053496,
+        "max": 0.056028,
+        "ci95_mean": [
+          -0.005192,
+          0.056028
+        ]
+      },
+      "checks_failed_union": [],
+      "labels": [
+        "e_min_960",
+        "e_min_1440",
+        "e_max_8640"
+      ]
+    },
+    "init": {
+      "count": 6,
+      "feasible_count": 6,
+      "feasible_rate": 1.0,
+      "objective": {
+        "count": 6,
+        "mean": 13758182.832058,
+        "std": 413.312563,
+        "min": 13757612.757058,
+        "p2_5": 13757648.354975,
+        "p25": 13757933.140391,
+        "median": 13758182.573725,
+        "p75": 13758432.257058,
+        "p97_5": 13758717.898725,
+        "max": 13758753.607058,
+        "ci95_mean": [
+          13757873.948724,
+          13758491.984836
+        ]
+      },
+      "relative_delta": {
+        "count": 6,
+        "mean": 0.0,
+        "std": 3e-05,
+        "min": -4.1e-05,
+        "p2_5": -3.9e-05,
+        "p25": -1.8e-05,
+        "median": 0.0,
+        "p75": 1.8e-05,
+        "p97_5": 3.9e-05,
+        "max": 4.2e-05,
+        "ci95_mean": [
+          -2.2e-05,
+          2.2e-05
+        ]
+      },
+      "delivery_relative_delta": {
+        "count": 6,
+        "mean": 0.0,
+        "std": 0.0,
+        "min": 0.0,
+        "p2_5": 0.0,
+        "p25": 0.0,
+        "median": 0.0,
+        "p75": 0.0,
+        "p97_5": 0.0,
+        "max": 0.0,
+        "ci95_mean": [
+          0.0,
+          0.0
+        ]
+      },
+      "checks_failed_union": [],
+      "labels": [
+        "e_init_4800",
+        "e_init_5400",
+        "e_init_5700",
+        "e_init_6300",
+        "e_init_6600",
+        "e_init_7200"
+      ]
+    },
+    "noise_day_5": {
+      "count": 25,
+      "feasible_count": 25,
+      "feasible_rate": 1.0,
+      "objective": {
+        "count": 25,
+        "mean": 13800704.683748,
+        "std": 76628.539243,
+        "min": 13638514.005075,
+        "p2_5": 13672797.611603,
+        "p25": 13753796.714517,
+        "median": 13821013.704027,
+        "p75": 13841019.621047,
+        "p97_5": 13932234.751455,
+        "max": 13972133.096357,
+        "ci95_mean": [
+          13770476.086489,
+          13829730.660598
+        ]
+      },
+      "relative_delta": {
+        "count": 25,
+        "mean": 0.003091,
+        "std": 0.00557,
+        "min": -0.008698,
+        "p2_5": -0.006206,
+        "p25": -0.000319,
+        "median": 0.004567,
+        "p75": 0.006021,
+        "p97_5": 0.012651,
+        "max": 0.015551,
+        "ci95_mean": [
+          0.000894,
+          0.0052
+        ]
+      },
+      "delivery_relative_delta": {
+        "count": 25,
+        "mean": 0.003629,
+        "std": 0.005706,
+        "min": -0.006111,
+        "p2_5": -0.004702,
+        "p25": 5.3e-05,
+        "median": 0.002833,
+        "p75": 0.006973,
+        "p97_5": 0.01519,
+        "max": 0.016204,
+        "ci95_mean": [
+          0.001527,
+          0.005843
+        ]
+      },
+      "checks_failed_union": [],
+      "labels": [
+        "noise_day_5_s000",
+        "noise_day_5_s001",
+        "noise_day_5_s002",
+        "noise_day_5_s003",
+        "noise_day_5_s004",
+        "noise_day_5_s005",
+        "noise_day_5_s006",
+        "noise_day_5_s007",
+        "noise_day_5_s008",
+        "noise_day_5_s009",
+        "noise_day_5_s010",
+        "noise_day_5_s011",
+        "noise_day_5_s012",
+        "noise_day_5_s013",
+        "noise_day_5_s014",
+        "noise_day_5_s015",
+        "noise_day_5_s016",
+        "noise_day_5_s017",
+        "noise_day_5_s018",
+        "noise_day_5_s019",
+        "noise_day_5_s020",
+        "noise_day_5_s021",
+        "noise_day_5_s022",
+        "noise_day_5_s023",
+        "noise_day_5_s024"
+      ]
+    },
+    "noise_joint_day_5": {
+      "count": 25,
+      "feasible_count": 25,
+      "feasible_rate": 1.0,
+      "objective": {
+        "count": 25,
+        "mean": 13784245.100501,
+        "std": 95605.658014,
+        "min": 13625515.235339,
+        "p2_5": 13643005.87785,
+        "p25": 13708883.172754,
+        "median": 13761057.610262,
+        "p75": 13872683.89807,
+        "p97_5": 13926354.103284,
+        "max": 13927818.2635,
+        "ci95_mean": [
+          13750152.33019,
+          13820255.015359
+        ]
+      },
+      "relative_delta": {
+        "count": 25,
+        "mean": 0.001894,
+        "std": 0.006949,
+        "min": -0.009643,
+        "p2_5": -0.008372,
+        "p25": -0.003583,
+        "median": 0.000209,
+        "p75": 0.008322,
+        "p97_5": 0.012223,
+        "max": 0.01233,
+        "ci95_mean": [
+          -0.000584,
+          0.004512
+        ]
+      },
+      "delivery_relative_delta": {
+        "count": 25,
+        "mean": 0.003045,
+        "std": 0.007593,
+        "min": -0.009648,
+        "p2_5": -0.008722,
+        "p25": -0.00359,
+        "median": 0.00217,
+        "p75": 0.009427,
+        "p97_5": 0.014225,
+        "max": 0.014921,
+        "ci95_mean": [
+          0.000429,
+          0.0058
+        ]
+      },
+      "checks_failed_union": [],
+      "labels": [
+        "noise_joint_day_5_s000",
+        "noise_joint_day_5_s001",
+        "noise_joint_day_5_s002",
+        "noise_joint_day_5_s003",
+        "noise_joint_day_5_s004",
+        "noise_joint_day_5_s005",
+        "noise_joint_day_5_s006",
+        "noise_joint_day_5_s007",
+        "noise_joint_day_5_s008",
+        "noise_joint_day_5_s009",
+        "noise_joint_day_5_s010",
+        "noise_joint_day_5_s011",
+        "noise_joint_day_5_s012",
+        "noise_joint_day_5_s013",
+        "noise_joint_day_5_s014",
+        "noise_joint_day_5_s015",
+        "noise_joint_day_5_s016",
+        "noise_joint_day_5_s017",
+        "noise_joint_day_5_s018",
+        "noise_joint_day_5_s019",
+        "noise_joint_day_5_s020",
+        "noise_joint_day_5_s021",
+        "noise_joint_day_5_s022",
+        "noise_joint_day_5_s023",
+        "noise_joint_day_5_s024"
+      ]
+    },
+    "noise_white_10": {
+      "count": 25,
+      "feasible_count": 25,
+      "feasible_rate": 1.0,
+      "objective": {
+        "count": 25,
+        "mean": 13800622.377831,
+        "std": 13767.947389,
+        "min": 13776300.872361,
+        "p2_5": 13779581.793679,
+        "p25": 13790466.124412,
+        "median": 13799079.989863,
+        "p75": 13808290.163361,
+        "p97_5": 13825142.14866,
+        "max": 13827104.889675,
+        "ci95_mean": [
+          13795391.143298,
+          13805950.870599
+        ]
+      },
+      "relative_delta": {
+        "count": 25,
+        "mean": 0.003085,
+        "std": 0.001001,
+        "min": 0.001317,
+        "p2_5": 0.001555,
+        "p25": 0.002346,
+        "median": 0.002973,
+        "p75": 0.003642,
+        "p97_5": 0.004867,
+        "max": 0.00501,
+        "ci95_mean": [
+          0.002704,
+          0.003472
+        ]
+      },
+      "delivery_relative_delta": {
+        "count": 25,
+        "mean": 0.003368,
+        "std": 0.00117,
+        "min": 0.001305,
+        "p2_5": 0.001607,
+        "p25": 0.002498,
+        "median": 0.003255,
+        "p75": 0.004201,
+        "p97_5": 0.005217,
+        "max": 0.005263,
+        "ci95_mean": [
+          0.002901,
+          0.003826
+        ]
+      },
+      "checks_failed_union": [],
+      "labels": [
+        "noise_white_10_s000",
+        "noise_white_10_s001",
+        "noise_white_10_s002",
+        "noise_white_10_s003",
+        "noise_white_10_s004",
+        "noise_white_10_s005",
+        "noise_white_10_s006",
+        "noise_white_10_s007",
+        "noise_white_10_s008",
+        "noise_white_10_s009",
+        "noise_white_10_s010",
+        "noise_white_10_s011",
+        "noise_white_10_s012",
+        "noise_white_10_s013",
+        "noise_white_10_s014",
+        "noise_white_10_s015",
+        "noise_white_10_s016",
+        "noise_white_10_s017",
+        "noise_white_10_s018",
+        "noise_white_10_s019",
+        "noise_white_10_s020",
+        "noise_white_10_s021",
+        "noise_white_10_s022",
+        "noise_white_10_s023",
+        "noise_white_10_s024"
+      ]
+    },
+    "noise_white_5": {
+      "count": 25,
+      "feasible_count": 25,
+      "feasible_rate": 1.0,
+      "objective": {
+        "count": 25,
+        "mean": 13770932.752238,
+        "std": 8497.602649,
+        "min": 13755675.743775,
+        "p2_5": 13757153.019136,
+        "p25": 13765416.699563,
+        "median": 13770838.670135,
+        "p75": 13778037.652178,
+        "p97_5": 13784593.682922,
+        "max": 13786034.200205,
+        "ci95_mean": [
+          13767805.694927,
+          13774268.024637
+        ]
+      },
+      "relative_delta": {
+        "count": 25,
+        "mean": 0.000927,
+        "std": 0.000618,
+        "min": -0.000182,
+        "p2_5": -7.5e-05,
+        "p25": 0.000526,
+        "median": 0.00092,
+        "p75": 0.001443,
+        "p97_5": 0.00192,
+        "max": 0.002024,
+        "ci95_mean": [
+          0.000699,
+          0.001169
+        ]
+      },
+      "delivery_relative_delta": {
+        "count": 25,
+        "mean": 0.000953,
+        "std": 0.000673,
+        "min": -0.000304,
+        "p2_5": -0.000146,
+        "p25": 0.000506,
+        "median": 0.001066,
+        "p75": 0.001311,
+        "p97_5": 0.002042,
+        "max": 0.002286,
+        "ci95_mean": [
+          0.00069,
+          0.001206
+        ]
+      },
+      "checks_failed_union": [],
+      "labels": [
+        "noise_white_5_s000",
+        "noise_white_5_s001",
+        "noise_white_5_s002",
+        "noise_white_5_s003",
+        "noise_white_5_s004",
+        "noise_white_5_s005",
+        "noise_white_5_s006",
+        "noise_white_5_s007",
+        "noise_white_5_s008",
+        "noise_white_5_s009",
+        "noise_white_5_s010",
+        "noise_white_5_s011",
+        "noise_white_5_s012",
+        "noise_white_5_s013",
+        "noise_white_5_s014",
+        "noise_white_5_s015",
+        "noise_white_5_s016",
+        "noise_white_5_s017",
+        "noise_white_5_s018",
+        "noise_white_5_s019",
+        "noise_white_5_s020",
+        "noise_white_5_s021",
+        "noise_white_5_s022",
+        "noise_white_5_s023",
+        "noise_white_5_s024"
+      ]
+    },
+    "pmax": {
+      "count": 6,
+      "feasible_count": 6,
+      "feasible_rate": 1.0,
+      "objective": {
+        "count": 6,
+        "mean": 13779467.181266,
+        "std": 70638.129094,
+        "min": 13711190.498252,
+        "p2_5": 13713065.415937,
+        "p25": 13729165.183223,
+        "median": 13761144.617111,
+        "p75": 13809971.253287,
+        "p97_5": 13888570.077811,
+        "max": 13898571.184516,
+        "ci95_mean": [
+          13732841.651697,
+          13839427.519774
+        ]
+      },
+      "relative_delta": {
+        "count": 6,
+        "mean": 0.001547,
+        "std": 0.005134,
+        "min": -0.003416,
+        "p2_5": -0.003279,
+        "p25": -0.002109,
+        "median": 0.000215,
+        "p75": 0.003764,
+        "p97_5": 0.009477,
+        "max": 0.010204,
+        "ci95_mean": [
+          -0.001842,
+          0.005905
+        ]
+      },
+      "delivery_relative_delta": {
+        "count": 6,
+        "mean": 0.001523,
+        "std": 0.004844,
+        "min": -0.003087,
+        "p2_5": -0.002965,
+        "p25": -0.001915,
+        "median": 0.000215,
+        "p75": 0.003552,
+        "p97_5": 0.009055,
+        "max": 0.009756,
+        "ci95_mean": [
+          -0.00166,
+          0.00562
+        ]
+      },
+      "checks_failed_union": [],
+      "labels": [
+        "p_max_4000",
+        "p_max_4500",
+        "p_max_4750",
+        "p_max_5250",
+        "p_max_5500",
+        "p_max_6000"
+      ]
+    },
+    "s_bound": {
+      "count": 1,
+      "feasible_count": 1,
+      "feasible_rate": 1.0,
+      "objective": {
+        "count": 1,
+        "mean": 13758182.573724,
+        "std": 0.0,
+        "min": 13758182.573724,
+        "p2_5": 13758182.573724,
+        "p25": 13758182.573724,
+        "median": 13758182.573724,
+        "p75": 13758182.573724,
+        "p97_5": 13758182.573724,
+        "max": 13758182.573724,
+        "ci95_mean": [
+          13758182.573724,
+          13758182.573724
+        ]
+      },
+      "relative_delta": {
+        "count": 1,
+        "mean": 0.0,
+        "std": 0.0,
+        "min": 0.0,
+        "p2_5": 0.0,
+        "p25": 0.0,
+        "median": 0.0,
+        "p75": 0.0,
+        "p97_5": 0.0,
+        "max": 0.0,
+        "ci95_mean": [
+          0.0,
+          0.0
+        ]
+      },
+      "delivery_relative_delta": {
+        "count": 1,
+        "mean": 0.0,
+        "std": 0.0,
+        "min": 0.0,
+        "p2_5": 0.0,
+        "p25": 0.0,
+        "median": 0.0,
+        "p75": 0.0,
+        "p97_5": 0.0,
+        "max": 0.0,
+        "ci95_mean": [
+          0.0,
+          0.0
+        ]
+      },
+      "checks_failed_union": [],
+      "labels": [
+        "s_bound_physical"
+      ]
+    },
+    "s_sell": {
+      "count": 2,
+      "feasible_count": 2,
+      "feasible_rate": 1.0,
+      "objective": {
+        "count": 2,
+        "mean": 15250550.661658,
+        "std": 980336.225695,
+        "min": 14557348.268626,
+        "p2_5": 14592008.388278,
+        "p25": 14903949.465142,
+        "median": 15250550.661658,
+        "p75": 15597151.858174,
+        "p97_5": 15909092.935038,
+        "max": 15943753.05469,
+        "ci95_mean": [
+          14557348.268626,
+          15943753.05469
+        ]
+      },
+      "relative_delta": {
+        "count": 2,
+        "mean": 0.108471,
+        "std": 0.071255,
+        "min": 0.058087,
+        "p2_5": 0.060606,
+        "p25": 0.083279,
+        "median": 0.108471,
+        "p75": 0.133664,
+        "p97_5": 0.156337,
+        "max": 0.158856,
+        "ci95_mean": [
+          0.058087,
+          0.158856
+        ]
+      },
+      "delivery_relative_delta": {
+        "count": 2,
+        "mean": 0.11585,
+        "std": 0.073515,
+        "min": 0.063867,
+        "p2_5": 0.066466,
+        "p25": 0.089858,
+        "median": 0.11585,
+        "p75": 0.141841,
+        "p97_5": 0.165233,
+        "max": 0.167832,
+        "ci95_mean": [
+          0.063867,
+          0.167832
+        ]
+      },
+      "checks_failed_union": [],
+      "labels": [
+        "s_sell_0.50_pvbound",
+        "s_sell_0.50_physical"
+      ]
+    },
+    "solver": {
+      "count": 3,
+      "feasible_count": 3,
+      "feasible_rate": 1.0,
+      "objective": {
+        "count": 3,
+        "mean": 13758182.573724,
+        "std": 0.0,
+        "min": 13758182.573724,
+        "p2_5": 13758182.573724,
+        "p25": 13758182.573724,
+        "median": 13758182.573724,
+        "p75": 13758182.573724,
+        "p97_5": 13758182.573724,
+        "max": 13758182.573724,
+        "ci95_mean": [
+          13758182.573724,
+          13758182.573724
+        ]
+      },
+      "relative_delta": {
+        "count": 3,
+        "mean": 0.0,
+        "std": 0.0,
+        "min": 0.0,
+        "p2_5": 0.0,
+        "p25": 0.0,
+        "median": 0.0,
+        "p75": 0.0,
+        "p97_5": 0.0,
+        "max": 0.0,
+        "ci95_mean": [
+          0.0,
+          0.0
+        ]
+      },
+      "delivery_relative_delta": {
+        "count": 3,
+        "mean": 0.0,
+        "std": 0.0,
+        "min": 0.0,
+        "p2_5": 0.0,
+        "p25": 0.0,
+        "median": 0.0,
+        "p75": 0.0,
+        "p97_5": 0.0,
+        "max": 0.0,
+        "ci95_mean": [
+          0.0,
+          0.0
+        ]
+      },
+      "checks_failed_union": [
+        "complementarity_sum"
+      ],
+      "labels": [
+        "solver_highs-ds",
+        "solver_highs-ipm",
+        "solver_highs_nopresolve"
+      ]
+    }
+  },
+  "criteria": {
+    "S1": {
+      "name": "可行率（核心族；参数族与噪声族分开）",
+      "threshold": "参数族 >= 0.99 且整体 >= 0.95",
+      "value": {
+        "core_rate": 0.992647,
+        "param_rate": 0.972222,
+        "core_count": 136,
+        "param_count": 36
+      },
+      "passed": false,
+      "failures": [
+        "solver_highs-ipm"
+      ]
+    },
+    "S2": {
+      "name": "OAT ±20% 最大相对偏移与符号方向",
+      "threshold": "max|ΔC|/C* <= 0.25（eta 档 <= 0.35）且方向判据全通过",
+      "value": {
+        "max_abs_relative_change": 0.140782,
+        "eta_extreme": 0.140782,
+        "detail": {
+          "eta@0.72": 0.140782,
+          "e_init@4800": 4.2e-05,
+          "e_init@7200": -4.1e-05,
+          "alpha_em@4": 0.0,
+          "alpha_em@6": 0.0,
+          "p_max@4000": 0.010204,
+          "p_max@6000": -0.003416,
+          "e_min@960": -0.004967,
+          "e_min@1440": 0.00515,
+          "e_max@8640": 0.054174
+        },
+        "directions": {
+          "dC_deta_nonpositive": true,
+          "dC_dpmax_nonpositive": true,
+          "e_init_elasticity_within_1p5": true
+        }
+      },
+      "passed": true
+    },
+    "S3": {
+      "name": "噪声传播 95% 区间与均值偏移",
+      "threshold": "2.5–97.5 分位半宽/C* <= 0.20 且 |均值偏移| <= 0.10",
+      "value": {
+        "half_width_ratio": 0.009565,
+        "mean_shift_ratio": 0.002249,
+        "samples": 100,
+        "families": {
+          "noise_day_5": {
+            "count": 25,
+            "mean": 13800704.683748,
+            "std": 76628.539243,
+            "min": 13638514.005075,
+            "p2_5": 13672797.611603,
+            "p25": 13753796.714517,
+            "median": 13821013.704027,
+            "p75": 13841019.621047,
+            "p97_5": 13932234.751455,
+            "max": 13972133.096357,
+            "ci95_mean": [
+              13770476.086489,
+              13829730.660598
+            ],
+            "p2_5_half_width_ratio": 0.009428,
+            "mean_shift_ratio": 0.003091
+          },
+          "noise_joint_day_5": {
+            "count": 25,
+            "mean": 13784245.100501,
+            "std": 95605.658014,
+            "min": 13625515.235339,
+            "p2_5": 13643005.87785,
+            "p25": 13708883.172754,
+            "median": 13761057.610262,
+            "p75": 13872683.89807,
+            "p97_5": 13926354.103284,
+            "max": 13927818.2635,
+            "ci95_mean": [
+              13750152.33019,
+              13820255.015359
+            ],
+            "p2_5_half_width_ratio": 0.010297,
+            "mean_shift_ratio": 0.001894
+          },
+          "noise_white_10": {
+            "count": 25,
+            "mean": 13800622.377831,
+            "std": 13767.947389,
+            "min": 13776300.872361,
+            "p2_5": 13779581.793679,
+            "p25": 13790466.124412,
+            "median": 13799079.989863,
+            "p75": 13808290.163361,
+            "p97_5": 13825142.14866,
+            "max": 13827104.889675,
+            "ci95_mean": [
+              13795391.143298,
+              13805950.870599
+            ],
+            "p2_5_half_width_ratio": 0.001656,
+            "mean_shift_ratio": 0.003085
+          },
+          "noise_white_5": {
+            "count": 25,
+            "mean": 13770932.752238,
+            "std": 8497.602649,
+            "min": 13755675.743775,
+            "p2_5": 13757153.019136,
+            "p25": 13765416.699563,
+            "median": 13770838.670135,
+            "p75": 13778037.652178,
+            "p97_5": 13784593.682922,
+            "max": 13786034.200205,
+            "ci95_mean": [
+              13767805.694927,
+              13774268.024637
+            ],
+            "p2_5_half_width_ratio": 0.000997,
+            "mean_shift_ratio": 0.000927
+          }
+        }
+      },
+      "passed": true
+    },
+    "S4": {
+      "name": "套利方向（C_opt < 同扰动数据下的无储能购电费）",
+      "threshold": "核心族 100% 成立",
+      "value": {
+        "checked": 136,
+        "failures": []
+      },
+      "passed": true
+    },
+    "S5": {
+      "name": "交付表稳定性（参数 OAT ±10% 的 4 个指定日期与表 1 六时段）",
+      "threshold": "全天购电量/购电费相对偏差 <= 0.10；表 1 每 slot 绝对偏差 <= 0.15×当日全天购电量",
+      "value": {
+        "cases_checked": 20,
+        "worst": {
+          "purchase": 0.190998,
+          "cost": 0.196225,
+          "slot_ratio": 0.009912
+        },
+        "failures": [
+          "eta_both_0.99@2025-06-21"
+        ]
+      },
+      "passed": false
+    },
+    "S6": {
+      "name": "求解器设置一致性（highs / highs-ds / highs-ipm / 关闭 presolve）",
+      "threshold": "目标值两两相对差 <= 1e-6",
+      "value": {
+        "objectives": {
+          "baseline": 13758182.573724,
+          "solver_highs-ds": 13758182.573724,
+          "solver_highs-ipm": 13758182.573724,
+          "solver_highs_nopresolve": 13758182.573724
+        },
+        "pairwise_relative_diff": {
+          "baseline|solver_highs-ds": 0.0,
+          "baseline|solver_highs-ipm": 0.0,
+          "baseline|solver_highs_nopresolve": 0.0,
+          "solver_highs-ds|solver_highs-ipm": 0.0,
+          "solver_highs-ds|solver_highs_nopresolve": 0.0,
+          "solver_highs-ipm|solver_highs_nopresolve": 0.0
+        }
+      },
+      "passed": true
+    }
+  },
+  "criteria_failed": [
+    "S1",
+    "S5"
+  ],
+  "stability_grade": "脆弱（需缩小适用范围）",
+  "structural_findings": {
+    "b_cap": {
+      "rows": [
+        {
+          "b_cap_kw": 10326.0,
+          "feasible": true,
+          "total_q_em_kwh": 0.0,
+          "emergency_cost_yuan": 0.0,
+          "objective_yuan": 13758182.573724,
+          "delivery_cost_yuan": 12233050.830708,
+          "days_with_emergency": 0,
+          "max_purchase_power_kw": 10325.33,
+          "checks_failed": []
+        },
+        {
+          "b_cap_kw": 8459.0,
+          "feasible": true,
+          "total_q_em_kwh": 0.0,
+          "emergency_cost_yuan": 0.0,
+          "objective_yuan": 13759939.976489,
+          "delivery_cost_yuan": 12234470.480744,
+          "days_with_emergency": 0,
+          "max_purchase_power_kw": 8459.0,
+          "checks_failed": []
+        },
+        {
+          "b_cap_kw": 6000.0,
+          "feasible": true,
+          "total_q_em_kwh": 0.0,
+          "emergency_cost_yuan": 0.0,
+          "objective_yuan": 13796297.077896,
+          "delivery_cost_yuan": 12263064.891109,
+          "days_with_emergency": 0,
+          "max_purchase_power_kw": 6000.0,
+          "checks_failed": []
+        },
+        {
+          "b_cap_kw": 5000.0,
+          "feasible": true,
+          "total_q_em_kwh": 0.0,
+          "emergency_cost_yuan": 0.0,
+          "objective_yuan": 13973747.564884,
+          "delivery_cost_yuan": 12406037.601335,
+          "days_with_emergency": 0,
+          "max_purchase_power_kw": 5000.0,
+          "checks_failed": []
+        },
+        {
+          "b_cap_kw": 4375.0,
+          "feasible": true,
+          "total_q_em_kwh": 0.0,
+          "emergency_cost_yuan": 0.0,
+          "objective_yuan": 14452283.680247,
+          "delivery_cost_yuan": 12811100.163885,
+          "days_with_emergency": 0,
+          "max_purchase_power_kw": 4375.0,
+          "checks_failed": []
+        },
+        {
+          "b_cap_kw": 4218.75,
+          "feasible": true,
+          "total_q_em_kwh": 8707.398542,
+          "emergency_cost_yuan": 18237.601302,
+          "objective_yuan": 14647566.902931,
+          "delivery_cost_yuan": 12980107.248088,
+          "days_with_emergency": 14,
+          "max_purchase_power_kw": 4218.75,
+          "checks_failed": [
+            "q_em_zero_total"
+          ]
+        },
+        {
+          "b_cap_kw": 4000.0,
+          "feasible": true,
+          "total_q_em_kwh": 86017.94818,
+          "emergency_cost_yuan": 184365.172195,
+          "objective_yuan": 15032312.166458,
+          "delivery_cost_yuan": 13317409.323704,
+          "days_with_emergency": 44,
+          "max_purchase_power_kw": 4000.0,
+          "checks_failed": [
+            "q_em_zero_total"
+          ]
+        },
+        {
+          "b_cap_kw": 3750.0,
+          "feasible": true,
+          "total_q_em_kwh": 320077.337317,
+          "emergency_cost_yuan": 751488.584723,
+          "objective_yuan": 15738644.828672,
+          "delivery_cost_yuan": 13914390.251982,
+          "days_with_emergency": 93,
+          "max_purchase_power_kw": 3750.0,
+          "checks_failed": [
+            "q_em_zero_total"
+          ]
+        },
+        {
+          "b_cap_kw": 3000.0,
+          "feasible": true,
+          "total_q_em_kwh": 2528614.211951,
+          "emergency_cost_yuan": 6486940.272101,
+          "objective_yuan": 20623372.127713,
+          "delivery_cost_yuan": 18126085.326211,
+          "days_with_emergency": 300,
+          "max_purchase_power_kw": 3000.0,
+          "checks_failed": [
+            "analytic_upper_bound",
+            "q_em_zero_total"
+          ]
+        },
+        {
+          "b_cap_kw": 2000.0,
+          "feasible": true,
+          "total_q_em_kwh": 7845369.336456,
+          "emergency_cost_yuan": 22032523.710644,
+          "objective_yuan": 32769611.572155,
+          "delivery_cost_yuan": 28885267.125367,
+          "days_with_emergency": 365,
+          "max_purchase_power_kw": 2000.0,
+          "checks_failed": [
+            "analytic_upper_bound",
+            "q_em_zero_total"
+          ]
+        }
+      ],
+      "threshold_bracket": {
+        "no_activation_below_or_equal_kw": 10326.0,
+        "activation_at_or_below_kw": 2000.0,
+        "expected_from_R5_kw": [
+          4218.75,
+          4375.0
+        ]
+      },
+      "monotone_cost_non_decreasing": true,
+      "monotone_q_em_non_increasing": false,
+      "note": "b 上限下降 ⇒ Σq_em 单调不减、总费用单调不降；上限 ≥ β 时 Σq_em = 0（团队勘误 R5）。"
+    },
+    "s_bound": {
+      "physical_objective_yuan": 13758182.573724,
+      "physical_total_spill_kwh": 990168.090312,
+      "baseline_total_spill_kwh": 990168.090312,
+      "relative_change": 0.0,
+      "note": "D5-B 收紧 s 上界为物理盈余：目标系数为 0；若最优值不变，则 AS09 松界在无售电口径下无套利路径。"
+    },
+    "s_sell": [
+      {
+        "label": "s_sell_0.50_pvbound",
+        "objective_yuan": 15943753.05469,
+        "total_spill_kwh": 5845778.709901,
+        "physical_surplus_kwh": 3120221.003233,
+        "sell_revenue_yuan": -2922889.354951,
+        "checks_failed": []
+      },
+      {
+        "label": "s_sell_0.50_physical",
+        "objective_yuan": 14557348.268626,
+        "total_spill_kwh": 2795527.333984,
+        "physical_surplus_kwh": 3120221.003233,
+        "sell_revenue_yuan": -1397763.666992,
+        "checks_failed": []
+      }
+    ],
+    "alpha_lt1": [
+      {
+        "label": "alpha_em_0.50",
+        "objective_yuan": 6879091.286862,
+        "total_q_em_kwh": 22657938.157435,
+        "days_with_emergency": 365,
+        "checks_failed": [
+          "analytic_lower_bound",
+          "q_em_zero_total"
+        ]
+      }
+    ],
+    "cited_not_rerun": {
+      "M4_daily_independent": {
+        "value": "交付期 −17,803.27 元（相对全年滚动口径）",
+        "source": "assumption_v001 §6 只读探针 / 团队裁定 B1（M4）+ D8-A",
+        "note": "robustness 不重复跑；数值以 ablation 的 M4 为准。"
+      },
+      "M5_terminal_6000": {
+        "value": "交付期 +2,217.08 元（+0.018%）",
+        "source": "assumption_v001 §6 只读探针 / 团队裁定 B1（M5）+ D8-A / B5",
+        "note": "M5 只在 ablation 出数；robustness 仅引用结论并注明来源，不重复计算。"
+      }
+    }
+  },
+  "cases_total": 149,
+  "cases_infeasible": [],
+  "checks_failed_union": [
+    "analytic_lower_bound",
+    "analytic_upper_bound",
+    "complementarity_sum",
+    "q_em_zero_total"
+  ],
+  "probe_mode": false
+}

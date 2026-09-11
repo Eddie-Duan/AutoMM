@@ -1,0 +1,229 @@
+{
+  "checked_at": "2026-09-11T02:31:03.899498+00:00",
+  "agent_checked_at": "2026-09-11T02:31:03.899498+00:00",
+  "action_id": "act-847e8cb12a844527",
+  "stage": "sanity_check",
+  "scope": "L1-L4 正式阶段复核（sanity_check 阶段；L5/L6 仅做适用性判定）",
+  "directory": "problems/microgrid_2025/prob02/versions/assumption_v001",
+  "task_id": "dc8afc3deb5477641b99",
+  "task_status": "succeeded",
+  "object": "problems/microgrid_2025/prob02/versions/assumption_v001/results/prob02_v001_f001_run002",
+  "automated_scope": [
+    "L1",
+    "L2-finite"
+  ],
+  "automated_status": "PASS_WITH_WARNING",
+  "failures": [],
+  "warnings": [
+    "L3 量纲与公式、L4 常识与文献、L5 跨小问一致性和条件性 L6 实验须由 sanity-checker 审查",
+    "文献池 23 条未逐篇读正文（19 abstract_oa + 4 metadata），引用只支撑框架级/机制级主张",
+    "D10「5000 kW 作用侧」为 team_decision，无文献支撑，论文不得包装为文献支持",
+    "C3/E3：prob01/assumption_v003/version.yaml 的 AS08「必然被激活」措辞未回写，待 cross_question_review",
+    "R5：下游 ablation/论文须用 β ∈ (4218.75, 4375.00] kW 表述购电上限激活阈值，不得沿用 10,326 kW",
+    "表 2 端点为计划窗首/末状态（AS01 左端点相位 0:10→24:10），prob02 为全年滚动逐日切片，论文须与 prob01 显式区分（R1）",
+    "LP 最优面可能不唯一（E 上下界两端活跃），验收不比对逐点解唯一性",
+    "A6/A7/A8/A9 未裁定且属 prob03/04",
+    "run001 仅作历史对照，交付与引用一律以 run002 为准",
+    "本报告为 sanity_check 阶段 L1-L4 正式结论，不替代 L5（全题跨小问一致性）与 L6（robustness 后复核）"
+  ],
+  "quality_status": "degraded_review",
+  "numeric_files": [
+    {
+      "path": "problems/microgrid_2025/prob02/versions/assumption_v001/results/prob02_v001_f001_run001/run_manifest.json",
+      "numeric_count": 33,
+      "finite": true,
+      "missing_numeric_count": 0,
+      "infinite_numeric_count": 0,
+      "empty_numeric": false,
+      "minimum": 0.0,
+      "maximum": 22657938.157435
+    },
+    {
+      "path": "problems/microgrid_2025/prob02/versions/assumption_v001/results/prob02_v001_f001_run001/solution.json",
+      "numeric_count": 529686,
+      "finite": true,
+      "missing_numeric_count": 0,
+      "infinite_numeric_count": 0,
+      "empty_numeric": false,
+      "minimum": 0.0,
+      "maximum": 40524054.9503
+    },
+    {
+      "path": "problems/microgrid_2025/prob02/versions/assumption_v001/results/prob02_v001_f001_run001/solver_status.json",
+      "numeric_count": 6,
+      "finite": true,
+      "missing_numeric_count": 0,
+      "infinite_numeric_count": 0,
+      "empty_numeric": false,
+      "minimum": 0.0,
+      "maximum": 13758182.573724
+    },
+    {
+      "path": "problems/microgrid_2025/prob02/versions/assumption_v001/results/prob02_v001_f001_run001/tables.json",
+      "numeric_count": 124,
+      "finite": true,
+      "missing_numeric_count": 0,
+      "infinite_numeric_count": 0,
+      "empty_numeric": false,
+      "minimum": 0.0,
+      "maximum": 93770.21494
+    },
+    {
+      "path": "problems/microgrid_2025/prob02/versions/assumption_v001/results/prob02_v001_f001_run002/run_manifest.json",
+      "numeric_count": 33,
+      "finite": true,
+      "missing_numeric_count": 0,
+      "infinite_numeric_count": 0,
+      "empty_numeric": false,
+      "minimum": 0.0,
+      "maximum": 22657938.157435
+    },
+    {
+      "path": "problems/microgrid_2025/prob02/versions/assumption_v001/results/prob02_v001_f001_run002/solution.json",
+      "numeric_count": 529686,
+      "finite": true,
+      "missing_numeric_count": 0,
+      "infinite_numeric_count": 0,
+      "empty_numeric": false,
+      "minimum": 0.0,
+      "maximum": 40524054.9503
+    },
+    {
+      "path": "problems/microgrid_2025/prob02/versions/assumption_v001/results/prob02_v001_f001_run002/solver_status.json",
+      "numeric_count": 6,
+      "finite": true,
+      "missing_numeric_count": 0,
+      "infinite_numeric_count": 0,
+      "empty_numeric": false,
+      "minimum": 0.0,
+      "maximum": 13758182.573724
+    },
+    {
+      "path": "problems/microgrid_2025/prob02/versions/assumption_v001/results/prob02_v001_f001_run002/tables.json",
+      "numeric_count": 124,
+      "finite": true,
+      "missing_numeric_count": 0,
+      "infinite_numeric_count": 0,
+      "empty_numeric": false,
+      "minimum": 0.0,
+      "maximum": 93770.21494
+    }
+  ],
+  "manual_levels_pending": [
+    "L5",
+    "L6-conditional"
+  ],
+  "overall_status": "PASS_WITH_WARNING",
+  "levels": {
+    "level_1_file_and_run_integrity": {
+      "status": "PASS",
+      "evidence": "task succeeded/rc0/attempt1/supervised/consumed；5 件产物齐备；输入与模板 md5 未变；code/*.py sha256 与 manifest 一致；harness code_hash=a37eda25…/source_config_hash=f781f7f6…/input_hash=4343d799…/config_hash=ebd08796… 独立重算一致且 task_id 复算回 dc8afc3deb5477641b99；run001 五件 sha256 与上一轮登记逐位不变；run002 的 solution/solver_status/tables 与 run001 逐字节相同"
+    },
+    "level_2_numeric_and_constraints": {
+      "status": "PASS",
+      "evidence": "(R1) 4.547e-13、(R2) 1.819e-12；E∈[1200,10800]；E_0=6000/E_T=1200；c≤833.333333；q_dis≤750.000000；两侧功率≤5000 kW；同充放=0；跨日连续性 0；Σq_em=0；Σs=990168.090312；(I1)/(I2) 全期与交付期切片均 0；totals 自洽；9 条序列全 finite"
+    },
+    "level_3_dimension_and_formula": {
+      "status": "PASS",
+      "evidence": "目标 min Σ(p·b+5p·q_em) 不带 Δt（全期 13758182.573724441/交付期 12233050.830708284/1 月 1525131.7430161578，交付期+1月=全期）；矩阵 315360/105120/315360/473039/0 整数与 6 变量 2 等式结构一致；表 1 六时段（1 基位置 60..120，0 基 59..119）与表 2 六块/端点回溯序列 ≤1e-6；表 3 全零且含格式示例说明；result2.xlsx 48096 格 + 全天能量/费用 ≤1e-6、逐格填报格式偏差 0、format_residuals=[]、全簿无 ⁝ 残留"
+    },
+    "level_4_common_sense_and_literature": {
+      "status": "PASS_WITH_WARNING",
+      "evidence": "费用落入独立重算解析界 [7525691.131068, 18298592.366275]；交付期 10^7 元量级；充放均价 0.520371/1.154986；终端自由披露 E_T=1200；日初取 96 个水平；关键假设文献门禁 passed=true；文献仅摘要/元数据级与 D10 无文献支撑为技术债"
+    },
+    "level_5_cross_question": {
+      "status": "NOT_APPLICABLE",
+      "evidence": "触发条件为所有小问 locally completed；prob03/prob04 尚未进入计算"
+    },
+    "level_6_robustness": {
+      "status": "NOT_APPLICABLE",
+      "evidence": "触发条件为 after_robustness；robustness/ablation 均 mandatory 且 pending"
+    }
+  },
+  "independent_recheck": {
+    "script": "runtime/actions/act-847e8cb12a844527/evidence/probe_prob02_formal_review.py",
+    "output": "runtime/actions/act-847e8cb12a844527/evidence/formal_review_out.json",
+    "stdout": "runtime/actions/act-847e8cb12a844527/evidence/formal_review_stdout.txt",
+    "status": "PASS",
+    "failures": [],
+    "checks_total": 57,
+    "checks_by_level": {"L1": 14, "L2": 19, "L3": 15, "L4": 7, "L5": 1, "L6": 1},
+    "probe_self_correction": "首次运行 L3-06 因探针把 AS01 的 1 基 position 误当 0 基下标而误报；改为 position-1 后 57/57 通过，run002 产物数值从未变化（探针侧缺陷，非模型缺陷）",
+    "artifact_sha256": {
+      "solution.json": "1dbc100bb2af58fe3361eb64c5dace7c63c4eefc42a985f5c9ad91d4cf18d6b5",
+      "solver_status.json": "4e87f187204948c86baf5f26eeef18dad3c5a31fe05b7dd05b21ffff63d840e8",
+      "tables.json": "49c00bd6c9912cb7c9392b7ba8126a06c3c8df1f3071c51e8ae046761250b12f",
+      "result2.xlsx": "3f075104f9b486617e24fc96173246b49bb353a45890424a21cc5cb38fe0aec7",
+      "run_manifest.json": "6e53b537919d87e323c491078de52ea488228b83a4b0485a09446293f3b1e57b"
+    },
+    "run001_artifact_sha256": {
+      "solution.json": "1dbc100bb2af58fe3361eb64c5dace7c63c4eefc42a985f5c9ad91d4cf18d6b5",
+      "solver_status.json": "4e87f187204948c86baf5f26eeef18dad3c5a31fe05b7dd05b21ffff63d840e8",
+      "tables.json": "49c00bd6c9912cb7c9392b7ba8126a06c3c8df1f3071c51e8ae046761250b12f",
+      "result2.xlsx": "ac7eba87e24a5719d05c0af45d488acb0f3357e891b365a781647330b095b229",
+      "run_manifest.json": "8b3397d4ca5417e119f9dcb876d34241ac01ed7ac5d800fca0b454fb9479d70c"
+    },
+    "summary": {
+      "objective_yuan": 13758182.573724441,
+      "plan_cost_yuan": 13758182.573724441,
+      "emergency_cost_yuan": 0.0,
+      "delivery_cost_yuan": 12233050.830708284,
+      "january_cost_yuan": 1525131.7430161578,
+      "max_balance_residual": 4.547473508864641e-13,
+      "max_transition_residual": 1.8189894035458565e-12,
+      "I1_residual": 0.0,
+      "I2_residual": 0.0,
+      "I1_delivery_residual": 0.0,
+      "I2_delivery_residual": 0.0,
+      "E_T": 1200.0,
+      "E_2_1_start": 7950.0,
+      "worst_side_power_kw": 5000.0,
+      "max_charge_kwh": 833.3333333333333,
+      "max_discharge_kwh": 750.0,
+      "total_q_em_kwh": 0.0,
+      "total_purchase_kwh": 22657938.15743468,
+      "total_charge_kwh": 7364620.676346707,
+      "total_discharge_kwh": 5969662.747840833,
+      "total_spill_kwh": 990168.0903121398,
+      "net_load_kwh": 20272812.138616666,
+      "analytic_lower_yuan": 7525691.131068368,
+      "analytic_upper_yuan": 18298592.366275184,
+      "charge_avg_price": 0.5203714079175827,
+      "discharge_avg_price": 1.1549857246823467
+    },
+    "workbook_scan": {
+      "plan_cells_checked": 48096,
+      "plan_max_abs_deviation": 0.0,
+      "storage_rows_checked": 2004,
+      "storage_deviation_count": 0,
+      "emergency_rows_checked": 334,
+      "emergency_deviation_count": 0,
+      "format_residuals": []
+    }
+  },
+  "gate_checks": {
+    "key_assumption_citation": {
+      "passed": true,
+      "detail": "check_key_assumptions passed=true, errors=[], assumption_version=assumption_v001"
+    },
+    "physical_and_economic_common_sense": {
+      "passed": true,
+      "detail": "费用区间/量级/套利方向/供给≥负载/终端自由披露均通过"
+    },
+    "cross_question_consistency": {
+      "passed": null,
+      "detail": "L5 未触发（prob03/prob04 未进入计算）"
+    }
+  },
+  "team_decision_conflicts": [
+    "C1/E1（q_dis ≤ 750.00）：global_symbols.yaml 已回写 750.00，本 run max q_dis=750.000000、两侧功率 max=5000.000000，无残留冲突",
+    "C2/E2（q_spill.first_question=prob01）：符号表已回写，无残留冲突",
+    "C3/E3（prob01 AS08「必然被激活」措辞）：仍未更正，结转 cross_question_review",
+    "R5（激活阈值 β ∈ (4218.75, 4375.00] kW）：本问主口径无上限，Σq_em=0；下游表述纪律已登记",
+    "上一轮 sanity（act-ca831716e72246eb）对 run001 判 NEEDS_REVISION 的交付格式缺陷（A15/E16）：本动作对 run002 独立复核为已闭合（逐格偏差 0，run001 负对照 2）"
+  ],
+  "failure_type": null,
+  "return_to_stage": null,
+  "recommended_next_stage": "visualization",
+  "blocking_reasons": []
+}

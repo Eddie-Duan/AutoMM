@@ -1,0 +1,482 @@
+# formulation_v001 / prob02 参数表
+# 生成者：mathematical-formulator（动作 act-1fd0891d17c94e2f）
+# 规则：只登记参数与口径，不重定义 global_symbols.yaml 中的符号；
+#       q_dis 的上界按团队裁定 D10 口径丙 + 团队勘误 E1 取 750.0000（符号表第 248 行已回写）；
+#       本问的目标不含 Δt（团队裁定 D9），跨日口径为滚动递推 + 终端自由（AS03/AS04）。
+version: formulation_v001
+question_id: prob02
+problem_id: microgrid_2025
+assumption_version: assumption_v001
+stage: mathematical_formulation
+action_id: act-1fd0891d17c94e2f
+
+time_basis:
+  n_t: 144
+  periods_per_day: 144
+  days_full: 365
+  days_delivery: 334
+  total_periods: 52560
+  delta_t: 0.16666666666666666
+  delta_t_exact: "1/6"
+  horizon_hours_per_day: 24
+  block_rows: 24
+  window: "0:10 -> 24:10（AS01 左端点口径；计划窗首/末状态 E_{d,0} / E_{d,144}）"
+  delivery_range: "2025-02-01 .. 2025-12-31"
+  warmup_range: "2025-01-01 .. 2025-01-31（预热期，参与优化但不交付）"
+
+parameters:
+  - name: n_t
+    symbol: n_t
+    value: 144
+    unit: 段
+    kind: index_size
+    source: 附件 2 每日 144 个 10 分钟数据点
+    assumption_refs: [AS01, AS09]
+  - name: delta_t
+    symbol: Delta_t
+    value: 0.16666666666666666
+    unit: h
+    kind: parameter
+    source: 24h / 144
+    assumption_refs: [AS01, AS09]
+  - name: days_full
+    symbol: D_full
+    value: 365
+    unit: 天
+    kind: index_size
+    source: 附件 2 覆盖 2025-01-01..2025-12-31
+    assumption_refs: [AS02, AS03]
+  - name: days_delivery
+    symbol: D_req
+    value: 334
+    unit: 天
+    kind: index_size
+    source: 附件 5 的 result2.xlsx 要求 2025.2.1-12.31
+    assumption_refs: [AS02, AS12]
+  - name: price_curve
+    symbol: price
+    value: "附件 1 第 2 列（144 维向量），∈ [0.3713, 1.3952]；逐日重复 365 次"
+    unit: 元/kWh
+    kind: parameter_vector
+    source: data/附件1.xlsx（只读）；本问只用价格列
+    assumption_refs: [AS02, AS05]
+  - name: p_min
+    symbol: p_min
+    value: 0.3713
+    unit: 元/kWh
+    kind: derived
+    source: min(price_curve)（探针实测）
+    assumption_refs: [AS05]
+  - name: p_max
+    symbol: p_max
+    value: 1.3952
+    unit: 元/kWh
+    kind: derived
+    source: max(price_curve)（探针实测）
+    assumption_refs: [AS05]
+  - name: price_all_positive
+    value: true
+    unit: "-"
+    kind: structural_check
+    source: 定理 T1（q_em ≡ 0）的前提之一；探针实测全部 p > 0
+    assumption_refs: [AS05, AS07]
+  - name: load_curve
+    symbol: load
+    value: "附件 2『小区负载』365 x 144，∈ [1995.7176, 7978.8849] kW"
+    unit: kW
+    kind: parameter_matrix
+    source: data/附件2.xlsx（只读，实际值）
+    assumption_refs: [AS02]
+  - name: pv_actual_curve
+    symbol: pv_act
+    value: "附件 2『光伏发电实际功率』365 x 144，∈ [0.0, 10216.2] kW"
+    unit: kW
+    kind: parameter_matrix
+    source: data/附件2.xlsx（只读，实际值）
+    assumption_refs: [AS02]
+  - name: eta_ch
+    symbol: eta_ch
+    value: 0.9
+    unit: "-"
+    kind: parameter
+    source: 附录 1「充放电效率为 90%」；作用位置为充电侧（prob01 accepted AS05）
+    assumption_refs: [AS08]
+  - name: eta_dis
+    symbol: eta_dis
+    value: 0.9
+    unit: "-"
+    kind: parameter
+    source: 附录 1；作用位置为放电侧
+    assumption_refs: [AS08]
+  - name: eta_round_trip
+    symbol: "eta_ch*eta_dis"
+    value: 0.81
+    unit: "-"
+    kind: derived
+    source: 0.9 x 0.9；决定恒等式 (I1)/(I2) 中的 0.19 = 1 - 0.81
+    assumption_refs: [AS08]
+  - name: P_max
+    symbol: P_max
+    value: 5000
+    unit: kW
+    kind: parameter
+    source: 附录 1「最大充放电功率为 5000 kW」；作用侧按团队裁定 D10 取并网点侧与电池侧交集（口径丙）
+    assumption_refs: [AS08]
+  - name: c_cap
+    symbol: c_ch_upper
+    value: 833.3333333333333
+    unit: kWh
+    kind: derived_bound
+    source: "min(P_max*delta_t, P_max*delta_t/eta_ch) = min(833.3333, 925.9259)；并网点侧为紧侧"
+    assumption_refs: [AS08]
+  - name: q_dis_cap
+    symbol: q_dis_upper
+    value: 750.0
+    unit: kWh
+    kind: derived_bound
+    source: "min(P_max*delta_t, P_max*delta_t*eta_dis) = min(833.3333, 750.0000)；电池侧为紧侧（D10 口径丙 / E1）"
+    assumption_refs: [AS08]
+  - name: c_cap_dc_side_registered
+    value: 925.9259259259259
+    unit: kWh
+    kind: registered_relaxed_bound
+    status: not_enforced
+    source: 电池侧充电上限（较松），仅登记以说明交集推导
+    assumption_refs: [AS08]
+  - name: q_dis_cap_ac_side_registered
+    value: 833.3333333333333
+    unit: kWh
+    kind: registered_relaxed_bound
+    status: not_enforced
+    source: 并网点侧放电上限（较松），仅登记以说明交集推导；旧登记值作废
+    assumption_refs: [AS08]
+  - name: E_cap_max
+    symbol: E_cap_max
+    value: 12000
+    unit: kWh
+    kind: parameter
+    source: 附录 1「最大容量 12000 kWh」（设备容量，非运行上界）
+    assumption_refs: [AS08]
+  - name: E_min
+    symbol: E_min
+    value: 1200
+    unit: kWh
+    kind: parameter
+    source: 附录 1「电量必须保持在 1200-10800 kWh 之间」
+    assumption_refs: [AS08]
+  - name: E_max
+    symbol: E_max
+    value: 10800
+    unit: kWh
+    kind: parameter
+    source: 附录 1
+    assumption_refs: [AS08]
+  - name: E_init
+    symbol: E_init
+    value: 6000
+    unit: kWh
+    kind: parameter
+    source: 附录 1「2025 年 1 月 1 日 0:00 的电量为 6000 kWh」；作为 E_0（A2 滚动口径）
+    assumption_refs: [AS03]
+  - name: E_terminal
+    value: null
+    unit: kWh
+    kind: constraint_rhs
+    source: 终端不作额外约束（AS04/D2 备选 A）；E_T 只受 [1200, 10800]，仅登记自由
+    assumption_refs: [AS04]
+  - name: alpha_em
+    symbol: alpha_em
+    value: 5
+    unit: "-"
+    kind: parameter
+    source: 题面问题 2「其电价是交易时刻电价的 5 倍」（题面硬参数，无文献标定）
+    assumption_refs: [AS05, AS07]
+  - name: q_em_upper
+    value: null
+    unit: kWh
+    kind: bound
+    source: q_em >= 0 且无上界；不得因预期恒零而删除变量
+    assumption_refs: [AS07, AS10]
+  - name: b_upper
+    value: null
+    unit: kWh
+    kind: bound
+    source: 主口径无购电上限（AS10）；参数族 P2(B) 追加 b <= B*delta_t
+    assumption_refs: [AS10]
+  - name: B_peak_kw
+    symbol: B_peak
+    value: 10325.33
+    unit: kW
+    kind: derived_data
+    source: "非绑定阈值 max_tau b*_tau / delta_t（探针实测 max b = 1720.8883 kWh）；注意这不是 q_em 的激活阈值（见 C6）"
+    assumption_refs: [AS10]
+  - name: beta_activation_kw
+    symbol: beta
+    value: "区间 (4218.75, 4375.00]"
+    unit: kW
+    kind: derived_probe
+    source: "激活阈值 inf{B : Sigma q_em(B) = 0}；二分 5 步（probe_m6_threshold）；解析必要下界 3478.8849 kW"
+    assumption_refs: [AS10, AS07]
+    note: 与 accepted 假设 AS10/D3/D6 的「低于 10,326 kW 即强制 q_em > 0」表述冲突（C6），待团队裁定
+  - name: N_net_load_full
+    symbol: N
+    value: 20272812.138616666
+    unit: kWh
+    kind: derived_data
+    source: sum_tau (load - pv) * delta_t（全期 365 天，探针实测）
+    assumption_refs: [AS02, AS09]
+  - name: N_net_load_delivery
+    value: 17939189.494966667
+    unit: kWh
+    kind: derived_data
+    source: 交付期 334 天净负荷电量（探针实测）
+    assumption_refs: [AS02, AS09]
+  - name: total_load_energy_full
+    value: 40524054.95029999
+    unit: kWh
+    kind: derived_data
+    source: sum_tau load * delta_t
+    assumption_refs: [AS09]
+  - name: total_pv_energy_full
+    value: 20251242.811683334
+    unit: kWh
+    kind: derived_data
+    source: sum_tau pv * delta_t
+    assumption_refs: [AS09]
+  - name: periods_with_pv_gt_load
+    value: 10130
+    unit: 段
+    kind: derived_data
+    source: count(pv > load)（全期 52560 段中）
+    assumption_refs: [AS09]
+
+index_mappings:
+  spec_date_day_index_0based:
+    "2025-03-20": 78
+    "2025-06-21": 171
+    "2025-09-23": 265
+    "2025-12-21": 354
+  table1_slot_rows:
+    "10:00-10:10": 60
+    "12:00-12:10": 72
+    "14:00-14:10": 84
+    "16:00-16:10": 96
+    "18:00-18:10": 108
+    "20:00-20:10": 120
+  table1_full_day:
+    energy: "sum_t b_{d,t}（计划口径）"
+    cost: "C_plan + C_em（本问 q_em = 0 故等于 C_plan）"
+  table2_blocks:
+    block_1: "rows 1-24（0:00-4:00）"
+    block_2: "rows 25-48（4:00-8:00）"
+    block_3: "rows 49-72（8:00-12:00）"
+    block_4: "rows 73-96（12:00-16:00）"
+    block_5: "rows 97-120（16:00-20:00）"
+    block_6: "rows 121-144（20:00-24:00）"
+  table2_endpoints:
+    "0:00": "E_{d,0}（计划窗首状态；prob02 为全年滚动切片，不等于 6000）"
+    "24:00": "E_{d,144}（计划窗末状态）"
+  table3_merge_rule: "连续 10 分钟紧急购电时段合并为区间；端点用 AS01 左端点标签 [tau_i, tau_j + 10min)"
+  table3_zero_rule: "J_d = 0 时 result2.xlsx 写 时间段='—'、购电量=0；论文表 3 写『无（0 kWh）』"
+  result2_sheets:
+    planned_purchase: "A1:EN335（表头 + 334 天 x 144 列 + 全天购电量 + 全天购电费；末列标签 0:00-0:10+1）"
+    charge_discharge: "A1:F20（334 天 x 6 行；时刻/储电量写在前两行：第 1 行 00:00:00、第 2 行 24:00）"
+    emergency: "A1:C11（本问 334 行，每日 1 行；勘误 R4 的登记偏离）"
+
+objective:
+  sense: minimize
+  expression: "sum_{d in D_full} sum_{t=1..144} [ p_t * b_{d,t} + 5 * p_t * q_em_{d,t} ]"
+  unit: 元
+  components:
+    C_plan: "sum p * b"
+    C_em: "sum 5 * p * q_em"
+    C_total: "C_plan + C_em（本问 q_em = 0 故 C_total = C_plan）"
+  forbidden_forms:
+    - "sum p * b * delta_t（量纲 元*h，偏小 6 倍；D9 已裁定修正）"
+    - "sum 5 * p * q_em * delta_t（同上）"
+  assumption_refs: [AS05]
+
+identities:
+  I1: "sum_tau q_dis = eta_ch*eta_dis*sum_tau c - eta_dis*(E_T - E_0)"
+  I2: "sum_tau b = N + sum_tau s + (1 - eta_ch*eta_dis)*sum_tau c + eta_dis*(E_T - E_0) - sum_tau q_em"
+  I2_delivery: "sum_{D_req} b = N_req + sum s + 0.19*sum c + eta_dis*(E_{12/31,144} - E_{2/1,0}) - sum q_em"
+  continuity: "|E_{d,0} - E_{d-1,144}| <= 1e-6"
+  q_em_zero_proof: "完全信息 + b 无上界 + alpha_em > 1 且 p > 0 推出 q_em = 0（定理 T1，模型内数学推论，非文献结论）"
+
+model_set:
+  role: "团队裁定 B1：formulation 负责定义、ablation 负责实跑；主结果只以 M1 为准（B0）"
+  M1:
+    definition: "全年 52560 时段单一确定性 LP (P2)"
+    delivery_role: primary
+  M2:
+    definition: "逐日解耦 LP + 跨日状态递推"
+    variants:
+      M2a: "耦合序列 {E*_{d,144}} 外生固定为 M1 最优值（精确分解，B3-C2 的适用口径）"
+      M2b: "日终自由、纯贪婪递推（结构性发现口径，不适用于 C2）"
+  M3:
+    definition: "MILP 追加互补二元 c <= 833.3333*u、q_dis <= 750.0000*(1-u)"
+    scale: "367,920 变量（含 52,560 二元）、追加 105,120 不等式"
+    analytic_note: "引理 L1 已给解析无损性，C3 结论不依赖 MILP 是否跑到最优"
+  M4:
+    definition: "逐日独立 LP，E_{d,0} = E_{d,144} = 6000（D1 备选 A）"
+    scope_note: "须与 M1 同为 365 天（每次只改一项）；交付期切片同时报告（B2 第 4 条）"
+  M5:
+    definition: "终端 E_T = 6000（D2 备选 B）"
+  M6:
+    definition: "购电上限族 b <= B*delta_t，B ∈ {10326, 8459, 6000, 5000} kW（团队勘误 R2 指定网格）"
+    status_warning: "该网格全部落在非激活区（Sigma q_em = 0），无法演示紧急购电机制（见 C6）"
+  M6_prime:
+    definition: "同 M6，B ∈ {4375, 4218.75, 4000, 3750, 3000, 2000} kW（覆盖 beta 两侧）"
+    status: "新增建议，非替换 B1 网格；须团队裁定（决策点 D4）"
+  M7:
+    definition: "M1 的独立第二实现（不同建模书写/变量消去次序/求解器设置）"
+
+relaxation_checks:
+  reference_tolerance: 1e-6
+  lower_bound_full_yuan: 7525691.1311
+  upper_no_storage_full_yuan: 18298592.3663
+  upper_no_storage_delivery_yuan: 16407319.6320
+  upper_emergency_only_full_yuan: 68790912.868622
+  note: "最优费用必须落在 [7525691.13, 18298592.37] 元（全年）；交付期总费用应为 10^7 元量级（实测 12233050.83），落在 10^6 / 10^3 元即量纲或范围错误"
+
+reference_values:
+  role: reference_check_only
+  source: "runtime/actions/act-1fd0891d17c94e2f/evidence/probe_formulation_checks_out.json 与 probe_m6_threshold_out.json"
+  note: "以下为 formulations 阶段只读探针自检值，不构成 computation 交付；正式数值以隔离 task 产物为准"
+  probe_checks: "28/28 PASS，checks_failed=[]"
+  M1_status: 0
+  M1_elapsed_s: 26.819
+  M1_peak_traced_mb: 113.16
+  C_total_full_year_yuan: 13758182.573724
+  C_total_delivery_yuan: 12233050.830708
+  C_total_january_yuan: 1525131.743016
+  sum_b_kwh: 22657938.157435
+  sum_c_kwh: 7364620.676347
+  sum_q_dis_kwh: 5969662.747841
+  sum_s_kwh: 990168.090312
+  sum_q_em_kwh: 0.0
+  E_0_kwh: 6000.0
+  E_2_1_0_kwh: 7950.0
+  E_T_kwh: 1200.0
+  E_range_kwh: [1200.0, 10800.0]
+  day_start_unique_levels: 96
+  max_c_kwh: 833.333333333
+  max_q_dis_kwh: 750.0
+  max_b_kwh: 1720.888333333
+  max_b_power_kw: 10325.33
+  max_side_power_kw: 5000.0
+  simultaneous_charge_discharge_sum: 0
+  equality_residual_max: 1.819e-12
+  identity_I1_residual: 0.0
+  identity_I2_residual: 0.0
+  continuity_residual_max: 0.0
+  daily_cost_min_yuan: 11900.552329
+  daily_cost_max_yuan: 63033.287434
+  daily_cost_mean_yuan: 37693.650887
+  M2a_objective_yuan: 13758182.573724
+  M2a_relative_diff_vs_M1: 1.354e-16
+  lemma_smoke_single_day_lp_yuan: 56298.331511
+  lemma_smoke_single_day_milp_yuan: 56298.331511
+  lemma_smoke_relative_diff: 1.292e-16
+  lemma_smoke_mip_gap: 0.0
+  spec_dates_cost_yuan:
+    "2025-03-20": 37975.400853
+    "2025-06-21": 20470.622813
+    "2025-09-23": 41351.897551
+    "2025-12-21": 59717.364845
+  cross_check_note: "全期 13758182.573724 / 交付期 12233050.830708 / 四个指定日期费用与表 1 六时段与 assumption 阶段独立探针逐位一致"
+
+solver:
+  primary: "scipy.optimize.linprog(method='highs')"
+  device: cpu
+  gpu_required: false
+  deterministic: true
+  seed: null
+  time_limit_seconds: 300
+  memory_budget_gb: 2
+  matrix_scale:
+    variables: 315360
+    equality_constraints: 105120
+    variable_bounds: 315360
+    nonzero: 473039
+    integer_variables_main: 0
+  notes:
+    - "本问为确定性 LP，不使用 GPU；task spec 须注明不占用单卡 GPU（GPU 规则仅约束真正使用 GPU 的任务）"
+    - "记录 solver status、迭代数、目标值、约束残差与代码 hash；PASS 不依赖逐点解唯一性"
+  verification_oracle: "互补性 MILP（u_tau ∈ {0,1}，M_c=833.3333，M_q=750.0000），单日 smoke test 已通过"
+
+conflicts:
+  - id: C1
+    with: problems/microgrid_2025/global_symbols.yaml
+    detail: "q_dis 域的旧登记值 833.33 与团队裁定 D10/E1 的 750.0000 冲突"
+    resolution: "按团队裁定取 750.0000；符号表第 248 行已回写，本问无残留冲突"
+  - id: C2
+    with: problems/microgrid_2025/global_symbols.yaml
+    detail: "q_spill.first_question 旧登记为 prob02，实际首次出现于 prob01"
+    resolution: "已回写为 prob01（第 273 行）；本问沿用 s_{d,t}，含义不变"
+  - id: C3
+    with: problems/microgrid_2025/prob01/versions/assumption_v003/version.yaml
+    detail: "AS08 的 statement 保留『该变量在部分时段必然被激活』，与 prob01 实测 Sigma s_t = 0 不符"
+    resolution: "按『变量保留、最优解允许取 0』执行；prob02 实测 Sigma s = 990168.090312 kWh > 0；权威回写待 cross_question_review"
+  - id: C4
+    with: assumptions.md AS08 / 团队裁定 D10
+    detail: "『5000 kW 作用侧』为 team_decision，prob01 池 25 条与 prob02 池 23 条均无一条涉及"
+    resolution: "只对约束集形式引用文献；口径选择标注为团队裁定，论文不得包装为文献支持"
+  - id: C5
+    with: assumptions.md §5.4
+    detail: "A6/A7/A8/A9 未裁定"
+    resolution: "均属 prob03/prob04；本问不越界裁定（不使用附件 3/4）"
+  - id: C6
+    with: assumptions.md AS10 / §6 / D3 备选 C / D6 备选 C
+    detail: >-
+      旧登记称『b 上限低于 10,326 kW 会强制 q_em > 0』。探针与解析均表明 10,325.33 kW 只是
+      非绑定阈值（max_tau b*_tau），不是激活阈值；团队勘误 R2 指定的网格 {10326, 8459, 6000, 5000} kW
+      上最优解一律 Sigma q_em = 0，真实激活阈值 beta ∈ (4218.75, 4375.00] kW。
+    resolution: >-
+      不改动 AS10 正文，也不替换 B1 指定的 M6 网格；新增建议对照 M6′ 并登记决策点 D4，请团队裁定。
+      论文不得据旧登记宣称购电上限『激活了紧急购电机制』。
+  - id: C7
+    with: prob02/shared/literature_pool.yaml
+    detail: "池内 23 条均未逐篇阅读正文（19 abstract_oa + 4 metadata）"
+    resolution: "本 formulation 的引用只支撑框架级/机制级主张；alpha_em = 5 与 q_em = 0 不得包装为文献结论"
+
+decision_points_adopted:
+  D1_formulation: "A —— 单层完整长时域 LP（M1，HiGHS）作为主路径与唯一交付口径；M2a 作分解验证、M3 作互补 oracle、D/E/F 作降级对照"
+  D2_formulation: "A + B 并列 —— C2 只判 M2a（耦合序列外生固定）；M2b 的差额记为跨日携带价值的结构性发现"
+  D3_formulation: "A —— M4 与 M1 同为 365 天（每次只改一项），交付期切片同时报告"
+  D4_formulation: "B —— 保留团队指定的 M6 网格，另加 M6′（beta 附近），待团队裁定"
+  D5_formulation: "A 为默认（全规模 MILP），超时自动降级为『L1 解析无损性 + 代表性日 MILP』并登记技术债"
+  D6_formulation: "A —— 论文表 2 说明处显式区分 prob01 与 prob02 的端点语义（勘误 R1）"
+  D7_formulation: "A —— 主口径表 3 全零 + 定理 T1 说明，机制演示交 M6/M6′"
+  D8_formulation: "A —— M5 只在 ablation 出数，robustness 引用结论并注明来源"
+
+adopted_team_findings:
+  R1: "论文表 2 说明处区分 prob01（单日周期、端点恒 6000）与 prob02（全年滚动、端点随日变化）"
+  R2: "购电上限灵敏度小表：模型形式与阈值结构在本 formulation 落地；数值由 ablation(M6/M6′) 与 robustness 产出，不得作主口径"
+  R3: "result2.xlsx 的 充放电量 工作表 时刻/储电量 写在前两行"
+  R4: "result2.xlsx 的 紧急购电量 工作表本问取每日期至少 1 行（334 行）"
+  E1: "q_dis <= 750.0000 / c <= 833.3333，并换算并网点侧与电池侧功率核对均 <= 5000 kW"
+  E3: "s 变量保留、最优解允许取 0"
+  B0: "主结果只以 M1 为准，其余模型数值只进 ablations/"
+  B1: "M1-M7 由本 formulation 定义（含新增建议 M6′），ablation 实跑，不得缩减为 1-2 个对照"
+  B2: "交叉验证：双路线同解、四条解析恒等式、退化条件、尺度分离、量级自检"
+  B3: "判据 C1-C7 由 ablation 跑数前冻结，事后不得改阈值；C2 只适用于 M2a"
+  B4: "同数据/同参数/同口径/同预算/输出隔离/不改动 accepted 产物"
+  B5: "模型族与口径对照归 ablation，参数扰动与置信区间归 robustness，数值不得互相替代"
+
+open_decision_points:
+  - id: D4
+    question: "是否执行 M6′（beta 附近的扩展网格）以完成勘误 R2 的机制演示？"
+    recommendation: "执行 M6′，同时保留 B1 指定的 M6 网格"
+  - id: D2
+    question: "C2 是否按本 formulation 的澄清只判 M2a？M2b 的差额是否作为结构性发现？"
+    recommendation: "是（C2 只判 M2a）"
+  - id: D3
+    question: "M4 的时域是否取 365 天（与 M1 可比）？"
+    recommendation: "取 365 天，同时报告交付期切片"
+  - id: D5
+    question: "M3 全规模 MILP 的预算处置？"
+    recommendation: "默认全规模，超时降级为引理 L1 + 代表性日 MILP，并登记技术债"
+  - id: D8
+    question: "M5 是否在 robustness 重复？"
+    recommendation: "不重复，ablation 出数、robustness 引用结论"

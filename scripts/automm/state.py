@@ -140,7 +140,15 @@ def apply_control(command: str, *, source: str = "cli") -> dict[str, Any]:
 
         reconciled = reconcile_tasks()
         state["blocking"] = []
-        state["last_action"] += f"；已对账 {len(reconciled)} 个异常任务"
+        # 人工解除阻塞（团队修复，2026-09-11）：RESUME 必须同时复位恢复状态。
+        # 否则当 recovery_status 停在 "human_blocked" / "harness_invariant_error" 时，
+        # workflow.next_action 会对该状态无条件返回机械 blocked 动作，而 runner 执行
+        # 该动作时又会把它覆写回 "human_blocked"（runner.py 的 blocked 分支），
+        # 且除本分支外没有任何入口能复位 recovery_status —— 形成自锁死循环
+        # （每 1 秒空转一次，永久无法推进）。复位后下一次唤醒即可回到正常派发。
+        state["recovery_status"] = "normal"
+        state["failure_class"] = None
+        state["last_action"] += f"；已对账 {len(reconciled)} 个异常任务，并复位恢复状态（→ normal）"
     save_state(state, event="control_command", details={"command": command, "source": source})
     if command == "RESUME":
         request_pending_wakeup(source=source)

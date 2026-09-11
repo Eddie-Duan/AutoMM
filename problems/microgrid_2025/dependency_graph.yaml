@@ -11,10 +11,22 @@ edges:
   version: 2
   content_hash: 6fb260491cb70450c0ea71608b59271f51d99a002737d0b3ed46a1bb1b8888d6
   propagates:
-  - 单日功率平衡与供电可靠性约束形式（购电 + 光伏 + 放电 ≥ 负载）
-  - 储能状态转移与容量/功率约束形式
-  - 日购电费用目标的结构
-  note: prob02 在 prob01 基础上把"每天相同"放宽为逐日负载/光伏变化，并加入 5 倍价紧急购电。
+  - 单日功率平衡与供电可靠性约束形式（b + PV·Δt + q_dis + q_em = L·Δt + c + s）
+  - 储能状态转移与容量/功率约束形式（E_t = E_{t-1} + 0.9c_t − q_dis_t/0.9；E∈[1200,10800]）
+  - 日购电费用目标的结构（min Σ p·b，元，不乘 Δt；prob02 追加 α_em·p·q_em）
+  - 时间对齐与表格聚合口径（AS01 左端点/计划窗 0:10→24:10；AS13 模板行位置聚合、充放电不冲抵）
+  - 功率上限作用侧口径（AS06 + D10 口径丙 + 团队勘误 E1）：c ≤ 833.33 kWh、q_dis ≤ 750.00 kWh， 并网点侧与电池侧功率均
+    ≤ 5000 kW；prob02–prob04 统一，旧登记 833.33 作废
+  - 显式弃光变量 s_t（AS08/D4；团队勘误 E2 更正 first_question = prob01）
+  - 边界口径（AS15 无购电上限/无售电、AS16 确定性；其在本问的适用性受 A14/A17 裁定约束）
+  received_in: problems/microgrid_2025/prob02/shared/problem_understanding.md
+  received_at_action: act-7ab45b76b8634948
+  pending_decisions:
+  - A2 逐日独立 vs 跨日滚动（高优先，须在 prob02 assumption_definition 裁定）
+  - A17 计划信息结构与紧急购电是否恒为零（高优先，新增）
+  - A18 紧急购电时间段合并与填报口径（新增）
+  note: prob02 在 prob01 基础上把"每天相同"放宽为逐日负载/光伏变化，并加入 5 倍价紧急购电。 本边三条原登记（平衡形式、储能动态、费用目标结构）已由
+    act-7ab45b76b8634948 细化为上列可执行口径并显式承接。
 - from: prob01
   to: prob03
   type: soft_conclusion_dependency
@@ -37,19 +49,22 @@ edges:
 - from: prob02
   to: prob03
   type: soft_conclusion_dependency
-  conclusion_id: ''
-  version: 0
-  content_hash: ''
+  conclusion_id: prob02-concl-001
+  version: 1
+  content_hash: 4840a4d4f57e6d404c77a0d72a2c0c045cbbfeac231248e688daf7d656c4b798
   propagates:
   - 紧急购电的触发条件、5 倍价结算与表 3 输出口径
   - 逐日负载/光伏数据的读取与逐日独立性（或滚动衔接）约定
+  pending_decisions:
+  - A2（逐日独立 vs 跨日滚动）— 由 prob02 的 assumption_definition 裁定后本边才可落实
+  - A17（计划信息结构与紧急购电是否恒零）/ A18（紧急购电时间段合并与填报）
   note: prob03 的紧急购电与逐日数据口径直接沿用 prob02。
 - from: prob02
   to: prob04
   type: soft_conclusion_dependency
-  conclusion_id: ''
-  version: 0
-  content_hash: ''
+  conclusion_id: prob02-concl-001
+  version: 1
+  content_hash: 4840a4d4f57e6d404c77a0d72a2c0c045cbbfeac231248e688daf7d656c4b798
   propagates:
   - 紧急购电机制与结果表结构（result4-2 复用 result2 模板）
   note: 问题 4 的"重算问题 2"直接引用 prob02 的结论。

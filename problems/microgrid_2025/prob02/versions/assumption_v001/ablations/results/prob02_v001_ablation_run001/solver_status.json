@@ -1,0 +1,12 @@
+{
+  "feasible_incumbent": true,
+  "baseline_check_passed": true,
+  "objective_yuan": 13758182.573724441,
+  "delivery_cost_yuan": 12233050.830708284,
+  "criteria_failed": [],
+  "device": "cpu",
+  "gpu_required": false,
+  "seed": 20260910,
+  "deterministic": true,
+  "model_count": 17
+}

@@ -1,3 +1,722 @@
 question_id: prob02
-dry: false
-items: []
+dry: true
+items:
+- id: ref-vanderveen-2016-balancing-market-design
+  title: 'The electricity balancing market: Exploring the design challenge'
+  authors: van der Veen Reinier A.C., Hakvoort Rudi A.
+  year: 2016
+  source: Utilities Policy
+  doi: 10.1016/j.jup.2016.10.008
+  url: https://doi.org/10.1016/j.jup.2016.10.008
+  authority: A
+  verification_level: abstract_oa
+  summary: 提出欧洲平衡市场（balancing market）设计框架：梳理设计变量与性能准则，强调平衡市场与主能量市场之间的多重耦合，以及不平衡结算规则对市场参与者激励的影响（开放摘要）。
+  applicable_conditions: 需要刻画「计划位置 vs 实时偏差」如何被结算、以及惩罚/不平衡价格如何影响最优计划的情形。
+  supports: E1 目标与惩罚项：说明实时偏差按平衡/不平衡价格结算是市场设计的显式制度变量，支撑 prob02 把「紧急购电价 = 交易时刻电价 ×5」建模为惩罚系数
+    α_em 而非普通市场价。
+  differences: 该文是市场机制设计层面的政策框架，不含微网/储能调度模型；本题只借用「偏差按惩罚价结算」的制度形式，α_em = 5 由题面给定。
+  claim_types:
+  - literature_fact
+  - agent_inference
+  status: used
+  decision_reason: E1 的 A 级制度级依据（开放摘要）：支撑「偏离计划按惩罚价结算」是可迁移的建模口径。摘要经 OpenAlex 开放获取核验，正文未读。
+  fingerprint: 10.1016/j.jup.2016.10.008
+  verified: true
+  verification_provider: crossref
+  verification_error: null
+  added_at: '2026-09-10T14:52:28.158698+00:00'
+  round_id: rnd-7881293f6b67
+  verified_at: '2026-09-10T14:52:31.216183+00:00'
+  verified_title:
+  - 'The electricity balancing market: Exploring the design challenge'
+  decided_at: '2026-09-10T14:53:09.084457+00:00'
+- id: ref-herre-2020-imbalance-settlement
+  title: Impact of Imbalance Settlement System Design on Risk-Averse Energy Storage
+  authors: Herre Lars
+  year: 2020
+  source: 2020 17th International Conference on the European Energy Market (EEM)
+  doi: 10.1109/eem49802.2020.9221962
+  url: https://doi.org/10.1109/eem49802.2020.9221962
+  authority: B
+  verification_level: abstract_oa
+  summary: 把平衡责任主体的实时不平衡定义为实际用电/送电相对合同位置的偏差，比较不同不平衡结算制度设计下的报价策略，并研究风险厌恶储能所有者在此制度下的偏差与盈利。
+  applicable_conditions: 储能 + 日前后实时偏差结算；需要判断偏差惩罚强度对计划/调度的影响。
+  supports: E1/E2：直接给出「不平衡 = 实际 − 计划」以及结算制度（单/双价、惩罚系数）决定偏差成本的建模框架，支撑 prob02 的 q_em
+    触发（供给低于负载）与 5 倍价结算。
+  differences: 该文面向电力市场平衡责任主体的报价与风险偏好；本题无报价、无风险目标，只有单一微网确定性最小费用问题，α_em = 5 由题面固定。
+  claim_types:
+  - literature_fact
+  - agent_inference
+  status: used
+  decision_reason: E1/E2 的 B 级直接机制来源（含开放摘要）：支撑偏差量与偏差结算的显式建模。正文未读。
+  fingerprint: 10.1109/eem49802.2020.9221962
+  verified: true
+  verification_provider: crossref
+  verification_error: null
+  added_at: '2026-09-10T14:52:28.208121+00:00'
+  round_id: rnd-7881293f6b67
+  verified_at: '2026-09-10T14:52:32.672668+00:00'
+  verified_title:
+  - Impact of Imbalance Settlement System Design on Risk-Averse Energy Storage
+  decided_at: '2026-09-10T14:53:09.238253+00:00'
+- id: ref-botterud-2011-wind-lmp-deviation
+  title: Wind Power Trading Under Uncertainty in LMP Markets
+  authors: Botterud Audun, Zhou Zhi, Wang Jianhui, Bessa Ricardo J., Keko Hrvoje,
+    Sumaili Jean, Miranda Vladimiro
+  year: 2011
+  source: IEEE Transactions on Power Systems
+  doi: 10.1109/tpwrs.2011.2170442
+  url: https://doi.org/10.1109/tpwrs.2011.2170442
+  authority: A
+  verification_level: abstract_oa
+  summary: 建立日前市场下风电最优交易模型，显式比较「有无偏差惩罚」两种结算机制：无惩罚时报价由价格期望驱动，有偏差惩罚时报价向期望出力靠拢；用 CVaR
+    表示风险偏好。
+  applicable_conditions: 需要在日前计划与实时偏差之间引入惩罚项、并讨论惩罚系数对最优计划影响的情形。
+  supports: E1：直接说明「偏差惩罚（deviation penalty）系数」是日前计划建模的显式参数，并给出惩罚会改变最优解方向的机制；支撑 prob02
+    目标中 Σ α_em·p_t·q_em_t 的合法性。
+  differences: 该文面向风电商报价与风险，含概率预测与 CVaR；本题为确定性、单一微网，惩罚系数由题面固定为 5，且决策是购电量而非市场报价。
+  claim_types:
+  - literature_fact
+  - agent_inference
+  status: used
+  decision_reason: E1 的 A 级直接依据（含开放摘要）：偏差惩罚作为显式建模项且会改变最优计划。正文未读。
+  fingerprint: 10.1109/tpwrs.2011.2170442
+  verified: true
+  verification_provider: crossref
+  verification_error: null
+  added_at: '2026-09-10T14:52:28.256268+00:00'
+  round_id: rnd-7881293f6b67
+  verified_at: '2026-09-10T14:52:34.184134+00:00'
+  verified_title:
+  - Wind Power Trading Under Uncertainty in LMP Markets
+  decided_at: '2026-09-10T14:53:09.393503+00:00'
+- id: ref-joos-2018-integration-costs
+  title: 'Short-term integration costs of variable renewable energy: Wind curtailment
+    and balancing in Britain and Germany'
+  authors: Joos Michael, Staffell Iain
+  year: 2018
+  source: Renewable and Sustainable Energy Reviews
+  doi: 10.1016/j.rser.2018.01.009
+  url: https://doi.org/10.1016/j.rser.2018.01.009
+  authority: A
+  verification_level: abstract_oa
+  summary: 综述英德两国可变可再生能源的短期系统成本（平衡成本、弃电成本），并比较两国不平衡结算设计；指出不平衡价格信号强度与「谁承担集成成本」是政策焦点。
+  applicable_conditions: 需要为「偏差/不平衡按惩罚价结算」提供制度与经验层面旁证的情形。
+  supports: E1：说明不平衡价格信号强度是可调制度变量且会影响参与者行为，支撑把题面 5 倍价解释为强惩罚信号（现实制度中存在此类设计）。
+  differences: 该文是国家层面成本统计与政策综述，不含微网优化模型；本题只借其制度视角，不引用其具体数值。
+  claim_types:
+  - literature_fact
+  - agent_inference
+  status: used
+  decision_reason: E1 的经验/制度级 A 级补充（含开放摘要）：说明惩罚性不平衡价格在现实中存在。正文未读。
+  fingerprint: 10.1016/j.rser.2018.01.009
+  verified: true
+  verification_provider: crossref
+  verification_error: null
+  added_at: '2026-09-10T14:52:28.306187+00:00'
+  round_id: rnd-7881293f6b67
+  verified_at: '2026-09-10T14:52:36.396787+00:00'
+  verified_title:
+  - 'Short-term integration costs of variable renewable energy: Wind curtailment and
+    balancing in Britain and Germany'
+  decided_at: '2026-09-10T14:53:09.548249+00:00'
+- id: ref-silva-2022-multistage-bidding
+  title: A multistage stochastic approach for the optimal bidding of variable renewable
+    energy in the day-ahead, intraday and balancing markets
+  authors: Silva Ana Rita, Pousinho H.M.I., Estanqueiro Ana
+  year: 2022
+  source: Energy
+  doi: 10.1016/j.energy.2022.124856
+  url: https://doi.org/10.1016/j.energy.2022.124856
+  authority: A
+  verification_level: abstract_oa
+  summary: 用多阶段随机线性规划优化含风/光/储虚拟电厂在日前、日内与平衡市场的申报；结果显示参与三市场相对仅日前+平衡可提高利润 10.1%，并把不平衡量降低
+    63.8%。
+  applicable_conditions: 多结算框架（日前/日内/平衡）下的调度与偏差处理。
+  supports: E1：给出「日前计划 + 实时/平衡偏差」多结算建模范式，说明偏差是可被日内交易或惩罚结算吸收的显式量；63.8% 的不平衡下降说明偏差处理是决策变量。
+  differences: 该文为随机多阶段与市场申报，含日内市场；本题无日内市场、无随机目标，紧急购电是唯一偏差处理通道。
+  claim_types:
+  - literature_fact
+  - agent_inference
+  status: used
+  decision_reason: E1 的 A 级多结算范式依据（含开放摘要）。其定量结论仅用于说明机制，不迁移到本题。正文未读。
+  fingerprint: 10.1016/j.energy.2022.124856
+  verified: true
+  verification_provider: crossref
+  verification_error: null
+  added_at: '2026-09-10T14:52:28.357398+00:00'
+  round_id: rnd-7881293f6b67
+  verified_at: '2026-09-10T14:52:38.244029+00:00'
+  verified_title:
+  - A multistage stochastic approach for the optimal bidding of variable renewable
+    energy in the day-ahead, intraday and balancing markets
+  decided_at: '2026-09-10T14:53:09.700830+00:00'
+- id: ref-poplavskaya-2020-balancing-design
+  title: 'Effect of market design on strategic bidding behavior: Model-based analysis
+    of European electricity balancing markets'
+  authors: Poplavskaya Ksenia, Lago Jesus, de Vries Laurens
+  year: 2020
+  source: Applied Energy
+  doi: 10.1016/j.apenergy.2020.115130
+  url: https://doi.org/10.1016/j.apenergy.2020.115130
+  authority: A
+  verification_level: abstract_oa
+  summary: 用 agent-based 模型比较平衡能量市场不同定价规则（边际定价 vs pay-as-bid）对经济效率与报价策略的影响；指出寡头结构下价格可偏离竞争基准
+    4–5 倍。
+  applicable_conditions: 讨论平衡/惩罚价格的定价规则与「惩罚倍数」量级。
+  supports: E1：提供「实时/平衡价格显著高于常规价格」的机制证据（偏离竞争基准 4–5 倍），为题面 α_em = 5 的数量级提供旁证（不用于标定，题面已给定）。
+  differences: 该文为市场博弈模拟，倍数来自策略行为而非题面制度；本题 5 倍为硬参数，仅作量级旁证。
+  claim_types:
+  - literature_fact
+  - agent_inference
+  status: used
+  decision_reason: E1 的量级旁证（A 级、含开放摘要）：惩罚/平衡价高于常规价属常见量级；不作为参数标定来源。正文未读。
+  fingerprint: 10.1016/j.apenergy.2020.115130
+  verified: true
+  verification_provider: crossref
+  verification_error: null
+  added_at: '2026-09-10T14:52:28.413519+00:00'
+  round_id: rnd-7881293f6b67
+  verified_at: '2026-09-10T14:52:40.068208+00:00'
+  verified_title:
+  - 'Effect of market design on strategic bidding behavior: Model-based analysis of
+    European electricity balancing markets'
+  decided_at: '2026-09-10T14:53:09.863263+00:00'
+- id: ref-wang-2011-spinning-reserve-microgrid
+  title: Spinning Reserve Estimation in Microgrids
+  authors: Wang M. Q., Gooi Hoay Beng
+  year: 2011
+  source: IEEE Transactions on Power Systems
+  doi: 10.1109/tpwrs.2010.2100414
+  url: https://doi.org/10.1109/tpwrs.2010.2100414
+  authority: A
+  verification_level: abstract_oa
+  summary: 提出微网旋转备用需求的概率估计法，在可靠性与经济性之间折中，考虑机组不可用与负荷/不可调度单元不确定性，用 MILP 求解。
+  applicable_conditions: 微网中为保障供电可靠性而预留/启用备用容量的建模。
+  supports: E2：说明「微网必须保证供给不低于负载」在文献中体现为备用/可靠性约束，其确定性极限即本题的硬可靠性约束；支撑 q_em 作为补足负载的显式变量。
+  differences: 该文以概率可靠性定备用容量；本题为确定性、「不足即紧急购电」由题面给定，不采用其概率模型。
+  claim_types:
+  - literature_fact
+  - agent_inference
+  status: used
+  decision_reason: E2 的 A 级可靠性建模依据（含开放摘要）。正文未读。
+  fingerprint: 10.1109/tpwrs.2010.2100414
+  verified: true
+  verification_provider: crossref
+  verification_error: null
+  added_at: '2026-09-10T14:52:28.470953+00:00'
+  round_id: rnd-7881293f6b67
+  verified_at: '2026-09-10T14:52:41.609052+00:00'
+  verified_title:
+  - Spinning Reserve Estimation in Microgrids
+  decided_at: '2026-09-10T14:53:10.035708+00:00'
+- id: ref-xie-2019-storage-reliability
+  title: Optimal Energy Storage Sizing for Networked Microgrids Considering Reliability
+    and Resilience
+  authors: Xie Hua, Teng Xiaofei, Xu Yin, Wang Ying
+  year: 2019
+  source: IEEE Access
+  doi: 10.1109/access.2019.2922994
+  url: https://doi.org/10.1109/access.2019.2922994
+  authority: A
+  verification_level: abstract_oa
+  summary: 提出计及可靠性与韧性的联网微网储能容量双层优化（正常/典型故障/极端故障场景），下层为运行优化，整体转为 MILP。
+  applicable_conditions: 储能与供电可靠性/韧性联合建模、多场景运行。
+  supports: E2：说明储能与供电可靠性在微网优化中是显式耦合对象；支撑 prob02 中储能降低计划购电与降低紧急购电（可靠性）需求的双重角色刻画。
+  differences: 该文为容量规划双层模型且含网络互联；本题容量给定、单微网、运行层单层 LP，无故障场景。
+  claim_types:
+  - literature_fact
+  - agent_inference
+  status: used
+  decision_reason: E2 的 A 级储能-可靠性耦合依据（含开放摘要）。正文未读。
+  fingerprint: 10.1109/access.2019.2922994
+  verified: true
+  verification_provider: crossref
+  verification_error: null
+  added_at: '2026-09-10T14:52:28.531285+00:00'
+  round_id: rnd-7881293f6b67
+  verified_at: '2026-09-10T14:52:43.161769+00:00'
+  verified_title:
+  - Optimal Energy Storage Sizing for Networked Microgrids Considering Reliability
+    and Resilience
+  decided_at: '2026-09-10T14:53:10.204225+00:00'
+- id: ref-hirsch-2018-microgrids-review
+  title: 'Microgrids: A review of technologies, key drivers, and outstanding issues'
+  authors: Hirsch A., Parag Yael, Guerrero Josep M.
+  year: 2018
+  source: Renewable and Sustainable Energy Reviews
+  doi: 10.1016/j.rser.2018.03.040
+  url: https://doi.org/10.1016/j.rser.2018.03.040
+  authority: A
+  verification_level: abstract_oa
+  summary: 微网技术、驱动因素与挑战的综述，指出微网的核心价值之一是提高供电可靠性与韧性，并支持分布式可再生接入。
+  applicable_conditions: 为「微网需保障供电可靠性、并可与外部电网交互」提供背景性依据。
+  supports: E2：框架级依据——微网的首要驱动之一是可靠性；本题「供给不低于负载、不足则紧急购电」是该目标在题面下的具体化。
+  differences: 综述层面，无优化模型与参数；仅作背景级引用。
+  claim_types:
+  - literature_fact
+  - agent_inference
+  status: used
+  decision_reason: E2 的 A 级背景依据（含开放摘要），仅框架级使用。正文未读。
+  fingerprint: 10.1016/j.rser.2018.03.040
+  verified: true
+  verification_provider: crossref
+  verification_error: null
+  added_at: '2026-09-10T14:52:28.593587+00:00'
+  round_id: rnd-7881293f6b67
+  verified_at: '2026-09-10T14:52:44.970288+00:00'
+  verified_title:
+  - 'Microgrids: A review of technologies, key drivers, and outstanding issues'
+  decided_at: '2026-09-10T14:53:10.369935+00:00'
+- id: ref-cardoso-2013-reliability-slp
+  title: Microgrid reliability modeling and battery scheduling using stochastic linear
+    programming
+  authors: Cardoso G., Städler Michael, Siddiqui Afzal S., Marnay Chris, DeForest
+    Nicholas, Barbosa-Póvoa Ana Paula, Ferrão Paulo
+  year: 2013
+  source: Electric Power Systems Research
+  doi: 10.1016/j.epsr.2013.05.005
+  url: https://doi.org/10.1016/j.epsr.2013.05.005
+  authority: A
+  verification_level: metadata
+  summary: 用随机线性规划对微网可靠性建模并调度电池，把供电不足作为可靠性指标纳入调度优化（据标题与期刊层级，本轮未取得摘要）。
+  applicable_conditions: 微网可靠性 + 电池调度的联合优化。
+  supports: E2/E3：可靠性约束与电池调度在同一优化框架内，支撑 prob02 把 q_em（可靠性补足）与 c/q_dis（储能调度）放在同一 LP
+    中。
+  differences: 该文为随机规划且关注可靠性指标；本题为确定性硬约束 + 惩罚价购电，不建随机模型。
+  claim_types:
+  - literature_fact
+  - agent_inference
+  status: used
+  decision_reason: E2/E3 的 A 级旁证（元数据级）：可靠性与电池调度联合建模是成熟做法。正文未读，不引用其公式或数值。
+  fingerprint: 10.1016/j.epsr.2013.05.005
+  verified: true
+  verification_provider: crossref
+  verification_error: null
+  added_at: '2026-09-10T14:52:28.660695+00:00'
+  round_id: rnd-7881293f6b67
+  verified_at: '2026-09-10T14:52:46.497645+00:00'
+  verified_title:
+  - Microgrid reliability modeling and battery scheduling using stochastic linear
+    programming
+  decided_at: '2026-09-10T14:53:10.540702+00:00'
+- id: ref-silvente-2015-rolling-horizon
+  title: A rolling horizon optimization framework for the simultaneous energy supply
+    and demand planning in microgrids
+  authors: Silvente Javier, Kopanos Georgios M., Pistikopoulos Efstratios N., Espuña
+    Antonio
+  year: 2015
+  source: Applied Energy
+  doi: 10.1016/j.apenergy.2015.05.090
+  url: https://doi.org/10.1016/j.apenergy.2015.05.090
+  authority: A
+  verification_level: abstract_oa
+  summary: 提出微网供需协同的 MILP 调度模型并置于滚动时域（rolling horizon）框架中，周期性更新输入信息，允许需求延迟并计入惩罚成本。
+  applicable_conditions: 多日/长时域微网调度；输入信息随时间更新；需要滚动衔接的场合。
+  supports: E3/E5：给出「多时段耦合 + 滚动时域更新」的标准范式，支撑 A2 候选 (b)（滚动递推）与长时域 LP 的可行性论证，以及 334
+    天规模的时域组织方式。
+  differences: 该文含需求侧延迟与惩罚，且为 MILP；本题需求刚性、模型为 LP，滚动与否仍需团队按题面裁定（文献不替题面裁定）。
+  claim_types:
+  - literature_fact
+  - agent_inference
+  status: used
+  decision_reason: E3/E5 的 A 级核心依据（含开放摘要）：滚动时域是有文献基础的时域组织方式。正文未读。
+  fingerprint: 10.1016/j.apenergy.2015.05.090
+  verified: true
+  verification_provider: crossref
+  verification_error: null
+  added_at: '2026-09-10T14:52:28.727784+00:00'
+  round_id: rnd-7881293f6b67
+  verified_at: '2026-09-10T14:52:48.191166+00:00'
+  verified_title:
+  - A rolling horizon optimization framework for the simultaneous energy supply and
+    demand planning in microgrids
+  decided_at: '2026-09-10T14:53:10.716006+00:00'
+- id: ref-deng-2020-interhours-rolling
+  title: Inter-hours rolling scheduling of behind-the-meter storage operating systems
+    using electricity price forecasting based on deep convolutional neural network
+  authors: Deng Zhuofu, Liu Chenxu, Zhu Zhiliang
+  year: 2020
+  source: International Journal of Electrical Power & Energy Systems
+  doi: 10.1016/j.ijepes.2020.106499
+  url: https://doi.org/10.1016/j.ijepes.2020.106499
+  authority: A
+  verification_level: abstract_oa
+  summary: 提出「小时间滚动时域」储能调度策略，用深度 CNN 做小时级多步电价预测与价格尖峰检测，在 Ontario 实际市场数据上比 ARX 基线降低运行成本
+    8.7%。
+  applicable_conditions: 跨小时/跨日储能调度需要滚动衔接与信息更新的情形。
+  supports: E3：直接支撑「储能调度可跨小时滚动、且需要跨时段状态衔接」，说明跨日衔接（SOC 连续性）是调度模型的常规组成部分，对应 A2 的核心分歧。
+  differences: 该文依赖价格预测与深度学习；本题电价每日相同且为已知确定性曲线，滚动与否不改变价格不确定性，只影响储能状态衔接与计算规模。
+  claim_types:
+  - literature_fact
+  - agent_inference
+  status: used
+  decision_reason: E3 的 A 级直接依据（含开放摘要）：跨小时滚动调度的状态衔接是标准做法。正文未读。
+  fingerprint: 10.1016/j.ijepes.2020.106499
+  verified: true
+  verification_provider: crossref
+  verification_error: null
+  added_at: '2026-09-10T14:52:28.796736+00:00'
+  round_id: rnd-7881293f6b67
+  verified_at: '2026-09-10T14:52:50.057423+00:00'
+  verified_title:
+  - Inter-hours rolling scheduling of behind-the-meter storage operating systems using
+    electricity price forecasting based on deep convolutional neural network
+  decided_at: '2026-09-10T14:53:10.888442+00:00'
+- id: ref-holjevac-2017-receding-horizon
+  title: Corrective receding horizon scheduling of flexible distributed multi-energy
+    microgrids
+  authors: Holjevac Ninoslav, Capuder Tomislav, Zhang Ning, Kuzle Igor, Kang Chongqing
+  year: 2017
+  source: Applied Energy
+  doi: 10.1016/j.apenergy.2017.06.045
+  url: https://doi.org/10.1016/j.apenergy.2017.06.045
+  authority: A
+  verification_level: abstract_oa
+  summary: 用 MILP + 滚动时域 MPC 对多能微网做短期日运行分析，评估不同时间尺度的运行灵活性；指出效率等近似对日尺度灵活性估计有显著影响。
+  applicable_conditions: 需要滚动修正日前计划、或评估多时间尺度调度一致性的情形。
+  supports: E3/E5：支撑「日前计划 + 滚动修正」的时域组织，并提示不同时间尺度近似会改变日尺度结论（A2 两读的费用差异必须实算，不能凭直觉忽略）。
+  differences: 该文为多能（冷热电）MILP 与 MPC；本题为纯电 LP，且题面没有滚动修正环节（prob03 才有调整）。
+  claim_types:
+  - literature_fact
+  - agent_inference
+  status: used
+  decision_reason: E3/E5 的 A 级依据（含开放摘要）：滚动/多时间尺度是成熟范式，且近似对日尺度结果影响可观。正文未读。
+  fingerprint: 10.1016/j.apenergy.2017.06.045
+  verified: true
+  verification_provider: crossref
+  verification_error: null
+  added_at: '2026-09-10T14:52:28.866583+00:00'
+  round_id: rnd-7881293f6b67
+  verified_at: '2026-09-10T14:52:51.807761+00:00'
+  verified_title:
+  - Corrective receding horizon scheduling of flexible distributed multi-energy microgrids
+  decided_at: '2026-09-10T14:53:11.060666+00:00'
+- id: ref-finnah-2021-da-intraday-adp
+  title: Integrated day-ahead and intraday self-schedule bidding for energy storage
+    systems using approximate dynamic programming
+  authors: Finnah Benedikt, Gönsch Jochen, Ziel Florian
+  year: 2021
+  source: European Journal of Operational Research
+  doi: 10.1016/j.ejor.2021.11.010
+  url: https://doi.org/10.1016/j.ejor.2021.11.010
+  authority: A
+  verification_level: abstract_oa
+  summary: 研究储能在日前（60 分钟时段）与日内（15 分钟时段）两市场联合自调度，状态含高维价格预测，用近似动态规划求解，并比较价格预测信息对期望利润的影响。
+  applicable_conditions: 储能跨市场/跨时段的申报与状态决策；信息（价格预测）质量对决策价值的影响。
+  supports: E4：说明「计划时可得的信息结构」直接决定储能调度的最优决策与收益，为 A17 的信息结构裁定提供方法级依据（完全信息 vs 预报对应不同价值）。
+  differences: 该文为随机动态规划与市场申报；本题为确定性 LP、无报价决策，但「信息结构决定模型」这一结论可迁移。
+  claim_types:
+  - literature_fact
+  - agent_inference
+  status: used
+  decision_reason: E4 的 A 级依据（含开放摘要）：信息结构是储能调度建模的显式维度。正文未读。
+  fingerprint: 10.1016/j.ejor.2021.11.010
+  verified: true
+  verification_provider: crossref
+  verification_error: null
+  added_at: '2026-09-10T14:52:28.936933+00:00'
+  round_id: rnd-7881293f6b67
+  verified_at: '2026-09-10T14:52:53.549846+00:00'
+  verified_title:
+  - Integrated day-ahead and intraday self-schedule bidding for energy storage systems
+    using approximate dynamic programming
+  decided_at: '2026-09-10T14:53:11.238921+00:00'
+- id: ref-bao-2014-multiscale-mg
+  title: 'A Multi Time-Scale and Multi Energy-Type Coordinated Microgrid Scheduling
+    Solution—Part I: Model and Methodology'
+  authors: Bao Zhejing, Zhou Qin, Yang Zhihui, Yang Qiang, Xu Lizhong, Wu Ting
+  year: 2014
+  source: IEEE Transactions on Power Systems
+  doi: 10.1109/tpwrs.2014.2367127
+  url: https://doi.org/10.1109/tpwrs.2014.2367127
+  authority: A
+  verification_level: abstract_oa
+  summary: 建立微网多时间尺度（日前调度 + 实时调度）与多能型协同优化模型：日前用多场景表示可再生不确定性以最小化期望运行成本，实时按更细时间尺度平滑波动。
+  applicable_conditions: 需要把「日前计划」与「实时/更细尺度修正」分层建模的情形。
+  supports: E3/E4：支撑「日前计划 + 实时偏差处理」两层时域结构；其日前用场景表示不确定性，对应 A17 中「完全信息 vs 预报」的信息结构选择。
+  differences: 该文含冷热电耦合与场景随机优化；本题纯电、确定性，仅借用两层时域结构。
+  claim_types:
+  - literature_fact
+  - agent_inference
+  status: used
+  decision_reason: E3/E4 的 A 级依据（含开放摘要）：多时间尺度分层是微网调度的标准结构。正文未读。
+  fingerprint: 10.1109/tpwrs.2014.2367127
+  verified: true
+  verification_provider: crossref
+  verification_error: null
+  added_at: '2026-09-10T14:52:29.015760+00:00'
+  round_id: rnd-7881293f6b67
+  verified_at: '2026-09-10T14:52:55.030969+00:00'
+  verified_title:
+  - 'A Multi Time-Scale and Multi Energy-Type Coordinated Microgrid Scheduling Solution—Part
+    I: Model and Methodology'
+  decided_at: '2026-09-10T14:53:11.417261+00:00'
+- id: ref-hu-2020-mpc-overview
+  title: Model predictive control of microgrids – An overview
+  authors: Hu Jiefeng, Shan Yinghao, Guerrero Josep M., Ioinovici Adrian, Chan Ka
+    Wing, Rodríguez José
+  year: 2020
+  source: Renewable and Sustainable Energy Reviews
+  doi: 10.1016/j.rser.2020.110422
+  url: https://doi.org/10.1016/j.rser.2020.110422
+  authority: A
+  verification_level: abstract_oa
+  summary: 微网 MPC 综述：覆盖变流器级与电网级、含经济运行优化的预测控制方法，指出 MPC 在功率管理与经济运行优化中是传统方法的竞争者，且在微网中仍处早期应用阶段。
+  applicable_conditions: 需要在多时段上反复求解、并把当前状态作为初值向前推进的调度/控制问题。
+  supports: E3/E5：支撑「把储能状态从一个时段/一天传递到下一个」的预测控制范式，是 A2「滚动递推」读法的框架级依据，同时提示其适用边界（模型与预测质量）。
+  differences: 该文是控制层综述，含变流器级控制；本题是开环确定性优化，只借用滚动/状态传递思想。
+  claim_types:
+  - literature_fact
+  - agent_inference
+  status: used
+  decision_reason: E3/E5 的 A 级框架依据（含开放摘要），仅框架级使用。正文未读。
+  fingerprint: 10.1016/j.rser.2020.110422
+  verified: true
+  verification_provider: crossref
+  verification_error: null
+  added_at: '2026-09-10T14:52:29.098870+00:00'
+  round_id: rnd-7881293f6b67
+  verified_at: '2026-09-10T14:52:56.853819+00:00'
+  verified_title:
+  - Model predictive control of microgrids – An overview
+  decided_at: '2026-09-10T14:53:11.600249+00:00'
+- id: ref-chazarra-2017-perfect-information
+  title: Value of perfect information of spot prices in the joint energy and reserve
+    hourly scheduling of pumped storage plants
+  authors: Chazarra Manuel, Pérez-Díaz Juan I., García-González Javier
+  year: 2017
+  source: Electric Power Systems Research
+  doi: 10.1016/j.epsr.2017.03.015
+  url: https://doi.org/10.1016/j.epsr.2017.03.015
+  authority: B
+  verification_level: metadata
+  summary: 研究抽水蓄能机组在能量与备用联合小时调度中「完美现货价格信息」的价值，度量信息结构对调度收益的影响（据标题与期刊层级，本轮未取得摘要）。
+  applicable_conditions: 需要量化「计划时是否已知未来价格/出力」对最优调度价值影响的情形。
+  supports: E4：直接对应 A17——「0:00 制定计划时掌握多少信息」会改变最优决策与结果价值；为「完全信息」读法提供可核验依据。
+  differences: 该文对象是抽水蓄能与现货价格信息；本题的完全信息指当日实际负载/光伏（附件 2），价格为已知确定曲线；仅迁移「信息结构有可度量价值」这一结论。
+  claim_types:
+  - literature_fact
+  - agent_inference
+  status: used
+  decision_reason: E4 的 B 级直接依据（元数据级）：「完美信息价值」是储能调度文献中的标准分析对象。正文未读，不引用其公式或数值。
+  fingerprint: 10.1016/j.epsr.2017.03.015
+  verified: true
+  verification_provider: crossref
+  verification_error: null
+  added_at: '2026-09-10T14:52:29.180853+00:00'
+  round_id: rnd-7881293f6b67
+  verified_at: '2026-09-10T14:52:59.387465+00:00'
+  verified_title:
+  - Value of perfect information of spot prices in the joint energy and reserve hourly
+    scheduling of pumped storage plants
+  decided_at: '2026-09-10T14:53:11.786924+00:00'
+- id: ref-liang-2014-stochastic-survey
+  title: 'Stochastic Modeling and Optimization in a Microgrid: A Survey'
+  authors: Liang Hao, Zhuang Weihua
+  year: 2014
+  source: Energies
+  doi: 10.3390/en7042027
+  url: https://doi.org/10.3390/en7042027
+  authority: A
+  verification_level: abstract_oa
+  summary: 微网随机建模与优化综述：系统梳理可再生出力随机性、储能缓冲与负荷不确定性下的规划/运行/控制方法族，并给出未来方向。
+  applicable_conditions: 需要在确定性优化与随机优化之间做方法选择的情形。
+  supports: E4：给出「确定性模型是随机模型在不确定性被忽略/已知时的特例」这一方法谱系，支撑 A17 先明确信息结构、再决定是否需要随机模型的裁定顺序。
+  differences: 综述层面，不针对本题数据；本题输入为确定性给定数据，只在信息结构假设下使用确定性模型。
+  claim_types:
+  - literature_fact
+  - agent_inference
+  status: used
+  decision_reason: E4 的 A 级方法谱系依据（含开放摘要）。正文未读。
+  fingerprint: 10.3390/en7042027
+  verified: true
+  verification_provider: crossref
+  verification_error: null
+  added_at: '2026-09-10T14:52:29.264327+00:00'
+  round_id: rnd-7881293f6b67
+  verified_at: '2026-09-10T14:53:01.115598+00:00'
+  verified_title:
+  - 'Stochastic Modeling and Optimization in a Microgrid: A Survey'
+  decided_at: '2026-09-10T14:53:11.973867+00:00'
+- id: ref-shuai-2018-adp-dispatch
+  title: Stochastic Optimization of Economic Dispatch for Microgrid Based on Approximate
+    Dynamic Programming
+  authors: Shuai Hang, Fang Jiakun, Ai Xiaomeng, Tang Yufei, Wen Jinyu, He Haibo
+  year: 2018
+  source: IEEE Transactions on Smart Grid
+  doi: 10.1109/tsg.2018.2798039
+  url: https://doi.org/10.1109/tsg.2018.2798039
+  authority: A
+  verification_level: abstract_oa
+  summary: 面向含分布式电源的微网经济调度，把可再生出力、电价与负荷视为随机变量，用近似动态规划（蒙特卡洛场景 + 分段线性近似）做日前与日内优化，并利用历史预测误差分布降低预测偏差影响。
+  applicable_conditions: 不确定性下的微网经济调度；日前 + 日内两阶段。
+  supports: E4：说明当计划信息不完美时需用预测误差分布与场景修正计划；对应 A17 候选 (b)（不完美信息需先固定预报来源与语义）。
+  differences: 该文为 ADP/随机优化；本题 A17 若裁定为完全信息则退化为确定性 LP，文献只用于说明两条路的分野。
+  claim_types:
+  - literature_fact
+  - agent_inference
+  status: used
+  decision_reason: E4 的 A 级依据（含开放摘要）：不完美信息下的调度需要显式预测误差模型。正文未读。
+  fingerprint: 10.1109/tsg.2018.2798039
+  verified: true
+  verification_provider: crossref
+  verification_error: null
+  added_at: '2026-09-10T14:52:29.352581+00:00'
+  round_id: rnd-7881293f6b67
+  verified_at: '2026-09-10T14:53:02.615374+00:00'
+  verified_title:
+  - Stochastic Optimization of Economic Dispatch for Microgrid Based on Approximate
+    Dynamic Programming
+  decided_at: '2026-09-10T14:53:12.168663+00:00'
+- id: ref-toubeau-2020-da-real-time
+  title: Data-Driven Scheduling of Energy Storage in Day-Ahead Energy and Reserve
+    Markets With Probabilistic Guarantees on Real-Time Delivery
+  authors: Toubeau Jean-François, Bottieau Jérémie, De Grève Zacharie, Vallée François,
+    Bruninx Kenneth
+  year: 2020
+  source: IEEE Transactions on Power Systems
+  doi: 10.1109/tpwrs.2020.3046710
+  url: https://doi.org/10.1109/tpwrs.2020.3046710
+  authority: A
+  verification_level: abstract_oa
+  summary: 用数据驱动的实时平衡阶段概率刻画改进储能日前调度，通过机会约束对实时可用性给出概率保证，并在能量/备用/平衡市场间做收益最大化（双层模型转 MILP）。
+  applicable_conditions: 日前计划必须为实时交付/偏差留出裕度的情形。
+  supports: E4：说明日前计划与实时偏差之间存在「预留裕度 vs 经济性」的权衡，支撑 A17 中「完全信息下 q_em ≡ 0」与「不完美信息下需留裕度」两种读法的差异来源。
+  differences: 该文为机会约束与市场收益最大化；本题无备用市场、无概率保证，只借用「日前-实时权衡」的结构。
+  claim_types:
+  - literature_fact
+  - agent_inference
+  status: used
+  decision_reason: E4 的 A 级依据（含开放摘要）：日前-实时权衡是储能调度的显式建模内容。正文未读。
+  fingerprint: 10.1109/tpwrs.2020.3046710
+  verified: true
+  verification_provider: crossref
+  verification_error: null
+  added_at: '2026-09-10T14:52:29.442783+00:00'
+  round_id: rnd-7881293f6b67
+  verified_at: '2026-09-10T14:53:04.153879+00:00'
+  verified_title:
+  - Data-Driven Scheduling of Energy Storage in Day-Ahead Energy and Reserve Markets
+    With Probabilistic Guarantees on Real-Time Delivery
+  decided_at: '2026-09-10T14:53:12.362014+00:00'
+- id: ref-zhang-2018-robust-multimg
+  title: Robust optimization for energy transactions in multi-microgrids under uncertainty
+  authors: Zhang Bingying, Li Qiqiang, Wang Luhao, Feng Wei
+  year: 2018
+  source: Applied Energy
+  doi: 10.1016/j.apenergy.2018.02.121
+  url: https://doi.org/10.1016/j.apenergy.2018.02.121
+  authority: A
+  verification_level: metadata
+  summary: 对多微网不确定性能量交易建立鲁棒优化模型（据标题与期刊层级，本轮未取得摘要）。
+  applicable_conditions: 计划时信息不确定、需要在最坏情形下保证可行的交易/调度。
+  supports: E4：提供「不确定性下保持可行」的另一条路线（鲁棒），说明 A17 若取不完美信息除随机模型外还有鲁棒路线；本题若取完全信息则两者都不需要。
+  differences: 该文为多微网鲁棒优化；本题单微网、确定性。仅作方法谱系补充。
+  claim_types:
+  - literature_fact
+  - agent_inference
+  status: used
+  decision_reason: E4 的方法谱系补充（A 级、元数据级）。正文未读，不引用其公式或数值。
+  fingerprint: 10.1016/j.apenergy.2018.02.121
+  verified: true
+  verification_provider: crossref
+  verification_error: null
+  added_at: '2026-09-10T14:52:29.531440+00:00'
+  round_id: rnd-7881293f6b67
+  verified_at: '2026-09-10T14:53:05.838681+00:00'
+  verified_title:
+  - Robust optimization for energy transactions in multi-microgrids under uncertainty
+  decided_at: '2026-09-10T14:53:12.557621+00:00'
+- id: ref-wang-2022-multiagent-time-price
+  title: Multi-agent-based collaborative regulation optimization for microgrid economic
+    dispatch under a time-based price mechanism
+  authors: Wang Lingyun, An Xiao, Xu Honglei, Zhang Yunning
+  year: 2022
+  source: Electric Power Systems Research
+  doi: 10.1016/j.epsr.2022.108760
+  url: https://doi.org/10.1016/j.epsr.2022.108760
+  authority: A
+  verification_level: metadata
+  summary: 在基于时间的电价（time-based price）机制下，用多智能体协同调控优化微网经济调度（据标题与期刊层级，本轮未取得摘要）。
+  applicable_conditions: 分时/时间型电价下的微网经济调度。
+  supports: E7：为「逐日给定电价曲线下的经济调度」提供 prob02 侧的独立 A 级来源（prob01 已建立同族依据，此处不依赖 prob01 池即可自洽）。
+  differences: 该文为多智能体协同调控；本题为单体 LP 优化。仅供问题族定位。
+  claim_types:
+  - literature_fact
+  - agent_inference
+  status: used
+  decision_reason: E7 的 A 级独立来源（元数据级），保证 prob02 池对「TOU/时间型电价 + 经济调度」自洽。正文未读。
+  fingerprint: 10.1016/j.epsr.2022.108760
+  verified: true
+  verification_provider: crossref
+  verification_error: null
+  added_at: '2026-09-10T14:52:29.622589+00:00'
+  round_id: rnd-7881293f6b67
+  verified_at: '2026-09-10T14:53:07.511818+00:00'
+  verified_title:
+  - Multi-agent-based collaborative regulation optimization for microgrid economic
+    dispatch under a time-based price mechanism
+  decided_at: '2026-09-10T14:53:12.762643+00:00'
+- id: ref-hu-2023-empc-review
+  title: 'Economic Model Predictive Control for Microgrid Optimization: A Review'
+  authors: Hu Jiefeng, Shan Yinghao, Yang Yong, Parisio Alessandra, Li Yong, Amjady
+    Nima, Islam Syed, Cheng K.W.E., Guerrero Josep M., Rodríguez José
+  year: 2023
+  source: IEEE Transactions on Smart Grid
+  doi: 10.1109/tsg.2023.3266253
+  url: https://doi.org/10.1109/tsg.2023.3266253
+  authority: A
+  verification_level: abstract_oa
+  summary: 微网经济模型预测控制（EMPC）综述：系统梳理以成本最小/收益最大为目标的预测控制方法在独立、并网、住宅与联网微网中的策略，并给出未来趋势。
+  applicable_conditions: 以经济目标为核心、需要在时域上滚动/分层求解的微网调度。
+  supports: E5/E7：说明「经济目标 + 多时段调度」是微网调度的主流范式；支撑 prob02 单日/多日 LP 定位与滚动读法的框架合法性。
+  differences: 综述层面，含控制实现细节；本题只做开环离线 LP，不实现闭环控制。
+  claim_types:
+  - literature_fact
+  - agent_inference
+  status: used
+  decision_reason: E5/E7 的 A 级综述依据（含开放摘要），仅框架级使用。正文未读。
+  fingerprint: 10.1109/tsg.2023.3266253
+  verified: true
+  verification_provider: crossref
+  verification_error: null
+  added_at: '2026-09-10T14:52:29.717280+00:00'
+  round_id: rnd-7881293f6b67
+  verified_at: '2026-09-10T14:53:09.008928+00:00'
+  verified_title:
+  - 'Economic Model Predictive Control for Microgrid Optimization: A Review'
+  decided_at: '2026-09-10T14:53:12.972577+00:00'
+rounds:
+- round_id: rnd-7881293f6b67
+  query: prob02 逐日计划 + 紧急购电：不平衡/偏差惩罚电价与 5 倍紧急购电结算、微网供电可靠性与失负荷/备用、多日与滚动时域储能调度及跨日 SOC
+    衔接、日前完全信息 vs 预报误差的信息结构、时间型电价下的逐日经济调度
+  status: completed
+  started_at: '2026-09-10T14:52:28.114022+00:00'
+  added_ids:
+  - ref-vanderveen-2016-balancing-market-design
+  - ref-herre-2020-imbalance-settlement
+  - ref-botterud-2011-wind-lmp-deviation
+  - ref-joos-2018-integration-costs
+  - ref-silva-2022-multistage-bidding
+  - ref-poplavskaya-2020-balancing-design
+  - ref-wang-2011-spinning-reserve-microgrid
+  - ref-xie-2019-storage-reliability
+  - ref-hirsch-2018-microgrids-review
+  - ref-cardoso-2013-reliability-slp
+  - ref-silvente-2015-rolling-horizon
+  - ref-deng-2020-interhours-rolling
+  - ref-holjevac-2017-receding-horizon
+  - ref-finnah-2021-da-intraday-adp
+  - ref-bao-2014-multiscale-mg
+  - ref-hu-2020-mpc-overview
+  - ref-chazarra-2017-perfect-information
+  - ref-liang-2014-stochastic-survey
+  - ref-shuai-2018-adp-dispatch
+  - ref-toubeau-2020-da-real-time
+  - ref-zhang-2018-robust-multimg
+  - ref-wang-2022-multiagent-time-price
+  - ref-hu-2023-empc-review
+  finished_at: '2026-09-10T14:53:13.212517+00:00'
+  dry_reason: all_candidates_decided
+dry_reason: all_candidates_decided

@@ -1,0 +1,180 @@
+{
+  "closed_form": [
+    "(I1) Σq_dis = η_ch·η_dis·Σc − η_dis·(E_T − E_0)",
+    "(I2) Σb = N + Σs + (1 − η_ch·η_dis)·Σc + η_dis·(E_T − E_0) − Σq_em"
+  ],
+  "per_model": {
+    "M1": {
+      "I1_residual": 0.0,
+      "I2_residual": 0.0,
+      "I1_delivery_residual": 0.0,
+      "I2_delivery_residual": 0.0,
+      "balance_residual_max": 2.2737367544323206e-13,
+      "soc_residual_max": 1.0231815394945443e-12,
+      "continuity_residual_max": 0.0,
+      "storage_final_kwh": 1200.0
+    },
+    "M7": {
+      "I1_residual": 0.0,
+      "I2_residual": 0.0,
+      "I1_delivery_residual": 9.313225746154785e-10,
+      "I2_delivery_residual": 0.0,
+      "balance_residual_max": 2.2737367544323206e-13,
+      "soc_residual_max": 3.637978807091713e-12,
+      "continuity_residual_max": 0.0,
+      "storage_final_kwh": 1200.0
+    },
+    "M5": {
+      "I1_residual": 0.0,
+      "I2_residual": 3.725290298461914e-09,
+      "I1_delivery_residual": 0.0,
+      "I2_delivery_residual": 0.0,
+      "balance_residual_max": 2.2737367544323206e-13,
+      "soc_residual_max": 1.0231815394945443e-12,
+      "continuity_residual_max": 0.0,
+      "storage_final_kwh": 6000.0
+    },
+    "M6_B10326": {
+      "I1_residual": 0.0,
+      "I2_residual": 0.0,
+      "I1_delivery_residual": 0.0,
+      "I2_delivery_residual": 0.0,
+      "balance_residual_max": 2.2737367544323206e-13,
+      "soc_residual_max": 1.0231815394945443e-12,
+      "continuity_residual_max": 0.0,
+      "storage_final_kwh": 1200.0
+    },
+    "M6_B8459": {
+      "I1_residual": 0.0,
+      "I2_residual": 3.725290298461914e-09,
+      "I1_delivery_residual": 0.0,
+      "I2_delivery_residual": 0.0,
+      "balance_residual_max": 2.2737367544323206e-13,
+      "soc_residual_max": 1.0231815394945443e-12,
+      "continuity_residual_max": 0.0,
+      "storage_final_kwh": 1200.0
+    },
+    "M6_B6000": {
+      "I1_residual": -9.313225746154785e-10,
+      "I2_residual": 0.0,
+      "I1_delivery_residual": 9.313225746154785e-10,
+      "I2_delivery_residual": 0.0,
+      "balance_residual_max": 2.2737367544323206e-13,
+      "soc_residual_max": 1.0231815394945443e-12,
+      "continuity_residual_max": 0.0,
+      "storage_final_kwh": 1200.0
+    },
+    "M6_B5000": {
+      "I1_residual": 9.313225746154785e-10,
+      "I2_residual": 0.0,
+      "I1_delivery_residual": 0.0,
+      "I2_delivery_residual": -3.725290298461914e-09,
+      "balance_residual_max": 2.2737367544323206e-13,
+      "soc_residual_max": 1.0231815394945443e-12,
+      "continuity_residual_max": 0.0,
+      "storage_final_kwh": 1200.0
+    },
+    "M6p_B4375": {
+      "I1_residual": 0.0,
+      "I2_residual": 3.725290298461914e-09,
+      "I1_delivery_residual": -9.313225746154785e-10,
+      "I2_delivery_residual": 0.0,
+      "balance_residual_max": 2.2737367544323206e-13,
+      "soc_residual_max": 1.0231815394945443e-12,
+      "continuity_residual_max": 0.0,
+      "storage_final_kwh": 1200.0
+    },
+    "M6p_B4218_75": {
+      "I1_residual": 0.0,
+      "I2_residual": 3.725290298461914e-09,
+      "I1_delivery_residual": -9.313225746154785e-10,
+      "I2_delivery_residual": 0.0,
+      "balance_residual_max": 2.2737367544323206e-13,
+      "soc_residual_max": 1.0231815394945443e-12,
+      "continuity_residual_max": 0.0,
+      "storage_final_kwh": 1200.0
+    },
+    "M6p_B4000": {
+      "I1_residual": 0.0,
+      "I2_residual": 0.0,
+      "I1_delivery_residual": -4.656612873077393e-10,
+      "I2_delivery_residual": 0.0,
+      "balance_residual_max": 2.2737367544323206e-13,
+      "soc_residual_max": 1.0231815394945443e-12,
+      "continuity_residual_max": 0.0,
+      "storage_final_kwh": 1200.0
+    },
+    "M6p_B3750": {
+      "I1_residual": 0.0,
+      "I2_residual": 0.0,
+      "I1_delivery_residual": -4.656612873077393e-10,
+      "I2_delivery_residual": -3.725290298461914e-09,
+      "balance_residual_max": 2.2737367544323206e-13,
+      "soc_residual_max": 1.0231815394945443e-12,
+      "continuity_residual_max": 0.0,
+      "storage_final_kwh": 1200.0
+    },
+    "M6p_B3000": {
+      "I1_residual": -4.656612873077393e-10,
+      "I2_residual": 3.725290298461914e-09,
+      "I1_delivery_residual": -4.656612873077393e-10,
+      "I2_delivery_residual": -3.725290298461914e-09,
+      "balance_residual_max": 2.2737367544323206e-13,
+      "soc_residual_max": 1.0231815394945443e-12,
+      "continuity_residual_max": 0.0,
+      "storage_final_kwh": 1200.0
+    },
+    "M6p_B2000": {
+      "I1_residual": 0.0,
+      "I2_residual": 5.587935447692871e-09,
+      "I1_delivery_residual": -4.656612873077393e-10,
+      "I2_delivery_residual": 0.0,
+      "balance_residual_max": 2.2737367544323206e-13,
+      "soc_residual_max": 1.0231815394945443e-12,
+      "continuity_residual_max": 0.0,
+      "storage_final_kwh": 1200.0
+    },
+    "M2a": {
+      "I1_residual": 0.0,
+      "I2_residual": 0.0,
+      "I1_delivery_residual": 0.0,
+      "I2_delivery_residual": 0.0,
+      "balance_residual_max": 2.2737367544323206e-13,
+      "soc_residual_max": 1.0231815394945443e-12,
+      "continuity_residual_max": 0.0,
+      "storage_final_kwh": 1200.0
+    },
+    "M2b": {
+      "I1_residual": 0.0,
+      "I2_residual": 0.0,
+      "I1_delivery_residual": 0.0,
+      "I2_delivery_residual": 0.0,
+      "balance_residual_max": 2.2737367544323206e-13,
+      "soc_residual_max": 1.0231815394945443e-12,
+      "continuity_residual_max": 0.0,
+      "storage_final_kwh": 1200.0
+    },
+    "M4": {
+      "I1_residual": -9.313225746154785e-10,
+      "I2_residual": -3.725290298461914e-09,
+      "I1_delivery_residual": -9.313225746154785e-10,
+      "I2_delivery_residual": 0.0,
+      "balance_residual_max": 2.2737367544323206e-13,
+      "soc_residual_max": 1.0231815394945443e-12,
+      "continuity_residual_max": 0.0,
+      "storage_final_kwh": 6000.0
+    },
+    "M3_full": {
+      "I1_residual": 0.0,
+      "I2_residual": 0.0,
+      "I1_delivery_residual": 9.313225746154785e-10,
+      "I2_delivery_residual": 0.0,
+      "balance_residual_max": 2.2737367544323206e-13,
+      "soc_residual_max": 5.5138116294983774e-12,
+      "continuity_residual_max": 0.0,
+      "storage_final_kwh": 1200.0
+    }
+  },
+  "q_em_zero_proof": "Σq_em = 0 是可证性结论而非实测断言：设 p>0、α_em=5>1 且 b 无上界，则任一含 q_em,τ=δ>0 的可行解可令 b'_τ=b_τ+δ、q'_em,τ=0，可行域不变而目标严格下降 (α_em−1)pδ>0，故最优解满足 q_em≡0（定理 T1；依赖完全信息 + 无购电上限 + α_em>1 三前提）。",
+  "note": "平衡/SOC 残差由解数组独立回代得到（不依赖求解器矩阵），故对 M7 的消元实现同样有效。"
+}

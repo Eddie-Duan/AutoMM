@@ -1,0 +1,13 @@
+version: formulation_v001
+status: accepted
+created_at: '2026-09-11T00:11:27.684452+00:00'
+parent_version: null
+content_hash: 880eb3c9eea4742a4dac4f391026fd1ae5f237df436c4b825808757d643cc7d4
+decision_reason: formulation_v001 已闭合：目标/变量/约束/边界条件齐备（连续变量 315,360、等式 105,120、非零元
+  473,039），团队裁定 B0/B1/B2/B3/B4/B5 与勘误 R1–R4、上游 E1 全部落地；独立只读探针 28/28 PASS、checks_failed=[]，M1
+  全期 13,758,182.573724 元 / 交付期 12,233,050.830708 元与 assumption 阶段独立探针逐位一致，(I1)/(I2)
+  含终端项残差 0.000e+00；定理 T1（q_em≡0）、定理 T2（非绑定阈值≠激活阈值）、引理 L1（M3 无损性）、命题 P1（逐日决策与全期求解等价）给出解析依据，M2a
+  重解与 M1 相对差 1.354e-16；M4/M5/M6 的退化条件与量级已写明，§5 比较标准在计算前固定，§4 给出 6 条候选路线与 M1–M7 定义。C6（β∈(4218.75,4375.00]
+  kW）与 D2–D8 已显式登记为待团队确认项并给出推荐口径，按 agents/mathematical-formulator.md 第 4 条不停下等待人工确认，不构成阻塞。
+decided_at: '2026-09-11T00:27:31.657325+00:00'
+assumption_version: assumption_v001

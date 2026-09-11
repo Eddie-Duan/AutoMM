@@ -1,0 +1,268 @@
+{
+  "criteria": {
+    "C2": {
+      "passed": true,
+      "rel_diff_full": 0.0,
+      "rel_diff_delivery": 0.0,
+      "note": "B3-C2 只适用于 M2a（D2 裁定）"
+    },
+    "C2b_M7_independent_implementation": {
+      "passed": true,
+      "rel_diff": 0.0,
+      "balance_residual_max": 2.2737367544323206e-13,
+      "note": "B2 第 1 条：M7 为 M1 的独立第二实现（消去 s + highs-ds + presolve=False）"
+    },
+    "C3": {
+      "passed": true,
+      "rel_diff": 3.165518736444326e-07,
+      "mip_gap": 3.165517716793772e-07,
+      "proven_optimal": false,
+      "day_oracles": [
+        {
+          "date": "2025-03-20",
+          "day_index": 78,
+          "e0_kwh": 8550.0,
+          "milp_binaries": 144,
+          "lp_objective_yuan": 36532.723614309216,
+          "lp_simultaneous_periods": 0,
+          "milp_seconds": 0.054156199999852106,
+          "milp_status": 0,
+          "milp_message": "Optimization terminated successfully. (HiGHS Status 7: Optimal)",
+          "milp_mip_gap": 0.0,
+          "milp_node_count": 1,
+          "milp_objective_yuan": 36532.7236143092,
+          "milp_simultaneous_periods": 0,
+          "objective_rel_diff": 3.98325495301071e-16,
+          "balance_residual_max": 2.2737367544323206e-13
+        },
+        {
+          "date": "2025-06-21",
+          "day_index": 171,
+          "e0_kwh": 2361.059962962963,
+          "milp_binaries": 144,
+          "lp_objective_yuan": 17051.589479258335,
+          "lp_simultaneous_periods": 0,
+          "milp_seconds": 0.10595170000306098,
+          "milp_status": 0,
+          "milp_message": "Optimization terminated successfully. (HiGHS Status 7: Optimal)",
+          "milp_mip_gap": 0.0,
+          "milp_node_count": 1,
+          "milp_objective_yuan": 17051.589479258335,
+          "milp_simultaneous_periods": 0,
+          "objective_rel_diff": 0.0,
+          "balance_residual_max": 1.1368683772161603e-13
+        },
+        {
+          "date": "2025-09-23",
+          "day_index": 265,
+          "e0_kwh": 8550.0,
+          "milp_binaries": 144,
+          "lp_objective_yuan": 37932.86421811419,
+          "lp_simultaneous_periods": 0,
+          "milp_seconds": 0.041705899995577056,
+          "milp_status": 0,
+          "milp_message": "Optimization terminated successfully. (HiGHS Status 7: Optimal)",
+          "milp_mip_gap": 0.0,
+          "milp_node_count": 1,
+          "milp_objective_yuan": 37932.8642181142,
+          "milp_simultaneous_periods": 0,
+          "objective_rel_diff": 1.9181144804533155e-16,
+          "balance_residual_max": 1.1368683772161603e-13
+        },
+        {
+          "date": "2025-12-21",
+          "day_index": 354,
+          "e0_kwh": 8550.0,
+          "milp_binaries": 144,
+          "lp_objective_yuan": 56298.33151137563,
+          "lp_simultaneous_periods": 0,
+          "milp_seconds": 0.04077309999411227,
+          "milp_status": 0,
+          "milp_message": "Optimization terminated successfully. (HiGHS Status 7: Optimal)",
+          "milp_mip_gap": 0.0,
+          "milp_node_count": 1,
+          "milp_objective_yuan": 56298.33151137564,
+          "milp_simultaneous_periods": 0,
+          "objective_rel_diff": 1.2923931169635545e-16,
+          "balance_residual_max": 1.1368683772161603e-13
+        }
+      ]
+    },
+    "C4": {
+      "M4": {
+        "passed": true,
+        "delta_full_yuan": 17135.02254159935,
+        "delta_delivery_yuan": 17803.272541597486,
+        "probe_full_yuan": 17135.02,
+        "probe_delivery_yuan": 17803.27,
+        "rel_full": 1.4832777246544733e-07,
+        "rel_delivery": 1.4276014940545977e-07
+      },
+      "M5": {
+        "passed": true,
+        "delta_full_yuan": 2217.083333333954,
+        "delta_delivery_yuan": 2217.083333335817,
+        "probe_full_yuan": 2217.083334,
+        "probe_delivery_yuan": 2217.083334,
+        "rel_full": 3.0041527860578816e-10,
+        "rel_delivery": 2.995751454810353e-10
+      }
+    },
+    "C5": {
+      "passed": true,
+      "monotone_q_em_non_increasing_in_cap": true,
+      "monotone_cost_non_increasing_in_cap": true,
+      "bracket_kw": [
+        4218.75,
+        4375.0
+      ],
+      "declared_bracket_kw": [
+        4218.75,
+        4375.0
+      ],
+      "grid": [
+        {
+          "label": "M6p_B2000",
+          "b_cap_kw": 2000.0,
+          "q_em_kwh": 7845369.33645626,
+          "objective_yuan": 32769611.572155192,
+          "delivery_cost_yuan": 28885267.125366565,
+          "days_with_emergency": 365
+        },
+        {
+          "label": "M6p_B3000",
+          "b_cap_kw": 3000.0,
+          "q_em_kwh": 2528614.2119511245,
+          "objective_yuan": 20623372.12771322,
+          "delivery_cost_yuan": 18126085.32621139,
+          "days_with_emergency": 300
+        },
+        {
+          "label": "M6p_B3750",
+          "b_cap_kw": 3750.0,
+          "q_em_kwh": 320077.33731740713,
+          "objective_yuan": 15738644.82867243,
+          "delivery_cost_yuan": 13914390.25198158,
+          "days_with_emergency": 93
+        },
+        {
+          "label": "M6p_B4000",
+          "b_cap_kw": 4000.0,
+          "q_em_kwh": 86017.94817966668,
+          "objective_yuan": 15032312.166458447,
+          "delivery_cost_yuan": 13317409.323703798,
+          "days_with_emergency": 44
+        },
+        {
+          "label": "M6p_B4218_75",
+          "b_cap_kw": 4218.75,
+          "q_em_kwh": 8707.398542499961,
+          "objective_yuan": 14647566.902931172,
+          "delivery_cost_yuan": 12980107.248088446,
+          "days_with_emergency": 14
+        },
+        {
+          "label": "M6p_B4375",
+          "b_cap_kw": 4375.0,
+          "q_em_kwh": 0.0,
+          "objective_yuan": 14452283.680246636,
+          "delivery_cost_yuan": 12811100.163885282,
+          "days_with_emergency": 0
+        },
+        {
+          "label": "M6_B5000",
+          "b_cap_kw": 5000.0,
+          "q_em_kwh": 0.0,
+          "objective_yuan": 13973747.56488431,
+          "delivery_cost_yuan": 12406037.601335162,
+          "days_with_emergency": 0
+        },
+        {
+          "label": "M6_B6000",
+          "b_cap_kw": 6000.0,
+          "q_em_kwh": 0.0,
+          "objective_yuan": 13796297.077895664,
+          "delivery_cost_yuan": 12263064.891108874,
+          "days_with_emergency": 0
+        },
+        {
+          "label": "M6_B8459",
+          "b_cap_kw": 8459.0,
+          "q_em_kwh": 0.0,
+          "objective_yuan": 13759939.976488728,
+          "delivery_cost_yuan": 12234470.480743602,
+          "days_with_emergency": 0
+        },
+        {
+          "label": "M6_B10326",
+          "b_cap_kw": 10326.0,
+          "q_em_kwh": 0.0,
+          "objective_yuan": 13758182.573724441,
+          "delivery_cost_yuan": 12233050.830708284,
+          "days_with_emergency": 0
+        }
+      ]
+    },
+    "C6": {
+      "passed": true,
+      "checks_failed": {
+        "M1": [],
+        "M7": [],
+        "M5": [],
+        "M6_B10326": [],
+        "M6_B8459": [],
+        "M6_B6000": [],
+        "M6_B5000": [],
+        "M6p_B4375": [],
+        "M6p_B4218_75": [],
+        "M6p_B4000": [],
+        "M6p_B3750": [],
+        "M6p_B3000": [],
+        "M6p_B2000": [],
+        "M2a": [],
+        "M2b": [],
+        "M4": [],
+        "M3_full": []
+      },
+      "failed_models": []
+    },
+    "C7": {
+      "passed": true,
+      "by_model": {
+        "M1": true,
+        "M7": true,
+        "M5": true,
+        "M6_B10326": true,
+        "M6_B8459": true,
+        "M6_B6000": true,
+        "M6_B5000": true,
+        "M6p_B4375": true,
+        "M6p_B4218_75": true,
+        "M6p_B4000": true,
+        "M6p_B3750": true,
+        "M6p_B3000": true,
+        "M6p_B2000": true,
+        "M2a": true,
+        "M2b": true,
+        "M4": true,
+        "M3_full": true
+      },
+      "note": "无可判模型时记 not_applicable"
+    },
+    "K2_cross_day_carrying_value": {
+      "delta_full_yuan": 26894.740017058328,
+      "delta_delivery_yuan": 27522.07335039042,
+      "note": "D2：M2b 与 M1 的差额为跨日携带价值的结构性发现，不得判为实现错误"
+    }
+  },
+  "criteria_failed": [],
+  "baseline_check_passed": true,
+  "days": 365,
+  "note": "判据阈值在 ablations/plan.md 冻结；本文件只在结果出来后填数值，不修改阈值。",
+  "figures": [
+    "ablation_model_cost.png",
+    "ablation_b_cap_curve.png",
+    "ablation_structure_waterfall.png",
+    "ablation_complexity_tradeoff.png"
+  ]
+}

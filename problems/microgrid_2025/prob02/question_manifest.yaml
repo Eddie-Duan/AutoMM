@@ -1,44 +1,63 @@
 problem_id: microgrid_2025
 question_id: prob02
-status: not_started
-stage: problem_understanding
+status: locally_completed
+stage: locally_completed
 dependencies: []
-active_assumption_version: 0
-active_formulation_version: 0
-accepted_formulation_version: 0
+active_assumption_version: 1
+active_formulation_version: 1
+accepted_formulation_version: 1
 consecutive_rejections: 0
 literature_refreshes: 0
 literature_refresh_required: false
 conclusion:
-  conclusion_id: ''
-  version: 0
-  content_hash: ''
+  conclusion_id: prob02-concl-001
+  version: 1
+  content_hash: 4840a4d4f57e6d404c77a0d72a2c0c045cbbfeac231248e688daf7d656c4b798
+  updated_at: '2026-09-11T04:05:50.760646+00:00'
 sanity:
-  level_1_4: pending
+  level_1_4: PASS_WITH_WARNING
   level_5: pending
-  level_6: not_applicable
+  level_6: PASS_WITH_WARNING
 optional_stages:
   robustness:
-    decision: pending
-    reason: ''
+    decision: completed
+    reason: prob02 robustness 阶段已按 config/workflow.yaml 的 mandatory_stages 完成，未跳过。产物：预注册
+      plan.md（K1–K6 / S1–S6 在看结果前冻结）+ 隔离 task f7a4e670b91ad469d771（succeeded、supervised、CPU、rc=0、seed=20260910、149
+      次全年 LP、wall_clock 907.269 s）+ report.md + task_submission.md 执行回执。基线复现闸门通过（8
+      项总量相对差 0.0，baseline_check.passed=true）。预注册判据 criteria_failed=[S1,S5]、stability_grade=脆弱（需在论文中缩小适用范围声明），判据未事后修改。S1
+      失败归因：solver_highs-ipm 在退化最优面上返回同值非互补解（AS07 不禁止同时充放电，引理 L1 仅为存在性）。S5 失败为 η±10%
+      的日尺度双向敏感性（eta_both_0.99@2025-06-21 下降 19.1%/19.6%，η=0.81 在部分日期上升最多 13.0%），年度/交付期总量仍在带内。结构性发现：β∈(4218.75,4375.00]
+      kW 与团队勘误 R5 一致；s 的物理界不改变最优值；售电 0.50 元/kWh 出现非物理套利；α_em=0.5 可激活紧急购电。robustness
+      图件未登记为交付图表。无人工阻塞需求。【登记方式说明】本条由团队用 harness 官方 CLI 补登记：原动作的 agent 响应因多带未登记字段`reason_note`
+      而未通过 schema 校验（failure_class=harness_invariant），该字段已剔除，其余内容与 agent 原意一致。
   ablation:
-    decision: pending
-    reason: ''
+    decision: completed
+    reason: ablation 为 config/workflow.yaml 的 mandatory_stages，未跳过：隔离 task 5b87ce0a8d9e4706c82c（succeeded、attempt
+      1、supervised、CPU HiGHS、rc=0）产出 ablations/results/prob02_v001_ablation_run001
+      齐备（baseline_check/solver_status/comparison/identities/raw_cases/summary/run_manifest
+      + 17 个 M*/case.json，17/17 case 可行、checks_failed=[]）；团队裁定 B0–B5 与 D1–D8 逐项落实（M1–M7
+      + M6′ 全部实跑），预注册判据 C1–C7 全通过且 criteria_failed=[]，C1 基线闸门通过；(I1)/(I2) 残差 ≤5.59e-09、平衡残差
+      ≤2.27e-13、跨日连续性 0。产物 report.md（模型×指标对比表 + C1–C7 + K1–K6 + 结论三问 + robustness
+      边界与冲突登记 + 技术债 + 追踪链）、ablations/figures/（4 张逐字节副本 + README.md）与 task_submission.md
+      执行回执全部落盘；输入 md5 与 accepted 产物哈希未变、run002 与 ablation_run001 均未被覆盖。结论字段 question_manifest.conclusion
+      已由本动作补齐。
 artifacts:
-  problem_understanding: false
-  literature: false
-  assumptions: false
-  formulation: false
-  implementation: false
-  computation: false
-  visualization: false
-  sanity_check: false
-  robustness: false
-  ablation: false
+  problem_understanding: true
+  literature: true
+  assumptions: true
+  formulation: true
+  implementation: true
+  computation: true
+  visualization: true
+  sanity_check: true
+  robustness: true
+  ablation: true
   cross_question_review: false
 notification:
-  sent: false
-  attempts: 0
+  sent: true
+  attempts: 2
+  status: sent
+  sent_at: '2026-09-11T04:08:24.721075+00:00'
 stale:
   value: false
   caused_by: []
@@ -53,3 +72,87 @@ stale_history:
   caused_by:
   - question_id: prob01
     conclusion_hash: 6fb260491cb70450c0ea71608b59271f51d99a002737d0b3ed46a1bb1b8888d6
+accepted_assumption_version: 1
+sanity_history:
+- at: '2026-09-11T00:46:51.863311+00:00'
+  level: level_1_4
+  status: PASS_WITH_WARNING
+  reason: prob02 computation 验收（act-d60b088f9a894242）：对象 task d5e2384e3128dd2a0649
+    / run001（succeeded、supervised、CPU HiGHS、exit 0）。121/121 项独立只读断言全通过、checks_failed=[]。L1
+    产物 5/5 齐备、输入与模板 md5 未变、代码 sha256 与 manifest 逐位一致、run001 唯一且未覆盖、manifest task_id
+    回显一致；L2 独立回代 (R1) 残差 4.547e-13、(R2) 残差 1.819e-12、E∈[1200,10800]（E_0=6000、E_T=1200）、max
+    c=833.333333、max q_dis=750.000000、两侧功率≤5000 kW、同充放=0、跨日连续性 0、(I1)/(I2) 全期与交付期切片均
+    0、Σq_em=0；L3 目标 min Σ(p·b+5p·q_em) 不带 Δt（全期 13,758,182.573724、交付期 12,233,050.830708、1
+    月 1,525,131.743016）、矩阵 315,360/105,120/473,039/0 与 formulation §3.9 一致、表 1 六时段双标签与表
+    2 六块/端点及 result2.xlsx 逐单元格（48,096 格 ≤1e-9）回溯一致；L4 费用落在解析界 [7,525,691.13,18,298,592.37]、与
+    formulation §8 独立探针逐位一致、充电均价<放电均价、关键假设文献门禁 passed=true。技术债见 warnings，无硬门禁失败。
+  failure_type: null
+- at: '2026-09-11T00:53:53.674646+00:00'
+  level: level_1_4
+  status: NEEDS_REVISION
+  reason: prob02 sanity_check 阶段正式复核（act-ca831716e72246eb）：对象 task d5e2384e3128dd2a0649
+    / run001（succeeded、supervised、CPU HiGHS、rc=0）。156 项独立只读断言 154 通过、2 失败。L1 PASS（产物齐备、输入/模板
+    md5 未变、代码 sha256 与 manifest 一致、harness 追踪链 b8f88661…/ebd08796…/4343d799…、run001
+    唯一未覆盖）；L2 PASS（(R1) 4.547e-13、(R2) 1.819e-12、E∈[1200,10800]、E_0=6000/E_T=1200、max
+    c=833.333333、max q_dis=750.000000、两侧功率≤5000 kW、同充放=0、跨日连续性 0、Σq_em=0、Σs=990,168.090312、(I1)/(I2)
+    全期与交付期切片均 0）；L3 模型/量纲 PASS（目标不带 Δt，独立复算全期 13,758,182.573724/交付期 12,233,050.830708/1
+    月 1,525,131.743016 与 formulation §8 逐位一致，矩阵 105120×315360、nnz 473039、表 1/2/3 与
+    result2.xlsx 48,096 格 ≤1e-9 一致）；L4 PASS_WITH_WARNING（费用落入独立重算解析界 [7,525,691.131,18,298,592.366]、套利方向合理、关键假设文献门禁
+    passed=true）。**硬失败 1 类（交付格式）**：result2.xlsx 的 `充放电量!A15` 残留模板日期 2025-12-31、`!E16`
+    残留模板时刻 '24:00'，违反 accepted AS12 + 团队勘误 R3（时刻/储电量只在每日前两行写、日期只写块首行）；根因是 prob02_io.fill_result2_workbook/_clear_rows
+    用 worksheet.cell(row,column,value=None) 表达清空，而 openpyxl 仅在 value is not None 时赋值（静默
+    no-op），模板 row14=⁝/row15=日期/row16 时刻 在第 3 天映射行位未被清除；implementation.md §6.5 与上一动作只抽查
+    k=0/1，故未暴露。该缺陷不影响任何数值，但交付答案文件出现伪日期与多余时刻，须修复并重出。判 NEEDS_REVISION 并路由回 implementation（failure_type=code_or_runtime）。技术债见
+    warnings，无人工阻塞。
+  failure_type: code_or_runtime
+- at: '2026-09-11T02:27:24.434104+00:00'
+  level: level_1_4
+  status: PASS_WITH_WARNING
+  reason: prob02 computation 验收（act-7fe7441469fb43fd）：对象 task dc8afc3deb5477641b99
+    / run002（succeeded、attempt 1、supervised、CPU HiGHS、rc=0、probe_mode=false、days=365/periods=52560、model=M1）。159
+    项独立只读断言全部通过、checks_failed=[]。L1 PASS（五件产物齐备、输入/模板 md5 未变、code/*.py sha256 与 manifest
+    逐位一致、harness code_hash=a37eda25…/source_config_hash=f781f7f6…/input_hash=4343d799…
+    独立重算一致、run001 四件产物 sha256 未被覆盖、run002 的 solution/solver_status/tables 与 run001
+    逐字节相同）；L2 PASS（(R1)=4.547e-13、(R2)=1.819e-12、E∈[1200,10800]、E_0=6000/E_T=1200、max
+    c=833.333333、max q_dis=750.000000、两侧功率≤5000 kW、同充放=0、跨日连续性=0、Σq_em=0、Σs=990,168.090312、(I1)/(I2)
+    全期与交付期切片=0）；L3 PASS（目标 min Σ(p·b+5p·q_em) 不带 Δt：全期 13,758,182.573724/交付期 12,233,050.830708/1
+    月 1,525,131.743016；矩阵 105120×315360、nnz 473039、0 整数；表 1/2/3 与 result2.xlsx 48,096
+    格 ≤1e-9 一致；result2.xlsx 逐单元格偏差 run002=0、run001 负对照=2、全簿 diff 仅 2 格清空、format_residuals=[]，上一轮
+    A15/E16 模板残留缺陷已闭合）；L4 PASS_WITH_WARNING（费用落入独立重算解析界 [7,525,691.131,18,298,592.366]、10^7
+    元量级、充放均价 0.520371/1.154986、定理 T1 前提成立、日初取 96 个水平、关键假设文献门禁 passed=true）。技术债见 warnings，无硬门禁失败。
+  failure_type: null
+- at: '2026-09-11T02:33:11.085136+00:00'
+  level: level_1_4
+  status: PASS_WITH_WARNING
+  reason: prob02 sanity_check 阶段正式复核（act-847e8cb12a844527）：对象 task dc8afc3deb5477641b99
+    / run002（succeeded、attempt 1、supervised、CPU HiGHS、rc=0、probe_mode=false、days=365/periods=52560、model=M1）。57
+    项独立只读断言全部通过、checks_failed=[]。L1 PASS（五件产物齐备、输入/模板 md5 未变、code/*.py sha256 与 manifest
+    逐位一致、harness code_hash=a37eda25…/source_config_hash=f781f7f6…/input_hash=4343d799…/config_hash=ebd08796…
+    独立重算一致且 task_id 复算一致、run001 五件 sha256 未被覆盖、run002 的 solution/solver_status/tables
+    与 run001 逐字节相同）；L2 PASS（(R1)=4.547e-13、(R2)=1.819e-12、E∈[1200,10800]、E_0=6000/E_T=1200、max
+    c=833.333333、max q_dis=750.000000、两侧功率≤5000 kW、同充放=0、跨日连续=0、日初 96 个水平、Σq_em=0、Σs=990,168.090312、(I1)/(I2)
+    全期与交付期切片=0）；L3 PASS（目标 min Σ(p·b+5p·q_em) 不带 Δt：全期 13,758,182.573724/交付期 12,233,050.830708/1
+    月 1,525,131.743016；矩阵 315,360/105,120/315,360/473,039/0 整数；表 1 四日期六时段与表 2 六块/端点回溯序列
+    ≤1e-6；表 3 全零且带格式示例说明；result2.xlsx 48,096 格 ≤1e-6、2,004 行充放电与 334 行紧急购电逐格偏差 0、format_residuals=[]，上一轮
+    A15/E16 模板残留缺陷已闭合）；L4 PASS_WITH_WARNING（费用落入独立重算解析界 [7,525,691.131,18,298,592.366]、10^7
+    元量级、充放均价 0.520371/1.154986、定理 T1 前提成立、终端自由披露、关键假设文献门禁 passed=true）。L5/L6 not_applicable（prob03/04
+    未 locally_completed；robustness 仍 pending）。技术债见 warnings，无硬门禁失败。
+  failure_type: null
+- at: '2026-09-11T03:35:23.472118+00:00'
+  level: level_6
+  status: PASS_WITH_WARNING
+  reason: prob02 Level 6 独立复核（act-8f35ac7d5f354489）：对象 robustness/results/prob02_v001_robust_run001（task
+    f7a4e670b91ad469d771，succeeded/attempt1/supervised/CPU/rc=0/probe_mode=false/seed=20260910，149
+    次全年 LP）。45 项独立只读断言全通过（checks_failed=0、verdict=PASS），scripts/run_sanity_check.py
+    自动 L1/L2-finite 亦 failures=[]。基线复现闸门通过（8 项总量相对差 0.0；4 个指定日期 ≤2e-11；表 1 六时段 ≤3.33e-7
+    kWh 舍入差），独立重算 run002 总量/逐日/端点一致 ≤1e-9。预注册判据独立复算与登记一致：S1 FAIL（核心族 135/136=0.992647、参数族
+    35/36=0.972222，唯一失败 highs-ipm 的 complementarity_sum=4.41358e8、同充放 1136，目标值与基线逐位相同，剔除该项后可行率均
+    1.0）、S2 PASS（0.140782）、S3 PASS（0.9565%/0.2249%）、S4 PASS（136/136）、S5 FAIL（19.0998%/19.6225%，唯一失败
+    eta_both_0.99@2025-06-21；全 365 天 η=0.81 不利方向费用最多 +12.9744%、21 天 >+10%）、S6 PASS（0.0）；criteria_failed=[S1,S5]、stability_grade=脆弱（需缩小适用范围）。结构情景独立复现
+    β∈(4218.75,4375.00] kW（10,326 kW 为非绑定阈值）、s_bound 最优值不变、s_sell 松界非物理套利、α_em=0.5
+    可激活；追踪链独立重算 code_hash=1e98c310…/source_config_hash=25dd6585…/input_hash=4343d799…
+    与 task.json 逐位一致，accepted 代码/run002 产物 sha256 与附件 md5 全部未变、输出目录隔离。新增 L6-D1：report
+    §8.4 把 α_em=0.5 的 Σq_em 标为『= 全年净负荷』有误（实为基线 Σb=22,657,938.157435 kWh，净负荷为 20,272,812.138617
+    kWh，目标 0.5 倍），仅文档标注、不影响数值。无硬门禁失败（无 NaN/Inf、约束/单位/追踪链通过、原始数据未改），判 PASS_WITH_WARNING
+    并建议推进 ablation；S1/S5 的 FAIL 与归因必须原样进入论文，不得改写为稳定或不可行。
+  failure_type: null

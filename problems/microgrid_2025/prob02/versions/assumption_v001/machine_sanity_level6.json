@@ -1,0 +1,151 @@
+{
+  "schema": "automm.sanity.machine",
+  "level": "level_6",
+  "problem_id": "microgrid_2025",
+  "question_id": "prob02",
+  "assumption_version": "assumption_v001",
+  "formulation_version": "formulation_v001",
+  "checked_at": "2026-09-11T03:33:19+00:00",
+  "action_id": "act-8f35ac7d5f354489",
+  "object": {
+    "stage": "robustness",
+    "task_id": "f7a4e670b91ad469d771",
+    "attempt": 1,
+    "task_status": "succeeded",
+    "worker_mode": "supervised",
+    "returncode": 0,
+    "probe_mode": false,
+    "output_directory": "problems/microgrid_2025/prob02/versions/assumption_v001/robustness/results/prob02_v001_robust_run001",
+    "reference_task_id": "dc8afc3deb5477641b99",
+    "reference_directory": "problems/microgrid_2025/prob02/versions/assumption_v001/results/prob02_v001_f001_run002",
+    "cases_total": 149,
+    "cases_infeasible": 0,
+    "seed": 20260910,
+    "device": "cpu",
+    "gpu_required": false,
+    "wall_clock_seconds": 907.269,
+    "pre_registered_plan": "problems/microgrid_2025/prob02/versions/assumption_v001/robustness/plan.md",
+    "report": "problems/microgrid_2025/prob02/versions/assumption_v001/robustness/report.md"
+  },
+  "overall": "PASS_WITH_WARNING",
+  "stability_grade": "脆弱（需缩小适用范围）",
+  "criteria": {
+    "S1_core_feasible_and_hard_checks": {
+      "value": 0.992647,
+      "threshold": 0.95,
+      "passed": false,
+      "detail": "core 135/136；参数族 35/36=0.972222 < 0.99；唯一失败样本 solver_highs-ipm（complementarity_sum=4.41358e8，同充放 1136 时段）；剔除 complementarity_sum（AS07 不禁止同充放、引理 L1 仅为存在性）后 core/param 均为 1.0"
+    },
+    "S2_oat_max_abs_relative_change": {
+      "value": 0.140782,
+      "threshold": 0.25,
+      "passed": true,
+      "detail": "eta@0.72；方向 dC/deta≤0、dC/dP_max≤0、|弹性(E_init)|≤1.5 全部成立"
+    },
+    "S3_noise_half_width_ratio": {
+      "value": 0.009565,
+      "threshold": 0.2,
+      "passed": true,
+      "detail": "100 个噪声样本 2.5–97.5 分位半宽/C*；均值偏移 0.002249 ≤ 0.10"
+    },
+    "S4_arbitrage_direction": {
+      "value": 1.0,
+      "threshold": 1.0,
+      "passed": true,
+      "detail": "核心族 136/136 满足 C_opt < C_nostorage（同一扰动数据）"
+    },
+    "S5_delivery_table_stability": {
+      "value": {"worst_purchase": 0.190998, "worst_cost": 0.196225, "worst_slot_ratio": 0.009912},
+      "threshold": {"purchase_or_cost": 0.1, "slot_ratio": 0.15},
+      "passed": false,
+      "detail": "20 个 ±10% 参数情景 × 4 个指定日期；唯一失败 eta_both_0.99@2025-06-21（购电量/费用下降 19.10%/19.62%，实现按绝对值口径）；eta=0.81 不利方向全 365 天费用最多 +12.97%（21 天 >+10%、1 天购电量 >+10%）"
+    },
+    "S6_solver_consistency": {
+      "value": 0.0,
+      "threshold": 1e-06,
+      "passed": true,
+      "detail": "highs / highs-ds / highs-ipm / 关闭 presolve 目标值两两相对差全为 0.0"
+    }
+  },
+  "criteria_failed": ["S1", "S5"],
+  "baseline_gate_passed": true,
+  "baseline_gate": {
+    "eight_totals_relative_diff": 0.0,
+    "spec_dates_max_purchase_relative_diff": 1.9931145472283224e-11,
+    "spec_dates_max_cost_relative_diff": 1.9931145472283224e-11,
+    "max_slot_abs_diff_kwh": 3.33e-07,
+    "note": "slot 差 3.33e-7 来自参考 tables.json 的 6 位小数舍入；run002 参考产物 sha256 与 accepted 基线逐位未变，故整批有效"
+  },
+  "independent_verification": {
+    "method": "runtime/actions/act-8f35ac7d5f354489/evidence/probe_l6_review.py（只读、不重解 LP、不导入 robustness 代码）",
+    "output": "runtime/actions/act-8f35ac7d5f354489/evidence/probe_l6_review_out.json",
+    "stdout": "runtime/actions/act-8f35ac7d5f354489/evidence/probe_l6_review_stdout.txt",
+    "checks_total": 45,
+    "checks_failed": 0,
+    "verdict": "PASS",
+    "independent_recomputation": {
+      "criteria_failed": ["S1", "S5"],
+      "stability_grade": "脆弱（需缩小适用范围）",
+      "b_cap_bracket_kw": [4218.75, 4375.0],
+      "zero_activation_caps_kw": [10326.0, 8459.0, 6000.0, 5000.0, 4375.0],
+      "alpha_lt1_objective_yuan": 6879091.286862,
+      "eta_0_99_daily_max_purchase_up": 0.071747,
+      "eta_0_99_days_purchase_up_gt10": 0,
+      "eta_0_81_daily_max_cost_up": 0.129744,
+      "eta_0_81_days_cost_up_gt10": 21
+    }
+  },
+  "automated_scope": {
+    "method": "scripts/run_sanity_check.py（--question-dir 指向本动作 evidence/auto_scope 的数值副本，未覆盖版本目录）",
+    "automated_status": "PASS_WITH_WARNING",
+    "failures": 0,
+    "numeric_files_finite": 6
+  },
+  "hard_gates": {
+    "key_assumption_citation": "passed=true（沿用 L1–L4 结论；本阶段未新增关键假设，未改动任何假设/公式文件）",
+    "physical_and_economic_common_sense": "passed（费用量级 10^7 元、套利方向 136/136 不反转、η/P_max/E 界方向与机理一致、149/149 可行、无 NaN/Inf）",
+    "cross_question_consistency": "not_applicable（L5 触发条件为所有小问 locally completed；prob03/prob04 未进入计算）"
+  },
+  "traceability": {
+    "harness_code_hash": "1e98c31054dcbbcd6a2398269fdfa9203a984424db5817af7e627ff23e0ef51e",
+    "source_config_hash": "25dd65854200a9322482d7a446799b27f202f89150425a2147facb7209c05355",
+    "input_hash": "4343d799b5830093d7a61d566219e1d2592f5bc39c8b7a9297286fa9e02d9434",
+    "recomputed_identical": true,
+    "accepted_code_sha256_unchanged": true,
+    "run002_artifact_sha256_unchanged": true,
+    "input_md5_unchanged": {"附件1.xlsx": "dbe06f92517431228efcc26e3e796ef9", "附件2.xlsx": "bb3e493f804678de571575116eca1ae6"},
+    "output_directory_isolated": true,
+    "note": "harness code_hash 由本动作按 scripts/automm/common.py::hash_path 独立重实现后重算，与 task.json 逐位一致"
+  },
+  "routing": {
+    "failure_type": null,
+    "return_to_stage": null,
+    "blocking_reasons": [],
+    "recommended_next_stage": "ablation"
+  },
+  "warnings": [
+    "D-R1（判据口径偏离，继承）：S5 的 plan.md 写「相对偏差 ≤10%」，实现取绝对值，导致有利方向（−19.1%）也判失败；按有符号读法 4 个指定日期最大升幅 +6.18%/+8.23%，S5 会通过。判据未事后修改，两种读法均披露；论文引用日尺度量须注明实现口径与双向敏感性。",
+    "D-R2（分级规则偏离，继承）：plan.md 的分级为「方向反转或 S1/S4 违反 ⇒ 脆弱」，实现为「失败条数 ≥2 ⇒ 脆弱」；本批 2 条失败，两种规则同判脆弱。",
+    "D-R3（S1 归因，继承）：complementarity_sum 属返回解清洁度而非可行性；AS07 不禁止同充放、引理 L1 仅为存在性。剔除该项后 core/param 可行率均为 1.0，失败样本目标值与交付费用与基线逐位相同。论文必须同时呈现「S1 FAIL」与「同值最优解」两件事，不得改写为模型脆弱或不可行。",
+    "D-R4（结构族混入解析界检查，继承）：b_cap/alpha_lt1 的 analytic_upper/lower_bound、q_em_zero_total「失败检查」是前提失效而非数值失败，引用 raw_samples 的 checks_failed_union 时须区分。",
+    "D-R5（tornado 取值错误，继承）：sensitivity.json.tornado_20pct.e_max.high_relative_change=-0.004967 是匹配 bug（误取 e_min 效应）；e_max=10800 即基线应为 0.0。图 robust_tornado.png 的 e_max 高分支蓝条错误，论文定量引用须以 sensitivity.json.oat.e_max 为准。",
+    "D-R6/D-R7（字段误导，继承）：summary.json.structural.b_cap.monotone_q_em_non_increasing=false 系比较方向写反（数据严格单调）；threshold_bracket 的字段名会把 β 误读为 10326/2000。正确夹逼为 β ∈ (4218.75, 4375.00] kW。",
+    "D-R8（逐日量来源）：raw_samples.jsonl 不含逐日序列，逐日量只在 trajectories/*.json；本动作已按该来源独立复算 §5.2 的逐日声明并全部吻合。",
+    "D-R9（登记欠账）：robustness task f7a4e670b91ad469d771 已 succeeded 但 consumed=false（robustness 阶段的 run_agent 动作不带 task_id，Runner 只消费 computation 阶段终态 task），与 prob01 同类，可在 cross_question_review/归档时统一闭合。",
+    "L6-D1（本动作新增，文档标注错误）：report.md §8.4 把 α_em=0.50 情景的 Σq_em=22,657,938.157435 kWh 标注为「= 全年净负荷」，但全年净负荷为 20,272,812.138617 kWh；该值实际等于**基线 Σb**（同一物理计划整体改记为紧急购电，Σq_em=Σb=净负荷+Σc−Σq_dis+Σs），且该情景目标 6,879,091.286862 元恰为基线的 0.5 倍。影响仅限叙述：论文不得称其为「净负荷」，并应说明 α<1 的「机制激活」是把全部购电量重标为紧急购电的重标定效应，而非新的物理调度。数值结论不受影响。",
+    "结构性边界（继承，不作交付数值）：s_sell 松界情景 Σs=5,845,778.71 kWh > 物理盈余 3,120,221.00 kWh 属非物理套利，不得作为售电收入；D5-B 物理界下 Σs=2,795,527.33 kWh 回到盈余以内，且收紧 s 的界不改变最优值（Σs=990,168.090312 kWh 不变）。α_em=0.5 与 b_cap 低上限情景只作机制边界登记。",
+    "LP 最优面非唯一（继承）：E 上下界两端活跃、c/q_dis 顶到上界、IPM 返回同值非互补解。L6 验收以约束残差 + (I1)/(I2) + 目标值 + 表 1/表 2/表 3 + result2.xlsx 为准，不比对逐点解唯一性，也不得把情景间调度轨迹差异当作不稳定证据。",
+    "结转 L1–L4 技术债：prob02 文献池 23 条未逐篇读正文（19 abstract_oa + 4 metadata）；D10「5000 kW 作用侧」为 team_decision 无文献支撑、α_em=5 为题面硬参数、q_em≡0 为模型内推论，均不得包装为文献支持；C3/E3（prob01 AS08「必然被激活」措辞）待 cross_question_review 回写；R5（β 表述）与 R1（表 2 端点语义区分 prob01/prob02）须在论文落地；A6/A7/A8/A9 属 prob03/04；question_manifest.conclusion 三字段仍为空。",
+    "本报告为 sanity_check 阶段 L6 正式结论，不替代 L5（全题跨小问一致性，触发条件为所有小问 locally completed）。"
+  ],
+  "evidence": [
+    "runtime/actions/act-8f35ac7d5f354489/evidence/probe_l6_review.py",
+    "runtime/actions/act-8f35ac7d5f354489/evidence/probe_l6_review_out.json",
+    "runtime/actions/act-8f35ac7d5f354489/evidence/probe_l6_review_stdout.txt",
+    "runtime/actions/act-8f35ac7d5f354489/evidence/automated_sanity_stdout.txt",
+    "runtime/actions/act-8f35ac7d5f354489/evidence/auto_scope/machine_sanity_finite.json",
+    "problems/microgrid_2025/prob02/versions/assumption_v001/robustness/plan.md",
+    "problems/microgrid_2025/prob02/versions/assumption_v001/robustness/report.md",
+    "problems/microgrid_2025/prob02/versions/assumption_v001/robustness/results/prob02_v001_robust_run001/summary.json"
+  ]
+}
