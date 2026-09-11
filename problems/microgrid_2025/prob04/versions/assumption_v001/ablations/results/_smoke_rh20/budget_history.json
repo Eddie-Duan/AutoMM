@@ -1,0 +1,324 @@
+{
+  "records": [
+    {
+      "label": "rh_4-2_H1_plan_day0",
+      "seconds": 0.044747
+    },
+    {
+      "label": "rh_4-2_H1_plan_day1",
+      "seconds": 0.030463
+    },
+    {
+      "label": "rh_4-2_H1_plan_day2",
+      "seconds": 0.030896
+    },
+    {
+      "label": "rh_4-2_H1_plan_day3",
+      "seconds": 0.027476
+    },
+    {
+      "label": "rh_4-2_H1_plan_day4",
+      "seconds": 0.024627
+    },
+    {
+      "label": "rh_4-2_H1_plan_day5",
+      "seconds": 0.023571
+    },
+    {
+      "label": "rh_4-2_H1_plan_day6",
+      "seconds": 0.023048
+    },
+    {
+      "label": "rh_4-2_H1_plan_day7",
+      "seconds": 0.021043
+    },
+    {
+      "label": "rh_4-2_H1_plan_day8",
+      "seconds": 0.020154
+    },
+    {
+      "label": "rh_4-2_H1_plan_day9",
+      "seconds": 0.018415
+    },
+    {
+      "label": "rh_4-2_H1_plan_day10",
+      "seconds": 0.017984
+    },
+    {
+      "label": "rh_4-2_H1_plan_day11",
+      "seconds": 0.016239
+    },
+    {
+      "label": "rh_4-2_H1_plan_day12",
+      "seconds": 0.014838
+    },
+    {
+      "label": "rh_4-2_H1_plan_day13",
+      "seconds": 0.013538
+    },
+    {
+      "label": "rh_4-2_H1_plan_day14",
+      "seconds": 0.012337
+    },
+    {
+      "label": "rh_4-2_H1_plan_day15",
+      "seconds": 0.011059
+    },
+    {
+      "label": "rh_4-2_H1_plan_day16",
+      "seconds": 0.010116
+    },
+    {
+      "label": "rh_4-2_H1_plan_day17",
+      "seconds": 0.008891
+    },
+    {
+      "label": "rh_4-2_H1_plan_day18",
+      "seconds": 0.007758
+    },
+    {
+      "label": "rh_4-2_H1_plan_day19",
+      "seconds": 0.006318
+    },
+    {
+      "label": "rh_4-2_H3_plan_day0",
+      "seconds": 0.043853
+    },
+    {
+      "label": "rh_4-2_H3_plan_day1",
+      "seconds": 0.030957
+    },
+    {
+      "label": "rh_4-2_H3_plan_day2",
+      "seconds": 0.028517
+    },
+    {
+      "label": "rh_4-2_H3_plan_day3",
+      "seconds": 0.026792
+    },
+    {
+      "label": "rh_4-2_H3_plan_day4",
+      "seconds": 0.024367
+    },
+    {
+      "label": "rh_4-2_H3_plan_day5",
+      "seconds": 0.023791
+    },
+    {
+      "label": "rh_4-2_H3_plan_day6",
+      "seconds": 0.022712
+    },
+    {
+      "label": "rh_4-2_H3_plan_day7",
+      "seconds": 0.021804
+    },
+    {
+      "label": "rh_4-2_H3_plan_day8",
+      "seconds": 0.019745
+    },
+    {
+      "label": "rh_4-2_H3_plan_day9",
+      "seconds": 0.01892
+    },
+    {
+      "label": "rh_4-2_H3_plan_day10",
+      "seconds": 0.017998
+    },
+    {
+      "label": "rh_4-2_H3_plan_day11",
+      "seconds": 0.015883
+    },
+    {
+      "label": "rh_4-2_H3_plan_day12",
+      "seconds": 0.015496
+    },
+    {
+      "label": "rh_4-2_H3_plan_day13",
+      "seconds": 0.01328
+    },
+    {
+      "label": "rh_4-2_H3_plan_day14",
+      "seconds": 0.01258
+    },
+    {
+      "label": "rh_4-2_H3_plan_day15",
+      "seconds": 0.011811
+    },
+    {
+      "label": "rh_4-2_H3_plan_day16",
+      "seconds": 0.010452
+    },
+    {
+      "label": "rh_4-2_H3_plan_day17",
+      "seconds": 0.009443
+    },
+    {
+      "label": "rh_4-2_H3_plan_day18",
+      "seconds": 0.007723
+    },
+    {
+      "label": "rh_4-2_H3_plan_day19",
+      "seconds": 0.006404
+    },
+    {
+      "label": "rh_4-2_H7_plan_day0",
+      "seconds": 0.044122
+    },
+    {
+      "label": "rh_4-2_H7_plan_day1",
+      "seconds": 0.030262
+    },
+    {
+      "label": "rh_4-2_H7_plan_day2",
+      "seconds": 0.028115
+    },
+    {
+      "label": "rh_4-2_H7_plan_day3",
+      "seconds": 0.026902
+    },
+    {
+      "label": "rh_4-2_H7_plan_day4",
+      "seconds": 0.023842
+    },
+    {
+      "label": "rh_4-2_H7_plan_day5",
+      "seconds": 0.022828
+    },
+    {
+      "label": "rh_4-2_H7_plan_day6",
+      "seconds": 0.021382
+    },
+    {
+      "label": "rh_4-2_H7_plan_day7",
+      "seconds": 0.022781
+    },
+    {
+      "label": "rh_4-2_H7_plan_day8",
+      "seconds": 0.019174
+    },
+    {
+      "label": "rh_4-2_H7_plan_day9",
+      "seconds": 0.018519
+    },
+    {
+      "label": "rh_4-2_H7_plan_day10",
+      "seconds": 0.01801
+    },
+    {
+      "label": "rh_4-2_H7_plan_day11",
+      "seconds": 0.016277
+    },
+    {
+      "label": "rh_4-2_H7_plan_day12",
+      "seconds": 0.015539
+    },
+    {
+      "label": "rh_4-2_H7_plan_day13",
+      "seconds": 0.013592
+    },
+    {
+      "label": "rh_4-2_H7_plan_day14",
+      "seconds": 0.012221
+    },
+    {
+      "label": "rh_4-2_H7_plan_day15",
+      "seconds": 0.011027
+    },
+    {
+      "label": "rh_4-2_H7_plan_day16",
+      "seconds": 0.010285
+    },
+    {
+      "label": "rh_4-2_H7_plan_day17",
+      "seconds": 0.0096
+    },
+    {
+      "label": "rh_4-2_H7_plan_day18",
+      "seconds": 0.007632
+    },
+    {
+      "label": "rh_4-2_H7_plan_day19",
+      "seconds": 0.006725
+    },
+    {
+      "label": "rh_4-2_H14_plan_day0",
+      "seconds": 0.044529
+    },
+    {
+      "label": "rh_4-2_H14_plan_day1",
+      "seconds": 0.03043
+    },
+    {
+      "label": "rh_4-2_H14_plan_day2",
+      "seconds": 0.028974
+    },
+    {
+      "label": "rh_4-2_H14_plan_day3",
+      "seconds": 0.028077
+    },
+    {
+      "label": "rh_4-2_H14_plan_day4",
+      "seconds": 0.025144
+    },
+    {
+      "label": "rh_4-2_H14_plan_day5",
+      "seconds": 0.024674
+    },
+    {
+      "label": "rh_4-2_H14_plan_day6",
+      "seconds": 0.022017
+    },
+    {
+      "label": "rh_4-2_H14_plan_day7",
+      "seconds": 0.02136
+    },
+    {
+      "label": "rh_4-2_H14_plan_day8",
+      "seconds": 0.019479
+    },
+    {
+      "label": "rh_4-2_H14_plan_day9",
+      "seconds": 0.019332
+    },
+    {
+      "label": "rh_4-2_H14_plan_day10",
+      "seconds": 0.019281
+    },
+    {
+      "label": "rh_4-2_H14_plan_day11",
+      "seconds": 0.016396
+    },
+    {
+      "label": "rh_4-2_H14_plan_day12",
+      "seconds": 0.015068
+    },
+    {
+      "label": "rh_4-2_H14_plan_day13",
+      "seconds": 0.014297
+    },
+    {
+      "label": "rh_4-2_H14_plan_day14",
+      "seconds": 0.01354
+    },
+    {
+      "label": "rh_4-2_H14_plan_day15",
+      "seconds": 0.011108
+    },
+    {
+      "label": "rh_4-2_H14_plan_day16",
+      "seconds": 0.010271
+    },
+    {
+      "label": "rh_4-2_H14_plan_day17",
+      "seconds": 0.009005
+    },
+    {
+      "label": "rh_4-2_H14_plan_day18",
+      "seconds": 0.007931
+    },
+    {
+      "label": "rh_4-2_H14_plan_day19",
+      "seconds": 0.006803
+    }
+  ]
+}

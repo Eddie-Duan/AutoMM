@@ -782,10 +782,14 @@
      终态只能由原写入者在子进程真正退出后补写（本例 `15:15:47.8Z` 已完成自愈）。
 - **一般化结论（必须写入报告）**：**在 `supervised` 模式下，计算进行期间的任何 `RESUME`/`reconcile_tasks()` 都会把运行中任务误判为
   `failed(infrastructure_transient)`。** 本问 4-2 任务 `953eeb1e0b004171cad9` 只因当时未被对账而幸免（其记录同为 supervised 形态）。
-- **后果（已发生的浪费，须披露）**：4-2 于 `14:25:41.7Z` 成功后，`robustness-analyst` 于
-  `14:25:42 / 14:29:26 / 14:35:05 / 14:39:29 / 14:44:01` 被**连续唤醒 5 次无效动作**（每次仅 `append_ledger`、
-  无任何实证内容；`recovery.total_rounds=6, productive_rounds=0`），根因即 4-3 被误判失败、阶段无法收尾。
-  团队于本地 22:52 主动 `harness.py control PAUSE --source cli` 止住空转。
+- **后果（已发生的浪费，须披露）**：4-2 于 `14:25:41.7Z` 成功后，`robustness-analyst` 被**连续唤醒 5 次无效动作**，
+  每次仅 `append_ledger`、无任何实证内容（`recovery.total_rounds=6, productive_rounds=0`）。5 个动作的完整区间（UTC）：
+  `act-6e395f67061f4990` `14:25:42→14:29:25`、`act-458dccfaed454c5b` `14:29:26→14:35:05`、
+  `act-6141343749294f00` `14:35:05→14:39:29`、`act-47b6bc4fe0b44c88` `14:39:29→14:44:01`、
+  `act-0a5a93765e2141e7` `14:44:01→**14:52:26**`（第 5 次在暂停之后才提交完成）。
+  根因即 4-3 被误判失败、阶段无法收尾（4-2 已完成但 4-3 未收，阶段 `artifacts.robustness` 无法置真）。
+  团队于 **`14:51:31Z`（本地 22:51:31）** 主动 `harness.py control PAUSE --source cli` 止住空转；
+  暂停生效后 runner 仅执行 `poll_email`（`14:52:28`–`14:53:09+` 连续多条），**未再产生任何 agent 动作**（已复核）。
 - **纪律（强制）**：**凡有本地任务处于 `running`，禁止 `RESUME`/`reconcile_tasks()`**；解除暂停前必须先确认无运行中任务
   （或接受该任务被误判、并在其真实收尾后核对终态）。**本缺陷未修，禁止在计算期以 `RESUME` 试图"催进度"。**
 - **对账修复记录（未执行，留痕）**：团队预置了证据优先的对账脚本（`--execute` 只在"现状确为 `failed`"且 198/198 完成标记
@@ -796,7 +800,12 @@
 ### E-F7（证据纪律）：上述 5 条空转 `append_ledger` 条目不得作为证据引用
 
 - 涉及动作：`act-6e395f67061f4990` / `act-458dccfaed454c5b` / `act-6141343749294f00` / `act-47b6bc4fe0b44c88` / `act-0a5a93765e2141e7`
-  （本地 22:25–22:52 区间）。它们的 `hypothesis/setup/result/sanity/conclusion/next` **不含任何计算或验证内容**。
+  （UTC `14:25:42`–`14:52:26`，本地 `22:25`–`22:52`）。它们的 `hypothesis/setup/result/sanity/conclusion/next` **不含任何计算或验证内容**。
+- **读取纪律（防止跨日误读，强制）**：`runtime/agent_commands.jsonl`、`runtime/transactions.jsonl`、`runtime/events.jsonl`
+  均为**跨多日累积**文件；按时间过滤时**必须使用完整时间戳**（`at` 的日期 + 时间），
+  **不得**只比较 `HH:MM` 子串 —— 否则会把前一日记录误当成本次运行
+  （团队在排查本阶段时曾因此把 `2026-09-10T14:46:30` 的 prob02 动作误判为「暂停期间仍在重跑 prob02」，
+  复核后确认：**暂停期间没有任何其他小问被推进**，prob02 当时对应记录为 09-10 的历史条目）。
 - 论文、`sanity_check`、`cross_question_review` 与任何下游阶段：**不得引用**这 5 条作为"已做过的鲁棒性工作"或"结论"；
   它们的作用仅为**过程留痕**（并已在本勘误 `E-F6` 中给出成因）。
 

@@ -1,0 +1,13 @@
+{
+  "chain": "4-2",
+  "criteria": {
+    "C6": {
+      "spill_bound_D9A_vs_D9B_relative_difference": null,
+      "spill_bound_pass": null,
+      "threshold": 1e-06,
+      "kappa1_delta_yuan": null,
+      "tiebreak_literal_delta_yuan": null
+    }
+  },
+  "criteria_failed": []
+}

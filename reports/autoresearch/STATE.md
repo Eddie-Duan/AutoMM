@@ -4,19 +4,19 @@
 
 ## 基本状态
 
-- 更新时间：2026-09-11T14:53:09.429004+00:00
-- 控制状态：paused
+- 更新时间：2026-09-11T21:43:35.664147+00:00
+- 控制状态：running
 - 活动题目：microgrid_2025
-- 当前小问：prob04
-- 当前阶段：robustness
+- 当前小问：未设置
+- 当前阶段：completed
 
 ## 任务
 
-cancelled=3 | failed=5 | succeeded=14
+cancelled=3 | failed=6 | succeeded=19
 
 ## 最近动作
 
-act-349ae5622a894079: poll_email
+act-3bdf1970296942d2: retrying
 
 ## 警告
 
@@ -755,6 +755,80 @@ act-349ae5622a894079: poll_email
 - 若下一次唤醒时 4-3 的 worker 已消失而 run001 仍缺 summary.json，须按 plan.md §4.9 用新 attempt + 新 output_directory（..._4-3_run002）重跑，不得覆盖 run001，并登记新 task_id 与失败指纹。
 - robustness 图件按 plan.md §5 不登记为交付图表（不调用 record_figure_review）；本阶段不写任何交付值、不触碰 data/附件5/ 与 results/prob04_v001_f001_*。
 - 结转技术债（不在本阶段处理）：CF-1（D2-B 的跨日 MPC 与 R-2 的 S-RH 指派冲突，本阶段不跑并指向 ablation）、CF-3/AS23（静置损耗属建模口径变更，本阶段不增设、指向 formulation 下一版）、CF-9（C4-1/C4-2/C4-3/C4-6/C4-7/C4-10、D8、N1–N5、V1–V10 继续结转）、D10「5000 kW 作用侧」文献缺口（论文不得包装为文献支持）。
+- R4-C1（plan.md 内部冲突，必须显式记录）：§0 表与 §1.8 声明静置损耗（AS23）不适用/本阶段不做，而 §7 CF-3 写「本阶段采纳、只作结构情景」。实际执行=不做（两链 162/198 情景清单中无 self_discharge/AS23 情景）；本报告按 §0/§1.8 执行，CF-3 措辞与实际口径不一致，权威回写待 ablation 或 formulation 下一版。
+- R4-1（K7 反例，禁止为凑结论改判据）：K7 在 max 口径两链均不成立（价格类 10.0% < eta_both 13.35%/11.70%），mean 口径成立；论文必须按 T7-4 如实登记反例+机制+适用边界，不得修改判据、统计量或口径。
+- R4-2（K8 反例）：4-3 |ΔC|/C 不低于 4-2 的预期在价格/负载/预测器三族不成立，仅在光伏族成立；同号 10/10 成立。不得为凑单调性调整。
+- R4-3（κ_m 截断口径）：kappa_clip_events_total=196 全部来自 kappa_bounds_tight（196/1460 层），登记界与放宽界 0 次、收紧档费用差 0.0；禁止把 196 读作主口径发生截断。
+- R4-4（空/近空参数）：4-2 的 α_em 六档费用逐位相同（q_em≡0）、e_init 六档交付期费用逐位相同；论文不得把这两族当作有效敏感性来源。
+- R4-5（预测机制族非独立）：PF-DUAL 与 PF-HIST 在两链上 D_req 逐位相同（4-2 −0.2261%、4-3 −0.1711%），不得当作两个独立敏感性来源重复计数，也不得由 E-F5 精度表推出「某预测器更保守/更激进」；第二条独立预测轴只能由 ablation 的 PF-AR 提供（AS08）。
+- R4-6（E-F8 复核）：trajectories/ 为抽样保存——4-2=62 份/162 情景、4-3=70 份/198 情景；raw_samples.jsonl 为 162/198 行、figures 各 7 张；不得以轨迹份数 < 情景数判为产物缺失。
+- R4-7（文档计数不符）：RUN_LESSONS_v001.md §2b 记 4-2「70 条轨迹」，实测 4-2=62、4-3=70（疑为把 4-3 计数写入 4-2 行）；不影响数值与判定，仅登记。
+- R4-8（4-3 结构统计只作归因）：基线同充放 1456 时段、q_em&c 同时正 6003 时段、deviation_minus=493977.438284 kWh；按 AS07/AS16/CF-5 只作统计与机制归因，不判失败、不为凑 0 改 tie-break。
+- R4-9（结构不可行机制未完全定位）：4-3 在 ≤4500 kW 不可行（3500/4500 kW 报计划层、4000 kW 报调整层 day=0,hour=12），而 4-2 全域可行；本阶段只登记观测（buy_cap 上限作用于各层购电量块、q^em 不受该上限约束），具体绑定约束块未定位，留待 ablation 或 formulation 下一版。
+- R4-10（口径混用禁令）：①S3 用全期 |ΔC|/C_base、S4 用交付期 C_total 族统计量；②行内 delta_c_price_yuan 为全期量、delivery.delta_c_price_yuan 为交付期量（4-2=520790.839035、4-3=258485.465704 元）；③4-2 的「q_em 机制激活区间 (4500,5000] kW」与 S6「buy_cap 全域可行」是两件事；④龙卷表 spread_relative（全期归一、max−min）与单档 max/min（交付期归一）不得混引。以上均不得跨口径比较。
+- E-F6（Harness 缺陷，强制披露与纪律）：supervised 模式下计算期间的任何 RESUME/reconcile_tasks() 都会把运行中任务误判为 failed(infrastructure_transient)；4-3 task 5713b0a24eedeac9f000 曾于 14:09:29Z 被误写、真实 worker 存活至 15:15:47.8Z 并自愈 succeeded。有本地任务 running 时禁止 RESUME/reconcile；本动作未执行 reconcile/list/RESUME，未启停 worker。
+- E-F7（证据纪律）：act-6e395f67061f4990 / act-458dccfaed454c5b / act-6141343749294f00 / act-47b6bc4fe0b44c88 / act-0a5a93765e2141e7 五条空转 append_ledger 不得被 sanity_check/cross_question_review/论文引用为已做过的鲁棒性工作；跨日日志按时间过滤必须用完整时间戳。
+- RUN_LESSONS_v001.md P-1~P-4：34 天探针 baseline_check=false 属时域口径错配（非模型错误）；buy_cap 不可行属结论；探针 S4 越界为采样量不足（--samples 2），已由正式 --samples 25 消解或如实登记（4-3 的 noise_white_10）；P-4 的 pid 复用致 liveness 假阴性已由 E-F6 定为 Harness 缺陷并规避。
+- S4 适用边界（4-3，强制给出、禁止调参凑过）：σ≤5% 输入扰动下条件稳定；σ=10% 价格白噪声属超设计工况（族均值 +10.5919%），机制为 Σq^em 的 max(0,·) 凸性；对光伏侧误差（实际与预报）不稳健、对价格侧稳健；不得删除不利样本、不得事后放宽阈值。
+- 未做项（显式登记，指向 ablation/下一版 formulation）：静置损耗/自放电（AS23，改写状态转移属建模口径变更）与跨日 MPC（CF-1，与 R-2 的 S-RH 职责重叠）均未跑；S-VAR/S-RH/S-VAR-RH/C-ANCHOR-P03/A2-PRE/P2 桥接/M7·D2-B/C/PF-AR/D9-A/D9-B 未重跑。
+- 结转欠账（本阶段无权改写）：C4-1/C4-2/C4-3/C4-6/C4-7/C4-10、D8（shared/problem_understanding.md §7/§10 仍把 A8 记为待裁定；prob01/assumption_v003/version.yaml 的 AS08「必然被激活」措辞）；D10「5000 kW 作用侧」为 team_decision，四池文献无一条涉及，论文不得包装为文献支持；N1–N5/V1–V10（sanity/visualization 技术债）；A5/A9/A10/A11/A13/A14/A18 仍为推荐口径并保留决策点。
+- question_manifest.yaml 的 conclusion.conclusion_id/version/content_hash 仍为空，locally_completed 门禁会因此报错，须在 ablation 结束或 locally_completed 前补齐；本阶段未越界代写。
+- 文献证据边界：prob04 池 24 条未逐篇阅读正文（15 abstract_oa + 9 metadata），本报告与论文引用只支撑框架级/机制级主张；α_em=5、β_def/β_over=0.5/1.5、附件 4 价格结构与预报误差量级、D9-B 紧界、A18 填报口径、5000 kW 作用侧、4-2 的 q_em≡0 均不得包装为文献支持。
+- robustness 图件按 plan.md §5 不登记为交付图表（未调用 record_figure_review），只在报告中作敏感性证据引用；本阶段未写任何交付值、未触碰 data/附件5/ 与 results/prob04_v001_f001_*。
+- prob04 level_6: prob04 Level 6（robustness 完成后）独立复核，act-cb24258ea2be418a：两链分别验收——4-2 = robustness/results/prob04_v001_robust_4-2_run001（task 953eeb1e0b004171cad9，162/162 成功、stability_grade=稳定、failed_criteria=[]）；4-3 = ..._4-3_run001（task 5713b0a24eedeac9f000，195/198、3 个预注册不可行负对照、failed_criteria=['S4']、stability_grade=条件稳定（需给出适用边界））。自建只读探针 270/270 PASS、0 FAIL，另在逐字节副本上通用脚本 144 数值文件 0 NaN/0 Inf、failures=[]。L1 前置 PASS：产物齐备、task succeeded/rc=0/attempt=1/supervised、stderr 0 字节、code_sha256 与磁盘及 accepted 四模块逐位一致、输入 md5 未变、两链独立 output_directory 且 forecast_backtest.json 逐位相同。L2/S1-S7：两链 baseline_check passed=true、worst_relative_diff=0.0 且与 run002/solution.json 逐位相等（交付期 13,006,411.041148 / 15,289,050.714738）；S1 受判 139/170 可行率 100%、identity_failed=[]；S2 4-2 max|Σq_em|≤1e-9 且 days=0、4-3 Σq_em 落在 [0.25×,4×] 带内 out_of_band=[]；S3 有方向组 reversals=[]；S4 4-2 四族全达标、4-3 noise_white_10 族均值 +10.5919% > 5%（E-F9 已定档）；S5 三设置全可行且两口径均≤1%（全期 1.25189e-4/4.36256e-4、交付期 4.969e-6/6.10152e-4）；S6 buy_cap 分链实测（4-2 全域可行、4-3 分界 (4500,5000] kW）、terminal_e_6000 有数值；S7 预测器 7 项指标齐全。预注册合规：plan.md 早于结果、CF-10 冻结措辞在 criteria 中、纠偏非单向放宽（新增更严锚定正是判出 4-3 S4 FAIL 的项）、失败样本未删除、未为凑 PASS 改判据。T7-4 反例（K7 max 口径两链、K8 部分）已如实登记并给机制与适用边界。主口径未被替换（robustness 无 xlsx、交付工作簿 md5 未变、无 run003）。技术债 L6-W1（S5 全期/交付期口径混用标注）、L6-W2（S4 族间均值差归一化基准未逐字定义）、L6-W3（plan.md 对 AS23 措辞冲突）、L6-W4（trajectories 62/70 计数纪律）、L6-W5（4-3 task status.json 残留 E-F6 过期 message）、L6-W6（E-F7 空转条目未引用）已在同目录 sanity_report_level6.md 与 machine_sanity_l6.json 逐条登记，无硬门禁失败。ablation 仍 pending，不在本 L6 结论覆盖范围。
+- L6 判定：Level 6 = PASS_WITH_WARNING（failure_type=null、return_stage=null、blocking_reasons=[]）；4-2 稳定、4-3 条件稳定（需给出适用边界），主交付值不受影响。
+- L6-W1（口径标注不一致，S5，非失败）：summary.criteria.S5.detail.solver_max_relative 取全期目标口径（4-2=1.25189e-4、4-3=4.36256e-4），而 report.md §2.2/§4.5 对 4-3 的“链级最大相对差”取交付期口径（6.10152e-4）、对 4-2 又取全期（1.25189e-4）；两者均 ≤1%，S5 PASS 不变。论文/下游引用“求解器口径敏感性”时必须标明口径，不得跨口径比较（与 R4-10 ①/N2/E6 同类）。
+- L6-W2（预注册归一化基准未逐字定义，S4，非失败）：plan.md §3 S4 只写“同一 σ 档内族间均值差 ≤ 3%”，实现用 (max−min)/mean(该档各族均值)（robustness_prob04.py:1541）：4-2=0.4463%、4-3=0.5654%；若改为“除以基线”则为 0.4474%/0.5865%。两种口径均 ≤3%，判定不变；建议 formulation 下一版或 ablation 计划明确基准。
+- L6-W3（计划内部措辞冲突，承 R4-C1）：plan.md §0 表与 §1.8 声明静置损耗/AS23“不适用/本阶段不做”，而 §7 CF-3 写“本阶段采纳（只作结构情景）”；实际执行为不做（两链情景清单无 self_discharge/AS23 情景）。权威回写待 ablation 或 formulation 下一版。
+- L6-W4（计数纪律，承 E-F8/R4-7）：trajectories/ 为抽样保存（4-2=62、4-3=70），raw_samples.jsonl 每情景一条（162/198）；RUN_LESSONS_v001.md §2b 的“4-2 … 70 条”为笔误，不得据此判产物缺失。
+- L6-W5（Harness 缺陷痕迹，承 E-F6，强制披露）：4-3 task 5713b0a24eedeac9f000 的 status.json 仍残留过期 message=“worker PID 不存在且未写入终态”，而实际 status=succeeded/returncode=0/finished_at=2026-09-11T15:15:47.8Z（自愈写入为 patch 语义、未删旧键）。不判失败；纪律不变：有本地任务 running 时禁止 RESUME/reconcile_tasks()，本动作未执行二者。
+- L6-W6（E-F7 证据纪律）：act-6e395f67061f4990 / act-458dccfaed454c5b / act-6141343749294f00 / act-47b6bc4fe0b44c88 / act-0a5a93765e2141e7 五条空转 append_ledger 未被本报告引用为任何鲁棒性证据或结论。
+- 承接 N1–N5/V1–V10 技术债（含 κ_m ∈ [0.66233, 1.54939]、C^fc 备选读法 258,485.465704 vs 560,148.236164 元、q_em 措辞、c 上限字面值 833.3333、交付工作簿 md5 3df5cd3c…/7397029f…）继续结转，本动作不越界代写。
+- 承接 D1–D12 与 D8（上游文档欠账：shared/problem_understanding.md §7/§10 仍把 A8 记为待裁定；prob01/assumption_v003/version.yaml 的 AS08“必然被激活”措辞）；D10“5000 kW 作用侧”为 team_decision 且四池文献无一条涉及，论文不得包装为文献支持；权威回写待 cross_question_review。
+- 文献边界：prob04 池 24 条未逐篇阅读正文（15 abstract_oa + 9 metadata），本报告与 report.md 的引用只支撑框架级/机制级主张；alpha_em=5、β_def/β_over=0.5/1.5、附件 4 价格结构与预报误差量级、D9-B、填报口径、4-2 的 q_em≡0 均不得包装为文献支持。
+- question_manifest.yaml 的 conclusion.conclusion_id/version/content_hash 仍为空，locally_completed 门禁会报错，须在 ablation 结束或 locally_completed 前补齐；ablation 为 mandatory_stages，完成后才可 locally_completed。
+- run002 整批不作为对照值：其 4-3 链因 D-1/D-6 从未跑通 S-RH 与 S-VAR；4-2 链的数值本身有效，但对生产它的代码修订而言已过期（C3/C4 判定有误）。run001/run002 的目录与产物一律原样保留、不覆盖、不删除，仅作审计对照。
+- plan_v001 与 plan_v002 原文保留、一字未改；本轮 8 项修订全部登记在新增的 plan_v003.md §2，并逐条声明「不改判据、阈值、对照集合、公平性纪律」——C3/C4 属闸门实现纠错，不是判据放宽（C3 反而采用最严读法）。
+- 探针目录 _probe_run003_smoke42/_probe_run003_smoke43/_probe_run003_fix42/_probe_run003_fix43/_probe_run003_fix43b 均以 _ 前缀落在 ablations/results/ 下，不属于 plan_v001 §5 的交付布局；其中 _probe_run003_fix43 在 S-VAR(4-3) 处崩溃、_probe_run003_smoke43 被主动终止，二者仅作审计留痕，不得引用其任何数值；可作修复证据的只有 _probe_run003_fix42 与 _probe_run003_fix43b。
+- 4-3 探针的 C6 报 spill_bound_D9A_v9D9B_relative_difference=6.68e-3 > 1e-6（spill_bound_pass=false），即 D9-B 物理盈余界在 4-3 上确实切掉了可行收益；按 plan_v001 §2 的 C6 处置须在报告与论文中归因披露（D9-A 相对 BASE 的 D_req 差 −1.10%），不得因「预期为 0」而静默。正式值以 run003 全年口径为准。
+- 4-3 探针 C6 的 kappa1_delta_yuan=1.54e-8 元（κ_m ≡ 1 的费用贡献近零），与 robustness 的 CF-2 口径不同（后者按情景重算上限），两处数值不得互换引用（plan_v001 §3.9）。
+- 本轮把 case_counts 口径修正为 14（4-2）/9（4-3）；旧版 run001/run002 的 manifest 记 12/7，属漏计 S-VAR/S-VAR-RH 的旧口径，历史文件不改写，仅在 report.md 与新 manifest 中并存披露。
+- 4-2 的 S-VAR 在 60 天探针下只含 1 个代表日（2025-02-15），场景池极小，其 Δ 相对基线为 +22.0%，属窗口口径放大效应，不得作为 365 天批次的结论；正式结论以 run003 的 12 代表日为准。
+- 上游欠账继续结转、本动作不越界代写：shared/problem_understanding.md §7/§10 仍把 A8 记为「待裁定」；prob01/assumption_v003 的 AS08「必然被激活」措辞；D10「5000 kW 作用侧」为 team_decision 且四池文献无一条涉及，论文不得包装为文献支持；question_manifest.yaml 的 conclusion 三字段仍为空（locally_completed 门禁会报错，须在 ablation 收尾前补齐）。
+- 文献边界：prob04 池 24 条未逐篇阅读正文（15 abstract_oa + 9 metadata），本动作不引用任何文献主张；α_em=5、β_def/β_over=0.5/1.5、附件 4 价格结构与预测误差量级均不得包装为文献支持。
+- 本动作期间曾有 4-3 探针进程被主动终止（用于统一在最终代码上重跑）与一次崩溃（暴露 D-5b）；两者都不属 Harness invariant，未修改 runtime/workflow_state.json、未调用 reconcile/RESUME、未触碰 data/、accepted code/、results/prob04_v001_f001_* 与 results/robustness_*。
+- AB-D1（布局缺口）：plan_v001 §5 要求的顶层 summary.json、raw/、figures/ 未由 ablation_prob04.py 生成（任务只落盘 baseline_check/criteria/comparison/results/budget_history/forecast_backtest/solver_status/run_manifest.json 与逐 case summary.json）。本动作在阶段级补齐 ablations/summary.json 与 ablations/figures/，未写入两条链的 task 输出目录（保持产物只读）。
+- AB-D2（可追溯性）：S-RH 只落盘 E_{d,144} 的统计量，未落盘逐日序列 ⇒ H>1 的日边界结论无法从产物逐点复算（与 A-DR1 同类）；唯一可逐位复核的是 H=1 闸门（相对差与轨迹差 0.0）。
+- AB-D3（残差语义）：S-ABL-ETA-* 三 case 的 checks_failed=["state_transition_residual_max"] 是改变状态转移定义后的必然差值（同 robustness DR8），非数值失败；但 C8 按原义判不通过，记技术债，不判模型失败、不删除不利样本。
+- AB-D4（C6 判不通过，4-3）：S-ABL-SPILL 的 s 界相对差 7.578e-5 > 1e-6，spill_bound_pass=false；结论是 D9-B 在 4-3 上确实切掉可行收益（D9-A 相对 BASE 的 D_req 差 −1.10% 量级），K5 的「不改变最优目标值」只对 4-2 成立，按 plan_v001 §2 归因披露、未改阈值。
+- AB-D5（口径歧义传导）：κ_m ≡ 1 使 C^fc 口径的 D_req ΔC_price 由 258,485.47 元变为 573,883.11 元而 C^act 不变 ⇒ sanity N2/D2 的「C^fc 计划项价格基数」公式歧义传导进 ablation；引用 ΔC_price 必须声明基数，不得跨基数比较。
+- AB-D6（退化与误读风险）：S-VAR(4-3) 因预注册的自由追索使 u^±≡0，与 S-VAR(4-2) 逐位同解，其 −19.02% 不得表述为「对冲对 4-3 有 19% 收益」，也不得据此修改 plan_v001 §3.2.2 的第二阶段变量集合。
+- AB-D7（反例如实登记）：S-VAR-RH(4-2,H=3) 期望费用高于同窗点预测 +2.6959%（+11,004.04 元），按 plan_v001 §2 C5 登记反例 + 机制，只对 12 代表日窗口成立，禁止为凑叠加收益改判据或删样本。
+- AB-D8（数值噪声）：序列含 ±1e-8 kWh 级求解器容差噪声（4-2 的 Σq^em 实测 1.07e-10 kWh、E_min 出现 1199.9999999953）；4-2 的紧急购电应表述为「机制级恒零（days_with_q_em=0、periods_with_q_em=0，|Σq_em| ≤ 1e-9 容差级）」，不写「逐位 0」。
+- AB-D9（图件定位）：本阶段 4 张图为实验产物；按 plan_v001 §4 与 A4.2，本动作未调用 record_figure_review、未写入 figures.yaml，即不登记为交付图表；prob04 交付图仍为 visualization 阶段已复核通过的 11 张。
+- AB-D10（比较口径）：成本矩阵只含全年口径对照（4-2 12 个、4-3 8 个）；S-VAR/S-VAR-RH 为 12 代表日窗口口径，不可与全年费用同轴比较或相加；S-RH 的 H 单调性只对 4-2 作方向性期望。
+- AB-D11（文献边界）：prob04 池 24 条均未逐篇阅读正文（15 abstract_oa + 9 metadata），本报告不引用任何公式级/定量级文献主张；α_em=5、β_def/β_over=0.5/1.5、附件 4 价格结构与预测误差量级、D9-B 紧界、5000 kW 作用侧均不得包装为文献支持。
+- AB-D12（上游登记欠账，本动作不越界代写）：shared/problem_understanding.md §7/§10 仍把 A8 记为「待裁定」（团队已裁定 A8-(b)）；prob01/assumption_v003 的 AS08「必然被激活」措辞；D10「5000 kW 作用侧」为 team_decision 且四池文献无一条涉及。权威回写待 cross_question_review。
+- AB-D13（结论字段交接）：question_manifest.yaml 的 conclusion 三字段此前为空，会使 locally_completed 门禁报错并可能触发反复自锁；本动作在 ablation 收尾时以 prob04-concl-001 补齐（内容只覆盖 prob04，未代写其他小问结论）；若后续小问口径再变，该 content_hash 变化将令下游 stale。
+- run001/run002 与全部 _probe_*（含 _probe_run003_fix43 崩溃件、_probe_run003_smoke43 被主动终止件）继续只作审计留痕，不得引用其任何数值作为交付值或对照值；本报告全部正式数值来源为 run003 两个隔离 task（supervised、独立 output_directory、同 code_hash 84142798754a3d5c… 的修订版）。
+- prob04 的 L5（全题跨小问一致性）与 L6 后续触发条件仍按既有登记：L5 需所有小问 locally_completed（本动作推进 prob04 后仍需其余小问），本动作不宣称 L5/L6 结论、不替代其独立判定。
+- X-1 窗口口径：C_plan/C_adj/C_em 在 prob03/4-3 上存在全期（顶层 cost_*_yuan）与交付期（delivery.cost_*_yuan）两套值；论文与下游引用必须标注口径，禁止跨口径比较（R4-10/E6）。
+- X-2 ΔC_price 基数分歧（N2/AB-D5）：4-3 权威值 258,485.465704 元（(G-4) 读法，与落盘 belief.* 一致），备选读法为 560,148.236164/573,883.11 元；主交付值 C^act 不受影响；建议 formulation_v002 或团队勘误冻结基数，且引用必须声明基数。
+- X-3 prob01 AS08 措辞不一致（C4-7/E3）已回写，但 history 中 version.yaml 旧措辞「必然被激活」仅作审计轨迹保留；后续引用一律以回写后文本为准。
+- X-4 prob04 shared/problem_understanding.md 的 A8 旧登记（待裁定/前置阻塞）已回写为 A8-(b)，同时保留原文为审计注记；若后续 formulation 版本再变，须与 §11 同步。
+- X-5「5000 kW 作用侧」为团队 team_decision（口径丙），prob01–prob04 四个文献池无一条涉及；论文不得包装为文献支持（C4-6/D10）。
+- X-6 q_em 措辞：4-2 应写「机制级恒零（days_with_emergency=0、periods_with_emergency=0，|Σq_em|≤1e-9 容差级）」，不得写「逐位 0」（N3/AB-D8）。
+- X-7 4-3 同时充放电 1456 时段、q_em>0 且 c>0 6003 时段，而 prob01/02/03=0；按 AS07/AS16 只作结构统计与机制归因，不得判模型失败（R4-8/DR8）。
+- X-8 2025-02-01 0:00 储电量 prob02=7950.00 vs prob03=1200.00，因信息集不同不可互比（prob03 R13）。
+- X-9 购电上限阈值必须分问引用：prob02 β∈(4218.75,4375.00] kW、prob03 [4375.0,5000.0] kW、4-2 机制激活区间 (4500,5000] kW 与「buy_cap 全域可行」是两件事、4-3 分界 (4500,5000] kW；不得跨问互引或外推（R5/E9/R4-10/CF-7）。
+- X-10 预测器报告纪律（E-F5/R4-5）：PF-PERSIST 与 PF-DUAL 精度优劣方向相反，MAE/MAPE/P50 与 RMSE/P90/P99 必须成对给出、禁止只报单一指标；PF-DUAL/PF-HIST 决策等价，不得当两个独立敏感性来源重复计数。
+- X-11 文献证据边界（E4/D9/AB-D11）：全局 97 条引用虽全部 verified=true，但等级仅 abstract_oa(53)/metadata(44)；prob04 池 24 条未逐篇阅读正文。alpha_em=5、beta_def/beta_over、附件4价格结构与预测误差量级、D9-B、A18 填报口径、5000 kW 作用侧、4-2 的 q_em≡0 均不得包装为文献支持。
+- X-12 4-3 稳健性 S4 未过（noise_white_10 族均值 +10.5919% > 5%），稳定档为「条件稳定」；须给出适用边界（对光伏侧误差不稳健、对价格侧稳健），不得删除不利样本或事后放宽阈值（E-F9/T7-4）。4-2 为稳定、failed_criteria=[]。
+- X-13 静置损耗/自放电（AS23）措辞冲突：plan.md §0/§1.8 判不做，§7 CF-3 写采纳；实际执行为不做，权威回写指向 formulation_v002 或下一版 plan（L6-W3）。
+- X-14 登记/指纹类技术债以最新更正值为准：κ_m∈[0.66233,1.54939]（N1）、交付工作簿 md5 3df5cd3c…/7397029f…（N5）、q_em 措辞（N3）、c 上限字面值 833.3333 应写 5000·Δt（N4）、trajectories 抽样 62/70（E-F8/R4-7）、implementation 文档过期 code_hash（D3）、S-RH 日边界逐点不可复算（AB-D2）、S-ABL-ETA 残差语义（AB-D3）；历史文件不改写，仅并存披露。
+- 4-3 调整层 m=6/12 的层目标含前视尾巴（未提交段取点未落盘），事后只能给下界复核；论文引用逐层目标值须声明该局限（D4/V4/AB-D2）。
+- run001/run002 与全部 _probe_* 仅作审计留痕，不得引用其任何数值作为交付值或对照值；prob04 正式数值一律来自 4-2/4-3 的 run002 隔离 task（supervised、独立 output_directory）。
+- 本动作只读数据与 accepted 产物并做小型只读探针；未创建 task、未启动 worker、未写 results/、未修改 data/ 与 accepted 代码，未直接编辑 runtime/workflow_state.json。
 
 ## 阻塞项
 
@@ -762,4 +836,4 @@ act-349ae5622a894079: poll_email
 
 ## 下次唤醒
 
-2026-09-11T15:03:09.428990+00:00
+2026-09-11T21:53:35.664132+00:00

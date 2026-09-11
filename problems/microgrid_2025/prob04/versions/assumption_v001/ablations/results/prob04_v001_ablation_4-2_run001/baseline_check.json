@@ -1,0 +1,24 @@
+{
+  "BASE": {
+    "pass": true,
+    "relative_differences": {
+      "D_full_C_total": 1.0477145524602348e-14,
+      "D_req_C_total": 8.592586271515616e-16,
+      "D_req_sum_q_em": 1.0734557687186452e-10,
+      "D_full_sum_q_em": 1.2225986889546903e-10
+    },
+    "threshold": 1e-09,
+    "expected": {
+      "D_full_C_total": 14755884.322036,
+      "D_req_C_total": 13006411.041148,
+      "D_req_sum_q_em": 0.0,
+      "D_full_sum_q_em": 0.0
+    },
+    "observed": {
+      "D_full_C_total": 14755884.322035845,
+      "D_req_C_total": 13006411.04114801,
+      "D_req_sum_q_em": 1.0734557687186452e-10,
+      "D_full_sum_q_em": 1.2225986889546903e-10
+    }
+  }
+}

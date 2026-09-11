@@ -1,0 +1,17 @@
+{
+  "status": 0,
+  "feasible_incumbent": true,
+  "chain": "4-3",
+  "cases": 8,
+  "baseline_check": {
+    "BASE": false
+  },
+  "criteria_failed": [
+    "C2"
+  ],
+  "checks_failed": [],
+  "wall_seconds": 49.25206040000194,
+  "device": "cpu",
+  "gpu_required": false,
+  "seed": 20260911
+}

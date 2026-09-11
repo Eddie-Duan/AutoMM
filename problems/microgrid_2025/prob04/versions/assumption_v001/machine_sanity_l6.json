@@ -1,0 +1,228 @@
+{
+  "schema": "automm.machine_sanity.level6.v1",
+  "action_id": "act-cb24258ea2be418a",
+  "generated_at": "2026-09-11T15:48:39.140006+00:00",
+  "problem_id": "microgrid_2025",
+  "question_id": "prob04",
+  "stage": "sanity_check",
+  "level": "level_6",
+  "status": "PASS_WITH_WARNING",
+  "failure_type": null,
+  "return_stage": null,
+  "blocking_reasons": [],
+  "scope": "robustness 完成后的 Level 6 独立复核；ablation 仍 pending，不在本结论覆盖范围",
+  "object": {
+    "4-2": {
+      "task_id": "953eeb1e0b004171cad9",
+      "dir": "problems/microgrid_2025/prob04/versions/assumption_v001/robustness/results/prob04_v001_robust_4-2_run001",
+      "scenario_count": 162,
+      "solved_count": 162,
+      "failed_count": 0,
+      "stability_grade": "稳定",
+      "failed_criteria": [],
+      "baseline_check_passed": true,
+      "worst_relative_diff": 0.0,
+      "baseline_delivery_cost_total_yuan": 13006411.041148
+    },
+    "4-3": {
+      "task_id": "5713b0a24eedeac9f000",
+      "dir": "problems/microgrid_2025/prob04/versions/assumption_v001/robustness/results/prob04_v001_robust_4-3_run001",
+      "scenario_count": 198,
+      "solved_count": 195,
+      "failed_count": 3,
+      "stability_grade": "条件稳定（需给出适用边界）",
+      "failed_criteria": [
+        "S4"
+      ],
+      "baseline_check_passed": true,
+      "worst_relative_diff": 0.0,
+      "baseline_delivery_cost_total_yuan": 15289050.714738
+    }
+  },
+  "independent_recompute": {
+    "probe": "runtime/actions/act-cb24258ea2be418a/evidence/probe_l6_verify.py",
+    "probe_output": "runtime/actions/act-cb24258ea2be418a/evidence/probe_l6_verify_out.txt",
+    "checks_total": 270,
+    "checks_passed": 270,
+    "checks_failed": 0,
+    "automated_l1l2_finite": {
+      "numeric_files": 144,
+      "non_finite": 0,
+      "failures": [],
+      "automated_status": "PASS_WITH_WARNING",
+      "artifact": "runtime/actions/act-cb24258ea2be418a/evidence/machine_sanity_l6_autocheck.json"
+    },
+    "solver_max_relative": {
+      "4-2": {
+        "max_fullperiod_rel": 0.00012518926657896246,
+        "max_delivery_rel": 4.968746550918993e-06
+      },
+      "4-3": {
+        "max_fullperiod_rel": 0.0004362555425463228,
+        "max_delivery_rel": 0.00061015150338979
+      }
+    },
+    "k7": {
+      "4-2": {
+        "price_max": 0.1,
+        "eta_both_max": 0.133453,
+        "pred_max": 0.002261,
+        "price_noise_10": 0.019724,
+        "input_mean": 0.028677,
+        "param_mean": 0.015532
+      },
+      "4-3": {
+        "price_max": 0.1,
+        "eta_both_max": 0.117004,
+        "pred_max": 0.001711,
+        "price_noise_10": 0.017593,
+        "input_mean": 0.076289,
+        "param_mean": 0.01374
+      }
+    },
+    "noise_family_stats": {
+      "4-2": {
+        "noise_white_5": {
+          "n": 25,
+          "mean": 13018406.155519,
+          "std_sample": 8517.765992,
+          "ci_rel": 0.00025648,
+          "max_abs_z": 1.973056,
+          "mean_rel_vs_base": 0.000922246,
+          "recorded_std": 8517.765992,
+          "recorded_ci_rel": 0.00025648
+        },
+        "noise_white_10": {
+          "n": 25,
+          "mean": 13048181.446324,
+          "std_sample": 17121.160431,
+          "ci_rel": 0.000514362,
+          "max_abs_z": 2.01157,
+          "mean_rel_vs_base": 0.003211524,
+          "recorded_std": 17121.160431,
+          "recorded_ci_rel": 0.000514362
+        },
+        "noise_day_5": {
+          "n": 25,
+          "mean": 13022289.961922,
+          "std_sample": 82762.181344,
+          "ci_rel": 0.002491326,
+          "max_abs_z": 2.008182,
+          "mean_rel_vs_base": 0.001220853,
+          "recorded_std": 82762.181344,
+          "recorded_ci_rel": 0.002491326
+        },
+        "noise_joint_day_5": {
+          "n": 25,
+          "mean": 13076598.592175,
+          "std_sample": 92727.328603,
+          "ci_rel": 0.002779707,
+          "max_abs_z": 1.935442,
+          "mean_rel_vs_base": 0.005396381,
+          "recorded_std": 92727.328603,
+          "recorded_ci_rel": 0.002779707
+        }
+      },
+      "4-3": {
+        "noise_white_5": {
+          "n": 25,
+          "mean": 15861642.262613,
+          "std_sample": 17474.767071,
+          "ci_rel": 0.000431866,
+          "max_abs_z": 2.294082,
+          "mean_rel_vs_base": 0.037451086,
+          "recorded_std": 17474.767071,
+          "recorded_ci_rel": 0.000431866
+        },
+        "noise_white_10": {
+          "n": 25,
+          "mean": 16908452.788088,
+          "std_sample": 35102.191668,
+          "ci_rel": 0.000813798,
+          "max_abs_z": 2.21116,
+          "mean_rel_vs_base": 0.105919073,
+          "recorded_std": 35102.191668,
+          "recorded_ci_rel": 0.000813798
+        },
+        "noise_day_5": {
+          "n": 25,
+          "mean": 15850391.964695,
+          "std_sample": 132922.671128,
+          "ci_rel": 0.003287344,
+          "max_abs_z": 2.542888,
+          "mean_rel_vs_base": 0.036715245,
+          "recorded_std": 132922.671128,
+          "recorded_ci_rel": 0.003287344
+        },
+        "noise_joint_day_5": {
+          "n": 25,
+          "mean": 15906188.168431,
+          "std_sample": 141695.602054,
+          "ci_rel": 0.003492017,
+          "max_abs_z": 2.182449,
+          "mean_rel_vs_base": 0.040364668,
+          "recorded_std": 141695.602054,
+          "recorded_ci_rel": 0.003492017
+        },
+        "noise_pvfc_5": {
+          "n": 25,
+          "mean": 15816519.292038,
+          "std_sample": 12934.913521,
+          "ci_rel": 0.000320582,
+          "max_abs_z": 2.433202,
+          "mean_rel_vs_base": 0.03449976,
+          "recorded_std": 12934.913521,
+          "recorded_ci_rel": 0.000320582
+        }
+      }
+    }
+  },
+  "prereg_compliance": {
+    "plan_frozen_before_runs": true,
+    "cf10_frozen_wording_in_criteria": true,
+    "thresholds_not_relaxed_to_pass": true,
+    "failed_samples_retained": true,
+    "baseline_gate_bitwise": true,
+    "main_results_not_replaced": true
+  },
+  "disclosure_compliance": {
+    "E-F5_predictor_metrics_complete": true,
+    "E-F6_harness_defect_disclosed": true,
+    "E-F7_idle_ledger_not_cited": true,
+    "E-F8_trajectories_sampled": {
+      "4-2": 62,
+      "4-3": 70
+    },
+    "E-F9_stability_grade_and_boundary": true,
+    "T7-4_counterexamples_registered": [
+      "K7_max_kou_jing(both chains)",
+      "K8_not_lower(partial)"
+    ]
+  },
+  "technical_debts": {
+    "L6-W1": "S5 求解器最大相对差的全期/交付期两种口径混用标注（均≤1%，S5 PASS 不变）",
+    "L6-W2": "plan.md 未逐字定义 S4 族间均值差的归一化基准（两种口径均≤3%）",
+    "L6-W3": "plan.md 内部对静置损耗/AS23 的措辞冲突（实际执行为不做）",
+    "L6-W4": "trajectories 抽样 62/70，RUN_LESSONS §2b 计数笔误（承 R4-7/E-F8）",
+    "L6-W5": "4-3 task status.json 残留 E-F6 过期 message，实际终态 succeeded",
+    "L6-W6": "E-F7 的 5 条空转动作未被引用为证据"
+  },
+  "carried_over": [
+    "C4-1",
+    "C4-2",
+    "C4-3",
+    "C4-6",
+    "C4-7",
+    "C4-10",
+    "D1-D12",
+    "N1-N5",
+    "V1-V10"
+  ],
+  "conclusion": "4-2 稳定；4-3 条件稳定（适用边界：σ≤5% 输入扰动稳健，σ=10% 价格白噪声超设计工况，对光伏侧误差不稳健，低购电上限结构不可行）。主交付值不受影响。",
+  "routing": "sanity_check -> ablation（ablation 仍 pending）",
+  "artifacts": [
+    "sanity_report_level6.md",
+    "machine_sanity_l6.json",
+    "sanity_report.md#9"
+  ]
+}

@@ -1,0 +1,972 @@
+{
+  "records": [
+    {
+      "label": "rh_4-2_H1_plan_day0",
+      "seconds": 0.005596
+    },
+    {
+      "label": "rh_4-2_H1_plan_day1",
+      "seconds": 0.006373
+    },
+    {
+      "label": "rh_4-2_H1_plan_day2",
+      "seconds": 0.006999
+    },
+    {
+      "label": "rh_4-2_H1_plan_day3",
+      "seconds": 0.007709
+    },
+    {
+      "label": "rh_4-2_H1_plan_day4",
+      "seconds": 0.007472
+    },
+    {
+      "label": "rh_4-2_H1_plan_day5",
+      "seconds": 0.006546
+    },
+    {
+      "label": "rh_4-2_H1_plan_day6",
+      "seconds": 0.006653
+    },
+    {
+      "label": "rh_4-2_H1_plan_day7",
+      "seconds": 0.0068
+    },
+    {
+      "label": "rh_4-2_H1_plan_day8",
+      "seconds": 0.006753
+    },
+    {
+      "label": "rh_4-2_H1_plan_day9",
+      "seconds": 0.007238
+    },
+    {
+      "label": "rh_4-2_H1_plan_day10",
+      "seconds": 0.007072
+    },
+    {
+      "label": "rh_4-2_H1_plan_day11",
+      "seconds": 0.007293
+    },
+    {
+      "label": "rh_4-2_H1_plan_day12",
+      "seconds": 0.006974
+    },
+    {
+      "label": "rh_4-2_H1_plan_day13",
+      "seconds": 0.006433
+    },
+    {
+      "label": "rh_4-2_H1_plan_day14",
+      "seconds": 0.006618
+    },
+    {
+      "label": "rh_4-2_H1_plan_day15",
+      "seconds": 0.006777
+    },
+    {
+      "label": "rh_4-2_H1_plan_day16",
+      "seconds": 0.007485
+    },
+    {
+      "label": "rh_4-2_H1_plan_day17",
+      "seconds": 0.007258
+    },
+    {
+      "label": "rh_4-2_H1_plan_day18",
+      "seconds": 0.006779
+    },
+    {
+      "label": "rh_4-2_H1_plan_day19",
+      "seconds": 0.006578
+    },
+    {
+      "label": "rh_4-2_H1_plan_day20",
+      "seconds": 0.007252
+    },
+    {
+      "label": "rh_4-2_H1_plan_day21",
+      "seconds": 0.007051
+    },
+    {
+      "label": "rh_4-2_H1_plan_day22",
+      "seconds": 0.006975
+    },
+    {
+      "label": "rh_4-2_H1_plan_day23",
+      "seconds": 0.006996
+    },
+    {
+      "label": "rh_4-2_H1_plan_day24",
+      "seconds": 0.007085
+    },
+    {
+      "label": "rh_4-2_H1_plan_day25",
+      "seconds": 0.007239
+    },
+    {
+      "label": "rh_4-2_H1_plan_day26",
+      "seconds": 0.007206
+    },
+    {
+      "label": "rh_4-2_H1_plan_day27",
+      "seconds": 0.007099
+    },
+    {
+      "label": "rh_4-2_H1_plan_day28",
+      "seconds": 0.007294
+    },
+    {
+      "label": "rh_4-2_H1_plan_day29",
+      "seconds": 0.007045
+    },
+    {
+      "label": "rh_4-2_H1_plan_day30",
+      "seconds": 0.00713
+    },
+    {
+      "label": "rh_4-2_H1_plan_day31",
+      "seconds": 0.00695
+    },
+    {
+      "label": "rh_4-2_H1_plan_day32",
+      "seconds": 0.006739
+    },
+    {
+      "label": "rh_4-2_H1_plan_day33",
+      "seconds": 0.006585
+    },
+    {
+      "label": "rh_4-2_H1_plan_day34",
+      "seconds": 0.007169
+    },
+    {
+      "label": "rh_4-2_H1_plan_day35",
+      "seconds": 0.007025
+    },
+    {
+      "label": "rh_4-2_H1_plan_day36",
+      "seconds": 0.006833
+    },
+    {
+      "label": "rh_4-2_H1_plan_day37",
+      "seconds": 0.006685
+    },
+    {
+      "label": "rh_4-2_H1_plan_day38",
+      "seconds": 0.006875
+    },
+    {
+      "label": "rh_4-2_H1_plan_day39",
+      "seconds": 0.007001
+    },
+    {
+      "label": "rh_4-2_H1_plan_day40",
+      "seconds": 0.007321
+    },
+    {
+      "label": "rh_4-2_H1_plan_day41",
+      "seconds": 0.006903
+    },
+    {
+      "label": "rh_4-2_H1_plan_day42",
+      "seconds": 0.006856
+    },
+    {
+      "label": "rh_4-2_H1_plan_day43",
+      "seconds": 0.007521
+    },
+    {
+      "label": "rh_4-2_H1_plan_day44",
+      "seconds": 0.006625
+    },
+    {
+      "label": "rh_4-2_H1_plan_day45",
+      "seconds": 0.007156
+    },
+    {
+      "label": "rh_4-2_H1_plan_day46",
+      "seconds": 0.007283
+    },
+    {
+      "label": "rh_4-2_H1_plan_day47",
+      "seconds": 0.007545
+    },
+    {
+      "label": "rh_4-2_H1_plan_day48",
+      "seconds": 0.007174
+    },
+    {
+      "label": "rh_4-2_H1_plan_day49",
+      "seconds": 0.007302
+    },
+    {
+      "label": "rh_4-2_H1_plan_day50",
+      "seconds": 0.006943
+    },
+    {
+      "label": "rh_4-2_H1_plan_day51",
+      "seconds": 0.006672
+    },
+    {
+      "label": "rh_4-2_H1_plan_day52",
+      "seconds": 0.006872
+    },
+    {
+      "label": "rh_4-2_H1_plan_day53",
+      "seconds": 0.007057
+    },
+    {
+      "label": "rh_4-2_H1_plan_day54",
+      "seconds": 0.007055
+    },
+    {
+      "label": "rh_4-2_H1_plan_day55",
+      "seconds": 0.007347
+    },
+    {
+      "label": "rh_4-2_H1_plan_day56",
+      "seconds": 0.007498
+    },
+    {
+      "label": "rh_4-2_H1_plan_day57",
+      "seconds": 0.00735
+    },
+    {
+      "label": "rh_4-2_H1_plan_day58",
+      "seconds": 0.007065
+    },
+    {
+      "label": "rh_4-2_H1_plan_day59",
+      "seconds": 0.006927
+    },
+    {
+      "label": "rh_4-2_H3_plan_day0",
+      "seconds": 0.007004
+    },
+    {
+      "label": "rh_4-2_H3_plan_day1",
+      "seconds": 0.009904
+    },
+    {
+      "label": "rh_4-2_H3_plan_day2",
+      "seconds": 0.010346
+    },
+    {
+      "label": "rh_4-2_H3_plan_day3",
+      "seconds": 0.00951
+    },
+    {
+      "label": "rh_4-2_H3_plan_day4",
+      "seconds": 0.009857
+    },
+    {
+      "label": "rh_4-2_H3_plan_day5",
+      "seconds": 0.009662
+    },
+    {
+      "label": "rh_4-2_H3_plan_day6",
+      "seconds": 0.009727
+    },
+    {
+      "label": "rh_4-2_H3_plan_day7",
+      "seconds": 0.009559
+    },
+    {
+      "label": "rh_4-2_H3_plan_day8",
+      "seconds": 0.010394
+    },
+    {
+      "label": "rh_4-2_H3_plan_day9",
+      "seconds": 0.009506
+    },
+    {
+      "label": "rh_4-2_H3_plan_day10",
+      "seconds": 0.010002
+    },
+    {
+      "label": "rh_4-2_H3_plan_day11",
+      "seconds": 0.009287
+    },
+    {
+      "label": "rh_4-2_H3_plan_day12",
+      "seconds": 0.009887
+    },
+    {
+      "label": "rh_4-2_H3_plan_day13",
+      "seconds": 0.009294
+    },
+    {
+      "label": "rh_4-2_H3_plan_day14",
+      "seconds": 0.010104
+    },
+    {
+      "label": "rh_4-2_H3_plan_day15",
+      "seconds": 0.009104
+    },
+    {
+      "label": "rh_4-2_H3_plan_day16",
+      "seconds": 0.010297
+    },
+    {
+      "label": "rh_4-2_H3_plan_day17",
+      "seconds": 0.009973
+    },
+    {
+      "label": "rh_4-2_H3_plan_day18",
+      "seconds": 0.009731
+    },
+    {
+      "label": "rh_4-2_H3_plan_day19",
+      "seconds": 0.009099
+    },
+    {
+      "label": "rh_4-2_H3_plan_day20",
+      "seconds": 0.010744
+    },
+    {
+      "label": "rh_4-2_H3_plan_day21",
+      "seconds": 0.008722
+    },
+    {
+      "label": "rh_4-2_H3_plan_day22",
+      "seconds": 0.009853
+    },
+    {
+      "label": "rh_4-2_H3_plan_day23",
+      "seconds": 0.0097
+    },
+    {
+      "label": "rh_4-2_H3_plan_day24",
+      "seconds": 0.009714
+    },
+    {
+      "label": "rh_4-2_H3_plan_day25",
+      "seconds": 0.009444
+    },
+    {
+      "label": "rh_4-2_H3_plan_day26",
+      "seconds": 0.009822
+    },
+    {
+      "label": "rh_4-2_H3_plan_day27",
+      "seconds": 0.008941
+    },
+    {
+      "label": "rh_4-2_H3_plan_day28",
+      "seconds": 0.009845
+    },
+    {
+      "label": "rh_4-2_H3_plan_day29",
+      "seconds": 0.009392
+    },
+    {
+      "label": "rh_4-2_H3_plan_day30",
+      "seconds": 0.010039
+    },
+    {
+      "label": "rh_4-2_H3_plan_day31",
+      "seconds": 0.009822
+    },
+    {
+      "label": "rh_4-2_H3_plan_day32",
+      "seconds": 0.009836
+    },
+    {
+      "label": "rh_4-2_H3_plan_day33",
+      "seconds": 0.009781
+    },
+    {
+      "label": "rh_4-2_H3_plan_day34",
+      "seconds": 0.010092
+    },
+    {
+      "label": "rh_4-2_H3_plan_day35",
+      "seconds": 0.009677
+    },
+    {
+      "label": "rh_4-2_H3_plan_day36",
+      "seconds": 0.010573
+    },
+    {
+      "label": "rh_4-2_H3_plan_day37",
+      "seconds": 0.009101
+    },
+    {
+      "label": "rh_4-2_H3_plan_day38",
+      "seconds": 0.0096
+    },
+    {
+      "label": "rh_4-2_H3_plan_day39",
+      "seconds": 0.009039
+    },
+    {
+      "label": "rh_4-2_H3_plan_day40",
+      "seconds": 0.010555
+    },
+    {
+      "label": "rh_4-2_H3_plan_day41",
+      "seconds": 0.009404
+    },
+    {
+      "label": "rh_4-2_H3_plan_day42",
+      "seconds": 0.010925
+    },
+    {
+      "label": "rh_4-2_H3_plan_day43",
+      "seconds": 0.009848
+    },
+    {
+      "label": "rh_4-2_H3_plan_day44",
+      "seconds": 0.010143
+    },
+    {
+      "label": "rh_4-2_H3_plan_day45",
+      "seconds": 0.00908
+    },
+    {
+      "label": "rh_4-2_H3_plan_day46",
+      "seconds": 0.009865
+    },
+    {
+      "label": "rh_4-2_H3_plan_day47",
+      "seconds": 0.010354
+    },
+    {
+      "label": "rh_4-2_H3_plan_day48",
+      "seconds": 0.010581
+    },
+    {
+      "label": "rh_4-2_H3_plan_day49",
+      "seconds": 0.009703
+    },
+    {
+      "label": "rh_4-2_H3_plan_day50",
+      "seconds": 0.011015
+    },
+    {
+      "label": "rh_4-2_H3_plan_day51",
+      "seconds": 0.008893
+    },
+    {
+      "label": "rh_4-2_H3_plan_day52",
+      "seconds": 0.009747
+    },
+    {
+      "label": "rh_4-2_H3_plan_day53",
+      "seconds": 0.009504
+    },
+    {
+      "label": "rh_4-2_H3_plan_day54",
+      "seconds": 0.01024
+    },
+    {
+      "label": "rh_4-2_H3_plan_day55",
+      "seconds": 0.009597
+    },
+    {
+      "label": "rh_4-2_H3_plan_day56",
+      "seconds": 0.009977
+    },
+    {
+      "label": "rh_4-2_H3_plan_day57",
+      "seconds": 0.009679
+    },
+    {
+      "label": "rh_4-2_H3_plan_day58",
+      "seconds": 0.008612
+    },
+    {
+      "label": "rh_4-2_H3_plan_day59",
+      "seconds": 0.006908
+    },
+    {
+      "label": "rh_4-2_H7_plan_day0",
+      "seconds": 0.013233
+    },
+    {
+      "label": "rh_4-2_H7_plan_day1",
+      "seconds": 0.015367
+    },
+    {
+      "label": "rh_4-2_H7_plan_day2",
+      "seconds": 0.015016
+    },
+    {
+      "label": "rh_4-2_H7_plan_day3",
+      "seconds": 0.01423
+    },
+    {
+      "label": "rh_4-2_H7_plan_day4",
+      "seconds": 0.014102
+    },
+    {
+      "label": "rh_4-2_H7_plan_day5",
+      "seconds": 0.014302
+    },
+    {
+      "label": "rh_4-2_H7_plan_day6",
+      "seconds": 0.014018
+    },
+    {
+      "label": "rh_4-2_H7_plan_day7",
+      "seconds": 0.013996
+    },
+    {
+      "label": "rh_4-2_H7_plan_day8",
+      "seconds": 0.0147
+    },
+    {
+      "label": "rh_4-2_H7_plan_day9",
+      "seconds": 0.014189
+    },
+    {
+      "label": "rh_4-2_H7_plan_day10",
+      "seconds": 0.015374
+    },
+    {
+      "label": "rh_4-2_H7_plan_day11",
+      "seconds": 0.014677
+    },
+    {
+      "label": "rh_4-2_H7_plan_day12",
+      "seconds": 0.015807
+    },
+    {
+      "label": "rh_4-2_H7_plan_day13",
+      "seconds": 0.013786
+    },
+    {
+      "label": "rh_4-2_H7_plan_day14",
+      "seconds": 0.014318
+    },
+    {
+      "label": "rh_4-2_H7_plan_day15",
+      "seconds": 0.013828
+    },
+    {
+      "label": "rh_4-2_H7_plan_day16",
+      "seconds": 0.015821
+    },
+    {
+      "label": "rh_4-2_H7_plan_day17",
+      "seconds": 0.01437
+    },
+    {
+      "label": "rh_4-2_H7_plan_day18",
+      "seconds": 0.014797
+    },
+    {
+      "label": "rh_4-2_H7_plan_day19",
+      "seconds": 0.01426
+    },
+    {
+      "label": "rh_4-2_H7_plan_day20",
+      "seconds": 0.01523
+    },
+    {
+      "label": "rh_4-2_H7_plan_day21",
+      "seconds": 0.013906
+    },
+    {
+      "label": "rh_4-2_H7_plan_day22",
+      "seconds": 0.014324
+    },
+    {
+      "label": "rh_4-2_H7_plan_day23",
+      "seconds": 0.013647
+    },
+    {
+      "label": "rh_4-2_H7_plan_day24",
+      "seconds": 0.014465
+    },
+    {
+      "label": "rh_4-2_H7_plan_day25",
+      "seconds": 0.013883
+    },
+    {
+      "label": "rh_4-2_H7_plan_day26",
+      "seconds": 0.01579
+    },
+    {
+      "label": "rh_4-2_H7_plan_day27",
+      "seconds": 0.01513
+    },
+    {
+      "label": "rh_4-2_H7_plan_day28",
+      "seconds": 0.016293
+    },
+    {
+      "label": "rh_4-2_H7_plan_day29",
+      "seconds": 0.013903
+    },
+    {
+      "label": "rh_4-2_H7_plan_day30",
+      "seconds": 0.01524
+    },
+    {
+      "label": "rh_4-2_H7_plan_day31",
+      "seconds": 0.014132
+    },
+    {
+      "label": "rh_4-2_H7_plan_day32",
+      "seconds": 0.015096
+    },
+    {
+      "label": "rh_4-2_H7_plan_day33",
+      "seconds": 0.014561
+    },
+    {
+      "label": "rh_4-2_H7_plan_day34",
+      "seconds": 0.015572
+    },
+    {
+      "label": "rh_4-2_H7_plan_day35",
+      "seconds": 0.014049
+    },
+    {
+      "label": "rh_4-2_H7_plan_day36",
+      "seconds": 0.016076
+    },
+    {
+      "label": "rh_4-2_H7_plan_day37",
+      "seconds": 0.013773
+    },
+    {
+      "label": "rh_4-2_H7_plan_day38",
+      "seconds": 0.013817
+    },
+    {
+      "label": "rh_4-2_H7_plan_day39",
+      "seconds": 0.014143
+    },
+    {
+      "label": "rh_4-2_H7_plan_day40",
+      "seconds": 0.015958
+    },
+    {
+      "label": "rh_4-2_H7_plan_day41",
+      "seconds": 0.014846
+    },
+    {
+      "label": "rh_4-2_H7_plan_day42",
+      "seconds": 0.015946
+    },
+    {
+      "label": "rh_4-2_H7_plan_day43",
+      "seconds": 0.015458
+    },
+    {
+      "label": "rh_4-2_H7_plan_day44",
+      "seconds": 0.015139
+    },
+    {
+      "label": "rh_4-2_H7_plan_day45",
+      "seconds": 0.014961
+    },
+    {
+      "label": "rh_4-2_H7_plan_day46",
+      "seconds": 0.015437
+    },
+    {
+      "label": "rh_4-2_H7_plan_day47",
+      "seconds": 0.015378
+    },
+    {
+      "label": "rh_4-2_H7_plan_day48",
+      "seconds": 0.016247
+    },
+    {
+      "label": "rh_4-2_H7_plan_day49",
+      "seconds": 0.015329
+    },
+    {
+      "label": "rh_4-2_H7_plan_day50",
+      "seconds": 0.015842
+    },
+    {
+      "label": "rh_4-2_H7_plan_day51",
+      "seconds": 0.013839
+    },
+    {
+      "label": "rh_4-2_H7_plan_day52",
+      "seconds": 0.014693
+    },
+    {
+      "label": "rh_4-2_H7_plan_day53",
+      "seconds": 0.013887
+    },
+    {
+      "label": "rh_4-2_H7_plan_day54",
+      "seconds": 0.013857
+    },
+    {
+      "label": "rh_4-2_H7_plan_day55",
+      "seconds": 0.011823
+    },
+    {
+      "label": "rh_4-2_H7_plan_day56",
+      "seconds": 0.011366
+    },
+    {
+      "label": "rh_4-2_H7_plan_day57",
+      "seconds": 0.010297
+    },
+    {
+      "label": "rh_4-2_H7_plan_day58",
+      "seconds": 0.008087
+    },
+    {
+      "label": "rh_4-2_H7_plan_day59",
+      "seconds": 0.006437
+    },
+    {
+      "label": "rh_4-2_H14_plan_day0",
+      "seconds": 0.027522
+    },
+    {
+      "label": "rh_4-2_H14_plan_day1",
+      "seconds": 0.024207
+    },
+    {
+      "label": "rh_4-2_H14_plan_day2",
+      "seconds": 0.023645
+    },
+    {
+      "label": "rh_4-2_H14_plan_day3",
+      "seconds": 0.022056
+    },
+    {
+      "label": "rh_4-2_H14_plan_day4",
+      "seconds": 0.023972
+    },
+    {
+      "label": "rh_4-2_H14_plan_day5",
+      "seconds": 0.023066
+    },
+    {
+      "label": "rh_4-2_H14_plan_day6",
+      "seconds": 0.025062
+    },
+    {
+      "label": "rh_4-2_H14_plan_day7",
+      "seconds": 0.022561
+    },
+    {
+      "label": "rh_4-2_H14_plan_day8",
+      "seconds": 0.024794
+    },
+    {
+      "label": "rh_4-2_H14_plan_day9",
+      "seconds": 0.023431
+    },
+    {
+      "label": "rh_4-2_H14_plan_day10",
+      "seconds": 0.024097
+    },
+    {
+      "label": "rh_4-2_H14_plan_day11",
+      "seconds": 0.023594
+    },
+    {
+      "label": "rh_4-2_H14_plan_day12",
+      "seconds": 0.024498
+    },
+    {
+      "label": "rh_4-2_H14_plan_day13",
+      "seconds": 0.023404
+    },
+    {
+      "label": "rh_4-2_H14_plan_day14",
+      "seconds": 0.02484
+    },
+    {
+      "label": "rh_4-2_H14_plan_day15",
+      "seconds": 0.02412
+    },
+    {
+      "label": "rh_4-2_H14_plan_day16",
+      "seconds": 0.024095
+    },
+    {
+      "label": "rh_4-2_H14_plan_day17",
+      "seconds": 0.025302
+    },
+    {
+      "label": "rh_4-2_H14_plan_day18",
+      "seconds": 0.024673
+    },
+    {
+      "label": "rh_4-2_H14_plan_day19",
+      "seconds": 0.02513
+    },
+    {
+      "label": "rh_4-2_H14_plan_day20",
+      "seconds": 0.024226
+    },
+    {
+      "label": "rh_4-2_H14_plan_day21",
+      "seconds": 0.022737
+    },
+    {
+      "label": "rh_4-2_H14_plan_day22",
+      "seconds": 0.024551
+    },
+    {
+      "label": "rh_4-2_H14_plan_day23",
+      "seconds": 0.024044
+    },
+    {
+      "label": "rh_4-2_H14_plan_day24",
+      "seconds": 0.025183
+    },
+    {
+      "label": "rh_4-2_H14_plan_day25",
+      "seconds": 0.023695
+    },
+    {
+      "label": "rh_4-2_H14_plan_day26",
+      "seconds": 0.024838
+    },
+    {
+      "label": "rh_4-2_H14_plan_day27",
+      "seconds": 0.02314
+    },
+    {
+      "label": "rh_4-2_H14_plan_day28",
+      "seconds": 0.025854
+    },
+    {
+      "label": "rh_4-2_H14_plan_day29",
+      "seconds": 0.023637
+    },
+    {
+      "label": "rh_4-2_H14_plan_day30",
+      "seconds": 0.024333
+    },
+    {
+      "label": "rh_4-2_H14_plan_day31",
+      "seconds": 0.022638
+    },
+    {
+      "label": "rh_4-2_H14_plan_day32",
+      "seconds": 0.024803
+    },
+    {
+      "label": "rh_4-2_H14_plan_day33",
+      "seconds": 0.024024
+    },
+    {
+      "label": "rh_4-2_H14_plan_day34",
+      "seconds": 0.026037
+    },
+    {
+      "label": "rh_4-2_H14_plan_day35",
+      "seconds": 0.024159
+    },
+    {
+      "label": "rh_4-2_H14_plan_day36",
+      "seconds": 0.025946
+    },
+    {
+      "label": "rh_4-2_H14_plan_day37",
+      "seconds": 0.02295
+    },
+    {
+      "label": "rh_4-2_H14_plan_day38",
+      "seconds": 0.023817
+    },
+    {
+      "label": "rh_4-2_H14_plan_day39",
+      "seconds": 0.024265
+    },
+    {
+      "label": "rh_4-2_H14_plan_day40",
+      "seconds": 0.026753
+    },
+    {
+      "label": "rh_4-2_H14_plan_day41",
+      "seconds": 0.025081
+    },
+    {
+      "label": "rh_4-2_H14_plan_day42",
+      "seconds": 0.026169
+    },
+    {
+      "label": "rh_4-2_H14_plan_day43",
+      "seconds": 0.025892
+    },
+    {
+      "label": "rh_4-2_H14_plan_day44",
+      "seconds": 0.024805
+    },
+    {
+      "label": "rh_4-2_H14_plan_day45",
+      "seconds": 0.023345
+    },
+    {
+      "label": "rh_4-2_H14_plan_day46",
+      "seconds": 0.024136
+    },
+    {
+      "label": "rh_4-2_H14_plan_day47",
+      "seconds": 0.024551
+    },
+    {
+      "label": "rh_4-2_H14_plan_day48",
+      "seconds": 0.022181
+    },
+    {
+      "label": "rh_4-2_H14_plan_day49",
+      "seconds": 0.019773
+    },
+    {
+      "label": "rh_4-2_H14_plan_day50",
+      "seconds": 0.019123
+    },
+    {
+      "label": "rh_4-2_H14_plan_day51",
+      "seconds": 0.01609
+    },
+    {
+      "label": "rh_4-2_H14_plan_day52",
+      "seconds": 0.015274
+    },
+    {
+      "label": "rh_4-2_H14_plan_day53",
+      "seconds": 0.014313
+    },
+    {
+      "label": "rh_4-2_H14_plan_day54",
+      "seconds": 0.015578
+    },
+    {
+      "label": "rh_4-2_H14_plan_day55",
+      "seconds": 0.012381
+    },
+    {
+      "label": "rh_4-2_H14_plan_day56",
+      "seconds": 0.01212
+    },
+    {
+      "label": "rh_4-2_H14_plan_day57",
+      "seconds": 0.009472
+    },
+    {
+      "label": "rh_4-2_H14_plan_day58",
+      "seconds": 0.008579
+    },
+    {
+      "label": "rh_4-2_H14_plan_day59",
+      "seconds": 0.006556
+    },
+    {
+      "label": "svar_4-2_daily_day45",
+      "seconds": 0.17032
+    },
+    {
+      "label": "svar_4-2_rh_day45",
+      "seconds": 0.037116
+    }
+  ]
+}

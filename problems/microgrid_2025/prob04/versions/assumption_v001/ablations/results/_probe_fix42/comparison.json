@@ -1,0 +1,409 @@
+{
+  "chain": "4-2",
+  "base_reference": {
+    "D_full_cost_total_yuan": 2946913.9710552567,
+    "D_req_cost_total_yuan": 1197440.6901674173,
+    "source": "BASE锛堟湰瀹為獙鐙珛閲嶈窇涓诲彛寰勶級"
+  },
+  "table": {
+    "BASE": {
+      "D_full_cost_total_yuan": 2946913.9710552567,
+      "D_req_cost_total_yuan": 1197440.6901674173,
+      "D_full_delta_vs_base_yuan": 0.0,
+      "D_req_delta_vs_base_yuan": 0.0,
+      "D_full_delta_pct": 0.0,
+      "D_req_delta_pct": 0.0,
+      "D_req_delta_c_price_yuan": 49051.96138681416,
+      "D_req_sum_q_em_kwh": 9.237055564881302e-12,
+      "state_end_mean_kwh": 1200.0000008121779,
+      "state_end_days_at_lower_bound": 59,
+      "sum_abs_state_span_from_lower_bound_kwh": 4.873067746302695e-05,
+      "lp_layer_solves": 60,
+      "checks_failed": []
+    },
+    "S-RH-H1": {
+      "D_full_cost_total_yuan": 2946913.9710552595,
+      "D_req_cost_total_yuan": 1197440.6901674194,
+      "D_full_delta_vs_base_yuan": 2.7939677238464355e-09,
+      "D_req_delta_vs_base_yuan": 2.0954757928848267e-09,
+      "D_full_delta_pct": 9.480995208170082e-14,
+      "D_req_delta_pct": 1.749962073354842e-13,
+      "D_req_delta_c_price_yuan": 49051.96138681623,
+      "D_req_sum_q_em_kwh": 9.464429240324534e-12,
+      "state_end_mean_kwh": 1200.0000008121779,
+      "state_end_days_at_lower_bound": 59,
+      "sum_abs_state_span_from_lower_bound_kwh": 4.873067746302695e-05,
+      "lp_layer_solves": 0,
+      "checks_failed": [],
+      "horizon_days": 1,
+      "lp_solves": 60,
+      "solver_seconds": 0.840228000015486,
+      "max_window_variables": 720
+    },
+    "S-RH-H3": {
+      "D_full_cost_total_yuan": 2933225.5979939722,
+      "D_req_cost_total_yuan": 1190011.5561675339,
+      "D_full_delta_vs_base_yuan": -13688.373061284423,
+      "D_req_delta_vs_base_yuan": -7429.13399988343,
+      "D_full_delta_pct": -0.4644985634372886,
+      "D_req_delta_pct": -0.6204177009255251,
+      "D_req_delta_c_price_yuan": 47050.37142195285,
+      "D_req_sum_q_em_kwh": 8.327560863108374e-12,
+      "state_end_mean_kwh": 7165.666985228353,
+      "state_end_days_at_lower_bound": 1,
+      "sum_abs_state_span_from_lower_bound_kwh": 357940.0191137012,
+      "lp_layer_solves": 0,
+      "checks_failed": [],
+      "horizon_days": 3,
+      "lp_solves": 60,
+      "solver_seconds": 1.1612377999990713,
+      "max_window_variables": 960
+    },
+    "S-RH-H7": {
+      "D_full_cost_total_yuan": 2933225.424541163,
+      "D_req_cost_total_yuan": 1190011.5333367367,
+      "D_full_delta_vs_base_yuan": -13688.546514093876,
+      "D_req_delta_vs_base_yuan": -7429.156830680557,
+      "D_full_delta_pct": -0.4645044493508632,
+      "D_req_delta_pct": -0.620419607558339,
+      "D_req_delta_c_price_yuan": 47050.357866734594,
+      "D_req_sum_q_em_kwh": 8.44124770082999e-12,
+      "state_end_mean_kwh": 7165.642568744051,
+      "state_end_days_at_lower_bound": 1,
+      "sum_abs_state_span_from_lower_bound_kwh": 357938.55412464304,
+      "lp_layer_solves": 0,
+      "checks_failed": [],
+      "horizon_days": 7,
+      "lp_solves": 60,
+      "solver_seconds": 1.7160951999831013,
+      "max_window_variables": 1440
+    },
+    "S-RH-H14": {
+      "D_full_cost_total_yuan": 2933225.1344923177,
+      "D_req_cost_total_yuan": 1190011.4997863278,
+      "D_full_delta_vs_base_yuan": -13688.836562938988,
+      "D_req_delta_vs_base_yuan": -7429.190381089458,
+      "D_full_delta_pct": -0.4645142918114155,
+      "D_req_delta_pct": -0.6204224094014013,
+      "D_req_delta_c_price_yuan": 47050.32858089872,
+      "D_req_sum_q_em_kwh": 8.213874025386758e-12,
+      "state_end_mean_kwh": 7165.601950303287,
+      "state_end_days_at_lower_bound": 1,
+      "sum_abs_state_span_from_lower_bound_kwh": 357936.1170181972,
+      "lp_layer_solves": 0,
+      "checks_failed": [],
+      "horizon_days": 14,
+      "lp_solves": 60,
+      "solver_seconds": 2.6822353998431936,
+      "max_window_variables": 2280
+    },
+    "S-VAR": {
+      "representative_days": [
+        "2025-02-15"
+      ],
+      "expected_cost_total_yuan": 18672.573387573186,
+      "baseline_point_forecast_cost_yuan": 15303.06526420974,
+      "delta_yuan": 3369.5081233634464,
+      "delta_pct": 22.01851763152269,
+      "cost_reduction_pct": -22.01851763152269,
+      "first_stage_shape": {
+        "mean_abs_diff_kwh": 54.19149080254913,
+        "sum_abs_diff_kwh": 7803.574675567075,
+        "max_abs_diff_kwh": 833.333333333335,
+        "top_periods": [
+          {
+            "period": 14,
+            "mean_diff_kwh": -833.333333333335
+          },
+          {
+            "period": 8,
+            "mean_diff_kwh": -833.3333333333333
+          },
+          {
+            "period": 13,
+            "mean_diff_kwh": -833.3333333333333
+          },
+          {
+            "period": 132,
+            "mean_diff_kwh": -833.3333333333333
+          },
+          {
+            "period": 133,
+            "mean_diff_kwh": -833.3333333333331
+          },
+          {
+            "period": 5,
+            "mean_diff_kwh": 833.3333333333331
+          },
+          {
+            "period": 34,
+            "mean_diff_kwh": 518.5316129333484
+          },
+          {
+            "period": 27,
+            "mean_diff_kwh": 469.02333333333166
+          },
+          {
+            "period": 9,
+            "mean_diff_kwh": 447.46302930039474
+          },
+          {
+            "period": 135,
+            "mean_diff_kwh": 433.40999999999997
+          },
+          {
+            "period": 138,
+            "mean_diff_kwh": 401.69999999999993
+          },
+          {
+            "period": 134,
+            "mean_diff_kwh": 386.64334999999994
+          }
+        ],
+        "block_mean_diff_kwh": [
+          -50.800151556928085,
+          41.148122761111665,
+          0.0,
+          0.0,
+          -0.38659791666661886,
+          -12.807846527777814
+        ]
+      },
+      "compute": {
+        "lp_solves": 1,
+        "solver_seconds": 0.17031950000091456,
+        "wall_seconds_including_scenario_build": 0.17329160000372212,
+        "max_variables_case": 17424,
+        "max_equality_rows_case": 6912
+      }
+    },
+    "S-VAR-RH": {
+      "representative_days": [
+        "2025-02-15"
+      ],
+      "horizon_days": 3,
+      "expected_cost_total_yuan": 18672.573429456465,
+      "baseline_point_forecast_cost_yuan": 15303.06526420974,
+      "delta_yuan": 3369.508165246725,
+      "delta_pct": 22.01851790521478,
+      "cost_reduction_pct": -22.01851790521478,
+      "compute": {
+        "lp_solves": 1,
+        "solver_seconds": 0.037116199993761256,
+        "wall_seconds_including_scenario_build": 0.037472199997864664,
+        "max_variables_case": 960,
+        "max_equality_rows_case": 384
+      }
+    },
+    "PF-AR": {
+      "D_full_cost_total_yuan": 2938199.7599412883,
+      "D_req_cost_total_yuan": 1192748.022396982,
+      "D_full_delta_vs_base_yuan": -8714.211113968398,
+      "D_req_delta_vs_base_yuan": -4692.667770435335,
+      "D_full_delta_pct": -0.2957063287072455,
+      "D_req_delta_pct": -0.39189145725282154,
+      "D_req_delta_c_price_yuan": 10056.616489022386,
+      "D_req_sum_q_em_kwh": 9.237055564881302e-12,
+      "state_end_mean_kwh": 1200.0000008121779,
+      "state_end_days_at_lower_bound": 59,
+      "sum_abs_state_span_from_lower_bound_kwh": 4.873067746302695e-05,
+      "lp_layer_solves": 60,
+      "checks_failed": [],
+      "decision_price_method": "PF-AR"
+    },
+    "S-ABL-SPILL": {
+      "D_full_cost_total_yuan": 2946913.971055253,
+      "D_req_cost_total_yuan": 1197440.690167414,
+      "D_full_delta_vs_base_yuan": -3.725290298461914e-09,
+      "D_req_delta_vs_base_yuan": -3.259629011154175e-09,
+      "D_full_delta_pct": -1.2641326944226776e-13,
+      "D_req_delta_pct": -2.7221632252186435e-13,
+      "D_req_delta_c_price_yuan": 49051.9613868109,
+      "D_req_sum_q_em_kwh": 9.350742402602918e-12,
+      "state_end_mean_kwh": 1200.0000008121779,
+      "state_end_days_at_lower_bound": 59,
+      "sum_abs_state_span_from_lower_bound_kwh": 4.873067746302695e-05,
+      "lp_layer_solves": 0,
+      "checks_failed": []
+    },
+    "S-ABL-TIEBREAK": {
+      "D_full_cost_total_yuan": 2946914.044920509,
+      "D_req_cost_total_yuan": 1197440.7286856703,
+      "D_full_delta_vs_base_yuan": 0.07386525254696608,
+      "D_req_delta_vs_base_yuan": 0.038518253015354276,
+      "D_full_delta_pct": 2.506528974801248e-06,
+      "D_req_delta_pct": 3.2167148929913964e-06,
+      "D_req_delta_c_price_yuan": 49052.000479261376,
+      "D_req_sum_q_em_kwh": 1.1084466677857563e-11,
+      "state_end_mean_kwh": 1200.0,
+      "state_end_days_at_lower_bound": 60,
+      "sum_abs_state_span_from_lower_bound_kwh": 0.0,
+      "lp_layer_solves": 0,
+      "checks_failed": []
+    },
+    "S-ABL-ETA-both": {
+      "D_full_cost_total_yuan": 2946913.9710552567,
+      "D_req_cost_total_yuan": 1197440.6901674173,
+      "D_full_delta_vs_base_yuan": 0.0,
+      "D_req_delta_vs_base_yuan": 0.0,
+      "D_full_delta_pct": 0.0,
+      "D_req_delta_pct": 0.0,
+      "D_req_delta_c_price_yuan": 49051.96138681416,
+      "D_req_sum_q_em_kwh": 9.237055564881302e-12,
+      "state_end_mean_kwh": 1200.0000008121779,
+      "state_end_days_at_lower_bound": 59,
+      "sum_abs_state_span_from_lower_bound_kwh": 4.873067746302695e-05,
+      "lp_layer_solves": 0,
+      "checks_failed": [],
+      "eta_ch": 0.9,
+      "eta_dis": 0.9
+    },
+    "S-ABL-ETA-charge_only": {
+      "D_full_cost_total_yuan": 2824109.014563133,
+      "D_req_cost_total_yuan": 1142653.6685428377,
+      "D_full_delta_vs_base_yuan": -122804.95649212366,
+      "D_req_delta_vs_base_yuan": -54787.02162457956,
+      "D_full_delta_pct": -4.1672392780488465,
+      "D_req_delta_pct": -4.57534323615808,
+      "D_req_delta_c_price_yuan": 53078.350571369825,
+      "D_req_sum_q_em_kwh": 1.1851852832478471e-11,
+      "state_end_mean_kwh": 1200.0000007269603,
+      "state_end_days_at_lower_bound": 59,
+      "sum_abs_state_span_from_lower_bound_kwh": 4.361761648397078e-05,
+      "lp_layer_solves": 0,
+      "checks_failed": [
+        "state_transition_residual_max"
+      ],
+      "eta_ch": 0.9,
+      "eta_dis": 1.0
+    },
+    "S-ABL-ETA-discharge_only": {
+      "D_full_cost_total_yuan": 2873159.682005029,
+      "D_req_cost_total_yuan": 1167940.4785552074,
+      "D_full_delta_vs_base_yuan": -73754.2890502275,
+      "D_req_delta_vs_base_yuan": -29500.21161220991,
+      "D_full_delta_pct": -2.5027635612931354,
+      "D_req_delta_pct": -2.463605241950264,
+      "D_req_delta_c_price_yuan": 52297.6578055634,
+      "D_req_sum_q_em_kwh": 1.1596057447604835e-11,
+      "state_end_mean_kwh": 1200.0000008121779,
+      "state_end_days_at_lower_bound": 59,
+      "sum_abs_state_span_from_lower_bound_kwh": 4.873067746302695e-05,
+      "lp_layer_solves": 0,
+      "checks_failed": [
+        "state_transition_residual_max"
+      ],
+      "eta_ch": 1.0,
+      "eta_dis": 0.9
+    },
+    "S-ABL-ETA-round_trip": {
+      "D_full_cost_total_yuan": 2847076.872752412,
+      "D_req_cost_total_yuan": 1154914.480872602,
+      "D_full_delta_vs_base_yuan": -99837.09830284445,
+      "D_req_delta_vs_base_yuan": -42526.209294815315,
+      "D_full_delta_pct": -3.3878524885167893,
+      "D_req_delta_pct": -3.5514251055615635,
+      "D_req_delta_c_price_yuan": 52498.120264143676,
+      "D_req_sum_q_em_kwh": 1.2945953370351494e-11,
+      "state_end_mean_kwh": 1200.0000007684469,
+      "state_end_days_at_lower_bound": 59,
+      "sum_abs_state_span_from_lower_bound_kwh": 4.6106809804769e-05,
+      "lp_layer_solves": 0,
+      "checks_failed": [
+        "state_transition_residual_max"
+      ],
+      "eta_ch": 0.9486832980505138,
+      "eta_dis": 0.9486832980505138
+    }
+  },
+  "criteria": {
+    "C2": {
+      "pass": false,
+      "relative_differences": {
+        "D_full_C_total": 0.8002888944680583,
+        "D_req_C_total": 0.9079345803866178,
+        "D_req_sum_q_em": 9.237055564881302e-12,
+        "D_full_sum_q_em": 2.4151347588485805e-11
+      },
+      "threshold": 1e-09,
+      "expected": {
+        "D_full_C_total": 14755884.322036,
+        "D_req_C_total": 13006411.041148,
+        "D_req_sum_q_em": 0.0,
+        "D_full_sum_q_em": 0.0
+      },
+      "observed": {
+        "D_full_C_total": 2946913.9710552567,
+        "D_req_C_total": 1197440.6901674173,
+        "D_req_sum_q_em": 9.237055564881302e-12,
+        "D_full_sum_q_em": 2.4151347588485805e-11
+      }
+    },
+    "C3": {
+      "pass": false,
+      "D_full_relative_difference": 9.480995208170081e-16,
+      "D_req_relative_difference": 1.7499620733548422e-15,
+      "state_trajectory_max_abs_difference_kwh": 9600.0,
+      "threshold": 1e-09,
+      "note": "H = 1 蹇呴』閫愪綅澶嶇幇涓诲彛寰勫熀鍑嗭紙鍥㈤槦 R-2 棰勬敞鍐屽垽鎹憼锛"
+    },
+    "C4": {
+      "chain": "4-2",
+      "D_full_cost_by_horizon": {
+        "H1": 2946913.9710552595,
+        "H3": 2933225.5979939722,
+        "H7": 2933225.424541163,
+        "H14": 2933225.1344923177
+      },
+      "monotone_nondecreasing_cost": false,
+      "applies": true,
+      "counterexample_registered": true,
+      "note": "棰勬敞鍐屾湡鏈涳細4-2 鐨?H 澧炲ぇ 鈬?璐圭敤涓嶅锛?-3 鍥?搂3.3.4 鐨勮竟鐣岋紙娣卞害鍙綔鐢ㄤ簬璁″垝灞傦級涓嶄綔鍗曡皟鎬ц姹傦紝浠呮姤鏁板€硷紱杩濆弽鍒欐寜 T7-4 濡傚疄鐧昏鍙嶄緥锛岀姝㈠己鍑戝崟璋冩€"
+    },
+    "C_RH_BOUNDARY": {
+      "state_end_statistics": {
+        "S-RH-H1": {
+          "mean": 1200.0000008121779,
+          "min": 1200.0,
+          "max": 1200.0000487306775,
+          "unique": 2,
+          "days_at_lower_bound": 59,
+          "sum_abs_span_from_lower_bound_kwh": 4.873067746302695e-05
+        },
+        "S-RH-H3": {
+          "mean": 7165.666985228353,
+          "min": 1200.0,
+          "max": 10800.0,
+          "unique": 33,
+          "days_at_lower_bound": 1,
+          "sum_abs_span_from_lower_bound_kwh": 357940.0191137012
+        },
+        "S-RH-H7": {
+          "mean": 7165.642568744051,
+          "min": 1200.0,
+          "max": 10800.0,
+          "unique": 33,
+          "days_at_lower_bound": 1,
+          "sum_abs_span_from_lower_bound_kwh": 357938.55412464304
+        },
+        "S-RH-H14": {
+          "mean": 7165.601950303287,
+          "min": 1200.0,
+          "max": 10800.0,
+          "unique": 33,
+          "days_at_lower_bound": 1,
+          "sum_abs_span_from_lower_bound_kwh": 357936.1170181972
+        }
+      },
+      "note": "鏃ヨ竟鐣屽偍鐢甸噺琛屼负锛堝洟闃?R-2 鎶ュ憡椤?b锛岀洿鎺ュ洖搴?prob03 E8/R18锛"
+    },
+    "C6": {
+      "spill_bound_D9A_vs_D9B_relative_difference": 1.2641326944226775e-15,
+      "spill_bound_pass": true,
+      "threshold": 1e-06,
+      "kappa1_delta_yuan": null,
+      "tiebreak_literal_delta_yuan": 0.07386525254696608
+    }
+  },
+  "note": "螖C = 瀵圭収璐圭敤 鈭?涓诲彛寰勮垂鐢紙璐熸暟 = 鏇寸渷锛夛紱涓€寰嬪垎閾炬姤鍛婏紱S-VAR 鐨勬湡鏈涜垂鐢ㄥ彧鍦?12 涓唬琛ㄦ棩绐楀彛鍐呬笌涓诲彛寰勫悓绐楀彛鍙瘮锛屼笉鍙笌鍏ㄥ勾璐圭敤鐩存帴鐩稿姞"
+}

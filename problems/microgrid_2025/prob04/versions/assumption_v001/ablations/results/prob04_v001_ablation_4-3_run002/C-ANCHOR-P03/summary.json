@@ -1,0 +1,111 @@
+{
+  "days": 365,
+  "chain": "4-3",
+  "D_full": {
+    "days": 365,
+    "cost_total_yuan": 16179176.145228228,
+    "cost_plan_yuan": 13885669.475554619,
+    "cost_adj_yuan": 563098.1325327263,
+    "cost_em_yuan": 1730408.5371408819,
+    "cost_total_fc_yuan": 16179176.145228228,
+    "delta_c_price_yuan": 0.0,
+    "delta_c_plan_yuan": 0.0,
+    "delta_c_adj_yuan": 0.0,
+    "delta_c_em_yuan": 0.0,
+    "total_plan_kwh": 22826813.51458929,
+    "total_purchase_kwh": 23359990.045333255,
+    "total_q_em_kwh": 406353.04885563464,
+    "total_charge_kwh": 7075623.9327816665,
+    "total_discharge_kwh": 5735575.385552466,
+    "total_spill_kwh": 2153482.4083430236,
+    "days_with_q_em": 365,
+    "periods_with_q_em": 12164
+  },
+  "D_req": {
+    "days": 334,
+    "cost_total_yuan": 14540616.335652174,
+    "cost_plan_yuan": 12362860.209640622,
+    "cost_adj_yuan": 510208.94090952,
+    "cost_em_yuan": 1667547.185102031,
+    "cost_total_fc_yuan": 14540616.335652174,
+    "delta_c_price_yuan": 0.0,
+    "delta_c_plan_yuan": 0.0,
+    "delta_c_adj_yuan": 0.0,
+    "delta_c_em_yuan": 0.0,
+    "total_plan_kwh": 20359871.873818003,
+    "total_purchase_kwh": 20842142.600808963,
+    "total_q_em_kwh": 391274.4859139793,
+    "total_charge_kwh": 6349998.6537291035,
+    "total_discharge_kwh": 5143498.909519889,
+    "total_spill_kwh": 2087727.847547066,
+    "days_with_q_em": 334,
+    "periods_with_q_em": 11156
+  },
+  "state_end_kwh": {
+    "mean": 1200.0000000894443,
+    "min": 1199.9999999976678,
+    "max": 1200.0000003059204,
+    "unique": 1,
+    "days_at_lower_bound": 365,
+    "sum_abs_span_from_lower_bound_kwh": 3.30478756040975e-05
+  },
+  "bounds": {
+    "max_charge_kwh": 833.3333333333333,
+    "max_discharge_kwh": 750.0,
+    "max_side_power_kw": 5000.0,
+    "storage_min_kwh": 1199.9999999976678,
+    "storage_max_kwh": 10800.000000000724,
+    "storage_initial_kwh": 6000.0
+  },
+  "layer_seconds": {},
+  "lp_layer_solves": 0,
+  "lp_layer_status_max": 0,
+  "t7": {
+    "max_primary_relative_change": 0.0,
+    "degenerate_layers": 0,
+    "layers": 0
+  },
+  "checks": {
+    "state_transition_residual_max": 8.789811545284465e-08,
+    "settlement_balance_residual_max": 3.410605131648481e-13,
+    "cross_day_continuity_max": 0.0,
+    "layer_equality_residual_max": 0.0,
+    "layer_equality_residual_relative_max": 0.0,
+    "layer_bound_violation_max": 0.0,
+    "storage_min_kwh": 1199.9999999976678,
+    "storage_max_kwh": 10800.000000000724,
+    "max_charge_kwh": 833.3333333333333,
+    "max_discharge_kwh": 750.0,
+    "sum_q_em_kwh": 406353.04885563464,
+    "min_plan_purchase_kwh": 0.0,
+    "simultaneous_charge_discharge_periods": 0,
+    "checks_failed": [],
+    "thresholds": {
+      "state_transition_residual_max": 1e-06,
+      "settlement_balance_residual_max": 1e-06,
+      "cross_day_continuity_max": 1e-06,
+      "layer_equality_residual_max": 1e-06,
+      "layer_equality_residual_relative_max": 1e-08,
+      "layer_bound_violation_max": 1e-06
+    }
+  },
+  "anchor_construction": {
+    "price_source": "data/附件1.xlsx（144 点单日曲线 × 365 天；只替换价格，团队勘误 E-F4）",
+    "attachment1_md5": "dbe06f92517431228efcc26e3e796ef9",
+    "pf_persist_exact": true,
+    "kappa_identity": true,
+    "spill_bound": "D9-A（s ≤ Π_m[PV]·Δt），与 prob03 M1 一致",
+    "reference_day_seed": "为 d = 2025-01-01 提供「参考日」（价格 = 当天附件 1 曲线）作为 H_1，使 PF-PERSIST 在该日也可用；否则该日回退为常量中性价 1.0，与 M1 的价格口径不同（此为信息集允许的合法回退）。",
+    "fallback_seed": "锚点价格序列为同一单日曲线 × 365 天 ⇒ `2025-01-01` 的前一日（`2024-12-31`）按构造同取该曲线；锚点运行期间以该曲线替换 accepted 模块「无前一日」的常量中性价 1.0（只补数据、不改模型方程），`finally` 中恢复。未补此项时 `D_full` 的 `C_adj` 残差 +1777.290337 元、`ΔC_price(D_full)` = −30558.377455 元，六项中两项超 1e-9。",
+    "probe_days": 365,
+    "note": "退化情景复现锚点：不进入交付值、不写回 prob03（换数据、不换模型）"
+  },
+  "anchor_reference": {
+    "D_full_C_total": 16179176.145228,
+    "D_req_C_total": 14540616.335652,
+    "D_full_C_plan": 13885669.475555,
+    "D_full_C_adj": 563098.132533,
+    "D_full_C_em": 1730408.537141,
+    "D_req_sum_q_em": 391274.485914
+  }
+}

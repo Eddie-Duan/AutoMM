@@ -1,0 +1,813 @@
+{
+  "problem_id": "microgrid_2025",
+  "question_id": "prob04",
+  "assumption_version": "assumption_v001",
+  "formulation_version": "formulation_v001",
+  "stage": "ablation",
+  "run_id": "run003",
+  "provenance": {
+    "derived_by": "ablation-analyst act-d9d013c46e6647f5（同步动作，ablation 收尾）",
+    "note": "本文件是**阶段级派生汇总**，不是隔离 task 的产物：plan_v001 §5 要求的顶层 summary.json 未由 ablation_prob04.py 生成（该任务只落盘 baseline_check/criteria/comparison/results/budget_history/forecast_backtest/solver_status/run_manifest.json 与逐 case summary.json）。本动作按技术债 AB-D1 在阶段目录补齐，未写入两条链的 task 输出目录。",
+    "sources": [
+      "results\\prob04_v001_ablation_4-2_run003",
+      "results\\prob04_v001_ablation_4-3_run003"
+    ],
+    "formal_numbers": "以 run003 两个隔离 task 的产物为准；run001/run002 与全部 _probe_* 只作审计对照，不作为对照值"
+  },
+  "chains": {
+    "4-2": {
+      "chain": "4-2",
+      "task_id": "e54f83cea3e31a1c0879",
+      "output_directory": "C:\\Users\\DUANboyang\\Desktop\\AutoMM\\problems\\microgrid_2025\\prob04\\versions\\assumption_v001\\ablations\\results\\prob04_v001_ablation_4-2_run003",
+      "case_counts": 14,
+      "wall_seconds": 160.45221670001047,
+      "solver_status": {
+        "status": 0,
+        "feasible_incumbent": true,
+        "chain": "4-2",
+        "cases": 14,
+        "baseline_check": {
+          "BASE": true
+        },
+        "criteria_failed": [],
+        "checks_failed": [],
+        "wall_seconds": 160.54363400000148,
+        "device": "cpu",
+        "gpu_required": false,
+        "seed": 20260911
+      },
+      "baseline_check": {
+        "BASE": {
+          "pass": true,
+          "relative_differences": {
+            "D_full_C_total": 1.0477145524602348e-14,
+            "D_req_C_total": 8.592586271515616e-16,
+            "D_req_sum_q_em": 1.0734557687186452e-10,
+            "D_full_sum_q_em": 1.2225986889546903e-10
+          },
+          "threshold": 1e-09,
+          "expected": {
+            "D_full_C_total": 14755884.322036,
+            "D_req_C_total": 13006411.041148,
+            "D_req_sum_q_em": 0.0,
+            "D_full_sum_q_em": 0.0
+          },
+          "observed": {
+            "D_full_C_total": 14755884.322035845,
+            "D_req_C_total": 13006411.04114801,
+            "D_req_sum_q_em": 1.0734557687186452e-10,
+            "D_full_sum_q_em": 1.2225986889546903e-10
+          }
+        }
+      },
+      "criteria_failed": [],
+      "checks_failed": [],
+      "criteria": {
+        "C2": {
+          "pass": true,
+          "relative_differences": {
+            "D_full_C_total": 1.0477145524602348e-14,
+            "D_req_C_total": 8.592586271515616e-16,
+            "D_req_sum_q_em": 1.0734557687186452e-10,
+            "D_full_sum_q_em": 1.2225986889546903e-10
+          },
+          "threshold": 1e-09,
+          "expected": {
+            "D_full_C_total": 14755884.322036,
+            "D_req_C_total": 13006411.041148,
+            "D_req_sum_q_em": 0.0,
+            "D_full_sum_q_em": 0.0
+          },
+          "observed": {
+            "D_full_C_total": 14755884.322035845,
+            "D_req_C_total": 13006411.04114801,
+            "D_req_sum_q_em": 1.0734557687186452e-10,
+            "D_full_sum_q_em": 1.2225986889546903e-10
+          }
+        },
+        "C3": {
+          "pass": true,
+          "D_full_relative_difference": 0.0,
+          "D_req_relative_difference": 0.0,
+          "state_trajectory_max_abs_difference_kwh": 0.0,
+          "threshold": 1e-09,
+          "note": "H = 1 必须逐位复现主口径基准（团队 R-2 预注册判据①）；轨迹比对对象为 H = 1"
+        },
+        "C4": {
+          "chain": "4-2",
+          "D_full_cost_by_horizon": {
+            "H1": 14755884.322035845,
+            "H3": 14726408.134429138,
+            "H7": 14726406.77440609,
+            "H14": 14726404.555075813
+          },
+          "expectation_nonincreasing_cost": true,
+          "monotone_nonincreasing_cost": true,
+          "applies": true,
+          "counterexample_registered": false,
+          "note": "预注册期望：4-2 的 H 增大 ⇒ 费用不增（非增）；4-3 因 §3.3.4 的边界（深度只作用于计划层）不作单调性要求，仅报数值；出现**增**则按 T7-4 如实登记反例，禁止强凑单调性"
+        },
+        "C6": {
+          "spill_bound_D9A_vs_D9B_relative_difference": 0.0,
+          "spill_bound_pass": true,
+          "threshold": 1e-06,
+          "kappa1_delta_yuan": null,
+          "tiebreak_literal_delta_yuan": 0.14608633890748024
+        },
+        "C_RH_BOUNDARY": {
+          "state_end_statistics": {
+            "S-RH-H1": {
+              "mean": 1200.0000001335086,
+              "min": 1200.0,
+              "max": 1200.0000487306775,
+              "unique": 2,
+              "days_at_lower_bound": 364,
+              "sum_abs_span_from_lower_bound_kwh": 4.873067746302695e-05
+            },
+            "S-RH-H3": {
+              "mean": 5335.874156546667,
+              "min": 1200.0,
+              "max": 10800.0,
+              "unique": 190,
+              "days_at_lower_bound": 30,
+              "sum_abs_span_from_lower_bound_kwh": 1509594.0671395333
+            },
+            "S-RH-H7": {
+              "mean": 5335.850434479388,
+              "min": 1200.0,
+              "max": 10800.0,
+              "unique": 190,
+              "days_at_lower_bound": 30,
+              "sum_abs_span_from_lower_bound_kwh": 1509585.4085849766
+            },
+            "S-RH-H14": {
+              "mean": 5335.810784236119,
+              "min": 1200.0,
+              "max": 10800.0,
+              "unique": 189,
+              "days_at_lower_bound": 30,
+              "sum_abs_span_from_lower_bound_kwh": 1509570.9362461832
+            }
+          },
+          "note": "日边界储电量行为（团队 R-2 报告项 b，直接回应 prob03 E8/R18）"
+        },
+        "C1": null
+      },
+      "cost_table_D_req_yuan": {
+        "BASE": {
+          "D_req_cost_total_yuan": 13006411.04114801,
+          "D_req_delta_vs_base_yuan": 0.0,
+          "D_req_delta_pct": 0.0,
+          "D_full_cost_total_yuan": 14755884.322035845,
+          "D_full_delta_pct": 0.0,
+          "D_req_sum_q_em_kwh": 1.0734557687186452e-10,
+          "D_req_delta_c_price_yuan": 520790.8390353306
+        },
+        "S-RH-H1": {
+          "D_req_cost_total_yuan": 13006411.04114801,
+          "D_req_delta_vs_base_yuan": 0.0,
+          "D_req_delta_pct": 0.0,
+          "D_full_cost_total_yuan": 14755884.322035845,
+          "D_full_delta_pct": 0.0,
+          "D_req_sum_q_em_kwh": 1.0734557687186452e-10,
+          "D_req_delta_c_price_yuan": 520790.8390353306
+        },
+        "S-RH-H3": {
+          "D_req_cost_total_yuan": 12983194.0926027,
+          "D_req_delta_vs_base_yuan": -23216.948545310646,
+          "D_req_delta_pct": -0.17850388144631021,
+          "D_full_cost_total_yuan": 14726408.134429138,
+          "D_full_delta_pct": -0.19975886882420635,
+          "D_req_sum_q_em_kwh": 1.051851314382013e-10,
+          "D_req_delta_c_price_yuan": 521438.3365281898
+        },
+        "S-RH-H7": {
+          "D_req_cost_total_yuan": 12983192.883201677,
+          "D_req_delta_vs_base_yuan": -23218.15794633329,
+          "D_req_delta_pct": -0.17851317994547972,
+          "D_full_cost_total_yuan": 14726406.77440609,
+          "D_full_delta_pct": -0.19976808564251486,
+          "D_req_sum_q_em_kwh": 1.0513973719428193e-10,
+          "D_req_delta_c_price_yuan": 521437.436347026
+        },
+        "S-RH-H14": {
+          "D_req_cost_total_yuan": 12983190.92036976,
+          "D_req_delta_vs_base_yuan": -23220.12077825144,
+          "D_req_delta_pct": -0.17852827121017942,
+          "D_full_cost_total_yuan": 14726404.555075813,
+          "D_full_delta_pct": -0.19978312594934336,
+          "D_req_sum_q_em_kwh": 1.0600698097107397e-10,
+          "D_req_delta_c_price_yuan": 521436.01324784354
+        },
+        "S-VAR": {
+          "D_req_cost_total_yuan": null,
+          "D_req_delta_vs_base_yuan": null,
+          "D_req_delta_pct": null,
+          "D_full_cost_total_yuan": null,
+          "D_full_delta_pct": null,
+          "D_req_sum_q_em_kwh": null,
+          "D_req_delta_c_price_yuan": null
+        },
+        "S-VAR-RH": {
+          "D_req_cost_total_yuan": null,
+          "D_req_delta_vs_base_yuan": null,
+          "D_req_delta_pct": null,
+          "D_full_cost_total_yuan": null,
+          "D_full_delta_pct": null,
+          "D_req_sum_q_em_kwh": null,
+          "D_req_delta_c_price_yuan": null
+        },
+        "PF-AR": {
+          "D_req_cost_total_yuan": 12971006.989431214,
+          "D_req_delta_vs_base_yuan": -35404.051716797054,
+          "D_req_delta_pct": -0.27220461974321947,
+          "D_full_cost_total_yuan": 14716458.72697552,
+          "D_full_delta_pct": -0.2671855796636299,
+          "D_req_sum_q_em_kwh": 9.65408863962125e-11,
+          "D_req_delta_c_price_yuan": 589484.4725398659
+        },
+        "S-ABL-SPILL": {
+          "D_req_cost_total_yuan": 13006411.041148007,
+          "D_req_delta_vs_base_yuan": -3.725290298461914e-09,
+          "D_req_delta_pct": -2.864195423838536e-14,
+          "D_full_cost_total_yuan": 14755884.322035845,
+          "D_full_delta_pct": 0.0,
+          "D_req_sum_q_em_kwh": 1.0706135977756048e-10,
+          "D_req_delta_c_price_yuan": 520790.8390353276
+        },
+        "S-ABL-TIEBREAK": {
+          "D_req_cost_total_yuan": 13006411.151887346,
+          "D_req_delta_vs_base_yuan": 0.1107393354177475,
+          "D_req_delta_pct": 8.51421157361586e-07,
+          "D_full_cost_total_yuan": 14755884.468122184,
+          "D_full_delta_pct": 9.900209009453996e-07,
+          "D_req_sum_q_em_kwh": 1.220884504604669e-10,
+          "D_req_delta_c_price_yuan": 520790.95601747744
+        },
+        "S-ABL-ETA-both": {
+          "D_req_cost_total_yuan": 13006411.04114801,
+          "D_req_delta_vs_base_yuan": 0.0,
+          "D_req_delta_pct": 0.0,
+          "D_full_cost_total_yuan": 14755884.322035845,
+          "D_full_delta_pct": 0.0,
+          "D_req_sum_q_em_kwh": 1.0734557687186452e-10,
+          "D_req_delta_c_price_yuan": 520790.8390353306
+        },
+        "S-ABL-ETA-charge_only": {
+          "D_req_cost_total_yuan": 12446012.984821208,
+          "D_req_delta_vs_base_yuan": -560398.0563268028,
+          "D_req_delta_pct": -4.308629448614899,
+          "D_full_cost_total_yuan": 14127468.330841504,
+          "D_full_delta_pct": -4.258748425235959,
+          "D_req_sum_q_em_kwh": 1.3215106786645947e-10,
+          "D_req_delta_c_price_yuan": 582397.3554413544
+        },
+        "S-ABL-ETA-discharge_only": {
+          "D_req_cost_total_yuan": 12747839.521211382,
+          "D_req_delta_vs_base_yuan": -258571.51993662864,
+          "D_req_delta_pct": -1.9880312802555087,
+          "D_full_cost_total_yuan": 14453058.724661205,
+          "D_full_delta_pct": -2.0522361843296157,
+          "D_req_sum_q_em_kwh": 1.2883560884802137e-10,
+          "D_req_delta_c_price_yuan": 573152.6021099743
+        },
+        "S-ABL-ETA-round_trip": {
+          "D_req_cost_total_yuan": 12595361.6757861,
+          "D_req_delta_vs_base_yuan": -411049.3653619103,
+          "D_req_delta_pct": -3.1603596415758752,
+          "D_full_cost_total_yuan": 14287524.067665908,
+          "D_full_delta_pct": -3.1740575091830077,
+          "D_req_sum_q_em_kwh": 1.415631263700154e-10,
+          "D_req_delta_c_price_yuan": 576973.5560385212
+        }
+      },
+      "base_reference": {
+        "D_full_cost_total_yuan": 14755884.322035845,
+        "D_req_cost_total_yuan": 13006411.04114801,
+        "source": "BASE（本实验独立重跑主口径）"
+      },
+      "forecast_backtest_metrics_D_req": {
+        "PF-PERSIST": {
+          "mae": 0.08432593978709249,
+          "mape": 0.13780058945644877,
+          "rmse": 0.12383718140836511,
+          "bias": -0.0005953551230871593,
+          "p50": 0.050000000000000044,
+          "p90": 0.22940000000000002,
+          "p99": 0.37729999999999997,
+          "max": 0.5319999999999999,
+          "daily_mae_win_days": 159.0,
+          "daily_mae_win_fraction": 0.47604790419161674
+        },
+        "PF-DUAL": {
+          "mae": 0.09338749766350038,
+          "mape": 0.15290417085582758,
+          "rmse": 0.12156633287001192,
+          "bias": -0.0003280142096758831,
+          "p50": 0.07230931788638112,
+          "p90": 0.2065374375606927,
+          "p99": 0.3358529269971275,
+          "max": 0.5071754637587215,
+          "daily_mae_win_days": 49.0,
+          "daily_mae_win_fraction": 0.1467065868263473
+        },
+        "PF-HIST": {
+          "mae": 0.10023081161598094,
+          "mape": 0.16330092149892692,
+          "rmse": 0.13687750498977533,
+          "bias": 0.013160843054557551,
+          "p50": 0.07102940447641867,
+          "p90": 0.24109448008849577,
+          "p99": 0.39630938775216207,
+          "max": 0.5469586206896551,
+          "daily_mae_win_days": 51.0,
+          "daily_mae_win_fraction": 0.15269461077844312
+        },
+        "PF-AR": {
+          "mae": 0.08066370950078573,
+          "mape": 0.1349933196335897,
+          "rmse": 0.10983600538393719,
+          "bias": 0.005108496107795424,
+          "p50": 0.05828817422275709,
+          "p90": 0.18568290965158607,
+          "p99": 0.33338640526105134,
+          "max": 0.48727371195244135,
+          "daily_mae_win_days": 75.0,
+          "daily_mae_win_fraction": 0.2245508982035928
+        }
+      },
+      "forecast_backtest_selection": {
+        "window": "D_req",
+        "selection_methods": [
+          "PF-PERSIST",
+          "PF-DUAL",
+          "PF-HIST"
+        ],
+        "mae_by_method": {
+          "PF-PERSIST": 0.08432593978709249,
+          "PF-DUAL": 0.09338749766350038,
+          "PF-HIST": 0.10023081161598094
+        },
+        "relative_difference_vs_best": {
+          "PF-PERSIST": 0.0,
+          "PF-DUAL": 0.10745872384329967,
+          "PF-HIST": 0.18861185382629977
+        },
+        "tie_tolerance": 0.01,
+        "tied_methods": [
+          "PF-PERSIST"
+        ],
+        "selected": "PF-PERSIST",
+        "simplicity_rank": {
+          "PF-PERSIST": 0,
+          "PF-HIST": 1,
+          "PF-DUAL": 2,
+          "PF-AR": 3
+        },
+        "baseline_methods": [
+          "PF-PERSIST",
+          "PF-DUAL",
+          "PF-HIST"
+        ],
+        "ablation_methods": [
+          "PF-AR"
+        ],
+        "note": "PF-AR 只作 ablation 强制对照，按 AS08 不参与主口径选择；所有预测器的指标（含 PF-AR）仍全量落盘于 windows 中。"
+      },
+      "information_set": {
+        "future_price_used_in_decision": false,
+        "decision_price_rule": "PF-PERSIST（4-2）；PF-PERSIST + κ_m 滚动更新（4-3）",
+        "settlement_price_rule": "附件 4 实际价（唯一结算入口）",
+        "anchor_exception": "C-ANCHOR-P03 只替换价格为附件 1 单日曲线（退化情景复现锚点）"
+      },
+      "code_sha256": {
+        "ablation": {
+          "ablation_prob04.py": "813f76baf456794fc6752d05b5083b8b7bcb8f75146c6cc54cec71cd21e3b2b8",
+          "submit_ablation_tasks.py": "e17dc8cd792d4a57b84ffc7d390a5652b3b2764898c14e9a4514a0838dd0f8e3",
+          "__code_dir__": "756d6d7784d1f35b65864b8472208973d1107fecc39086a4a5cc79f4c353eb95"
+        },
+        "accepted": {
+          "prob04_io.py": "b6d1b8bd1e9b15355002d8f551818729b4ae6619922d02d0d263a66473a3ca0c",
+          "prob04_model.py": "c367367de2af14f2660f224329fc793822fb64d9ee270e23d0df8d7105e7fb56",
+          "prob04_predict.py": "87a801a8848e2997afc9f188010db7d00947d5cf7839204d8d4fedfaad8e2ba3",
+          "run_prob04.py": "b8b40d9884ab4632554cb31b82f004dd380680ef3112baaf8aab01bb39d4ca02",
+          "__code_dir__": "79061cd402e07cc7cdca47f59ac40deb60e8f14b591093f252581074bf168a93"
+        }
+      },
+      "input_md5": {
+        "attachment1_md5": "dbe06f92517431228efcc26e3e796ef9",
+        "attachment2_md5": "bb3e493f804678de571575116eca1ae6",
+        "attachment3_md5": "e8dfee653d53a78c82198f657a01feb4",
+        "attachment4_md5": "cf8762375436b281dc33b6432e441a6a"
+      }
+    },
+    "4-3": {
+      "chain": "4-3",
+      "task_id": "20906d684ca14f498047",
+      "output_directory": "C:\\Users\\DUANboyang\\Desktop\\AutoMM\\problems\\microgrid_2025\\prob04\\versions\\assumption_v001\\ablations\\results\\prob04_v001_ablation_4-3_run003",
+      "case_counts": 9,
+      "wall_seconds": 330.75028069999826,
+      "solver_status": {
+        "status": 0,
+        "feasible_incumbent": true,
+        "chain": "4-3",
+        "cases": 9,
+        "baseline_check": {
+          "BASE": true,
+          "C-ANCHOR-P03": true
+        },
+        "criteria_failed": [],
+        "checks_failed": [],
+        "wall_seconds": 330.81396909999603,
+        "device": "cpu",
+        "gpu_required": false,
+        "seed": 20260911
+      },
+      "baseline_check": {
+        "BASE": {
+          "pass": true,
+          "relative_differences": {
+            "D_full_C_total": 2.3200125926906667e-14,
+            "D_req_C_total": 2.6314998866872502e-14,
+            "D_req_sum_q_em": 1.0448618696807667e-12,
+            "D_full_sum_q_em": 8.918611662143554e-13
+          },
+          "threshold": 1e-09,
+          "expected": {
+            "D_full_C_total": 17181202.515506,
+            "D_req_C_total": 15289050.714738,
+            "D_req_sum_q_em": 394026.04075,
+            "D_full_sum_q_em": 410453.995927
+          },
+          "observed": {
+            "D_full_C_total": 17181202.515506398,
+            "D_req_C_total": 15289050.714737598,
+            "D_req_sum_q_em": 394026.0407495883,
+            "D_full_sum_q_em": 410453.9959273661
+          }
+        },
+        "C-ANCHOR-P03": {
+          "pass": true,
+          "relative_differences": {
+            "D_full_C_total": 1.4045381925902408e-14,
+            "D_req_C_total": 1.2041349553967103e-14,
+            "D_full_C_plan": 2.7499016613103144e-14,
+            "D_full_C_adj": 4.86047468109982e-13,
+            "D_full_C_em": 6.821807324618693e-14,
+            "D_req_sum_q_em": 5.2960077978989315e-14
+          },
+          "threshold": 1e-09,
+          "reference": {
+            "D_full_C_total": 16179176.145228,
+            "D_req_C_total": 14540616.335652,
+            "D_full_C_plan": 13885669.475555,
+            "D_full_C_adj": 563098.132533,
+            "D_full_C_em": 1730408.537141,
+            "D_req_sum_q_em": 391274.485914
+          },
+          "observed": {
+            "D_full_C_total": 16179176.145228228,
+            "D_req_C_total": 14540616.335652174,
+            "D_full_C_plan": 13885669.475554619,
+            "D_full_C_adj": 563098.1325327263,
+            "D_full_C_em": 1730408.5371408819,
+            "D_req_sum_q_em": 391274.4859139793
+          },
+          "probe_days": 365,
+          "note": "probe_days < 365 时 pass 预期为 False（仅自检）"
+        }
+      },
+      "criteria_failed": [],
+      "checks_failed": [],
+      "criteria": {
+        "C2": {
+          "pass": true,
+          "relative_differences": {
+            "D_full_C_total": 2.3200125926906667e-14,
+            "D_req_C_total": 2.6314998866872502e-14,
+            "D_req_sum_q_em": 1.0448618696807667e-12,
+            "D_full_sum_q_em": 8.918611662143554e-13
+          },
+          "threshold": 1e-09,
+          "expected": {
+            "D_full_C_total": 17181202.515506,
+            "D_req_C_total": 15289050.714738,
+            "D_req_sum_q_em": 394026.04075,
+            "D_full_sum_q_em": 410453.995927
+          },
+          "observed": {
+            "D_full_C_total": 17181202.515506398,
+            "D_req_C_total": 15289050.714737598,
+            "D_req_sum_q_em": 394026.0407495883,
+            "D_full_sum_q_em": 410453.9959273661
+          }
+        },
+        "C3": {
+          "pass": true,
+          "D_full_relative_difference": 0.0,
+          "D_req_relative_difference": 0.0,
+          "state_trajectory_max_abs_difference_kwh": 0.0,
+          "threshold": 1e-09,
+          "note": "H = 1 必须逐位复现主口径基准（团队 R-2 预注册判据①）；轨迹比对对象为 H = 1"
+        },
+        "C4": {
+          "chain": "4-3",
+          "D_full_cost_by_horizon": {
+            "H1": 17181202.515506398,
+            "H3": 17149405.023812063,
+            "H7": 17149403.06553306,
+            "H14": 17149399.532727864
+          },
+          "expectation_nonincreasing_cost": true,
+          "monotone_nonincreasing_cost": true,
+          "applies": false,
+          "counterexample_registered": false,
+          "note": "预注册期望：4-2 的 H 增大 ⇒ 费用不增（非增）；4-3 因 §3.3.4 的边界（深度只作用于计划层）不作单调性要求，仅报数值；出现**增**则按 T7-4 如实登记反例，禁止强凑单调性"
+        },
+        "C6": {
+          "spill_bound_D9A_vs_D9B_relative_difference": 7.578043250244173e-05,
+          "spill_bound_pass": false,
+          "threshold": 1e-06,
+          "kappa1_delta_yuan": 1.4901161193847656e-08,
+          "tiebreak_literal_delta_yuan": null
+        },
+        "C_RH_BOUNDARY": {
+          "state_end_statistics": {
+            "S-RH-H1": {
+              "mean": 1200.0000000428229,
+              "min": 1199.9999999952972,
+              "max": 1200.0000003066643,
+              "unique": 1,
+              "days_at_lower_bound": 365,
+              "sum_abs_span_from_lower_bound_kwh": 1.6051868215072318e-05
+            },
+            "S-RH-H3": {
+              "mean": 5327.9287879801595,
+              "min": 1200.0,
+              "max": 10800.0,
+              "unique": 191,
+              "days_at_lower_bound": 30,
+              "sum_abs_span_from_lower_bound_kwh": 1506694.0076127583
+            },
+            "S-RH-H7": {
+              "mean": 5327.905131462525,
+              "min": 1200.0,
+              "max": 10800.0,
+              "unique": 191,
+              "days_at_lower_bound": 30,
+              "sum_abs_span_from_lower_bound_kwh": 1506685.3729838217
+            },
+            "S-RH-H14": {
+              "mean": 5327.8654434755135,
+              "min": 1200.0,
+              "max": 10800.0,
+              "unique": 191,
+              "days_at_lower_bound": 30,
+              "sum_abs_span_from_lower_bound_kwh": 1506670.8868685625
+            }
+          },
+          "note": "日边界储电量行为（团队 R-2 报告项 b，直接回应 prob03 E8/R18）"
+        },
+        "C1": {
+          "pass": true,
+          "relative_differences": {
+            "D_full_C_total": 1.4045381925902408e-14,
+            "D_req_C_total": 1.2041349553967103e-14,
+            "D_full_C_plan": 2.7499016613103144e-14,
+            "D_full_C_adj": 4.86047468109982e-13,
+            "D_full_C_em": 6.821807324618693e-14,
+            "D_req_sum_q_em": 5.2960077978989315e-14
+          },
+          "threshold": 1e-09,
+          "reference": {
+            "D_full_C_total": 16179176.145228,
+            "D_req_C_total": 14540616.335652,
+            "D_full_C_plan": 13885669.475555,
+            "D_full_C_adj": 563098.132533,
+            "D_full_C_em": 1730408.537141,
+            "D_req_sum_q_em": 391274.485914
+          },
+          "observed": {
+            "D_full_C_total": 16179176.145228228,
+            "D_req_C_total": 14540616.335652174,
+            "D_full_C_plan": 13885669.475554619,
+            "D_full_C_adj": 563098.1325327263,
+            "D_full_C_em": 1730408.5371408819,
+            "D_req_sum_q_em": 391274.4859139793
+          },
+          "probe_days": 365,
+          "note": "probe_days < 365 时 pass 预期为 False（仅自检）"
+        }
+      },
+      "cost_table_D_req_yuan": {
+        "BASE": {
+          "D_req_cost_total_yuan": 15289050.714737598,
+          "D_req_delta_vs_base_yuan": 0.0,
+          "D_req_delta_pct": 0.0,
+          "D_full_cost_total_yuan": 17181202.515506398,
+          "D_full_delta_pct": 0.0,
+          "D_req_sum_q_em_kwh": 394026.0407495883,
+          "D_req_delta_c_price_yuan": 258485.4657039248
+        },
+        "C-ANCHOR-P03": {
+          "D_req_cost_total_yuan": 14540616.335652174,
+          "D_req_delta_vs_base_yuan": -748434.3790854234,
+          "D_req_delta_pct": -4.895231188970967,
+          "D_full_cost_total_yuan": 16179176.145228228,
+          "D_full_delta_pct": -5.8321084881795695,
+          "D_req_sum_q_em_kwh": 391274.4859139793,
+          "D_req_delta_c_price_yuan": 0.0
+        },
+        "S-RH-H1": {
+          "D_req_cost_total_yuan": 15289050.714737598,
+          "D_req_delta_vs_base_yuan": 0.0,
+          "D_req_delta_pct": 0.0,
+          "D_full_cost_total_yuan": 17181202.515506398,
+          "D_full_delta_pct": 0.0,
+          "D_req_sum_q_em_kwh": 394026.0407495883,
+          "D_req_delta_c_price_yuan": 258485.4657039248
+        },
+        "S-RH-H3": {
+          "D_req_cost_total_yuan": 15266243.750132084,
+          "D_req_delta_vs_base_yuan": -22806.96460551396,
+          "D_req_delta_pct": -0.14917188144015775,
+          "D_full_cost_total_yuan": 17149405.023812063,
+          "D_full_delta_pct": -0.18507139803303632,
+          "D_req_sum_q_em_kwh": 393906.1355911513,
+          "D_req_delta_c_price_yuan": 263970.8839165686
+        },
+        "S-RH-H7": {
+          "D_req_cost_total_yuan": 15266241.97266081,
+          "D_req_delta_vs_base_yuan": -22808.742076788098,
+          "D_req_delta_pct": -0.14918350721933332,
+          "D_full_cost_total_yuan": 17149403.06553306,
+          "D_full_delta_pct": -0.18508279583246678,
+          "D_req_sum_q_em_kwh": 393906.1167445845,
+          "D_req_delta_c_price_yuan": 263969.85155684676
+        },
+        "S-RH-H14": {
+          "D_req_cost_total_yuan": 15266238.742182754,
+          "D_req_delta_vs_base_yuan": -22811.972554843873,
+          "D_req_delta_pct": -0.14920463657599548,
+          "D_full_cost_total_yuan": 17149399.532727864,
+          "D_full_delta_pct": -0.18510335786934257,
+          "D_req_sum_q_em_kwh": 393906.0841088231,
+          "D_req_delta_c_price_yuan": 263968.01218862063
+        },
+        "S-VAR": {
+          "D_req_cost_total_yuan": null,
+          "D_req_delta_vs_base_yuan": null,
+          "D_req_delta_pct": null,
+          "D_full_cost_total_yuan": null,
+          "D_full_delta_pct": null,
+          "D_req_sum_q_em_kwh": null,
+          "D_req_delta_c_price_yuan": null
+        },
+        "S-ABL-SPILL": {
+          "D_req_cost_total_yuan": 15296930.182182683,
+          "D_req_delta_vs_base_yuan": 7879.467445084825,
+          "D_req_delta_pct": 0.05153666890181454,
+          "D_full_cost_total_yuan": 17182504.514463935,
+          "D_full_delta_pct": 0.007578043250244173,
+          "D_req_sum_q_em_kwh": 390050.78665613267,
+          "D_req_delta_c_price_yuan": 257551.30098433903
+        },
+        "S-ABL-KAPPA1": {
+          "D_req_cost_total_yuan": 15289050.714737613,
+          "D_req_delta_vs_base_yuan": 1.4901161193847656e-08,
+          "D_req_delta_pct": 9.746295876619703e-14,
+          "D_full_cost_total_yuan": 17181202.515506413,
+          "D_full_delta_pct": 8.67294427174061e-14,
+          "D_req_sum_q_em_kwh": 394026.0407495883,
+          "D_req_delta_c_price_yuan": 573883.1116725173
+        }
+      },
+      "base_reference": {
+        "D_full_cost_total_yuan": 17181202.515506398,
+        "D_req_cost_total_yuan": 15289050.714737598,
+        "source": "BASE（本实验独立重跑主口径）"
+      },
+      "forecast_backtest_metrics_D_req": {
+        "PF-PERSIST": {
+          "mae": 0.08432593978709249,
+          "mape": 0.13780058945644877,
+          "rmse": 0.12383718140836511,
+          "bias": -0.0005953551230871593,
+          "p50": 0.050000000000000044,
+          "p90": 0.22940000000000002,
+          "p99": 0.37729999999999997,
+          "max": 0.5319999999999999,
+          "daily_mae_win_days": 159.0,
+          "daily_mae_win_fraction": 0.47604790419161674
+        },
+        "PF-DUAL": {
+          "mae": 0.09338749766350038,
+          "mape": 0.15290417085582758,
+          "rmse": 0.12156633287001192,
+          "bias": -0.0003280142096758831,
+          "p50": 0.07230931788638112,
+          "p90": 0.2065374375606927,
+          "p99": 0.3358529269971275,
+          "max": 0.5071754637587215,
+          "daily_mae_win_days": 49.0,
+          "daily_mae_win_fraction": 0.1467065868263473
+        },
+        "PF-HIST": {
+          "mae": 0.10023081161598094,
+          "mape": 0.16330092149892692,
+          "rmse": 0.13687750498977533,
+          "bias": 0.013160843054557551,
+          "p50": 0.07102940447641867,
+          "p90": 0.24109448008849577,
+          "p99": 0.39630938775216207,
+          "max": 0.5469586206896551,
+          "daily_mae_win_days": 51.0,
+          "daily_mae_win_fraction": 0.15269461077844312
+        },
+        "PF-AR": {
+          "mae": 0.08066370950078573,
+          "mape": 0.1349933196335897,
+          "rmse": 0.10983600538393719,
+          "bias": 0.005108496107795424,
+          "p50": 0.05828817422275709,
+          "p90": 0.18568290965158607,
+          "p99": 0.33338640526105134,
+          "max": 0.48727371195244135,
+          "daily_mae_win_days": 75.0,
+          "daily_mae_win_fraction": 0.2245508982035928
+        }
+      },
+      "forecast_backtest_selection": {
+        "window": "D_req",
+        "selection_methods": [
+          "PF-PERSIST",
+          "PF-DUAL",
+          "PF-HIST"
+        ],
+        "mae_by_method": {
+          "PF-PERSIST": 0.08432593978709249,
+          "PF-DUAL": 0.09338749766350038,
+          "PF-HIST": 0.10023081161598094
+        },
+        "relative_difference_vs_best": {
+          "PF-PERSIST": 0.0,
+          "PF-DUAL": 0.10745872384329967,
+          "PF-HIST": 0.18861185382629977
+        },
+        "tie_tolerance": 0.01,
+        "tied_methods": [
+          "PF-PERSIST"
+        ],
+        "selected": "PF-PERSIST",
+        "simplicity_rank": {
+          "PF-PERSIST": 0,
+          "PF-HIST": 1,
+          "PF-DUAL": 2,
+          "PF-AR": 3
+        },
+        "baseline_methods": [
+          "PF-PERSIST",
+          "PF-DUAL",
+          "PF-HIST"
+        ],
+        "ablation_methods": [
+          "PF-AR"
+        ],
+        "note": "PF-AR 只作 ablation 强制对照，按 AS08 不参与主口径选择；所有预测器的指标（含 PF-AR）仍全量落盘于 windows 中。"
+      },
+      "information_set": {
+        "future_price_used_in_decision": false,
+        "decision_price_rule": "PF-PERSIST（4-2）；PF-PERSIST + κ_m 滚动更新（4-3）",
+        "settlement_price_rule": "附件 4 实际价（唯一结算入口）",
+        "anchor_exception": "C-ANCHOR-P03 只替换价格为附件 1 单日曲线（退化情景复现锚点）"
+      },
+      "code_sha256": {
+        "ablation": {
+          "ablation_prob04.py": "813f76baf456794fc6752d05b5083b8b7bcb8f75146c6cc54cec71cd21e3b2b8",
+          "submit_ablation_tasks.py": "e17dc8cd792d4a57b84ffc7d390a5652b3b2764898c14e9a4514a0838dd0f8e3",
+          "__code_dir__": "756d6d7784d1f35b65864b8472208973d1107fecc39086a4a5cc79f4c353eb95"
+        },
+        "accepted": {
+          "prob04_io.py": "b6d1b8bd1e9b15355002d8f551818729b4ae6619922d02d0d263a66473a3ca0c",
+          "prob04_model.py": "c367367de2af14f2660f224329fc793822fb64d9ee270e23d0df8d7105e7fb56",
+          "prob04_predict.py": "87a801a8848e2997afc9f188010db7d00947d5cf7839204d8d4fedfaad8e2ba3",
+          "run_prob04.py": "b8b40d9884ab4632554cb31b82f004dd380680ef3112baaf8aab01bb39d4ca02",
+          "__code_dir__": "79061cd402e07cc7cdca47f59ac40deb60e8f14b591093f252581074bf168a93"
+        }
+      },
+      "input_md5": {
+        "attachment1_md5": "dbe06f92517431228efcc26e3e796ef9",
+        "attachment2_md5": "bb3e493f804678de571575116eca1ae6",
+        "attachment3_md5": "e8dfee653d53a78c82198f657a01feb4",
+        "attachment4_md5": "cf8762375436b281dc33b6432e441a6a"
+      }
+    }
+  },
+  "derived_notes": {
+    "gates": "C1/C2/C3 强制闸门两链全部通过；criteria_failed=[]；checks_failed=[]；两链 rc=0、supervised、CPU HiGHS、seed=20260911",
+    "main_conclusion_family_dependence": "费用水平不依赖模型族（≤0.28%/0.15%）；「日边界 E_{d,144}=E_min 不跨日携带」依赖「逐日 0:00 决策 + 终端自由」结构，H>=3 后失效",
+    "svar_43_degeneracy": "S-VAR(4-3) 因预注册的自由追索使 u±≡0，与 S-VAR(4-2) 逐位同解，其 -19.02% 不得读作对冲收益",
+    "svar_rh_counterexample": "S-VAR-RH(4-2,H=3) 期望费用比同窗点预测贵 +2.6959%，按 plan_v001 §2 C5 如实登记反例，只对 12 代表日窗口成立",
+    "disclosures": "AB-D1…AB-D13 见 ablations/report.md §8（含 C6 在 4-3 判不通过、ΔC_price 基数歧义、ETA 族残差语义、图件不登记为交付图表等）"
+  }
+}

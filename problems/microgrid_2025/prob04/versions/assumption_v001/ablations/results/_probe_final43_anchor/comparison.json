@@ -1,0 +1,103 @@
+{
+  "chain": "4-3",
+  "base_reference": {
+    "D_full_cost_total_yuan": 17181202.515506398,
+    "D_req_cost_total_yuan": 15289050.714737598,
+    "source": "BASE（本实验独立重跑主口径）"
+  },
+  "table": {
+    "BASE": {
+      "D_full_cost_total_yuan": 17181202.515506398,
+      "D_req_cost_total_yuan": 15289050.714737598,
+      "D_full_delta_vs_base_yuan": 0.0,
+      "D_req_delta_vs_base_yuan": 0.0,
+      "D_full_delta_pct": 0.0,
+      "D_req_delta_pct": 0.0,
+      "D_req_delta_c_price_yuan": 258485.4657039248,
+      "D_req_sum_q_em_kwh": 394026.0407495883,
+      "state_end_mean_kwh": 1200.0000000428229,
+      "state_end_days_at_lower_bound": 365,
+      "sum_abs_state_span_from_lower_bound_kwh": 1.6051868215072318e-05,
+      "lp_layer_solves": 1460,
+      "checks_failed": []
+    },
+    "C-ANCHOR-P03": {
+      "D_full_cost_total_yuan": 16179176.145228228,
+      "D_req_cost_total_yuan": 14540616.335652174,
+      "D_full_delta_vs_base_yuan": -1002026.3702781703,
+      "D_req_delta_vs_base_yuan": -748434.3790854234,
+      "D_full_delta_pct": -5.8321084881795695,
+      "D_req_delta_pct": -4.895231188970967,
+      "D_req_delta_c_price_yuan": 0.0,
+      "D_req_sum_q_em_kwh": 391274.4859139793,
+      "state_end_mean_kwh": 1200.0000000894443,
+      "state_end_days_at_lower_bound": 365,
+      "sum_abs_state_span_from_lower_bound_kwh": 3.30478756040975e-05,
+      "lp_layer_solves": 0,
+      "checks_failed": [],
+      "anchor_pass": true
+    }
+  },
+  "criteria": {
+    "C2": {
+      "pass": true,
+      "relative_differences": {
+        "D_full_C_total": 2.3200125926906667e-14,
+        "D_req_C_total": 2.6314998866872502e-14,
+        "D_req_sum_q_em": 1.0448618696807667e-12,
+        "D_full_sum_q_em": 8.918611662143554e-13
+      },
+      "threshold": 1e-09,
+      "expected": {
+        "D_full_C_total": 17181202.515506,
+        "D_req_C_total": 15289050.714738,
+        "D_req_sum_q_em": 394026.04075,
+        "D_full_sum_q_em": 410453.995927
+      },
+      "observed": {
+        "D_full_C_total": 17181202.515506398,
+        "D_req_C_total": 15289050.714737598,
+        "D_req_sum_q_em": 394026.0407495883,
+        "D_full_sum_q_em": 410453.9959273661
+      }
+    },
+    "C1": {
+      "pass": true,
+      "relative_differences": {
+        "D_full_C_total": 1.4045381925902408e-14,
+        "D_req_C_total": 1.2041349553967103e-14,
+        "D_full_C_plan": 2.7499016613103144e-14,
+        "D_full_C_adj": 4.86047468109982e-13,
+        "D_full_C_em": 6.821807324618693e-14,
+        "D_req_sum_q_em": 5.2960077978989315e-14
+      },
+      "threshold": 1e-09,
+      "reference": {
+        "D_full_C_total": 16179176.145228,
+        "D_req_C_total": 14540616.335652,
+        "D_full_C_plan": 13885669.475555,
+        "D_full_C_adj": 563098.132533,
+        "D_full_C_em": 1730408.537141,
+        "D_req_sum_q_em": 391274.485914
+      },
+      "observed": {
+        "D_full_C_total": 16179176.145228228,
+        "D_req_C_total": 14540616.335652174,
+        "D_full_C_plan": 13885669.475554619,
+        "D_full_C_adj": 563098.1325327263,
+        "D_full_C_em": 1730408.5371408819,
+        "D_req_sum_q_em": 391274.4859139793
+      },
+      "probe_days": 365,
+      "note": "probe_days < 365 时 pass 预期为 False（仅自检）"
+    },
+    "C6": {
+      "spill_bound_D9A_vs_D9B_relative_difference": null,
+      "spill_bound_pass": null,
+      "threshold": 1e-06,
+      "kappa1_delta_yuan": null,
+      "tiebreak_literal_delta_yuan": null
+    }
+  },
+  "note": "ΔC = 对照费用 − 主口径费用（负数 = 更省）；一律分链报告；S-VAR 的期望费用只在 12 个代表日窗口内与主口径同窗口可比，不可与全年费用直接相加"
+}

@@ -230,3 +230,31 @@
 **路由**：`PASS_WITH_WARNING` → 不退回；按 `config/gates.yaml` 的 `sanity_check → visualization` 推进至 `visualization`（`robustness`/`ablation` 为 `config/workflow.yaml` 的 `mandatory_stages`，须在可视化后完成，否则 `locally_completed` 门禁报错）。
 
 - 报告生成：`act-d7fa5a1e75ac4428`（2026-09-11）
+
+---
+
+## 9. Level 6（鲁棒性与敏感性）追加复核（本动作，**追加不改写** §1–§8）
+
+> 触发条件：`robustness` 已完成（`optional_stages.robustness.decision = completed`、`artifacts.robustness = true`）。
+> 本节的完整报告、独立复算与披露项见同目录 **`sanity_report_level6.md`**；机器可读摘要见同目录 `machine_sanity_l6.json`。
+
+- 复核动作：`act-cb24258ea2be418a`（sanity-checker，policy P3 / `level_6`）。
+- 对象：链 `4-2` = `robustness/results/prob04_v001_robust_4-2_run001`（task `953eeb1e0b004171cad9`）、
+  链 `4-3` = `..._4-3_run001`（task `5713b0a24eedeac9f000`），均 `succeeded` / `rc=0` / `attempt=1` / `supervised` / `probe_mode=false`。
+- 独立复算：自建只读探针 `runtime/actions/act-cb24258ea2be418a/evidence/probe_l6_verify.py` ⇒ **`270/270 PASS`、`0 FAIL`**
+  （产物与追踪完整性、`plan.md` 冻结先于跑数、S1–S7、噪声族逐族 `n`/`mean`/`ddof=1 std`/`1.96-CI`/`max|z|`/族均值相对基线、
+  求解器双口径、`buy_cap` 分界、`κ_m` 截断来源、K7/K8 重算、报告引用值对账、交付工作簿与模板 md5、accepted 代码指纹）；
+  另在逐字节副本上跑通用脚本 ⇒ `144` 数值文件 `0 NaN / 0 Inf`、`failures = []`、`PASS_WITH_WARNING`。
+- 分链结论：`4-2` = `162/162` 全成功、**稳定**；`4-3` = `195/198`、`failed_criteria = ["S4"]`、**条件稳定（需给出适用边界）**
+  （σ=10% 价格白噪声族均值 `+10.5919% > 5%`，机制 = `Σq^em` 的 `max(0,·)` 凸性；承 `E-F9`，**禁止**调参/放宽判据使其"通过"）。
+  K7（`max` 口径两链反例）与 K8（部分反例）已按 `T7-4` 如实登记 + 机制 + 适用边界。
+- 本动作新登记技术债（**不构成硬门禁失败**）：`L6-W1`（S5 求解器最大相对差在全期/交付期两种口径下混用标注：全期 `1.25189e-4`/`4.36256e-4`、
+  交付期 `4.969e-6`/`6.10152e-4`，均 ≤1%）；`L6-W2`（`plan.md` 未逐字定义 S4「族间均值差」的归一化基准：代码以族均值均值为基准 `0.4463%`/`0.5654%`，
+  以基线为基准则 `0.4474%`/`0.5865%`，均 ≤3%）；`L6-W3`（`plan.md` §0/§1.8 与 §7 `CF-3` 对静置损耗/`AS23` 措辞冲突，实际执行为"不做"）；
+  `L6-W4`（`trajectories/` 抽样 `62`/`70`，`RUN_LESSONS` §2b 计数笔误，不得据此判产物缺失）；`L6-W5`（`4-3` task `status.json` 残留
+  `E-F6` 过期 `message`，实际终态 `succeeded`；有本地任务 `running` 时禁止 `RESUME`/`reconcile`）；`L6-W6`（`E-F7` 的 5 条空转动作未被引用）。
+- **Level 6 判定：`PASS_WITH_WARNING`**（`failure_type = null`、`return_stage = null`、`blocking_reasons = []`）。
+- **路由**：按 `config/gates.yaml` 的 `sanity_check → ablation` 推进至 `ablation`；`ablation` 仍为 `pending`，
+  **不在本 L6 结论覆盖范围内**，本结论不替代 `ablation` 的独立验收。
+
+- 报告生成：`act-cb24258ea2be418a`（2026-09-11）

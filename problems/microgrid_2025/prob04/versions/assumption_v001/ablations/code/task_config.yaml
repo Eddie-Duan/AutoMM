@@ -1,0 +1,46 @@
+# prob04 ablation 隔离计算 task 级配置 —— 链 4-2
+# 生成者：ablation-analyst（动作同步唤醒，2026-09-12）；阶段：ablation（config/workflow.yaml: mandatory_stages，不得 skipped）
+# 修订 run002：代码为编码修复版（run001 的 code_hash d33ee2ef… 已作废），output_directory 一并改为 _run002。
+# 修订 run003：实现纠错版（S-RH 窗口 t0/include_q_em、plan_* 全量落盘、C3 比对对象、C4 方向、
+#   S-VAR(4-3) 不等式方向与逐场景行偏移、C8 残差证据），判据 C1–C9 与阈值一字未改（见 plan_v003.md）；
+#   output_directory 改为 _run003，run001/run002 原样保留。
+# 用途：make_task_spec 的 config_path；effective_config 合并到全局配置之上（仅影响本 task）。
+# 关键：chain_scope 使本文件 config_hash 与 task_config_4-3.yaml 不同 ——
+#       automm.tasks.compute_task_id 的身份不含 output_directory/command，两链共用同一 config 会算出同一 task_id。
+chain_scope: "4-2"
+compute:
+  default_backend: local
+  max_local_concurrent_tasks: 1
+  memory_per_worker_gb: 2
+  task_timeout_seconds: 5400
+  timeout_retry_attempts: 2
+  retry:
+    infrastructure_transient: 3
+    code_runtime: 2
+    model_revision: 2
+  resource_notes:
+    device: cpu
+    gpu_required: false
+    concurrent_gpu_tasks: 0
+    note: >-
+      链 4-2 ablation：BASE + S-RH(H=1/3/7/14) + S-VAR + S-VAR-RH(H=3) + PF-AR +
+      S-ABL-SPILL + S-ABL-TIEBREAK + S-ABL-ETA-PLACE(4 档) = 14 个对照，全年 365 天。
+      本动作实测（run003 修复版）：60 天 7 对照 = 15.3 s；按 365 天线性外推含 S-RH 窗口增长
+      ⇒ 预计 200–600 s；故 timeout 5,400 s、整批 --max-wall-seconds 3,000 s 留余量。
+      CPU HiGHS，不占单卡 GPU 串行额度；本机内存偏低，单 worker 串行。
+    worker_launch_mode: "supervised（继承 config/compute.yaml）"
+solver:
+  name: highs
+  interface: "scipy.optimize.linprog(method='highs')"
+  device: cpu
+  time_limit_seconds: 60
+  deterministic: true
+  seed: 20260911
+  notes:
+    - "seed 只用于场景抽样的确定性记录；S-VAR 场景用确定性等距规则，不用随机数。"
+    - "全部对照复用 accepted M._solve_with_tiebreak（AS21 字典序）以保证 H=1 逐位复现主口径。"
+    - "结算一律用附件 4 实际价；决策层只用 ≤ d−1 的历史（A8-(b)）。"
+ablation:
+  base_reference_42_d_full: 14755884.322036
+  base_reference_42_d_req: 13006411.041148
+  gate_c1_relative_tolerance: 1.0e-9

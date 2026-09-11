@@ -1,7 +1,7 @@
 problem_id: microgrid_2025
 question_id: prob04
-status: active
-stage: robustness
+status: locally_completed
+stage: locally_completed
 dependencies: []
 active_assumption_version: 1
 active_formulation_version: 1
@@ -10,20 +10,33 @@ consecutive_rejections: 0
 literature_refreshes: 0
 literature_refresh_required: false
 conclusion:
-  conclusion_id: ''
-  version: 0
-  content_hash: ''
+  conclusion_id: prob04-concl-001
+  version: 1
+  content_hash: 3c3971b3923ba16e355b511c1054717c21405e5f0b8be304bde1797d1df81508
+  updated_at: '2026-09-11T17:22:53.706892+00:00'
 sanity:
   level_1_4: PASS_WITH_WARNING
-  level_5: pending
-  level_6: not_applicable
+  level_5: PASS
+  level_6: PASS_WITH_WARNING
 optional_stages:
   robustness:
-    decision: pending
-    reason: ''
+    decision: completed
+    reason: mandatory_stages 阶段，未 skipped。robustness/report.md 已落盘：覆盖 plan.md 冻结的全部适用类别（参数/输入噪声/预测机制/求解器/结构情景），两链各自独立隔离
+      task 全年 365 天（4-2 = task 953eeb1e0b004171cad9，162/162 成功，stability_grade=稳定、failed_criteria=[]；4-3
+      = task 5713b0a24eedeac9f000，198 情景/195 成功/3 预注册不可行，failed_criteria=['S4']、stability_grade=条件稳定（需给出适用边界））；基线闸门两链
+      worst_relative_diff=0.0；预注册 S1–S7 与 K1–K8 已分链判定，K7/K8 反例按 T7-4 如实登记并给出机制与适用边界（未改判据）；原始样本与汇总分开保存、95%
+      CI 与敏感性图齐备、两链各 7 图；引用数值自检 68/68 PASS；本阶段未写任何交付值、未覆盖 results/prob04_v001_f001_*、未修改
+      accepted 代码与假设/公式版本，robustness 图件不登记为交付图表。
   ablation:
-    decision: pending
-    reason: ''
+    decision: completed
+    reason: mandatory_stages 阶段，未 skipped。plan_v001 §3 的 13 个对照条目（分链 14/9 个 case）在
+      run003 两链隔离 task（e54f83cea3e31a1c0879 / 20906d684ca14f498047，同 code_hash、supervised、CPU
+      HiGHS、seed=20260911）全部执行、无失败 case；强制闸门 C1（C-ANCHOR-P03 六项逐位复现 prob03 M1 ≤4.86e-13）、C2（两链
+      ≤2.63e-14）、C3（H=1 相对差与 E 轨迹差 0.0）全通过，criteria_failed=[]、checks_failed=[]；S-VAR
+      四项与 S-RH 三项齐备，判据 C4–C9 已分链判定并如实登记反例（S-VAR-RH +2.6959%）与不通过项（4-3 的 C6 spill_bound_pass=false）。ablations/report.md
+      已回答 plan_v001 §7 三问（模型族依赖性、被消融项经济贡献、论文主表推荐模型），ablations/figures/ 落盘 4 张实验图（不登记为交付图表），ablations/summary.json
+      为阶段级派生汇总。技术债 AB-D1…AB-D13 与上游欠账 AB-D12 已逐条登记；主口径未被替换，未写回 prob03，未改 data/、accepted
+      code/、assumptions.md、formulation_v001 与 results/prob04_v001_f001_*。
 artifacts:
   problem_understanding: true
   literature: true
@@ -33,12 +46,14 @@ artifacts:
   computation: true
   visualization: true
   sanity_check: true
-  robustness: false
-  ablation: false
+  robustness: true
+  ablation: true
   cross_question_review: false
 notification:
-  sent: false
-  attempts: 0
+  sent: true
+  attempts: 2
+  status: sent
+  sent_at: '2026-09-11T17:23:00.480867+00:00'
 stale:
   value: false
   caused_by: []
@@ -115,4 +130,25 @@ sanity_history:
     数据事实复核、关键假设文献门禁 passed=true、跨问未互填且 Σs'(4-2) 与 prob02 逐位相同、两链差额三分项归因恒等式残差 1.0e-6、黑名单措辞通过。技术债
     N1–N5（本动作更正 κ_m 范围、C^fc 备选读法数值、q_em 措辞、c 上限字面值、交付工作簿 md5）与 D1/D3–D12 已在 sanity_report.md
     §7 与 machine_sanity.json 逐条登记，无硬门禁失败。
+  failure_type: null
+- at: '2026-09-11T15:50:31.522573+00:00'
+  level: level_6
+  status: PASS_WITH_WARNING
+  reason: prob04 Level 6（robustness 完成后）独立复核，act-cb24258ea2be418a：两链分别验收——4-2 = robustness/results/prob04_v001_robust_4-2_run001（task
+    953eeb1e0b004171cad9，162/162 成功、stability_grade=稳定、failed_criteria=[]）；4-3 = ..._4-3_run001（task
+    5713b0a24eedeac9f000，195/198、3 个预注册不可行负对照、failed_criteria=['S4']、stability_grade=条件稳定（需给出适用边界））。自建只读探针
+    270/270 PASS、0 FAIL，另在逐字节副本上通用脚本 144 数值文件 0 NaN/0 Inf、failures=[]。L1 前置 PASS：产物齐备、task
+    succeeded/rc=0/attempt=1/supervised、stderr 0 字节、code_sha256 与磁盘及 accepted 四模块逐位一致、输入
+    md5 未变、两链独立 output_directory 且 forecast_backtest.json 逐位相同。L2/S1-S7：两链 baseline_check
+    passed=true、worst_relative_diff=0.0 且与 run002/solution.json 逐位相等（交付期 13,006,411.041148
+    / 15,289,050.714738）；S1 受判 139/170 可行率 100%、identity_failed=[]；S2 4-2 max|Σq_em|≤1e-9
+    且 days=0、4-3 Σq_em 落在 [0.25×,4×] 带内 out_of_band=[]；S3 有方向组 reversals=[]；S4 4-2
+    四族全达标、4-3 noise_white_10 族均值 +10.5919% > 5%（E-F9 已定档）；S5 三设置全可行且两口径均≤1%（全期 1.25189e-4/4.36256e-4、交付期
+    4.969e-6/6.10152e-4）；S6 buy_cap 分链实测（4-2 全域可行、4-3 分界 (4500,5000] kW）、terminal_e_6000
+    有数值；S7 预测器 7 项指标齐全。预注册合规：plan.md 早于结果、CF-10 冻结措辞在 criteria 中、纠偏非单向放宽（新增更严锚定正是判出
+    4-3 S4 FAIL 的项）、失败样本未删除、未为凑 PASS 改判据。T7-4 反例（K7 max 口径两链、K8 部分）已如实登记并给机制与适用边界。主口径未被替换（robustness
+    无 xlsx、交付工作簿 md5 未变、无 run003）。技术债 L6-W1（S5 全期/交付期口径混用标注）、L6-W2（S4 族间均值差归一化基准未逐字定义）、L6-W3（plan.md
+    对 AS23 措辞冲突）、L6-W4（trajectories 62/70 计数纪律）、L6-W5（4-3 task status.json 残留 E-F6
+    过期 message）、L6-W6（E-F7 空转条目未引用）已在同目录 sanity_report_level6.md 与 machine_sanity_l6.json
+    逐条登记，无硬门禁失败。ablation 仍 pending，不在本 L6 结论覆盖范围。
   failure_type: null

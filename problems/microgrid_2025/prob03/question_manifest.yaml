@@ -16,7 +16,7 @@ conclusion:
   updated_at: '2026-09-11T11:31:51.021216+00:00'
 sanity:
   level_1_4: PASS_WITH_WARNING
-  level_5: pending
+  level_5: PASS
   level_6: PASS_WITH_WARNING
 optional_stages:
   robustness:

@@ -1,0 +1,55 @@
+# prob04 ablation 隔离计算 task 级配置 —— 链 4-3
+# 生成者：ablation-analyst（动作同步唤醒，2026-09-12）；阶段：ablation（config/workflow.yaml: mandatory_stages，不得 skipped）
+# 修订 run002：代码为编码修复版（run001 的 code_hash d33ee2ef… 已作废），output_directory 一并改为 _run002；
+#   并补全 C-ANCHOR-P03 构造：锚点运行期间把「无前一日」的中性回退项换成锚点自身的单日曲线（只补数据、不改模型方程）。
+# 修订 run003：实现纠错版（S-RH 窗口 t0=0 + plan_* 全量落盘、S-VAR(4-3) 不等式方向与逐场景行偏移、
+#   C3 比对对象取 H=1、C4 按「非增」判定、C8 残差证据），判据 C1–C9 与阈值一字未改（见 plan_v003.md）；
+#   output_directory 改为 _run003，run001/run002 原样保留。
+# 用途：make_task_spec 的 config_path；effective_config 合并到全局配置之上（仅影响本 task）。
+# 关键：chain_scope 使本文件 config_hash 与 task_config.yaml 不同，避免 task_id 撞号。
+chain_scope: "4-3"
+compute:
+  default_backend: local
+  max_local_concurrent_tasks: 1
+  memory_per_worker_gb: 2
+  task_timeout_seconds: 12600
+  timeout_retry_attempts: 2
+  retry:
+    infrastructure_transient: 3
+    code_runtime: 2
+    model_revision: 2
+  resource_notes:
+    device: cpu
+    gpu_required: false
+    concurrent_gpu_tasks: 0
+    note: >-
+      链 4-3 ablation：BASE + C-ANCHOR-P03（强制闸门 C1，逐位复现 prob03 run003 的 M1）+
+      S-RH(H=1/3/7/14) + S-VAR + S-ABL-SPILL + S-ABL-KAPPA1 = 9 个对照，全年 365 天；
+      4-3 每日 4 层 LP，C-ANCHOR-P03 与 BASE 各需一次全年四层链路。
+      本动作实测（run003 修复版、隔离 task 之外的只读探针）：60 天 8 对照 = 49.25 s
+      （含 S-RH 四深度与 S-VAR(4-3)）；按 365 天线性外推 ⇒ 预计 300–700 s；
+      故 timeout 12,600 s、整批 --max-wall-seconds 10,800 s 留足余量。
+      CPU HiGHS，与 4-2 以 max_local_concurrent_tasks=1 强制串行。
+    worker_launch_mode: "supervised（继承 config/compute.yaml）"
+solver:
+  name: highs
+  interface: "scipy.optimize.linprog(method='highs')"
+  device: cpu
+  time_limit_seconds: 60
+  deterministic: true
+  seed: 20260911
+  notes:
+    - "C-ANCHOR-P03 用附件 1 单日曲线 × 365 替换价格，其余输入与 AS21 tie-break 不变；判据相对差 ≤ 1e-9。"
+    - "C-ANCHOR-P03 的层内弃光界用 D9-A（与 prob03 M1 一致），不用主口径的 D9-B。"
+    - "结算一律用附件 4 实际价；调整层只用「已实现的实际价 + 历史 + 该时刻光伏预报」（A8-(b)）。"
+ablation:
+  base_reference_43_d_full: 17181202.515506
+  base_reference_43_d_req: 15289050.714738
+  anchor_p03:
+    d_full_c_total: 16179176.145228
+    d_req_c_total: 14540616.335652
+    d_full_c_plan: 13885669.475555
+    d_full_c_adj: 563098.132533
+    d_full_c_em: 1730408.537141
+    d_req_sum_q_em: 391274.485914
+  gate_c1_relative_tolerance: 1.0e-9

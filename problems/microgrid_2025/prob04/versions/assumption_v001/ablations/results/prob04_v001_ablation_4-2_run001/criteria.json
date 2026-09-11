@@ -1,0 +1,95 @@
+{
+  "chain": "4-2",
+  "criteria": {
+    "C2": {
+      "pass": true,
+      "relative_differences": {
+        "D_full_C_total": 1.0477145524602348e-14,
+        "D_req_C_total": 8.592586271515616e-16,
+        "D_req_sum_q_em": 1.0734557687186452e-10,
+        "D_full_sum_q_em": 1.2225986889546903e-10
+      },
+      "threshold": 1e-09,
+      "expected": {
+        "D_full_C_total": 14755884.322036,
+        "D_req_C_total": 13006411.041148,
+        "D_req_sum_q_em": 0.0,
+        "D_full_sum_q_em": 0.0
+      },
+      "observed": {
+        "D_full_C_total": 14755884.322035845,
+        "D_req_C_total": 13006411.04114801,
+        "D_req_sum_q_em": 1.0734557687186452e-10,
+        "D_full_sum_q_em": 1.2225986889546903e-10
+      }
+    },
+    "C3": {
+      "pass": false,
+      "D_full_relative_difference": 2.524613379422279e-16,
+      "D_req_relative_difference": 5.728390847677072e-16,
+      "state_trajectory_max_abs_difference_kwh": 9600.0,
+      "threshold": 1e-09,
+      "note": "H = 1 蹇呴』閫愪綅澶嶇幇涓诲彛寰勫熀鍑嗭紙鍥㈤槦 R-2 棰勬敞鍐屽垽鎹憼锛"
+    },
+    "C4": {
+      "chain": "4-2",
+      "D_full_cost_by_horizon": {
+        "H1": 14755884.322035842,
+        "H3": 14726408.132530775,
+        "H7": 14726406.774405988,
+        "H14": 14726404.555077136
+      },
+      "monotone_nondecreasing_cost": false,
+      "applies": true,
+      "counterexample_registered": true,
+      "note": "棰勬敞鍐屾湡鏈涳細4-2 鐨?H 澧炲ぇ 鈬?璐圭敤涓嶅锛?-3 鍥?搂3.3.4 鐨勮竟鐣岋紙娣卞害鍙綔鐢ㄤ簬璁″垝灞傦級涓嶄綔鍗曡皟鎬ц姹傦紝浠呮姤鏁板€硷紱杩濆弽鍒欐寜 T7-4 濡傚疄鐧昏鍙嶄緥锛岀姝㈠己鍑戝崟璋冩€"
+    },
+    "C_RH_BOUNDARY": {
+      "state_end_statistics": {
+        "S-RH-H1": {
+          "mean": 1200.0000001335086,
+          "min": 1200.0,
+          "max": 1200.0000487306775,
+          "unique": 2,
+          "days_at_lower_bound": 364,
+          "sum_abs_span_from_lower_bound_kwh": 4.873067746302695e-05
+        },
+        "S-RH-H3": {
+          "mean": 5335.874156546682,
+          "min": 1200.0,
+          "max": 10800.0,
+          "unique": 190,
+          "days_at_lower_bound": 30,
+          "sum_abs_span_from_lower_bound_kwh": 1509594.067139539
+        },
+        "S-RH-H7": {
+          "mean": 5335.850434485893,
+          "min": 1200.0,
+          "max": 10800.0,
+          "unique": 190,
+          "days_at_lower_bound": 30,
+          "sum_abs_span_from_lower_bound_kwh": 1509585.408587351
+        },
+        "S-RH-H14": {
+          "mean": 5335.810784242993,
+          "min": 1200.0,
+          "max": 10800.0,
+          "unique": 189,
+          "days_at_lower_bound": 30,
+          "sum_abs_span_from_lower_bound_kwh": 1509570.9362486922
+        }
+      },
+      "note": "鏃ヨ竟鐣屽偍鐢甸噺琛屼负锛堝洟闃?R-2 鎶ュ憡椤?b锛岀洿鎺ュ洖搴?prob03 E8/R18锛"
+    },
+    "C6": {
+      "spill_bound_D9A_vs_D9B_relative_difference": 0.0,
+      "spill_bound_pass": true,
+      "threshold": 1e-06,
+      "kappa1_delta_yuan": null,
+      "tiebreak_literal_delta_yuan": 0.14608633890748024
+    }
+  },
+  "criteria_failed": [
+    "C3"
+  ]
+}

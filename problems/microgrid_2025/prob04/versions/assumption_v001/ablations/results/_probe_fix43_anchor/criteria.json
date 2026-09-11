@@ -1,0 +1,67 @@
+{
+  "chain": "4-3",
+  "criteria": {
+    "C2": {
+      "pass": true,
+      "relative_differences": {
+        "D_full_C_total": 2.3200125926906667e-14,
+        "D_req_C_total": 2.6314998866872502e-14,
+        "D_req_sum_q_em": 1.0448618696807667e-12,
+        "D_full_sum_q_em": 8.918611662143554e-13
+      },
+      "threshold": 1e-09,
+      "expected": {
+        "D_full_C_total": 17181202.515506,
+        "D_req_C_total": 15289050.714738,
+        "D_req_sum_q_em": 394026.04075,
+        "D_full_sum_q_em": 410453.995927
+      },
+      "observed": {
+        "D_full_C_total": 17181202.515506398,
+        "D_req_C_total": 15289050.714737598,
+        "D_req_sum_q_em": 394026.0407495883,
+        "D_full_sum_q_em": 410453.9959273661
+      }
+    },
+    "C1": {
+      "pass": false,
+      "relative_differences": {
+        "D_full_C_total": 0.00010985048444389406,
+        "D_req_C_total": 1.2041349553967103e-14,
+        "D_full_C_plan": 6.237581817118518e-14,
+        "D_full_C_adj": 0.003156271060516456,
+        "D_full_C_em": 1.515463824401979e-12,
+        "D_req_sum_q_em": 5.2960077978989315e-14
+      },
+      "threshold": 1e-09,
+      "reference": {
+        "D_full_C_total": 16179176.145228,
+        "D_req_C_total": 14540616.335652,
+        "D_full_C_plan": 13885669.475555,
+        "D_full_C_adj": 563098.132533,
+        "D_full_C_em": 1730408.537141,
+        "D_req_sum_q_em": 391274.485914
+      },
+      "observed": {
+        "D_full_C_total": 16180953.435565457,
+        "D_req_C_total": 14540616.335652174,
+        "D_full_C_plan": 13885669.475554135,
+        "D_full_C_adj": 564875.4228729447,
+        "D_full_C_em": 1730408.5371383775,
+        "D_req_sum_q_em": 391274.4859139793
+      },
+      "probe_days": 365,
+      "note": "probe_days < 365 时 pass 预期为 False（仅自检）"
+    },
+    "C6": {
+      "spill_bound_D9A_vs_D9B_relative_difference": null,
+      "spill_bound_pass": null,
+      "threshold": 1e-06,
+      "kappa1_delta_yuan": null,
+      "tiebreak_literal_delta_yuan": null
+    }
+  },
+  "criteria_failed": [
+    "C1"
+  ]
+}

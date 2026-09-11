@@ -1,0 +1,57 @@
+{
+  "chain": "4-2",
+  "base_reference": {
+    "D_full_cost_total_yuan": 14755884.322035845,
+    "D_req_cost_total_yuan": 13006411.04114801,
+    "source": "BASE（本实验独立重跑主口径）"
+  },
+  "table": {
+    "BASE": {
+      "D_full_cost_total_yuan": 14755884.322035845,
+      "D_req_cost_total_yuan": 13006411.04114801,
+      "D_full_delta_vs_base_yuan": 0.0,
+      "D_req_delta_vs_base_yuan": 0.0,
+      "D_full_delta_pct": 0.0,
+      "D_req_delta_pct": 0.0,
+      "D_req_delta_c_price_yuan": 520790.8390353306,
+      "D_req_sum_q_em_kwh": 1.0734557687186452e-10,
+      "state_end_mean_kwh": 1200.0000001335086,
+      "state_end_days_at_lower_bound": 364,
+      "sum_abs_state_span_from_lower_bound_kwh": 4.873067746302695e-05,
+      "lp_layer_solves": 365,
+      "checks_failed": []
+    }
+  },
+  "criteria": {
+    "C2": {
+      "pass": true,
+      "relative_differences": {
+        "D_full_C_total": 1.0477145524602348e-14,
+        "D_req_C_total": 8.592586271515616e-16,
+        "D_req_sum_q_em": 1.0734557687186452e-10,
+        "D_full_sum_q_em": 1.2225986889546903e-10
+      },
+      "threshold": 1e-09,
+      "expected": {
+        "D_full_C_total": 14755884.322036,
+        "D_req_C_total": 13006411.041148,
+        "D_req_sum_q_em": 0.0,
+        "D_full_sum_q_em": 0.0
+      },
+      "observed": {
+        "D_full_C_total": 14755884.322035845,
+        "D_req_C_total": 13006411.04114801,
+        "D_req_sum_q_em": 1.0734557687186452e-10,
+        "D_full_sum_q_em": 1.2225986889546903e-10
+      }
+    },
+    "C6": {
+      "spill_bound_D9A_vs_D9B_relative_difference": null,
+      "spill_bound_pass": null,
+      "threshold": 1e-06,
+      "kappa1_delta_yuan": null,
+      "tiebreak_literal_delta_yuan": null
+    }
+  },
+  "note": "ΔC = 对照费用 − 主口径费用（负数 = 更省）；一律分链报告；S-VAR 的期望费用只在 12 个代表日窗口内与主口径同窗口可比，不可与全年费用直接相加"
+}

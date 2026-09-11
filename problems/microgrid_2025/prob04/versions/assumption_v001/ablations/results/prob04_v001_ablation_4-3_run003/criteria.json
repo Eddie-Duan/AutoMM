@@ -1,0 +1,124 @@
+{
+  "chain": "4-3",
+  "criteria": {
+    "C2": {
+      "pass": true,
+      "relative_differences": {
+        "D_full_C_total": 2.3200125926906667e-14,
+        "D_req_C_total": 2.6314998866872502e-14,
+        "D_req_sum_q_em": 1.0448618696807667e-12,
+        "D_full_sum_q_em": 8.918611662143554e-13
+      },
+      "threshold": 1e-09,
+      "expected": {
+        "D_full_C_total": 17181202.515506,
+        "D_req_C_total": 15289050.714738,
+        "D_req_sum_q_em": 394026.04075,
+        "D_full_sum_q_em": 410453.995927
+      },
+      "observed": {
+        "D_full_C_total": 17181202.515506398,
+        "D_req_C_total": 15289050.714737598,
+        "D_req_sum_q_em": 394026.0407495883,
+        "D_full_sum_q_em": 410453.9959273661
+      }
+    },
+    "C1": {
+      "pass": true,
+      "relative_differences": {
+        "D_full_C_total": 1.4045381925902408e-14,
+        "D_req_C_total": 1.2041349553967103e-14,
+        "D_full_C_plan": 2.7499016613103144e-14,
+        "D_full_C_adj": 4.86047468109982e-13,
+        "D_full_C_em": 6.821807324618693e-14,
+        "D_req_sum_q_em": 5.2960077978989315e-14
+      },
+      "threshold": 1e-09,
+      "reference": {
+        "D_full_C_total": 16179176.145228,
+        "D_req_C_total": 14540616.335652,
+        "D_full_C_plan": 13885669.475555,
+        "D_full_C_adj": 563098.132533,
+        "D_full_C_em": 1730408.537141,
+        "D_req_sum_q_em": 391274.485914
+      },
+      "observed": {
+        "D_full_C_total": 16179176.145228228,
+        "D_req_C_total": 14540616.335652174,
+        "D_full_C_plan": 13885669.475554619,
+        "D_full_C_adj": 563098.1325327263,
+        "D_full_C_em": 1730408.5371408819,
+        "D_req_sum_q_em": 391274.4859139793
+      },
+      "probe_days": 365,
+      "note": "probe_days < 365 时 pass 预期为 False（仅自检）"
+    },
+    "C3": {
+      "pass": true,
+      "D_full_relative_difference": 0.0,
+      "D_req_relative_difference": 0.0,
+      "state_trajectory_max_abs_difference_kwh": 0.0,
+      "threshold": 1e-09,
+      "note": "H = 1 必须逐位复现主口径基准（团队 R-2 预注册判据①）；轨迹比对对象为 H = 1"
+    },
+    "C4": {
+      "chain": "4-3",
+      "D_full_cost_by_horizon": {
+        "H1": 17181202.515506398,
+        "H3": 17149405.023812063,
+        "H7": 17149403.06553306,
+        "H14": 17149399.532727864
+      },
+      "expectation_nonincreasing_cost": true,
+      "monotone_nonincreasing_cost": true,
+      "applies": false,
+      "counterexample_registered": false,
+      "note": "预注册期望：4-2 的 H 增大 ⇒ 费用不增（非增）；4-3 因 §3.3.4 的边界（深度只作用于计划层）不作单调性要求，仅报数值；出现**增**则按 T7-4 如实登记反例，禁止强凑单调性"
+    },
+    "C_RH_BOUNDARY": {
+      "state_end_statistics": {
+        "S-RH-H1": {
+          "mean": 1200.0000000428229,
+          "min": 1199.9999999952972,
+          "max": 1200.0000003066643,
+          "unique": 1,
+          "days_at_lower_bound": 365,
+          "sum_abs_span_from_lower_bound_kwh": 1.6051868215072318e-05
+        },
+        "S-RH-H3": {
+          "mean": 5327.9287879801595,
+          "min": 1200.0,
+          "max": 10800.0,
+          "unique": 191,
+          "days_at_lower_bound": 30,
+          "sum_abs_span_from_lower_bound_kwh": 1506694.0076127583
+        },
+        "S-RH-H7": {
+          "mean": 5327.905131462525,
+          "min": 1200.0,
+          "max": 10800.0,
+          "unique": 191,
+          "days_at_lower_bound": 30,
+          "sum_abs_span_from_lower_bound_kwh": 1506685.3729838217
+        },
+        "S-RH-H14": {
+          "mean": 5327.8654434755135,
+          "min": 1200.0,
+          "max": 10800.0,
+          "unique": 191,
+          "days_at_lower_bound": 30,
+          "sum_abs_span_from_lower_bound_kwh": 1506670.8868685625
+        }
+      },
+      "note": "日边界储电量行为（团队 R-2 报告项 b，直接回应 prob03 E8/R18）"
+    },
+    "C6": {
+      "spill_bound_D9A_vs_D9B_relative_difference": 7.578043250244173e-05,
+      "spill_bound_pass": false,
+      "threshold": 1e-06,
+      "kappa1_delta_yuan": 1.4901161193847656e-08,
+      "tiebreak_literal_delta_yuan": null
+    }
+  },
+  "criteria_failed": []
+}

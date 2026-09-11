@@ -56,22 +56,22 @@ edges:
   version: 2
   content_hash: 6fb260491cb70450c0ea71608b59271f51d99a002737d0b3ed46a1bb1b8888d6
   propagates:
-  - 基础微网-储能-外网联合模型结构（问题 2/3 在波动电价下的重算基础：等式功率平衡 + 显式弃光 s、储能状态转移
-    E_t = E_{t-1} + 0.9c − q_dis/0.9、E∈[1200,10800]、c ≤ 833.3333 / q_dis ≤ 750.0000 kWh、Δt = 1/6 h、
-    目标 min Σ p·b 元不乘 Δt、无购电上限/无售电/确定性）
+  - 基础微网-储能-外网联合模型结构（问题 2/3 在波动电价下的重算基础：等式功率平衡 + 显式弃光 s、储能状态转移 E_t = E_{t-1} + 0.9c
+    − q_dis/0.9、E∈[1200,10800]、c ≤ 833.3333 / q_dis ≤ 750.0000 kWh、Δt = 1/6 h、 目标
+    min Σ p·b 元不乘 Δt、无购电上限/无售电/确定性）
   - 计划窗与时间对齐口径（AS01 左端点 / 0:10 → 24:10）
   received_in: problems/microgrid_2025/prob04/shared/problem_understanding.md
   received_at_action: act-b680a52c76184c4b
   pending_decisions:
-  - A8 价格可观测性（0:00 是否已知附件 4 全天电价；高优先，prob04 assumption_definition 必须裁定，
-    裁定前 mathematical_formulation 不得启动）
+  - A8 价格可观测性（0:00 是否已知附件 4 全天电价；高优先，prob04 assumption_definition 必须裁定， 裁定前 mathematical_formulation
+    不得启动）
   - A21 两条链（4-2/4-3）是否必须共用同一 A8 解读（新增）
   - A22 结算倍数（5× / 0.5× / 1.5×）以附件 4 的 p_{d,t} 为基数（新增，登记性）
   - A23 A8=(a) 时 4-2 的 q_em 是否恒零（承接 prob02 A17 的同构问题）
   - D9-B prob03 登记的 prob04 前置条件（弃光界收紧为物理盈余 0 ≤ s ≤ max(0, PV·Δt − L·Δt)）
   - A2 已由 prob02 assumption_v001 裁定（D1-B/D2-A/D8-A），prob04 承接不再重议
-  note: prob04 把价格输入由附件 1 换成附件 4，并按 4-2/4-3 两条链分别重算；不新增约束结构，但
-    A8 会改变信息集（原 note「只更换价格输入」已由 act-b680a52c76184c4b 更正）。
+  note: prob04 把价格输入由附件 1 换成附件 4，并按 4-2/4-3 两条链分别重算；不新增约束结构，但 A8 会改变信息集（原 note「只更换价格输入」已由
+    act-b680a52c76184c4b 更正）。
 - from: prob02
   to: prob03
   type: soft_conclusion_dependency
@@ -104,8 +104,7 @@ edges:
   version: 1
   content_hash: 4840a4d4f57e6d404c77a0d72a2c0c045cbbfeac231248e688daf7d656c4b798
   propagates:
-  - 紧急购电机制与结果表结构（α_em = 5 结算、q_em 只补负载缺口不用于充电；result4-2 复用 result2 模板与
-    三个工作表 计划购电量/充放电量/紧急购电量）
+  - 紧急购电机制与结果表结构（α_em = 5 结算、q_em 只补负载缺口不用于充电；result4-2 复用 result2 模板与 三个工作表 计划购电量/充放电量/紧急购电量）
   - 4-2 链的跨日衔接口径（A2：自 2025-01-01 以 E_init = 6000 kWh 滚动递推、1 月预热、终端自由、单一长时域 LP）
   - 表 2 端点语义（R1：多日为逐日切片、随日变化）与购电上限阈值表述（R5，仅 prob02 口径）
   received_in: problems/microgrid_2025/prob04/shared/problem_understanding.md
@@ -114,11 +113,10 @@ edges:
   - A8 价格可观测性（决定 4-2 的计划信息结构与 q_em 是否恒零）
   - A23（承接 A17 的同构问题：A8=(a) + 无购电上限 ⇒ q_em ≡ 0 与题面表 3 展示意图的张力）
   not_portable:
-  - prob02 A17（0:00 完全信息 + 无购电上限 ⇒ 最优 q_em ≡ 0）是 prob02 侧口径，不得直接移植到 4-2；
-    4-2 的对应问题为 A8/A23，A8 取 (b)/(c) 时 q_em 可能非零
-  note: 问题 4 的「重算问题 2」直接引用 prob02 的结论，但价格输入换成附件 4（p_{d,t}），故数值必然不同；
-    禁止用 result2.xlsx 的数值充当 result4-2.xlsx，也禁止把 result4-2.xlsx 写回 result2.xlsx
-    （两模板 md5 相同：b878ce2b016155f49486af25c51e8cab）。
+  - prob02 A17（0:00 完全信息 + 无购电上限 ⇒ 最优 q_em ≡ 0）是 prob02 侧口径，不得直接移植到 4-2； 4-2 的对应问题为
+    A8/A23，A8 取 (b)/(c) 时 q_em 可能非零
+  note: 问题 4 的「重算问题 2」直接引用 prob02 的结论，但价格输入换成附件 4（p_{d,t}），故数值必然不同； 禁止用 result2.xlsx
+    的数值充当 result4-2.xlsx，也禁止把 result4-2.xlsx 写回 result2.xlsx （两模板 md5 相同：b878ce2b016155f49486af25c51e8cab）。
 - from: prob03
   to: prob04
   type: soft_conclusion_dependency

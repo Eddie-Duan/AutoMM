@@ -1,0 +1,96 @@
+{
+  "chain": "4-2",
+  "criteria": {
+    "C2": {
+      "pass": false,
+      "relative_differences": {
+        "D_full_C_total": 0.8002888944680583,
+        "D_req_C_total": 0.9079345803866178,
+        "D_req_sum_q_em": 9.237055564881302e-12,
+        "D_full_sum_q_em": 2.4151347588485805e-11
+      },
+      "threshold": 1e-09,
+      "expected": {
+        "D_full_C_total": 14755884.322036,
+        "D_req_C_total": 13006411.041148,
+        "D_req_sum_q_em": 0.0,
+        "D_full_sum_q_em": 0.0
+      },
+      "observed": {
+        "D_full_C_total": 2946913.9710552567,
+        "D_req_C_total": 1197440.6901674173,
+        "D_req_sum_q_em": 9.237055564881302e-12,
+        "D_full_sum_q_em": 2.4151347588485805e-11
+      }
+    },
+    "C3": {
+      "pass": false,
+      "D_full_relative_difference": 0.004444363200371506,
+      "D_req_relative_difference": 0.006204159352476645,
+      "state_trajectory_max_abs_difference_kwh": 9600.0,
+      "threshold": 1e-09,
+      "note": "H = 1 必须逐位复现主口径基准（团队 R-2 预注册判据①）"
+    },
+    "C4": {
+      "chain": "4-2",
+      "D_full_cost_by_horizon": {
+        "H1": 2933816.815047638,
+        "H3": 2933816.815047638,
+        "H7": 2933816.815047638,
+        "H14": 2933816.815047638
+      },
+      "monotone_nondecreasing_cost": true,
+      "applies": true,
+      "counterexample_registered": false,
+      "note": "预注册期望：4-2 的 H 增大 ⇒ 费用不增；4-3 因 §3.3.4 的边界（深度只作用于计划层）不作单调性要求，仅报数值；违反则按 T7-4 如实登记反例，禁止强凑单调性"
+    },
+    "C_RH_BOUNDARY": {
+      "state_end_statistics": {
+        "S-RH-H1": {
+          "mean": 7085.68597191358,
+          "min": 1200.0,
+          "max": 10800.0,
+          "unique": 15,
+          "days_at_lower_bound": 2,
+          "sum_abs_span_from_lower_bound_kwh": 353141.1583148148
+        },
+        "S-RH-H3": {
+          "mean": 7085.68597191358,
+          "min": 1200.0,
+          "max": 10800.0,
+          "unique": 15,
+          "days_at_lower_bound": 2,
+          "sum_abs_span_from_lower_bound_kwh": 353141.1583148148
+        },
+        "S-RH-H7": {
+          "mean": 7085.68597191358,
+          "min": 1200.0,
+          "max": 10800.0,
+          "unique": 15,
+          "days_at_lower_bound": 2,
+          "sum_abs_span_from_lower_bound_kwh": 353141.1583148148
+        },
+        "S-RH-H14": {
+          "mean": 7085.68597191358,
+          "min": 1200.0,
+          "max": 10800.0,
+          "unique": 15,
+          "days_at_lower_bound": 2,
+          "sum_abs_span_from_lower_bound_kwh": 353141.1583148148
+        }
+      },
+      "note": "日边界储电量行为（团队 R-2 报告项 b，直接回应 prob03 E8/R18）"
+    },
+    "C6": {
+      "spill_bound_D9A_vs_D9B_relative_difference": 1.2641326944226775e-15,
+      "spill_bound_pass": true,
+      "threshold": 1e-06,
+      "kappa1_delta_yuan": null,
+      "tiebreak_literal_delta_yuan": 0.07386525254696608
+    }
+  },
+  "criteria_failed": [
+    "C2",
+    "C3"
+  ]
+}

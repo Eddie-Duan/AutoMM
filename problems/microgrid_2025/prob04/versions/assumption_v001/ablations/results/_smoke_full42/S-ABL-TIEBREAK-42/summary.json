@@ -1,0 +1,96 @@
+{
+  "days": 60,
+  "chain": "4-2",
+  "D_full": {
+    "days": 60,
+    "cost_total_yuan": 2946914.044920509,
+    "cost_plan_yuan": 2946914.044920509,
+    "cost_adj_yuan": 0.0,
+    "cost_em_yuan": 8.423495856391129e-11,
+    "cost_total_fc_yuan": 2851730.6772848777,
+    "delta_c_price_yuan": 95183.36763563042,
+    "delta_c_plan_yuan": 95183.36763563042,
+    "delta_c_adj_yuan": 0.0,
+    "delta_c_em_yuan": 6.074525771282424e-12,
+    "total_plan_kwh": 4358067.88843715,
+    "total_purchase_kwh": 4358067.88843715,
+    "total_q_em_kwh": 2.7505109301273478e-11,
+    "total_charge_kwh": 1388610.7802561726,
+    "total_discharge_kwh": 1129094.7320074998,
+    "total_spill_kwh": 27390.758538477385,
+    "days_with_q_em": 0,
+    "periods_with_q_em": 0
+  },
+  "D_req": {
+    "days": 29,
+    "cost_total_yuan": 1197440.7286856703,
+    "cost_plan_yuan": 1197440.7286856703,
+    "cost_adj_yuan": 0.0,
+    "cost_em_yuan": 3.019658834091388e-11,
+    "cost_total_fc_yuan": 1148388.7282064087,
+    "delta_c_price_yuan": 49052.000479261376,
+    "delta_c_plan_yuan": 49052.000479261376,
+    "delta_c_adj_yuan": 0.0,
+    "delta_c_em_yuan": 2.7597337748375153e-12,
+    "total_plan_kwh": 1888893.6006624587,
+    "total_purchase_kwh": 1888893.6006624587,
+    "total_q_em_kwh": 1.1084466677857563e-11,
+    "total_charge_kwh": 652444.2322314815,
+    "total_discharge_kwh": 528479.8281075,
+    "total_spill_kwh": 27390.75853847737,
+    "days_with_q_em": 0,
+    "periods_with_q_em": 0
+  },
+  "state_end_kwh": {
+    "mean": 1200.0,
+    "min": 1200.0,
+    "max": 1200.0,
+    "unique": 1,
+    "days_at_lower_bound": 60,
+    "sum_abs_span_from_lower_bound_kwh": 0.0
+  },
+  "bounds": {
+    "max_charge_kwh": 833.3333333333333,
+    "max_discharge_kwh": 750.0,
+    "max_side_power_kw": 5000.0,
+    "storage_min_kwh": 1200.0,
+    "storage_max_kwh": 10800.0,
+    "storage_initial_kwh": 6000.0
+  },
+  "layer_seconds": {},
+  "lp_layer_solves": 0,
+  "lp_layer_status_max": 0,
+  "t7": {
+    "max_primary_relative_change": 0.0,
+    "degenerate_layers": 0,
+    "layers": 0
+  },
+  "checks": {
+    "state_transition_residual_max": 1.0231815394945443e-12,
+    "settlement_balance_residual_max": 3.410605131648481e-13,
+    "cross_day_continuity_max": 0.0,
+    "layer_equality_residual_max": 0.0,
+    "layer_equality_residual_relative_max": 0.0,
+    "layer_bound_violation_max": 0.0,
+    "storage_min_kwh": 1200.0,
+    "storage_max_kwh": 10800.0,
+    "max_charge_kwh": 833.3333333333333,
+    "max_discharge_kwh": 750.0,
+    "sum_q_em_kwh": 2.7505109301273478e-11,
+    "min_plan_purchase_kwh": 0.0,
+    "simultaneous_charge_discharge_periods": 0,
+    "checks_failed": [],
+    "thresholds": {
+      "state_transition_residual_max": 1e-06,
+      "settlement_balance_residual_max": 1e-06,
+      "cross_day_continuity_max": 1e-06,
+      "layer_equality_residual_max": 1e-06,
+      "layer_equality_residual_relative_max": 1e-08,
+      "layer_bound_violation_max": 1e-06
+    }
+  },
+  "ablation": {
+    "item": "AS21",
+    "change": "字面 ε 加权式（min 主目标 + ε·Σ(c+q_dis)）替代字典序提交解"
+  }
+}

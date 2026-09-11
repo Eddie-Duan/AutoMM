@@ -1,0 +1,108 @@
+{
+  "days": 60,
+  "chain": "4-2",
+  "D_full": {
+    "days": 60,
+    "cost_total_yuan": 2933225.5979939722,
+    "cost_plan_yuan": 2933225.5979939722,
+    "cost_adj_yuan": 0.0,
+    "cost_em_yuan": 7.418681136073248e-11,
+    "cost_total_fc_yuan": 2843932.6302840477,
+    "delta_c_price_yuan": 89292.96770992449,
+    "delta_c_plan_yuan": 89292.96770992449,
+    "delta_c_adj_yuan": 0.0,
+    "delta_c_em_yuan": 5.325283325419149e-12,
+    "total_plan_kwh": 4356491.610453837,
+    "total_purchase_kwh": 4356491.610453837,
+    "total_q_em_kwh": 2.4627411221445072e-11,
+    "total_charge_kwh": 1380314.5803440013,
+    "total_discharge_kwh": 1122374.810078641,
+    "total_spill_kwh": 27390.758538477392,
+    "days_with_q_em": 0,
+    "periods_with_q_em": 0
+  },
+  "D_req": {
+    "days": 29,
+    "cost_total_yuan": 1190011.5561675339,
+    "cost_plan_yuan": 1190011.5561675339,
+    "cost_adj_yuan": 0.0,
+    "cost_em_yuan": 2.301156598605303e-11,
+    "cost_total_fc_yuan": 1142961.1847455807,
+    "delta_c_price_yuan": 47050.37142195285,
+    "delta_c_plan_yuan": 47050.37142195285,
+    "delta_c_adj_yuan": 0.0,
+    "delta_c_em_yuan": 1.9572325982153417e-12,
+    "total_plan_kwh": 1884293.9552449614,
+    "total_purchase_kwh": 1884293.9552449614,
+    "total_q_em_kwh": 8.327560863108374e-12,
+    "total_charge_kwh": 653103.9931920222,
+    "total_discharge_kwh": 533739.234485538,
+    "total_spill_kwh": 27390.75853847737,
+    "days_with_q_em": 0,
+    "periods_with_q_em": 0
+  },
+  "state_end_kwh": {
+    "mean": 7165.666985228353,
+    "min": 1200.0,
+    "max": 10800.0,
+    "unique": 33,
+    "days_at_lower_bound": 1,
+    "sum_abs_span_from_lower_bound_kwh": 357940.0191137012
+  },
+  "bounds": {
+    "max_charge_kwh": 833.3333333333333,
+    "max_discharge_kwh": 750.0,
+    "max_side_power_kw": 5000.0,
+    "storage_min_kwh": 1200.0,
+    "storage_max_kwh": 10800.0,
+    "storage_initial_kwh": 6000.0
+  },
+  "layer_seconds": {
+    "plan": 0.580619,
+    "adjustment6": 0.0,
+    "adjustment12": 0.0,
+    "adjustment18": 0.0
+  },
+  "lp_layer_solves": 0,
+  "lp_layer_status_max": 0,
+  "t7": {
+    "max_primary_relative_change": 0.0,
+    "degenerate_layers": 0,
+    "layers": 0
+  },
+  "checks": {
+    "state_transition_residual_max": 1.9326762412674725e-12,
+    "settlement_balance_residual_max": 3.410605131648481e-13,
+    "cross_day_continuity_max": 0.0,
+    "layer_equality_residual_max": 0.0,
+    "layer_equality_residual_relative_max": 0.0,
+    "layer_bound_violation_max": 0.0,
+    "storage_min_kwh": 1200.0,
+    "storage_max_kwh": 10800.0,
+    "max_charge_kwh": 833.3333333333333,
+    "max_discharge_kwh": 750.0,
+    "sum_q_em_kwh": 2.4627411221445072e-11,
+    "min_plan_purchase_kwh": 0.0,
+    "simultaneous_charge_discharge_periods": 0,
+    "checks_failed": [],
+    "thresholds": {
+      "state_transition_residual_max": 1e-06,
+      "settlement_balance_residual_max": 1e-06,
+      "cross_day_continuity_max": 1e-06,
+      "layer_equality_residual_max": 1e-06,
+      "layer_equality_residual_relative_max": 1e-08,
+      "layer_bound_violation_max": 1e-06
+    }
+  },
+  "horizon_days": 3,
+  "window": {
+    "granularity": "current_day_10min + future_days_1hour_block",
+    "future_load_pv_basis": "month_mean",
+    "price_forward_basis": "PF-PERSIST锛坧^{act}_{d鈭?,路}锛",
+    "terminal_rule": "鏈獥锛堣秺杩?12-31锛夋寜缁堢鑷敱鎴柇骞剁櫥璁",
+    "non_anticipativity": "绐楀彛鍐呮湭鏉ュ彉閲忓彧鐢ㄤ簬浼樺寲銆佷笉杩涘叆鎵胯"
+  },
+  "solver_seconds": 1.1612377999990713,
+  "lp_solves": 60,
+  "max_window_variables": 960
+}

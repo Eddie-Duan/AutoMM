@@ -1,0 +1,192 @@
+{
+  "chain": "4-2",
+  "base_reference": {
+    "D_full_cost_total_yuan": 2946913.9710552567,
+    "D_req_cost_total_yuan": 1197440.6901674173,
+    "source": "BASE（本实验独立重跑主口径）"
+  },
+  "table": {
+    "BASE": {
+      "D_full_cost_total_yuan": 2946913.9710552567,
+      "D_req_cost_total_yuan": 1197440.6901674173,
+      "D_full_delta_vs_base_yuan": 0.0,
+      "D_req_delta_vs_base_yuan": 0.0,
+      "D_full_delta_pct": 0.0,
+      "D_req_delta_pct": 0.0,
+      "D_req_delta_c_price_yuan": 49051.96138681416,
+      "D_req_sum_q_em_kwh": 9.237055564881302e-12,
+      "state_end_mean_kwh": 1200.0000008121779,
+      "state_end_days_at_lower_bound": 59,
+      "sum_abs_state_span_from_lower_bound_kwh": 4.873067746302695e-05,
+      "lp_layer_solves": 60,
+      "checks_failed": []
+    },
+    "S-RH-H1": {
+      "D_full_cost_total_yuan": 2946913.9710552567,
+      "D_req_cost_total_yuan": 1197440.6901674173,
+      "D_full_delta_vs_base_yuan": 0.0,
+      "D_req_delta_vs_base_yuan": 0.0,
+      "D_full_delta_pct": 0.0,
+      "D_req_delta_pct": 0.0,
+      "D_req_delta_c_price_yuan": 49051.96138681416,
+      "D_req_sum_q_em_kwh": 9.237055564881302e-12,
+      "state_end_mean_kwh": 1200.0000008121779,
+      "state_end_days_at_lower_bound": 59,
+      "sum_abs_state_span_from_lower_bound_kwh": 4.873067746302695e-05,
+      "lp_layer_solves": 0,
+      "checks_failed": [],
+      "horizon_days": 1,
+      "lp_solves": 60,
+      "solver_seconds": 0.9334939999389462,
+      "max_window_variables": 864
+    },
+    "S-RH-H3": {
+      "D_full_cost_total_yuan": 2933225.5979939722,
+      "D_req_cost_total_yuan": 1190011.5561675334,
+      "D_full_delta_vs_base_yuan": -13688.373061284423,
+      "D_req_delta_vs_base_yuan": -7429.133999883896,
+      "D_full_delta_pct": -0.4644985634372886,
+      "D_req_delta_pct": -0.6204177009255639,
+      "D_req_delta_c_price_yuan": 47050.37142195264,
+      "D_req_sum_q_em_kwh": 8.100187187665142e-12,
+      "state_end_mean_kwh": 7165.666985227068,
+      "state_end_days_at_lower_bound": 1,
+      "sum_abs_state_span_from_lower_bound_kwh": 357940.01911362406,
+      "lp_layer_solves": 0,
+      "checks_failed": [],
+      "horizon_days": 3,
+      "lp_solves": 60,
+      "solver_seconds": 1.2036558000836521,
+      "max_window_variables": 1104
+    },
+    "S-RH-H7": {
+      "D_full_cost_total_yuan": 2933225.4245411474,
+      "D_req_cost_total_yuan": 1190011.5333367344,
+      "D_full_delta_vs_base_yuan": -13688.546514109243,
+      "D_req_delta_vs_base_yuan": -7429.156830682885,
+      "D_full_delta_pct": -0.46450444935138463,
+      "D_req_delta_pct": -0.6204196075585334,
+      "D_req_delta_c_price_yuan": 47050.3578667412,
+      "D_req_sum_q_em_kwh": 8.213874025386758e-12,
+      "state_end_mean_kwh": 7165.642568743104,
+      "state_end_days_at_lower_bound": 1,
+      "sum_abs_state_span_from_lower_bound_kwh": 357938.5541245862,
+      "lp_layer_solves": 0,
+      "checks_failed": [],
+      "horizon_days": 7,
+      "lp_solves": 60,
+      "solver_seconds": 1.7980757998884656,
+      "max_window_variables": 1584
+    },
+    "S-RH-H14": {
+      "D_full_cost_total_yuan": 2933225.1344923778,
+      "D_req_cost_total_yuan": 1190011.499786324,
+      "D_full_delta_vs_base_yuan": -13688.836562878918,
+      "D_req_delta_vs_base_yuan": -7429.1903810931835,
+      "D_full_delta_pct": -0.4645142918093771,
+      "D_req_delta_pct": -0.6204224094017123,
+      "D_req_delta_c_price_yuan": 47050.32858090239,
+      "D_req_sum_q_em_kwh": 8.100187187665142e-12,
+      "state_end_mean_kwh": 7165.60195029781,
+      "state_end_days_at_lower_bound": 1,
+      "sum_abs_state_span_from_lower_bound_kwh": 357936.1170178686,
+      "lp_layer_solves": 0,
+      "checks_failed": [],
+      "horizon_days": 14,
+      "lp_solves": 60,
+      "solver_seconds": 2.7446689999778755,
+      "max_window_variables": 2424
+    }
+  },
+  "criteria": {
+    "C2": {
+      "pass": false,
+      "relative_differences": {
+        "D_full_C_total": 0.8002888944680583,
+        "D_req_C_total": 0.9079345803866178,
+        "D_req_sum_q_em": 9.237055564881302e-12,
+        "D_full_sum_q_em": 2.4151347588485805e-11
+      },
+      "threshold": 1e-09,
+      "expected": {
+        "D_full_C_total": 14755884.322036,
+        "D_req_C_total": 13006411.041148,
+        "D_req_sum_q_em": 0.0,
+        "D_full_sum_q_em": 0.0
+      },
+      "observed": {
+        "D_full_C_total": 2946913.9710552567,
+        "D_req_C_total": 1197440.6901674173,
+        "D_req_sum_q_em": 9.237055564881302e-12,
+        "D_full_sum_q_em": 2.4151347588485805e-11
+      }
+    },
+    "C3": {
+      "pass": true,
+      "D_full_relative_difference": 0.0,
+      "D_req_relative_difference": 0.0,
+      "state_trajectory_max_abs_difference_kwh": 0.0,
+      "threshold": 1e-09,
+      "note": "H = 1 必须逐位复现主口径基准（团队 R-2 预注册判据①）；轨迹比对对象为 H = 1"
+    },
+    "C4": {
+      "chain": "4-2",
+      "D_full_cost_by_horizon": {
+        "H1": 2946913.9710552567,
+        "H3": 2933225.5979939722,
+        "H7": 2933225.4245411474,
+        "H14": 2933225.1344923778
+      },
+      "expectation_nonincreasing_cost": true,
+      "monotone_nonincreasing_cost": true,
+      "applies": true,
+      "counterexample_registered": false,
+      "note": "预注册期望：4-2 的 H 增大 ⇒ 费用不增（非增）；4-3 因 §3.3.4 的边界（深度只作用于计划层）不作单调性要求，仅报数值；出现**增**则按 T7-4 如实登记反例，禁止强凑单调性"
+    },
+    "C_RH_BOUNDARY": {
+      "state_end_statistics": {
+        "S-RH-H1": {
+          "mean": 1200.0000008121779,
+          "min": 1200.0,
+          "max": 1200.0000487306775,
+          "unique": 2,
+          "days_at_lower_bound": 59,
+          "sum_abs_span_from_lower_bound_kwh": 4.873067746302695e-05
+        },
+        "S-RH-H3": {
+          "mean": 7165.666985227068,
+          "min": 1200.0,
+          "max": 10800.0,
+          "unique": 33,
+          "days_at_lower_bound": 1,
+          "sum_abs_span_from_lower_bound_kwh": 357940.01911362406
+        },
+        "S-RH-H7": {
+          "mean": 7165.642568743104,
+          "min": 1200.0,
+          "max": 10800.0,
+          "unique": 33,
+          "days_at_lower_bound": 1,
+          "sum_abs_span_from_lower_bound_kwh": 357938.5541245862
+        },
+        "S-RH-H14": {
+          "mean": 7165.60195029781,
+          "min": 1200.0,
+          "max": 10800.0,
+          "unique": 33,
+          "days_at_lower_bound": 1,
+          "sum_abs_span_from_lower_bound_kwh": 357936.1170178686
+        }
+      },
+      "note": "日边界储电量行为（团队 R-2 报告项 b，直接回应 prob03 E8/R18）"
+    },
+    "C6": {
+      "spill_bound_D9A_vs_D9B_relative_difference": null,
+      "spill_bound_pass": null,
+      "threshold": 1e-06,
+      "kappa1_delta_yuan": null,
+      "tiebreak_literal_delta_yuan": null
+    }
+  },
+  "note": "ΔC = 对照费用 − 主口径费用（负数 = 更省）；一律分链报告；S-VAR 的期望费用只在 12 个代表日窗口内与主口径同窗口可比，不可与全年费用直接相加"
+}

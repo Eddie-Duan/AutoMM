@@ -1,0 +1,56 @@
+{
+  "problem_id": "microgrid_2025",
+  "question_id": "prob04",
+  "assumption_version": "assumption_v001",
+  "formulation_version": "formulation_v001",
+  "stage": "ablation",
+  "chain": "4-3",
+  "created_at": "2026-09-11T17:12:58.385189+00:00",
+  "task_id": "20906d684ca14f498047",
+  "output_directory": "C:\\Users\\DUANboyang\\Desktop\\AutoMM\\problems\\microgrid_2025\\prob04\\versions\\assumption_v001\\ablations\\results\\prob04_v001_ablation_4-3_run003",
+  "seed": 20260911,
+  "deterministic_scenarios": true,
+  "device": "cpu",
+  "gpu_required": false,
+  "solver": "scipy.optimize.linprog(method='highs')（S-VAR 的确定性等价同样用 HiGHS）",
+  "days": 365,
+  "layer_time_limit_seconds": 60.0,
+  "max_wall_seconds": 10800.0,
+  "wall_seconds": 330.75028069999826,
+  "forecast_basis": "month_mean",
+  "information_set": {
+    "future_price_used_in_decision": false,
+    "decision_price_rule": "PF-PERSIST（4-2）；PF-PERSIST + κ_m 滚动更新（4-3）",
+    "settlement_price_rule": "附件 4 实际价（唯一结算入口）",
+    "anchor_exception": "C-ANCHOR-P03 只替换价格为附件 1 单日曲线（退化情景复现锚点）"
+  },
+  "input": {
+    "attachment1": "C:\\Users\\DUANboyang\\Desktop\\AutoMM\\data\\附件1.xlsx",
+    "attachment1_md5": "dbe06f92517431228efcc26e3e796ef9",
+    "attachment1_used_only_for": "C-ANCHOR-P03（只替换价格；团队勘误 E-F4）",
+    "attachment2_md5": "bb3e493f804678de571575116eca1ae6",
+    "attachment3_md5": "e8dfee653d53a78c82198f657a01feb4",
+    "attachment4_md5": "cf8762375436b281dc33b6432e441a6a"
+  },
+  "code_sha256": {
+    "ablation": {
+      "ablation_prob04.py": "813f76baf456794fc6752d05b5083b8b7bcb8f75146c6cc54cec71cd21e3b2b8",
+      "submit_ablation_tasks.py": "e17dc8cd792d4a57b84ffc7d390a5652b3b2764898c14e9a4514a0838dd0f8e3",
+      "__code_dir__": "756d6d7784d1f35b65864b8472208973d1107fecc39086a4a5cc79f4c353eb95"
+    },
+    "accepted": {
+      "prob04_io.py": "b6d1b8bd1e9b15355002d8f551818729b4ae6619922d02d0d263a66473a3ca0c",
+      "prob04_model.py": "c367367de2af14f2660f224329fc793822fb64d9ee270e23d0df8d7105e7fb56",
+      "prob04_predict.py": "87a801a8848e2997afc9f188010db7d00947d5cf7839204d8d4fedfaad8e2ba3",
+      "run_prob04.py": "b8b40d9884ab4632554cb31b82f004dd380680ef3112baaf8aab01bb39d4ca02",
+      "__code_dir__": "79061cd402e07cc7cdca47f59ac40deb60e8f14b591093f252581074bf168a93"
+    }
+  },
+  "case_counts": 9,
+  "checks_failed": [],
+  "environment": {
+    "python": "3.14.4",
+    "numpy": "2.5.2",
+    "platform": "Windows-11-10.0.26200-SP0"
+  }
+}
