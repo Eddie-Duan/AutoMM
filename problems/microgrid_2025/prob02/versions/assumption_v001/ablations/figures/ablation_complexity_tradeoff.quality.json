@@ -1,0 +1,11 @@
+{
+  "checked_at": "2026-09-11T05:43:18.360184+00:00",
+  "path": "problems/microgrid_2025/prob02/versions/assumption_v001/ablations/figures/ablation_complexity_tradeoff.png",
+  "width": 1350,
+  "height": 750,
+  "nonblank": true,
+  "dark_border_ratio": 0.0,
+  "status": "passed",
+  "errors": [],
+  "warnings": []
+}

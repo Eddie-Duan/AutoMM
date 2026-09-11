@@ -1,0 +1,959 @@
+{
+  "scenario_count": 156,
+  "sample_count": 156,
+  "solved_count": 153,
+  "failed_count": 3,
+  "failures": [
+    {
+      "scenario": "buy_cap_4375kW",
+      "failure": {
+        "type": "solver_not_optimal",
+        "status": 2,
+        "message": "计划层 LP 未达最优（day=1, status=2）：The problem is infeasible. (HiGHS Status 8: model_status is Infeasible; primal_status is None)"
+      }
+    },
+    {
+      "scenario": "buy_cap_4218.75kW",
+      "failure": {
+        "type": "solver_not_optimal",
+        "status": 2,
+        "message": "计划层 LP 未达最优（day=1, status=2）：The problem is infeasible. (HiGHS Status 8: model_status is Infeasible; primal_status is None)"
+      }
+    },
+    {
+      "scenario": "buy_cap_3500kW",
+      "failure": {
+        "type": "solver_not_optimal",
+        "status": 2,
+        "message": "计划层 LP 未达最优（day=0, status=2）：The problem is infeasible. (HiGHS Status 8: model_status is Infeasible; primal_status is None)"
+      }
+    }
+  ],
+  "baseline": {
+    "objective_yuan": 16179176.145228,
+    "cost_plan_yuan": 13885669.475555,
+    "cost_adj_yuan": 563098.132533,
+    "cost_em_yuan": 1730408.537141,
+    "delivery": {
+      "days": 334,
+      "cost_total_yuan": 14540616.335652,
+      "cost_plan_yuan": 12362860.209641,
+      "cost_adj_yuan": 510208.94091,
+      "cost_em_yuan": 1667547.185102,
+      "total_plan_kwh": 20359871.873818,
+      "total_purchase_kwh": 20842142.600809,
+      "total_q_em_kwh": 391274.485914,
+      "total_spill_kwh": 2087727.847547,
+      "total_charge_kwh": 6349998.653729,
+      "total_discharge_kwh": 5143498.90952,
+      "storage_final_kwh": 1200.0
+    },
+    "totals": {
+      "total_plan_kwh": 22826813.514589,
+      "total_purchase_kwh": 23359990.045333,
+      "total_q_em_kwh": 406353.048856,
+      "total_spill_kwh": 2153482.408343,
+      "total_charge_kwh": 7075623.932782,
+      "total_discharge_kwh": 5735575.385552,
+      "net_load_kwh": 20272812.138617,
+      "storage_initial_kwh": 6000.0,
+      "storage_final_kwh": 1200.0,
+      "storage_min_kwh": 1200.0,
+      "storage_max_kwh": 10800.0,
+      "max_charge_kwh": 833.333333,
+      "max_discharge_kwh": 750.0,
+      "max_plan_purchase_kwh": 1670.663617,
+      "max_final_purchase_kwh": 1670.663617
+    },
+    "residuals": {
+      "settlement_balance_max": 0.0,
+      "state_transition_max": 8.8e-08,
+      "cross_day_continuity_max": 0.0,
+      "cost_decomposition_max": 0.0,
+      "layer_status_max": 0,
+      "layer_equality_residual_max": 8.8e-08,
+      "layer_equality_residual_relative_max": 2e-12,
+      "layer_inequality_residual_max": 3.5e-08,
+      "layer_inequality_residual_relative_max": 2e-12,
+      "layer_bound_violation_max": 7e-08
+    },
+    "statistics": {
+      "periods": 52560,
+      "simultaneous_charge_discharge_periods": 0,
+      "periods_with_q_em_and_charge": 5070,
+      "periods_with_q_em_and_charge_ratio": 0.096461187,
+      "periods_with_emergency": 12164,
+      "days_with_emergency": 365,
+      "days_with_deviation": 338,
+      "q_eq_b_first_block_max": 0.0,
+      "max_side_power_kw": 5000.0
+    },
+    "t7": {
+      "layers": 1460,
+      "probe_coverage": 0.0,
+      "lexicographic_committed_layers": 1460,
+      "fallback_committed_layers": 0,
+      "max_primary_relative_change": 5e-10,
+      "all_layers_invariance_passed": true,
+      "throughput_kwh": 31781301.96533,
+      "throughput_primary_only_kwh": 32435832.184704,
+      "degenerate_layers": 0,
+      "layers_with_remaining_multiplicity": 0,
+      "layers_with_unknown_multiplicity": 0
+    },
+    "daily_cost_total_yuan": [
+      62349.802381,
+      66124.434625,
+      28439.773062,
+      28799.877195,
+      63584.424769,
+      63987.251688,
+      65183.751872,
+      66529.24607,
+      63686.589055,
+      32959.494587,
+      29498.71575,
+      65271.49207,
+      62797.098023,
+      62110.524459,
+      64079.388783,
+      64463.227917,
+      26579.698829,
+      29354.294832,
+      62503.533491,
+      62916.266387,
+      59455.187556,
+      62183.728449,
+      64179.159664,
+      25968.323977,
+      25136.55009,
+      63983.745885,
+      59688.543236,
+      62189.362064,
+      59941.562447,
+      59619.623226,
+      24995.137137,
+      24919.413221,
+      55458.388582,
+      58514.460035,
+      59432.886245,
+      57201.328438,
+      60406.927779,
+      23299.965975,
+      22710.124294,
+      56498.379314,
+      55859.583392,
+      57311.050425,
+      57539.570111,
+      52902.117669,
+      21965.403364,
+      23983.354862,
+      59907.63605,
+      56164.746866,
+      53050.07327,
+      53538.44427,
+      53313.052698,
+      21210.031163,
+      22598.705487,
+      53032.543875,
+      50283.167906,
+      52787.512843,
+      50963.804547,
+      49648.249977,
+      22811.9462,
+      21514.315613,
+      52174.636501,
+      55757.107684,
+      52054.287721,
+      52394.16363,
+      48385.448967,
+      23468.472266,
+      19899.326646,
+      51921.194512,
+      50577.274765,
+      50053.142032,
+      50828.199142,
+      49835.093177,
+      19418.848187,
+      19371.854254,
+      47105.114316,
+      46440.090734,
+      48900.457437,
+      47587.792005,
+      52814.209286,
+      19968.64827,
+      19785.164733,
+      46506.033253,
+      44447.884298,
+      50087.183387,
+      43173.461606,
+      46937.745464,
+      18445.498733,
+      18988.891483,
+      48377.280271,
+      44810.923472,
+      46299.998205,
+      44449.112772,
+      44667.726755,
+      17589.081728,
+      23224.823298,
+      42855.947135,
+      41506.105477,
+      44551.882683,
+      43453.188616,
+      44998.787039,
+      20167.799644,
+      18855.348428,
+      41959.962916,
+      45457.50866,
+      39801.456708,
+      42875.625071,
+      42451.359215,
+      20672.977985,
+      16614.257419,
+      40279.402978,
+      42467.169272,
+      41524.546511,
+      39516.175371,
+      39848.416614,
+      17148.604892,
+      16914.189939,
+      39896.353568,
+      42872.324643,
+      38349.647709,
+      41616.004511,
+      42272.842232,
+      20087.739502,
+      18515.128812,
+      46947.608654,
+      42658.380031,
+      43333.903017,
+      42219.476248,
+      44550.06028,
+      20690.121823,
+      20442.938083,
+      44044.828834,
+      41568.178113,
+      42737.899881,
+      43599.883249,
+      42806.768656,
+      18734.455767,
+      20273.223463,
+      41049.028138,
+      38812.087159,
+      42763.129518,
+      41436.993162,
+      40733.606268,
+      17833.713505,
+      17305.842932,
+      39872.273002,
+      42605.087904,
+      41608.890489,
+      39652.016479,
+      42817.426055,
+      19284.390316,
+      18422.919891,
+      56734.162987,
+      56701.925198,
+      50988.194511,
+      56109.416582,
+      52011.865597,
+      29572.221555,
+      26682.133414,
+      50074.665796,
+      55341.760661,
+      54223.415439,
+      57352.443242,
+      53963.463567,
+      26190.346604,
+      29038.874452,
+      52790.304208,
+      56647.097066,
+      57535.814832,
+      52663.065348,
+      55796.603574,
+      23955.502091,
+      22848.62938,
+      55005.296573,
+      50839.779635,
+      58147.941571,
+      53353.693047,
+      51422.244453,
+      26865.203965,
+      21707.711413,
+      53469.60543,
+      53051.992636,
+      59417.159654,
+      56289.055105,
+      58545.889508,
+      29564.406176,
+      33176.680332,
+      61723.258975,
+      59415.109722,
+      58834.634454,
+      57723.497416,
+      56710.793132,
+      31202.959408,
+      29811.836522,
+      57905.157575,
+      55676.711748,
+      60338.995043,
+      55960.935677,
+      56781.78205,
+      35310.048213,
+      30284.434005,
+      55686.627656,
+      57672.216682,
+      57176.010244,
+      62270.89617,
+      59162.08141,
+      29508.784693,
+      29206.431155,
+      57259.885296,
+      59276.179424,
+      56180.354723,
+      57483.69729,
+      58523.965102,
+      28389.85279,
+      33365.240732,
+      53793.609623,
+      55683.732416,
+      51734.429191,
+      54829.675079,
+      53098.426544,
+      27082.70509,
+      27599.142996,
+      52367.078678,
+      50107.432986,
+      53210.282977,
+      51987.298853,
+      51081.775537,
+      29693.190769,
+      29722.83352,
+      50468.950989,
+      50435.939005,
+      51654.045558,
+      55470.487775,
+      52771.299075,
+      30728.321266,
+      28828.896128,
+      51899.966439,
+      62532.570684,
+      52431.181582,
+      52857.292177,
+      57000.351575,
+      28360.530421,
+      28433.876913,
+      53497.797361,
+      44895.446477,
+      43292.956957,
+      46323.099907,
+      46318.268899,
+      23860.900855,
+      21376.033732,
+      43479.437158,
+      46144.579435,
+      44444.855126,
+      49568.00552,
+      46845.944115,
+      22029.479891,
+      22856.706665,
+      48630.911975,
+      45780.537623,
+      47618.249116,
+      46606.377374,
+      45627.435777,
+      22988.846363,
+      24534.635097,
+      45715.321009,
+      48709.269464,
+      47936.179117,
+      47475.612002,
+      46406.849688,
+      23982.827999,
+      22749.017478,
+      48649.097953,
+      51818.655269,
+      51250.250162,
+      40919.5129,
+      46261.441313,
+      20812.272735,
+      23408.101609,
+      45908.909084,
+      46005.564744,
+      43039.002444,
+      43702.034278,
+      48289.683576,
+      22500.627516,
+      20401.55955,
+      48153.497699,
+      49891.529265,
+      50431.510623,
+      49579.727717,
+      48541.052795,
+      20507.038671,
+      21846.109827,
+      49789.907932,
+      50225.566794,
+      49030.229069,
+      49489.604373,
+      53753.146173,
+      21035.039057,
+      21763.333646,
+      50907.709584,
+      47558.816969,
+      49952.84496,
+      49733.804151,
+      50445.073512,
+      22017.80235,
+      22133.857702,
+      50186.359295,
+      52307.624354,
+      49256.438439,
+      54784.491762,
+      51342.437804,
+      19982.425242,
+      21268.231444,
+      51493.821852,
+      53018.776719,
+      52130.012987,
+      52400.286244,
+      52912.55412,
+      23499.450558,
+      22246.068734,
+      52790.052234,
+      52450.843051,
+      54756.794942,
+      54233.69091,
+      52975.536755,
+      20356.947414,
+      21677.89368,
+      53296.921572,
+      53168.142566,
+      55782.03033,
+      54175.403233,
+      54017.792064,
+      20651.136745,
+      24356.712547,
+      56354.625238,
+      63147.883453,
+      63261.478861,
+      61928.975717,
+      63142.541926,
+      25773.836768,
+      27207.437751,
+      63675.3798,
+      62222.86281,
+      63284.619592,
+      61557.145306,
+      61453.354436,
+      26865.117222,
+      26633.913795,
+      63165.578979,
+      63454.711591,
+      62378.55741,
+      63328.493115,
+      60767.242903,
+      27055.908677,
+      27663.29167,
+      62365.864792,
+      61891.24768,
+      61644.635112,
+      62080.031324,
+      62994.901879,
+      27571.890067,
+      26596.964803,
+      60662.960554,
+      61137.829613,
+      62121.187426,
+      61561.982919
+    ],
+    "seconds": 17.623345,
+    "noise": null
+  },
+  "criteria": {
+    "S1": {
+      "pass": true,
+      "rule": "全部受判样本求解最优、四条恒等式与层残差在容差内、可行率 = 100%",
+      "detail": {
+        "judged_samples": 144,
+        "feasible_samples": 144,
+        "feasible_rate": 1.0,
+        "failed_samples": [],
+        "identity_failed_samples": []
+      }
+    },
+    "S2": {
+      "pass": true,
+      "rule": "受判样本全部满足 Σq_em>0、q=b(i≤36)、同充放 0、交付期费用 10^7 量级带、q_em&c 占比 ≤15%",
+      "detail": {
+        "rows": 144,
+        "violations": [],
+        "max_q_em_charge_ratio": 0.106906393
+      }
+    },
+    "S3": {
+      "pass": true,
+      "rule": "六组 OAT 单调方向不反转（相对容差 1e-6）",
+      "detail": {
+        "rows": [
+          {
+            "family": "eta_both",
+            "note": "η 上升 ⇒ C_total 不上升",
+            "levels": [
+              0.7200000000000001,
+              0.81,
+              0.855,
+              0.9450000000000001,
+              0.9900000000000001
+            ],
+            "costs": [
+              17954271.508014,
+              17137692.133828,
+              16656514.031529,
+              15717745.198635,
+              15236811.519523
+            ],
+            "violations": []
+          },
+          {
+            "family": "alpha_em",
+            "note": "α_em 上升 ⇒ C_total 不下降",
+            "levels": [
+              4.0,
+              4.5,
+              4.75,
+              5.25,
+              5.5,
+              6.0
+            ],
+            "costs": [
+              15833094.4378,
+              16006135.291514,
+              16092655.718371,
+              16265696.572085,
+              16352216.998942,
+              16525257.852656
+            ],
+            "violations": []
+          },
+          {
+            "family": "p_max",
+            "note": "P_max 上升 ⇒ C_total 不上升",
+            "levels": [
+              4000.0,
+              4500.0,
+              4750.0,
+              5250.0,
+              5500.0,
+              6000.0
+            ],
+            "costs": [
+              16301823.50369,
+              16230667.415898,
+              16201101.221656,
+              16164519.688206,
+              16154201.756462,
+              16134263.213131
+            ],
+            "violations": []
+          },
+          {
+            "family": "e_min",
+            "note": "E_min 上升（收紧）⇒ C_total 不下降",
+            "levels": [
+              960.0,
+              1080.0,
+              1320.0,
+              1440.0
+            ],
+            "costs": [
+              16115257.842329,
+              16146623.20341,
+              16212994.474794,
+              16246902.158423
+            ],
+            "violations": []
+          },
+          {
+            "family": "e_max",
+            "note": "E_max 上升（放松）⇒ C_total 不上升",
+            "levels": [
+              8640.0,
+              9720.0,
+              11880.0,
+              12000.0
+            ],
+            "costs": [
+              16845076.081608,
+              16499647.447596,
+              15901545.313399,
+              15871502.499251
+            ],
+            "violations": []
+          },
+          {
+            "family": "beta",
+            "note": "β_def/β_over 上升 ⇒ C_total 不下降",
+            "levels": [
+              0.4,
+              0.45,
+              0.55,
+              0.6
+            ],
+            "costs": [
+              16066556.518722,
+              16122866.331975,
+              16235485.958482,
+              16291795.771735
+            ],
+            "violations": []
+          }
+        ],
+        "violations": []
+      }
+    },
+    "S4": {
+      "pass": false,
+      "rule": "噪声族 n≥25、std≤5%、95%CI 半宽≤5%、|z|≤4、族间均值差≤3%、无失败样本",
+      "detail": {
+        "families": {
+          "noise_white_5": {
+            "n": 25,
+            "std_relative_delivery": 0.00099558,
+            "ci95_half_width_relative": 0.000390267,
+            "max_abs_z": 2.290401,
+            "failures": []
+          },
+          "noise_white_10": {
+            "n": 25,
+            "std_relative_delivery": 0.002091754,
+            "ci95_half_width_relative": 0.000819968,
+            "max_abs_z": 2.378171,
+            "failures": []
+          },
+          "noise_day_5": {
+            "n": 25,
+            "std_relative_delivery": 0.008684241,
+            "ci95_half_width_relative": 0.003404223,
+            "max_abs_z": 2.550155,
+            "failures": []
+          },
+          "noise_joint_day_5": {
+            "n": 25,
+            "std_relative_delivery": 0.009236068,
+            "ci95_half_width_relative": 0.003620539,
+            "max_abs_z": 2.223881,
+            "failures": []
+          }
+        },
+        "violations": [
+          "inter_family_mean_spread>3%"
+        ]
+      }
+    },
+    "S5": {
+      "pass": true,
+      "rule": "三种求解器设置全部可行且残差合格；链级费用最大相对差 ≤1%（T7-6 口径敏感性，>1e-3 登记 warning）",
+      "detail": {
+        "rows": [
+          {
+            "scenario": "solver_highs_ds",
+            "label": "求解器 highs-ds（presolve=True）",
+            "ok": true,
+            "failure": null,
+            "objective_yuan": 16179176.145228,
+            "delta_relative": 0.0,
+            "total_q_em_kwh": 406353.048856
+          },
+          {
+            "scenario": "solver_highs_ipm",
+            "label": "求解器 highs-ipm（presolve=True）",
+            "ok": true,
+            "failure": null,
+            "objective_yuan": 16157309.823962,
+            "delta_relative": -0.00135151,
+            "total_q_em_kwh": 417241.579318
+          },
+          {
+            "scenario": "solver_highs_nopresolve",
+            "label": "highs + presolve=False",
+            "ok": true,
+            "failure": null,
+            "objective_yuan": 16180967.7273,
+            "delta_relative": 0.000110734,
+            "total_q_em_kwh": 406459.844721
+          }
+        ],
+        "feasibility_violations": [],
+        "max_abs_relative_diff": 0.00135151,
+        "t7_6_registered_relative": 0.00022566,
+        "note": "求解器设置（highs-ds / highs-ipm / presolve=False）的链级费用差异经 LP 最优面选择与跨日初值传播放大，属团队 T7-6 已登记的口径敏感性（非实现缺陷）；仅当任一设置不可行或相对差 > 1% 才判脆弱。"
+      }
+    },
+    "S6": {
+      "pass": true,
+      "rule": "购电上限情景给出夹逼区间；终端情景如实登记",
+      "detail": {
+        "buy_cap_rows": [
+          {
+            "scenario": "buy_cap_3500kW",
+            "label": "购电上限 = 3500 kW（决策层 q/b 上限，结构约束压力；R5 交叉验证）",
+            "structural": {
+              "buy_cap_kwh": 583.3333333333333
+            },
+            "ok": false,
+            "failure": {
+              "type": "solver_not_optimal",
+              "status": 2,
+              "message": "计划层 LP 未达最优（day=0, status=2）：The problem is infeasible. (HiGHS Status 8: model_status is Infeasible; primal_status is None)"
+            },
+            "objective_yuan": null,
+            "delivery_cost_total_yuan": null,
+            "delta_delivery_relative": null,
+            "total_q_em_kwh": null,
+            "storage_final_kwh": null
+          },
+          {
+            "scenario": "buy_cap_4218.75kW",
+            "label": "购电上限 = 4218.75 kW（决策层 q/b 上限，结构约束压力；R5 交叉验证）",
+            "structural": {
+              "buy_cap_kwh": 703.125
+            },
+            "ok": false,
+            "failure": {
+              "type": "solver_not_optimal",
+              "status": 2,
+              "message": "计划层 LP 未达最优（day=1, status=2）：The problem is infeasible. (HiGHS Status 8: model_status is Infeasible; primal_status is None)"
+            },
+            "objective_yuan": null,
+            "delivery_cost_total_yuan": null,
+            "delta_delivery_relative": null,
+            "total_q_em_kwh": null,
+            "storage_final_kwh": null
+          },
+          {
+            "scenario": "buy_cap_4375kW",
+            "label": "购电上限 = 4375 kW（决策层 q/b 上限，结构约束压力；R5 交叉验证）",
+            "structural": {
+              "buy_cap_kwh": 729.1666666666666
+            },
+            "ok": false,
+            "failure": {
+              "type": "solver_not_optimal",
+              "status": 2,
+              "message": "计划层 LP 未达最优（day=1, status=2）：The problem is infeasible. (HiGHS Status 8: model_status is Infeasible; primal_status is None)"
+            },
+            "objective_yuan": null,
+            "delivery_cost_total_yuan": null,
+            "delta_delivery_relative": null,
+            "total_q_em_kwh": null,
+            "storage_final_kwh": null
+          },
+          {
+            "scenario": "buy_cap_5000kW",
+            "label": "购电上限 = 5000 kW（决策层 q/b 上限，结构约束压力；R5 交叉验证）",
+            "structural": {
+              "buy_cap_kwh": 833.3333333333333
+            },
+            "ok": true,
+            "failure": null,
+            "objective_yuan": 16532714.028502,
+            "delivery_cost_total_yuan": 14811903.802338,
+            "delta_delivery_relative": 0.018657219,
+            "total_q_em_kwh": 393081.617723,
+            "storage_final_kwh": 1200.0
+          },
+          {
+            "scenario": "buy_cap_6000kW",
+            "label": "购电上限 = 6000 kW（决策层 q/b 上限，结构约束压力；R5 交叉验证）",
+            "structural": {
+              "buy_cap_kwh": 1000.0
+            },
+            "ok": true,
+            "failure": null,
+            "objective_yuan": 16230039.825116,
+            "delivery_cost_total_yuan": 14578158.085242,
+            "delta_delivery_relative": 0.002581854,
+            "total_q_em_kwh": 407573.913278,
+            "storage_final_kwh": 1200.0
+          },
+          {
+            "scenario": "buy_cap_6500kW",
+            "label": "购电上限 = 6500 kW（决策层 q/b 上限，结构约束压力；R5 交叉验证）",
+            "structural": {
+              "buy_cap_kwh": 1083.3333333333333
+            },
+            "ok": true,
+            "failure": null,
+            "objective_yuan": 16205947.492243,
+            "delivery_cost_total_yuan": 14560925.658121,
+            "delta_delivery_relative": 0.001396731,
+            "total_q_em_kwh": 407114.018073,
+            "storage_final_kwh": 1200.0
+          },
+          {
+            "scenario": "buy_cap_7000kW",
+            "label": "购电上限 = 7000 kW（决策层 q/b 上限，结构约束压力；R5 交叉验证）",
+            "structural": {
+              "buy_cap_kwh": 1166.6666666666665
+            },
+            "ok": true,
+            "failure": null,
+            "objective_yuan": 16196265.805705,
+            "delivery_cost_total_yuan": 14554311.972387,
+            "delta_delivery_relative": 0.000941888,
+            "total_q_em_kwh": 406845.238898,
+            "storage_final_kwh": 1200.0
+          },
+          {
+            "scenario": "buy_cap_7500kW",
+            "label": "购电上限 = 7500 kW（决策层 q/b 上限，结构约束压力；R5 交叉验证）",
+            "structural": {
+              "buy_cap_kwh": 1250.0
+            },
+            "ok": true,
+            "failure": null,
+            "objective_yuan": 16190271.965496,
+            "delivery_cost_total_yuan": 14549025.283655,
+            "delta_delivery_relative": 0.000578308,
+            "total_q_em_kwh": 406855.995952,
+            "storage_final_kwh": 1200.0
+          },
+          {
+            "scenario": "buy_cap_8000kW",
+            "label": "购电上限 = 8000 kW（决策层 q/b 上限，结构约束压力；R5 交叉验证）",
+            "structural": {
+              "buy_cap_kwh": 1333.3333333333333
+            },
+            "ok": true,
+            "failure": null,
+            "objective_yuan": 16184993.911352,
+            "delivery_cost_total_yuan": 14544972.437579,
+            "delta_delivery_relative": 0.000299582,
+            "total_q_em_kwh": 406732.615036,
+            "storage_final_kwh": 1200.0
+          },
+          {
+            "scenario": "buy_cap_9000kW",
+            "label": "购电上限 = 9000 kW（决策层 q/b 上限，结构约束压力；R5 交叉验证）",
+            "structural": {
+              "buy_cap_kwh": 1500.0
+            },
+            "ok": true,
+            "failure": null,
+            "objective_yuan": 16179671.131755,
+            "delivery_cost_total_yuan": 14541066.406665,
+            "delta_delivery_relative": 3.0953e-05,
+            "total_q_em_kwh": 406365.115292,
+            "storage_final_kwh": 1200.0
+          },
+          {
+            "scenario": "buy_cap_10326kW",
+            "label": "购电上限 = 10326 kW（决策层 q/b 上限，结构约束压力；R5 交叉验证）",
+            "structural": {
+              "buy_cap_kwh": 1721.0
+            },
+            "ok": true,
+            "failure": null,
+            "objective_yuan": 16179036.822842,
+            "delivery_cost_total_yuan": 14540513.138319,
+            "delta_delivery_relative": -7.097e-06,
+            "total_q_em_kwh": 406300.204711,
+            "storage_final_kwh": 1200.0
+          }
+        ],
+        "buy_cap_feasibility_bracket_kw": [
+          4375.0,
+          5000.0
+        ],
+        "prob02_R5_beta_bracket_kw": [
+          4218.75,
+          4375.0
+        ],
+        "terminal_e_6000": {
+          "scenario": "terminal_e_6000",
+          "label": "终端储电量 = 6000 kWh（AS04 验证建议的情景对照）",
+          "structural": {
+            "terminal_e_kwh": 6000.0
+          },
+          "ok": true,
+          "failure": null,
+          "objective_yuan": 16182501.77023,
+          "delivery_cost_total_yuan": 14543941.960654,
+          "delta_delivery_relative": 0.000228713,
+          "total_q_em_kwh": 406353.048856,
+          "storage_final_kwh": 6000.0
+        }
+      },
+      "notes": []
+    },
+    "failed": [
+      "S4"
+    ],
+    "stability_grade": "条件稳定（需给出适用边界）"
+  },
+  "stability_grade": "条件稳定（需给出适用边界）",
+  "failed_criteria": [
+    "S4"
+  ],
+  "structural_findings": {
+    "buy_cap_feasibility_bracket_kw": [
+      4375.0,
+      5000.0
+    ],
+    "terminal_e_6000": {
+      "scenario": "terminal_e_6000",
+      "label": "终端储电量 = 6000 kWh（AS04 验证建议的情景对照）",
+      "structural": {
+        "terminal_e_kwh": 6000.0
+      },
+      "ok": true,
+      "failure": null,
+      "objective_yuan": 16182501.77023,
+      "delivery_cost_total_yuan": 14543941.960654,
+      "delta_delivery_relative": 0.000228713,
+      "total_q_em_kwh": 406353.048856,
+      "storage_final_kwh": 6000.0
+    },
+    "solver_rows": [
+      {
+        "scenario": "solver_highs_ds",
+        "label": "求解器 highs-ds（presolve=True）",
+        "ok": true,
+        "failure": null,
+        "objective_yuan": 16179176.145228,
+        "delta_relative": 0.0,
+        "total_q_em_kwh": 406353.048856
+      },
+      {
+        "scenario": "solver_highs_ipm",
+        "label": "求解器 highs-ipm（presolve=True）",
+        "ok": true,
+        "failure": null,
+        "objective_yuan": 16157309.823962,
+        "delta_relative": -0.00135151,
+        "total_q_em_kwh": 417241.579318
+      },
+      {
+        "scenario": "solver_highs_nopresolve",
+        "label": "highs + presolve=False",
+        "ok": true,
+        "failure": null,
+        "objective_yuan": 16180967.7273,
+        "delta_relative": 0.000110734,
+        "total_q_em_kwh": 406459.844721
+      }
+    ]
+  },
+  "figures": [
+    "C:\\Users\\DUANboyang\\Desktop\\AutoMM\\problems\\microgrid_2025\\prob03\\versions\\assumption_v001\\robustness\\results\\prob03_v001_robust_run001\\figures\\robustness_prob03_tornado.png",
+    "C:\\Users\\DUANboyang\\Desktop\\AutoMM\\problems\\microgrid_2025\\prob03\\versions\\assumption_v001\\robustness\\results\\prob03_v001_robust_run001\\figures\\robustness_prob03_response_curves.png",
+    "C:\\Users\\DUANboyang\\Desktop\\AutoMM\\problems\\microgrid_2025\\prob03\\versions\\assumption_v001\\robustness\\results\\prob03_v001_robust_run001\\figures\\robustness_prob03_noise_ecdf.png",
+    "C:\\Users\\DUANboyang\\Desktop\\AutoMM\\problems\\microgrid_2025\\prob03\\versions\\assumption_v001\\robustness\\results\\prob03_v001_robust_run001\\figures\\robustness_prob03_buy_cap_curve.png",
+    "C:\\Users\\DUANboyang\\Desktop\\AutoMM\\problems\\microgrid_2025\\prob03\\versions\\assumption_v001\\robustness\\results\\prob03_v001_robust_run001\\figures\\robustness_prob03_scenarios.png",
+    "C:\\Users\\DUANboyang\\Desktop\\AutoMM\\problems\\microgrid_2025\\prob03\\versions\\assumption_v001\\robustness\\results\\prob03_v001_robust_run001\\figures\\robustness_prob03_spider.png"
+  ],
+  "wall_seconds": 3437.368155,
+  "budget_exceeded": false
+}

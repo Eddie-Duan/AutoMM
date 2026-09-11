@@ -1,0 +1,119 @@
+# prob03 隔离计算 task 规格（computation 阶段由 resource-manager 提交）
+# 生成者：implementation-agent（动作 act-06c999a94813435f；T7 一致性修订，前稿 act-109ffb18e7f84f33）
+# 依据：agents/implementation-agent.md、agents/resource-manager.md、PROJECT.md、config/gates.yaml、
+#       prob03 assumption_v001（AS01–AS18 + 团队裁定 B0–B7 + 末节 T5–T8，**尤其 T7**）与 formulation_v001
+#       （§3.2/§3.3/§3.4/§3.5/§3.10/§7）
+# 说明：本文件只是**规格**，implementation 阶段不得自行创建 task；task 由 Runner/tasks.py 确定性创建。
+#
+# 口径要点（不得逐问更改）：
+#   * 主口径 M1（团队裁定 B0）：三层顺序向前递推 LP（计划 0:00 → 调整 6:00/12:00/18:00 → 闭式结算），
+#     D_full 365 天 × 144 时段；跨日状态连续 E_{d,0} = E_{d-1,144}（E_{1/1,0} = 6000），终端自由；
+#   * 计划层目标 min Σ p·b（团队 T1）；调整层目标为剩余时段偏差结算 min Σ[0.5p·u⁺ + 1.5p·u⁻]；
+#   * **统一 tie-breaking（团队 T7-1，效力高于 B4-C5 初版措辞）**：所有层、所有模型（M1–M8）一律
+#     `min [该层主目标] + ε·Σ_t(c_{d,t}+q_dis_{d,t})`，即在主目标最优解中优先取储能吞吐量最小者；
+#     本实现 ε = 1e-6 × max(|该层主目标最优值|,1) / [n·(c_cap+q_dis_cap)]（无量纲相对权重），
+#     并逐层落盘 T7-2 不变性验证（主目标相对变化 ≤ 1e-9）与 T7-3 退化维度/多重最优审计；
+#     T7-5：ablation 的 M2–M8 必须复用 code/prob03_model.py 的同一算子
+#     （`_solve_with_tiebreak` / `tiebreak_epsilon` / `throughput_coefficients`），仅允许 HiGHS 设置不同；
+#   * 目标 C_total = C_plan + C_em + C_adj（元，**不乘 Δt**，团队 D9；单日 10^3 元即硬错误信号）；
+#   * c ≤ 833.3333、q_dis ≤ 750.0000（D10 口径丙 / 勘误 E1）、E ∈ [1200,10800]；
+#   * 只用附件 1 的电价列、附件 2 的实际负载/光伏、附件 3 的整点预报；**禁用附件 4 与附件 1 预测列**；
+#   * 附件 3 降尺度 = 整点点值 + 整点锚定线性插值（k=1 前向保持）；跨年项（m=6/12/18 的 k=19..24/13..24/7..24，
+#     合计 36 项）不消费、不截断、不外推；
+#   * 实际结算层是 PV^act 的唯一入口（§0.4 F2）：决策层输入不含附件 2 实际光伏。
+spec_version: 1
+problem_id: microgrid_2025
+question_id: prob03
+stage: computation
+assumption_version: assumption_v001
+formulation_version: formulation_v001
+backend: local
+working_directory: "."
+code_path: problems/microgrid_2025/prob03/versions/assumption_v001/code
+config_path: problems/microgrid_2025/prob03/versions/assumption_v001/code/task_config.yaml
+input_path: data
+output_directory: problems/microgrid_2025/prob03/versions/assumption_v001/results/prob03_v001_f001_run003
+timeout_seconds: 1800
+seed: null
+gpu_required: false
+device: cpu
+gpu_serial_constraint: "本 task 不使用 GPU，故不占用单卡 GPU 串行额度；若未来引入 GPU 路径必须单卡串行"
+worker_launch_mode: supervised
+command:
+  - ".venv/Scripts/python.exe"
+  - "problems/microgrid_2025/prob03/versions/assumption_v001/code/run_prob03.py"
+  - "--data"
+  - "data/附件1.xlsx"
+  - "--data2"
+  - "data/附件2.xlsx"
+  - "--data3"
+  - "data/附件3.xlsx"
+  - "--template"
+  - "data/附件5/result3.xlsx"
+  - "--output"
+  - "problems/microgrid_2025/prob03/versions/assumption_v001/results/prob03_v001_f001_run003"
+  - "--days"
+  - "365"
+  - "--time-limit"
+  - "60"
+  - "--max-wall-seconds"
+  - "1500"
+submit_hint:
+  tool: scripts/compute_dispatcher.py
+  subcommand: submit
+  notes:
+    - "若 .venv/Scripts/python.exe 无法解析，resource-manager 应改用当前 Runner 解释器（sys.executable）或项目 venv 的绝对路径；不得改用缺少 scipy/openpyxl/numpy 的解释器。"
+    - "--output 的取值必须与 output_directory 完全一致（tasks.make_task_spec 会强校验）。"
+    - "禁止 --days 小于 365；探针模式（--days < 365）只允许在 implementation/静态检查中使用，不得作为交付结果。"
+    - "必须由 Runner 以 worker_launch_mode=supervised（in-process）启动；detached 在本环境会被沙箱回收。"
+    - "本问为确定性 LP：seed=null，不读取任何随机源；重跑必须使用新的 output_directory（..._run002 等），不得覆盖既有结果。"
+    - "整链墙钟预算 = --max-wall-seconds 1500（task timeout 1800）；单层 LP 时限 = --time-limit 60。"
+inputs_readonly:
+  - data/附件1.xlsx
+  - data/附件2.xlsx
+  - data/附件3.xlsx
+  - data/附件5/result3.xlsx
+  - data/（作为 input_path 整体参与 input_hash）
+expected_outputs:
+  - result3.xlsx
+  - solver_status.json
+  - solution.json
+  - tables.json
+  - t7_tiebreak.json
+  - run_manifest.json
+expected_runtime:
+  wall_clock_seconds_max: 900
+  memory_mb_max: 1024
+  device: cpu
+  lp_calls: 1460
+  lp_solver_invocations_nominal: 5840
+  lp_solver_invocations_note: >-
+    每层 4 次名义 LP（① 纯主目标基线 ② T7-1 字面加权 ③ 字典序提交解 ④ T7-3 退化探测），
+    4 层/日 × 365 天 = 5,840 次名义调用；T7-2 不变性不满足时每次收缩 ε 另加 1 次（有界于 T7_MAX_SHRINKS=8）。
+    实测 implementation 探针：14 天链 1.5 s、34 天链（含产物落盘）约 3 s ⇒ 全年预期 < 120 s，
+    task timeout 1800 s / --max-wall-seconds 1500 余量充足。
+expected_failure_conditions:
+  - exit_code: 2
+    meaning: "某一层 LP 未达最优（infeasible/unbounded/time_limit）或整链墙钟预算耗尽；solver_status.json 的 feasible_incumbent=false"
+    route: "route_compute_failure -> implementation-agent 复核 formulation 与数据；不得伪报最优"
+  - exit_code: 3
+    meaning: "附件 1/2/3 或模板结构与 accepted 假设不一致（表头、行数、日期序列、预报时刻、模板工作表名/列数）"
+    route: "needs_revision -> mathematical_formulation 或 assumption_definition"
+  - exit_code: 4
+    meaning: "硬检查或模板标签校验失败（层残差 > 1e-8、结算平衡/恒等式 > 1e-6、边界越界、解析界/量级越界、T7 主目标不变性 > 1e-9、表 1 位置口径不符、result3.xlsx 填报残留 format_residuals 非空）"
+    route: "needs_revision -> implementation 修复或 mathematical_formulation 复核"
+  - exit_code: 1
+    meaning: "未捕获异常（Python 运行时错误）"
+    route: "code_runtime -> implementation-agent 修复代码"
+acceptance_hint:
+  - "solver_status.json: status=0、feasible_incumbent=true、lp_calls=1460、layer_status_max=0、层等式/不等式残差 <= 1e-8；lp_solver_invocations_nominal=5840 为名义值（实际由 T7-2 的 ε 收缩次数决定）"
+  - "t7_tiebreak.json: policy=T7、layers=1460、checks_failed 为空；summary.all_layers_invariance_passed=true、summary.max_primary_relative_change <= 1e-9（T7-2）；per_layer 含 1,460 条逐层记录（epsilon/primary_before/primary_after/throughput/degeneracy_degree/boundary_state_kwh/committed_solution）"
+  - "T7-3：summary.degenerate_layers 与 summary.layers_with_remaining_multiplicity 必须如实报告（> 0 属结构性事实，不是失败）；不得把不同最优轨迹判为不一致"
+  - "T7-5：ablation 的 M2–M8 必须复用 code/prob03_model.py 的 tiebreak 算子，sanity 在比对 M1 与 M8 时须核对 epsilon 与次目标系数完全一致"
+  - "solution.json: checks_failed 为空；(I1d)/(I2d) 逐日与切片残差 <= 1e-6；(I4d) 跨日连续性 <= 1e-6；(I5d) 状态转移 <= 1e-6；(I6d) 结算平衡 <= 1e-6；交付期费用为 10^7 元量级（约 1.2e7，formulation 探针锚点，不得当作验收目标值；T7 后的链级数值可与 T7 前参考值有 ≤1e-3 的相对差，属最优点选择变化的合理传播）"
+  - "solution.json.totals: max c <= 833.3333、max q_dis <= 750.0000、max_side_power_kw <= 5000、E ∈ [1200,10800]、E_{1/1,0} = 6000、Σq_em 不应恒为零（B3-5）"
+  - "solution.json.statistics: 同充放时段数 > 0 属调整层 LP 退化（仅记录，不作硬失败）；periods_with_q_em_and_charge 为 AS08 的事后统计量"
+  - "solution.json.layer_summary: 1,460 条逐层记录（day/hour/status/iterations/objective/残差/耗时）供 sanity L1 审计各层输入与信息集"
+  - "tables.json: 4 个指定日期（2025-03-20/06-21/09-23/12-21）；表 1 六时段行位置 60/72/84/96/108/120 且 attachment_timestamp 为区间左端点、template_label 为完整区间；表 2 每日 6 块；表 3 合并区间 + 左端点标签"
+  - "result3.xlsx: 计划购电量/调整购电量 各 335 行 × 147 列（334 天 × 144 时段 + 全天购电量 + 全天购电费）；充放电量 1 + 334×6 行且时刻/储电量在每日前两行；紧急购电量 每日至少 1 行（J_d=0 写 —/0）"
+  - "run_manifest.json: workbook_info.format_residuals 必须为空；code_sha256、附件 1/2/3 与模板 md5、device=cpu、seed=null、layer_inputs、matrix_scale、t7_tiebreak（含 max_primary_relative_change 与 total_shrinks）齐备，供 sanity/ablation/robustness 追踪"

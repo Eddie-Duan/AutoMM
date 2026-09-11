@@ -16,6 +16,13 @@ revision_note: >-
   在 prob02 problem_understanding（act-7ab45b76b8634948）按团队勘误执行 E1/E2 回写，
   并登记 prob02 新增符号。团队裁定/团队勘误（prob01 assumption_v003/assumptions.md 末节）
   效力高于本表旧登记；被更正的旧值原样保留在 notes 中，不删除审计痕迹。
+  act-d0daa84bf4d74bbb（prob03 problem_understanding）复核后确认：k/m/pv_fc/beta_def/beta_over/q_adj/C_adj
+  已覆盖 prob03，无需新增或修改任何符号定义与域；本表与 dependency_graph.yaml 的 prob03 边一致。
+  prob03 的信息集口径（A19）、调整量语义与填报映射（A20）、预报降尺度（A6）与计划/调整结算（A7）
+  均属待裁定项，其指向已登记在 notes 与 prob03/shared/problem_understanding.md §7。
+  2026-09-11 按 prob03 团队勘误 E1–E5 补登记：新增符号 q（最终/结算购电量，E5，此前 formulation/implementation 已在使用但本表漏登记）；
+  A19 指向写入 m 与 q_adj 的 notes；附件 3 日期列稀疏（E1）与 A6 的 RMSE 样本口径（E2/E3）
+  登记于 prob03/shared/problem_understanding.md §2.1 与 prob03/versions/assumption_v001/assumptions.md 的「团队勘误」节。
 symbols:
   # ---------- 指标与集合 ----------
   - symbol: t
@@ -49,7 +56,8 @@ symbols:
     kind: index
     domain: "m ∈ {0:00, 6:00, 12:00, 18:00}"
     first_question: prob03
-    notes: "prob02 无预报、仅用实际值。"
+    notes: "prob02 无预报、仅用实际值。本符号承载 A19（逐时刻信息集口径：每个决策时刻只能使用该时刻已发布的预报与该时刻已实现的信息）；\
+      prob03 已由团队裁定 B1-D1 采纳「预报驱动 + 实际结算、q_em 保留为变量」，见 prob03/versions/assumption_v001/assumptions.md 的 AS06、团队裁定 B0–B7/T5–T8 与团队勘误 E2/E3。"
   - symbol: n_t
     latex: "n_t"
     meaning_zh: "一天的 10 分钟时段数"
@@ -213,6 +221,19 @@ symbols:
     domain: "b_{d,t} ≥ 0"
     first_question: prob01
     notes: "prob01 为单日，写作 b_t。"
+  - symbol: q
+    latex: "q_{d,t}"
+    meaning_zh: "最终（结算）购电量——调整替代后的实际购电量"
+    unit: "kWh"
+    kind: decision
+    domain: "q_{d,t} ≥ 0"
+    first_question: prob03
+    notes: >-
+      2026-09-11 补登记（prob03 团队勘误 E5）。prob03 的团队裁定 B1-D3（A7/A20 采纳 A）取「替代量 + 单次结算 + 不回溯」，
+      即 b 是 0:00 计划量、q 是最终量；B7-7 已明确「表 1 报 q、『计划购电量』工作表报 b」，
+      B3-(iv) 的费用分解恒等式 C_total = C_plan + C_em + C_adj 亦以 b 与 q 的分段差定义（0.5·p·(b−q)^+ 与 1.5·p·(q−b)^+）。
+      此前 prob03 的 formulation_v001 与 implementation 已在公式/代码中使用 q，本表漏登记，本次补入；含义以本条为准，
+      prob04 复用该三层结构时不得另起新符号。
   - symbol: q_adj
     latex: "q^{adj}_{d,t}"
     meaning_zh: "调整购电量（非 0:00 预报时刻对购电量的调整）"
@@ -220,7 +241,10 @@ symbols:
     kind: decision
     domain: "q_adj_{d,t} ≥ 0（亦可建模为带符号增量，待定 A7）"
     first_question: prob03
-    notes: "与 b 的结算关系待定（A7）。"
+    notes: "与 b 的结算关系待定（A7）；result3.xlsx『调整购电量』335×147 每格填『最终购电量』还是『增量』、多次调整的覆盖规则见 A20。\
+      2026-09-11：A7/A20 已由团队裁定 B1-D2/D3/D4 闭合（替代量 + 单次结算 + 不回溯；填报按 A20-A），本变量的结算关系以团队裁定为准；\
+      其信息集口径见 A19（承载于符号 m）。A9 的「是否引入其他时刻预报」已由团队裁定 B6/AS18 冻结为成本对照 M4/M5，\
+      不得以预报 RMSE 作为跨发布时刻的比较轴（团队勘误 E3）。"
   - symbol: q_em
     latex: "q^{em}_{d,t}"
     meaning_zh: "紧急购电量（微网供电低于负载时的补足购电）"
@@ -232,6 +256,7 @@ symbols:
       能否用于储能充电待定（A5）；计划信息结构与「无购电上限 + 完全信息 ⇒ 最优 q_em ≡ 0」的推论见 A17，
       表 3 的时间段合并与填报口径见 A18——两者均由 assumption_definition 裁定，本阶段不固定。
       该变量在 prob02 就必须保留（题面要求给出紧急购电结果），不得因预期恒零而删除。
+      prob03 的信息结构由附件 3 预报驱动、与 prob02 不同，其对应问题为 A19（不得移植 A17），表 3 可能非零。
   - symbol: c_ch
     latex: "c_{d,t}"
     meaning_zh: "储能充电量"

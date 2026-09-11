@@ -1,0 +1,524 @@
+{
+  "spec_dates": [
+    "2025-03-20",
+    "2025-06-21",
+    "2025-09-23",
+    "2025-12-21"
+  ],
+  "table1": {
+    "2025-03-20": {
+      "slots": [
+        {
+          "slot": "10:00-10:10",
+          "position": 60,
+          "attachment_timestamp": "10:00",
+          "template_label": "10:00-10:10",
+          "label_matches": true,
+          "final_purchase_kwh": 0.0
+        },
+        {
+          "slot": "12:00-12:10",
+          "position": 72,
+          "attachment_timestamp": "12:00",
+          "template_label": "12:00-12:10",
+          "label_matches": true,
+          "final_purchase_kwh": 553.563367
+        },
+        {
+          "slot": "14:00-14:10",
+          "position": 84,
+          "attachment_timestamp": "14:00",
+          "template_label": "14:00-14:10",
+          "label_matches": true,
+          "final_purchase_kwh": 0.0
+        },
+        {
+          "slot": "16:00-16:10",
+          "position": 96,
+          "attachment_timestamp": "16:00",
+          "template_label": "16:00-16:10",
+          "label_matches": true,
+          "final_purchase_kwh": 641.129717
+        },
+        {
+          "slot": "18:00-18:10",
+          "position": 108,
+          "attachment_timestamp": "18:00",
+          "template_label": "18:00-18:10",
+          "label_matches": true,
+          "final_purchase_kwh": 682.353333
+        },
+        {
+          "slot": "20:00-20:10",
+          "position": 120,
+          "attachment_timestamp": "20:00",
+          "template_label": "20:00-20:10",
+          "label_matches": true,
+          "final_purchase_kwh": -0.0
+        }
+      ],
+      "all_day_energy_kwh": 70040.887993,
+      "all_day_cost_yuan": 52814.209286,
+      "all_day_plan_cost_yuan": 41095.385464,
+      "all_day_adjust_cost_yuan": 2373.89589,
+      "all_day_emergency_cost_yuan": 9344.927933
+    },
+    "2025-06-21": {
+      "slots": [
+        {
+          "slot": "10:00-10:10",
+          "position": 60,
+          "attachment_timestamp": "10:00",
+          "template_label": "10:00-10:10",
+          "label_matches": true,
+          "final_purchase_kwh": 0.0
+        },
+        {
+          "slot": "12:00-12:10",
+          "position": 72,
+          "attachment_timestamp": "12:00",
+          "template_label": "12:00-12:10",
+          "label_matches": true,
+          "final_purchase_kwh": 0.0
+        },
+        {
+          "slot": "14:00-14:10",
+          "position": 84,
+          "attachment_timestamp": "14:00",
+          "template_label": "14:00-14:10",
+          "label_matches": true,
+          "final_purchase_kwh": 0.0
+        },
+        {
+          "slot": "16:00-16:10",
+          "position": 96,
+          "attachment_timestamp": "16:00",
+          "template_label": "16:00-16:10",
+          "label_matches": true,
+          "final_purchase_kwh": 112.922733
+        },
+        {
+          "slot": "18:00-18:10",
+          "position": 108,
+          "attachment_timestamp": "18:00",
+          "template_label": "18:00-18:10",
+          "label_matches": true,
+          "final_purchase_kwh": 396.158467
+        },
+        {
+          "slot": "20:00-20:10",
+          "position": 120,
+          "attachment_timestamp": "20:00",
+          "template_label": "20:00-20:10",
+          "label_matches": true,
+          "final_purchase_kwh": 0.0
+        }
+      ],
+      "all_day_energy_kwh": 33532.164963,
+      "all_day_cost_yuan": 22848.62938,
+      "all_day_plan_cost_yuan": 18055.815827,
+      "all_day_adjust_cost_yuan": 1088.445153,
+      "all_day_emergency_cost_yuan": 3704.3684
+    },
+    "2025-09-23": {
+      "slots": [
+        {
+          "slot": "10:00-10:10",
+          "position": 60,
+          "attachment_timestamp": "10:00",
+          "template_label": "10:00-10:10",
+          "label_matches": true,
+          "final_purchase_kwh": 0.0
+        },
+        {
+          "slot": "12:00-12:10",
+          "position": 72,
+          "attachment_timestamp": "12:00",
+          "template_label": "12:00-12:10",
+          "label_matches": true,
+          "final_purchase_kwh": 358.668517
+        },
+        {
+          "slot": "14:00-14:10",
+          "position": 84,
+          "attachment_timestamp": "14:00",
+          "template_label": "14:00-14:10",
+          "label_matches": true,
+          "final_purchase_kwh": 0.0
+        },
+        {
+          "slot": "16:00-16:10",
+          "position": 96,
+          "attachment_timestamp": "16:00",
+          "template_label": "16:00-16:10",
+          "label_matches": true,
+          "final_purchase_kwh": 550.185183
+        },
+        {
+          "slot": "18:00-18:10",
+          "position": 108,
+          "attachment_timestamp": "18:00",
+          "template_label": "18:00-18:10",
+          "label_matches": true,
+          "final_purchase_kwh": 752.645
+        },
+        {
+          "slot": "20:00-20:10",
+          "position": 120,
+          "attachment_timestamp": "20:00",
+          "template_label": "20:00-20:10",
+          "label_matches": true,
+          "final_purchase_kwh": 61.911667
+        }
+      ],
+      "all_day_energy_kwh": 68433.17447,
+      "all_day_cost_yuan": 47936.179117,
+      "all_day_plan_cost_yuan": 42772.756895,
+      "all_day_adjust_cost_yuan": 0.0,
+      "all_day_emergency_cost_yuan": 5163.422222
+    },
+    "2025-12-21": {
+      "slots": [
+        {
+          "slot": "10:00-10:10",
+          "position": 60,
+          "attachment_timestamp": "10:00",
+          "template_label": "10:00-10:10",
+          "label_matches": true,
+          "final_purchase_kwh": 0.0
+        },
+        {
+          "slot": "12:00-12:10",
+          "position": 72,
+          "attachment_timestamp": "12:00",
+          "template_label": "12:00-12:10",
+          "label_matches": true,
+          "final_purchase_kwh": 954.537833
+        },
+        {
+          "slot": "14:00-14:10",
+          "position": 84,
+          "attachment_timestamp": "14:00",
+          "template_label": "14:00-14:10",
+          "label_matches": true,
+          "final_purchase_kwh": 0.0
+        },
+        {
+          "slot": "16:00-16:10",
+          "position": 96,
+          "attachment_timestamp": "16:00",
+          "template_label": "16:00-16:10",
+          "label_matches": true,
+          "final_purchase_kwh": 806.735183
+        },
+        {
+          "slot": "18:00-18:10",
+          "position": 108,
+          "attachment_timestamp": "18:00",
+          "template_label": "18:00-18:10",
+          "label_matches": true,
+          "final_purchase_kwh": 712.633333
+        },
+        {
+          "slot": "20:00-20:10",
+          "position": 120,
+          "attachment_timestamp": "20:00",
+          "template_label": "20:00-20:10",
+          "label_matches": true,
+          "final_purchase_kwh": 30.268333
+        }
+      ],
+      "all_day_energy_kwh": 94749.308713,
+      "all_day_cost_yuan": 62365.864792,
+      "all_day_plan_cost_yuan": 59764.834892,
+      "all_day_adjust_cost_yuan": 1182.684937,
+      "all_day_emergency_cost_yuan": 1418.344963
+    }
+  },
+  "table2": {
+    "2025-03-20": {
+      "block_charge_kwh": [
+        9000.0,
+        1666.666667,
+        407.250938,
+        9628.058727,
+        522.570958,
+        0.0
+      ],
+      "block_discharge_kwh": [
+        0.0,
+        5987.312564,
+        2313.919814,
+        250.650927,
+        5728.06385,
+        2911.93615
+      ],
+      "storage_0_00_kwh": 1200.0,
+      "storage_24_00_kwh": 1200.0
+    },
+    "2025-06-21": {
+      "block_charge_kwh": [
+        1409.411021,
+        833.333333,
+        305.11434,
+        9115.003028,
+        131.177858,
+        0.0
+      ],
+      "block_discharge_kwh": [
+        0.0,
+        913.172061,
+        0.0,
+        0.0,
+        6154.100616,
+        2485.899383
+      ],
+      "storage_0_00_kwh": 1200.0,
+      "storage_24_00_kwh": 1200.0
+    },
+    "2025-09-23": {
+      "block_charge_kwh": [
+        9000.0,
+        1666.666667,
+        4228.432373,
+        5723.53258,
+        312.487517,
+        0.0
+      ],
+      "block_discharge_kwh": [
+        0.0,
+        6077.776583,
+        1920.520492,
+        315.909426,
+        5640.0,
+        3000.0
+      ],
+      "storage_0_00_kwh": 1200.0,
+      "storage_24_00_kwh": 1200.0
+    },
+    "2025-12-21": {
+      "block_charge_kwh": [
+        9000.0,
+        2325.111956,
+        5639.895653,
+        7580.766219,
+        -0.0,
+        0.0
+      ],
+      "block_discharge_kwh": [
+        0.0,
+        1426.801586,
+        7383.012208,
+        2432.263006,
+        5797.474233,
+        2842.525767
+      ],
+      "storage_0_00_kwh": 1200.0,
+      "storage_24_00_kwh": 1200.0
+    }
+  },
+  "table3": {
+    "2025-03-20": {
+      "intervals": [
+        {
+          "slot": "6:10-10:10",
+          "start_period": 37,
+          "stop_period": 60,
+          "energy_kwh": 1381.024153
+        },
+        {
+          "slot": "12:50-14:30",
+          "start_period": 77,
+          "stop_period": 86,
+          "energy_kwh": 475.567692
+        },
+        {
+          "slot": "14:50-15:00",
+          "start_period": 89,
+          "stop_period": 89,
+          "energy_kwh": 8.944492
+        },
+        {
+          "slot": "15:30-16:30",
+          "start_period": 93,
+          "stop_period": 98,
+          "energy_kwh": 119.81325
+        },
+        {
+          "slot": "17:00-18:00",
+          "start_period": 102,
+          "stop_period": 107,
+          "energy_kwh": 77.139567
+        }
+      ],
+      "total_kwh": 2062.489153,
+      "paper_text": ""
+    },
+    "2025-06-21": {
+      "intervals": [
+        {
+          "slot": "4:10-5:00",
+          "start_period": 25,
+          "stop_period": 29,
+          "energy_kwh": 2.339308
+        },
+        {
+          "slot": "5:10-5:40",
+          "start_period": 31,
+          "stop_period": 33,
+          "energy_kwh": 12.593667
+        },
+        {
+          "slot": "6:10-7:30",
+          "start_period": 37,
+          "stop_period": 44,
+          "energy_kwh": 815.069758
+        },
+        {
+          "slot": "13:10-13:20",
+          "start_period": 79,
+          "stop_period": 79,
+          "energy_kwh": 1.484383
+        },
+        {
+          "slot": "16:10-16:30",
+          "start_period": 97,
+          "stop_period": 98,
+          "energy_kwh": 5.779875
+        },
+        {
+          "slot": "17:30-17:40",
+          "start_period": 105,
+          "stop_period": 105,
+          "energy_kwh": 0.504575
+        },
+        {
+          "slot": "19:10-20:00",
+          "start_period": 115,
+          "stop_period": 119,
+          "energy_kwh": 2.584567
+        }
+      ],
+      "total_kwh": 840.356133,
+      "paper_text": ""
+    },
+    "2025-09-23": {
+      "intervals": [
+        {
+          "slot": "6:10-7:00",
+          "start_period": 37,
+          "stop_period": 41,
+          "energy_kwh": 692.041417
+        },
+        {
+          "slot": "7:20-8:10",
+          "start_period": 44,
+          "stop_period": 48,
+          "energy_kwh": 61.881756
+        },
+        {
+          "slot": "8:20-9:10",
+          "start_period": 50,
+          "stop_period": 54,
+          "energy_kwh": 64.486089
+        },
+        {
+          "slot": "10:10-10:20",
+          "start_period": 61,
+          "stop_period": 61,
+          "energy_kwh": 3.388967
+        },
+        {
+          "slot": "11:50-12:10",
+          "start_period": 71,
+          "stop_period": 72,
+          "energy_kwh": 25.120286
+        },
+        {
+          "slot": "13:00-14:10",
+          "start_period": 78,
+          "stop_period": 84,
+          "energy_kwh": 121.331133
+        },
+        {
+          "slot": "14:30-15:10",
+          "start_period": 87,
+          "stop_period": 90,
+          "energy_kwh": 92.6445
+        },
+        {
+          "slot": "16:00-16:40",
+          "start_period": 96,
+          "stop_period": 99,
+          "energy_kwh": 24.371917
+        },
+        {
+          "slot": "17:10-18:00",
+          "start_period": 103,
+          "stop_period": 107,
+          "energy_kwh": 64.928417
+        }
+      ],
+      "total_kwh": 1150.194481,
+      "paper_text": ""
+    },
+    "2025-12-21": {
+      "intervals": [
+        {
+          "slot": "7:10-7:40",
+          "start_period": 43,
+          "stop_period": 45,
+          "energy_kwh": 47.450467
+        },
+        {
+          "slot": "7:50-8:20",
+          "start_period": 47,
+          "stop_period": 49,
+          "energy_kwh": 11.620611
+        },
+        {
+          "slot": "9:00-9:40",
+          "start_period": 54,
+          "stop_period": 57,
+          "energy_kwh": 44.928367
+        },
+        {
+          "slot": "9:50-10:30",
+          "start_period": 59,
+          "stop_period": 62,
+          "energy_kwh": 96.555331
+        },
+        {
+          "slot": "10:40-11:00",
+          "start_period": 64,
+          "stop_period": 65,
+          "energy_kwh": 29.646272
+        },
+        {
+          "slot": "11:10-11:50",
+          "start_period": 67,
+          "stop_period": 70,
+          "energy_kwh": 106.342094
+        },
+        {
+          "slot": "13:10-13:20",
+          "start_period": 79,
+          "stop_period": 79,
+          "energy_kwh": 2.278356
+        },
+        {
+          "slot": "16:40-17:00",
+          "start_period": 100,
+          "stop_period": 101,
+          "energy_kwh": 13.693425
+        }
+      ],
+      "total_kwh": 352.514922,
+      "paper_text": ""
+    }
+  },
+  "table1_label_checks_passed": true,
+  "table3_note": "题面表 4 的示例日期 2025/3/1 与 3 个区间及其数值是**格式示例**，不是本问答案；本问紧急购电由预报—实际光伏误差驱动（结算层），表 3 按 D11-A 合并连续时段并以左端点标签填报。",
+  "table2_note": "表 2 的 0:00/24:00 为计划窗首/末状态（AS01 左端点口径使计划窗为 0:10→24:10，模板固有相位）；prob03 为多日滚动切片，E_{d,0} = E_{d−1,144} 随日变化（团队勘误 R1），与 prob01 单日周期端点恒 6000 不同。",
+  "probe_mode": false
+}

@@ -1,0 +1,222 @@
+{
+  "problem_id": "microgrid_2025",
+  "question_id": "prob03",
+  "assumption_version": "assumption_v001",
+  "formulation_version": "formulation_v001",
+  "stage": "computation",
+  "model": "M1",
+  "probe_mode": false,
+  "days": 365,
+  "periods": 52560,
+  "created_at": "2026-09-11T07:29:45.639871+00:00",
+  "task_id": "1b57b1cb92e0d5095518",
+  "output_directory": "C:\\Users\\DUANboyang\\Desktop\\AutoMM\\problems\\microgrid_2025\\prob03\\versions\\assumption_v001\\results\\prob03_v001_f001_run001",
+  "device": "cpu",
+  "gpu_required": false,
+  "seed": null,
+  "deterministic": true,
+  "solver": "scipy.optimize.linprog(method='highs')",
+  "layer_time_limit_seconds": 60.0,
+  "max_wall_seconds": 1500.0,
+  "input": {
+    "attachment1": "C:\\Users\\DUANboyang\\Desktop\\AutoMM\\data\\附件1.xlsx",
+    "attachment1_md5": "dbe06f92517431228efcc26e3e796ef9",
+    "attachment1_periods": 144,
+    "attachment2": "C:\\Users\\DUANboyang\\Desktop\\AutoMM\\data\\附件2.xlsx",
+    "attachment2_md5": "bb3e493f804678de571575116eca1ae6",
+    "attachment2_days": 365,
+    "attachment3": "C:\\Users\\DUANboyang\\Desktop\\AutoMM\\data\\附件3.xlsx",
+    "attachment3_md5": "e8dfee653d53a78c82198f657a01feb4",
+    "attachment3_days": 365,
+    "template": "C:\\Users\\DUANboyang\\Desktop\\AutoMM\\data\\附件5\\result3.xlsx",
+    "template_md5": "75be588e714646dde3102aa102382347",
+    "template_plan_rows": 334
+  },
+  "parameters": {
+    "delta_t_h": 0.16666666666666666,
+    "eta_ch": 0.9,
+    "eta_dis": 0.9,
+    "eta_round_trip": 0.81,
+    "alpha_em": 5.0,
+    "beta_def": 0.5,
+    "beta_over": 1.5,
+    "e_init_kwh": 6000.0,
+    "e_min_kwh": 1200.0,
+    "e_max_kwh": 10800.0,
+    "e_terminal": null,
+    "p_max_kw": 5000.0,
+    "c_cap_kwh": 833.3333333333333,
+    "q_dis_cap_kwh": 750.0,
+    "b_upper_kwh": null,
+    "decision_hours": [
+      0,
+      6,
+      12,
+      18
+    ]
+  },
+  "layer_inputs": {
+    "hour_0": {
+      "dominated_periods_per_day": 144,
+      "finite_cells": 52560,
+      "nan_cells": 0,
+      "expected_nan_cells": 0,
+      "cross_year_dropped_items_per_day": 0,
+      "forecast_matrix_sha256": "b057c0da9325454ac533316e4523069429c7182a7df0c4b4c620669e45e20c03",
+      "uses_actual_pv": false
+    },
+    "hour_6": {
+      "dominated_periods_per_day": 108,
+      "finite_cells": 39420,
+      "nan_cells": 13140,
+      "expected_nan_cells": 13140,
+      "cross_year_dropped_items_per_day": 6,
+      "forecast_matrix_sha256": "c4d1119d977bc5a059f6f243e33f8b220b89990fe3ca3094db66aba11b83d961",
+      "uses_actual_pv": false
+    },
+    "hour_12": {
+      "dominated_periods_per_day": 72,
+      "finite_cells": 26280,
+      "nan_cells": 26280,
+      "expected_nan_cells": 26280,
+      "cross_year_dropped_items_per_day": 12,
+      "forecast_matrix_sha256": "828228a201a1e8824fd394ea18ad2b4d5efd05afb010dff6e6dc6c43f5c8598d",
+      "uses_actual_pv": false
+    },
+    "hour_18": {
+      "dominated_periods_per_day": 36,
+      "finite_cells": 13140,
+      "nan_cells": 39420,
+      "expected_nan_cells": 39420,
+      "cross_year_dropped_items_per_day": 18,
+      "forecast_matrix_sha256": "6ff067a3b7fbe4187ff3f2a0de94691b5e516d971c23340cdaffbf7ce1d51ed2",
+      "uses_actual_pv": false
+    },
+    "dominance_rule": "nu(i) = 6*floor((i-1)/36)；D_0/D_6/D_12/D_18 各 36 时段（i<=36 / 37..72 / 73..108 / 109..144）",
+    "downscale_rule": "k=1 前向保持 A_{m,1}；k>=2 取 (1-j/6)A_{m,k-1} + (j/6)A_{m,k}；块能量 (2.5A_{k-1}+3.5A_k)/6（不保块内能量，T3）",
+    "cross_year_dropped_total_per_day": 36,
+    "actual_pv_scope": "settlement_layer_only（§0.4 F2：决策层输入不含 PV^act）"
+  },
+  "code_sha256": {
+    "prob03_io.py": "3d708a0919abe4ade942f9dc8da57dd4c6f5140297302cfcc9104662ce0aff8b",
+    "prob03_model.py": "e5c88c94eb07fccbdb651929b74c51ec46a4717f33dbbcc18d8ffe5866c07f19",
+    "run_prob03.py": "e80ade246ed65204d5e27ede410e3b127dad7e399709757f73df622dc9167fca",
+    "__code_dir__": "cf7b24d83353938bfe89b51104c0d900f1ce229195558d356e358cdb931f97fd"
+  },
+  "environment": {
+    "python": "3.14.4",
+    "numpy": "2.5.2",
+    "platform": "Windows-11-10.0.26200-SP0"
+  },
+  "outcome": "hard_check_failed",
+  "matrix_scale": {
+    "plan_layer": {
+      "variables": 720,
+      "equality_constraints": 288,
+      "inequalities": 0,
+      "solver_calls_nominal": 4
+    },
+    "adjustment_layer_m6": {
+      "variables": 756,
+      "equality_constraints": 216,
+      "inequalities": 216,
+      "solver_calls_nominal": 4
+    },
+    "adjustment_layer_m12": {
+      "variables": 504,
+      "equality_constraints": 144,
+      "inequalities": 144,
+      "solver_calls_nominal": 4
+    },
+    "adjustment_layer_m18": {
+      "variables": 252,
+      "equality_constraints": 72,
+      "inequalities": 72,
+      "solver_calls_nominal": 4
+    },
+    "per_day": {
+      "variables": 2232,
+      "equality_constraints": 720,
+      "inequalities": 432,
+      "layer_solves": 4,
+      "solver_calls_nominal": 16
+    },
+    "lp_calls_total": 1460,
+    "lp_solver_invocations_nominal": 5840,
+    "tiebreak_solver_calls_per_layer_nominal": 4,
+    "tiebreak_extra_calls_note": "T7-2 不变性不满足时每个缩小一次 ε 会额外增加一次 LP（有界于 T7_MAX_SHRINKS）；实际调用次数见 run_manifest.t7_tiebreak.total_shrinks。",
+    "integer_variables_main": 0
+  },
+  "lp_calls": 1460,
+  "lp_solver_invocations_nominal": 5840,
+  "t7_tiebreak": {
+    "rule": "min [该层主目标] + ε·Σ_t(c_{d,t}+q_dis_{d,t})，ε = 1e-6·max(|该层主目标最优值|,1)/[n·(c_cap+q_dis_cap)]；所有层、所有模型 M1–M8 必须完全一致（团队 T7-1/T7-5）",
+    "eps_relative": 1e-06,
+    "invariance_tol": 1e-09,
+    "shrink_factor": 0.1,
+    "max_shrinks": 8,
+    "layers": 1460,
+    "max_primary_relative_change": 5.000040911448317e-10,
+    "all_layers_invariance_passed": true,
+    "total_shrinks": 0,
+    "epsilon_min": 5.8479532163742686e-12,
+    "epsilon_max": 2.8572526542091855e-07,
+    "weighted_sum_max_primary_relative_change": 0.0,
+    "weighted_sum_effective_layers": 651,
+    "lexicographic_committed_layers": 1460,
+    "fallback_committed_layers": 0,
+    "throughput_primary_only_kwh": 32435832.18470421,
+    "throughput_tiebreak_kwh": 31781301.96533016,
+    "throughput_reduced_kwh": 654530.2193740495,
+    "max_baseline_trajectory_change_kwh": 4527.568797283953,
+    "degenerate_layers": 1460,
+    "max_degeneracy_degree": 228,
+    "layers_with_remaining_multiplicity": 1024,
+    "layers_with_unknown_multiplicity": 1,
+    "note": "T7-1 次目标 Σ(c+q_dis) 的 ε 为无量纲相对权重；提交解为 ③ 主目标最优面上的吞吐量最小解（T7-1 优先序在 ε→0⁺ 的精确实现），② 的字面加权式作为诊断对照逐层落盘。T7-3 的 degeneracy_degree = 活跃约束数 − 变量数，layers_with_remaining_multiplicity 为「主目标最优面上吞吐量上界 > 提交解吞吐量」的层数（即仍有多重最优）。"
+  },
+  "t7_tiebreak_artifact": "t7_tiebreak.json",
+  "wall_seconds": 39.57295139999769,
+  "workbook": "result3.xlsx",
+  "workbook_info": {
+    "plan_rows_filled": 334,
+    "plan_periods_per_row": 144,
+    "adjust_rows_filled": 334,
+    "storage_blocks_filled": 2004,
+    "emergency_rows_filled": 2270,
+    "storage_blocks": [
+      "0:00-4:00",
+      "4:00-8:00",
+      "8:00-12:00",
+      "12:00-16:00",
+      "16:00-20:00",
+      "20:00-24:00"
+    ],
+    "format_residuals": []
+  },
+  "delivery_days": 334,
+  "checks_failed": [
+    "layer_equality_residual_max",
+    "layer_inequality_residual_max"
+  ],
+  "statistics": {
+    "complementarity_sum_kwh2": 0.0,
+    "simultaneous_charge_discharge_periods": 0,
+    "simultaneous_charge_kwh": 0.0,
+    "simultaneous_discharge_kwh": 0.0,
+    "periods_with_q_em_and_charge": 5070,
+    "days_with_emergency": 365,
+    "periods_with_emergency": 12164,
+    "days_with_deviation": 338,
+    "note": "同充放属调整层目标（仅偏差结算、无吞吐成本）导致的 LP 退化，不是硬约束违反；§5.1 的硬约束清单不含该项，§6.11 的『期望 0』是设计期望；费用与全部恒等式不受影响。"
+  },
+  "objective_yuan": 16179176.145228,
+  "cost_plan_yuan": 13885669.475555,
+  "cost_adj_yuan": 563098.132533,
+  "cost_em_yuan": 1730408.537141,
+  "delivery_cost_yuan": 14540616.335652,
+  "total_purchase_kwh": 20842142.600809,
+  "total_q_em_kwh": 391274.485914,
+  "total_spill_kwh": 2087727.847547,
+  "storage_final_kwh": 1200.0
+}

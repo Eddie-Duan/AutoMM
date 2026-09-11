@@ -1,0 +1,16 @@
+version: formulation_v001
+status: accepted
+created_at: '2026-09-11T05:36:53.493361+00:00'
+parent_version: null
+content_hash: 4e60869df5669e7816f3d82138370940f7bfe8a2878d2c357bf7ba8d23605ce9
+decision_reason: formulation_v001 已闭合：模型输入/输出/状态/参数/目标/约束/边界条件齐备（计划层 720 变量/288 等式，AD_6/12/18
+  为 756/504/252 变量；单日 2,232 变量/720 等式；全年 1,460 次小 LP），团队裁定 B0–B7 与 T1/T2/T3 逐条落地，B7
+  的 7 项阻塞清单全部闭合（计划层目标 min Σp·b 与 PLAN-EXP 均已在公式层写出；三层信息集边界、C_adj 线性化无损性与 M6 接口、表 1/2/3
+  与 result3.xlsx 逐格映射、跨年 36 项清单、规模与 compute.yaml 对照、P-VS-Q 声明）。解析依据：L1（决策层 q_em≡0）、L2（结算层唯一闭式解）、L3（s'≤PV^act·Δt
+  自动成立）、L4（各层必可行）、L5（分段线性化 LP 无损）、L6（M3 ≡ prob02 (P2) 跨问锚点）、P1（信息单调方向与比较纪律）。独立只读探针
+  exit 0、ALL_PASS=True（20/20）、ruff All checks passed，14 天窗口实测恒等式残差 ≤1.82e-12 kWh、Σq_em
+  14/14 天非零、LP=MILP（mip_gap=0）、量级折单日 10^4 元。已给出 7 个候选方案（覆盖精确/启发式/混合）与看到结果前冻结的 6 维比较标准
+  + C1–C9 引用，推荐 M1 为唯一交付口径。F1–F8 与 D1–D8 已显式登记并给出推荐，按 agents/mathematical-formulator.md
+  第 4 条未停下等待人工，无阻塞。
+decided_at: '2026-09-11T06:09:05.524911+00:00'
+assumption_version: assumption_v001

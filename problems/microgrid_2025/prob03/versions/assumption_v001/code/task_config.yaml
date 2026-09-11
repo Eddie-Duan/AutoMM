@@ -1,0 +1,40 @@
+# prob03 computation task 级配置
+# 生成者：implementation-agent（动作 act-06c999a94813435f；T7 一致性修订，前稿 act-109ffb18e7f84f33）
+# 用途：resource-manager 提交隔离计算 task 时作为 --config-path 传入；
+#       effective_config 会把它合并到全局配置之上（仅影响本 task）。
+compute:
+  default_backend: local
+  max_local_concurrent_tasks: 1
+  memory_per_worker_gb: 2
+  task_timeout_seconds: 1800
+  timeout_retry_attempts: 2
+  retry:
+    infrastructure_transient: 3
+    code_runtime: 2
+    model_revision: 2
+  resource_notes:
+    device: cpu
+    gpu_required: false
+    concurrent_gpu_tasks: 0
+    note: >-
+      prob03 为 M1 三层顺序向前递推（计划层 + 3 个调整层 + 闭式结算），全年 365 天 × 4 层 = 1,460 次层求解；
+      团队 T7 冻结 tie-breaking 后每层 4 次名义 LP（① 纯主目标基线 ② T7-1 字面加权 ③ 主目标最优面上的
+      字典序最小吞吐量提交解 ④ T7-3 退化/多重最优探测）= 5,840 次名义调用，单次 LP ≤ 756 变量 / ≤ 288 等式
+      （计划层 720/288），规模远小于 prob02 的单一 52,560 时段 LP。CPU HiGHS 求解，implementation 探针实测
+      14 天 56 层 = 1.5 s、34 天 136 层（含产物落盘）约 3 s，全年预期 < 120 s；**不占用单卡 GPU**。
+      可用内存偏低（本机实测 1.3–2.2 GB），故 memory_slots=1、不安排多 worker 并发。
+    worker_launch_mode: "supervised（继承 config/compute.yaml；detached 在本环境会被沙箱回收）"
+solver:
+  name: highs
+  interface: "scipy.optimize.linprog(method='highs')"
+  device: cpu
+  time_limit_seconds: 60
+  deterministic: true
+  seed: null
+  notes:
+    - "time_limit_seconds 为**单层 LP** 时限；整链另有 --max-wall-seconds 墙钟预算。"
+    - "团队 T7 统一 tie-breaking（所有层、所有模型 M1–M8）：min [该层主目标] + ε·Σ(c+q_dis)。"
+    - "ε = 1e-6 × max(|该层主目标最优值|,1) / [n·(c_cap+q_dis_cap)]（无量纲相对权重）；T7-2 要求逐层主目标相对变化 ≤ 1e-9。"
+    - "T7 后每层多 3 次名义 LP（基线/加权/退化探测）；每层求解耗时仍 < 0.05 s，预算余量 ≥ 1 个数量级。"
+    - "LP 最优面可能不唯一（调整层目标在偏差为 0 处退化）：提交解在主目标最优面上取吞吐量最小者；"
+    - "T7-3 的退化维度与多重最优层数落盘于 t7_tiebreak.json；sanity 以约束残差 + 恒等式 + 目标值 + 交付表为准，不比对逐点解唯一性。"

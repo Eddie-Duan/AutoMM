@@ -1,11 +1,11 @@
 problem_id: microgrid_2025
 question_id: prob03
-status: not_started
-stage: problem_understanding
+status: active
+stage: sanity_check
 dependencies: []
-active_assumption_version: 0
-active_formulation_version: 0
-accepted_formulation_version: 0
+active_assumption_version: 1
+active_formulation_version: 1
+accepted_formulation_version: 1
 consecutive_rejections: 0
 literature_refreshes: 0
 literature_refresh_required: false
@@ -14,26 +14,31 @@ conclusion:
   version: 0
   content_hash: ''
 sanity:
-  level_1_4: pending
+  level_1_4: PASS_WITH_WARNING
   level_5: pending
   level_6: not_applicable
 optional_stages:
   robustness:
-    decision: pending
-    reason: ''
+    decision: completed
+    reason: prob03 robustness 阶段全部产物落盘并收尾（动作 act-93a3075a9a494876）：隔离 task 9d890669fb66a1bcc3ae
+      成功（succeeded/supervised/CPU/rc=0/wall 3437.37 s/156 情景），report.md 已写入版本 robustness/，含适用性决定、预注册
+      K1–K6/S1–S6、任务与追踪链独立复核、数值结论、置信区间、6 张敏感性图引用、稳定性分级与适用边界、技术债与强制披露项。预注册判据判定 S1/S2/S3/S5/S6
+      PASS、S4 FAIL（唯一违反项 inter_family_mean_spread 7.2946%，同 σ=5% 子集仅 0.0641%），按 plan.md
+      §3 分级规则判「条件稳定（需给出适用边界）」；3 个失败情景全属结构族并已保留计入样本清单。无硬门禁失败（基线闸门 passed=true、追踪链三方哈希独立复现、独立复核
+      38/38 断言通过、独立重解探针逐位复现），不返回 skipped。
   ablation:
     decision: pending
     reason: ''
 artifacts:
-  problem_understanding: false
-  literature: false
-  assumptions: false
-  formulation: false
-  implementation: false
-  computation: false
-  visualization: false
-  sanity_check: false
-  robustness: false
+  problem_understanding: true
+  literature: true
+  assumptions: true
+  formulation: true
+  implementation: true
+  computation: true
+  visualization: true
+  sanity_check: true
+  robustness: true
   ablation: false
   cross_question_review: false
 notification:
@@ -53,3 +58,93 @@ stale_history:
   caused_by:
   - question_id: prob01
     conclusion_hash: 6fb260491cb70450c0ea71608b59271f51d99a002737d0b3ed46a1bb1b8888d6
+accepted_assumption_version: 1
+sanity_history:
+- at: '2026-09-11T08:13:41.518300+00:00'
+  level: level_1_4
+  status: NEEDS_REVISION
+  reason: prob03 computation 阶段验收（act-d80f5539ff934699，policy P2 inspect_compute_result）：对象
+    task c84281b1f49fc30b9ecd / results/prob03_v001_f001_run002（succeeded、attempt
+    1、supervised、CPU HiGHS、rc=0、probe_mode=false、days=365/periods=52560/model=M1）。独立只读断言
+    44+19=63 项，通过 61 项、失败 2 项（均为 R9 标签风格）。**L1 FAIL（交付口径）**：运行与隔离本身 PASS（五件产物齐备、task.json
+    与 attempt-001 逐字节相同、stderr 0 字节、输入/模板 md5 未变、run001 未被覆盖、input_hash=4343d799…
+    与 source_config_hash=5ba829f3… 独立重算一致），但 code_hash 由 run002 的 927bf1e1… 变为当前 5bab4f26…（prob03_io.py
+    3d708a09…→fb8b5eb4…、prob03_model.py 932bd01f…→43aa60b7…、run_prob03.py 未变），与团队勘误
+    R14 逐字节吻合；R14 明确 run002 不得作为最终交付口径、一律以 run003 为准，而 results/ 只有 run001/run002（run003
+    task 6de708bbd2d3dd273013 未创建）= 追踪链与交付口径不匹配。**交付件硬失败（R9/R10）**：result3.xlsx 紧急购电量
+    2,270 行中 874 条标签起始小时补零（06:10-9:20 / 08:00-9:00 / 06:10-7:00），run001 负对照同为 874、模板无数据行，团队勘误
+    R9 数字被逐位复现；充放电量 668 个储电量格中 152 格低于题面下界 1200 kWh（最深 1199.999999997668，偏低 2.332e-9
+    kWh）且 0 格超 10800；55,463 格超过 6 位小数（计划 25,771 + 调整 26,404 + 充电 1,512 + 放电 1,265
+    + 储电量 511，最长 25 位），与团队勘误 R10 的 152/55,463 逐位一致；另新定位 tables.json 表 3 有 11 条同源标签（如
+    2025-06-21 的 04:10-5:00 应为 4:10-5:00）。R9/R10 均属呈现层（标签首尾分钟与逐时段区间 0 处不符；越界幅度 ≤2.4e-9
+    kWh 为求解器容差量级），但交付答案文件违背题面硬下界与格式纪律，硬门禁不通过。**L2 PASS**：独立回代结算平衡 3.411e-13、状态转移 8.790e-8、(I1d)/(I2d)
+    7.911e-8/7.910e-8、c_max=833.333333 kWh、q_dis_max=750.000000 kWh、两侧功率 5000.000
+    kW、同充放 0、E∈[1199.9999999977,10800.0000000007]、非负性 min=−6.975e-8（求解器容差）；模型自检 33/33、checks_failed=[]；5
+    个数值文件 658,245 个数值 0 NaN/0 Inf。**L3 数值/量纲/映射 PASS**：Δt=1/6 h 与附件 2 对齐残差 0.0、电价与附件
+    1 一致 0.0；目标不含 Δt，独立复算 C_total=16,179,176.145228 元、交付期=14,540,616.335652 元、C_plan=13,885,669.475555、C_adj=563,098.132533、C_em=1,730,408.537141；result3.xlsx
+    计划/调整各 48,096 格 max 4.547e-13、充放电块 5.46e-12、储电量 4.55e-13、紧急购电区间能量 4.98e-7（6 位舍入）；表
+    1/2/3 ↔ 序列 ≤4.96e-7；附件 3 降尺度算子独立重建的未定义项数 0/13,140/26,280/39,420 == run_manifest.layer_inputs.nan_cells；T7
+    口径 layers=1460、fallback=0、lexicographic=1460、max_primary_relative_change=5.0000409e-10≤1e-9，且不与
+    lp_solver_invocations_nominal=5840 混用。**唯一 L3 失败项即 R9 的两处标签风格。****L4 PASS_WITH_WARNING**：交付期费用
+    ∈ 解析界 [6,963,514.20, 19,109,190.33]（62.39% 处）、日费用 [16,614.26, 66,529.25] 元在量级带内、紧急购电单价/同段电价=5.000000、储能上下界均激活（7,556/3,887
+    时段）、365 天均有紧急购电、Σs=2,153,482.408343 kWh（目标系数 0）、关键假设文献门禁 passed=true（25 条 0 全文）；R11：比
+    prob02 交付期贵 2,307,565.50 元（+18.863%）而两问交付期净负荷逐位相同（17,939,189.49 kWh）⇒ 预报误差代价，须披露；R12：机制恒等式
+    q_em = Π − 预报余额 − PV^act + s 在全期 52,560 时段成立（max 4.55e-13），5,070 个 q_em>0 且 c>0
+    时段不违反 D7-A（示例 2025-01-01 6:20-6:30）；R13：2025-02-01 0:00 储电量 prob02=7,950.00 /
+    prob03=1,200.00 kWh 因信息集不同不可互比。结论：run002 的**数值与口径正确**，但交付件违反 R9/R10 且代码指纹已被当前注册代码取代（R14），不能作为最终结果；判
+    NEEDS_REVISION 并路由回 implementation（failure_type=code_or_runtime；代码补丁已在盘，需按已登记的
+    code_hash=5bab4f26…/task_id=6de708bbd2d3dd273013/output_directory=..._run003 推进到
+    computation 重跑）。无人工阻塞。
+  failure_type: code_or_runtime
+- at: '2026-09-11T08:53:09.020159+00:00'
+  level: level_1_4
+  status: PASS_WITH_WARNING
+  reason: prob03 computation 阶段 L1–L4 验收（act-36514ddc575b4bdb，policy P2 inspect_compute_result）：对象
+    task 6de708bbd2d3dd273013 / results/prob03_v001_f001_run003（succeeded、attempt
+    1、supervised、CPU HiGHS、rc=0、probe_mode=false、days=365/periods=52560/model=M1、wall
+    41.77 s）。本动作 5 个只读探针 44+19+38=101 项断言全部通过。**L1 PASS**：六件产物齐备；task.json 与 attempt-001-task.json
+    逐字节相同、stderr 0 字节；输入 md5（dbe06f92…/bb3e493f…/e8dfee65…/75be588e…）未变；run001/run002
+    共 12 件（各 6 件）sha256 未被覆盖；input_hash=4343d799…、source_config_hash=5ba829f3… 与 task.json
+    一致；code_hash=5bab4f2625a398fec85e9560afe1cf0a7a6a71db80455bcde720973ca6c38015
+    与 task.json 及当前注册代码逐位一致（R14 已闭合）；R9/R10 逐格扫描全部为 0——紧急购电 2,270 行标签起始小时补零 0 条（run001
+    负对照 874）、668 个储电量格低于 1200 的 0 格、三表超 6 位小数 0 格，tables.json 表 3 的 11 条同源标签亦已修正（数值
+    diff=0）。**L2 PASS**：结算平衡 3.411e-13、状态转移 8.790e-8、(I1d)/(I2d) 7.911e-8/7.910e-8、c_max=833.333333
+    kWh、q_dis_max=750.000000 kWh（E1）、两侧功率 5000.000 kW（D10 口径丙）、同充放 0、E∈[1199.9999999977,10800.0000000007]、非负性
+    min=−6.975e-8（求解器容差）；模型自检 33/33、checks_failed=[]；658,245 个数值 0 NaN/0 Inf；跨日闭合按正确判据独立复算残差
+    1.14e-13（前动作草稿探针的 4 项失败已逐条定位为探针判据/指数错误：E 为时段末状态、48,096 时段≠334 天、物理 1461 行 vs pandas
+    1460 行）。**L3 PASS**：Δt=1/6 与附件 2 残差 0.0、电价与附件 1 残差 0.0；目标不含 Δt，独立复算 C_total=16,179,176.145228
+    元（=objective_yuan）、交付期=14,540,616.335652 元、C_plan=13,885,669.475555、C_adj=563,098.132533、C_em=1,730,408.537141，分解恒等式残差
+    0.0；result3.xlsx 计划/调整各 48,096 格 max 5.00e-7、2,004 充放电块、668 储电量格、2,270 紧急购电区间（能量
+    4.98e-7、区间数与首尾分钟 0 处不符）；表 1/2/3 ↔ 序列 ≤4.96e-7；附件 3 降尺度算子独立重建的未定义项数 0/13,140/26,280/39,420
+    == run_manifest.layer_inputs.nan_cells（E1 落点：物理 1461 行、每组 4×24、形状 (1460,24)）；T7
+    layers=1460、max_primary_relative_change=5.0000409e-10≤1e-9、fallback=0、lexicographic=1460，且不与
+    lp_solver_invocations_nominal=5840 混用。**L4 PASS_WITH_WARNING**：交付期费用 ∈ 解析界 [6,963,514.20,
+    19,109,190.33]（62.39% 处）、日费用 [16614.26, 66529.25] 元、均价 0.692602 元/kWh、紧急购电单价/同段电价=5.000000、储能上下界均激活（7,556/3,887
+    时段）、365 天均有紧急购电、Σs=2,153,482.408343 kWh（目标系数 0）、关键假设文献门禁 passed=true（25 条 0 全文）；R11：比
+    prob02 交付期贵 2,307,565.50 元（+18.863%）而两问交付期净负荷逐位相同（17,939,189.49 kWh）⇒ 预报误差代价，须披露；R12：机制恒等式
+    q_em = Π − 预报余额 − PV^act + s 在全期 52,560 时段成立（max 4.55e-13），5,070 个 q_em>0 且 c>0
+    时段不违反 D7-A（示例 2025-01-01 6:20-6:30）；R13：2025-02-01 0:00 储电量 prob02=7,950.00 /
+    prob03=1,200.00 kWh 因信息集不同不可互比。run003↔run002 的 7 个汇总块与表 1/2 逐位 identical、表 3 数值
+    diff=0，工作簿差异仅 874 标签 + 55,463 格 ≤5e-5 舍入（other_diffs=0），证明 R9/R10 只改呈现、数值与结论不变。**结论：run003
+    满足题面硬约束、R9/R10 填报纪律与追踪链要求，可作为最终交付口径（论文与表 1/2/3 一律以 run003 为准，run001/run002 仅作审计负对照）；无硬门禁失败，技术债见
+    warnings（文献等级、R11–R13/T7-3/T7-6/E7 披露、continuity 自检恒等、T9 阈值口径、E6 口径、上游 C3/E3 与
+    D10 结转）。推荐下一阶段 sanity_check → visualization。**
+  failure_type: null
+- at: '2026-09-11T09:02:29.479148+00:00'
+  level: level_1_4
+  status: PASS_WITH_WARNING
+  reason: prob03 sanity_check 阶段正式复核（act-354d33342edf4e70）：对象 task 6de708bbd2d3dd273013
+    / results/prob03_v001_f001_run003（succeeded、attempt 1、rc=0、supervised、CPU HiGHS、probe_mode=false、days=365/periods=52560/model=M1、wall
+    41.77 s）。本动作自建探针 73 项独立只读断言全部通过、checks_failed=[]。L1 PASS（六件产物齐备、task.json 与 attempt-001-task.json
+    逐字节相同、stderr 0 字节、输入/模板 md5 未变、run001/run002 未被覆盖、code_hash=5bab4f26…/config_hash=fd07c6a5…/source_config_hash=5ba829f3…/input_hash=4343d799…/task_id
+    独立重算一致且与当前注册代码逐位一致（R14 闭合）、E1 附件 3 结构 1460 行=365 天×4 决策时刻×24 提前量列且与 layer_inputs
+    自洽、R9 补零标签 0/2270、R10 值口径非 6 位小数 0 与储电量越界 0）；L2 PASS（结算平衡 3.411e-13、状态转移 8.790e-8、日边界
+    1.137e-13、(I1d)/(I2d) 7.911e-8/7.910e-8、c≤833.3333、q_dis≤750.0000、两侧功率 5000.000
+    kW、E∈[1200,10800]、同充放 0、非负性 ≥−6.975e-8、52,560×12 全 finite、模型自检 33/33）；L3 PASS（Δt=1/6
+    与电价对齐残差 0.0、目标不含 Δt、四费用分项独立复算逐位一致、分解恒等式 0.0、四工作表与表 1/2/3 全量逐格 ≤4.9999e-7、T7 口径与
+    lp_calls=1460/nominal=5840 不混用、E6 口径核对、run003↔run002 数值零变化）；L4 PASS_WITH_WARNING（交付期
+    14,540,616.335652 元落于独立解析界 [6,963,514.20, 16,407,319.63]、量级 10^7、均价 0.697655 元/kWh、α_em
+    比值 5.000000、储能上下界均激活、Σq_em 非零、关键假设文献门禁独立复算通过）。L5/L6 not_applicable。无硬门禁失败；技术债见
+    warnings（含 R10 值口径与 XML 字面口径的显式冲突登记：字面口径 run003 仍余 4,849 格 >6 位小数串，已证明为 openpyxl
+    %.16g 浮点渲染、值等于 6 位小数舍入，属呈现层技术债、不得据此判失败）。不退回：failure_type=null、return_stage=null。
+  failure_type: null

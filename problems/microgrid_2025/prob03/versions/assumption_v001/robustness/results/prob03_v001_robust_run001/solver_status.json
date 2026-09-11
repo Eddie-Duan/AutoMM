@@ -1,0 +1,14 @@
+{
+  "status": 0,
+  "feasible_incumbent": true,
+  "baseline_check_passed": true,
+  "model": "M1",
+  "device": "cpu",
+  "gpu_required": false,
+  "seed": 20260911,
+  "scenario_count": 156,
+  "solved_count": 153,
+  "failed_count": 3,
+  "wall_seconds": 3437.368155,
+  "mode": "compact"
+}

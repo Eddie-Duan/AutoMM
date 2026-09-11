@@ -1,0 +1,102 @@
+{
+  "generated_at": "2026-09-11T09:14:59.571364+00:00",
+  "problem_id": "microgrid_2025",
+  "question_id": "prob03",
+  "assumption_version": "assumption_v001",
+  "formulation_version": "formulation_v001",
+  "task_id": "6de708bbd2d3dd273013",
+  "run": "problems/microgrid_2025/prob03/versions/assumption_v001/results/prob03_v001_f001_run003",
+  "font": "Microsoft YaHei",
+  "dpi": 180,
+  "source_solution_hash": "fc465646c7fd80533be952253de13831fe6f19fbcc0f5bb03432935e1f1d1d89",
+  "source_tables_hash": "dde04ce5a1394340ae873e5b7c98cfed96c07e129725a93965c676d02e6dfde6",
+  "source_tiebreak_hash": "7f07d02bba7778ed4cbc519d15fd50dc70b07a5ae6be40289d69b9eef95730c7",
+  "figure_count": 8,
+  "removed_stale_registrations": [],
+  "figures": [
+    {
+      "stable_id": "prob03_fig_forecast_chain_78b78a9c24",
+      "kind": "forecast_chain",
+      "path": "problems/microgrid_2025/prob03/versions/assumption_v001/figures/prob03_fig_forecast_chain_78b78a9c24.png",
+      "quality_status": "passed",
+      "source_data": "problems/microgrid_2025/prob03/versions/assumption_v001/results/prob03_v001_f001_run003/solution.json + data/附件2.xlsx + data/附件3.xlsx"
+    },
+    {
+      "stable_id": "prob03_fig_plan_adjust_profile_5815df79b4",
+      "kind": "plan_adjust_profile",
+      "path": "problems/microgrid_2025/prob03/versions/assumption_v001/figures/prob03_fig_plan_adjust_profile_5815df79b4.png",
+      "quality_status": "passed",
+      "source_data": "problems/microgrid_2025/prob03/versions/assumption_v001/results/prob03_v001_f001_run003/solution.json"
+    },
+    {
+      "stable_id": "prob03_fig_adjust_surface_3d_6b4425cbc5",
+      "kind": "adjust_surface_3d",
+      "path": "problems/microgrid_2025/prob03/versions/assumption_v001/figures/prob03_fig_adjust_surface_3d_6b4425cbc5.png",
+      "quality_status": "passed",
+      "source_data": "problems/microgrid_2025/prob03/versions/assumption_v001/results/prob03_v001_f001_run003/solution.json"
+    },
+    {
+      "stable_id": "prob03_fig_adjust_heatmap_2d_4477246233",
+      "kind": "adjust_heatmap_2d",
+      "path": "problems/microgrid_2025/prob03/versions/assumption_v001/figures/prob03_fig_adjust_heatmap_2d_4477246233.png",
+      "quality_status": "passed",
+      "source_data": "problems/microgrid_2025/prob03/versions/assumption_v001/results/prob03_v001_f001_run003/solution.json"
+    },
+    {
+      "stable_id": "prob03_fig_cost_decomposition_3c230c19db",
+      "kind": "cost_decomposition",
+      "path": "problems/microgrid_2025/prob03/versions/assumption_v001/figures/prob03_fig_cost_decomposition_3c230c19db.png",
+      "quality_status": "passed",
+      "source_data": "problems/microgrid_2025/prob03/versions/assumption_v001/results/prob03_v001_f001_run003/solution.json + problems/microgrid_2025/prob02/versions/assumption_v001/results/prob02_v001_f001_run002/solution.json"
+    },
+    {
+      "stable_id": "prob03_fig_soc_trajectory_ae5b14c70a",
+      "kind": "soc_trajectory",
+      "path": "problems/microgrid_2025/prob03/versions/assumption_v001/figures/prob03_fig_soc_trajectory_ae5b14c70a.png",
+      "quality_status": "passed",
+      "source_data": "problems/microgrid_2025/prob03/versions/assumption_v001/results/prob03_v001_f001_run003/solution.json"
+    },
+    {
+      "stable_id": "prob03_fig_emergency_profile_c948ccca1e",
+      "kind": "emergency_profile",
+      "path": "problems/microgrid_2025/prob03/versions/assumption_v001/figures/prob03_fig_emergency_profile_c948ccca1e.png",
+      "quality_status": "passed",
+      "source_data": "problems/microgrid_2025/prob03/versions/assumption_v001/results/prob03_v001_f001_run003/solution.json"
+    },
+    {
+      "stable_id": "prob03_fig_tiebreak_degeneracy_85401e7e5d",
+      "kind": "tiebreak_degeneracy",
+      "path": "problems/microgrid_2025/prob03/versions/assumption_v001/figures/prob03_fig_tiebreak_degeneracy_85401e7e5d.png",
+      "quality_status": "passed",
+      "source_data": "problems/microgrid_2025/prob03/versions/assumption_v001/results/prob03_v001_f001_run003/solution.json + problems/microgrid_2025/prob03/versions/assumption_v001/results/prob03_v001_f001_run003/t7_tiebreak.json"
+    }
+  ],
+  "diagnostics": {
+    "cost_recomputed": {
+      "plan": 13885669.475554619,
+      "adj": 563098.1325327263,
+      "em": 1730408.537140882,
+      "total": 16179176.145228228
+    },
+    "cost_reported": {
+      "plan": 13885669.475555,
+      "adj": 563098.132533,
+      "em": 1730408.537141,
+      "total": 16179176.145228,
+      "delivery_total": 14540616.335652
+    },
+    "adjustment": {
+      "up_periods": 5810,
+      "down_periods": 86,
+      "sum_full_kwh": 533176.5307439647,
+      "sum_delivery_kwh": 482270.7269909621
+    },
+    "prob02": {
+      "delivery_cost_yuan": 12233050.830708,
+      "objective_yuan": 13758182.573724,
+      "net_load_delivery_kwh": 17939189.494967,
+      "state_start_delivery_kwh": 7950.0
+    },
+    "checks_failed": []
+  }
+}

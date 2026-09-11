@@ -19,6 +19,15 @@ action 超时后保留日志和草稿。下一次 action 必须复用已有产�
   `evidence/<name>_out.txt`（例如 `evidence/compileall_out.txt`、`evidence/ruff_out.txt`），不要只留在日志或不落盘。
 - 若某项检查无法产出文件（命令不可用、环境缺依赖等），必须在响应正文里显式说明该项已跳过，并把它从路径列表中移除，
   **不得留悬空路径**。
+- **文件名必须与脚本实际写出的名字逐字符一致（团队补充，2026-09-11 第二次实测）**：实例 `act-06c999a94813435f` ——
+  脚本实际写出 `evidence/probe_run_d34/probe_result3.xlsx`，但响应里列成了 `evidence/probe_run_d34/result3.xlsx`
+  （少了 `probe_` 前缀），整批响应被判 `infrastructure_transient` 并作废；**该动作的实质工作（T7 实现 + 23 项探针全过 +
+  136 层不变性验证）全部落盘但未登记，白耗一个 attempt**。
+- **提交前的强制自检**：列路径前用 `python -c "import os,sys; [sys.exit(...) if not os.path.isfile(p) else None for p in [...]]"`
+  或等价脚本**逐条 `os.path.isfile()`**（输出重定向到 `evidence/path_check_out.txt`）。**不要凭记忆写路径**——
+  一律从脚本里的 `Path(...)` 构造处复制，或从 `ls` 输出复制。
+- 注意**输出名随参数变化**的情况：本问探针在 `--days 34` 下交付期为空、**不写 `result3.xlsx`**，写的是 `probe_result3.xlsx`。
+  凡「输出文件名取决于运行参数」的探针，必须把实际路径**从脚本打印出来**再抄进响应。
 
 ## 响应协议
 

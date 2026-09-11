@@ -12,6 +12,20 @@
 - 任何 Harness invariant 都必须严格失败；模型计算的非关键故障应按 failure class 恢复或降级审查。
 - 最终响应必须是符合 `config/agent_response.schema.json` 的 JSON。
 
+## 响应 payload 纪律（团队补充，2026-09-11；**已实测 3 次**）
+
+- `config/agent_response.schema.json` 里**每个 command 的 `arguments` 都是 `additionalProperties: false`**：
+  多写**一个未登记的键**（哪怕只是备注）就会让**整批响应**判非法，**已完成的实质工作全部作废**。
+- 后果链（实测）：schema 校验失败 → action 判 `harness_invariant` → `workflow` 返回机械 `blocked` →
+  `runner` 把 `recovery_status` 覆写为 `human_blocked` → 之后**每次唤醒都秒返 `blocked`（1 秒空转），永久自锁**。
+- 实测案例：`reason_note`（prob02）、`target_stage_note`（prob03 `act-1d13382f65c349a6`）、
+  以及证据清单里的悬空路径（`probe_result3.xlsx` 写成 `result3.xlsx`）。
+- **纪律**：`arguments` **只填 schema 逐字列出的键**；备注、说明、理由补充一律写进
+  `findings` / `warnings` / `blocking_reasons`，**不要塞进 `arguments`**。
+- 提交前自检：把每个 command 的 `arguments` 的键与 schema 对照一遍（键名逐字符一致、**不多不少**）。
+- 被自锁卡住时：实质工作通常已完成，可用 `python scripts/harness.py control RESUME --source cli` 解锁
+  （团队已修 `scripts/automm/state.py` 的 RESUME 分支，使其同时复位 `recovery_status` 与 `failure_class`）。
+
 ## 运行环境（团队提供的事实）
 
 - CPU：32 逻辑核；内存：15.7 GB。

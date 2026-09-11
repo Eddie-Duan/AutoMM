@@ -1,0 +1,37 @@
+# prob03 robustness 隔离计算 task 级配置
+# 生成者：robustness-analyst（动作 act-7c496fc60d7741c4）；阶段：robustness（mandatory_stages，不得 skipped）
+# 用途：由 scripts/compute_dispatcher.py submit 时作为 --config-path 传入；
+#       effective_config 会把它合并到全局配置之上（仅影响本 task）。
+compute:
+  default_backend: local
+  max_local_concurrent_tasks: 1
+  memory_per_worker_gb: 2
+  task_timeout_seconds: 7200
+  timeout_retry_attempts: 2
+  retry:
+    infrastructure_transient: 3
+    code_runtime: 2
+    model_revision: 2
+  resource_notes:
+    device: cpu
+    gpu_required: false
+    concurrent_gpu_tasks: 0
+    note: >-
+      prob03 robustness 共 156 个情景 = baseline(compact) 1 + baseline_full(四段式) 1 +
+      参数 OAT 39 + 求解器 3 + 结构约束 12 + 输入噪声 4 族 × 25 = 100。
+      每情景为一次全年三层顺序 LP（365 天 × 144 时段 = 52,560 时段；每层 2 次 LP（compact）或 4 次（full））。
+      本动作小探针实测：34 天窗口单情景 1.63–1.76 s；全年 compact 17.5–17.8 s、full 34.9–35.1 s；
+      整批预计 45–50 min（≈ 2,800 s）。timeout 设 7,200 s、整批 --max-wall-seconds 5,400 s 留余量。
+      CPU HiGHS，**不占单卡 GPU 串行额度**；本机可用内存偏低，单 worker 串行，不安排并发。
+    worker_launch_mode: "supervised（继承 config/compute.yaml；detached 在本环境会被沙箱回收）"
+solver:
+  name: highs
+  interface: "scipy.optimize.linprog(method='highs')"
+  device: cpu
+  time_limit_seconds: 30
+  deterministic: true
+  seed: 20260911
+robustness:
+  mode: compact
+  tiebreak_rule: "团队 T7-1/T7-5 统一规则；compact 只跳过 ②字面加权式 / ④退化探测两个诊断环节，提交解 = ③字典序"
+  baseline_reference: problems/microgrid_2025/prob03/versions/assumption_v001/results/prob03_v001_f001_run003

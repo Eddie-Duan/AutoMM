@@ -1353,3 +1353,780 @@ references:
   verified_title:
   - 'Economic Model Predictive Control for Microgrid Optimization: A Review'
   decided_at: '2026-09-10T14:53:12.972577+00:00'
+- id: ref-zhang-2020-eds-retailers
+  title: Optimal Alliance Strategies Among Retailers Under Energy Deviation Settlement
+    Mechanism in China's Forward Electricity Market
+  authors:
+  - Zhi Zhang
+  - Yicheng Jiang
+  - Zhenzhi Lin
+  - Fushuan Wen
+  - Yi Ding
+  - Li Yang
+  - Zhemin Lin
+  - Yongbo Li
+  - Hanhan Qian
+  - Jing Li
+  - Chuan He
+  year: 2020
+  source: IEEE Transactions on Power Systems
+  doi: 10.1109/tpwrs.2019.2955479
+  url: https://doi.org/10.1109/tpwrs.2019.2955479
+  authority: A
+  verification_level: abstract_oa
+  summary: 中国远期电力市场的能量偏差结算（EDS）机制：以合约量与实际用电量的偏差结算成本刻画偏差代价，并提出零售商间偏差互保（DMI）与联盟策略；摘要明确
+    EDS 成本是电力零售商的显著成本项，且可通过联盟降低。
+  applicable_conditions: 存在『计划/合约量 vs 实际量』偏差并按偏差量结算的市场；偏差是显著成本项、可进入优化目标。
+  supports: E1/A7：支撑『计划量与实际/调整量的偏差可显式计价并进入目标函数』这一制度与建模形式（框架级）；不支撑 0.5×/1.5× 的具体系数（题面硬给定，不由文献标定）。
+  differences: 该文是多零售商联盟 + CVaR 风险视角；本问是单一微网确定性调度，偏差为双向（欠/超）而非单向。
+  claim_types:
+  - literature_fact
+  - agent_inference
+  status: used
+  decision_reason: 支撑 E1/A7：给出『偏差结算成本作为显式成本项』的真实制度案例（中国远期市场 EDS），摘要级证据充分支持框架级主张。元数据经
+    Crossref 核验。
+  verified: true
+  verification_provider: crossref
+  verification_error: null
+  added_at: '2026-09-11T05:19:40.741915+00:00'
+  verified_at: '2026-09-11T05:19:43.508181+00:00'
+  verified_title:
+  - Optimal Alliance Strategies Among Retailers Under Energy Deviation Settlement
+    Mechanism in China's Forward Electricity Market
+  decided_at: '2026-09-11T05:20:07.896175+00:00'
+- id: ref-chauhan-2024-dsm-over-under
+  title: Effect of linking of deviation settlement mechanism for over-drawl and under-drawl
+    of power with market clearing price
+  authors:
+  - Rajeev Kumar Chauhan
+  - Sanjay Kumar Maurya
+  - Nilesh Kumar
+  - Durg Singh Chauhan
+  year: 2024
+  source: Electrical Engineering
+  doi: 10.1007/s00202-023-02031-x
+  url: https://doi.org/10.1007/s00202-023-02031-x
+  authority: A
+  verification_level: metadata
+  summary: 研究把『超额取电（over-drawl）』与『欠额取电（under-drawl）』的偏差结算机制与市场出清价挂钩后的影响（据标题与期刊层级；本轮未取得摘要）。
+  applicable_conditions: 偏差结算同时区分欠额与超额两个方向，并与市场价格联动。
+  supports: E1/A7：文献中存在『欠/超两方向偏差分别计价并可链接市场价』的制度设计，支撑本问 β_def=0.5 与 β_over=1.5 的『双向、非对称』分段结算形式。
+  differences: 面向印度/区域电网级 DSM；本问为单一微网日尺度，且系数由题面给定。
+  claim_types:
+  - literature_fact
+  status: used
+  decision_reason: 支撑 E1/A7 的『双向偏差分别计价』形式（关键假设的机制依据之一）。仅元数据级证据，引用限于制度存在性，不引具体数值。
+  verified: true
+  verification_provider: crossref
+  verification_error: null
+  added_at: '2026-09-11T05:19:40.800887+00:00'
+  verified_at: '2026-09-11T05:19:44.717592+00:00'
+  verified_title:
+  - Effect of linking of deviation settlement mechanism for over-drawl and under-drawl
+    of power with market clearing price
+  decided_at: '2026-09-11T05:20:08.102505+00:00'
+- id: ref-matsumoto-2022-imbalance-design
+  title: Mitigation of the Inefficiency in Imbalance Settlement Designs Using Day-Ahead
+    Prices
+  authors:
+  - Takuji Matsumoto
+  - Derek Bunn
+  - Yuji Yamada
+  year: 2022
+  source: IEEE Transactions on Power Systems
+  doi: 10.1109/tpwrs.2021.3135334
+  url: https://doi.org/10.1109/tpwrs.2021.3135334
+  authority: A
+  verification_level: abstract_oa
+  summary: 系统比较不平衡结算机制设计：是否允许虚拟交易、是否以及如何对不平衡量施加惩罚激励、不平衡价是取自实时交易还是基于日前报价/需求函数；以日本市场多次机制修订为样本实证，摘要明确『是否/how
+    施加 penalty incentives on the imbalance volumes』是设计变量，不平衡价可基于日前参考价。
+  applicable_conditions: 日前—实时两结算机制下的不平衡量惩罚与结算价基准选择。
+  supports: E1/A7：支撑『调整/偏差量按结算价 × 惩罚因子计价』的机制形式，并支撑『结算基准可取自日前计划价』这一口径；不裁定本题的 0.5×/1.5×
+    取值。
+  differences: 市场参与者套利与虚拟交易视角，含价格预测建模；本问为单一微网确定性偏差结算，无报价与风险目标。
+  claim_types:
+  - literature_fact
+  - agent_inference
+  status: used
+  decision_reason: 支撑 E1/A7：为『对偏差量施加惩罚激励』与『日前价作为结算基准』提供 A 级机制依据。元数据与摘要均经开放获取核验。
+  verified: true
+  verification_provider: crossref
+  verification_error: null
+  added_at: '2026-09-11T05:19:40.849846+00:00'
+  verified_at: '2026-09-11T05:19:45.589075+00:00'
+  verified_title:
+  - Mitigation of the Inefficiency in Imbalance Settlement Designs Using Day-Ahead
+    Prices
+  decided_at: '2026-09-11T05:20:08.317830+00:00'
+- id: ref-munhoz-2021-two-settlement
+  title: Two-settlement system for the Brazilian electricity market
+  authors:
+  - Fernando Colli Munhoz
+  year: 2021
+  source: Energy Policy
+  doi: 10.1016/j.enpol.2021.112234
+  url: https://doi.org/10.1016/j.enpol.2021.112234
+  authority: A
+  verification_level: metadata
+  summary: 讨论巴西电力市场的两结算（two-settlement）制度设计（据标题与期刊层级；本轮未取得摘要）。
+  applicable_conditions: 『日前计划 + 实时结算』的两结算制度，偏差由后续结算处理。
+  supports: E1/A7：支撑『计划在内层先行、偏差在后续阶段以另一价格结算』的两结算框架，与本问『0:00 计划 + 6:00/12:00/18:00
+    调整』的结构同构。
+  differences: 国家级市场制度分析；本问把两结算压缩为单微网的计划—调整两段。
+  claim_types:
+  - literature_fact
+  status: used
+  decision_reason: 支撑 E1/A7 的两结算框架定位。仅元数据级证据，仅用于框架级引用。
+  verified: true
+  verification_provider: crossref
+  verification_error: null
+  added_at: '2026-09-11T05:19:40.905643+00:00'
+  verified_at: '2026-09-11T05:19:46.445769+00:00'
+  verified_title:
+  - Two-settlement system for the Brazilian electricity market
+  decided_at: '2026-09-11T05:20:08.532968+00:00'
+- id: ref-asgarpoor-1995-deviation-penalty
+  title: Expected Cost Penalty due to Deviation from Economic Dispatch for interconnected
+    power systems
+  authors:
+  - S. Asgarpoor
+  - S.K. Panarelli
+  year: 1995
+  source: IEEE Transactions on Power Systems
+  doi: 10.1109/59.373969
+  url: https://doi.org/10.1109/59.373969
+  authority: A
+  verification_level: abstract_oa
+  summary: 提出并评估『偏离经济调度的期望成本惩罚』（EPDED）指标，用于互联系统在机组随机故障、负荷增长与燃料成本不确定性下的成本惩罚；摘要明确该指标刻画短周期内可观测的偏离代价。
+  applicable_conditions: 偏离调度计划（deviation from economic dispatch）被计为一项显式成本惩罚。
+  supports: E1/A7：支撑『偏离计划的偏差量可写成显式成本惩罚项』的建模范式（框架级）；不支撑本题系数。
+  differences: 面向可靠性/随机故障的期望成本指标；本问为确定性日尺度双向偏差结算。
+  claim_types:
+  - literature_fact
+  - agent_inference
+  status: used
+  decision_reason: 支撑 E1/A7：『偏差 → 成本惩罚项』是该领域长期存在的标准建模对象。元数据经 Crossref 核验，摘要支持框架级主张。
+  verified: true
+  verification_provider: crossref
+  verification_error: null
+  added_at: '2026-09-11T05:19:40.966335+00:00'
+  verified_at: '2026-09-11T05:19:47.298977+00:00'
+  verified_title:
+  - Expected Cost Penalty due to Deviation from Economic Dispatch for interconnected
+    power systems
+  decided_at: '2026-09-11T05:20:08.753670+00:00'
+- id: ref-danti-2019-intraday-rescheduling
+  title: Intraday dispatch, energy storage and the value of re-scheduling in systems
+    with high wind shares
+  authors:
+  - Irene Danti Lopez
+  - Damian Flynn
+  - Maël Desmartin
+  - Marcelo Saguan
+  year: 2019
+  source: 2019 IEEE Power &amp; Energy Society General Meeting (PESGM)
+  doi: 10.1109/pesgm40551.2019.8973426
+  url: https://doi.org/10.1109/pesgm40551.2019.8973426
+  authority: B
+  verification_level: abstract_oa
+  summary: 比较高风电占比系统『仅日前调度』与『滚动规划实现日内调度』在调度决策、运行成本与储能价值上的差异；摘要明确指出在高不确定下单一日前计划 + 平衡调度『不再必然最省』，并讨论平衡调度中纠正预报误差的成本与对储能调度/估值的影响。
+  applicable_conditions: 需要评估『在 0:00 计划之外引入日内调整』的价值与代价。
+  supports: E3/A9 + E1/A7：直接支撑本问开放式问题『是否需要引入其他时刻的预报制定调整策略』——文献显示日内再调度可降低运行成本、改变储能调度与价值；并支撑『平衡阶段纠正预报误差会产生成本』。
+  differences: 面向含风电的电力系统仿真；本问为单微网，且 6/12/18 三个调整时刻由题面给定。其数值不可引用。
+  claim_types:
+  - literature_fact
+  - agent_inference
+  status: used
+  decision_reason: 支撑 E3/A9（A9 是本问必答的开放问题）与 E1 的偏差纠正成本。会议论文（PESGM）定为 B 级，引用限于机制与方向。
+  verified: true
+  verification_provider: crossref
+  verification_error: null
+  added_at: '2026-09-11T05:19:41.022271+00:00'
+  verified_at: '2026-09-11T05:19:48.184688+00:00'
+  verified_title:
+  - Intraday dispatch, energy storage and the value of re-scheduling in systems with
+    high wind shares
+  decided_at: '2026-09-11T05:20:08.977434+00:00'
+- id: ref-almpantis-2024-minute-downscaling
+  title: A minute-resolution downscaling algorithm for high-resolution global irradiance
+    time series
+  authors:
+  - Diamantis Almpantis
+  - Henrik Davidsson
+  - Martin Andersson
+  year: 2024
+  source: Solar Energy Advances
+  doi: 10.1016/j.seja.2024.100076
+  url: https://doi.org/10.1016/j.seja.2024.100076
+  authority: A
+  verification_level: abstract_oa
+  summary: 提出从小时平均与晴空辐照数据合成分钟级 GHI 时间序列的降尺度算法（线性插值 + 短期天气过程识别）；摘要明确小时平均无法表征快速波动、高分辨率序列对含快爬坡技术的
+    PV 仿真必要，并指出精度提升依赖更多信息而非直接复现真实过程。
+  applicable_conditions: 把小时级辐照/预报降尺度到分钟级，用于 PV 出力仿真与调度。
+  supports: E2/A6：支撑『整点预报 → 10 分钟功率』必须有显式降尺度规则，且分段常数（直接沿用小时平均）会平滑掉波动；是本问 A6 降尺度规则的直接方法学依据。
+  differences: 面向 GHI 合成与 PV 仿真精度，不含调度优化；本问数据是附件 3 的整点 PV 功率预报，需按候选规则落到 144 个 10 分钟时段。
+  claim_types:
+  - literature_fact
+  - agent_inference
+  status: used
+  decision_reason: 支撑 E2/A6 的『必须显式降尺度』这一结论，且给出可迁移的线性插值路线。元数据与摘要经开放获取核验。
+  verified: true
+  verification_provider: crossref
+  verification_error: null
+  added_at: '2026-09-11T05:19:41.083626+00:00'
+  verified_at: '2026-09-11T05:19:49.332458+00:00'
+  verified_title:
+  - A minute-resolution downscaling algorithm for high-resolution global irradiance
+    time series
+  decided_at: '2026-09-11T05:20:09.202400+00:00'
+- id: ref-grantham-2017-5min-from-hourly
+  title: Generating synthetic five-minute solar irradiance values from hourly observations
+  authors:
+  - A.P. Grantham
+  - P.J. Pudney
+  - L.A. Ward
+  - M. Belusko
+  - J.W. Boland
+  year: 2017
+  source: Solar Energy
+  doi: 10.1016/j.solener.2017.03.026
+  url: https://doi.org/10.1016/j.solener.2017.03.026
+  authority: A
+  verification_level: metadata
+  summary: 由小时观测生成 5 分钟合成太阳辐照值的方法（据标题与期刊层级；本轮未取得摘要）。
+  applicable_conditions: 小时 → 分钟级（5 分钟）辐照序列的生成/降尺度。
+  supports: E2/A6：支撑『小时观测/预报到亚小时分辨率需要专门的生成或降尺度方法』，与本问 10 分钟粒度同尺度量级。
+  differences: 处理对象是辐照而非 PV 功率，侧重统计生成而非调度口径。
+  claim_types:
+  - literature_fact
+  status: used
+  decision_reason: 支撑 E2/A6 的降尺度必要性（第二独立来源，避免单点依赖）。仅元数据级证据。
+  verified: true
+  verification_provider: crossref
+  verification_error: null
+  added_at: '2026-09-11T05:19:41.143671+00:00'
+  verified_at: '2026-09-11T05:19:50.219523+00:00'
+  verified_title:
+  - Generating synthetic five-minute solar irradiance values from hourly observations
+  decided_at: '2026-09-11T05:20:09.433436+00:00'
+- id: ref-martins-2021-1min-irradiance
+  title: Generating Solar Irradiance Data Series with 1-minute Time Resolution Based
+    on Hourly Observational Data
+  authors:
+  - Fernando Ramos Martins
+  - Thaiane Gambarra Soares
+  - Francisco José Lopes Lima
+  year: 2021
+  source: IEEE Latin America Transactions
+  doi: 10.1109/tla.2021.9443060
+  url: https://doi.org/10.1109/tla.2021.9443060
+  authority: A
+  verification_level: abstract_oa
+  summary: 基于马尔可夫链，用逐时观测数据生成 1 分钟分辨率全球辐照时间序列：按云况（晴/少云/多云）建立转移概率矩阵并在两种气候下验证。
+  applicable_conditions: 由粗分辨率观测重建高时间分辨率辐照序列，需要刻画云导致的短时波动。
+  supports: E2/A6：支撑高分辨率与低分辨率序列的统计差异来自短时云过程，佐证『用整点值直接代表 10 分钟功率』会丢失波动结构。
+  differences: 统计生成 + 云分类；本问按 AS16 为确定性口径，本动作只用其说明降尺度必要性，不引入随机天气模型。
+  claim_types:
+  - literature_fact
+  - agent_inference
+  status: used
+  decision_reason: 支撑 E2/A6 的降尺度必要性（第三独立来源）。摘要经开放获取核验。
+  verified: true
+  verification_provider: crossref
+  verification_error: null
+  added_at: '2026-09-11T05:19:41.207606+00:00'
+  verified_at: '2026-09-11T05:19:51.108072+00:00'
+  verified_title:
+  - Generating Solar Irradiance Data Series with 1-minute Time Resolution Based on
+    Hourly Observational Data
+  decided_at: '2026-09-11T05:20:09.663125+00:00'
+- id: ref-sweeney-2020-forecasting-future
+  title: The future of forecasting for renewable energy
+  authors:
+  - Conor Sweeney
+  - Ricardo J. Bessa
+  - Jethro Browell
+  - Pierre Pinson
+  year: 2020
+  source: WIREs Energy and Environment
+  doi: 10.1002/wene.365
+  url: https://doi.org/10.1002/wene.365
+  authority: A
+  verification_level: abstract_oa
+  summary: 综述可再生能源（风/光）预报的技术现状与未来：覆盖分钟级到天级的统计与物理方法、确定性与概率预报，并强调预报产品需面向具体决策问题、预报的『使用方式』与预报本身同等重要。
+  applicable_conditions: 预报的时间尺度（分钟—天）语义、更新时刻与预报产品的决策耦合。
+  supports: E2/A6 + E3/A19：支撑『预报有明确的时间尺度与发布/更新时刻语义』，以及『信息结构与预报本身同等重要』，为 A6（预报语义）与
+    A19（信息集）提供框架级依据。
+  differences: 综述级、跨风与光；不给出具体降尺度算子，也不裁定本题的预报口径。
+  claim_types:
+  - literature_fact
+  - agent_inference
+  status: used
+  decision_reason: 支撑 E2/A6 与 E3/A19 的框架定位。摘要经开放获取核验。
+  verified: true
+  verification_provider: crossref
+  verification_error: null
+  added_at: '2026-09-11T05:19:41.274739+00:00'
+  verified_at: '2026-09-11T05:19:52.217674+00:00'
+  verified_title:
+  - The future of forecasting for renewable energy
+  decided_at: '2026-09-11T05:20:09.909834+00:00'
+- id: ref-barbieri-2017-very-short-term-pv
+  title: 'Very short-term photovoltaic power forecasting with cloud modeling: A review'
+  authors:
+  - Florian Barbieri
+  - Sumedha Rajakaruna
+  - Arindam Ghosh
+  year: 2017
+  source: Renewable and Sustainable Energy Reviews
+  doi: 10.1016/j.rser.2016.10.068
+  url: https://doi.org/10.1016/j.rser.2016.10.068
+  authority: A
+  verification_level: metadata
+  summary: 综述超短期（分钟—小时级）光伏功率预报与云建模方法（据标题与期刊层级；本轮未取得摘要）。
+  applicable_conditions: 超短期 PV 预报及其与云运动的关系，即 10 分钟尺度波动的可预报性。
+  supports: E2/A6：支撑 10 分钟尺度的 PV 波动主要受云过程支配，因此整点预报到 10 分钟的映射不能默认常数。
+  differences: 预报方法综述，不含调度模型与降尺度算子。
+  claim_types:
+  - literature_fact
+  status: used
+  decision_reason: 支撑 E2/A6 的『短时波动不可忽略』。仅元数据级证据，引用限于机制定位。
+  verified: true
+  verification_provider: crossref
+  verification_error: null
+  added_at: '2026-09-11T05:19:41.341664+00:00'
+  verified_at: '2026-09-11T05:19:53.332329+00:00'
+  verified_title:
+  - 'Very short-term photovoltaic power forecasting with cloud modeling: A review'
+  decided_at: '2026-09-11T05:20:10.150713+00:00'
+- id: ref-stenzel-2016-temporal-resolution
+  title: Impact of temporal resolution of supply and demand profiles on the design
+    of photovoltaic battery systems for increased self-consumption
+  authors:
+  - Peter Stenzel
+  - Jochen Linssen
+  - Johannes Fleer
+  - Florian Busch
+  year: 2016
+  source: 2016 IEEE International Energy Conference (ENERGYCON)
+  doi: 10.1109/energycon.2016.7514010
+  url: https://doi.org/10.1109/energycon.2016.7514010
+  authority: B
+  verification_level: abstract_oa
+  summary: 量化供给/需求曲线时间分辨率（1–60 分钟）对 PV+BESS 系统设计与运行指标的影响：分辨率越低误差越大（60 分钟分辨率下部分指标相对误差峰值
+    11.6%），并出现平滑效应（峰谷被削平、PV 与负荷的同时性被高估）。
+  applicable_conditions: 评估『用小时分辨率代替分钟分辨率』对储能系统指标的系统性偏差方向。
+  supports: E2/A6 + H7：直接给出『低分辨率会平滑波动并高估自消纳』的量化证据，支撑本问必须显式处理整点预报 → 10 分钟降尺度，否则会系统性低估峰谷与购电/弃光峰值。
+  differences: 面向容量设计而非运行调度；1–60 分钟网格与本问 10 分钟不同，其 11.6% 数值仅作方向性证据、不得引用为交付数值。
+  claim_types:
+  - literature_fact
+  - agent_inference
+  status: used
+  decision_reason: 支撑 E2/A6 的『分辨率影响方向』（低分辨率高估自消纳、削平峰谷）。会议论文（ENERGYCON）定为 B 级。
+  verified: true
+  verification_provider: crossref
+  verification_error: null
+  added_at: '2026-09-11T05:19:41.410634+00:00'
+  verified_at: '2026-09-11T05:19:54.181133+00:00'
+  verified_title:
+  - Impact of temporal resolution of supply and demand profiles on the design of photovoltaic
+    battery systems for increased self-consumption
+  decided_at: '2026-09-11T05:20:10.395969+00:00'
+- id: ref-bhattacharya-2018-multistage-storage
+  title: 'Managing Energy Storage in Microgrids: A Multistage Stochastic Programming
+    Approach'
+  authors:
+  - Arnab Bhattacharya
+  - Jeffrey P. Kharoufeh
+  - Bo Zeng
+  year: 2018
+  source: IEEE Transactions on Smart Grid
+  doi: 10.1109/tsg.2016.2618621
+  url: https://doi.org/10.1109/tsg.2016.2618621
+  authority: A
+  verification_level: abstract_oa
+  summary: 把微网『购电—储电—放电』决策建成有限时域多阶段随机规划（目标为期望总能量成本最小），运营商在每一决策阶段依据随机演化的需求、可再生出力与价格信息动态调整；用定制
+    SDDP 求解，并报告相对近视策略、无储能策略与两阶段 SP 有显著成本节省。
+  applicable_conditions: 决策分多个阶段、每阶段获得新信息并允许调整的储能/购电问题。
+  supports: E3/A19：支撑『多阶段信息结构下逐阶段调整决策』是本问 A19 候选 (a)『预报驱动 + 实时结算』的成熟范式，且相对单阶段/近视策略有可量化收益。
+  differences: 随机规划（期望成本 + 场景树）；本问按 AS16 为确定性口径。其『阶段即信息更新点』的划分可直接支撑 A19 的信息集结构，但其数值不可引用。
+  claim_types:
+  - literature_fact
+  - agent_inference
+  status: used
+  decision_reason: 支撑 E3/A19 的多阶段信息结构范式（A19 是本问高优先待裁定项，需要可核验先例）。摘要经开放获取核验。
+  verified: true
+  verification_provider: crossref
+  verification_error: null
+  added_at: '2026-09-11T05:19:41.484830+00:00'
+  verified_at: '2026-09-11T05:19:55.072274+00:00'
+  verified_title:
+  - 'Managing Energy Storage in Microgrids: A Multistage Stochastic Programming Approach'
+  decided_at: '2026-09-11T05:20:10.668077+00:00'
+- id: ref-shinde-2022-multistage-vpp
+  title: Multistage Stochastic Programming for VPP Trading in Continuous Intraday
+    Electricity Markets
+  authors:
+  - Priyanka Shinde
+  - Iasonas Kouveliotis-Lysikatos
+  - Mikael Amelin
+  year: 2022
+  source: IEEE Transactions on Sustainable Energy
+  doi: 10.1109/tste.2022.3144022
+  url: https://doi.org/10.1109/tste.2022.3144022
+  authority: A
+  verification_level: abstract_oa
+  summary: 用多阶段随机规划建模 VPP 在连续日内市场的交易，摘要明确『日内市场使参与者能在更新预报后修改市场头寸』，并用改进 SDDP 求解、与基准模型比较。
+  applicable_conditions: 预报更新后修改原计划（日内/调整）的多阶段决策及调整机制的价值。
+  supports: E3/A19 + E1/A7：支撑『调整时刻依据更新的预报修改原计划』这一机制的存在性与建模方式，正是本问 6:00/12:00/18:00
+    调整的理论对应。
+  differences: 面向市场交易头寸（报价/清算）而非物理调度；参与者视角，本问为单一微网自调度。
+  claim_types:
+  - literature_fact
+  - agent_inference
+  status: used
+  decision_reason: 支撑 E3/A19 与 E1/A7 的『调整 = 依更新预报修改计划』机制。摘要经开放获取核验。
+  verified: true
+  verification_provider: crossref
+  verification_error: null
+  added_at: '2026-09-11T05:19:41.557748+00:00'
+  verified_at: '2026-09-11T05:19:55.948852+00:00'
+  verified_title:
+  - Multistage Stochastic Programming for VPP Trading in Continuous Intraday Electricity
+    Markets
+  decided_at: '2026-09-11T05:20:10.908555+00:00'
+- id: ref-fusco-2023-multistage-uc
+  title: A multi-stage stochastic programming model for the unit commitment of conventional
+    and virtual power plants bidding in the day-ahead and ancillary services markets
+  authors:
+  - Andrea Fusco
+  - Domenico Gioffrè
+  - Alessandro Francesco Castelli
+  - Cristian Bovo
+  - Emanuele Martelli
+  year: 2023
+  source: Applied Energy
+  doi: 10.1016/j.apenergy.2023.120739
+  url: https://doi.org/10.1016/j.apenergy.2023.120739
+  authority: A
+  verification_level: abstract_oa
+  summary: 提出含二元回素的日前多阶段随机 MILP，用于常规电厂与 VPP 的机组组合（场景刻画辅助服务请求与光伏出力不确定性），并给出分解算法；摘要报告相对确定性
+    UC 可提升收益最高 13.58%。
+  applicable_conditions: 多阶段决策 + 回素（recourse，即调整）的调度模型，且需保持可解。
+  supports: E3/A19 + E5：支撑『多阶段 + 回素（调整）』是含光伏出力不确定性调度的标准建模范式；亦可作为『分段/离散逻辑引入二元变量后仍可解』的方法学旁证。
+  differences: 面向市场竞价与机组组合；本问为单微网确定性调度。13.58% 等数值不可引用。
+  claim_types:
+  - literature_fact
+  - agent_inference
+  status: used
+  decision_reason: 支撑 E3/A19 的多阶段 + 回素结构，并旁证 E5 的 MILP 可解性。摘要经开放获取核验。
+  verified: true
+  verification_provider: crossref
+  verification_error: null
+  added_at: '2026-09-11T05:19:41.636347+00:00'
+  verified_at: '2026-09-11T05:19:57.082327+00:00'
+  verified_title:
+  - A multi-stage stochastic programming model for the unit commitment of conventional
+    and virtual power plants bidding in the day-ahead and ancillary services markets
+  decided_at: '2026-09-11T05:20:11.153061+00:00'
+- id: ref-haberg-2019-stochastic-uc
+  title: Fundamentals and recent developments in stochastic unit commitment
+  authors:
+  - Martin Håberg
+  year: 2019
+  source: International Journal of Electrical Power &amp; Energy Systems
+  doi: 10.1016/j.ijepes.2019.01.037
+  url: https://doi.org/10.1016/j.ijepes.2019.01.037
+  authority: A
+  verification_level: abstract_oa
+  summary: 综述随机机组组合：不确定性表示、不同问题形式与最常用的分解方法，并回顾近年重要进展。
+  applicable_conditions: 把预报误差纳入调度（随机 UC）的方法谱系与问题形式。
+  supports: E3/A19：支撑『预报误差/信息结构决定模型类别（确定性 vs 两阶段 vs 多阶段）』这一判断，为 A19 的候选谱系提供综述级依据。
+  differences: 综述级；本问为确定性口径，仅用其界定 A19 的候选范围。
+  claim_types:
+  - literature_fact
+  status: used
+  decision_reason: 支撑 E3/A19 的候选谱系界定。摘要经开放获取核验。
+  verified: true
+  verification_provider: crossref
+  verification_error: null
+  added_at: '2026-09-11T05:19:41.718122+00:00'
+  verified_at: '2026-09-11T05:19:58.187079+00:00'
+  verified_title:
+  - Fundamentals and recent developments in stochastic unit commitment
+  decided_at: '2026-09-11T05:20:11.400081+00:00'
+- id: ref-li-2016-two-stage-rhc
+  title: Combined Two-Stage Stochastic Programming and Receding Horizon Control Strategy
+    for Microgrid Energy Management Considering Uncertainty
+  authors:
+  - Zhongwen Li
+  - Chuanzhi Zang
+  - Peng Zeng
+  - Haibin Yu
+  year: 2016
+  source: Energies
+  doi: 10.3390/en9070499
+  url: https://doi.org/10.3390/en9070499
+  authority: A
+  verification_level: abstract_oa
+  summary: 提出两阶段随机规划与滚动时域控制相结合的微网能量管理策略（SPRHC）：随机规划得到对不确定性稳健的计划，滚动时域用『最新更新的预报信息』通过反馈进一步补偿不确定性；模型保持为可精确求解的
+    MILCQP。
+  applicable_conditions: 『先计划、后用更新预报滚动修正』的微网 EMS 与信息更新机制。
+  supports: E3/A19：直接支撑本问『0:00 计划 + 6:00/12:00/18:00 依更新预报调整』的结构，并说明调整的价值来自更新预报的反馈；支撑
+    A19 候选 (a)。
+  differences: 含随机规划与风险目标；本问为确定性口径。其『更新预报 → 调整』机制可迁移，数值不可引用。
+  claim_types:
+  - literature_fact
+  - agent_inference
+  status: used
+  decision_reason: 支撑 E3/A19 的『计划 + 滚动修正』结构，是本问调整机制最贴近的先例之一。摘要经开放获取核验。
+  verified: true
+  verification_provider: crossref
+  verification_error: null
+  added_at: '2026-09-11T05:19:41.801693+00:00'
+  verified_at: '2026-09-11T05:19:59.326231+00:00'
+  verified_title:
+  - Combined Two-Stage Stochastic Programming and Receding Horizon Control Strategy
+    for Microgrid Energy Management Considering Uncertainty
+  decided_at: '2026-09-11T05:20:11.657298+00:00'
+- id: ref-matamala-2021-two-stage-stackelberg
+  title: A two-stage stochastic Stackelberg model for microgrid operation with chance
+    constraints for renewable energy generation uncertainty
+  authors:
+  - Yolanda Matamala
+  - Felipe Feijoo
+  year: 2021
+  source: Applied Energy
+  doi: 10.1016/j.apenergy.2021.117608
+  url: https://doi.org/10.1016/j.apenergy.2021.117608
+  authority: A
+  verification_level: metadata
+  summary: 提出微网运行的两阶段随机 Stackelberg 模型，对可再生出力不确定性使用机会约束（据标题与期刊层级；本轮未取得摘要）。
+  applicable_conditions: 两阶段决策 + 机会约束处理可再生出力不确定性。
+  supports: E3/A19：支撑『第一阶段计划、第二阶段在信息揭示后调整』的两阶段信息结构（框架级）。
+  differences: 机会约束/博弈结构；本问不建概率模型，仅作信息结构谱系旁证。
+  claim_types:
+  - literature_fact
+  status: used
+  decision_reason: 支撑 E3/A19 的两阶段信息结构（第二独立来源）。仅元数据级证据。
+  verified: true
+  verification_provider: crossref
+  verification_error: null
+  added_at: '2026-09-11T05:19:41.888364+00:00'
+  verified_at: '2026-09-11T05:20:00.416679+00:00'
+  verified_title:
+  - A two-stage stochastic Stackelberg model for microgrid operation with chance constraints
+    for renewable energy generation uncertainty
+  decided_at: '2026-09-11T05:20:11.918353+00:00'
+- id: ref-toubeau-2019-probabilistic-forecast
+  title: Deep Learning-Based Multivariate Probabilistic Forecasting for Short-Term
+    Scheduling in Power Markets
+  authors:
+  - Jean-Francois Toubeau
+  - Jeremie Bottieau
+  - Francois Vallee
+  - Zacharie De Greve
+  year: 2019
+  source: IEEE Transactions on Power Systems
+  doi: 10.1109/tpwrs.2018.2870041
+  url: https://doi.org/10.1109/tpwrs.2018.2870041
+  authority: A
+  verification_level: abstract_oa
+  summary: 用深度学习给出多变量、多步概率预报，并以 copula 采样生成预测场景，直接嵌入售电方的随机优化工具，比较预报质量对决策质量的影响。
+  applicable_conditions: 预报 → 决策的耦合；预报误差对短期市场调度决策的影响。
+  supports: E3/A19：支撑『预报质量/信息集直接影响最优决策』，为 A19 的信息结构裁定提供方法学依据。
+  differences: 概率预报 + 随机优化；本问为确定性预报 + 实时结算，不引入概率模型。
+  claim_types:
+  - literature_fact
+  - agent_inference
+  status: used
+  decision_reason: 支撑 E3/A19 的『信息集影响决策』。摘要经开放获取核验。
+  verified: true
+  verification_provider: crossref
+  verification_error: null
+  added_at: '2026-09-11T05:19:41.974202+00:00'
+  verified_at: '2026-09-11T05:20:01.324034+00:00'
+  verified_title:
+  - Deep Learning-Based Multivariate Probabilistic Forecasting for Short-Term Scheduling
+    in Power Markets
+  decided_at: '2026-09-11T05:20:12.182974+00:00'
+- id: ref-shang-2017-emergency-pricing
+  title: Pricing of emergency dynamic microgrid power service for distribution resilience
+    enhancement
+  authors:
+  - Duo (Rick) Shang
+  year: 2017
+  source: Energy Policy
+  doi: 10.1016/j.enpol.2017.09.043
+  url: https://doi.org/10.1016/j.enpol.2017.09.043
+  authority: A
+  verification_level: metadata
+  summary: 研究面向配电网韧性提升的『紧急动态微网电力服务』定价（据标题与期刊层级；本轮未取得摘要）。
+  applicable_conditions: 紧急电力服务的定价机制。
+  supports: E4/A5：支撑『紧急购电/紧急服务按高于常规价的价格结算』这一制度形式（机制级）。
+  differences: 面向配网韧性的服务定价；本问 α_em = 5 由题面硬给定，不由文献标定。
+  claim_types:
+  - literature_fact
+  status: used
+  decision_reason: 支撑 E4/A5 的紧急电力服务定价机制。仅元数据级证据，引用限于机制存在性。
+  verified: true
+  verification_provider: crossref
+  verification_error: null
+  added_at: '2026-09-11T05:19:42.063487+00:00'
+  verified_at: '2026-09-11T05:20:02.413338+00:00'
+  verified_title:
+  - Pricing of emergency dynamic microgrid power service for distribution resilience
+    enhancement
+  decided_at: '2026-09-11T05:20:12.443473+00:00'
+- id: ref-li-2024-energy-purchase-strategy
+  title: Study on integrated energy microgrid energy purchase strategy with demand-side
+    response in market environment
+  authors:
+  - Zhenkun Li
+  - Yicong Yao
+  - Nan Zhao
+  - Jie Shan
+  - Yang Fu
+  year: 2024
+  source: Energy
+  doi: 10.1016/j.energy.2024.131724
+  url: https://doi.org/10.1016/j.energy.2024.131724
+  authority: A
+  verification_level: metadata
+  summary: 研究市场环境下含需求侧响应的综合能源微网购电策略（据标题与期刊层级；本轮未取得摘要）。
+  applicable_conditions: 微网在市场价格环境下的购电/购能策略优化。
+  supports: E4/A5 + E1/A7：支撑『购电策略是微网运行优化的核心决策』以及多类购电费用并列计入目标的形式。
+  differences: 综合能源与需求侧响应；本问无需求响应，只含外网购电与储能。
+  claim_types:
+  - literature_fact
+  status: used
+  decision_reason: 支撑 E4/A5 的『购电策略 = 微网优化核心』。仅元数据级证据。
+  verified: true
+  verification_provider: crossref
+  verification_error: null
+  added_at: '2026-09-11T05:19:42.167716+00:00'
+  verified_at: '2026-09-11T05:20:03.577594+00:00'
+  verified_title:
+  - Study on integrated energy microgrid energy purchase strategy with demand-side
+    response in market environment
+  decided_at: '2026-09-11T05:20:12.697538+00:00'
+- id: ref-elkazaz-2020-convex-mpc-rhc
+  title: Energy management system for hybrid PV-wind-battery microgrid using convex
+    programming, model predictive and rolling horizon predictive control with experimental
+    validation
+  authors:
+  - Mahmoud Elkazaz
+  - Mark Sumner
+  - David Thomas
+  year: 2020
+  source: International Journal of Electrical Power &amp; Energy Systems
+  doi: 10.1016/j.ijepes.2019.105483
+  url: https://doi.org/10.1016/j.ijepes.2019.105483
+  authority: A
+  verification_level: metadata
+  summary: 用凸规划与模型预测控制/滚动时域预测控制实现 PV-风-储微网 EMS，并做实验验证（据标题与期刊层级；本轮未取得摘要）。
+  applicable_conditions: 滚动时域/MPC 的微网 EMS 工程实现路线。
+  supports: E3/A19 + E4：支撑滚动时域是微网 EMS 的工程主流实现，且与供电可靠性约束兼容。
+  differences: 含实验验证的 EMS 实现；本问为离线计划—调整两段优化，不含实时控制器。
+  claim_types:
+  - literature_fact
+  status: used
+  decision_reason: 支撑 E3/A19 与 E4 的滚动时域实现先例（prob03 池内的滚动/MPC 独立来源）。仅元数据级证据。
+  verified: true
+  verification_provider: crossref
+  verification_error: null
+  added_at: '2026-09-11T05:19:42.274395+00:00'
+  verified_at: '2026-09-11T05:20:04.672480+00:00'
+  verified_title:
+  - Energy management system for hybrid PV-wind-battery microgrid using convex programming,
+    model predictive and rolling horizon predictive control with experimental validation
+  decided_at: '2026-09-11T05:20:12.959311+00:00'
+- id: ref-zhai-2009-linear-approx-uc
+  title: 'Fast unit commitment based on optimal linear approximation to nonlinear
+    fuel cost: Error analysis and applications'
+  authors:
+  - Qiaozhu Zhai
+  - Xiaohong Guan
+  - Jiping Yang
+  year: 2009
+  source: Electric Power Systems Research
+  doi: 10.1016/j.epsr.2009.06.005
+  url: https://doi.org/10.1016/j.epsr.2009.06.005
+  authority: A
+  verification_level: metadata
+  summary: 研究用最优线性逼近替代非线性燃料成本的快速机组组合，并给出误差分析与应用（据标题与期刊层级；本轮未取得摘要）。
+  applicable_conditions: 把非线性/分段成本以线性近似纳入机组组合，并控制逼近误差。
+  supports: E5/A7：支撑本问把『0.5× 违约 / 1.5× 超出』的分段结算函数用辅助变量线性化后纳入 LP/MILP 的方法学合法性。
+  differences: 面向燃料成本的凸近似；本问为双向偏差分段结算，需用 max/min 或二元变量线性化。
+  claim_types:
+  - literature_fact
+  status: used
+  decision_reason: 支撑 E5：分段/非线性成本线性化的标准做法。仅元数据级证据。
+  verified: true
+  verification_provider: crossref
+  verification_error: null
+  added_at: '2026-09-11T05:19:42.383184+00:00'
+  verified_at: '2026-09-11T05:20:05.574871+00:00'
+  verified_title:
+  - 'Fast unit commitment based on optimal linear approximation to nonlinear fuel
+    cost: Error analysis and applications'
+  decided_at: '2026-09-11T05:20:13.224023+00:00'
+- id: ref-viana-2013-milp-uc
+  title: A new MILP-based approach for unit commitment in power production planning
+  authors:
+  - Ana Viana
+  - João Pedro Pedroso
+  year: 2013
+  source: International Journal of Electrical Power &amp; Energy Systems
+  doi: 10.1016/j.ijepes.2012.08.046
+  url: https://doi.org/10.1016/j.ijepes.2012.08.046
+  authority: A
+  verification_level: metadata
+  summary: 提出机组组合的新 MILP 建模方法（据标题与期刊层级；本轮未取得摘要）。
+  applicable_conditions: MILP 建模与求解机组组合的标准做法。
+  supports: E5 + E6：支撑『分段/离散逻辑用 MILP 表达』属成熟做法，prob03 若因分段结算引入二元变量属常规建模。
+  differences: 机组组合问题；本问为单微网 144 时段（或长时域）调度。
+  claim_types:
+  - literature_fact
+  status: used
+  decision_reason: 支撑 E5 的 MILP 建模合法性。仅元数据级证据。
+  verified: true
+  verification_provider: crossref
+  verification_error: null
+  added_at: '2026-09-11T05:19:42.484977+00:00'
+  verified_at: '2026-09-11T05:20:06.434102+00:00'
+  verified_title:
+  - A new MILP-based approach for unit commitment in power production planning
+  decided_at: '2026-09-11T05:20:13.489162+00:00'
+- id: ref-thirunavukkarasu-2022-mg-ems-review
+  title: Role of optimization techniques in microgrid energy management systems—A
+    review
+  authors:
+  - Gokul Sidarth Thirunavukkarasu
+  - Mehdi Seyedmahmoudian
+  - Elmira Jamei
+  - Ben Horan
+  - Saad Mekhilef
+  - Alex Stojcevski
+  year: 2022
+  source: Energy Strategy Reviews
+  doi: 10.1016/j.esr.2022.100899
+  url: https://doi.org/10.1016/j.esr.2022.100899
+  authority: A
+  verification_level: abstract_oa
+  summary: 系统综述微网能量管理中的优化技术（预测、需求管理、经济调度、机组组合），并指出混合整数规划因简单与性能而最常用。
+  applicable_conditions: 微网 EMS 的问题族与方法族定位。
+  supports: E6：为本问池提供独立的问题族定位来源（微网 EMS = 优化问题，MILP/LP 为主流），保证 prob03 的关键假设门禁可在本小问池内闭合。
+  differences: 综述级；不涉及本问具体的偏差结算与预报降尺度口径。
+  claim_types:
+  - literature_fact
+  status: used
+  decision_reason: 支撑 E6：保证 prob03 池自洽（check_key_assumptions 只读本小问池）。摘要经开放获取核验。
+  verified: true
+  verification_provider: crossref
+  verification_error: null
+  added_at: '2026-09-11T05:19:42.590153+00:00'
+  verified_at: '2026-09-11T05:20:07.809705+00:00'
+  verified_title:
+  - Role of optimization techniques in microgrid energy management systems—A review
+  decided_at: '2026-09-11T05:20:13.757769+00:00'

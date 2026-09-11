@@ -1,0 +1,479 @@
+# formulation_v001 / prob03 参数表
+# 生成者：mathematical-formulator（动作 act-cb66f12c2f5945ff）
+# 规则：只登记参数与口径，不重定义 global_symbols.yaml 中的符号；
+#       q_dis 上界按团队裁定 D10 口径丙 + 勘误 E1 = 750.0000（符号表第 253 行已回写）；
+#       本问目标不带 Δt（团队 D9），跨日口径为滚动递推 + 终端自由（AS03/AS04），
+#       信息结构为「预报驱动 + 实际结算」的三层顺序向前递推（AS06/AS07）。
+version: formulation_v001
+question_id: prob03
+problem_id: microgrid_2025
+assumption_version: assumption_v001
+stage: mathematical_formulation
+action_id: act-cb66f12c2f5945ff
+
+time_basis:
+  n_t: 144
+  periods_per_day: 144
+  days_full: 365
+  days_delivery: 334
+  total_periods: 52560
+  delta_t: 0.16666666666666666
+  delta_t_exact: "1/6"
+  horizon_hours_per_day: 24
+  blocks_per_day: 24
+  window: "0:10 -> 24:10（AS01 左端点口径；计划窗首/末状态 E_{d,0} / E_{d,144}）"
+  delivery_range: "2025-02-01 .. 2025-12-31"
+  warmup_range: "2025-01-01 .. 2025-01-31（预热期，参与优化但不交付）"
+  decision_hours: [0, 6, 12, 18]
+  decision_hours_dense_3h: [0, 3, 6, 9, 12, 15, 18, 21]
+  decision_hours_dense_1h: [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23]
+  dominance: "nu(i) = 6*floor((i-1)/36)；D_0/D_6/D_12/D_18 各 36 时段（i<=36 / 37..72 / 73..108 / 109..144）"
+
+parameters:
+  - name: n_t
+    symbol: n_t
+    value: 144
+    unit: 段
+    kind: index_size
+    source: 附件 2/3 的每日 144 个 10 分钟数据点
+    assumption_refs: [AS01, AS09]
+  - name: delta_t
+    symbol: Delta_t
+    value: 0.16666666666666666
+    unit: h
+    kind: parameter
+    source: 24h / 144
+    assumption_refs: [AS01, AS09]
+  - name: days_full
+    symbol: D_full
+    value: 365
+    unit: 天
+    kind: index_size
+    source: 附件 2/3 覆盖 2025-01-01..2025-12-31
+    assumption_refs: [AS02, AS03]
+  - name: days_delivery
+    symbol: D_req
+    value: 334
+    unit: 天
+    kind: index_size
+    source: 附件 5 的 result3.xlsx 要求 2025.2.1-12.31
+    assumption_refs: [AS02, AS16]
+  - name: price_curve
+    symbol: price
+    value: "附件 1 第 2 列的 144 维向量，∈ [0.3713, 1.3952]；逐日重复 365 次"
+    unit: 元/kWh
+    kind: parameter_vector
+    source: data/附件1.xlsx（只读）；本问只用价格列
+    assumption_refs: [AS02, AS10]
+  - name: p_min
+    symbol: p_min
+    value: 0.3713
+    unit: 元/kWh
+    kind: derived
+    source: min(price_curve)（探针 G1 实测）
+    assumption_refs: [AS10]
+  - name: p_max
+    symbol: p_max
+    value: 1.3952
+    unit: 元/kWh
+    kind: derived
+    source: max(price_curve)（探针 G1 实测）
+    assumption_refs: [AS10]
+  - name: load_curve
+    symbol: load
+    value: "附件 2『小区负载』365 x 144，∈ [1995.7176, 7978.8849] kW"
+    unit: kW
+    kind: parameter_matrix
+    source: data/附件2.xlsx（只读，实际值）
+    assumption_refs: [AS02]
+  - name: pv_actual_curve
+    symbol: pv_act
+    value: "附件 2『光伏发电实际功率』365 x 144，∈ [0.0, 10216.2] kW"
+    unit: kW
+    kind: parameter_matrix
+    source: data/附件2.xlsx（只读，实际值）；只进结算层（§0.4 F2）
+    assumption_refs: [AS02, AS06]
+  - name: pv_forecast_table
+    symbol: pv_fc
+    value: "附件 3 的 365 x 4 x 24 表 A_{d,m,k}（m ∈ {0,6,12,18}，k = 1..24）"
+    unit: kW
+    kind: parameter_tensor
+    source: data/附件3.xlsx（只读）；整点 (m+k):00 的功率点值
+    assumption_refs: [AS05]
+  - name: forecast_horizon_consumed
+    value: {"m=0": "k = 1..24", "m=6": "k = 1..18", "m=12": "k = 1..12", "m=18": "k = 1..6"}
+    unit: "-"
+    kind: structural_check
+    source: b = m + k <= 24（跨年项不消费，AS05 第 4 条 / B7-5）
+    assumption_refs: [AS05]
+  - name: downscale_rule
+    value: "k=1: Pi_m[i] = A_{m,1}（前向保持）；k>=2: Pi_m[i] = (1-j/6)*A_{m,k-1} + (j/6)*A_{m,k}"
+    unit: kW
+    kind: structural_check
+    source: AS05 第 2 条；探针 G3 逐点验证；块能量 = (2.5*A_{k-1} + 3.5*A_k)/6（不保块内能量）
+    assumption_refs: [AS05]
+  - name: eta_ch
+    symbol: eta_ch
+    value: 0.9
+    unit: "-"
+    kind: parameter
+    source: 附录 1「充放电效率 90%」；作用位置为充电侧（prob01 accepted AS05）
+    assumption_refs: [AS12]
+  - name: eta_dis
+    symbol: eta_dis
+    value: 0.9
+    unit: "-"
+    kind: parameter
+    source: 附录 1；作用位置为放电侧
+    assumption_refs: [AS12]
+  - name: round_trip_efficiency
+    value: 0.81
+    unit: "-"
+    kind: derived
+    source: eta_ch * eta_dis
+    assumption_refs: [AS12]
+  - name: E_min
+    symbol: E_min
+    value: 1200
+    unit: kWh
+    kind: parameter
+    source: 附录 1（运行下界）
+    assumption_refs: [AS12]
+  - name: E_max
+    symbol: E_max
+    value: 10800
+    unit: kWh
+    kind: parameter
+    source: 附录 1（运行上界）
+    assumption_refs: [AS12]
+  - name: E_cap_max
+    symbol: E_cap_max
+    value: 12000
+    unit: kWh
+    kind: parameter
+    source: 附录 1（设备最大容量，仅登记）
+    assumption_refs: [AS12]
+  - name: E_init
+    symbol: E_init
+    value: 6000
+    unit: kWh
+    kind: parameter
+    source: 附录 1（2025-01-01 00:00 储电量）
+    assumption_refs: [AS03, AS12]
+  - name: P_max
+    symbol: P_max
+    value: 5000
+    unit: kW
+    kind: parameter
+    source: 附录 1；口径丙（并网点侧与电池侧同时 <= 5000 kW，取更严者）
+    assumption_refs: [AS12]
+    evidence_note: "『5000 kW 作用侧』为 team_decision（D10），三个文献池均无一条涉及，不得包装为文献支持"
+  - name: c_cap
+    symbol: "P_ch_max*Delta_t"
+    value: 833.3333333333334
+    unit: kWh
+    kind: derived
+    source: "min(P_max*Delta_t, P_max*Delta_t/eta_ch) = min(833.3333, 925.9259)"
+    assumption_refs: [AS12]
+  - name: q_dis_cap
+    symbol: "P_dis_max*Delta_t*eta_dis"
+    value: 750.0
+    unit: kWh
+    kind: derived
+    source: "min(P_max*Delta_t, P_max*Delta_t*eta_dis) = min(833.3333, 750.0000)；团队裁定 D10 口径丙 + 勘误 E1"
+    assumption_refs: [AS12]
+  - name: alpha_em
+    symbol: alpha_em
+    value: 5
+    unit: "-"
+    kind: parameter
+    source: 题面问题 3 硬参数（紧急购电电价为交易时刻电价的 5 倍）
+    assumption_refs: [AS08, AS10]
+  - name: beta_def
+    symbol: beta_def
+    value: 0.5
+    unit: "-"
+    kind: parameter
+    source: 题面问题 3 硬参数（计划高于调整部分的违约电价为 50%）；团队 D2-A：成本项方向
+    assumption_refs: [AS09]
+  - name: beta_over
+    symbol: beta_over
+    value: 1.5
+    unit: "-"
+    kind: parameter
+    source: 题面问题 3 硬参数（调整高于计划部分为 1.5 倍）；团队 D2-A
+    assumption_refs: [AS09]
+  - name: eps_u
+    symbol: eps_u
+    value: 1e-6
+    unit: "-"
+    kind: tolerance
+    source: 恒等式与约束残差判据（B3）
+    assumption_refs: [AS15]
+  - name: q_em_decision_layer
+    value: 0
+    unit: kWh
+    kind: structural_check
+    source: "引理 L1：决策层 q_em ≡ 0（alpha_em = 5 > beta_over = 1.5 且 q 无上界）"
+    assumption_refs: [AS08]
+  - name: actual_pv_scope
+    value: "settlement_layer_only"
+    unit: "-"
+    kind: structural_check
+    source: "§0.4 F2：实际光伏只进结算层，不改变决策量与 SOC 轨迹（探针 G4f）"
+    assumption_refs: [AS06, AS07]
+
+index_mappings:
+  spec_date_day_index_0based:
+    "2025-03-20": 78
+    "2025-06-21": 171
+    "2025-09-23": 265
+    "2025-12-21": 354
+  table1_slot_rows:
+    "10:00-10:10": 60
+    "12:00-12:10": 72
+    "14:00-14:10": 84
+    "16:00-16:10": 96
+    "18:00-18:10": 108
+    "20:00-20:10": 120
+  table1_full_day:
+    energy: "sum_i q_{d,i}（最终量口径，D4-A）"
+    cost: "C_total = C_plan + C_em + C_adj（D8-A）"
+  table2_blocks:
+    block_1: "rows 1-24（0:00-4:00）"
+    block_2: "rows 25-48（4:00-8:00）"
+    block_3: "rows 49-72（8:00-12:00）"
+    block_4: "rows 73-96（12:00-16:00）"
+    block_5: "rows 97-120（16:00-20:00）"
+    block_6: "rows 121-144（20:00-24:00）"
+  table2_endpoints:
+    "0:00": "E_{d,0}（计划窗首状态；prob03 为多日滚动切片，随日变化，不等于 6000——勘误 R1）"
+    "24:00": "E_{d,144}（计划窗末状态）"
+  table3_merge_rule: "连续 10 分钟紧急购电时段合并为区间；端点用 AS01 左端点标签 [tau_i, tau_j + 10min)"
+  table3_zero_rule: "J_d = 0 时 result3.xlsx 写 购电时间段='—'、购电量=0；论文表 3 写『无（0 kWh）』；每日至少 1 行"
+  result3_sheets:
+    planned_purchase: "A1:EN335（表头 + 334 天 x 144 列 + 全天购电量 + 全天购电费；末列标签 0:00-0:10+1）；每格填 b"
+    adjusted_purchase: "A1:EN335（列标签与计划购电量逐列相同）；每格填最终量 q；末两列 sum(q) 与 C_total"
+    charge_discharge: "A1:F20（334 天 x 6 行；时刻/储电量写在前两行：第 1 行 00:00:00 载 E_{d,0}、第 2 行 24:00 载 E_{d,144}）"
+    emergency: "A1:C11 模板 → 展开 334 行（D11-A：合并区间 + 左端点标签 + J_d=0 写 —/0）"
+  cross_year_dropped_items:
+    "m=6": "k = 19..24（-> 2026-01-01 01:00-06:00，块 b = 25..30）"
+    "m=12": "k = 13..24（-> 2026-01-01 01:00-12:00，块 b = 25..36）"
+    "m=18": "k = 7..24（-> 2026-01-01 01:00-18:00，块 b = 25..42）"
+    total: 36
+
+objective:
+  sense: minimize
+  main_caliber:
+    name: "T1-PLAN"
+    plan_layer: "min sum_i p_i * b_{d,i}（团队 T1 主口径；仅 0:00 预报 + E_{d-1,144} + L + p）"
+    adjustment_layer: "min sum_{i in R_m} [ beta_def*p_i*u^+_{d,i} + beta_over*p_i*u^-_{d,i} ]（该层剩余时段的偏差结算）"
+    total: "C_total = C_plan + C_em + C_adj"
+  PLAN_EXP_contrast:
+    name: "PLAN-EXP"
+    expression: "min sum_i p_i*b_i + E[ sum_i (beta_def*p_i*(b_i-q_i)^+ + beta_over*p_i*(q_i-b_i)^+) + sum_i alpha_em*p_i*q^em_i ]"
+    information_set: "与主口径相同（仅 0:00 预报 + E_{d-1,144} + L + p）"
+    status: "在无预报误差分布时退化为 T1-PLAN（§0.4 F5）；可实施化待团队裁定（决策点 D4）"
+  components:
+    C_plan: "sum p * b"
+    C_adj: "sum [ 0.5*p*(b-q)^+ + 1.5*p*(q-b)^+ ]（两段均为成本项）"
+    C_em: "sum 5 * p * q_em（结算层，实际光伏驱动）"
+    C_total: "C_plan + C_em + C_adj"
+  forbidden_forms:
+    - "sum p * b * delta_t（量纲 元*h，偏小 6 倍；prob01 v001 旧口径，团队 D9 已裁定修正）"
+    - "sum 5 * p * q_em * delta_t（同上）"
+    - "sum beta * p * (b-q) * delta_t（同上）"
+  assumption_refs: [AS09, AS10]
+
+identities:
+  I1d: "sum_i q_dis_{d,i} = eta_ch*eta_dis*sum_i c_{d,i} - eta_dis*(E_{d,144} - E_{d,0})"
+  I2d: "sum_i q_{d,i} = N_d + sum_i s'_{d,i} + 0.19*sum_i c_{d,i} + eta_dis*(E_{d,144} - E_{d,0}) - sum_i q^em_{d,i}"
+  I2req: "sum_{D_req} q = N_req + sum s' + 0.19*sum c + eta_dis*(E_{12/31,144} - E_{2/1,0}) - sum q^em"
+  I3d_cost: "C_total,d = C_plan,d + C_adj,d + C_em,d；C_adj,d = 0.5*sum p*(b-q)^+ + 1.5*sum p*(q-b)^+"
+  I4d_continuity: "|E_{d,0} - E_{d-1,144}| <= 1e-6；E_{1/1,0} = 6000"
+  I5d_transition: "|E_{d,i} - E_{d,i-1} - 0.9*c_{d,i} + q_dis_{d,i}/0.9| <= 1e-6"
+  I6d_settlement: "|q + q^em + pv_act*delta_t + q_dis - L*delta_t - c - s'| <= 1e-6"
+  layer_balance: "各层用该层预报闭合：计划层 Pi_0；AD_m 用 Pi_m；残差 <= 1e-8"
+  q_em_decision_lemma: "引理 L1：决策层 q_em ≡ 0（模型内数学推论，非文献结论；表 3 非零由预报误差在结算层产生）"
+
+model_set:
+  role: "团队裁定 B2：formulation 负责定义、ablation 负责实跑；主结果只以 M1 为准（B0）"
+  M1:
+    definition: "三层顺序向前递推 LP（计划 0:00 -> 调整 6/12/18 -> 实际结算），D_full 365 天，跨日状态连续，终端自由，计划层目标 min sum p*b"
+    delivery_role: primary
+    structure_note: "层次目标不可合并为单次联合 LP（§0.4 F1）；全年 1,460 次小 LP"
+  M2a:
+    definition: "逐日解耦 + 跨日状态递推（E_{d,0} 由前一日实测末端传入）"
+    status_note: "与 M1 算法同构（F6）；C2 是结构性恒等式，不是分解等价的独立证据（决策点 D2）"
+  M2b:
+    definition: "日初复位 E_{d,0} = 6000，其余同 M1"
+    status_note: "差额记为跨日携带价值的结构性发现，不得判为实现错误"
+  M3:
+    definition: "完全信息上界：0:00 即知全天附件 2 实际值 -> 单阶段 LP，q ≡ b，q_em ≡ 0，调整无信息增益"
+    analytic_note: "引理 L6：M3 与 prob02 accepted formulation_v001 的 (P2) 逐项相同；应复现全期 13,758,182.573724 元 / 交付期 12,233,050.830708 元（决策点 D8）"
+  M4:
+    definition: "仅 0:00 计划、无调整：q ≡ b（全 144），偏差项恒 0，缺口由结算层 q_em 承担"
+    scope_note: "M4 ⊆ M1 的口径论证见命题 P1；比较须用同起点或累计口径"
+  M5:
+    definition: "加密决策时刻族：{0 + 每 3 小时}、{0 + 每 1 小时}；同一发布集（各时刻用最近一次已发布预报）"
+    status_warning: "每 3 小时与 M1 逐位同值；每 1 小时反转 +83.4747 元/14 天（F4）——C5 须先定 tie-breaking（决策点 D3）"
+  M6:
+    definition: "偏差项 MILP 精确化：二元 z^+/z^- + 紧 Big-M（u^+ <= b*z^+、u^- <= q_max*z^-、z^+ + z^- <= 1）；4 个指定日做日尺度 oracle"
+    big_m_note: "q_max_{d,i} = L*delta_t + 833.3333 + Pi_m[i]*delta_t（由模型推导，非『足够大的数』；F8）"
+    degradation_note: "全年 MILP 可降级为『4 天 oracle + 全年 LP 损失界』，降级须登记（决策点 D6）"
+  M7:
+    definition: "强制口径对照族：M7·D2-B（C_plan 改 sum p*min(b,q)）、M7·D2-C（-0.5*p*(b-q)^+ 退款）、M7·D5-B（分段常数降尺度）、M7·PLAN-EXP（计划层 (PL-0b)）"
+    requirement: "每条须给出 Delta C / Delta C_plan / Delta C_em / Delta C_adj / Delta sum q_em 全量差额，不得只报方向（C7）"
+  M8:
+    definition: "M1 的独立第二实现（不同变量消去/书写次序/求解器设置，如消去 E、highs-ds、presolve=False）"
+
+relaxation_checks:
+  reference_tolerance: 1e-6
+  lower_bound_delivery_yuan_approx: 6660000.0
+  lower_bound_formula: "p_min * [ N_req + eta_dis*(E_min - E_{2/1,0}) ]（N_req 与 E_{2/1,0} 取自 prob02 accepted 诊断锚点）"
+  constructed_upper_bound: "sum p * max(0, (L - pv_act)*delta_t)（计划即实际、无偏差、无紧急；量级 10^7 元）"
+  magnitude_rule: "交付期 C_total ∈ 10^7 元；单日 ∈ 10^4 元；单日落入 10^3 元即判 Δt 硬错误（B3-5）"
+  q_em_nonzero_expected: true
+  note: "本 formulation 的解析界只用于量级自检；正式数值以隔离 task 产物为准"
+
+reference_values:
+  role: reference_check_only
+  source: "runtime/actions/act-cb66f12c2f5945ff/evidence/probe_formulation_prob03_out.json"
+  note: "以下为 formulation 阶段只读探针自检值（14 天窗口，2025-01-01..01-14），不构成 computation 交付；正式数值以隔离 task 产物为准"
+  probe_checks: "20/20 PASS，all_pass = true，耗时 5.82 s"
+  M1_14d_total_yuan: 761150.7115249089
+  M3_14d_total_yuan: 711975.8723522272
+  M4_14d_total_yuan: 780077.2562203383
+  M1_day1_breakdown_yuan: {"C_plan": 58236.129017400744, "C_adj": 2718.328378551534, "C_em": 1395.3449540736106, "C_total": 62349.80235002589}
+  sum_q_em_14d_kwh: 4939.424724
+  max_settlement_balance_residual_kwh: 2.2737367544323206e-13
+  max_state_transition_residual_kwh: 1.8189894035458565e-12
+  max_layer_balance_residual_kwh: 2.2737367544323206e-13
+  max_spill_over_pvact_dt_kwh: 6.821210263296962e-13
+  M5_3h_total_yuan: 761150.7115249089
+  M5_1h_total_yuan: 761234.1862714089
+  M6_oracle: {"lp_obj": 8673.572439459997, "milp_obj": 8673.572439459998, "mip_gap": 0.0, "n_binary": 72}
+  actual_pv_only_in_settlement: true
+
+solver:
+  primary: "scipy.optimize.linprog(method='highs')"
+  oracle: "scipy.optimize.milp（M6，二元 + 紧 Big-M）"
+  device: cpu
+  gpu_required: false
+  deterministic: true
+  seed: null
+  memory_budget_gb: 2
+  worker_launch_mode: supervised
+  memory_slots: 1
+  m6_time_limit_seconds: 60
+  matrix_scale:
+    plan_layer: {variables: 720, equality_constraints: 288, inequalities: 0, variable_bounds: 720}
+    adj_layer_m6: {variables: 756, equality_constraints: 216, inequalities: 216, variable_bounds: 756}
+    adj_layer_m12: {variables: 504, equality_constraints: 144, inequalities: 144, variable_bounds: 504}
+    adj_layer_m18: {variables: 252, equality_constraints: 72, inequalities: 72, variable_bounds: 252}
+    per_day: {variables: 2232, equality_constraints: 720, inequalities: 432, lp_calls: 4}
+    year_stacked_if_single_lp: {variables: 814680, equality_constraints: 262800, inequalities: 157680}
+    year_lp_calls: 1460
+    integer_variables_main: 0
+  notes:
+    - "本问为确定性分层 LP，不使用 GPU；task spec 须注明不占用单卡 GPU"
+    - "记录逐层 solver status、迭代数、目标值、约束残差、各层耗时与输入指纹；PASS 不依赖逐点解唯一性"
+    - "正式计算必须走隔离 task + 独立 output_directory + supervised worker"
+  verification_oracle: "M6 偏差项 MILP（单层 72 二元实测 LP = MILP，mip_gap = 0）；M3 复现 prob02 accepted 值（跨问锚点）"
+
+conflicts:
+  - id: C1
+    with: problems/microgrid_2025/global_symbols.yaml
+    detail: "q_dis 域的旧登记值 833.33 与团队裁定 D10/E1 的 750.0000 冲突"
+    resolution: "按团队裁定取 750.0000；符号表第 253 行已回写，本问无残留冲突"
+  - id: C2
+    with: problems/microgrid_2025/global_symbols.yaml
+    detail: "q_spill.first_question 旧登记为 prob02，实际首次出现于 prob01"
+    resolution: "已回写为 prob01（第 278 行）；本问沿用 s_{d,t}，含义不变"
+  - id: C3
+    with: problems/microgrid_2025/prob01/versions/assumption_v003/version.yaml
+    detail: "AS08 的 statement 保留『该变量在部分时段必然被激活』，与 prob01 实测 Sigma s_t = 0 不符"
+    resolution: "按『变量保留、最优解允许取 0』执行；prob03 探针实测 Sigma s' > 0；权威回写待 cross_question_review"
+  - id: C4
+    with: assumptions.md AS12 / 团队裁定 D10
+    detail: "『5000 kW 作用侧』为 team_decision，prob01 池 25 条、prob02 池 23 条与 prob03 池 25 条均无一条涉及"
+    resolution: "只对约束集形式引用文献；口径选择标注为团队裁定，论文不得包装为文献支持"
+  - id: C5
+    with: assumptions.md AS11 / global_symbols.yaml q_adj
+    detail: "q_adj 的域写『≥ 0（亦可建模为带符号增量，待定 A7）』，语义未定"
+    resolution: "按团队 D3-A/D4-A 取替代量口径 q = q_adj（≥ 0，最终购电量）；不新增符号、含义不变"
+  - id: C6
+    with: assumptions.md 团队裁定 B7-1 / AS15-AS16
+    detail: "PLAN-EXP 要求与主口径同信息集且含偏差/紧急项，但在确定性、无误差分布口径下退化为 min sum p*b"
+    resolution: "在 (PL-0b) 写出两式并如实登记退化；非退化形式须团队提供误差分布（决策点 D4）"
+  - id: C7
+    with: assumptions.md 团队裁定 B4-C5 / AS18
+    detail: "C5 的加密单调性在同一发布集 + 无 tie-breaking 下对『每 1 小时』反转（+83.4747 元/14 天）"
+    resolution: "不改 C5 阈值；登记 F4 与机制，请求团队固定 tie-breaking（决策点 D3）"
+  - id: C8
+    with: prob03/shared/literature_pool.yaml
+    detail: "池内 25 条均未逐篇阅读正文（15 abstract_oa + 10 metadata）"
+    resolution: "本 formulation 的引用只支撑框架级/机制级主张；alpha_em/beta/降尺度/结算/填报口径不得包装为文献结论"
+
+decision_points_adopted:
+  D1: "A —— 三层顺序向前递推 LP（M1）作为主路径与唯一交付口径；不采用联合 LP（违反 AS07）"
+  D2: "A —— 计划全额计价 + 双向偏差成本项；M7·D2-B/D2-C 作强制口径对照"
+  D3: "A —— 替代量 + 单次结算 + 不回溯（q 为最终购电量，i <= 36 时 q = b）"
+  D4: "A —— 调整购电量工作表填最终量 q；表 1/2/3 报最终结果，正文补计划/调整/紧急三分项对比表"
+  D5: "A —— 整点点值 + 整点锚定线性插值（k=1 前向保持）；块内能量不守恒须披露（T3）"
+  D6: "A —— 不回溯 + 跨年项不消费（m=6 的 k=19..24、m=12 的 k=13..24、m=18 的 k=7..24）"
+  D7: "A —— 等式平衡 + q_em 仅补足缺口；sanity 统计 q_em 与 c 同为正的时段数"
+  D8: "A —— 表 1 全天购电费 = C_total，正文补 C_plan/C_em/C_adj 三分项"
+  D9: "A —— 各层 s 用该层预报作上界；D9-B（物理盈余界）登记为 prob04 前置条件"
+  D10: "A —— 外网购电无上限"
+  D11: "A —— 表 3 合并连续时段 + 左端点标签 + J_d = 0 写 —/0 + 每日至少 1 行"
+  D12: "A —— 预注册四指标对照集，由 M4/M5 实跑"
+
+adopted_team_findings:
+  T1: "计划层目标显式定义为 min sum p_t*b_{d,t}（主口径）；另设 PLAN-EXP 对照，两者信息集一致（§3.3 PL-0a/PL-0b）"
+  T2: "M7·D2-B / M7·D2-C 作为强制口径对照，须给出全量差额并在论文披露读法歧义"
+  T3: "线性插值不保块内能量守恒须显式披露，并给出插值 vs 分段常数的实际光伏能量偏差统计（M7·D5-B）"
+  B0: "主结果只以 M1 为准，其余模型数值只进 ablations/"
+  B1: "D1-D12 的团队采纳项与 T1-T3 全部落地；M1-M8 由本 formulation 定义并由 ablation 实跑"
+  B2: "M1-M8 formulation 级定义（含 M2a/M2b、M5 两变体、M7 四 case、M8 独立实现）"
+  B3: "四条恒等式（逐日 + 全期/交付期两口径）、M8 独立实现同值、交付期与全期分别报告、量级自检"
+  B4: "判据 C1-C9 保持冻结不改；本 formulation 只澄清 C2/C5/C6 的适用条件"
+  B5: "同数据/同参数/同口径/同预算/输出隔离/不改动 accepted 产物；不得用附件 4 与 2026 数据"
+  B6: "模型族与口径对照归 ablation，参数扰动与置信区间归 robustness，数值不得互相替代"
+  B7: "阻塞清单 7 项已全部闭合（落点见 formulation.md §0.2 表）"
+
+formulation_findings:
+  F1: "三层不能合并为单次联合 LP（层次目标 + 跨日递推依赖）"
+  F2: "实际光伏只进结算层；决策量与 SOC 轨迹与附件 2 实际值无关（探针已验）"
+  F3: "q_em 在决策层恒不激活；表 3 非零由预报误差产生（勿与 prob02 R5 混淆）"
+  F4: "C5 的加密单调性在同一发布集 + 无 tie-breaking 下对每 1 小时反转（+83.4747 元/14 天）"
+  F5: "PLAN-EXP 在同信息集 + 确定性口径下退化为 min sum p*b"
+  F6: "M2a 与 M1 算法同构；C2 是结构性恒等式，独立性由 C3/M8 承担"
+  F7: "M3 ≡ prob02 (P2)（跨问独立锚点，L6）"
+  F8: "M6 的紧 Big-M 由模型推导（u^+ <= b、u^- <= q_max），无需『足够大的数』"
+
+open_decision_points:
+  - id: D1
+    question: "求解路线是否取三层顺序向前递推 LP（M1）？"
+    recommendation: "A：M1 顺序递推（联合 LP 违反 AS07，不采用）"
+  - id: D2
+    question: "C2/M2a 的语义是否登记为结构性恒等式、独立性交 C3/M8？"
+    recommendation: "A：登记语义，不改 C2 阈值"
+  - id: D3
+    question: "调整层是否加 lexicographic tie-breaking 以支撑 C5 的单调性？"
+    recommendation: "A：加 tie-breaking（次级目标 = 与上一已提交轨迹偏差最小），全部变体统一应用"
+  - id: D4
+    question: "PLAN-EXP 采用哪种可实施化？"
+    recommendation: "A 为默认（如实登记退化）；若需实质差额则改 B（团队提供误差分布，非主口径）"
+  - id: D5
+    question: "M5『其他时刻预报』的数据接口取哪种？"
+    recommendation: "A：决策加密（同一发布集），结论限定为『决策频率』；B 需团队批准数据构造"
+  - id: D6
+    question: "M6 取 4 天 oracle 还是全年 MILP？"
+    recommendation: "A：4 天日尺度 oracle + 全年 LP 损失界（由 L5 保证），降级须登记"
+  - id: D7
+    question: "表 3/紧急购电填报与表 2 端点语义的论文披露方式？"
+    recommendation: "A：按 §7.3 落盘 + 论文表 2 说明处显式区分 prob01/prob03（勘误 R1）"
+  - id: D8
+    question: "M3 是否以 prob02 accepted 值作等式校验基准？"
+    recommendation: "A：是（只读校验，不引用为本问交付值）"

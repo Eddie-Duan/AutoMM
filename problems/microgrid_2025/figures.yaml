@@ -342,35 +342,6 @@ figures:
     reason: 视觉复核通过（相较 task 原图已修正点标注重叠/截断）：对数横轴（求解时间 s）与线性纵轴（目标值 元）刻度完整，12 个点标注按确定性偏移分列、C_dp_h400
       标注不再被上边界截断，cluster（A/E/F_both）标签互不重叠；图例与红色虚线不遮挡数据点。自动质检 passed（1596×948）。
     reviewed_at: '2026-09-10T14:19:12.019483+00:00'
-- stable_id: prob02_fig_year_energy_flow_ed77b9f928
-  problem_id: microgrid_2025
-  question_id: prob02
-  assumption_version: assumption_v001
-  formulation_version: formulation_v001
-  task_id: dc8afc3deb5477641b99
-  kind: year_energy_flow
-  title: prob02 全年日能量构成与代表日功率平衡
-  caption: 上：365 天逐日电量堆叠（光伏发电量 + 计划购电量）与小区负载、净负荷曲线（单位 MWh/日）；两者之差即储能净放电与往返损耗。下：交付期内代表日
-    2025-06-21 的日内功率（MW，实际负载/光伏来自附件 2，非附件 1 的代表日预测）。X 轴为自然日日期，竖虚线为月初；交付范围 2025-02-01→12-31（334
-    天），1 月为预热期。数据来源：assumption_v001 / formulation_v001 / task dc8afc3deb5477641b99
-    / run002。
-  path: problems/microgrid_2025/prob02/versions/assumption_v001/figures/prob02_fig_year_energy_flow_ed77b9f928.png
-  source_data: problems/microgrid_2025/prob02/versions/assumption_v001/results/prob02_v001_f001_run002/solution.json
-  source_hash: 4bcf70250a945038e02c95c52a6070e1489824f847713c130a2620e642131c44
-  script: problems/microgrid_2025/prob02/versions/assumption_v001/figures/plot_prob02_figures.py
-  font: Microsoft YaHei
-  style_config: config/visualization.yaml
-  included_in_summary: true
-  included_in_paper: false
-  quality_report: problems/microgrid_2025/prob02/versions/assumption_v001/figures/prob02_fig_year_energy_flow_ed77b9f928.quality.json
-  quality_status: passed
-  visual_review:
-    status: passed
-    reason: 视觉复核通过（首轮已修正）：上方面板为 365 天日电量堆叠（光伏 Σ(PVΔt) + 计划购电 Σb）与负载/净负荷曲线，单位 MWh/日、月初竖虚线标注；下面板代表日
-      2025-06-21 的负载/光伏/购电功率（MW）峰谷完整，购电尖峰出现在凌晨与 21:00 后，图例 3 项不遮挡曲线。首轮缺陷为时刻轴单位错误（arange(144)+0.5
-      与 xlim=(0,24) 不匹配，只画出前 24 时段），已改为 (arange(144)+0.5)·Δt；像素复检绿色像素 13,142、覆盖 y=1027–1512（8.6→0
-      MW），购电尖峰恢复。自动质检 passed（1820×1640）。
-    reviewed_at: '2026-09-11T02:51:41.053561+00:00'
 - stable_id: prob02_fig_cost_price_rhythm_74725a2a9b
   problem_id: microgrid_2025
   question_id: prob02
@@ -397,90 +368,6 @@ figures:
       x 轴说明中区分；下图为逐日购电加权均价散点（颜色=日费用），色标与标题语义一致。轴标签含单位、图例不遮挡数据、无文本截断。日费用与序列独立复算最大偏差
       4.997e-07 元。自动质检 passed（1820×1460）。
     reviewed_at: '2026-09-11T02:51:41.126409+00:00'
-- stable_id: prob02_fig_temporal_heatmap_2aa0a5f976
-  problem_id: microgrid_2025
-  question_id: prob02
-  assumption_version: assumption_v001
-  formulation_version: formulation_v001
-  task_id: dc8afc3deb5477641b99
-  kind: temporal_heatmap
-  title: 全年时空热力图：购电功率与储电量的日×时段结构
-  caption: 上：全年 365×144 的计划购电功率 b/Δt（MW，色标上限取 99.5 分位以避免尖峰压色）；下：储电量 E（kWh，色标固定为运行区间
-    [1200, 10800]）。红圈标出题面表 1/表 2 的 4 个指定日期（2025-03-20/06-21/09-23/12-21）。两图纵轴为自然日（1
-    月在上），横轴为 10 分钟时段（0:10→24:10 位置口径）；储电量在年末放空至 1200 kWh 是 AS04 终端自由口径的结果，须与价格套利区分。
-  path: problems/microgrid_2025/prob02/versions/assumption_v001/figures/prob02_fig_temporal_heatmap_2aa0a5f976.png
-  source_data: problems/microgrid_2025/prob02/versions/assumption_v001/results/prob02_v001_f001_run002/solution.json
-  source_hash: 4bcf70250a945038e02c95c52a6070e1489824f847713c130a2620e642131c44
-  script: problems/microgrid_2025/prob02/versions/assumption_v001/figures/plot_prob02_figures.py
-  font: Microsoft YaHei
-  style_config: config/visualization.yaml
-  included_in_summary: true
-  included_in_paper: false
-  quality_report: problems/microgrid_2025/prob02/versions/assumption_v001/figures/prob02_fig_temporal_heatmap_2aa0a5f976.quality.json
-  quality_status: passed
-  visual_review:
-    status: passed
-    reason: 视觉复核通过（首轮已修正）：上图为 365×144 计划购电功率热力图（MW，色标上限取 99.5 分位以防尖峰压色），下图为储电量热力图（kWh，色标固定
-      [1200,10800]）；两图色标量纲明确，纵轴为自然日（月初标签）、横轴为 10 分钟时段，轴标签已说明「行=自然日、列=时段」导致每行首末相差 10
-      分钟相位。4 个指定日期红圈 + 日期标签原置于标记下方致 2025-12-21 被底边裁切，已改到标记右侧并加半透明白底，四个标签在深浅条纹上均可读、不越界。自动质检
-      passed（1820×1676）。
-    reviewed_at: '2026-09-11T02:51:41.201498+00:00'
-- stable_id: prob02_fig_soc_trajectory_eb0f77c2a5
-  problem_id: microgrid_2025
-  question_id: prob02
-  assumption_version: assumption_v001
-  formulation_version: formulation_v001
-  task_id: dc8afc3deb5477641b99
-  kind: soc_trajectory
-  title: prob02 全年储电量轨迹与年末终值放大
-  caption: 左：全年 52,560 时段末储电量 E（kWh）轨迹，虚线为运行区间 [E_min, E_max] = [1200, 10800] kWh，点划线为题面初值
-    6000 kWh（2025-01-01 0:00）；储电量长期贴近上界运行，跨日由 E_{d,0}=E_{d−1,144} 连续衔接（continuity_residual_max
-    = 0）。右：年末 14 天放大，期末放空至 E_{12/31,144} = 1200.00 kWh（AS04 终端自由口径），该「放空」等价于少购 4320
-    kWh，须与价格套利区分（论文须披露）。
-  path: problems/microgrid_2025/prob02/versions/assumption_v001/figures/prob02_fig_soc_trajectory_eb0f77c2a5.png
-  source_data: problems/microgrid_2025/prob02/versions/assumption_v001/results/prob02_v001_f001_run002/solution.json
-  source_hash: 4bcf70250a945038e02c95c52a6070e1489824f847713c130a2620e642131c44
-  script: problems/microgrid_2025/prob02/versions/assumption_v001/figures/plot_prob02_figures.py
-  font: Microsoft YaHei
-  style_config: config/visualization.yaml
-  included_in_summary: true
-  included_in_paper: false
-  quality_report: problems/microgrid_2025/prob02/versions/assumption_v001/figures/prob02_fig_soc_trajectory_eb0f77c2a5.quality.json
-  quality_status: passed
-  visual_review:
-    status: passed
-    reason: 视觉复核通过（首轮已修正）：左面板为全年 52,560 时段 SOC 轨迹（kWh），E_min=1200、E_max=10800、E_{1/1,0}=6000
-      三组参考线语义移至图内顶部注记条，避免图例压住 E_min 虚线与数据；右面板为年末 14 天放大，期末放空至 1200 kWh 的阶梯清晰，放空注记盒移至右下不压数据，图例加半透明底后在密集尖峰上可读。E∈[1200,10800]、E_{2/1,0}=7950、日初
-      96 个水平与 continuity_residual_max=0 均与 solution.json 一致。自动质检 passed（2540×1316）。
-    reviewed_at: '2026-09-11T02:51:41.283248+00:00'
-- stable_id: prob02_fig_energy_balance_b86f1c6e8b
-  problem_id: microgrid_2025
-  question_id: prob02
-  assumption_version: assumption_v001
-  formulation_version: formulation_v001
-  task_id: dc8afc3deb5477641b99
-  kind: energy_balance
-  title: prob02 全年供需构成与弃光（按月汇总）
-  caption: 左：按月汇总的供给三项堆叠（外网购电 b、光伏实际消纳 PVΔt−s、储能放电 q_dis）与需求（负载 LΔt + 充电 c），两者逐月重合；闭合关系即恒等式
-    (I2) 的月度切片，残差量级 ~1e-9 GWh（全期 (I2) 残差为 0）。右：逐月弃光率（Σs/ΣPVΔt）与弃光电量；全期弃光 Σs = 990,168.09
-    kWh（0.99 GWh），因 AS09 的 s 目标系数为 0，弃光不产生收益也不受惩罚。单位 GWh/月。
-  path: problems/microgrid_2025/prob02/versions/assumption_v001/figures/prob02_fig_energy_balance_b86f1c6e8b.png
-  source_data: problems/microgrid_2025/prob02/versions/assumption_v001/results/prob02_v001_f001_run002/solution.json
-  source_hash: 4bcf70250a945038e02c95c52a6070e1489824f847713c130a2620e642131c44
-  script: problems/microgrid_2025/prob02/versions/assumption_v001/figures/plot_prob02_figures.py
-  font: Microsoft YaHei
-  style_config: config/visualization.yaml
-  included_in_summary: true
-  included_in_paper: false
-  quality_report: problems/microgrid_2025/prob02/versions/assumption_v001/figures/prob02_fig_energy_balance_b86f1c6e8b.quality.json
-  quality_status: passed
-  visual_review:
-    status: passed
-    reason: 视觉复核通过（首轮已修正）：左图为按月汇总的供给三项堆叠（外网购电 Σb、光伏实际消纳 Σ(PVΔt−s)、储能放电 Σq_dis）与需求曲线（负载
-      ΣLΔt + 充电 Σc），两者逐月重合，闭合残差注记修正后为 4.657e-16 GWh（原实现把窗口前状态误取窗口内首点 E，导致 6.750e-04
-      GWh）；右图为逐月弃光率（Σs/Σ(PVΔt)）与弃光电量条形，数值标注完整，1/12 月 0% 与说明框一致，全期 Σs=990,168.09 kWh。轴标签含单位
-      GWh/月、%、图例不遮挡堆叠。自动质检 passed（2180×1100）。
-    reviewed_at: '2026-09-11T02:51:41.364602+00:00'
 - stable_id: prob02_fig_rhythm_3d_9748be3c4f
   problem_id: microgrid_2025
   question_id: prob02
@@ -536,35 +423,6 @@ figures:
       0 与 >0 两支的分时套利结构，消除三维视角的遮挡与深度歧义；右图为逐日净负荷（MWh/日）与购电加权均价（颜色），2025-02-01 交付起点虚线标注正确，季节结构由实际光伏出力驱动。轴标签含单位、色标可读、无遮挡。自动质检
       passed（2360×1100）。
     reviewed_at: '2026-09-11T02:51:41.521910+00:00'
-- stable_id: prob02_fig_spec_dates_a8ffbf1f32
-  problem_id: microgrid_2025
-  question_id: prob02
-  assumption_version: assumption_v001
-  formulation_version: formulation_v001
-  task_id: dc8afc3deb5477641b99
-  kind: spec_dates
-  title: 题面 4 个指定日期的日内功率与表 1/表 2 摘要
-  caption: 四个交付期指定日期（2025-03-20 / 06-21 / 09-23 / 12-21）的日内功率：阴影+实线为计划购电 b/Δt，红为负载
-    L，绿为光伏 PV（MW）。每格下方标注该日表 2 的计划窗首/末储电量与表 1 的六个时段购电量（位置 i = 60/72/84/96/108/120，对应
-    10:00/12:00/14:00/16:00/18:00/20:00 起点）。注意：表 2 的端点储电量在本问为全年滚动的逐日切片（如 2025-03-20
-    = 8550.00 → 4352.87 kWh），与 prob01 的单日周期口径（恒 6000 kWh）语义不同，论文须显式区分。
-  path: problems/microgrid_2025/prob02/versions/assumption_v001/figures/prob02_fig_spec_dates_a8ffbf1f32.png
-  source_data: problems/microgrid_2025/prob02/versions/assumption_v001/results/prob02_v001_f001_run002/solution.json
-    + problems/microgrid_2025/prob02/versions/assumption_v001/results/prob02_v001_f001_run002/tables.json
-  source_hash: 229330b75213ee610b4cffb73c4f1e1d19fa2296066e8dbb383680742ffdb2b7
-  script: problems/microgrid_2025/prob02/versions/assumption_v001/figures/plot_prob02_figures.py
-  font: Microsoft YaHei
-  style_config: config/visualization.yaml
-  included_in_summary: true
-  included_in_paper: false
-  quality_report: problems/microgrid_2025/prob02/versions/assumption_v001/figures/prob02_fig_spec_dates_a8ffbf1f32.quality.json
-  quality_status: passed
-  visual_review:
-    status: passed
-    reason: 视觉复核通过（首轮已修正）：2×2 四联给出题面指定 4 个交付日期的日内功率（计划购电 b/Δt、负载 L、光伏 PV，MW），各日曲线完整、刻度与单位清晰；子图标题改为两行后不再超宽截断，含各日费用、Σb
-      与表 2 端点储电量；原本压住下一行标题的「表 1 六时段购电量」注记已集中到图底预留文本框，与子图零重叠，并显式区分 prob01/prob02 的表
-      2 端点语义。四日期的 6 时段购电量、6 块充放电与端点储电量对序列最大偏差 3.79e-07。自动质检 passed（2113×1804）。
-    reviewed_at: '2026-09-11T02:51:41.615285+00:00'
 - stable_id: prob02_fig_daily_coupling_3d_55ed1b8ea2
   problem_id: microgrid_2025
   question_id: prob02
@@ -593,6 +451,323 @@ figures:
       96 个水平与 Σ ΔE_d=−4800 kWh（= 期末 1200 − 期初 6000），与 daily 数组一致（|ΣΔE+4800|<1e-6）。数据点无自遮挡，静态可读；定量判读以配套二维图
       daily_coupling_2d 与 tables.json 为准。自动质检 passed（1712×1415）。
     reviewed_at: '2026-09-11T02:51:41.700055+00:00'
+- stable_id: prob02_fig_structure_waterfall_298a5e67df
+  problem_id: microgrid_2025
+  question_id: prob02
+  assumption_version: assumption_v001
+  formulation_version: formulation_v001
+  task_id: 5b87ce0a8d9e4706c82c
+  kind: structure_waterfall
+  title: 结构口径的经济贡献瀑布图（相对 M1 基准）
+  caption: 以 M1（accepted 全年滚动 LP）为基准，逐步叠加各结构/口径变动的费用增量：M3 互补 MILP +4.36 元（LP 松弛无损）、M5
+    终端=6000 kWh +2,217.08 元、M4 每日独立（D1 备选 A）+17,135.02 元、M2b 日终自由递推 +26,894.74 元（跨日携带价值，按团队裁定
+    D2 属结构性发现而非实现错误）。数据来源：ablation task 5b87ce0a8d9e4706c82c。
+  path: problems/microgrid_2025/prob02/versions/assumption_v001/ablations/figures/ablation_structure_waterfall.png
+  source_data: problems/microgrid_2025/prob02/versions/assumption_v001/ablations/results/prob02_v001_ablation_run001/comparison.json
+    + problems/microgrid_2025/prob02/versions/assumption_v001/ablations/results/prob02_v001_ablation_run001/summary.json
+  source_hash: ce495f508e5028e9447ba7440f837bdbd715918dd223dc5fc1a3cc620b20b3c6
+  script: problems/microgrid_2025/prob02/versions/assumption_v001/ablations/code/ablation_prob02.py
+  font: Microsoft YaHei
+  style_config: config/visualization.yaml
+  included_in_summary: true
+  included_in_paper: false
+  quality_report: problems/microgrid_2025/prob02/versions/assumption_v001/ablations/figures/ablation_structure_waterfall.quality.json
+  quality_status: passed
+  axis_units:
+    x: 结构/口径变动
+    y:
+    - 费用增量 (元)
+  x_domain: null
+  y_domains: null
+- stable_id: prob02_fig_model_cost_comparison_3436a3966d
+  problem_id: microgrid_2025
+  question_id: prob02
+  assumption_version: assumption_v001
+  formulation_version: formulation_v001
+  task_id: 5b87ce0a8d9e4706c82c
+  kind: model_cost_comparison
+  title: 模型族与结构对照的全期总费用（线性同量级口径）
+  caption: 【团队勘误 R6：本图被判为退化图，不作为论文图】7 个模型的全期费用全部落在 0–1.4×10^7 元的同一线性轴上，而最大极差仅 26,894.74
+    元 = 全期的 0.1955%（不足 1 像素），柱高不可分辨、不携带有效信息。论文改用 `prob02_fig_model_cost_delta_*`（与
+    M1 的差值 + 对数相对偏差口径）。本图保留为审计产物。数据来源：ablation task 5b87ce0a8d9e4706c82c。
+  path: problems/microgrid_2025/prob02/versions/assumption_v001/ablations/figures/ablation_model_cost.png
+  source_data: problems/microgrid_2025/prob02/versions/assumption_v001/ablations/results/prob02_v001_ablation_run001/comparison.json
+    + problems/microgrid_2025/prob02/versions/assumption_v001/ablations/results/prob02_v001_ablation_run001/summary.json
+  source_hash: ce495f508e5028e9447ba7440f837bdbd715918dd223dc5fc1a3cc620b20b3c6
+  script: problems/microgrid_2025/prob02/versions/assumption_v001/ablations/code/ablation_prob02.py
+  font: Microsoft YaHei
+  style_config: config/visualization.yaml
+  included_in_summary: true
+  included_in_paper: false
+  quality_report: problems/microgrid_2025/prob02/versions/assumption_v001/ablations/figures/ablation_model_cost.quality.json
+  quality_status: passed
+  axis_units:
+    x: 对照模型
+    y:
+    - 全期总费用 (元)
+  x_domain: null
+  y_domains: null
+- stable_id: prob02_fig_complexity_tradeoff_471fced46a
+  problem_id: microgrid_2025
+  question_id: prob02
+  assumption_version: assumption_v001
+  formulation_version: formulation_v001
+  task_id: 5b87ce0a8d9e4706c82c
+  kind: complexity_tradeoff
+  title: 复杂度-费用权衡：各对照的变量规模与求解时间
+  caption: 各对照模型的矩阵规模（变量/等式/非零元）与求解时间对比。M1 为 315,360 变量 / 105,120 等式 / 473,039 非零元、约
+    5.8 s（CPU HiGHS）；M3_full 追加 52,560 个二元变量后未能证明最优（mip_gap≈3.17e-7，按团队裁定 D5 登记为技术债），另以
+    4 个指定日期的日规模 MILP 作为独立 oracle。数据来源：ablation task 5b87ce0a8d9e4706c82c。
+  path: problems/microgrid_2025/prob02/versions/assumption_v001/ablations/figures/ablation_complexity_tradeoff.png
+  source_data: problems/microgrid_2025/prob02/versions/assumption_v001/ablations/results/prob02_v001_ablation_run001/comparison.json
+    + problems/microgrid_2025/prob02/versions/assumption_v001/ablations/results/prob02_v001_ablation_run001/summary.json
+  source_hash: ce495f508e5028e9447ba7440f837bdbd715918dd223dc5fc1a3cc620b20b3c6
+  script: problems/microgrid_2025/prob02/versions/assumption_v001/ablations/code/ablation_prob02.py
+  font: Microsoft YaHei
+  style_config: config/visualization.yaml
+  included_in_summary: true
+  included_in_paper: false
+  quality_report: problems/microgrid_2025/prob02/versions/assumption_v001/ablations/figures/ablation_complexity_tradeoff.quality.json
+  quality_status: passed
+  axis_units:
+    x: 对照模型
+    y:
+    - 变量数
+    - 求解时间 (s)
+  x_domain: null
+  y_domains: null
+- stable_id: prob02_fig_model_cost_delta_888b60671d
+  problem_id: microgrid_2025
+  question_id: prob02
+  assumption_version: assumption_v001
+  formulation_version: formulation_v001
+  task_id: 5b87ce0a8d9e4706c82c
+  kind: model_cost_delta
+  title: 结构与模型族对照：与 M1 基准的费用差（全期 365 天）
+  caption: 替代退化图 `ablation_model_cost.png`（团队勘误 R6）。上：ΔC = C(模型) − C(M1)（元）；下：|ΔC|/C(M1)（‰，对数轴，橙色虚线为
+    1‰ 参考线）。三条结论：①M7（独立第二实现）与 M2a（精确分解）与 M1 **数值恒等**（ΔC=0）⇒ 实现级与分解级交叉验证通过；②M3（互补 MILP）+4.36
+    元 ⇒ LP 松弛无损；③M5 终端=6000 +2,217.08 元、M4 每日独立 +17,135.02 元、M2b 日终自由递推 +26,894.74
+    元 ⇒ 结构/口径效应，其中 M2b 的差额为「跨日携带价值」（团队裁定 D2）。全部模型极差 = 全期的 0.1955%。数据来源：ablation task
+    5b87ce0a8d9e4706c82c。
+  path: problems/microgrid_2025/prob02/versions/assumption_v001/ablations/figures/prob02_ablation_model_cost_delta.png
+  source_data: problems/microgrid_2025/prob02/versions/assumption_v001/ablations/results/prob02_v001_ablation_run001/comparison.json
+    + problems/microgrid_2025/prob02/versions/assumption_v001/ablations/results/prob02_v001_ablation_run001/summary.json
+  source_hash: ce495f508e5028e9447ba7440f837bdbd715918dd223dc5fc1a3cc620b20b3c6
+  script: problems/microgrid_2025/prob02/versions/assumption_v001/ablations/figures/plot_prob02_ablation_delta.py
+  font: Microsoft YaHei
+  style_config: config/visualization.yaml
+  included_in_summary: true
+  included_in_paper: true
+  quality_report: problems/microgrid_2025/prob02/versions/assumption_v001/ablations/figures/prob02_ablation_model_cost_delta.quality.json
+  quality_status: passed
+  axis_units:
+    x: 对照模型
+    y:
+    - ΔC (元)
+    - '|ΔC|/C(M1) (‰)'
+  x_domain: null
+  y_domains:
+    ΔC (元):
+    - -3300
+    - 32800
+    '|ΔC|/C(M1) (‰)':
+    - 0.00024
+    - 6.6
+  visual_review:
+    status: passed
+    reason: 视觉复核通过：Microsoft YaHei 正常渲染无方框；上下两面板共用同一 X 轴（7 个对照模型，两行标签）；上面板纵轴单位「元」、下面板纵轴「‰，对数轴」明确；7
+      个数值标签（0 / 0 / +2,217.08 / 0 / +26,894.74 / +17,135.02 / +4.36）均完整可见、无遮挡；对数面板的零值以置底灰柱
+      + 「0」标注示意并配合 1‰ 虚参考线，不产生误读；**无解释性注释框**（按团队要求已移除，论文版）。自动质检 passed。
+    reviewed_at: '2026-09-11T05:43:50.622990+00:00'
+- stable_id: prob02_fig_b_cap_curve_paper_6ff413d398
+  problem_id: microgrid_2025
+  question_id: prob02
+  assumption_version: assumption_v001
+  formulation_version: formulation_v001
+  task_id: 5b87ce0a8d9e4706c82c
+  kind: b_cap_curve_paper
+  title: 外网购电上限对紧急购电与总费用的影响（全期 365 天）
+  caption: 替代原图 `ablation_b_cap_curve.png`（团队裁定 R8）：原标题含内部勘误编号「见勘误 R5」，且线性纵轴（0–8×10⁶
+    kWh）把阈值附近的 Σq_em = 8,707.40 kWh 压成 0、不可见。上：Σq_em（kWh，对数轴；Σq_em = 0 的网格点以底部灰点 +「0」标注）；下：全期总费用（元），灰虚线为上限不受限（无绑定）基线
+    13,758,182.57 元。三条结论：①B ≥ 4,375 kW 时 Σq_em = 0，B = 4,218.75 kW 时 Σq_em = 8,707.40
+    kWh（14 天）⇒ 激活阈值 β ∈ (4,218.75, 4,375.00] kW；②Σq_em 随上限下降单调不减、总费用单调不降（判据 C5）；③B
+    = 4,218.75 kW 时费用仅比无绑定基线高 889,384.33 元（+6.46%），而 B = 2,000 kW 时高 19,011,429.00
+    元（+138.18%）⇒ 上限一旦低于激活阈值，代价陡增。数据源与 ablation task 5b87ce0a8d9e4706c82c 的 comparison.json
+    同源，未重跑任何计算。
+  path: problems/microgrid_2025/prob02/versions/assumption_v001/ablations/figures/prob02_ablation_bcap_paper.png
+  source_data: problems/microgrid_2025/prob02/versions/assumption_v001/ablations/results/prob02_v001_ablation_run001/comparison.json
+    + problems/microgrid_2025/prob02/versions/assumption_v001/ablations/results/prob02_v001_ablation_run001/summary.json
+  source_hash: ce495f508e5028e9447ba7440f837bdbd715918dd223dc5fc1a3cc620b20b3c6
+  script: problems/microgrid_2025/prob02/versions/assumption_v001/ablations/figures/plot_prob02_ablation_bcap_paper.py
+  font: Microsoft YaHei
+  style_config: config/visualization.yaml
+  axis_units:
+    x: 外网购电上限 B (kW)
+    y:
+    - Σq_em (kWh)
+    - 全期总费用 (元)
+  x_domain: null
+  y_domains:
+    Σq_em (kWh):
+    - 200.0
+    - 22000000.0
+    全期总费用 (元):
+    - 12617496.833818596
+    - 39978926.11802933
+  included_in_summary: true
+  included_in_paper: true
+  quality_report: problems/microgrid_2025/prob02/versions/assumption_v001/ablations/figures/prob02_ablation_bcap_paper.quality.json
+  quality_status: passed
+  visual_review:
+    status: passed
+    reason: 视觉复核通过：Microsoft YaHei 正常渲染（无需用上标字符，改用完整整数字，避免缺字形）；上下双面板共享同一等距网格 X 轴，10
+      个上限标签（2000/3000/3750/4000/4218.75/4375/5000/6000/8459/10326）旋转 45° 全部可读；上面板对数纵轴，5
+      个非零值标签（8,707 / 86,018 / 320,077 / 2,528,614 / 7,845,369）与 5 个「0」标注均完整、无相互遮挡；下面板三个费用标签（32,769,612
+      元 / +889,384 元 / 基线 13,758,183 元）经调整图例位置（upper right）与两端标签内对齐后无遮挡、无截断（首轮 upper-left
+      图例压住左端标签，已修）；β 夹逼区间色带在图例中给出数值。标题不含任何内部勘误编号。
+    reviewed_at: '2026-09-11T06:20:15.010763+00:00'
+- stable_id: prob02_fig_year_energy_flow_ed77b9f928
+  problem_id: microgrid_2025
+  question_id: prob02
+  assumption_version: assumption_v001
+  formulation_version: formulation_v001
+  task_id: dc8afc3deb5477641b99
+  kind: year_energy_flow
+  title: prob02 全年日能量构成与代表日功率平衡
+  caption: 上：365 天逐日电量堆叠（光伏发电量 + 计划购电量）与小区负载、净负荷曲线（单位 MWh/日）；两者之差即储能净放电与往返损耗。下：交付期内代表日
+    2025-06-21 的日内功率（MW，实际负载/光伏来自附件 2，非附件 1 的代表日预测）。X 轴为自然日日期，竖虚线为月初；交付范围 2025-02-01→12-31（334
+    天），1 月为预热期。数据来源：assumption_v001 / formulation_v001 / task dc8afc3deb5477641b99
+    / run002。
+  path: problems/microgrid_2025/prob02/versions/assumption_v001/figures/prob02_fig_year_energy_flow_ed77b9f928.png
+  source_data: problems/microgrid_2025/prob02/versions/assumption_v001/results/prob02_v001_f001_run002/solution.json
+  source_hash: 4bcf70250a945038e02c95c52a6070e1489824f847713c130a2620e642131c44
+  script: problems/microgrid_2025/prob02/versions/assumption_v001/figures/plot_prob02_figures.py
+  font: Microsoft YaHei
+  style_config: config/visualization.yaml
+  included_in_summary: true
+  included_in_paper: true
+  quality_report: problems/microgrid_2025/prob02/versions/assumption_v001/figures/prob02_fig_year_energy_flow_ed77b9f928.quality.json
+  quality_status: passed
+  visual_review:
+    status: passed
+    reason: 视觉复核通过（首轮已修正）：上方面板为 365 天日电量堆叠（光伏 Σ(PVΔt) + 计划购电 Σb）与负载/净负荷曲线，单位 MWh/日、月初竖虚线标注；下面板代表日
+      2025-06-21 的负载/光伏/购电功率（MW）峰谷完整，购电尖峰出现在凌晨与 21:00 后，图例 3 项不遮挡曲线。首轮缺陷为时刻轴单位错误（arange(144)+0.5
+      与 xlim=(0,24) 不匹配，只画出前 24 时段），已改为 (arange(144)+0.5)·Δt；像素复检绿色像素 13,142、覆盖 y=1027–1512（8.6→0
+      MW），购电尖峰恢复。自动质检 passed（1820×1640）。
+    reviewed_at: '2026-09-11T02:51:41.053561+00:00'
+- stable_id: prob02_fig_temporal_heatmap_2aa0a5f976
+  problem_id: microgrid_2025
+  question_id: prob02
+  assumption_version: assumption_v001
+  formulation_version: formulation_v001
+  task_id: dc8afc3deb5477641b99
+  kind: temporal_heatmap
+  title: 全年时空热力图：购电功率与储电量的日×时段结构
+  caption: 上：全年 365×144 的计划购电功率 b/Δt（MW，色标上限取 99.5 分位以避免尖峰压色）；下：储电量 E（kWh，色标固定为运行区间
+    [1200, 10800]）。红圈标出题面表 1/表 2 的 4 个指定日期（2025-03-20/06-21/09-23/12-21）。两图纵轴为自然日（1
+    月在上），横轴为 10 分钟时段（0:10→24:10 位置口径）；储电量在年末放空至 1200 kWh 是 AS04 终端自由口径的结果，须与价格套利区分。
+  path: problems/microgrid_2025/prob02/versions/assumption_v001/figures/prob02_fig_temporal_heatmap_2aa0a5f976.png
+  source_data: problems/microgrid_2025/prob02/versions/assumption_v001/results/prob02_v001_f001_run002/solution.json
+  source_hash: 4bcf70250a945038e02c95c52a6070e1489824f847713c130a2620e642131c44
+  script: problems/microgrid_2025/prob02/versions/assumption_v001/figures/plot_prob02_figures.py
+  font: Microsoft YaHei
+  style_config: config/visualization.yaml
+  included_in_summary: true
+  included_in_paper: true
+  quality_report: problems/microgrid_2025/prob02/versions/assumption_v001/figures/prob02_fig_temporal_heatmap_2aa0a5f976.quality.json
+  quality_status: passed
+  visual_review:
+    status: passed
+    reason: 视觉复核通过（首轮已修正）：上图为 365×144 计划购电功率热力图（MW，色标上限取 99.5 分位以防尖峰压色），下图为储电量热力图（kWh，色标固定
+      [1200,10800]）；两图色标量纲明确，纵轴为自然日（月初标签）、横轴为 10 分钟时段，轴标签已说明「行=自然日、列=时段」导致每行首末相差 10
+      分钟相位。4 个指定日期红圈 + 日期标签原置于标记下方致 2025-12-21 被底边裁切，已改到标记右侧并加半透明白底，四个标签在深浅条纹上均可读、不越界。自动质检
+      passed（1820×1676）。
+    reviewed_at: '2026-09-11T02:51:41.201498+00:00'
+- stable_id: prob02_fig_soc_trajectory_eb0f77c2a5
+  problem_id: microgrid_2025
+  question_id: prob02
+  assumption_version: assumption_v001
+  formulation_version: formulation_v001
+  task_id: dc8afc3deb5477641b99
+  kind: soc_trajectory
+  title: prob02 全年储电量轨迹与年末终值放大
+  caption: 左：全年 52,560 时段末储电量 E（kWh）轨迹，虚线为运行区间 [E_min, E_max] = [1200, 10800] kWh，点划线为题面初值
+    6000 kWh（2025-01-01 0:00）；储电量长期贴近上界运行，跨日由 E_{d,0}=E_{d−1,144} 连续衔接（continuity_residual_max
+    = 0）。右：年末 14 天放大，期末放空至 E_{12/31,144} = 1200.00 kWh（AS04 终端自由口径），该「放空」等价于少购 4320
+    kWh，须与价格套利区分（论文须披露）。
+  path: problems/microgrid_2025/prob02/versions/assumption_v001/figures/prob02_fig_soc_trajectory_eb0f77c2a5.png
+  source_data: problems/microgrid_2025/prob02/versions/assumption_v001/results/prob02_v001_f001_run002/solution.json
+  source_hash: 4bcf70250a945038e02c95c52a6070e1489824f847713c130a2620e642131c44
+  script: problems/microgrid_2025/prob02/versions/assumption_v001/figures/plot_prob02_figures.py
+  font: Microsoft YaHei
+  style_config: config/visualization.yaml
+  included_in_summary: true
+  included_in_paper: true
+  quality_report: problems/microgrid_2025/prob02/versions/assumption_v001/figures/prob02_fig_soc_trajectory_eb0f77c2a5.quality.json
+  quality_status: passed
+  visual_review:
+    status: passed
+    reason: 视觉复核通过（首轮已修正）：左面板为全年 52,560 时段 SOC 轨迹（kWh），E_min=1200、E_max=10800、E_{1/1,0}=6000
+      三组参考线语义移至图内顶部注记条，避免图例压住 E_min 虚线与数据；右面板为年末 14 天放大，期末放空至 1200 kWh 的阶梯清晰，放空注记盒移至右下不压数据，图例加半透明底后在密集尖峰上可读。E∈[1200,10800]、E_{2/1,0}=7950、日初
+      96 个水平与 continuity_residual_max=0 均与 solution.json 一致。自动质检 passed（2540×1316）。
+    reviewed_at: '2026-09-11T02:51:41.283248+00:00'
+- stable_id: prob02_fig_energy_balance_b86f1c6e8b
+  problem_id: microgrid_2025
+  question_id: prob02
+  assumption_version: assumption_v001
+  formulation_version: formulation_v001
+  task_id: dc8afc3deb5477641b99
+  kind: energy_balance
+  title: prob02 全年供需构成与弃光（按月汇总）
+  caption: 左：按月汇总的供给三项堆叠（外网购电 b、光伏实际消纳 PVΔt−s、储能放电 q_dis）与需求（负载 LΔt + 充电 c），两者逐月重合；闭合关系即恒等式
+    (I2) 的月度切片，残差量级 ~1e-9 GWh（全期 (I2) 残差为 0）。右：逐月弃光率（Σs/ΣPVΔt）与弃光电量；全期弃光 Σs = 990,168.09
+    kWh（0.99 GWh），因 AS09 的 s 目标系数为 0，弃光不产生收益也不受惩罚。单位 GWh/月。
+  path: problems/microgrid_2025/prob02/versions/assumption_v001/figures/prob02_fig_energy_balance_b86f1c6e8b.png
+  source_data: problems/microgrid_2025/prob02/versions/assumption_v001/results/prob02_v001_f001_run002/solution.json
+  source_hash: 4bcf70250a945038e02c95c52a6070e1489824f847713c130a2620e642131c44
+  script: problems/microgrid_2025/prob02/versions/assumption_v001/figures/plot_prob02_figures.py
+  font: Microsoft YaHei
+  style_config: config/visualization.yaml
+  included_in_summary: true
+  included_in_paper: true
+  quality_report: problems/microgrid_2025/prob02/versions/assumption_v001/figures/prob02_fig_energy_balance_b86f1c6e8b.quality.json
+  quality_status: passed
+  visual_review:
+    status: passed
+    reason: 视觉复核通过（首轮已修正）：左图为按月汇总的供给三项堆叠（外网购电 Σb、光伏实际消纳 Σ(PVΔt−s)、储能放电 Σq_dis）与需求曲线（负载
+      ΣLΔt + 充电 Σc），两者逐月重合，闭合残差注记修正后为 4.657e-16 GWh（原实现把窗口前状态误取窗口内首点 E，导致 6.750e-04
+      GWh）；右图为逐月弃光率（Σs/Σ(PVΔt)）与弃光电量条形，数值标注完整，1/12 月 0% 与说明框一致，全期 Σs=990,168.09 kWh。轴标签含单位
+      GWh/月、%、图例不遮挡堆叠。自动质检 passed（2180×1100）。
+    reviewed_at: '2026-09-11T02:51:41.364602+00:00'
+- stable_id: prob02_fig_spec_dates_a8ffbf1f32
+  problem_id: microgrid_2025
+  question_id: prob02
+  assumption_version: assumption_v001
+  formulation_version: formulation_v001
+  task_id: dc8afc3deb5477641b99
+  kind: spec_dates
+  title: 题面 4 个指定日期的日内功率与表 1/表 2 摘要
+  caption: 四个交付期指定日期（2025-03-20 / 06-21 / 09-23 / 12-21）的日内功率：阴影+实线为计划购电 b/Δt，红为负载
+    L，绿为光伏 PV（MW）。每格下方标注该日表 2 的计划窗首/末储电量与表 1 的六个时段购电量（位置 i = 60/72/84/96/108/120，对应
+    10:00/12:00/14:00/16:00/18:00/20:00 起点）。注意：表 2 的端点储电量在本问为全年滚动的逐日切片（如 2025-03-20
+    = 8550.00 → 4352.87 kWh），与 prob01 的单日周期口径（恒 6000 kWh）语义不同，论文须显式区分。
+  path: problems/microgrid_2025/prob02/versions/assumption_v001/figures/prob02_fig_spec_dates_a8ffbf1f32.png
+  source_data: problems/microgrid_2025/prob02/versions/assumption_v001/results/prob02_v001_f001_run002/solution.json
+    + problems/microgrid_2025/prob02/versions/assumption_v001/results/prob02_v001_f001_run002/tables.json
+  source_hash: 229330b75213ee610b4cffb73c4f1e1d19fa2296066e8dbb383680742ffdb2b7
+  script: problems/microgrid_2025/prob02/versions/assumption_v001/figures/plot_prob02_figures.py
+  font: Microsoft YaHei
+  style_config: config/visualization.yaml
+  included_in_summary: true
+  included_in_paper: true
+  quality_report: problems/microgrid_2025/prob02/versions/assumption_v001/figures/prob02_fig_spec_dates_a8ffbf1f32.quality.json
+  quality_status: passed
+  visual_review:
+    status: passed
+    reason: 视觉复核通过（首轮已修正）：2×2 四联给出题面指定 4 个交付日期的日内功率（计划购电 b/Δt、负载 L、光伏 PV，MW），各日曲线完整、刻度与单位清晰；子图标题改为两行后不再超宽截断，含各日费用、Σb
+      与表 2 端点储电量；原本压住下一行标题的「表 1 六时段购电量」注记已集中到图底预留文本框，与子图零重叠，并显式区分 prob01/prob02 的表
+      2 端点语义。四日期的 6 时段购电量、6 块充放电与端点储电量对序列最大偏差 3.79e-07。自动质检 passed（2113×1804）。
+    reviewed_at: '2026-09-11T02:51:41.615285+00:00'
 - stable_id: prob02_fig_daily_coupling_2d_3069395b29
   problem_id: microgrid_2025
   question_id: prob02
@@ -611,7 +786,7 @@ figures:
   font: Microsoft YaHei
   style_config: config/visualization.yaml
   included_in_summary: true
-  included_in_paper: false
+  included_in_paper: true
   quality_report: problems/microgrid_2025/prob02/versions/assumption_v001/figures/prob02_fig_daily_coupling_2d_3069395b29.quality.json
   quality_status: passed
   visual_review:
@@ -638,7 +813,7 @@ figures:
   font: Microsoft YaHei
   style_config: config/visualization.yaml
   included_in_summary: true
-  included_in_paper: false
+  included_in_paper: true
   quality_report: problems/microgrid_2025/prob02/versions/assumption_v001/figures/prob02_fig_cost_bounds_ad7c3c0cc0.quality.json
   quality_status: passed
   visual_review:
@@ -650,3 +825,291 @@ figures:
       语义改正并加三条断言防回归，独立复算 (lower,upper)=(7,525,691.131,18,298,592.366) 与 solution.json
       逐位一致。自动质检 passed（1820×1532）。
     reviewed_at: '2026-09-11T02:51:41.870027+00:00'
+- stable_id: prob02_fig_b_cap_curve_e948ae961d
+  problem_id: microgrid_2025
+  question_id: prob02
+  assumption_version: assumption_v001
+  formulation_version: formulation_v001
+  task_id: 5b87ce0a8d9e4706c82c
+  kind: b_cap_curve
+  title: 购电上限族：紧急购电激活曲线（M6 团队网格 + M6′ 阈值附近）
+  caption: 横轴为外网购电功率上限 B（kW，施加为 b≤B·Δt），纵轴为全期紧急购电量 Σq_em（kWh）与全期总费用（元）。M6 的团队指定网格
+    {10,326, 8,459, 6,000, 5,000} kW 全部落在非激活区（Σq_em=0，见团队勘误 R5）；追加的 M6′ 覆盖真实激活阈值两侧，实测
+    Σq_em 由 0（B≥4,375 kW）跳升至 8,707.40（B=4,218.75）、86,017.95（4,000）、320,077.34（3,750）、2,528,614.21（3,000）、7,845,369.34
+    kWh（2,000），全期费用 1.3758×10^7 → 3.2770×10^7 元。该图即「把紧急购电机制演示并验证出来」的证据（勘误 R2 的原始意图）。数据来源：assumption_v001
+    / formulation_v001 / ablation task 5b87ce0a8d9e4706c82c。
+  path: problems/microgrid_2025/prob02/versions/assumption_v001/ablations/figures/ablation_b_cap_curve.png
+  source_data: problems/microgrid_2025/prob02/versions/assumption_v001/ablations/results/prob02_v001_ablation_run001/comparison.json
+    + problems/microgrid_2025/prob02/versions/assumption_v001/ablations/results/prob02_v001_ablation_run001/summary.json
+  source_hash: ce495f508e5028e9447ba7440f837bdbd715918dd223dc5fc1a3cc620b20b3c6
+  script: problems/microgrid_2025/prob02/versions/assumption_v001/ablations/code/ablation_prob02.py
+  font: Microsoft YaHei
+  style_config: config/visualization.yaml
+  included_in_summary: true
+  included_in_paper: false
+  quality_report: problems/microgrid_2025/prob02/versions/assumption_v001/ablations/figures/ablation_b_cap_curve.quality.json
+  quality_status: passed
+  axis_units:
+    x: 购电上限 B (kW)
+    y:
+    - Σq_em (kWh)
+    - 全期总费用 (元)
+  x_domain:
+  - -1000
+  - 11000
+  y_domains:
+    Σq_em (kWh):
+    - 0
+    - 8400000.0
+    全期总费用 (元):
+    - 13000000.0
+    - 34000000.0
+  visual_review:
+    status: needs_revision
+    reason: '**需修订（仅标题）**：标题含内部文档编号「（阈值β见勘误 R5）」，论文版必须去掉该括注（建议改为「购电上限与紧急购电机制」）。其余通过：左轴
+      Σq_em（kWh，1e6 倍率）、右轴 全期总费用（元，1e7 倍率）单位与倍率齐全；β ∈ (4218.75, 4375.0] kW 阈值带以浅黄底
+      + 图例标注，与团队勘误 R5 的实测 bracket 一致；图例置于右上空白处，不遮挡两条曲线；Microsoft YaHei 正常。'
+    reviewed_at: '2026-09-11T05:43:50.718593+00:00'
+- stable_id: prob03_fig_forecast_chain_78b78a9c24
+  problem_id: microgrid_2025
+  question_id: prob03
+  assumption_version: assumption_v001
+  formulation_version: formulation_v001
+  task_id: 6de708bbd2d3dd273013
+  kind: forecast_chain
+  title: prob03 三层信息结构：决策用预报与结算用实际（代表日）
+  caption: 两个代表日的日内光伏：黑实线 = 附件 2 实际光伏 $PV^{act}$（只进结算层，F2）；蓝虚线 = 0:00 预报经 AS05 降尺度（整点点值
+    + 整点锚定线性插值）后的计划层输入；橙实线 = 该时段支配决策时刻（0:00/6:00/12:00/18:00，每个时刻支配 36 个时段）的预报降尺度结果，即调整层输入。竖点线为四个预报发布时刻。本图只展示信息结构，**不比较**四个发布时刻的预报精度：各时刻可用样本的提前量窗口与日内时段不同，团队勘误
+    E3 明确禁止把不同样本口径的 RMSE 横排成『某时刻更准』；AS05 的块内能量不守恒（T3）亦在此声明。
+  path: problems/microgrid_2025/prob03/versions/assumption_v001/figures/prob03_fig_forecast_chain_78b78a9c24.png
+  source_data: problems/microgrid_2025/prob03/versions/assumption_v001/results/prob03_v001_f001_run003/solution.json
+    + data/附件2.xlsx + data/附件3.xlsx
+  source_hash: bbf9cfa98c6a3f84667839dae5f9b3ed8a50724caa1cbd15e19709f58b5a9b14
+  script: problems/microgrid_2025/prob03/versions/assumption_v001/figures/plot_prob03_figures.py
+  font: Microsoft YaHei
+  style_config: config/visualization.yaml
+  included_in_summary: true
+  included_in_paper: true
+  quality_report: problems/microgrid_2025/prob03/versions/assumption_v001/figures/prob03_fig_forecast_chain_78b78a9c24.quality.json
+  quality_status: passed
+  visual_review:
+    status: passed
+    reason: 三层信息结构图：2025-06-21（夏至）与 2025-12-21（冬至）两个代表日的实际光伏（附件 2，黑实线）、0:00 预报降尺度（蓝虚线，计划层输入）与各时段支配预报降尺度（橙线，调整层输入）。视觉复核通过：Microsoft
+      YaHei 字体正常、无方框缺字；6/12/18 发布时刻的竖点线与竖排标签完整且不越界、不压曲线；三曲线颜色区分明确、图例 3 项置于左上空白；两子图
+      Y 轴单位（kW）与 X 轴 AS01 位置口径（计划窗 0:10→24:10）标注完整。本图只展示信息结构，按团队勘误 E3 不比较四个发布时刻的预报精度。自动质检
+      passed（2432×1100，边界暗像素比 0.000）。
+    reviewed_at: '2026-09-11T09:17:26.908744+00:00'
+- stable_id: prob03_fig_plan_adjust_profile_5815df79b4
+  problem_id: microgrid_2025
+  question_id: prob03
+  assumption_version: assumption_v001
+  formulation_version: formulation_v001
+  task_id: 6de708bbd2d3dd273013
+  kind: plan_adjust_profile
+  title: prob03 计划购电量、最终购电量与紧急购电的日内剖面
+  caption:
+  - 两行两列：上排为指定日期的日内剖面（蓝线 = 计划层购电量 $b$，仅用 0:00 预报；橙线 = 调整后的最终购电量 $q$，各时段取其支配决策时刻的预报；橙/绿填充
+    = 上调 $q-b$ / 下调 $b-q$；红柱 = 结算层紧急购电量 $q_{em}$），下排为同一日期的逐时段调整量 $(q-b)$。主口径下 $q_{em}$
+    只在结算层由「支配层预报 vs 附件 2 实际」的缺口产生（F3），决策层恒不激活。全期 52,560 时段中上调 5,810 个、下调 86 个（下调总量
+    −2.87e-7 kWh，属求解器容差），即最优解满足 $q\geq b$：在 D2-A 口径下下调只增加 $0.5p(b-q)$ 成本而不减少已全额沉没的计划费
+    $\Sigma p b$，盈余又可零成本弃光；成因是计划层目标 $\min\Sigma p b$ 不含偏差与紧急购电预期（团队裁定 T1/T6 与勘误 R11
+    的『无对冲机制』）。全年另有 27 天（含 2025-09-23）无任何调整，当日购电全部按计划执行、缺口仍由结算层紧急购电承担。
+  path: problems/microgrid_2025/prob03/versions/assumption_v001/figures/prob03_fig_plan_adjust_profile_5815df79b4.png
+  source_data: problems/microgrid_2025/prob03/versions/assumption_v001/results/prob03_v001_f001_run003/solution.json
+  source_hash: fc465646c7fd80533be952253de13831fe6f19fbcc0f5bb03432935e1f1d1d89
+  script: problems/microgrid_2025/prob03/versions/assumption_v001/figures/plot_prob03_figures.py
+  font: Microsoft YaHei
+  style_config: config/visualization.yaml
+  included_in_summary: true
+  included_in_paper: true
+  quality_report: problems/microgrid_2025/prob03/versions/assumption_v001/figures/prob03_fig_plan_adjust_profile_5815df79b4.quality.json
+  quality_status: passed
+  visual_review:
+    status: passed
+    reason: 计划/调整/紧急购电日内落地图：2025-03-20 与 2025-12-21 两日，上排为计划购电量 b、最终购电量 q、调整上/下调填充与紧急购电
+      q_em 柱，下排为逐时段调整量 q−b 柱（0 线分隔）。视觉复核通过：2×2 布局无子图互相遮挡，图例移至画布底部后不再压住 x 轴标题（首轮缺陷已修），当日
+      Σ(q−b)/Σq_em/C_adj/C_em 注记置于右上空白、不压曲线；下排柱体正负方向与颜色（橙=上调、绿=下调）一致，且如实显示本问主口径下无下调柱。自动质检
+      passed（2432×1764）。
+    reviewed_at: '2026-09-11T09:17:27.020278+00:00'
+- stable_id: prob03_fig_adjust_surface_3d_6b4425cbc5
+  problem_id: microgrid_2025
+  question_id: prob03
+  assumption_version: assumption_v001
+  formulation_version: formulation_v001
+  task_id: 6de708bbd2d3dd273013
+  kind: adjust_surface_3d
+  title: prob03 全年调整量三维曲面：日期 × 时刻 ×（最终−计划）购电量
+  caption:
+  - 三维曲面：X = 日期（2025 全年 365 天），Y = 时刻（0→23 h），Z = 该「日 × 小时」内 6 个时段的调整量之和 $(q-b)$（kWh/h），颜色以
+    0 为中心的双向色标（暖色=上调、冷色=下调）。视角 elev=26°、azim=−58°，为静态 PNG 可读性沿日期轴每 3 天抽 1 条网格线；色标与
+    Z 轴按 99.5 分位截断以保留低幅结构（已在图内注明峰值）。曲面几乎全部位于 Z≥0 半空间（上调 5,810 时段、下调 86 时段且总量 −2.87e-7
+    kWh），无自遮挡；定量判读以配套二维投影 adjust_heatmap_2d 为准。
+  path: problems/microgrid_2025/prob03/versions/assumption_v001/figures/prob03_fig_adjust_surface_3d_6b4425cbc5.png
+  source_data: problems/microgrid_2025/prob03/versions/assumption_v001/results/prob03_v001_f001_run003/solution.json
+  source_hash: fc465646c7fd80533be952253de13831fe6f19fbcc0f5bb03432935e1f1d1d89
+  script: problems/microgrid_2025/prob03/versions/assumption_v001/figures/plot_prob03_figures.py
+  font: Microsoft YaHei
+  style_config: config/visualization.yaml
+  included_in_summary: true
+  included_in_paper: true
+  quality_report: problems/microgrid_2025/prob03/versions/assumption_v001/figures/prob03_fig_adjust_surface_3d_6b4425cbc5.quality.json
+  quality_status: passed
+  visual_review:
+    status: passed
+    reason: 全年调整量三维曲面（日期 × 时刻 × Σ(q−b) kWh/h）：视角 elev=26°/azim=−58°，三轴与色标标签完整；曲面几乎全部位于Z≥0
+      半空间，不存在自遮挡或上下表面互相遮蔽；色标与 Z 轴按 99.5 分位 1,692 kWh/h 截断（峰值 3,557 kWh/h 已在图内注明），低幅结构在静态
+      PNG 中仍可辨；透视缩短不影响「调整集中在日间与傍晚」的结构判读，并已配二维配套图 adjust_heatmap_2d承担定量判读（图注已写明）。自动质检
+      passed（1793×1524）。
+    reviewed_at: '2026-09-11T09:17:27.128494+00:00'
+- stable_id: prob03_fig_adjust_heatmap_2d_4477246233
+  problem_id: microgrid_2025
+  question_id: prob03
+  assumption_version: assumption_v001
+  formulation_version: formulation_v001
+  task_id: 6de708bbd2d3dd273013
+  kind: adjust_heatmap_2d
+  title: prob03 调整量的二维投影：日期 × 时刻热力图与逐日总量
+  caption:
+  - 上：全年「日期 × 时刻」调整量 $(q-b)$ 热力图（色标以 0 为中心并按 99 分位截断以防压色）；下：逐日调整量 $\Sigma_t(q-b)$
+    柱状与交付期日均线（MWh/日）。用于对三维曲面 adjust_surface_3d 做定量判读：调整集中在日间光伏时段与傍晚，交付期（2025-02-01
+    起）几乎逐日为正。X 轴为自然日索引（0 = 2025-01-01）。
+  path: problems/microgrid_2025/prob03/versions/assumption_v001/figures/prob03_fig_adjust_heatmap_2d_4477246233.png
+  source_data: problems/microgrid_2025/prob03/versions/assumption_v001/results/prob03_v001_f001_run003/solution.json
+  source_hash: fc465646c7fd80533be952253de13831fe6f19fbcc0f5bb03432935e1f1d1d89
+  script: problems/microgrid_2025/prob03/versions/assumption_v001/figures/plot_prob03_figures.py
+  font: Microsoft YaHei
+  style_config: config/visualization.yaml
+  included_in_summary: true
+  included_in_paper: true
+  quality_report: problems/microgrid_2025/prob03/versions/assumption_v001/figures/prob03_fig_adjust_heatmap_2d_4477246233.quality.json
+  quality_status: passed
+  visual_review:
+    status: passed
+    reason: 调整量二维投影：上为全年「日期 × 时刻」调整量热力图（色标以 0 为中心、按调整量绝对值 99 分位 1,256 kWh/h 截断以防压色，交付期红线与
+      12 个月份刻度正确），下为逐日调整量柱与交付期日均线 1.44 MWh/日。视觉复核通过：上排注记框与下排图例均为白底不透明、不压数据；X 轴自然日索引与轴标签说明一致；下排可读出逐日规律与
+      8 月峰值。自动质检 passed（2180×1568）。
+    reviewed_at: '2026-09-11T09:17:27.242568+00:00'
+- stable_id: prob03_fig_cost_decomposition_3c230c19db
+  problem_id: microgrid_2025
+  question_id: prob03
+  assumption_version: assumption_v001
+  formulation_version: formulation_v001
+  task_id: 6de708bbd2d3dd273013
+  kind: cost_decomposition
+  title: prob03 费用分解与跨问交付期费用对比（含团队勘误 R11 披露）
+  caption: 左：prob03 的交付期 $D_{req}$（2025-02-01…12-31，334 天）与全期 $D_{full}$（365 天）费用分解，三个分项由
+    run003 序列独立复算（$C_{plan}=\Sigma p b$、$C_{adj}=\Sigma[0.5p(b-q)^++1.5p(q-b)^+]$、$C_{em}=\Sigma
+    5p q_{em}$），恒等式残差为 0。右：与 prob02 交付期的跨问对比，$Δ$ 及各分项差额按 R11 如实披露 —— 两问交付期净负荷逐位相同，差额完全来自「问题
+    3 的决策只能用附件 3 预报、结算用附件 2 实际」的预报误差代价，论文不得声称问题 3 更省；主口径的计划层目标 $\min\Sigma p b$ 对紧急购电零预期（T6
+    撤销 PLAN-EXP），模型无对冲机制。全部费用取自 run003 与 prob02 run002 的 accepted 产物。
+  path: problems/microgrid_2025/prob03/versions/assumption_v001/figures/prob03_fig_cost_decomposition_3c230c19db.png
+  source_data: problems/microgrid_2025/prob03/versions/assumption_v001/results/prob03_v001_f001_run003/solution.json
+    + problems/microgrid_2025/prob02/versions/assumption_v001/results/prob02_v001_f001_run002/solution.json
+  source_hash: 208e32f729a80dbe8d3942859d5ef7409333260a318b37cab2e4249d3b0088d5
+  script: problems/microgrid_2025/prob03/versions/assumption_v001/figures/plot_prob03_figures.py
+  font: Microsoft YaHei
+  style_config: config/visualization.yaml
+  included_in_summary: true
+  included_in_paper: true
+  quality_report: problems/microgrid_2025/prob03/versions/assumption_v001/figures/prob03_fig_cost_decomposition_3c230c19db.quality.json
+  quality_status: passed
+  visual_review:
+    status: passed
+    reason: 费用分解与跨问对比：左为交付期 D_req（334 天）与全期 D_full（365 天）的 C_plan/C_adj/C_em 堆叠柱及分项与合计数值；右为
+      prob02 与 prob03 交付期总费用对比与 R11 的 Δ 注记。视觉复核通过：左图例改白底不透明后与深蓝柱对比充足（首轮缺陷已修）；柱内白色分项数值与柱顶合计均不越界；右图注记框给出
+      Δ=+2,307,565.50 元（+18.863%）与「两问交付期净负荷逐位相同」及「不得表述为问题 3 更省」的结论，框体不压柱顶标签。自动质检 passed（2360×1208）。
+    reviewed_at: '2026-09-11T09:17:27.353309+00:00'
+- stable_id: prob03_fig_soc_trajectory_ae5b14c70a
+  problem_id: microgrid_2025
+  question_id: prob03
+  assumption_version: assumption_v001
+  formulation_version: formulation_v001
+  task_id: 6de708bbd2d3dd273013
+  kind: soc_trajectory
+  title: prob03 储电量轨迹与上下界（全年与代表日）
+  caption:
+  - 上：全年逐日储电量区间（min–max 带）与均值，红色虚/点线为题面附录 1 的运行上下界 1,200 / 10,800 kWh；下：交付期首日（2025-02-01）与夏至日的日内轨迹（位置口径
+    0:10 → 24:10）。约束 $1200\leq E\le 10800$ 逐时段满足（残差为求解器容差量级）。跨日状态连续 $E_{d,0}=E_{d-1,144}$（滚动递推，AS03），终端自由（AS04）；由于计划层/调整层按日求解且日末状态自由，逐日末端
+    E 一律取下界 1,200 kWh（365/365 天），储能在日内完成大幅充放循环（日均区间约 1,200–10,800 kWh），这是交付期首日 0:00（日初
+    $E_{d,0}$）即处于下界的原因（团队勘误 R13：prob03 = 1,200 kWh、prob02 = 7,950 kWh，信息集不同、不可直接互比；表
+    2 端点语义为逐日切片，R1）。
+  path: problems/microgrid_2025/prob03/versions/assumption_v001/figures/prob03_fig_soc_trajectory_ae5b14c70a.png
+  source_data: problems/microgrid_2025/prob03/versions/assumption_v001/results/prob03_v001_f001_run003/solution.json
+  source_hash: fc465646c7fd80533be952253de13831fe6f19fbcc0f5bb03432935e1f1d1d89
+  script: problems/microgrid_2025/prob03/versions/assumption_v001/figures/plot_prob03_figures.py
+  font: Microsoft YaHei
+  style_config: config/visualization.yaml
+  included_in_summary: true
+  included_in_paper: true
+  quality_report: problems/microgrid_2025/prob03/versions/assumption_v001/figures/prob03_fig_soc_trajectory_ae5b14c70a.quality.json
+  quality_status: passed
+  visual_review:
+    status: passed
+    reason: 储电量轨迹：上为全年逐日 min–max 带与均值 + 1,200/10,800 kWh 上下界 + 交付期起点；下为 2025-02-01
+      与 2025-06-21 的日内轨迹。视觉复核通过：上下界红虚/点线与曲线、区间带区分清晰；两处图例改为白底后不压数据与界线；2025-02-01 0:00
+      已按日初状态 E_{d,0} 修正为 1,200.00 kWh（首轮口径缺陷已修，与团队勘误 R13 一致），R13（prob02 同日 7,950.00
+      kWh、不可互比）与 R1（表 2 端点为逐日切片）注记完整可读。自动质检 passed（2180×1568）。
+    reviewed_at: '2026-09-11T09:17:27.460328+00:00'
+- stable_id: prob03_fig_emergency_profile_c948ccca1e
+  problem_id: microgrid_2025
+  question_id: prob03
+  assumption_version: assumption_v001
+  formulation_version: formulation_v001
+  task_id: 6de708bbd2d3dd273013
+  kind: emergency_profile
+  title: prob03 紧急购电的逐日与日内分布（含 R12 机制示例）
+  caption:
+  - 上：逐日紧急购电量与交付期日均线；中：紧急购电量的日内小时分布（柱顶数字为该小时触发 $q_{em}>0$ 的时段数，全期共 12,164 个时段、365
+    天全部触发）；下：团队勘误 R12 要求的最小可复现示例 —— 2025-01-01 6:20–6:30 等时段 $q_{em}>0$ 与 $c>0$ 同时成立，机制为「决策层用预报定
+    $(q,c)$ + 结算层用实际算缺口」，普通购电支付的充电与紧急购电分属两层，不违反 D7-A 的『$q_{em}$ 不用于储能充电』。X 轴为自然日索引（0
+    = 2025-01-01）；小时块按 AS01 位置口径（第 h 小时 = [h:00, h+1:00) 共 6 个时段）。
+  path: problems/microgrid_2025/prob03/versions/assumption_v001/figures/prob03_fig_emergency_profile_c948ccca1e.png
+  source_data: problems/microgrid_2025/prob03/versions/assumption_v001/results/prob03_v001_f001_run003/solution.json
+  source_hash: fc465646c7fd80533be952253de13831fe6f19fbcc0f5bb03432935e1f1d1d89
+  script: problems/microgrid_2025/prob03/versions/assumption_v001/figures/plot_prob03_figures.py
+  font: Microsoft YaHei
+  style_config: config/visualization.yaml
+  included_in_summary: true
+  included_in_paper: true
+  quality_report: problems/microgrid_2025/prob03/versions/assumption_v001/figures/prob03_fig_emergency_profile_c948ccca1e.quality.json
+  quality_status: passed
+  visual_review:
+    status: passed
+    reason: 紧急购电分布与 R12 示例：上为逐日 Σq_em 与交付期日均线 1,171.5 kWh/日，中为小时块分布（第 6 小时 201.9 MWh、1,859
+      个触发时段；全期 12,164 个时段），下为 2025-01-01 5:00–9:50 的 c 与 q_em 并置柱。视觉复核通过：时间轴按 AS01
+      位置口径修正（首轮 period→时刻映射 +5 h 错误已修），6:20–6:30 以高亮带与箭头标注并给出c=0.256、q_em=0.515 kWh/10min；柱顶时段计数互不重叠；R12
+      机制说明框（5,070 个时段占 9.6%、不违反 D7-A）置于右上空白、不压柱体。自动质检 passed（2180×1748）。
+    reviewed_at: '2026-09-11T09:17:27.569128+00:00'
+- stable_id: prob03_fig_tiebreak_degeneracy_85401e7e5d
+  problem_id: microgrid_2025
+  question_id: prob03
+  assumption_version: assumption_v001
+  formulation_version: formulation_v001
+  task_id: 6de708bbd2d3dd273013
+  kind: tiebreak_degeneracy
+  title: prob03 tie-breaking 不变性、LP 退化与多重最优的逐层披露（T7-2/T7-3/E7）
+  caption:
+  - 左：加入 T7-1 次目标（$\varepsilon\cdot\Sigma(c+q_{dis})$）前后主目标相对变化的逐层分布，最大 5.000e-10
+    ≤ 容差 1e-9，1,460/1,460 层通过不变性验证；右：逐层退化度（活跃约束数 − 变量数）分布，按计划层/调整层分解。1,460 层全部退化，最大退化度
+    228；最优面吞吐量唯一性 True 435 / False 1,024 / None 1。提交解一律取 T9 的字典序规则（主目标最优面上吞吐量最小，1,460
+    层全部按字典序提交、fallback = 0）；唯一无法判定重数的层为 2025-10-12 18:00 调整层，因该层主目标为 0 使 ε 低于 HiGHS
+    对偶分辨率，属探测能力边界、不构成缺陷（团队勘误 E7）。T7-6：主结果对 tie-break 选择的量级敏感性约 1e-4 相对量级，所有模型与所有 run
+    一律使用同一规则，不得用不同 tie-break 的结果互相比对。
+  path: problems/microgrid_2025/prob03/versions/assumption_v001/figures/prob03_fig_tiebreak_degeneracy_85401e7e5d.png
+  source_data: problems/microgrid_2025/prob03/versions/assumption_v001/results/prob03_v001_f001_run003/solution.json
+    + problems/microgrid_2025/prob03/versions/assumption_v001/results/prob03_v001_f001_run003/t7_tiebreak.json
+  source_hash: 73f646e9518f5df682c0be3e01dffdc6006ac2dfb1edce2085b853c620f4f138
+  script: problems/microgrid_2025/prob03/versions/assumption_v001/figures/plot_prob03_figures.py
+  font: Microsoft YaHei
+  style_config: config/visualization.yaml
+  included_in_summary: true
+  included_in_paper: true
+  quality_report: problems/microgrid_2025/prob03/versions/assumption_v001/figures/prob03_fig_tiebreak_degeneracy_85401e7e5d.quality.json
+  quality_status: passed
+  visual_review:
+    status: passed
+    reason: T7-2/T7-3/E7 披露图：左为 1,460 层逐层主目标相对变化散点（对数轴）+ 10⁻⁹ 容差线（可见全部落在5.0e-10 ±
+      3e-15 窄带内、1,460/1,460 通过），右为计划层/调整层退化度堆叠直方图。视觉复核通过：左图由单柱直方图改为逐层散点后信息量提升（首轮缺陷已修）；两处图例白底不压数据；T7-3/E7/T7-6
+      披露文本移到底部独立文本框，未压缩图面，内容（退化 1,460 层、最大退化度 228、吞吐量唯一性 True 435/False 1,024/None
+      1、字典序 1,460 层、fallback 0）与 t7_tiebreak.json 逐项一致。自动质检 passed（2477×1414）。
+    reviewed_at: '2026-09-11T09:17:27.694815+00:00'

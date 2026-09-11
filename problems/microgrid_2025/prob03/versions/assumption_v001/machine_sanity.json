@@ -1,0 +1,116 @@
+{
+ "checked_at": "2026-09-11T08:53:25+00:00",
+ "action_id": "act-354d33342edf4e70",
+ "stage": "sanity_check",
+ "policy": "P3 run_agent（sanity-checker 阶段正式复核）",
+ "agent": "sanity-checker",
+ "scope": "prob03 sanity_check 阶段 L1–L4 正式结论；L5（需 prob04 locally_completed）与 L6（需 robustness 完成）本动作 not_applicable",
+ "directory": "problems/microgrid_2025/prob03/versions/assumption_v001",
+ "task_id": "6de708bbd2d3dd273013",
+ "task_status": "succeeded",
+ "object": "problems/microgrid_2025/prob03/versions/assumption_v001/results/prob03_v001_f001_run003",
+ "object_scope": {
+  "kind": "隔离 task 产物（supervised / attempt 1 / rc=0 / CPU HiGHS / probe_mode=false / days=365 / periods=52560 / model=M1 / wall 41.77 s）",
+  "delivery_caliber": "run003（run001/run002 仅作审计负对照，不得删除/覆盖/作为最终答案文件）"
+ },
+ "supersedes": {
+  "action_id": "act-36514ddc575b4bdb",
+  "previous_stage": "computation（P2 inspect_compute_result）",
+  "previous_overall": "PASS_WITH_WARNING",
+  "prior_report_backup": "runtime/actions/act-354d33342edf4e70/evidence/prior_sanity_report_backup.md",
+  "prior_report_sha256": "24CD903636EC02E1A6D81545D42098E9C5924731AA8EBFE5738F767ABACE3DCF",
+  "prior_machine_backup": "runtime/actions/act-354d33342edf4e70/evidence/prior_machine_sanity_backup.json",
+  "prior_machine_sha256": "8C65FD4BC57DEC7310ED5C4031BCB2951177D04675BFEE4659DB4077A2CAA5E2"
+ },
+ "overall_status": "PASS_WITH_WARNING",
+ "failure_type": null,
+ "return_to_stage": null,
+ "recommended_next_stage": "visualization",
+ "blocking_reasons": [],
+ "independent_probe": {
+  "script": "runtime/actions/act-354d33342edf4e70/evidence/probe_sanity_l1_l4_run003.py",
+  "output": "runtime/actions/act-354d33342edf4e70/evidence/sanity_probe_run003.json",
+  "checks_total": 73,
+  "checks_passed": 73,
+  "checks_failed": [],
+  "independence": "不导入 prob03 实现代码、不重解 LP；仅用 data/ 原始附件 + run003 的 solution/tables/result3.xlsx + prob02 accepted run002；追踪链按 scripts/automm/common.py 的 hash_path/hash_json 同名算法只读复算",
+  "aux_diagnostics": [
+   "runtime/actions/act-354d33342edf4e70/evidence/diag_openpyxl_float.py",
+   "runtime/actions/act-354d33342edf4e70/evidence/diag_decimal_cells.py",
+   "runtime/actions/act-354d33342edf4e70/evidence/diag_decimal_breakdown.py",
+   "runtime/actions/act-354d33342edf4e70/evidence/diag_xml_cells.py"
+  ],
+  "failed_run_trace": "runtime/actions/act-354d33342edf4e70/evidence/probe_stderr.txt（首跑 KeyError:'delivery'，属探针接口错误，已修并复跑通过）"
+ },
+ "levels": {
+  "level_1": {
+   "status": "PASS",
+   "verdict_run_integrity": "PASS",
+   "verdict_deliverable_compliance": "PASS",
+   "verdict_traceability": "PASS",
+   "evidence": [
+    "六件产物齐备；task.json 与 attempt-001-task.json 逐字节相同、stderr 0 字节；status.json=attempt 1/succeeded/rc=0/supervised/consumed=true。",
+    "输入/模板 md5（dbe06f92…/bb3e493f…/e8dfee65…/75be588e…）与 run_manifest 逐位一致；run001/run002 各 6 件且 mtime 早于 run003 created_at（未被覆盖）。",
+    "追踪链独立重算：input_hash=4343d799…、source_config_hash=5ba829f3…、config_hash=fd07c6a5…、code_hash=5bab4f26…、task_id=6de708bbd2d3dd273013 与 task.json 逐位一致；当前 code/*.py 三文件 sha256 == run_manifest.code_sha256（R14 闭合）。",
+    "E1：附件 3 = 1460 行 × 365 天 × 4 决策时刻，每行 24 个提前量列非空 0；layer_inputs.nan_cells=0/13,140/26,280/39,420、跨年丢弃 0/6/12/18 与 ν(i)=6·floor((i−1)/36) 自洽，四层 uses_actual_pv=false（F2）。",
+    "R9：工作簿起始小时补零标签 run003=0 / run002=874；tables.json 表 3 同源标签 run003=0 / run002=11。",
+    "R10 值口径：非 6 位小数舍入的格数 run003=0；储电量 <1200 = 0 格、>10800 = 0 格；format_residuals=[]、storage_projection.max_abs_correction_kwh=3.059e-7。"
+   ]
+  },
+  "level_2": {
+   "status": "PASS",
+   "evidence": [
+    "结算平衡 max=3.411e-13；状态转移 max=8.790e-08；跨日边界转移残差 max=1.137e-13。",
+    "(I1d)/(I2d) 逐日残差 max=7.911e-08/7.910e-08。",
+    "c_max=833.3333333333333 kWh、q_dis_max=750.000000 kWh（团队 E1/D10）、两侧换算功率 max=5000.000 kW。",
+    "E∈[1199.9999999977, 10800.0000000007]；同充放=0；非负性 min=−6.975e-08（≥ −1e-6，HiGHS 容差）。",
+    "52,560 时段 × 12 列全 finite（0 NaN / 0 Inf）；模型自检 33/33、checks_failed=[]（求解器侧自检，非独立证据）。"
+   ]
+  },
+  "level_3": {
+   "status": "PASS",
+   "evidence": [
+    "Δt=1/6 h 与附件 2 对齐残差 0.0；电价与附件 1 残差 0.0；目标不含 Δt。",
+    "独立复算 C_total=16,179,176.145228（=objective_yuan）、C_plan=13,885,669.475555、C_adj=563,098.132533、C_em=1,730,408.537141，分解恒等式残差 0.0；交付期 14,540,616.335652 / 12,362,860.209641 / 510,208.940910 / 1,667,547.185102。",
+    "result3.xlsx 全量逐格：计划/调整各 48,096 格 + 末两列 max=4.995e-7/4.9999e-7；充放电 2,004 块 4.997e-7/4.9999e-7、668 储电量格 3.059e-7；紧急购电 2,270 区间能量 4.978e-7、区间数与首尾分钟 0 处不符、标签 0 处补零。",
+    "表 1=4.980e-7、表 2=4.958e-7、表 3=4.444e-7。",
+    "T7：layers=1460、max_primary_relative_change=5.0000409e-10≤1e-9、lexicographic=1460、fallback=0、total_shrinks=0；lp_calls=1460（提交解口径）与 nominal=5840（T7 四段式）不混用。",
+    "E6：manifest total_purchase_kwh=20,842,142.600809 为交付期 Σq（非 Σb）、total_q_em_kwh=391,274.485914、total_spill_kwh=2,087,727.847547 与 solution.delivery 逐位一致。",
+    "run003↔run002：七列序列逐位差 0.0、四费用字段逐位相同；工作簿差异=874 标签 + 55,463 舍入（≤5e-5）+ 0 其他（R16 逐位一致）。"
+   ]
+  },
+  "level_4": {
+   "status": "PASS_WITH_WARNING",
+   "evidence": [
+    "交付期 C_total ∈ 独立解析界 [6,963,514.20, 16,407,319.63]（自下界起 80.23%）、量级 10^7、与 prob02 交付期 12,233,050.83 同阶。",
+    "均价 0.697655 元/kWh ∈ [p_min, 5·p_max]；逐日 C_total∈[16,614.26, 66,529.25] 元且全为正。",
+    "紧急购电单价/同段电价 = 5.000000（α_em 精确）；储能上下界均激活（7,556/3,887 时段）；Σq_em=391,274.485914 kWh 非零。",
+    "关键假设文献门禁独立复算通过：18 条假设中 key=7 条，全部绑定池内来源、无悬空 id；池 25 条全 used（abstract_oa 15 + metadata 10、0 全文，E4）。",
+    "R11：+2,307,565.50 元（+18.863%），两问交付期净负荷逐位相同（17,939,189.49 kWh）⇒ 预报误差代价；R12：5,070 个 q_em>0 且 c>0 时段，示例 2025-01-01 6:20–6:30，不违反 D7-A；R13：2025-02-01 0:00 储电量 prob03=1200.00 vs prob02=7950.00（信息集不同，不可互比）。",
+    "T7-3/T7-6/E7：degenerate_layers=1460、remaining_multiplicity=1024、unknown=1（2025-10-12 hour18 调整层）、tie-break 量级敏感性约 1e-4；如实报告、不得判失败、禁止为制造唯一性调 ε 或换规则。"
+   ]
+  },
+  "level_5": {"status": "not_applicable", "reason": "需所有小问 locally_completed；prob04 未开始"},
+  "level_6": {"status": "not_applicable", "reason": "需 robustness 完成；optional_stages.robustness.decision 仍为 pending"}
+ },
+ "gate_checks": {
+  "key_assumption_citation": "PASS（独立复算：7 条 key 假设均绑定池内来源；25 条 0 全文，证据仅支撑框架级/机制级）",
+  "physical_and_economic_common_sense": "PASS_WITH_WARNING（费用落于独立重算解析界、量级与均价正常、α_em=5 精确；R11–R13 为披露义务）",
+  "cross_question_consistency": "L5 not_applicable（本动作未触发）；R11/R13 的跨问接口已核对并登记披露义务",
+  "hard_constraint_violation": "PASS（储电量/功率/容量/平衡/非负性全部在题面与容差范围内；R9 标签与 R10 值口径计数为 0）",
+  "traceability": "PASS（code_hash/input_hash/source_config_hash/config_hash/task_id 与 task.json 及当前注册代码逐位一致；run001/run002 未被覆盖）",
+  "raw_data_modified": "PASS（附件 1/2/3 与模板 md5 全部未变）",
+  "nan_inf": "PASS（0 NaN / 0 Inf；52560×12 序列 + 全部 JSON 数值）"
+ },
+ "team_decision_conflicts": [
+  "R10 口径冲突（本动作新增）：团队勘误 R16 与上一 P2 动作记『超 6 位小数 = 0 格』（值口径，run003 实测 0，已复现）；本动作按 xlsx XML 原始 <v> 字符串的字面口径测得 run003 仍有 4,849 格（计划 2,271 / 调整 2,393 / 充放电 64 / 紧急 121；run002 为 56,237）。已用 5 格最小实验证明为 openpyxl 3.1.5 的 %.16g 浮点渲染（对 float/numpy.float64/round(v,6) 一致），值等于 6 位小数舍入（|v−round(v,6)|≤1e-9），非实现缺陷。判定按值口径为 PASS，字面残差登记为呈现层技术债，不得据此判失败。",
+  "L4 上界构造差异：本动作独立复算的构造上界为 16,407,319.63 元（Σ_{D_req} p·max(0,(L−PV)Δt)），上一 P2 动作报告为 19,109,190.33 元（更宽）。两者均为有效上界，C_total=14,540,616.34 同时落在两者之内，判定不受影响。",
+  "E1 读法纠错（探针侧）：附件 3 为 1460 行 × 每行 24 个提前量列（非 1460×24 行）；本动作首版判据按 24 行分组而失败，已改为按 24 列复核；与上一 P2 动作草稿探针 E1-rows 失败同类，属探针口径错误。",
+  "T7/T9 口径：lp_calls=1460（提交解口径）与 lp_solver_invocations_nominal=5840（四段式名义值，含基线）为两个不同口径，不得混用；T7-3 退化事实与 E7 未定论层如实报告、不判失败。",
+  "阈值口径（T9）：求解器内部层残差为『绝对 1e-6 + 相对 1e-8』，层余额判据仍按 1e-8 执行（实测 1e-13 级）；run001 的历史 hard_check_failed 不构成缺陷。",
+  "新增技术债：模型自检 continuity_residual_max 为构造性恒等（state_starts[1:] ≡ E[:-1,-1]），不构成独立证据；实质跨日连续性由 (I5d) 转移残差（8.79e-8）与日边界残差（1.137e-13）承担。",
+  "上游结转（本动作不越界代改）：prob01/assumption_v003/version.yaml 的 AS08『必然被激活』措辞（C3/E3）待 cross_question_review 权威回写；D10『5000 kW 作用侧』为 team_decision、三池文献无一条涉及，论文不得包装为文献支持；R5（β∈(4218.75, 4375.00] kW，本问 AS14 不触发）与 R1（表 2 端点语义区分）须在论文落地；A5/A9/A10/A11/A13/A14/A18 仍为推荐口径并保留决策点。"
+ ],
+ "warnings_count": 12,
+ "conclusion": "run003 满足题面硬约束、R9/R10 填报纪律与追踪链要求，可作为最终交付口径；无硬门禁失败，判 PASS_WITH_WARNING，并按 config/gates.yaml 推进 sanity_check → visualization。"
+}

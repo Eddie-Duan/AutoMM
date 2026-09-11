@@ -1,0 +1,116 @@
+# prob03 robustness 隔离计算 task 规格
+# 生成者：robustness-analyst（动作 act-7c496fc60d7741c4）；阶段：robustness（mandatory_stages，不得 skipped）
+# 依据：agents/robustness-analyst.md、skills/robustness-study/SKILL.md、knowledge/robustness-ablation.md、
+#       config/workflow.yaml（robustness 属 mandatory_stages）、本版本 robustness/plan.md（预注册，跑数前冻结）、
+#       prob03 团队裁定 B6/T7-1/T7-5/T7-6 与勘误 R11–R13/E6/E7。
+# 说明：本文件是**规格**；task 由 scripts/compute_dispatcher.py submit 经
+#       automm.tasks.make_task_spec/submit_task 确定性创建（status=queued），再由 Runner 以
+#       worker_launch_mode=supervised 原地运行。Agent 不自行代跑，也不在短命 shell 内调用 start_queued。
+spec_version: 1
+problem_id: microgrid_2025
+question_id: prob03
+stage: robustness
+assumption_version: assumption_v001
+formulation_version: formulation_v001
+backend: local
+working_directory: "."
+code_path: problems/microgrid_2025/prob03/versions/assumption_v001/robustness/code
+config_path: problems/microgrid_2025/prob03/versions/assumption_v001/robustness/code/task_config.yaml
+input_path: data
+output_directory: problems/microgrid_2025/prob03/versions/assumption_v001/robustness/results/prob03_v001_robust_run001
+timeout_seconds: 7200
+seed: 20260911
+gpu_required: false
+device: cpu
+gpu_serial_constraint: "本 task 不使用 GPU，故不占用单卡 GPU 串行额度；本机可用内存偏低，单 worker 串行"
+worker_launch_mode: supervised
+command:
+  - ".venv/Scripts/python.exe"
+  - "problems/microgrid_2025/prob03/versions/assumption_v001/robustness/code/robustness_prob03.py"
+  - "--data"
+  - "data/附件1.xlsx"
+  - "--data2"
+  - "data/附件2.xlsx"
+  - "--data3"
+  - "data/附件3.xlsx"
+  - "--template"
+  - "data/附件5/result3.xlsx"
+  - "--reference"
+  - "problems/microgrid_2025/prob03/versions/assumption_v001/results/prob03_v001_f001_run003"
+  - "--output"
+  - "problems/microgrid_2025/prob03/versions/assumption_v001/robustness/results/prob03_v001_robust_run001"
+  - "--seed"
+  - "20260911"
+  - "--samples"
+  - "25"
+  - "--time-limit"
+  - "30"
+  - "--days"
+  - "365"
+  - "--mode"
+  - "compact"
+  - "--families"
+  - "all"
+  - "--max-wall-seconds"
+  - "5400"
+submit_hint:
+  tool: scripts/compute_dispatcher.py
+  subcommand: submit
+  notes:
+    - "必须由 Runner 以 supervised（in-process）启动；detached 会被沙箱进程树回收。"
+    - "--output 必须与 output_directory 完全一致（make_task_spec 强校验）。"
+    - "output_directory 必须位于 assumption_v001 目录内（make_task_spec 强校验）。"
+    - "input_path=data 使附件 1/2/3/4/5 全部进入 input_hash；只读，不修改。"
+    - "--samples 25 表示每个噪声族 25 个样本，4 族合计 100（满足默认 ≥100 次随机实验）。"
+    - "禁止用 --days < 365 作为交付结果（该开关仅用于代码接口自检）。"
+    - "禁止把 --mode full 用于整批（预算）；full 只用于 baseline_full 情景的四段式对账。"
+inputs_readonly:
+  - data/附件1.xlsx
+  - data/附件2.xlsx
+  - data/附件3.xlsx
+  - data/附件5/result3.xlsx
+  - data/（作为 input_path 整体参与 input_hash）
+  - problems/microgrid_2025/prob03/versions/assumption_v001/results/prob03_v001_f001_run003/{run_manifest.json,tables.json,t7_tiebreak.json,solver_status.json}（基线复现闸门，只读）
+  - problems/microgrid_2025/prob03/versions/assumption_v001/code/（accepted M1，只读导入 prob03_model/prob03_io/run_prob03）
+expected_outputs:
+  - baseline_check.json
+  - solver_status.json
+  - raw_samples.jsonl
+  - trajectories/
+  - summary.json
+  - sensitivity.json
+  - run_manifest.json
+  - figures/robustness_prob03_tornado.png
+  - figures/robustness_prob03_response_curves.png
+  - figures/robustness_prob03_noise_ecdf.png
+  - figures/robustness_prob03_buy_cap_curve.png
+  - figures/robustness_prob03_scenarios.png
+  - figures/robustness_prob03_spider.png
+expected_runtime:
+  wall_clock_seconds_max: 5400
+  memory_mb_max: 1024
+  device: cpu
+expected_failure_conditions:
+  - exit_code: 4
+    meaning: "基线复现闸门失败：compact 基线或 four-stage 基线与 run003 不一致，整批作废"
+    route: "needs_revision -> robustness-analyst 复核模型口径"
+  - exit_code: 3
+    meaning: "输入结构或情景族参数非法（附件结构、日期序列、未知族）"
+    route: "needs_revision -> robustness-analyst 修复代码或参数"
+  - exit_code: 5
+    meaning: "整批墙钟预算耗尽（--max-wall-seconds）"
+    route: "infrastructure_transient -> 用新 attempt + 新 output_directory 重跑"
+  - exit_code: 2
+    meaning: "solver_not_optimal（LayerFailure）"
+    route: "code_runtime/model_revision -> 复核后新 attempt + 新 output_directory"
+  - exit_code: 1
+    meaning: "未捕获异常（Python 运行时错误）"
+    route: "code_runtime -> robustness-analyst 修复代码后新 attempt + 新 output_directory"
+acceptance_hint:
+  - "solver_status.json: feasible_incumbent=true、baseline_check_passed=true"
+  - "baseline_check.json: 9 项总量相对差 ≤ 1e-6、表 1 四日期六时段最大绝对差 ≤ 1e-5 kWh、T7 审计与 run003 一致"
+  - "raw_samples.jsonl: 156 条样本（1+1+39+3+12+100）、每样本一行、无 NaN/Inf；失败样本保留并计入可行率"
+  - "summary.json: S1–S6 判定、stability_grade、structural_findings（buy_cap 分界、terminal_e_6000）齐备"
+  - "sensitivity.json: OAT 龙卷排名、噪声 95% CI（t + bootstrap）、求解器对照、买电上限扫掠齐备"
+  - "run_manifest.json: task_id、code_sha256、输入 md5、seed、样本计数、耗时、判据与分级齐备"
+  - "figures/ 6 张 PNG；robustness 图件不登记为交付图表（不调用 record_figure_review）"
