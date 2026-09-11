@@ -1,0 +1,481 @@
+# formulation_v001 / prob04 参数表（波动电价下重算问题 2 与问题 3；一题两链）
+# 生成者：mathematical-formulator（动作 act-b41891a79e214751）
+# 规则：
+#   1. 只登记参数与口径，**不重定义** global_symbols.yaml 中的符号；本问派生记号
+#      p^{act} / \hat p^{(m)} / \kappa_m / \hat p^{fc} 为局部声明（AS22）。
+#   2. 价格来源唯一 = data/附件4.xlsx（md5 cf8762375436b281dc33b6432e441a6a）；
+#      附件 1 电价在 prob04 中作废（H10）。
+#   3. q_dis 上界 = 750.0000、c 上界 = 833.3333（团队裁定 D10 口径丙 + 勘误 E1），
+#      经探针 A 复算 min(5000*Δt, 5000*Δt/0.9)=833.3333、min(5000*Δt, 5000*Δt*0.9)=750.0。
+#   4. 目标与费用**不乘 Δt**（决策变量已是 kWh）；乘 Δt 会使费用偏 6 倍（量纲红线）。
+#   5. 跨日口径 = 自 2025-01-01 以 E_init=6000 滚动递推 + 1 月预热 + 终端自由（AS03）。
+#   6. 主口径 = 价格点预测 + 确定性 LP（AS12 / A8-(b) 派生 ④）；随机/鲁棒只进 ablation。
+#   7. 两链（4-2 / 4-3）**共用**同一价格预测器与同一结算口径；差异仅在 4-3 多出
+#      6:00/12:00/18:00 调整层与 0.5x/1.5x 分段结算（AS13 / A8-(b) 派生 ⑥）。
+version: formulation_v001
+question_id: prob04
+problem_id: microgrid_2025
+assumption_version: assumption_v001
+stage: mathematical_formulation
+action_id: act-b41891a79e214751
+chains: [4-2, 4-3]
+deliverables:
+  - chain: 4-2
+    file: result4-2.xlsx
+    sheets: [计划购电量, 充放电量, 紧急购电量]
+    cost_items: [C_plan, C_em]
+  - chain: 4-3
+    file: result4-3.xlsx
+    sheets: [计划购电量, 调整购电量, 充放电量, 紧急购电量]
+    cost_items: [C_plan, C_adj, C_em]
+
+time_basis:
+  n_t: 144
+  periods_per_day: 144
+  days_full: 365
+  days_delivery: 334
+  warmup_days: 31
+  total_periods_full: 52560
+  total_periods_delivery: 48096
+  delta_t: 0.16666666666666666
+  delta_t_exact: "1/6"
+  horizon_hours_per_day: 24
+  blocks_per_day: 24
+  window: "0:10 -> 24:10（AS01 左端点口径；计划窗首/末状态 E_{d,0} / E_{d,144}）"
+  delivery_range: "2025-02-01 .. 2025-12-31"
+  warmup_range: "2025-01-01 .. 2025-01-31（预热期，参与优化但不交付）"
+  decision_hours_4_2: [0]
+  decision_hours_4_3: [0, 6, 12, 18]
+  dominance: "nu(i) = 6*floor((i-1)/36)；D_0/D_6/D_12/D_18 各 36 时段（i<=36 / 37..72 / 73..108 / 109..144）"
+  locked_periods_4_3: "层 m 锁定 i <= 6m；可决策 R_m = {i : 6m < i <= 144}"
+  designated_dates:
+    "2025-03-20": 78
+    "2025-06-21": 171
+    "2025-09-23": 265
+    "2025-12-21": 354
+  table1_slots: [60, 72, 84, 96, 108, 120]
+
+parameters:
+  - name: n_t
+    symbol: n_t
+    value: 144
+    unit: 段
+    kind: index_size
+    source: 附件 2/4 的每日 144 个 10 分钟数据点
+    assumption_refs: [AS01, AS04]
+  - name: delta_t
+    symbol: Delta_t
+    value: 0.16666666666666666
+    unit: h
+    kind: parameter
+    source: 24h / 144
+    assumption_refs: [AS01, AS04]
+  - name: days_full
+    symbol: D_full
+    value: 365
+    unit: 天
+    kind: index_size
+    source: 附件 2/4 覆盖 2025-01-01..2025-12-31（连续无缺日）
+    assumption_refs: [AS02, AS03]
+  - name: days_delivery
+    symbol: D_req
+    value: 334
+    unit: 天
+    kind: index_size
+    source: 附件 5 模板（result4-2 ≡ result2、result4-3 ≡ result3）要求 2025-02-01..12-31
+    assumption_refs: [AS02, AS20]
+  - name: price_actual_matrix
+    symbol: "p^{act}"
+    local_symbol: true
+    value: "附件 4 Sheet1 的 365 x 144 实际价矩阵；D_req 上 min/max/mean = 0.0076 / 1.7936 / 0.757528，零价 0 个"
+    unit: 元/kWh
+    kind: parameter_matrix
+    source: data/附件4.xlsx（只读；md5 cf8762375436b281dc33b6432e441a6a）
+    assumption_refs: [AS02, AS14, AS22]
+    notes: "全期（365 天）均值 0.7661976（假设阶段探针）；本动作探针 D 只复算 D_req 子集均值 0.757528"
+  - name: p_act_min
+    symbol: p^{act}_{min}
+    value: 0.0076
+    unit: 元/kWh
+    kind: derived
+    source: "本动作只读探针 D：min(D_req 价格)"
+    assumption_refs: [AS08]
+  - name: p_act_max
+    symbol: p^{act}_{max}
+    value: 1.7936
+    unit: 元/kWh
+    kind: derived
+    source: "本动作只读探针 D：max(D_req 价格)"
+    assumption_refs: [AS08]
+  - name: p_act_mean_req
+    symbol: "mean(p^{act})"
+    value: 0.7575275199600799
+    unit: 元/kWh
+    kind: derived
+    source: "本动作只读探针 D：mean(D_req 价格)"
+    assumption_refs: [AS08]
+  - name: load_curve
+    symbol: load
+    value: "附件 2『小区负载』365 x 144 实际功率（kW）"
+    unit: kW
+    kind: parameter_matrix
+    source: data/附件2.xlsx（只读；md5 bb3e493f804678de571575116eca1ae6）
+    assumption_refs: [AS02]
+  - name: pv_actual_curve
+    symbol: pv_act
+    value: "附件 2『光伏发电实际功率』365 x 144 实际功率（kW，>= 0）"
+    unit: kW
+    kind: parameter_matrix
+    source: data/附件2.xlsx（只读）
+    assumption_refs: [AS02]
+    notes: "两链的**结算层**与 4-2 的**计划层**使用该实际值；4-3 的决策层不得使用"
+  - name: pv_forecast_table
+    symbol: pv_fc
+    value: "附件 3 单表 1460 行 = 365 天 x 4 发布时刻 x 24 提前量（kW）；日期列须前向填充"
+    unit: kW
+    kind: parameter_matrix
+    source: data/附件3.xlsx（只读；md5 e8dfee653d53a78c82198f657a01feb4）
+    assumption_refs: [AS19]
+    applies_to: [4-3]
+    notes: "仅 4-3；4-2 禁止使用（问题 2 无预报机制）"
+  - name: E_cap_max
+    symbol: E_cap_max
+    value: 12000
+    unit: kWh
+    kind: parameter
+    source: 题面附录 1（设备最大容量）
+    assumption_refs: [AS04]
+  - name: E_min
+    symbol: E_min
+    value: 1200
+    unit: kWh
+    kind: parameter
+    source: 题面附录 1（运行下界）
+    assumption_refs: [AS04]
+  - name: E_max
+    symbol: E_max
+    value: 10800
+    unit: kWh
+    kind: parameter
+    source: 题面附录 1（运行上界）
+    assumption_refs: [AS04]
+  - name: E_init
+    symbol: E_init
+    value: 6000
+    unit: kWh
+    kind: parameter
+    source: 题面附录 1（2025-01-01 0:00 储电量）
+    assumption_refs: [AS03, AS04]
+  - name: eta_ch
+    symbol: eta_ch
+    value: 0.9
+    unit: "-"
+    kind: parameter
+    source: 题面附录 1
+    assumption_refs: [AS04, AS23]
+  - name: eta_dis
+    symbol: eta_dis
+    value: 0.9
+    unit: "-"
+    kind: parameter
+    source: 题面附录 1
+    assumption_refs: [AS04, AS23]
+  - name: P_max
+    symbol: "P^{ch}_{max} = P^{dis}_{max}"
+    value: 5000
+    unit: kW
+    kind: parameter
+    source: 题面附录 1（口径丙：并网点侧与电池侧同时 <= 5000 kW）
+    assumption_refs: [AS04]
+    notes: "作用侧为 team_decision，三问文献池均无来源，不得包装为文献支持（C4-6）"
+  - name: c_ub_kwh
+    symbol: "c^{ub}"
+    value: 833.3333333333334
+    unit: kWh
+    kind: derived
+    source: "min(P_max*dt, P_max*dt/eta_ch) = min(833.3333, 925.9259)；本动作探针 A 复算"
+    assumption_refs: [AS04]
+  - name: q_dis_ub_kwh
+    symbol: "q^{dis,ub}"
+    value: 750.0
+    unit: kWh
+    kind: derived
+    source: "min(P_max*dt, P_max*dt*eta_dis) = min(833.3333, 750.0000)；团队勘误 E1"
+    assumption_refs: [AS04]
+  - name: alpha_em
+    symbol: alpha_em
+    value: 5
+    unit: "-"
+    kind: parameter
+    source: 题面（紧急购电按交易时刻电价的 5 倍）
+    assumption_refs: [AS14, AS16]
+    applies_to: [4-2, 4-3]
+    notes: "结算基数为 p^{act}（A22）；决策层为 alpha_em * 该层预测价"
+  - name: beta_def
+    symbol: beta_def
+    value: 0.5
+    unit: "-"
+    kind: parameter
+    source: 题面（计划量高于调整量的部分按 0.5 倍价）
+    assumption_refs: [AS14, AS17]
+    applies_to: [4-3]
+    notes: "仅 4-3；结算基数为 p^{act}；4-2 无 C_adj（4-2 的 beta_def 不参与任何公式）"
+  - name: beta_over
+    symbol: beta_over
+    value: 1.5
+    unit: "-"
+    kind: parameter
+    source: 题面（调整量高于计划量的部分按 1.5 倍价）
+    assumption_refs: [AS14, AS17]
+    applies_to: [4-3]
+  - name: kappa_clip
+    symbol: "kappa_m 的截断区间"
+    value: [0.5, 2.0]
+    unit: "-"
+    kind: parameter
+    source: AS11 的防御性截断（预期不触发；触发须逐个登记）
+    assumption_refs: [AS11]
+    applies_to: [4-3]
+  - name: kappa_0
+    symbol: kappa_0
+    value: 1.0
+    unit: "-"
+    kind: parameter
+    source: "使 m=0 层与两链共用的 PF-PERSIST 一致（AS11 / AS13）"
+    assumption_refs: [AS11, AS13]
+    applies_to: [4-3]
+
+derived_quantities:
+  - name: net_load_req
+    symbol: N_req
+    value: 17939189.494966667
+    unit: kWh
+    kind: derived
+    source: "sum_{D_req} (L - PV^act) * dt；本动作只读探针 D 复算（与假设阶段登记的 17,939,189.49 独立一致）"
+    assumption_refs: [AS15, AS17]
+  - name: cost_upper_bound_constructive
+    symbol: "C^{UB}"
+    value: 17026782.85809905
+    unit: 元
+    kind: derived
+    source: "构造可行解（c = q_dis = 0、s' = 盈余、b = 净缺额）在 D_req 上的费用；本动作探针 D"
+    assumption_refs: [AS15, AS17]
+  - name: cost_lower_bound_crude
+    symbol: "C^{LB}"
+    value: 136272.17616174667
+    unit: 元
+    kind: derived
+    source: "p_min * (N_req - 8640)；本动作探针 D；界很松，只用于排除乘 Δt 类硬错误"
+    assumption_refs: [AS15, AS17]
+  - name: expected_magnitude_req
+    symbol: "mean(p^{act}) * N_req"
+    value: 13589429.728216019
+    unit: 元
+    kind: derived
+    source: "本动作探针 D；量级自检基准（交付期应为 1e7 元）"
+    assumption_refs: [AS15, AS17]
+  - name: expected_single_day
+    symbol: "C^{total}_day"
+    value: 40686.915353940174
+    unit: 元
+    kind: derived
+    source: "期望量级 / 334 天（本动作探针 D）"
+    assumption_refs: [AS15, AS17]
+
+price_predictors:
+  frozen_selection_rule: "D_req 的 MAE 最小者为主口径；MAE 相对差 < 1% 视为并列、取更简者（BT-5，跑数前冻结）"
+  primary: PF-PERSIST
+  mandatory_benchmarks: [PF-DUAL, PF-HIST]
+  ablation_only: [PF-AR]
+  backtest:
+    train_rule: "只用 t 日之前的信息（H_d = {d' : d' < d}）"
+    main_window: D_req
+    diagnostic_window: D_full
+    metrics_primary: MAE
+    metrics_secondary: [MAPE, RMSE, bias, P50, P90, P99, daily_win_count]
+    null_day_rule: "d = 2025-01-01（H_d = 空）按 (FB) 回退并落盘标记；该日属预热期，不影响交付期指标"
+  predictors:
+    - id: PF-PERSIST
+      formula: "hat_p_{d,i} = p^{act}_{d-1,i}，i = 1..144"
+      role: primary
+      params: {}
+    - id: PF-HIST
+      formula: "hat_p_{d,i} = mean_{d' in H_d} p^{act}_{d',i}"
+      role: benchmark
+      params: {window: expanding}
+    - id: PF-DUAL
+      formula: "hat_p_{d,i} = mu_d * s_i；s_i = bar_p_i / mean_i(bar_p)；mu_d = mean_{d' in last 7 days of H_d}(mean_i p^{act}_{d',i})"
+      role: benchmark
+      params: {shape_normalization: "mean_i(s_i) = 1", level_window_days: 7}
+    - id: PF-AR
+      formula: "hat_p_{d,i} = a_i + phi_i * p^{act}_{d-1,i}（系数只用 H_d 估计）"
+      role: ablation_only
+      params: {per_slot: true}
+  diagnostics_from_assumption_probe:
+    note: "以下为假设阶段（act-fca33f7acdfd48dc）只读探针的 D_req 诊断值，**不得**作为论文/sanity 交付数值；正式回测由 computation 阶段隔离 task 复算"
+    PF-PERSIST: {MAE: 0.084326, MAPE: 0.13780, RMSE: 0.123837, bias: -0.000595, P50: 0.0500, P90: 0.2294, P99: 0.3773, daily_wins: 218}
+    PF-DUAL: {MAE: 0.093183, MAPE: 0.15181, RMSE: 0.120951, bias: -0.000328, P90: 0.2052, P99: 0.3334, daily_wins: 49}
+    PF-HIST: {MAE: 0.100231, MAPE: 0.16330, RMSE: 0.136878, bias: 0.013161, P90: 0.2411, P99: 0.3963, daily_wins: 67}
+
+models:
+  "4-2":
+    name: M4-2
+    class: "确定性逐日向前递推 LP + 事后线性闭式结算"
+    layers: [plan_daily, settlement]
+    decision_hours: [0]
+    lp_calls_full: 365
+    lp_calls_delivery: 334
+    single_day_lp_vars: 864
+    single_day_lp_eq: 288
+    price_input: '\hat p_{d,i} = p^{act}_{d-1,i}（仅 <= d-1 日）'
+    pv_input_decision: "PV^act（附件 2 实际；问题 2 无预报机制）"
+    pv_input_settlement: "PV^act"
+    settlement_price: "p^{act}"
+    cost_items: [C_plan, C_em]
+    q_em_property: "q_em == 0（定理，见 formulation §2.3；计划层等式平衡 + s >= 0 自由处置）"
+    tie_break: 'AS21 字典序：先 min Σ \hat p·b（+ alpha_em 项），再 min Σ(c + q_dis)'
+    objective: 'min Σ_{i=1..144} \hat p_{d,i} b_{d,i} + Σ_i alpha_em \hat p_{d,i} q_em_{d,i}'
+    s_upper_bound: "max(0, PV^act*dt - L*dt)（AS05 / D9-B）"
+    q_variable: "不定义独立 q；结算层 q := b"
+  "4-3":
+    name: M4-3
+    class: "确定性三层顺序向前递推 LP（4 个决策时刻）+ 事后线性闭式结算"
+    layers: [plan_0, adjust_6, adjust_12, adjust_18, settlement]
+    decision_hours: [0, 6, 12, 18]
+    lp_calls_full: 1460
+    lp_calls_delivery: 1336
+    single_day_lp_vars: 2232
+    single_day_lp_eq: 720
+    price_input:
+      plan: '\hat p^{(0)}_{d,i} = p^{act}_{d-1,i}'
+      adjust: "i <= 6m 用 p^{act}_{d,i}；i > 6m 用 kappa_m * p^{act}_{d-1,i}"
+    pv_input:
+      plan: "Pi_0[PV]（附件 3 的 0:00 发布预报降尺度）"
+      adjust: "Pi_m[PV]（附件 3 的 m 时刻发布预报降尺度，定义在 i >= 6m+1）"
+      settlement: "PV^act（唯一入口）"
+    settlement_price: "p^{act}"
+    cost_items: [C_plan, C_adj, C_em]
+    objective_plan: 'min Σ_{i=1..144} \hat p^{(0)}_{d,i} b_{d,i}'
+    objective_adjust: 'min Σ_{i in R_m} [beta_def \hat p^{(m)}_{d,i} u^+_{d,i} + beta_over \hat p^{(m)}_{d,i} u^-_{d,i}]'
+    s_upper_bound: "max(0, Pi_m[PV]*dt - L*dt)（分层 PV）"
+    locked_rule: "i <= 6m 不可回溯；b 是已提交参数，调整层不得改变"
+    tie_break: "AS21 字典序，逐层适用"
+
+cost_definitions:
+  settlement_basis: "p^{act}（附件 4 实际价）—— 所有费用分项的结算基数（A22/H12）"
+  decision_basis: '\hat p^{(m)}（该层信息集下的预测价）—— 决策层目标与 C^{fc} 口径'
+  C_plan_act: "Σ_{W,i} p^{act}_{d,i} * b_{d,i}"
+  C_adj_act: "Σ_{W,i} [beta_def * p^{act}_{d,i} * (b-q)^+ + beta_over * p^{act}_{d,i} * (q-b)^+]（仅 4-3）"
+  C_em_act: "Σ_{W,i} alpha_em * p^{act}_{d,i} * q_em_{d,i}"
+  C_total_act:
+    "4-2": "C_plan + C_em"
+    "4-3": "C_plan + C_adj + C_em"
+  C_fc: '把上述各项的 p^{act} 换成 \hat p^{fc}_{d,i} = \hat p^{(nu(i))}_{d,i}（4-2 中即 \hat p_{d,i}）'
+  delta_C_price: "C_total^{act} - C_total^{fc}，分项 delta_C_plan / delta_C_em / delta_C_adj，两窗口分别报告"
+  windows: [D_req, D_full]
+  same_decisions_rule: "两套口径必须使用同一组决策量（只换价格、不重解）；否则改名为方案对比并登记"
+
+comparison_criteria_preregistered:
+  hard_constraints: "I2-*/I3-* 恒等式残差 <= 1e-6 kWh；各层余额残差 <= 1e-8；设备界与两侧功率 <= 5000 kW；跨日状态闭合 <= 1e-6；4-3 的 i <= 6m 不回溯"
+  metrics: "两链分别报 C_plan/C_em/C_total（4-3 另加 C_adj、Σq）；Σb/Σq/Σq_em/Σs'/Σc/Σq_dis；表 1/2/3"
+  scale_consistency: "D_req 与 D_full 分别给出全部指标；run_manifest 的 total_*_kwh 为 D_req 口径且 total_purchase_kwh 装 Σq；stdout 摘要为 D_full 口径（E6）"
+  magnitude: "交付期 C_total 属 1e7 元量级；单日 1e4 元；单日 1e3 元判 Δt 硬错误；4-2 的 Σq_em == 0；4-3 的 Σq^em 不应恒零"
+  decision_settlement_split: "两链都给出 C^{act}、C^{fc}、ΔC_price 及分项与两窗口；恒等式 C_total^{act} = Σ分项^{act} 残差 <= 1e-6"
+  information_set: "4-2 计划层输入指纹不含 >= d 的价格；4-3 逐层落盘预报/价格/锁定时段/初始状态来源；未来数据置乱不变性探针通过"
+  optimality: "逐层 solver status / 迭代数 / 目标值；M6 记录 incumbent / mip_gap / 节点数；启发式只能称当前最好可行解"
+  model_family: "C1 基线闸门；C2 自洽；C3 M8≡M1；C4 信息单调（P1）；C5 加密单调（先定 tie-break）；C6 LP 无损（L5）；C7 口径对照全量落盘；C8 交付逐格一致；C9 可解释性"
+
+analytic_relations:
+  state_transition: "E_{d,i} = E_{d,i-1} + 0.9*c_{d,i} - q_dis_{d,i}/0.9"
+  cross_day: "E_{d,0} = E_{d-1,144}；E_{1/1,0} = 6000；E_{12/31,144} 自由（终端自由）"
+  identity_4_2:
+    - "Σ_i q_dis = 0.81*Σ_i c - 0.9*(E_{d,144} - E_{d,0})"
+    - "Σ_i b = N_d + Σ_i s' + 0.19*Σ_i c + 0.9*(E_{d,144} - E_{d,0}) - Σ_i q_em"
+    - "C_total,d = C_plan,d + C_em,d"
+  identity_4_3:
+    - "Σ_i q_dis = 0.81*Σ_i c - 0.9*(E_{d,144} - E_{d,0})"
+    - "Σ_i q = N_d + Σ_i s' + 0.19*Σ_i c + 0.9*(E_{d,144} - E_{d,0}) - Σ_i q^em"
+    - "C_total,d = C_plan,d + C_adj,d + C_em,d"
+    - "C_adj,d = 0.5*Σ p^{act}(b-q)^+ + 1.5*Σ p^{act}(q-b)^+"
+  anchors:
+    A2_PRE: "价格完全预知 + 附件 2 实际的 4-2 退化模型；由 L6 得 C^{act}(4-2) >= C^{pre}（**成本下界**，见 E-F1）"
+    bridge: "Pi_m[PV] ≡ PV^act 且 kappa_m ≡ 1 时 4-3 与 4-2 退化同构（P2）；比较 b/q/q_em/C_total，轨迹比较须先统一 tie-break"
+
+ablation_interfaces:
+  - id: A2-PRE
+    chain: 4-2
+    change: "价格完全预知（+ 附件 2 实际）"
+  - id: M3-ter
+    chain: 4-3
+    change: "价格与光伏同时完全预知（单一长时域 LP，beta = 1）"
+  - id: M4-ter
+    chain: 4-3
+    change: "仅 0:00 计划、q ≡ b、无调整层"
+  - id: PF-ALT
+    chain: 4-2/4-3
+    change: "预测器换成 PF-DUAL / PF-HIST / PF-AR"
+  - id: kappa1
+    chain: 4-3
+    change: "kappa_m ≡ 1（不更新价格预测）"
+  - id: D2-B
+    chain: 4-3
+    change: "读法 B（实际交付计价）"
+  - id: D2-C
+    chain: 4-3
+    change: "读法 C（0.5x 当退款）"
+  - id: M6
+    chain: 4-3
+    change: "偏差项互补 MILP（指定日 oracle）"
+  - id: M8
+    chain: 4-2/4-3
+    change: "独立第二实现（消去 E、highs-ds、presolve=False）"
+  - id: S-VAR
+    chain: 4-2/4-3
+    change: "团队预注册：两阶段随机 LP，24 个由附件 4 历史实际价构造的经验场景，12 个代表日的确定性等价大 LP；计划购电账单必须落在 Q_s 内"
+  - id: S-RH
+    chain: 4-2/4-3
+    change: "团队已批准（2026-09-11）：滚动时域确定性 LP，决策时刻与承诺规则完全不变，只改前瞻深度 H ∈ {1,3,7,14} 天；H = 1 必须逐位复现主口径（基线闸门）；H > 1 的超 24 h 部分：价格用 PF-PERSIST（只用 <= t-1）、光伏用附件 2 同季节/同月历史均值（第二口径 = 最近 7 天实测，做敏感性），禁止声称获得超过 24 h 的预报；末窗按终端自由处理并登记；报告 (a) 费用差 (b) 日边界储电量行为（Σ|E_{d,144}-1200|、均值/唯一取值数）(c) 每层与总求解时间；判据 H=1 逐位复现、H 增大费用不增（违反则按 T7-4 如实登记反例，禁止强凑单调性）"
+    prerequisite: "超 24 h 的光伏预期属新增假设，须先在 assumptions.md 的「团队勘误」节追加登记（assumption_v001 已 accepted，不新建版本、不改既有口径）；登记完成前不得跑数"
+  - id: S-VAR-RH
+    chain: 4-2/4-3
+    change: "可选组合项：24 场景 x H = 3（12 代表日），检验「对冲 + 前瞻」是否叠加收益"
+  - id: R-CAP
+    chain: 4-2/4-3
+    change: "购电上限扫描（阈值分链重新扫描，禁止跨链互写）"
+  - id: R-KAPPA
+    chain: 4-3
+    change: "kappa_m 截断敏感性"
+  - id: R-TIE
+    chain: 4-2/4-3
+    change: "最优面选择敏感性（tie-break 量级）"
+
+resource_budget:
+  solver: "CPU HiGHS（scipy.optimize.linprog method=highs）；M6 用 scipy.optimize.milp"
+  gpu_required: false
+  gpu_serial_note: "本问不涉及 GPU；若 ablation 引入 GPU 路径，须遵守单卡串行并在 task spec 注明"
+  memory_per_worker_gb: 2
+  worker_launch_mode: supervised
+  memory_slots_effective: 1
+  task_timeout_seconds: 0
+  estimated_lp_calls: {"4-2": 365, "4-3": 1460, "total": 1825}
+  estimated_runtime_note: "团队预注册标定：单日链路 LP ≈ 0.104 s（prob03 M1 全年 37.9 s / 365）⇒ 4-2 全年约 38 s，4-3 同量级 x4 层；正式预算由 implementation 复核"
+
+constraints_and_redlines:
+  price_source_unique: "一切价格（含 alpha_em*p、beta_def*p、beta_over*p）只能来自 data/附件4.xlsx；附件 1 电价禁用（H10）"
+  no_dt_in_objective: "目标与费用不得乘 Δt；决策变量已是 kWh"
+  no_buy_cap_main: "主口径无购电上限；若 ablation 引入须分链重新扫描阈值（R5/E9）"
+  no_2026_data: "跨年项不消费、不截断、不外推"
+  no_lookahead: "决策层不得使用 d 当日未实现时段的 p^{act}；4-3 不得使用 i > 6m 的当日实际价"
+  no_b_as_decision_4_3: "b 在 4-3 的调整层是已提交参数，不得作为决策变量"
+  no_backtrack: "i <= 6m 已提交时段不可回溯修改"
+  forbidden_phrases: ["全天电价已知", "已知全天价格", "0:00 即知当天电价"]
+  no_cross_question_numbers: "prob02 的 12,233,050.83 元、prob03 的 14,540,616.34 元/Σq_em/C_adj 不得作为 prob04 的交付值或锚点"
+  no_literature_overclaim: "alpha_em/beta_def/beta_over 的数值、附件 4 价格结构与预测误差量级、D9-B、填报口径、5000 kW 作用侧、4-2 的 q_em ≡ 0 不得包装为文献支持"
+  same_tiebreak_everywhere: "所有层与所有对照模型统一使用 AS21 字典序，禁止为凑唯一性调 ε 或更换规则"
+
+probe_evidence:
+  script: runtime/actions/act-b41891a79e214751/evidence/probe_prob04_formulation_checks.py
+  output: runtime/actions/act-b41891a79e214751/evidence/probe_prob04_formulation_checks_out.json
+  stdout: runtime/actions/act-b41891a79e214751/evidence/probe_prob04_formulation_checks_stdout.txt
+  ALL_PASS: true
+  discipline: "只读探针数值只作 formulation 阶段静态/解析证据，不得作为论文或 sanity 的交付数值"

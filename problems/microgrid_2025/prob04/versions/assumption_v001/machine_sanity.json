@@ -1,0 +1,325 @@
+{
+ "checked_at": "2026-09-11T13:20:44.495311+00:00",
+ "action_id": "act-d7fa5a1e75ac4428",
+ "agent": "sanity-checker",
+ "policy": "P3",
+ "action": "run_agent",
+ "stage": "sanity_check",
+ "problem_id": "microgrid_2025",
+ "question_id": "prob04",
+ "assumption_version": "assumption_v001",
+ "formulation_version": "formulation_v001",
+ "objects": {
+  "4-2": {
+   "task_id": "892351beefa2bc5f7804",
+   "output_directory": "problems/microgrid_2025/prob04/versions/assumption_v001/results/prob04_v001_f001_4-2_run002",
+   "status": "succeeded",
+   "attempt": 1,
+   "returncode": 0,
+   "workbook_md5": "3df5cd3cd941ec23d7399d8073bc561f",
+   "template_md5": "b878ce2b016155f49486af25c51e8cab"
+  },
+  "4-3": {
+   "task_id": "eca261e1d516ab2867d9",
+   "output_directory": "problems/microgrid_2025/prob04/versions/assumption_v001/results/prob04_v001_f001_4-3_run002",
+   "status": "succeeded",
+   "attempt": 1,
+   "returncode": 0,
+   "workbook_md5": "7397029ff1a5b9c7ee715bd2e24f4468",
+   "template_md5": "75be588e714646dde3102aa102382347"
+  }
+ },
+ "levels": {
+  "level_1": "PASS",
+  "level_2": "PASS",
+  "level_3": "PASS",
+  "level_4": "PASS_WITH_WARNING"
+ },
+ "status": "PASS_WITH_WARNING",
+ "failure_type": null,
+ "return_stage": null,
+ "blocking_reasons": [],
+ "independent_asserts": {
+  "total": 88,
+  "failed": 0,
+  "failed_names": [],
+  "probes": {
+   "probe_a_l1_out.json": {
+    "n_asserts": 27,
+    "n_failed": 0,
+    "source": "runtime/actions/act-d7fa5a1e75ac4428/evidence/probe_a_l1_out.json"
+   },
+   "probe_b_l2l3_out.json": {
+    "n_asserts": 49,
+    "n_failed": 0,
+    "source": "runtime/actions/act-d7fa5a1e75ac4428/evidence/probe_b_l2l3_out.json"
+   },
+   "probe_c_l4_out.json": {
+    "n_asserts": 12,
+    "n_failed": 0,
+    "source": "runtime/actions/act-d7fa5a1e75ac4428/evidence/probe_c_l4_out.json"
+   }
+  }
+ },
+ "automated_scope": {
+  "4-2": {
+   "automated_status": "PASS_WITH_WARNING",
+   "failures": [],
+   "numeric_files": 6,
+   "numeric_values": 703219,
+   "task_id": "892351beefa2bc5f7804",
+   "source": "runtime/actions/act-d7fa5a1e75ac4428/evidence/auto_scope_4-2/machine_sanity.json"
+  },
+  "4-3": {
+   "automated_status": "PASS_WITH_WARNING",
+   "failures": [],
+   "numeric_files": 6,
+   "numeric_values": 742786,
+   "task_id": "eca261e1d516ab2867d9",
+   "source": "runtime/actions/act-d7fa5a1e75ac4428/evidence/auto_scope_4-3/machine_sanity.json"
+  }
+ },
+ "key_numbers": {
+  "4-2": {
+   "delivery_C_total_act_yuan": 13006411.041148009,
+   "delivery_C_plan_act_yuan": 13006411.041148009,
+   "delivery_C_adj_act_yuan": 0.0,
+   "delivery_C_em_act_yuan": 2.944279210437273e-10,
+   "delivery_C_total_fc_yuan": 12485620.20211268,
+   "delivery_delta_c_price_yuan": 520790.8390353285,
+   "delivery_sum_b_kwh": 20241516.374467,
+   "delivery_sum_q_kwh": 20241516.374467,
+   "full_C_total_act_yuan": 14755884.322035847,
+   "max_abs_q_em_kwh": 2.2737367544323206e-13,
+   "simultaneous_charge_discharge_periods": 0
+  },
+  "4-3": {
+   "delivery_C_total_act_yuan": 15289050.714737598,
+   "delivery_C_plan_act_yuan": 13106641.487373143,
+   "delivery_C_adj_act_yuan": 522512.7887759962,
+   "delivery_C_em_act_yuan": 1659896.4385884593,
+   "delivery_C_total_fc_yuan": 15030565.249033673,
+   "delivery_delta_c_price_yuan": 258485.46570392512,
+   "delivery_C_total_fc_literal_FCF3_1_yuan": 14728902.478573995,
+   "delivery_delta_c_price_literal_FCF3_1_yuan": 560148.2361636031,
+   "delivery_sum_b_kwh": 20411764.664671,
+   "delivery_sum_q_kwh": 20807826.888962,
+   "delivery_sum_q_em_kwh": 394026.0407495883,
+   "full_C_total_act_yuan": 17181202.515506398,
+   "periods_with_q_em_and_charge": 6003,
+   "simultaneous_charge_discharge_periods": 1456
+  }
+ },
+ "constraint_residuals": {
+  "4-2": {
+   "settlement_balance_max": 3.410605131648481e-13,
+   "transition_max": 2.7284841053187847e-12,
+   "I1_daily_max": 1.0913936421275139e-11,
+   "I2_daily_max": 2.9103830456733704e-11,
+   "max_c": 833.3333333333333,
+   "max_q_dis": 750.0,
+   "E_min": 1200.0,
+   "E_max": 10800.0
+  },
+  "4-3": {
+   "settlement_balance_max": 4.547473508864641e-13,
+   "transition_max": 8.7145735960803e-08,
+   "I1_daily_max": 7.843482308089733e-08,
+   "I2_daily_max": 7.843482308089733e-08,
+   "max_c": 833.3333333333334,
+   "max_q_dis": 750.0,
+   "E_min": 1199.9999999952972,
+   "E_max": 10800.000000000002,
+   "max_net_side_kw": 5000.000000000001,
+   "max_battery_side_kw": 5000.0
+  }
+ },
+ "storage_boundary_behaviour": {
+  "4-2": {
+   "E_d144_max_dev_from_1200": 0.0,
+   "sum_abs_dev": 0.0,
+   "unique_E_d144": [
+    1200.0
+   ],
+   "E_d0_mean": 1200.0,
+   "periods_at_1200": 9346,
+   "periods_at_10800": 7682
+  },
+  "4-3": {
+   "E_d144_max_dev_from_1200": 3.066643330384977e-07,
+   "sum_abs_dev": 1.6035186945373425e-05,
+   "unique_E_d144": [
+    1200.0
+   ],
+   "E_d0_mean": 1200.0000000468374,
+   "periods_at_1200": 7256,
+   "periods_at_10800": 3954
+  }
+ },
+ "independent_bounds": {
+  "no_storage_constructed_upper_bound_yuan": 17026782.85809905,
+  "recorded_upper_bound_parts_4-2": {
+   "plan": 17026782.858099,
+   "adjustment": 0.0,
+   "emergency": 0.0
+  },
+  "recorded_upper_bound_parts_4-3": {
+   "plan": 17026782.858099,
+   "adjustment": 410414.836978,
+   "emergency": 1446995.525626
+  },
+  "storage_value_vs_no_storage_4-2": 4020371.8169510514,
+  "storage_value_vs_no_storage_4-3": 1737732.1433610506
+ },
+ "forecast_backtest": {
+  "D_req": {
+   "PF-PERSIST": {
+    "mae": 0.08432593978709249,
+    "mape": 0.13780058945644877,
+    "rmse": 0.12383718140836511,
+    "bias": -0.0005953551230871593,
+    "p50": 0.050000000000000044,
+    "p90": 0.22940000000000002,
+    "p99": 0.37729999999999997
+   },
+   "PF-HIST": {
+    "mae": 0.10023081161598094,
+    "mape": 0.16330092149892692,
+    "rmse": 0.13687750498977533,
+    "bias": 0.013160843054557551,
+    "p50": 0.07102940447641867,
+    "p90": 0.24109448008849577,
+    "p99": 0.39630938775216207
+   },
+   "PF-DUAL": {
+    "mae": 0.09338749766350035,
+    "mape": 0.15290417085582758,
+    "rmse": 0.12156633287001194,
+    "bias": -0.00032801420967588755,
+    "p50": 0.07230931788638112,
+    "p90": 0.20653743756069265,
+    "p99": 0.3358529269971274
+   }
+  },
+  "selected": "PF-PERSIST",
+  "max_abs_diff_vs_artifact": 1.1102230246251565e-16
+ },
+ "kappa": {
+  "min": 0.6623297807778713,
+  "max": 1.5493928472727483,
+  "clip_events": 0,
+  "min_location_0based": {
+   "day": 135,
+   "m": 18
+  },
+  "prior_report_range": [
+   0.50133,
+   1.54939
+  ]
+ },
+ "two_chain_attribution": {
+  "diff_total": 2282639.6735900007,
+  "delta_c_plan": 100230.44622500055,
+  "C_adj": 522512.788776,
+  "C_em": 1659896.438588,
+  "residual": 1.000240445137024e-06,
+  "date_diff": "4-3 交付期净负荷 == 4-2 净负荷（价格情景相同）",
+  "net_load_42": 17939189.494967,
+  "net_load_43": 17939189.494967
+ },
+ "data_facts": {
+  "price_min": 0.0076,
+  "price_max": 1.7936,
+  "price_mean": 0.7661976046423136,
+  "price_lt_0.10": 28,
+  "price_lt_0.05": 9,
+  "deep_valley_5x": 0.038,
+  "price_min_location": {
+   "day_index_0based": 115,
+   "day_index_1based": 116,
+   "period_1based": 72,
+   "date": "2025-04-26",
+   "registered_date": "2025-04-27（E-F2 原文，差 1 天）"
+  },
+  "EF3_mean_shape_correlation": 0.9999999956086034,
+  "EF3_a4_extrema": [
+   0.3712602739726028,
+   1.3952457534246572
+  ],
+  "EF3_a1_extrema": [
+   0.3713,
+   1.3952
+  ]
+ },
+ "workbook_backtrace": {
+  "4-2": {
+   "sheetnames": [
+    "计划购电量",
+    "充放电量",
+    "紧急购电量"
+   ],
+   "plan_max_abs_diff": 4.999999489996299e-07,
+   "storage_max_abs_diff": 5.000001692678779e-07,
+   "storage_nonempty_rows": 2004,
+   "emergency_rows": 334,
+   "emergency_energy_max_abs_diff": 1.2505552149377763e-12,
+   "emergency_group_dates": 334,
+   "emergency_max_intervals_per_day": 1,
+   "emergency_energy_within_rounding_bound": true
+  },
+  "4-3": {
+   "sheetnames": [
+    "计划购电量",
+    "调整购电量",
+    "充放电量",
+    "紧急购电量"
+   ],
+   "plan_max_abs_diff": 4.999988909570874e-07,
+   "adjust_max_abs_diff": 4.999999418942025e-07,
+   "storage_max_abs_diff": 4.99999714520527e-07,
+   "storage_nonempty_rows": 2004,
+   "emergency_rows": 2169,
+   "emergency_energy_max_abs_diff": 2.3333338958764216e-06,
+   "emergency_group_dates": 334,
+   "emergency_max_intervals_per_day": 16,
+   "emergency_energy_within_rounding_bound": true
+  }
+ },
+ "cross_question": {
+  "prob02_delivery": 12233050.830708,
+  "prob03_delivery": 14540616.335652,
+  "prob04_4_2_delivery": 13006411.041148,
+  "prob04_4_3_delivery": 15289050.714738,
+  "spill_42_vs_prob02": [
+   990168.090312,
+   990168.090312
+  ]
+ },
+ "key_assumption_gate": {
+  "passed": true,
+  "errors": []
+ },
+ "technical_debts": [
+  "N1（本次新增更正，κ_m 范围）：上轮 L1–L4 报告与 question_manifest 记 κ_m ∈ [0.50133, 1.54939]；本动作独立复算（raw A_m/B_m，d=1..364、m∈{6,12,18}）为 [0.6623297807778713, 1.5493928472727483]，最小值在 0-based day 135 的 m=18。0.50133 在附件 4 与落盘序列中均不可复现；截断事件 0 次（两种读法一致），无数值影响，但论文/下游引用必须用 [0.66233, 1.54939]。",
+  "N2（本次新增更正，C^fc 备选读法的数值）：上轮 D2 写「两读法差 315,397.65 元」并把两者称作 C_total^fc；实际 (G-4) 与 (FCF3-1) 的 C_plan^fc（4-3 交付期）为 12,879,614.472595 vs 12,577,951.702107，差 301,662.770488 元；对应 C_total^fc = 15,030,565.249034 vs 14,728,902.478574，ΔC_price = 258,485.465704 vs 560,148.236164 元（非 573,883.11）。方向与结论不变（主交付值 C^act 不受影响），但论文/ablation 引用必须用更正后数值。",
+  "N3（本次新增登记，措辞精度）：上轮记 4-2 的 max|q_em| = 0.0（逐位）；落盘 series.q_em_kwh 的最大绝对值为 2.2737367544323206e-13 kWh（0 个时段 > 1e-12），机制级恒零成立（≤1e-9），但非逐位精确 0。",
+  "N4（本次新增登记，字面值 vs 实现值）：登记口径 c ≤ 833.3333 kWh（4 位小数）与实现 c_cap = 833.3333333333333 = 5000·Δt 相差 3.3e-5；实测 max c = 833.3333333333334（4-3）。按字面 833.3333 判会误报越界，按两侧功率 ≤ 5000 kW 与 5000·Δt 判据均满足。论文应写 c ≤ 5000·Δt = 833.33… kWh。",
+  "N5（本次新增更正，交付工作簿 md5）：上轮记两交付工作簿 md5 = 1fd0d039…/90441bc3…，本动作独立 md5 为 3df5cd3cd941ec23d7399d8073bc561f（4-2）/ 7397029ff1a5b9c7ee715bd2e24f4468（4-3），且 run001 为 e8db4df1…/ca382e71…；1fd0d039/90441bc3 在仓库任何文件中均不可复现。实质结论（两工作簿均新写、md5 ≠ 模板 b878ce2b…/75be588e…）不变，但被引用的指纹必须更正。",
+  "D1（结转）：E-F2 的最小值索引/日期与实测差 1 天（实测 min=0.0076 在 0-based day 115 = 1-based 第 116 天 = 2025-04-26 第 72 时段；E-F2 原文写 2025-04-27）；E-F3 的「极值完全相同」只在 4 位小数成立（均值曲线 0.37126027/1.39524575 vs 附件 1 的 0.3713/1.3952，相关系数 0.9999999956）。",
+  "D3（文档过期）：implementation.md §2.1 的 prob04_io.py sha256 = c2bdab84…（修复前）与当前磁盘 b6d1b8bd… 不一致；§2.1/§7.2/§9 的 harness code_hash = 7fbc9610… 为 run001 值，权威值 e50ae1323cd83ec5ca058a134ad12064d2d1ae5a5ac9420de07c0e337bd6bb64（§12.4 已登记）。",
+  "D4（可追溯性局限）：4-3 调整层 m=6/12 的目标含前视尾巴（未提交段取点未落盘）⇒ 只能给下界复核；实测 m=18 逐位一致（4.5e-13），m=6/12 的已提交段偏差费不高于层目标（−5e-10 / 4.5e-15 的超出量）。",
+  "D5（登记与描述不一致）：2025-01-01 回退常量价 1.0 实际覆盖该日四层（计划层与 m=6/12/18），而 forecast_fallbacks.scope 声明为 plan_layer_decision_price；仅落在 D_full（预热期），不影响交付期。",
+  "D6（披露义务，承 E-F2）：以 p_min 构造的解析下界（p_min·Σb = 153,835.52 元（4-2）/155,129.41 元（4-3），全局最小价版本 136,297.31 元）极松（不足交付费用 1.2%）；深谷 5× 紧急价仅 0.038 元/kWh。",
+  "D7（披露义务，承 E8/R11 与 C7/C8）：两链交付期差额 2,282,639.673590 元必须按「价格预报误差的代价 / 光伏预报误差的代价 / 偏差结算制度」三分项归因（本动作给出可复算恒等式与残差 1.0e-6）；q_em>0 且 c>0（6003）与同充放（1456）只作统计与机制归因，不得判失败。",
+  "D8（结转上游欠账，本 Agent 无权改写）：shared/problem_understanding.md §7/§10 仍把 A8 记为「待裁定」（C4-1）；prob01/assumption_v003/version.yaml 的 AS08「必然被激活」措辞（C4-7/E3）；D10「5000 kW 作用侧」为 team_decision、prob01–prob04 四池无一条文献涉及；权威回写待 cross_question_review。",
+  "D9（文献边界）：prob04 池 24 条均未逐篇阅读正文（15 abstract_oa + 9 metadata），本报告引用只支撑框架级/机制级主张；α_em=5、β_def/β_over、附件 4 价格结构、D9-B、填报口径、5000 kW 作用侧、4-2 的 q_em≡0 均不得包装为文献支持。",
+  "D10（ablation 边界）：S-VAR/S-RH 只进 ablation，不得替换或混入主结果；S-RH 的超 24 h 光伏预期属新增假设，登记完成前不得跑数；C-ANCHOR-P03（E-F4）是实现正确性锚点、属 ablation，本阶段未跑、不得写入交付值或反向写入 prob03。",
+  "D11（LP 退化与 tie-break 敏感性）：degenerate_layers = 364/365（4-2）、1459/1460（4-3）；layers_with_remaining_multiplicity = 365/984；AS21 max_primary_relative_change = 5.000009e-10 / 5.000125e-10 ≤ 1e-9。验收以约束残差 + 恒等式 + 目标值 + 交付表为准，不比对逐点解唯一性。",
+  "D12（数值噪声）：序列含 ±1e-8 kWh 级求解器容差噪声（4-3 min c = −5.23e-9、min q_dis = −3.66e-9、E_min = 1199.9999999952972）；两侧功率在 4-3 贴 5000 kW（5000.000000000001）。后续逐时段写值与引用须沿用同一规整纪律。"
+ ],
+ "manual_levels_pending": [
+  "L5 跨小问一致性（cross_question_review）",
+  "L6 鲁棒性与敏感性（robustness/ablation）"
+ ],
+ "report": "problems/microgrid_2025/prob04/versions/assumption_v001/sanity_report.md"
+}

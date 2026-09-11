@@ -1,0 +1,146 @@
+{
+  "action_id": "act-a752e4172fdd43b4",
+  "question_id": "prob04",
+  "assumption_version": "assumption_v001",
+  "formulation_version": "formulation_v001",
+  "source_hash": "36a6bd5efb77e8abb4c91ed9d73159adb2f1b526f4a583ac32d451204eac2862",
+  "figure_count": 11,
+  "figures": [
+    {
+      "stable_id": "prob04_fig_price_belief_chain_0f0c113ea4",
+      "kind": "price_belief_chain",
+      "title": "prob04 价格信念链：决策层预测价与结算层实际价的分离（两链分别标注）",
+      "path": "problems/microgrid_2025/prob04/versions/assumption_v001/figures/prob04_fig_price_belief_chain_0f0c113ea4.png",
+      "quality_status": "passed",
+      "included_in_paper": true,
+      "task_id": "892351beefa2bc5f7804+eca261e1d516ab2867d9"
+    },
+    {
+      "stable_id": "prob04_fig_forecast_backtest_33ec6918c7",
+      "kind": "forecast_backtest",
+      "title": "prob04 价格预测器滚动回测：MAE/MAPE 与 RMSE/P90/P99 成对报告（`E-F5`）",
+      "path": "problems/microgrid_2025/prob04/versions/assumption_v001/figures/prob04_fig_forecast_backtest_33ec6918c7.png",
+      "quality_status": "passed",
+      "included_in_paper": true,
+      "task_id": "892351beefa2bc5f7804+eca261e1d516ab2867d9"
+    },
+    {
+      "stable_id": "prob04_fig_kappa_rolling_correction_562118434e",
+      "kind": "kappa_rolling_correction",
+      "title": "prob04 链 `4-3` 调整层 $\\kappa_m$ 滚动水平校正：逐日序列、分布与截断纪律",
+      "path": "problems/microgrid_2025/prob04/versions/assumption_v001/figures/prob04_fig_kappa_rolling_correction_562118434e.png",
+      "quality_status": "passed",
+      "included_in_paper": true,
+      "task_id": "eca261e1d516ab2867d9"
+    },
+    {
+      "stable_id": "prob04_fig_dispatch_profile_42_6cef29f9f5",
+      "kind": "dispatch_profile_42",
+      "title": "prob04 链 4-2 日内调度剖面：计划购电量、充放电与储电量（指定日期）",
+      "path": "problems/microgrid_2025/prob04/versions/assumption_v001/figures/prob04_fig_dispatch_profile_42_6cef29f9f5.png",
+      "quality_status": "passed",
+      "included_in_paper": true,
+      "task_id": "892351beefa2bc5f7804"
+    },
+    {
+      "stable_id": "prob04_fig_plan_adjust_profile_43_14d05cff1e",
+      "kind": "plan_adjust_profile_43",
+      "title": "prob04 链 4-3 计划/调整/紧急购电日内剖面（指定日期）",
+      "path": "problems/microgrid_2025/prob04/versions/assumption_v001/figures/prob04_fig_plan_adjust_profile_43_14d05cff1e.png",
+      "quality_status": "passed",
+      "included_in_paper": true,
+      "task_id": "eca261e1d516ab2867d9"
+    },
+    {
+      "stable_id": "prob04_fig_cost_decomposition_21e04b722c",
+      "kind": "cost_decomposition",
+      "title": "prob04 两链费用分解、价格预报误差代价与交付期差额三分项归因",
+      "path": "problems/microgrid_2025/prob04/versions/assumption_v001/figures/prob04_fig_cost_decomposition_21e04b722c.png",
+      "quality_status": "passed",
+      "included_in_paper": true,
+      "task_id": "892351beefa2bc5f7804+eca261e1d516ab2867d9"
+    },
+    {
+      "stable_id": "prob04_fig_soc_trajectory_7a09b8f02b",
+      "kind": "soc_trajectory",
+      "title": "prob04 两链储电量轨迹：全年区间、日内轨迹与日边界储电量（含日边界不携带电量）",
+      "path": "problems/microgrid_2025/prob04/versions/assumption_v001/figures/prob04_fig_soc_trajectory_7a09b8f02b.png",
+      "quality_status": "passed",
+      "included_in_paper": true,
+      "task_id": "892351beefa2bc5f7804+eca261e1d516ab2867d9"
+    },
+    {
+      "stable_id": "prob04_fig_emergency_profile_43_ee87fab821",
+      "kind": "emergency_profile_43",
+      "title": "prob04 链 4-3 紧急购电分布、结算层缺口机制与 E-F2 披露（4-2 全零对照）",
+      "path": "problems/microgrid_2025/prob04/versions/assumption_v001/figures/prob04_fig_emergency_profile_43_ee87fab821.png",
+      "quality_status": "passed",
+      "included_in_paper": true,
+      "task_id": "892351beefa2bc5f7804+eca261e1d516ab2867d9"
+    },
+    {
+      "stable_id": "prob04_fig_adjust_surface_3d_71403364a6",
+      "kind": "adjust_surface_3d",
+      "title": "prob04 链 4-3 全年调整量三维曲面：日期 × 时刻 ×（最终−计划）购电量",
+      "path": "problems/microgrid_2025/prob04/versions/assumption_v001/figures/prob04_fig_adjust_surface_3d_71403364a6.png",
+      "quality_status": "passed",
+      "included_in_paper": false,
+      "task_id": "eca261e1d516ab2867d9"
+    },
+    {
+      "stable_id": "prob04_fig_adjust_heatmap_2d_faadb9f50e",
+      "kind": "adjust_heatmap_2d",
+      "title": "prob04 链 4-3 调整量二维投影：日期×时刻热力图与逐日总量",
+      "path": "problems/microgrid_2025/prob04/versions/assumption_v001/figures/prob04_fig_adjust_heatmap_2d_faadb9f50e.png",
+      "quality_status": "passed",
+      "included_in_paper": true,
+      "task_id": "eca261e1d516ab2867d9"
+    },
+    {
+      "stable_id": "prob04_fig_tiebreak_degeneracy_a22f550697",
+      "kind": "tiebreak_degeneracy",
+      "title": "prob04 两链 AS21 tie-break 不变性与 LP 退化度逐层披露（D11/T7-6）",
+      "path": "problems/microgrid_2025/prob04/versions/assumption_v001/figures/prob04_fig_tiebreak_degeneracy_a22f550697.png",
+      "quality_status": "passed",
+      "included_in_paper": false,
+      "task_id": "892351beefa2bc5f7804+eca261e1d516ab2867d9"
+    }
+  ],
+  "pruned_stale_figures": [],
+  "key_values": {
+    "4-2": {
+      "C_total_act_delivery": 13006411.041148009,
+      "C_plan": 13006411.041148009,
+      "C_adj": 0.0,
+      "C_em": 2.944279210437273e-10,
+      "C_total_fc": 12485620.20211268,
+      "delta_c_price": 520790.8390353285,
+      "price_mae_delivery": 0.08432593978709249,
+      "gap_identity_max_abs": 0.0
+    },
+    "4-3": {
+      "C_total_act_delivery": 15289050.714737598,
+      "C_plan": 13106641.487373143,
+      "C_adj": 522512.7887759962,
+      "C_em": 1659896.4385884593,
+      "C_total_fc": 15030565.249033673,
+      "delta_c_price": 258485.46570392512,
+      "price_mae_delivery": 0.062286650157782085,
+      "q_em_delivery_kwh": 394026.0407495883,
+      "kappa_min": 0.6623297807778713,
+      "kappa_max": 1.5493928472727483,
+      "kappa_argmin_day": 135,
+      "kappa_argmin_m": 18,
+      "kappa_clip_events": 0,
+      "kappa_rebuild_max_abs_err": 0.0,
+      "gap_identity_max_abs": 0.0
+    },
+    "cross_chain": {
+      "delta_total": 2282639.673589589,
+      "delta_plan": 100230.44622513466,
+      "delta_adj": 522512.7887759962,
+      "delta_em": 1659896.4385884593,
+      "residual": -9.313225746154785e-10
+    }
+  }
+}

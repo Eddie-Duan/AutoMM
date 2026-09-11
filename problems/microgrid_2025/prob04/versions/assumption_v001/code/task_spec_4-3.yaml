@@ -1,0 +1,146 @@
+# prob04 隔离计算 task 规格（链 4-3 ≙ 「波动电价下重算问题 3」；computation 阶段由 resource-manager 提交）
+# 生成者：implementation-agent（动作 act-be9040ad7b264d3e）
+# 依据：agents/implementation-agent.md、agents/resource-manager.md、PROJECT.md、config/gates.yaml、
+#       AGENTS.md「prob04 交付结构」（一道小问、两套结果）与「A8 团队裁定 + 六条派生」、
+#       prob04 assumption_v001（AS01–AS23 + D1–D12 推荐项 + R-1/R-2）与 formulation_v001
+#       （§1.3 预测器与 κ_m、§1.4 降尺度 Π_m、§3.2–§3.7 链 4-3、§8.2–§8.7 接口与黑名单）
+# 说明：本文件只是**规格**，implementation 阶段不得自行创建 task；task 由 Runner/tasks.py 确定性创建。
+#       本任务与 `task_spec.yaml`（链 4-2）构成 prob04 的**两个交付件**，必须同时产出。
+#
+# ⚠️ **为何本 spec 使用 `task_config_4-3.yaml` 而不是 `task_config.yaml`**（必要，不可改回）：
+#   `automm.tasks.compute_task_id` 的身份由
+#   `problem_id/question_id/stage/code_hash/config_hash/input_hash/assumption_version/formulation_version/backend`
+#   组成，**不含 `output_directory` 与 `command`**。两链共用同一份代码与同一份输入（`data/`），
+#   若再共用同一份 config，两份 spec 会算出**相同 `task_id`** → `submit_task` 按 `TASK_ROOT/<task_id>`
+#   目录互相覆盖/拒绝第二次提交，且 task group 的 `expected_tasks=2` 永远无法满足
+#   （实测：两链 task_id 均为 `5035744a77340d1b467e`）。故本 spec 指向含 `chain_scope: "4-3"` 的
+#   `task_config_4-3.yaml`，使 `config_hash` 与 `task_id` 不同。
+#
+# 口径要点（不得逐问更改）：
+#   * **A8-(b)**：0:00 时当天实时电价（附件 4）未知；计划层用 PF-PERSIST，调整层（6:00/12:00/18:00）
+#     用「已实现实际价 + κ_m 滚动水平校正」（κ_m = A_m/B_m 截断到 [0.5,2.0]，κ_0 ≡ 1，截断须逐个登记）；
+#     结算层一律用附件 4 实际价；**禁止**「全天电价已知」类表述；
+#   * 三层顺序向前递推（不回溯、b 为已提交参数、只提交 D_m = {i : 6m < i ≤ 6m+36}）；
+#     光伏：计划层/调整层用附件 3 降尺度 Π_m（整点点值 + 整点锚定线性插值，k=1 前向保持；
+#     跨年项 m=6/12/18 分别丢弃 k=19..24/13..24/7..24，合计 36 项，不消费、不截断、不外推）；
+#     **实际光伏 PV^act 只进结算层**（唯一入口）；
+#   * 降尺度**不保块内能量**（块和 = (2.5A_{k−1}+3.5A_k)/6 ≠ A_k·1h），必须显式披露；
+#   * 计划层目标 min Σ \hat p^{(0)}·b（**不含 q_em 变量**，承 prob03 (PL-1)）；
+#     调整层目标 min Σ_{R_m}[β_def·\hat p^{(m)}·u⁺ + β_over·\hat p^{(m)}·u⁻]（分段线性化 LP 无损）；
+#   * 结算层闭式：r = q + q_dis + PV^act·Δt − L·Δt − c；s' = max(0,r)；q^em = max(0,−r)；
+#   * 目标 C_total^{act} = C_plan^{act} + C_adj^{act} + C_em^{act}（读法 A；元，**不乘 Δt**）；
+#     Σq^em **不应恒为零**（结算用实际光伏、决策用预报 ⇒ 预报误差必然产生缺口）；
+#   * c ≤ 833.3333、q_dis ≤ 750.0000、E ∈ [1200,10800]、两侧功率 ≤ 5000 kW、q ≥ 0 无上界；
+#   * 弃光界用 D9-B 物理盈余界（分层用该层 PV）：0 ≤ s ≤ max(0, Π_m[PV]·Δt − L·Δt)；
+#   * **附件 1 禁用**；模板 data/附件5/result4-3.xlsx 只读，交付工作簿新写入独立 output_directory。
+spec_version: 1
+problem_id: microgrid_2025
+question_id: prob04
+stage: computation
+assumption_version: assumption_v001
+formulation_version: formulation_v001
+backend: local
+working_directory: "."
+code_path: problems/microgrid_2025/prob04/versions/assumption_v001/code
+config_path: problems/microgrid_2025/prob04/versions/assumption_v001/code/task_config_4-3.yaml
+input_path: data
+output_directory: problems/microgrid_2025/prob04/versions/assumption_v001/results/prob04_v001_f001_4-3_run002
+timeout_seconds: 1800
+seed: null
+gpu_required: false
+device: cpu
+gpu_serial_constraint: "本 task 不使用 GPU（gpu_required=false，链 4-3 为 CPU HiGHS 的分层确定性 LP），故不占用单卡 GPU 串行额度；若未来引入 GPU 路径必须单卡串行"
+worker_launch_mode: supervised
+deliverables_note: >-
+  prob04 = **一道小问、两套结果**（AGENTS.md 团队纪律）：本任务交付体 = **两道 task / 两个交付件**。
+  本文件（task_spec_4-3.yaml）对应链 `4-3`，交付 `result4-3.xlsx`（≙ 重算问题 3）；
+  配套任务见 `problems/microgrid_2025/prob04/versions/assumption_v001/code/task_spec.yaml`（链 `4-2`，
+  交付 `result4-2.xlsx`）。两者**共用**附件 4 电价、同一价格预测器（PF-PERSIST，κ_0 ≡ 1）与同一结算口径，
+  差异仅在 `4-3` 多出 6:00/12:00/18:00 调整层、`0.5×`/`1.5×` 分段结算与附件 3 光伏预报误差；
+  `output_directory` **必须不同**，**不得**用一条链的结果充当另一条链，**不得**覆盖 `data/附件5/` 下的模板。
+command:
+  - ".venv/Scripts/python.exe"
+  - "problems/microgrid_2025/prob04/versions/assumption_v001/code/run_prob04.py"
+  - "--chain"
+  - "4-3"
+  - "--data2"
+  - "data/附件2.xlsx"
+  - "--data3"
+  - "data/附件3.xlsx"
+  - "--data4"
+  - "data/附件4.xlsx"
+  - "--template43"
+  - "data/附件5/result4-3.xlsx"
+  - "--output"
+  - "problems/microgrid_2025/prob04/versions/assumption_v001/results/prob04_v001_f001_4-3_run002"
+  - "--days"
+  - "365"
+  - "--time-limit"
+  - "60"
+  - "--max-wall-seconds"
+  - "1500"
+submit_hint:
+  tool: scripts/compute_dispatcher.py
+  subcommand: submit
+  notes:
+    - "若 .venv/Scripts/python.exe 无法解析，resource-manager 应改用当前 Runner 解释器（sys.executable）或项目 venv 的绝对路径；不得改用缺少 scipy/openpyxl/numpy 的解释器。"
+    - "--output 的取值必须与 output_directory 完全一致（tasks.make_task_spec 会强校验）。"
+    - "禁止 --days 小于 365；探针模式（--days < 365）只允许在 implementation/静态检查中使用（改写 probe_result4-3.xlsx），不得作为交付结果。"
+    - "必须由 Runner 以 worker_launch_mode=supervised（in-process）启动；detached 在本环境会被沙箱回收。"
+    - "本问为确定性 LP：seed=null，不读取任何随机源；重跑必须使用新的 output_directory（..._run002 等），不得覆盖既有结果。"
+    - "链 4-2（task_spec.yaml）与链 4-3 **必须串行**执行（max_local_concurrent_tasks=1）。"
+    - "整链墙钟预算 = --max-wall-seconds 1500（task timeout 1800）；单层 LP 时限 = --time-limit 60。"
+inputs_readonly:
+  - data/附件2.xlsx
+  - data/附件3.xlsx
+  - data/附件4.xlsx
+  - data/附件5/result4-3.xlsx
+  - data/（作为 input_path 整体参与 input_hash）
+  - "（禁止读取 data/附件1.xlsx：其电价被附件 4 取代，H10）"
+expected_outputs:
+  - result4-3.xlsx
+  - solver_status.json
+  - solution.json
+  - tables.json
+  - forecast_backtest.json
+  - tiebreak_audit.json
+  - run_manifest.json
+expected_runtime:
+  wall_clock_seconds_max: 600
+  memory_mb_max: 1024
+  device: cpu
+  lp_calls: 1460
+  lp_solver_invocations_nominal: 5840
+  lp_solver_invocations_note: >-
+    每层 4 次名义 LP（① 纯主目标基线 ② AS21 字面 ε 加权诊断 ③ 主目标最优面上的字典序提交解
+    ④ 退化/多重最优探测），链 4-3 为每天 4 层（计划 1 + 调整 3）× 365 天 = 1,460 次层求解、
+    5,840 次名义调用；T7-2 不变性不满足时每次收缩 ε 另加 1 次（有界于 T7_MAX_SHRINKS=8）。
+    实测 implementation 探针：34 天 136 层（含全部产物落盘）≈ 8 s ⇒ 全年预期 < 150 s，
+    task timeout 1800 s / --max-wall-seconds 1500 余量充足。
+expected_failure_conditions:
+  - exit_code: 2
+    meaning: "某一层 LP 未达最优（infeasible/unbounded/time_limit）或整链墙钟预算耗尽；solver_status.json 的 feasible_incumbent=false"
+    route: "route_compute_failure -> implementation-agent 复核 formulation 与数据；不得伪报最优"
+  - exit_code: 3
+    meaning: "附件 2/3/4 或模板结构与 accepted 假设不一致（表头、行数、日期连续性、附件 3 日期前向填充与 预报时刻 升序、相位标签、模板工作表名/列数/列标签）"
+    route: "needs_revision -> mathematical_formulation 或 assumption_definition"
+  - exit_code: 4
+    meaning: "硬检查或模板填报校验失败（层残差、结算平衡/恒等式 > 1e-6、边界越界、E 越界、两侧功率 > 5000 kW、i ≤ 36 时 q ≠ b、层内余额残差 > 1e-8、AS21 主目标不变性 > 1e-9、解析界/量级带越界、表 1 位置口径不符、result4-3.xlsx 填报残留 format_residuals 非空）"
+    route: "needs_revision -> implementation 修复或 mathematical_formulation 复核"
+  - exit_code: 1
+    meaning: "未捕获异常（Python 运行时错误）"
+    route: "code_runtime -> implementation-agent 修复代码"
+acceptance_hint:
+  - "solver_status.json: status=0、feasible_incumbent=true、lp_calls=1460、layer_status_max=0、层等式/不等式残差 <= 1e-6（绝对）且相对残差 <= 1e-8；lp_solver_invocations_nominal=5840 为名义值（实际由 AS21 的 ε 收缩次数决定）"
+  - "tiebreak_audit.json: policy=AS21、layers=1460、checks_failed 为空；summary.all_layers_invariance_passed=true、summary.max_primary_relative_change <= 1e-9；per_layer 含 1,460 条逐层记录（含 plan43 与 adjustment6/12/18 四类层）"
+  - "退化层数（degenerate_layers）与 layers_with_remaining_multiplicity 必须如实报告（> 0 属结构性事实，不是失败；调整层在偏差为 0 处天然退化）"
+  - "solution.json: checks_failed 为空；I1/I2 逐日与交付期切片残差 <= 1e-6；跨日连续性 <= 1e-6；状态转移 <= 1e-6；结算平衡 <= 1e-6；层内余额残差 <= 1e-8（s^{[ν(i)]} ≤ max(0, Π_{ν(i)}·Δt − L·Δt)）；i ≤ 36 时 q = b"
+  - "solution.json.totals: Σq^em **不应恒为零**（若恒零须先查「附件 3 是否被误用为附件 2」或「Π_m 是否被写成 PV^act」）；C_adj 两段（0.5×/1.5×）可分别复算"
+  - "solution.json.statistics.kappa_clip_records: κ_m 的**每次截断**必须逐个登记（日期、m、A_m、B_m、原值、截断值、原因）；κ_0 ≡ 1；禁止静默截断"
+  - "solution.json.belief: 用 \\hat p^{fc}_{d,i} = \\hat p^{(ν(i))}_{d,i}（ν(i)=0/6/12/18 分段）计 C^fc 与 ΔC_price 分项；与 C^act 使用**同一组决策量**（不重解）"
+  - "solution.json.delivery（D_req 口径）与 stdout 摘要（D_full 口径）**必须分别给出**；run_manifest 的 total_*_kwh 为 D_req 口径，且 total_purchase_kwh 装 Σq（最终量）"
+  - "量级自检（正式模式硬检查）：交付期 C_total^act ∈ [3e6, 5e7] 元、日均 ∈ [5e3, 2e5] 元；落入 10^5/10^8 元先查口径错位"
+  - "forecast_backtest.json: 与链 4-2 **同一份回测**（两链共用同一预测器，A8-(b) 派生⑥）；selection.selected 必须为 PF-PERSIST"
+  - "tables.json: 4 个指定日期（78/171/265/354）；表 1 六时段行位置 60/72/84/96/108/120，购电量用**最终量 q**（替代量口径）、全天购电费为 C_total,d（正文另给分项）；表 2 每日 6 块且 table2_note 显式区分 prob01 单日周期与本题多日滚动切片；表 3 合并区间 + 左端点标签 + 每日至少 1 行"
+  - "result4-3.xlsx: 计划购电量/调整购电量各 335 行 × 147 列（列标签逐列相同、末列 0:00-0:10+1）；充放电量 1 + 334×6 行且 时刻/储电量 只在每日前两行；紧急购电量 每日至少 1 行（J_d=0 写 —/0）；run_manifest.workbook_info.format_residuals 必须为空"
+  - "run_manifest.json: code_sha256、附件 2/3/4 与对应模板 md5、device=cpu、seed=null、gpu_required=false、layer_inputs（逐层价格/预报指纹、锁定时段、初始状态来源、future_price_used_in_decision=false）、matrix_scale、naming、statistics、checks_failed 齐备，供 sanity/ablation/robustness 追踪"

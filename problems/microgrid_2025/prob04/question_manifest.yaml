@@ -1,11 +1,11 @@
 problem_id: microgrid_2025
 question_id: prob04
 status: active
-stage: literature_review
+stage: robustness
 dependencies: []
-active_assumption_version: 0
-active_formulation_version: 0
-accepted_formulation_version: 0
+active_assumption_version: 1
+active_formulation_version: 1
+accepted_formulation_version: 1
 consecutive_rejections: 0
 literature_refreshes: 0
 literature_refresh_required: false
@@ -14,7 +14,7 @@ conclusion:
   version: 0
   content_hash: ''
 sanity:
-  level_1_4: pending
+  level_1_4: PASS_WITH_WARNING
   level_5: pending
   level_6: not_applicable
 optional_stages:
@@ -26,13 +26,13 @@ optional_stages:
     reason: ''
 artifacts:
   problem_understanding: true
-  literature: false
-  assumptions: false
-  formulation: false
-  implementation: false
-  computation: false
-  visualization: false
-  sanity_check: false
+  literature: true
+  assumptions: true
+  formulation: true
+  implementation: true
+  computation: true
+  visualization: true
+  sanity_check: true
   robustness: false
   ablation: false
   cross_question_review: false
@@ -53,3 +53,66 @@ stale_history:
   caused_by:
   - question_id: prob01
     conclusion_hash: 6fb260491cb70450c0ea71608b59271f51d99a002737d0b3ed46a1bb1b8888d6
+accepted_assumption_version: 1
+sanity_history:
+- at: '2026-09-11T13:11:25.448655+00:00'
+  level: level_1_4
+  status: PASS_WITH_WARNING
+  reason: prob04 computation 阶段 L1–L4 验收（act-ac9fa70f8976452b，policy P2 inspect_compute_result，对象
+    task group grp-42696d0413186d8c）：链 4-2 = task 892351beefa2bc5f7804 / results/prob04_v001_f001_4-2_run002，链
+    4-3 = task eca261e1d516ab2867d9 / results/prob04_v001_f001_4-3_run002（均 succeeded、attempt
+    1、supervised、CPU HiGHS、rc=0、days=365/periods=52560）。本动作 6 个只读探针共 530 项独立断言全部通过，另加
+    scripts/run_sanity_check.py 在两链 JSON 产物逐字节副本上 failures=[]、PASS_WITH_WARNING。**L1
+    PASS**：各 7 件产物齐备；task.json 与 attempt-001-task.json 逐字节相同、stderr 0 字节；独立重算 code_hash=e50ae1323cd83ec5ca058a134ad12064d2d1ae5a5ac9420de07c0e337bd6bb64（两链一致、与当前注册代码一致）、source_config_hash=49790ae0…/17ce597d…、config_hash=8e779d84…/2f40e2c8…、input_hash=4343d799…；输入
+    md5 未变（附件2 bb3e493f…、附件3 e8dfee65…、附件4 cf876237…、模板 b878ce2b…/75be588e…）；两交付工作簿
+    md5 与模板不同（1fd0d039…/90441bc3…）；run001 保留为审计负对照且未覆盖；两链 forecast_backtest.json 完全相同（sha256
+    d6c9b422…）；信息集边界第一手验证：置乱 d'>d 的未来价格后信念价逐位不变（0.0），独立重建的信念价与落盘序列逐位相同（4-2 = 前一日同时段；4-3
+    = κ_{ν(i)}·前一日，κ_0≡1）；表 1 标签分支在 365 天产物上 24/24 label_matches=true（左端点 H:MM、完整区间、位置
+    60/72/84/96/108/120）。**L2 PASS**：结算平衡 3.411e-13/4.547e-13、状态转移 2.728e-12/8.715e-8、跨日闭合
+    0.0/4.7e-9、(I1)/(I2) 1.09e-11/2.91e-11 与 7.84e-8、c≤833.3333、q_dis≤750.0000（E1）、两侧功率
+    5000.0 kW（D10 口径丙）、E∈[1200,10800]、同充放 0（4-2）/1456（4-3）、4-2 的 q_em≡0 与 q≡b 逐位成立、4-3
+    的 Σq^em=394,026.040750 kWh 非零、checks_failed=[]。**L3 PASS**：Δt=1/6 与目标不含 Δt；逐层目标独立回代（4-2/4-3
+    计划层 == Σ p^{(0)}·b，最大差 1.46e-11 元；4-3 m=18 调整层 == 分段偏差式，4.5e-13 元）；费用分解恒等式 0.0；PF-PERSIST
+    D_req MAE 0.084326/MAPE 13.780%/P90 0.2294/P99 0.3773（与 E-F5 冻结表逐位一致）、PF-DUAL
+    0.093387/0.121566/0.206537/0.335853、PF-HIST 0.100231、PF-AR 0.080664（按 AS08 不参与主口径）；κ_m∈[0.50133,1.54939]、截断
+    0 次；AS21 max_primary_relative_change=5.0e-10≤1e-9；format_residuals=[]；表 1/2/3
+    与两个工作簿逐格回溯（计划购电量 334×144==b、调整购电量 334×144==q、6 块充放电、668 格储电量、紧急购电 334 行全零（4-2）/2169
+    行合并区间（4-3））全部一致。**L4 PASS_WITH_WARNING**：交付期 C_total^act=13,006,411.041148（4-2，=C_plan，无
+    C_adj，Σq_em≡0）/15,289,050.714738（4-3 = C_plan 13,106,641.487373 + C_adj 522,512.788776
+    + C_em 1,659,896.438588，Σq^em=394,026.040750），均 ≤ 独立构造的无储能上界 17,026,782.858099
+    元、远高于极松下界 136,297.31 元；ΔC_price=520,790.839035（4-2）/258,485.465704（4-3）；全部 334
+    个交付日 E_{d,144}=1200（日边界不携带电量，直面 prob03 E8/R18）；关键假设文献门禁 passed=true；prob02/prob03
+    数值与 prob04 均不同（未互填），Σs'(D_req) 4-2 与 prob02 逐位相同（990,168.090312）；两链差额 2,282,639.673590
+    = ΔC_plan 100,230.446225 + C_adj 522,512.788776 + C_em 1,659,896.438588。技术债 D1–D12
+    已在 report §7 与 warnings 中逐条登记（其中 D2 为 C^fc 计划项价格基数的公式歧义，两种读法使 4-3 的 ΔC_price 在
+    258,485.47 与 573,883.11 元之间，主交付值 C^act 不受影响），无硬门禁失败。
+  failure_type: null
+- at: '2026-09-11T13:23:16.914931+00:00'
+  level: level_1_4
+  status: PASS_WITH_WARNING
+  reason: prob04 sanity_check 阶段 L1–L4 正式复核（act-d7fa5a1e75ac4428，policy P3 run_agent）：两链分别验收——4-2
+    = task 892351beefa2bc5f7804 / results/prob04_v001_f001_4-2_run002，4-3 = task eca261e1d516ab2867d9
+    / results/prob04_v001_f001_4-3_run002（均 succeeded、attempt 1、supervised、CPU HiGHS、rc=0、probe_mode=false、days=365/periods=52560）。本动作自建三个独立只读探针共
+    88 项断言全部通过（L1 27 + L2/L3 49 + L4 12），另加 scripts/run_sanity_check.py 在两链 JSON 产物逐字节副本上
+    failures=[]、PASS_WITH_WARNING。L1 PASS：各 7 件产物齐备；task.json 与 attempt-001-task.json
+    逐字节相同、stderr 0 字节；独立重算 code_hash=e50ae1323cd83ec5ca058a134ad12064d2d1ae5a5ac9420de07c0e337bd6bb64（两链一致、与当前注册代码一致）、source_config_hash=49790ae0…/17ce597d…、config_hash=8e779d84…/2f40e2c8…、input_hash=4343d799…、task_id
+    复算一致；输入与模板 md5 未变；两交付工作簿为新写（实测 md5 3df5cd3c…/7397029f…，均 ≠ 模板）；run001 保留为审计负对照且未覆盖；run_manifest.code_sha256
+    与磁盘逐位一致；两链 forecast_backtest.json 逐字节相同（sha256 d6c9b422…）；信息集边界第一手验证：置乱未来日与当日
+    i>36 后 PF-PERSIST 与 κ_m 逐位不变（0.0），置乱当日 i≤36 后 κ_6 改变（正对照），独立重建信念价与落盘序列逐位相同（4-2
+    = 前一日同时段；4-3 = κ_{ν(i)}·前一日，κ_0≡1）；表 1 标签分支 24/24 label_matches=true（两链）。L2 PASS：结算平衡
+    3.411e-13/4.547e-13、状态转移 2.728e-12/8.715e-8、(I1d)/(I2d) 1.091e-11/2.910e-11 与
+    7.843e-8/7.843e-8、c≤5000·Δt、q_dis≤750.0000（E1）、两侧功率 ≤5000 kW（D10 口径丙）、E∈[1200,10800]、同充放
+    0（4-2）/1456（4-3）、4-2 的 q_em 机制级恒零（2.27e-13）与 q≡b、4-3 的 i≤36⇒q=b 与 Σq^em=394,026.040750
+    kWh、checks_failed=[]。L3 PASS：Δt=1/6 与目标不含 Δt；交付期 C_plan/C_adj/C_em/C_total 独立复算逐位一致（4-2
+    13,006,411.041148 无 C_adj；4-3 13,106,641.487373 + 522,512.788776 + 1,659,896.438588
+    = 15,289,050.714738），分解恒等式 0.0、format_residuals=[]；全期 ΔC_price 五分项与 solution.belief
+    一致；逐层目标 4-2/4-3 计划层差 0.0、m=18 差 4.5e-13、m=6/12 只给下界（前视尾巴）；三个基准的 MAE/MAPE/RMSE/bias/P50/P90/P99
+    独立重建与落盘差 1.11e-16（PF-PERSIST 0.08432594/13.7801%/0.12383718/0.2294/0.3773，选定 PF-PERSIST）；κ_m
+    独立复算一致、截断 0 次；AS21 ≤5.000125e-10、total_shrinks=0、lexicographic=365/1460；规模与 formulation
+    §8.6 一致；表 1/2/3 与两个工作簿逐格回溯全部在 6 位小数舍入界内。L4 PASS_WITH_WARNING：量级 1.3006e7/1.5289e7
+    元、独立构造上界 17,026,782.858099（+4-3 的 adjustment/emergency 段 = 18,884,193.220703）、储能价值
+    4,020,371.82/1,737,732.14 元、全部 334 个交付日 E_{d,144}=1200（日边界不携带电量，直面 E8/R18）、E-F2/E-F3
+    数据事实复核、关键假设文献门禁 passed=true、跨问未互填且 Σs'(4-2) 与 prob02 逐位相同、两链差额三分项归因恒等式残差 1.0e-6、黑名单措辞通过。技术债
+    N1–N5（本动作更正 κ_m 范围、C^fc 备选读法数值、q_em 措辞、c 上限字面值、交付工作簿 md5）与 D1/D3–D12 已在 sanity_report.md
+    §7 与 machine_sanity.json 逐条登记，无硬门禁失败。
+  failure_type: null

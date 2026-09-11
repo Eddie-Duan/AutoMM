@@ -1,0 +1,446 @@
+version: assumption_v001
+status: accepted
+created_at: '2026-09-11T11:49:59.698219+00:00'
+parent_version: null
+assumptions:
+- id: AS01
+  title: 时间戳与时段的位置对齐（左端点，继承 prob01 AS01）
+  statement: 附件 2/3/4 的数据点与 result4-2.xlsx/result4-3.xlsx 的 144 个时段按位置一一对应；时间戳是所属
+    10 分钟区间的左端点（tau_i = 10i 分钟，tau_1 = 0:10，tau_144 = 24:00，代表 [tau_i, tau_i+10min)）；计划窗
+    0:10 → 24:10；表 1 的 10:00-10:10 取位置 i = 60。
+  type: 离散化约定（数据生成）
+  key: false
+  criticality: high
+  evidence_type: inherited
+  reference_ids: []
+  basis: prob01 accepted AS01 + 团队裁定 D1-A；prob04 池不覆盖该主题，按不伪造绑定纪律标 inherited。
+  applicability: prob04 两条链的全部输入与交付表。
+  bias_if_invalid: 改用右端点口径会使全表错位一格。
+  validation: sanity L1 核对两个交付工作簿的行列数与列标签；L3 抽查表 1 六时段与表 2 六块的行位置映射。
+  relations: 决定 AS08（按位置定义预测器）、AS19（降尺度映射）、AS20（表 2 聚合相位）。
+  status: inherited
+- id: AS02
+  title: 本问输入范围、两链交付与交付隔离
+  statement: 4-2 使用附件 2（负载 + 光伏实际）与附件 4（实时电价）；4-3 使用附件 2、附件 3（整点预报，日期列须前向填充）与附件 4；附件
+    1 不使用。D_full = 2025-01-01…12-31（365 天），D_req = 2025-02-01…12-31（334 天）；result4-2.xlsx
+    与 result4-3.xlsx 必须新写、各自独立 output_directory，不得覆盖模板（与 result2/result3 逐字节相同），也不得互相替代。
+  type: 边界条件（数据范围）
+  key: false
+  criticality: medium
+  evidence_type: agent_inference
+  reference_ids: []
+  basis: request/problem.md 第 57/101–104 行；data/ 只读探针（附件 4 = 365 × 144，md5 cf8762375436b281dc33b6432e441a6a）；模板
+    md5 相等事实。
+  applicability: 两链全部输入与交付。
+  bias_if_invalid: 误用附件 1 电价违反 H10；把附件 3 用于 4-2 违反题面；复用模板或跨链替代会污染交付且无法靠文件差异发现。
+  validation: sanity L1 对账输入 md5 与工作表结构；L3 核对交付行数、指定日期索引与工作簿工作表集合。
+  relations: AS08/AS15/AS17 的数据前提；AS20 的交付前提。
+  status: accepted
+- id: AS03
+  title: 跨日衔接与 1 月预热期（滚动递推 + 终端自由）
+  statement: 自 2025-01-01 0:00 以 E_init = 6000 kWh 起，对 D_full 建立跨日状态连续 E_{d,0} = E_{d-1,144}；终端
+    E_{12/31,144} 自由（仅受 [1200, 10800] 约束）；2025 年 1 月为预热期不计入交付；交付期首日 0:00 储电量由轨迹给出（不等于
+    6000），两链的值可以不同。
+  type: 边界条件（时域组织）
+  key: false
+  criticality: high
+  evidence_type: inherited
+  reference_ids: []
+  basis: prob02 accepted AS03/AS04 + 团队裁定 D1-B/D2-A；prob04 池不含跨日组织类来源，标 inherited
+    不绑定。
+  applicability: 两链计划层与结算层。
+  bias_if_invalid: 日初复位 6000 会丢弃 1 月数据并消除跨日携带价值（prob02 实测交付期费用差 −17,803.27 元）。
+  validation: sanity L1 检查 |E_{d,0} − E_{d-1,144}| ≤ 1e-6 与 E_{1/1,0} = 6000；表 2 端点按
+    R1 说明为逐日切片。
+  relations: AS04 的前提；与 AS10（逐日递推）联动。
+  status: inherited
+- id: AS04
+  title: 储能状态转移、效率、容量/功率约束与量纲
+  statement: E_t = E_{t-1} + 0.9·c_t − q_dis_t/0.9；1200 ≤ E ≤ 10800 kWh；c ≤ 833.3333
+    kWh、q_dis ≤ 750.0000 kWh（口径丙：两侧功率同时 ≤ 5000 kW）；Delta_t = 1/6 h，功率 × Delta_t =
+    电量；目标与费用以元计且不乘 Delta_t。
+  type: 边界条件（设备）
+  key: false
+  criticality: high
+  evidence_type: inherited
+  reference_ids: []
+  basis: prob01 accepted AS05/AS06 + 团队裁定 D10 口径丙 + 团队勘误 E1（q_dis = 750.0000）。
+  applicability: 两链所有层的储能变量。
+  bias_if_invalid: 界写错会改变可行域；乘 Delta_t 会使费用差 6 倍（量级错误）。
+  validation: sanity L1/L2 逐时段检查两侧功率 ≤ 5000 kW；L3 抽查状态转移闭合与费用量级（交付期 10^7 元）。
+  relations: AS05（s 的界）、AS15/AS17（费用项）的量纲前提。
+  status: inherited
+- id: AS05
+  title: 弃光/盈余变量 s 的界：采纳 D9-B 物理盈余界（两链）
+  statement: 各层 0 ≤ s ≤ max(0, PV^层·Delta_t − L·Delta_t)（PV^层 为该层信息集对应的光伏）；目标系数恒为
+    0（无售电收益）；变量保留、最优解允许取 0。
+  type: 机理
+  key: false
+  criticality: medium
+  evidence_type: team_decision
+  reference_ids: []
+  basis: prob03 团队登记 D9-B 为 prob04 前置条件 + 本版本 §0.3 显式采纳；本批 24 条文献无一条涉及该紧松选择，不得虚构依据。
+  applicability: 两链所有层。
+  bias_if_invalid: 沿用 D9-A（s ≤ PV·Delta_t）不改变最优值（零成本），但会留下物理不可能的上界、削弱 sanity 的发现能力。
+  validation: sanity L2 检查 s ≤ max(0, PV·Delta_t − L·Delta_t) + 1e-6（逐层）并统计 s > 0
+    时段与同时购电/弃光时段。
+  relations: AS04（平衡式）、AS16（结算层 s' 与 q_em 的互补结构）。
+  status: accepted
+- id: AS06
+  title: 外网购电无上限、余电不上网（主口径）
+  statement: b（与 4-3 的 q）无上界；余电不上网（s 无收益）；主口径不引入购电上限。若 ablation 引入上限，须按 R5/E9 分问分链表述并重新扫描本问的可行性分界，不得引用
+    prob02 的 beta ∈ (4218.75, 4375.00] kW 或 prob03 的 [4375.0, 5000.0] kW。
+  type: 边界条件（系统范围）
+  key: false
+  criticality: medium
+  evidence_type: inherited
+  reference_ids: []
+  basis: prob01 AS15 / prob02 AS10 / prob03 AS14（题面未给联络线容量）。
+  applicability: 两链。
+  bias_if_invalid: 无依据加上限会改变主口径与全部费用；把无上限写成有上限属口径污染。
+  validation: sanity L2 记录分链购电峰值；若跑上限情景须登记为 ablation/robustness 并给出各自扫描结果。
+  relations: AS16（4-2 恒零依赖无上限 + 等式平衡）；决策点 D10。
+  status: inherited
+- id: AS07
+  title: 价格可观测性与决策时序（A8-(b)，团队裁定）
+  statement: 0:00 时当天及任何未来日的附件 4 实时电价均未知。决策层只能用历史价格（d' < d）与其他已有附件（4-2：附件 2 实际；4-3：附件
+    2 历史实际 + 附件 3 该时刻预报；4-3 调整层额外可用当天截至该时刻已实现的价格，见 AS11）；结算层一律用附件 4 实际价。论文、sanity
+    脚本与图表注记不得出现「全天电价已知」类表述。
+  type: 信息结构
+  key: true
+  criticality: high
+  evidence_type: team_decision
+  reference_ids:
+  - ref-chitsaz-2018-price-forecast-btm-storage
+  - ref-khani-2015-online-adaptive-rtod
+  - ref-campillo-2016-rtp-residential
+  basis: AGENTS.md「A8 团队裁定」（2026-09-11）与六条派生口径；文献支撑「仅用可得历史信息决策」的交易/预测范式（chitsaz-2018
+    小时内滚动更新 + 接入调度；khani-2015 预测价决策/事后价结算；campillo-2016 RTP 取决于主动调度能力）。
+  applicability: 两链全部决策层与结算层。
+  bias_if_invalid: 信息集越界会系统性低估费用、把 4-2 的 q_em 与 4-3 的 C_adj 压到零、抹平两链差异。
+  validation: 4-2 计划层输入指纹只含 ≤ d−1 的价格；4-3 每层落盘价格/预报来源与锁定时段；sanity L1 逐层核对并检查论文表述黑名单。
+  relations: AS08/AS09/AS10/AS11/AS12 的共同前提；与 AS13（A21）联动。
+  status: accepted
+- id: AS08
+  title: 主价格预测器 PF-PERSIST 与滚动回测协议
+  statement: 主预测器 = 前一日同时段：p_hat_{d,i} = p_act_{d-1,i}（i = 1..144）；d = 2025-01-01
+    无前一日，不参与回测（D_full 计 364 天）。强制基准：PF-DUAL（水平 × 时段双因子：p_hat = mu_d·s_i，s_i 为归一化历史同时段形状、mu_d
+    为最近 7 个可用历史日的日均价均值）与 PF-HIST（历史同时段扩张窗均值）。滚动回测协议（跑数前冻结）：只用 t 日之前信息；主窗口 D_req =
+    2025-02-01…12-31（334 天）、D_full 诊断；MAE 为主判据并同时报 MAPE/RMSE/bias 与 P50/P90/P99；选择规则：D_req
+    MAE 最小者，MAE 相对差 < 1% 视为并列取更简者。PF-AR（逐时段 AR(1)/惩罚回归）登记为 ablation 强制对照。
+  type: 数值近似（预测）
+  key: true
+  criticality: high
+  evidence_type: literature_fact
+  reference_ids:
+  - ref-lago-2018-spot-price-deep-learning
+  - ref-kapoor-2023-nz-price-forecasting
+  - ref-ibebuchi-2025-daep-endogenous-predictors
+  - ref-myttenaere-2016-mape-regression
+  - ref-tschora-2022-da-price-forecasting-ml
+  basis: 本动作只读滚动回测（D_req）：PF-PERSIST MAE 0.084326 元/kWh、MAPE 13.780%、RMSE 0.123837、bias
+    −0.000595、P50/P90/P99 = 0.0500/0.2294/0.3773；PF-DUAL MAE 0.093183、RMSE 0.120951、P90/P99
+    = 0.2052/0.3334；PF-HIST MAE 0.100231、MAPE 16.330%；逐日夺冠 218/67/49。文献：公平基准比较（lago-2018）、统计
+    vs ML + 基准对照与 sMAPE/MASE（kapoor-2023）、滚动窗口交叉验证且只用预测时点可得信息（ibebuchi-2025）、MAPE
+    有偏须同时报绝对指标（myttenaere-2016）。
+  applicability: 两链共用；4-3 调整层在此基础上的滚动更新见 AS11。
+  bias_if_invalid: 任何使用 t 日当天信息的实现即越界；形式回测与探针 MAE 相对差 > 5% 应先怀疑实现口径（相位/前向填充/切片）而非改预测器。
+  validation: implementation 在隔离 task 复现同一滚动回测并落盘全部分位数；sanity L3 复核输入不含 t 日信息；论文报告三者指标与预测器选择敏感性。
+  relations: AS07 的落地；AS09 与 AS11 的前提；AS22（接口）。
+  status: accepted
+- id: AS09
+  title: 决策—结算分离与「价格预报误差的代价」双口径
+  statement: 决策层（4-2 计划层；4-3 计划层与调整层）目标与偏差/紧急项使用该层信息集下的预测价 p_hat；结算层全部分项（C_plan、C_em、C_adj
+    两分段）一律按附件 4 实际价 p_act 计。对同一组提交决策分别按两套价格计价得 C_act（主）与 C_fc（决策层信念），给出 Delta_C_price
+    = C_act − C_fc 并分解为 Delta_C_plan/Delta_C_em/Delta_C_adj，D_req 与 D_full 两窗口同时报告。
+  type: 报告口径（成本）
+  key: true
+  criticality: high
+  evidence_type: literature_fact
+  reference_ids:
+  - ref-khani-2015-online-adaptive-rtod
+  - ref-staffell-2016-maximising-storage-value
+  - ref-mathaba-2014-price-forecast-benefit
+  - ref-hodge-2018-forecast-value-storage
+  - ref-antweiler-2021-storage-microeconomics
+  basis: AGENTS.md A8-(b) 派生②；文献支撑预测价决策/事后价结算、完美预知对照与以调度成本增量度量预测价值。
+  applicability: 两链全部费用。
+  bias_if_invalid: 只报一个口径会低估/高估真实支出或无法回答预测误差的经济价值；两套口径若重解模型则不是误差代价而是方案对比。
+  validation: sanity L3 复核 C_act 的分项恒等式（4-2 无 C_adj）与 C_fc 逐项可复算；论文与 ablation 同时给出
+    Delta_C_price 与预测器选择敏感性。
+  relations: AS08 的经济映射；AS15/AS17 的分项定义；AS11 的预测价。
+  status: accepted
+- id: AS10
+  title: 4-2 的逐日计划与跨日向前递推（D8-A 冲突的处理）
+  statement: 4-2 每天 0:00 制定一次当天计划、当天不再调整。实现为逐日向前递推：对每个 d 用 p_hat_{d,·}（只用 d−1 及之前的价格）与当天已知的附件
+    2 实际负载/光伏解一个单日确定性 LP，提交 (b, c, q_dis, s) 并断言 q ≡ b；状态按 E_{d,0} = E_{d-1,144} 传递，终端自由。4-2
+    不得写成单一长时域 LP（那需要全年价格信息，违反 AS07）。
+  type: 机理（决策时序）
+  key: true
+  criticality: high
+  evidence_type: literature_fact
+  reference_ids:
+  - ref-krishnamurthy-2018-arbitrage-da-rt
+  - ref-yang-2023-da-rt-shared-storage
+  - ref-staffell-2016-maximising-storage-value
+  basis: 题面「针对波动电价建立微网当天购电策略的数学模型」+ A8-(b)（未来价格未知）；文献支撑日前—实时两阶段结构与无预知可用信息下的调度对照。与
+    prob02 D8-A（单一长时域、价格完全已知）不相容，属 A8-(b) 的强制派生修正（P4-D1）。
+  applicability: 仅 4-2。
+  bias_if_invalid: 写成单一长时域 LP（预测价）会把跨日价格信息提前给计划层而低估费用；写成完全信息实际价则违反 A8-(b)。
+  validation: implementation 落盘逐日求解日志；sanity L1 检查计划层输入指纹不含任何 >= d 日的价格；与 4-3 的退化同构仅作结构检查。
+  relations: AS03/AS07/AS15；决策点 D2/D3。
+  status: accepted
+- id: AS11
+  title: 4-3 调整层的滚动价格预测与逐层信息集
+  statement: '决策时刻 m ∈ {0,6,12,18}（小时）。计划层（m=0）：p_hat = p_act_{d-1,·}，光伏 = 附件 3 的
+    0:00 预报降尺度。调整层（m = 6/12/18）：i <= 6m 用实际价 p_act_{d,i}；i > 6m 用 p_hat_{d,i} = kappa_m·p_act_{d-1,i}，kappa_m
+    = A_m/B_m（A_m 为当日 i <= 6m 实际均价、B_m 为前一日同时段均价），防御性截断 kappa_m ∈ [0.5, 2.0]；kappa_0
+    ≡ 1；光伏 = 附件 3 的 m 时刻预报降尺度；锁定 i <= 6m，剩余时段 R_m = {i : 6m < i <= 144}。'
+  type: 信息结构
+  key: true
+  criticality: high
+  evidence_type: literature_fact
+  reference_ids:
+  - ref-chitsaz-2018-price-forecast-btm-storage
+  - ref-jiang-2015-hour-ahead-bidding-adp
+  - ref-khani-2015-online-adaptive-rtod
+  basis: AGENTS.md A8-(b) 派生③（调整层用滚动更新的价格预测并逐层写明信息集）；文献支撑小时内滚动更新、信息逐步揭示的序贯决策与在线修正。
+  applicability: 仅 4-3。
+  bias_if_invalid: 调整层使用 i > 6m 的实际价属越界；kappa_m ≡ 1 会浪费当日已实现价格信息；不截断会在异常日放大误差。
+  validation: implementation 落盘每层 kappa_m、价格/光伏来源与锁定时段；sanity L1 逐层对照本表；ablation 给出
+    kappa_m ≡ 1 的对照费用。
+  relations: AS07/AS08/AS17/AS18；决策点 D6。
+  status: accepted
+- id: AS12
+  title: 主口径 = 价格点预测 + 确定性 LP；不确定性对照仅 ablation
+  statement: 两链主结果只出自「价格点预测 + 确定性线性规划」；随机规划、鲁棒优化、概率/区间预测、在线/ADP 策略只能作为 ablation 对照并标注口径差异，不得替换主结果。改主口径须先由团队裁定并新建假设版本。
+  type: 数值近似（模型族）
+  key: true
+  criticality: high
+  evidence_type: literature_fact
+  reference_ids:
+  - ref-akbari-2019-stochastic-robust-arbitrage
+  - ref-oconnor-2025-conformal-price-forecast
+  - ref-jiang-2015-hour-ahead-bidding-adp
+  basis: AGENTS.md A8-(b) 派生④（主口径 = 点预测 + 确定性 LP，鲁棒/场景随机只作 ablation）+ 承 prob03 B0（主结果唯一来源）；文献为对照口径提供先例。
+  applicability: 两链。
+  bias_if_invalid: 把鲁棒/随机结果写进主表违反 B0；反之若否认不确定性存在则缺少风险量化。
+  validation: ablation 给完全信息上界、场景/鲁棒对照、预测器选择敏感性三组；sanity L1 核对主表数值只来自主口径 run。
+  relations: AS07/AS08；决策点 D8。
+  status: accepted
+- id: AS13
+  title: 两链共用同一预测器与同一结算口径（A21 = (a)）
+  statement: 4-2 与 4-3 共用同一价格预测器（AS08 的 PF-PERSIST，4-3 调整层按 AS11 做水平校正）与同一结算口径（AS09/AS14：结算用附件
+    4 实际价、价格基数一致）；两链差异只允许来自 4-3 的调整层、0.5×/1.5× 分段结算与附件 3 预报带来的光伏预报误差，论文对比必须按此三项归因。
+  type: 决策偏好（口径统一）
+  key: false
+  criticality: high
+  evidence_type: team_decision
+  reference_ids: []
+  basis: AGENTS.md A8-(b) 派生⑥ + 本版本 §0.3 的 A21 裁定（两链共用）。
+  applicability: 两链。
+  bias_if_invalid: 两链用不同预测器会使差额无法归因到制度差异，跨链结论作废。
+  validation: sanity L1 核对两链预测器配置与结算价格字段；cross_question_review 核对口径表。
+  relations: AS08/AS09/AS14；决策点 D11。
+  status: accepted
+- id: AS14
+  title: 结算倍数与费用项的价格基数（A22）
+  statement: alpha_em = 5（两链紧急购电）、beta_def = 0.5 / beta_over = 1.5（仅 4-3 偏差结算）的结算基数一律为附件
+    4 实际价 p_act；决策层的预测价口径（C_fc）以相应层 p_hat 为基数；三者不得混记（H12）；附件 1 电价不得出现（H10）。
+  type: 边界条件（价格基数）
+  key: false
+  criticality: high
+  evidence_type: team_decision
+  reference_ids: []
+  basis: 本问 A22 登记 + 承 prob03 B1-D2-A/D7-A 的价格基数口径。
+  applicability: 两链全部价格引用点（含 4-3 调整层的 beta_def·p_hat）。
+  bias_if_invalid: 漏替换某一价格引用点会产生「部分用旧价」的静默污染，内部恒等式仍可能通过。
+  validation: implementation 给出价格引用点清单并逐项标注附件 4 来源；sanity L3 抽查 4 个指定日期 × 全部价格项。
+  relations: AS09/AS15/AS17；shared/problem_understanding.md §4.3 的三处替换警示。
+  status: accepted
+- id: AS15
+  title: 4-2 目标函数与费用分解（C_plan + C_em）
+  statement: 第 d 日计划层目标 min Σ_i p_hat_{d,i}·b_{d,i}（元，不乘 Delta_t），保留 q_em >= 0 与 alpha_em·p_hat·q_em
+    项（最优值恒 0，不得删除变量）；结算口径费用分解 C_total_act = C_plan_act + C_em_act（C_plan_act = Σ p_act·b、C_em_act
+    = Σ alpha_em·p_act·q_em = 0），4-2 无 C_adj。
+  type: 决策偏好（目标）
+  key: true
+  criticality: high
+  evidence_type: literature_fact
+  reference_ids:
+  - ref-paulauskas-2024-battery-scheduling-arbitrage
+  - ref-zhang-2021-arbitrage-technologies
+  - ref-staffell-2016-maximising-storage-value
+  - ref-hai-2025-microgrid-price-ems
+  basis: 题面问题 2 与问题 4 的费用结构 + 承 prob01 D9（不乘 Delta_t）与 prob03 T1（计划层目标必须显式给出）；文献支撑按价格曲线调度、容量/效率/功率约束与问题族定位。
+  applicability: 仅 4-2。
+  bias_if_invalid: 目标缺失会使 b 在可行域内不唯一、C_plan 不可复现；乘 Delta_t 会错量级。
+  validation: sanity L3 复核 C_total = C_plan + C_em 恒等式与 C_plan 逐日可复算；量级自检（交付期 10^7
+    元）。
+  relations: AS06/AS16；与 4-3 的 AS17 对照。
+  status: accepted
+- id: AS16
+  title: 紧急购电作用位置与分链的 q_em 机制（A23）
+  statement: 两链均保留 q_em >= 0，作用位置为等式平衡左端且仅补足负载缺口、不用于储能充电。4-2：物理输入在 0:00 已知、等式平衡含 s
+    >= 0 且计划层精确闭合，故 q_em ≡ 0（定理级结论，与价格是否已知无关）；价格不确定性只影响 C_plan（即 Delta_C_price）。4-3：决策层用附件
+    3 预报、结算层用附件 2 实际，缺口由光伏预报误差产生，q_em 由结算层互补结构唯一确定；价格误差不改变该机制。
+  type: 机理（可靠性）
+  key: false
+  criticality: high
+  evidence_type: inherited
+  reference_ids: []
+  basis: prob02 AS06 + D4-A、prob03 F2/F3（承接）；4-2 的恒零为本问 agent_inference 证明（r = s >=
+    0 ⇒ q_em = max(0, −r) = 0）；恒零属模型内推论，不得包装为文献结论。
+  applicability: 两链。
+  bias_if_invalid: 4-2 若出现 q_em > 0 应先怀疑信息集越界或平衡式写错；4-3 若把 q_em 放进决策层并允许替代普通购电会破坏作用位置口径。
+  validation: sanity L2 复核 4-2 全时段 q_em ≡ 0 与平衡残差；4-3 统计 q_em > 0 时段数、Σq_em 及归因（承
+    C9/R12）；两链统计 q_em > 0 与 c > 0 同时成立的时段数。
+  relations: AS15/AS17/AS18；决策点 D4。
+  status: accepted
+- id: AS17
+  title: 4-3 双向分段结算（读法 A 主口径 + B/C 强制对照）
+  statement: 主口径（承 prob03 B1-D2-A 读法 A）：C_total_act = Σ p_act·b + Σ[beta_def·p_act·(b−q)^+
+    + beta_over·p_act·(q−b)^+] + C_em_act，两段均为成本项，基准为当天 0:00 计划、以最终量 q 单次结算、不回溯；决策层的同一表达式用该层
+    p_hat（C_fc）。强制对照 M7·D2-B 与 M7·D2-C 必须在 ablation 跑出全量差额。
+  type: 决策偏好（结算）
+  key: true
+  criticality: high
+  evidence_type: literature_fact
+  reference_ids:
+  - ref-bottieau-2020-imbalance-settlement-forecast
+  - ref-yang-2020-deviation-penalty-distribution
+  - ref-yang-2023-da-rt-shared-storage
+  - ref-scharff-2016-elbas-intraday
+  basis: prob03 B1-D2-A/T2 + prob04 阶段级强制要求（4-3 必须含 0.5×/1.5× 分段结算）；文献支撑偏差/不平衡结算的制度与建模形式，系数
+    0.5/1.5 由题面硬给定、文献不支撑系数。
+  applicability: 仅 4-3。
+  bias_if_invalid: 把 0.5× 段写成退款（读法 C）会诱导高报计划的非物理激励；两段混记会使 C_adj 不可复算。
+  validation: sanity L3 逐项复算 0.5·Σp(b−q)^+ 与 1.5·Σp(q−b)^+；ablation 报告两条对照读法的全量差额（prob04
+    数字重跑，不得沿用 prob03 数值）。
+  relations: AS14/AS18；决策点 D7。
+  status: accepted
+- id: AS18
+  title: 4-3 三层结构、不回溯与「实际光伏只进结算层」
+  statement: 4-3 为顺序向前递推的三层结构：计划层（m=0）→ 调整层（m=6/12/18，i <= 6m 锁定）→ 实际结算层（用附件 2 实际光伏，事后闭式）；不存在等价单次联合
+    LP；实际光伏只进结算层，不改变任何决策量与储能轨迹，只改变 q_em/s'/C_em。计划层目标 min Σ p_hat^(0)·b；调整层目标 = 该层剩余时段
+    R_m 的预测价偏差结算；调整量取替代量口径（q 为最终购电量，i <= 6m 取先前层提交值）。
+  type: 机理（决策时序）
+  key: true
+  criticality: high
+  evidence_type: literature_fact
+  reference_ids:
+  - ref-scharff-2016-elbas-intraday
+  - ref-bottieau-2020-imbalance-settlement-forecast
+  - ref-krishnamurthy-2018-arbitrage-da-rt
+  - ref-komorowska-2024-liion-price-arbitrage
+  basis: prob03 F1/F2/F3 与 B1-D3（承接）+ 团队阶段级要求（4-3 须含 0:00 计划 + 三调整时刻）；文献支撑日内市场修正头寸、偏差结算与日前—实时结构。
+  applicability: 仅 4-3。
+  bias_if_invalid: 写成联合 LP 或让调整层使用未发布预报/未来实际值会使费用被低估并抹平调整机制的价值；回溯修改破坏因果性。
+  validation: implementation 落盘各层输入指纹、层目标值与提交解；sanity L1（不回溯/信息集）与 L2（结算层互补结构）复核。
+  relations: AS11/AS17/AS19。
+  status: accepted
+- id: AS19
+  title: 附件 3 预报语义、10 分钟降尺度与年末边界（承 D5-A/D6-A）
+  statement: 「预报 k 小时」= 发布时刻 m 之后第 k 个整点的功率点值；10 分钟降尺度 = 整点锚定线性插值（发布后第一小时前向保持），不强制块内能量守恒且须显式披露；发布时刻
+    m 只支配 i >= 6m+1（m 为小时，已提交为 i <= 6m）；跨年项（m+k > 24）不消费、不截断、不外推；读取附件 3 时日期列必须前向填充。
+  type: 离散化约定（预报）
+  key: false
+  criticality: medium
+  evidence_type: inherited
+  reference_ids: []
+  basis: prob03 AS05/D5-A/D6-A + 团队勘误 E1（日期列 1095/1460 行为空，必须前向填充）。
+  applicability: 仅 4-3。
+  bias_if_invalid: 不前向填充会丢 3/4 的行；改用块内能量守恒与 D5-A 冲突。
+  validation: sanity L1 复核「每天恰 4 个发布时刻 × 24 个提前量 = 1460 组」；E3 纪律：不得以预报 RMSE 作跨发布时刻比较轴；prob03
+    探针数值不得作为 prob04 交付数值。
+  relations: AS11/AS18。
+  status: inherited
+- id: AS20
+  title: 表 1/2/3 与 result4-2.xlsx/result4-3.xlsx 的填报与模板新写纪律
+  statement: 按模板行位置聚合；充放电量分别列示不冲抵；充放电量前两行时刻为 00:00:00 与 24:00；表 1 全天购电费 = C_total（正文给分项）；表
+    2 端点为逐日切片（须与 prob01 单日周期恒 6000 kWh 显式区分一次）；表 3/紧急购电量合并连续时段 + 左端点标签 + 每日至少 1 行（J_d
+    = 0 写「—」/0）。result4-2.xlsx 为三工作表（计划购电量/充放电量/紧急购电量）、result4-3.xlsx 为四工作表（计划购电量/调整购电量/充放电量/紧急购电量）；附件
+    5 的两个模板与 result2.xlsx/result3.xlsx 逐字节相同（发放方式，不是损坏），必须新写且不得反向覆盖。run_manifest 的
+    total_*_kwh 为 D_req 口径且 total_purchase_kwh 装的是 Σq，stdout 摘要为 D_full 口径。
+  type: 报告口径
+  key: false
+  criticality: medium
+  evidence_type: team_decision
+  reference_ids: []
+  basis: prob02 勘误 R1/R3/R4、prob03 D4/D11/A18 与勘误 E6（承接）；填报口径无文献可依，不得虚构。
+  applicability: 两链全部交付件。
+  bias_if_invalid: 覆盖模板或用模板数值会污染交付，且 md5 相同使误覆盖无法靠文件差异发现。
+  validation: sanity L1 核对工作表集合与行数；L3 对全部工作表逐格回溯（>= 4 个指定日期 + 随机 3 天）。
+  relations: AS02/AS22。
+  status: accepted
+- id: AS21
+  title: 统一 tie-break（字典序）与可复现性（承 T7-1/T9）
+  statement: 两链所有层、所有对照模型一律使用同一次目标规则：提交解取字典序——先 min 该层主目标，再在主目标最优面上 min Σ_t (c + q_dis)（吞吐量最小）；epsilon
+    加权式只作逐层诊断对照并落盘。不得用不同 tie-break 的结果互相比对。
+  type: 数值近似（可复现性）
+  key: false
+  criticality: high
+  evidence_type: inherited
+  reference_ids: []
+  basis: prob03 团队裁定 T7-1/T7-4/T9（承接）。
+  applicability: 两链。
+  bias_if_invalid: LP 最优面非唯一时，不同取点经跨层/跨日初值传播会改变链级总费用（prob03 实测约 1e-4 相对量级）；prob04
+    须重新实测。
+  validation: implementation 落盘逐层 tie-break 记录与不变性验证（主目标相对变化 <= 1e-9）；sanity/ablation
+    把最优面选择敏感性登记为已知口径敏感性。
+  relations: AS10/AS18；ablation 的公平性前提。
+  status: inherited
+- id: AS22
+  title: 价格相关派生记号与数据接口
+  statement: 引入三个派生记号（不改 global_symbols.yaml，由 formulation 在局部符号表声明）：p_act_{d,i}（附件
+    4 实际价，即全局符号 price 的 prob04 取值）、p_hat^(m)_{d,i}（层 m 信息集下的预测价）、kappa_m（调整层水平校正因子）。价格一律从
+    data/附件4.xlsx 读取（Sheet1，A1:EO366，日期\时间 + 144 个 10 分钟列，与附件 1/2 同相位）；禁止从附件 1 读取任何价格；预测器实现必须以「t
+    + 可用历史集合」为显式入参。
+  type: 数据假设（接口）
+  key: false
+  criticality: medium
+  evidence_type: agent_inference
+  reference_ids: []
+  basis: 本动作只读探针实测的附件 4 结构与 A22 派生；global_symbols.yaml 已登记 price/alpha_em/beta_def/beta_over/q
+    的 prob04 语义。
+  applicability: 两链。
+  bias_if_invalid: 符号命名与全局表冲突，或预测器隐式使用全量数据（无时间窗参数），会使信息集越界难以审计。
+  validation: implementation 的预测器以「t + 可用历史集合」为显式入参；sanity L3 用「把未来数据置乱后预测结果不变」的探针检查信息集边界。
+  relations: AS07/AS08/AS11；global_symbols.yaml 的相关条目。
+  status: accepted
+- id: AS23
+  title: 不计静置损耗与自放电
+  statement: 只计充放电往返效率（eta = 0.9），不计静置损耗与自放电（无充放电时 E 保持不变）。
+  type: 机理简化
+  key: false
+  criticality: low
+  evidence_type: common_sense
+  reference_ids: []
+  basis: prob01 AS14（承接）；常识性简化。
+  applicability: 两链。
+  bias_if_invalid: 长时间静置的日历老化被忽略会高估年末可用电量（365 天跨度下影响有限，方向为略低估费用）。
+  validation: robustness 可加静置损耗情景（非必做）；论文在假设表中披露。
+  relations: AS04。
+  status: inherited
+formulation_versions:
+- formulation_v001
+active_formulation: formulation_v001
+accepted_formulation: formulation_v001
+tasks: []
+sanity_status: pending
+conclusion_id: ''
+conclusion_version: 0
+conclusion_hash: ''
+notes: prob04（问题 4：波动电价下重算问题 2 与问题 3）首个假设版本，23 条假设（关键 9 条：AS07–AS12、AS15、AS17、AS18）；A8
+  = A8-(b)（团队裁定）、A21 = (a)、A22、A23（分链）、D9-B = 采纳 均在本版本登记。关键假设的 reference_ids 全部取 prob04
+  本小问池内 verified+used 条目。
+decision_reason: prob04 assumption_v001 已把 A8/A21/A22/A23 与 D9-B 全部裁定为可执行口径并版本化（23
+  条假设，关键 9 条：AS07–AS12、AS15、AS17、AS18），并按团队阶段级要求同时覆盖 4-2 与 4-3 两条产物链。关键假设文献门禁真实调用
+  check_key_assumptions('microgrid_2025','prob04') 得 passed=true、errors=[]（prob04
+  池 24/24 verified=true 且 status=used）。核心口径：A8 = A8-(b)（0:00 未知当天电价，决策用历史价与预测价、结算用附件
+  4 实际价），价格预测器按预注册规则选定 PF-PERSIST（D_req MAE 0.084326 元/kWh、MAPE 13.780%，PF-DUAL/PF-HIST
+  为强制基准，PF-AR 延后 ablation），决策—结算分离并给出两套计价口径之差（价格预报误差的代价）；4-2 改为逐日向前递推（与 prob02 D8-A
+  的冲突已显式记录并按 A8-(b) 派生修正）、其 q_em ≡ 0 有定理级证明，4-3 三层结构 + 调整层 κ_m 滚动价格预测 + 双向分段结算（读法
+  A 主口径、B/C 强制对照）。冲突与差异（C4-1…C4-10、P4-D1…P4-D6）逐条记录，未静默沿用旧登记；文末 D1–D12 给出 2–3 备选与推荐供团队替换。无人工阻塞条件，建议进入
+  mathematical_formulation。
+decided_at: '2026-09-11T11:58:51.376665+00:00'

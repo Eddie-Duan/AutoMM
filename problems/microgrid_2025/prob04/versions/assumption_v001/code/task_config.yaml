@@ -1,0 +1,64 @@
+# prob04 computation task 级配置（**两链共用**）
+# 生成者：implementation-agent（动作 act-be9040ad7b264d3e）
+# 用途：resource-manager 提交隔离计算 task 时作为 --config-path 传入；
+#       effective_config 会把它合并到全局配置之上（仅影响本 task）。
+#
+# 本问是「**一道小问、两套结果**」：链 4-2（≙ 重算问题 2）与链 4-3（≙ 重算问题 3）
+# 各自有独立 task spec 与独立 output_directory，但共用本配置与同一份 code 目录。
+#
+# ⚠️ `chain_scope` 的作用（**必要，不可删**）：`automm.tasks.compute_task_id` 的身份由
+# `problem_id/question_id/stage/code_hash/config_hash/input_hash/assumption_version/formulation_version/backend`
+# 组成，**不含 `output_directory` 与 `command`**。两链共用同一份代码与同一份输入，若再共用同一份 config，
+# 两份 spec 会算出**相同 task_id**，`submit_task` 会按 `TASK_ROOT/<task_id>` 目录互相覆盖/拒绝第二次提交，
+# 且 task group 的 `expected_tasks=2` 永远无法满足。故链 4-3 使用 `task_config_4-3.yaml`
+# （`chain_scope: "4-3"`），使 `config_hash` 不同 ⇒ `task_id` 不同。**不得**把两份 config 合并回一份。
+chain_scope: "4-2"
+compute:
+  default_backend: local
+  max_local_concurrent_tasks: 1
+  memory_per_worker_gb: 2
+  task_timeout_seconds: 1800
+  timeout_retry_attempts: 2
+  retry:
+    infrastructure_transient: 3
+    code_runtime: 2
+    model_revision: 2
+  resource_notes:
+    device: cpu
+    gpu_required: false
+    concurrent_gpu_tasks: 0
+    note: >-
+      prob04 不使用 GPU（`gpu_required: false`），故**单卡 GPU 串行约束不适用**，不占用该额度；
+      两链均为 CPU HiGHS 的确定性 LP。规模：链 4-2 单日 1 次 LP（864 变量 / 288 等式，6 块：b/c/q_dis/s/E/q_em），
+      全年 365 次；链 4-3 单日 4 次 LP（计划层 720 变量 / 288 等式；调整层 m=6/12/18 分别 756/504/252 变量，
+      单日合计 2,232 变量 / 720 等式），全年 1,460 次。统一 tie-break（AS21 承 prob03 T7-1/T9）为四段式
+      （① 纯主目标基线 ② 字面 ε 加权诊断 ③ 主目标最优面上的字典序最小吞吐量提交解 ④ 退化/多重最优探测），
+      故名义求解器调用为链 4-2 `365×4 = 1,460`、链 4-3 `1,460×4 = 5,840`；T7-2 每触发一次 ε 收缩另加 1 次
+      （有界于 T7_MAX_SHRINKS=8）。实测（implementation 探针，`--days 34`）：链 4-2 34 层 ≈ 3.6 s（含产物落盘）、
+      链 4-3 136 层 ≈ 8 s ⇒ 全年预期链 4-2 < 60 s、链 4-3 < 150 s，task timeout 1800 s /
+      `--max-wall-seconds 1500` 余量 ≥ 一个数量级。
+      内存：单层 LP 最大 756 变量 / 288 等式的稀疏矩阵，实测常驻 < 400 MB，低于 `memory_per_worker_gb = 2`；
+      本机可用内存偏低（实测 1.3–2.2 GB），故 `max_local_concurrent_tasks = 1`，两链**必须串行**提交。
+      另需注意：`--model a2-pre`（4-2 的价格完全预知下界锚点）会堆叠单一长时域 LP（全年 262,800 变量 /
+      105,120 等式），**只在探针/ablation/sanity 使用且强制 `--days < 365`**，不进入主结果。
+    worker_launch_mode: "supervised（继承 config/compute.yaml；detached 在本环境会被沙箱回收）"
+    budget_split_note: >-
+      chain_4-2: 单层 LP ≤ 864 变量 / 288 等式，名义调用 1,460 次，`--max-wall-seconds 1500`；
+      chain_4-3: 单层 LP ≤ 756 变量 / 288 等式，名义调用 5,840 次，`--max-wall-seconds 1500`。
+solver:
+  name: highs
+  interface: "scipy.optimize.linprog(method='highs')"
+  device: cpu
+  time_limit_seconds: 60
+  deterministic: true
+  seed: null
+  notes:
+    - "time_limit_seconds 为**单层 LP** 时限；整链另有 --max-wall-seconds 墙钟预算（正式两链均为 1500）。"
+    - "统一 tie-break（AS21，承 prob03 团队裁定 T7-1/T9）：先 min 该层主目标，再在主目标最优面上 min Σ(c+q_dis)。"
+    - "ε = 1e-6 × max(|该层主目标最优值|,1) / [n·(c_cap+q_dis_cap)]（无量纲相对权重）；逐层要求主目标相对变化 ≤ 1e-9。"
+    - "字面 ε 加权式只作**逐层诊断**（tiebreak_audit.json 的 weighted_* 字段），提交解一律取字典序解。"
+    - "LP 最优面可能不唯一（调整层目标在偏差为 0 处退化、计划层在吞吐量上退化）：提交解取吞吐量最小者，"
+    - "退化维度与多重最优层数落盘于 tiebreak_audit.json；sanity 以约束残差 + 恒等式 + 目标值 + 交付表为准，"
+    - "不比对逐点解唯一性（formulation §7.8）。"
+    - "决策层价格一律用 \\hat p（PF-PERSIST / κ_m 滚动更新），结算层一律用附件 4 实际价；"
+    - "禁止出现「全天电价已知」类表述（A8-(b) 派生⑤）。"

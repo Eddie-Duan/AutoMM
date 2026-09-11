@@ -1,0 +1,190 @@
+{
+  "protocol": {
+    "information_set": "H_d = {d' : d' < d}（显式入参；禁止使用 d 当日与未来信息）",
+    "windows": {
+      "D_req": "2025-02-01…2025-12-31（334 天，主判据）",
+      "D_full": "2025-01-02…2025-12-31（364 天，诊断）"
+    },
+    "metrics": "MAE（主判据）、MAPE、RMSE、bias、绝对误差 P50/P90/P99、逐日 MAE 夺冠计数",
+    "selection_rule": "D_req MAE 最小；MAE 相对差 < 1% 视为并列，取更简者（BT-5）",
+    "frozen": true
+  },
+  "formulas": {
+    "PF-PERSIST": "hat p_{d,i} = p^{act}_{d-1,i}（主口径）",
+    "PF-HIST": "hat p_{d,i} = mean_{d' in H_d} p^{act}_{d',i}（扩张窗历史同时段均值）",
+    "PF-DUAL": "hat p_{d,i} = mu_d * s_i；s_i 为归一化历史形状（mean_i(s_i)=1），mu_d 为最近 7 个可用日的日内均价均值",
+    "PF-AR": "hat p_{d,i} = a_i + phi_i * p^{act}_{d-1,i}（逐时段 OLS，系数只用 H_d 估计；配对样本 < 3 组时回退 PF-HIST；ablation 对照）"
+  },
+  "days_available": 364,
+  "fallbacks": {
+    "PF-PERSIST": {
+      "fallback_constant_price": 0,
+      "pf_ar_regression_undefined": 0
+    },
+    "PF-DUAL": {
+      "fallback_constant_price": 0,
+      "pf_ar_regression_undefined": 0
+    },
+    "PF-HIST": {
+      "fallback_constant_price": 0,
+      "pf_ar_regression_undefined": 0
+    },
+    "PF-AR": {
+      "fallback_constant_price": 0,
+      "pf_ar_regression_undefined": 3
+    }
+  },
+  "windows": {
+    "D_req": {
+      "days": 334,
+      "first_day": 31,
+      "last_day": 364,
+      "metrics": {
+        "PF-PERSIST": {
+          "mae": 0.08432593978709249,
+          "mape": 0.13780058945644877,
+          "rmse": 0.12383718140836511,
+          "bias": -0.0005953551230871593,
+          "p50": 0.050000000000000044,
+          "p90": 0.22940000000000002,
+          "p99": 0.37729999999999997,
+          "max": 0.5319999999999999,
+          "daily_mae_win_days": 159.0,
+          "daily_mae_win_fraction": 0.47604790419161674
+        },
+        "PF-DUAL": {
+          "mae": 0.09338749766350038,
+          "mape": 0.15290417085582758,
+          "rmse": 0.12156633287001192,
+          "bias": -0.0003280142096758831,
+          "p50": 0.07230931788638112,
+          "p90": 0.2065374375606927,
+          "p99": 0.3358529269971275,
+          "max": 0.5071754637587215,
+          "daily_mae_win_days": 49.0,
+          "daily_mae_win_fraction": 0.1467065868263473
+        },
+        "PF-HIST": {
+          "mae": 0.10023081161598094,
+          "mape": 0.16330092149892692,
+          "rmse": 0.13687750498977533,
+          "bias": 0.013160843054557551,
+          "p50": 0.07102940447641867,
+          "p90": 0.24109448008849577,
+          "p99": 0.39630938775216207,
+          "max": 0.5469586206896551,
+          "daily_mae_win_days": 51.0,
+          "daily_mae_win_fraction": 0.15269461077844312
+        },
+        "PF-AR": {
+          "mae": 0.08066370950078573,
+          "mape": 0.1349933196335897,
+          "rmse": 0.10983600538393719,
+          "bias": 0.005108496107795424,
+          "p50": 0.05828817422275709,
+          "p90": 0.18568290965158607,
+          "p99": 0.33338640526105134,
+          "max": 0.48727371195244135,
+          "daily_mae_win_days": 75.0,
+          "daily_mae_win_fraction": 0.2245508982035928
+        }
+      },
+      "tie_days": 0
+    },
+    "D_full": {
+      "days": 364,
+      "first_day": 1,
+      "last_day": 364,
+      "metrics": {
+        "PF-PERSIST": {
+          "mae": 0.08447020375457877,
+          "mape": 0.13610119303397145,
+          "rmse": 0.1241289145905324,
+          "bias": 4.4719169719169406e-05,
+          "p50": 0.050000000000000044,
+          "p90": 0.23109999999999997,
+          "p99": 0.3768,
+          "max": 0.5319999999999999,
+          "daily_mae_win_days": 177.0,
+          "daily_mae_win_fraction": 0.48626373626373626
+        },
+        "PF-DUAL": {
+          "mae": 0.09265999093973917,
+          "mape": 0.1497215902123782,
+          "rmse": 0.12052732167566797,
+          "bias": 0.00028817574332083506,
+          "p50": 0.0719703920522064,
+          "p90": 0.2052113764507294,
+          "p99": 0.33319282939815453,
+          "max": 0.5071754637587215,
+          "daily_mae_win_days": 58.0,
+          "daily_mae_win_fraction": 0.15934065934065933
+        },
+        "PF-HIST": {
+          "mae": 0.09900307761348602,
+          "mape": 0.15939263115995247,
+          "rmse": 0.13490301597677962,
+          "bias": 0.012936895567938415,
+          "p50": 0.07067728102189752,
+          "p90": 0.23701883239171384,
+          "p99": 0.39306451612903254,
+          "max": 0.5469586206896551,
+          "daily_mae_win_days": 55.0,
+          "daily_mae_win_fraction": 0.1510989010989011
+        },
+        "PF-AR": {
+          "mae": 0.08147499729300403,
+          "mape": 0.13389115083792774,
+          "rmse": 0.11061350651560685,
+          "bias": 0.0048519813529471,
+          "p50": 0.05916002896221989,
+          "p90": 0.18777443735548538,
+          "p99": 0.3331293687981712,
+          "max": 0.48727371195244135,
+          "daily_mae_win_days": 80.0,
+          "daily_mae_win_fraction": 0.21978021978021978
+        }
+      },
+      "tie_days": 3
+    }
+  },
+  "method_metrics": {},
+  "selection": {
+    "window": "D_req",
+    "selection_methods": [
+      "PF-PERSIST",
+      "PF-DUAL",
+      "PF-HIST"
+    ],
+    "mae_by_method": {
+      "PF-PERSIST": 0.08432593978709249,
+      "PF-DUAL": 0.09338749766350038,
+      "PF-HIST": 0.10023081161598094
+    },
+    "relative_difference_vs_best": {
+      "PF-PERSIST": 0.0,
+      "PF-DUAL": 0.10745872384329967,
+      "PF-HIST": 0.18861185382629977
+    },
+    "tie_tolerance": 0.01,
+    "tied_methods": [
+      "PF-PERSIST"
+    ],
+    "selected": "PF-PERSIST",
+    "simplicity_rank": {
+      "PF-PERSIST": 0,
+      "PF-HIST": 1,
+      "PF-DUAL": 2,
+      "PF-AR": 3
+    },
+    "baseline_methods": [
+      "PF-PERSIST",
+      "PF-DUAL",
+      "PF-HIST"
+    ],
+    "ablation_methods": [
+      "PF-AR"
+    ],
+    "note": "PF-AR 只作 ablation 强制对照，按 AS08 不参与主口径选择；所有预测器的指标（含 PF-AR）仍全量落盘于 windows 中。"
+  }
+}
