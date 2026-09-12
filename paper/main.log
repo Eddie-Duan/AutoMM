@@ -1,4 +1,4 @@
-This is XeTeX, Version 3.141592653-2.6-0.999997 (MiKTeX 25.12) (preloaded format=xelatex 2026.9.12)  12 SEP 2026 11:48
+This is XeTeX, Version 3.141592653-2.6-0.999997 (MiKTeX 25.12) (preloaded format=xelatex 2026.9.12)  12 SEP 2026 15:03
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -1220,6 +1220,45 @@ Package: xeCJK-listings 2026/08/21 v3.10.6 xeCJK patch file for listings
         2025/11/14 1.11b (Carsten Heinz)
     so I'm assuming it got fixed.
 
+Package fontspec Info: 
+(fontspec)             Consolas scale = 0.90.
+
+
+Package fontspec Info: 
+(fontspec)             Consolas scale = 0.90.
+
+
+Package fontspec Info: 
+(fontspec)             Consolas/B scale = 0.90.
+
+
+Package fontspec Info: 
+(fontspec)             Consolas/I scale = 0.90.
+
+
+Package fontspec Info: 
+(fontspec)             Consolas/BI scale = 0.90.
+
+
+Package fontspec Info: 
+(fontspec)             Font family 'Consolas(0)' created for font 'Consolas'
+(fontspec)             with options
+(fontspec)             [WordSpace={1,0,0},HyphenChar=None,PunctuationSpace=Word
+Space,Scale=0.90].
+(fontspec)              
+(fontspec)              This font family consists of the following NFSS
+(fontspec)             series/shapes:
+(fontspec)              
+(fontspec)             - 'normal' (m/n) with NFSS spec.:
+(fontspec)             <->s*[0.90]"Consolas/OT:script=latn;language=dflt;"
+(fontspec)             - 'bold' (b/n) with NFSS spec.:
+(fontspec)             <->s*[0.90]"Consolas/B/OT:script=latn;language=dflt;"
+(fontspec)             - 'italic' (m/it) with NFSS spec.:
+(fontspec)             <->s*[0.90]"Consolas/I/OT:script=latn;language=dflt;"
+(fontspec)             - 'bold italic' (b/it) with NFSS spec.:
+(fontspec)             <->s*[0.90]"Consolas/BI/OT:script=latn;language=dflt;"
+
+
 (C:\Users\DUANboyang\AppData\Local\Programs\MiKTeX\tex/latex/hyperref\hyperref.
 sty
 Package: hyperref 2025-07-12 v7.01o Hypertext links for LaTeX
@@ -1365,29 +1404,47 @@ Package uniquecounter Info: New unique counter `rerunfilecheck' on input line 2
 84.
 )
 \Hy@SectionHShift=\skip92
-) (main.aux)
+)
+(C:\Users\DUANboyang\AppData\Local\Programs\MiKTeX\tex/latex/cite\cite.sty
+LaTeX Info: Redefining \cite on input line 302.
+LaTeX Info: Redefining \nocite on input line 332.
+Package: cite 2015/02/27  v 5.5
+)
+(main.aux)
+Runaway argument?
+{\contentsline { 
+! File ended while scanning use of \@writefile.
+<inserted text> 
+                \par 
+l.111 \begin{document}
+                      
+I suspect you have forgotten a `}', causing me
+to read past where you wanted me to stop.
+I'll try to recover; but if the error is serious,
+you'd better type `E' or `X' now and fix your file.
+
 \openout1 = `main.aux'.
 
-LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 88.
-LaTeX Font Info:    ... okay on input line 88.
-LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 88.
-LaTeX Font Info:    ... okay on input line 88.
-LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 88.
-LaTeX Font Info:    ... okay on input line 88.
-LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 88.
-LaTeX Font Info:    ... okay on input line 88.
-LaTeX Font Info:    Checking defaults for TS1/cmr/m/n on input line 88.
-LaTeX Font Info:    ... okay on input line 88.
-LaTeX Font Info:    Checking defaults for TU/lmr/m/n on input line 88.
-LaTeX Font Info:    ... okay on input line 88.
-LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 88.
-LaTeX Font Info:    ... okay on input line 88.
-LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 88.
-LaTeX Font Info:    ... okay on input line 88.
-LaTeX Font Info:    Checking defaults for PD1/pdf/m/n on input line 88.
-LaTeX Font Info:    ... okay on input line 88.
-LaTeX Font Info:    Checking defaults for PU/pdf/m/n on input line 88.
-LaTeX Font Info:    ... okay on input line 88.
+LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 111.
+LaTeX Font Info:    ... okay on input line 111.
+LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 111.
+LaTeX Font Info:    ... okay on input line 111.
+LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 111.
+LaTeX Font Info:    ... okay on input line 111.
+LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 111.
+LaTeX Font Info:    ... okay on input line 111.
+LaTeX Font Info:    Checking defaults for TS1/cmr/m/n on input line 111.
+LaTeX Font Info:    ... okay on input line 111.
+LaTeX Font Info:    Checking defaults for TU/lmr/m/n on input line 111.
+LaTeX Font Info:    ... okay on input line 111.
+LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 111.
+LaTeX Font Info:    ... okay on input line 111.
+LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 111.
+LaTeX Font Info:    ... okay on input line 111.
+LaTeX Font Info:    Checking defaults for PD1/pdf/m/n on input line 111.
+LaTeX Font Info:    ... okay on input line 111.
+LaTeX Font Info:    Checking defaults for PU/pdf/m/n on input line 111.
+LaTeX Font Info:    ... okay on input line 111.
 
 Package fontspec Info: 
 (fontspec)             Adjusting the maths setup (use [no-math] to avoid
@@ -1395,57 +1452,57 @@ Package fontspec Info:
 
 \symlegacymaths=\mathgroup9
 LaTeX Font Info:    Overwriting symbol font `legacymaths' in version `bold'
-(Font)                  OT1/cmr/m/n --> OT1/cmr/bx/n on input line 88.
-LaTeX Font Info:    Redeclaring math accent \acute on input line 88.
-LaTeX Font Info:    Redeclaring math accent \grave on input line 88.
-LaTeX Font Info:    Redeclaring math accent \ddot on input line 88.
-LaTeX Font Info:    Redeclaring math accent \tilde on input line 88.
-LaTeX Font Info:    Redeclaring math accent \bar on input line 88.
-LaTeX Font Info:    Redeclaring math accent \breve on input line 88.
-LaTeX Font Info:    Redeclaring math accent \check on input line 88.
-LaTeX Font Info:    Redeclaring math accent \hat on input line 88.
-LaTeX Font Info:    Redeclaring math accent \dot on input line 88.
-LaTeX Font Info:    Redeclaring math accent \mathring on input line 88.
-LaTeX Font Info:    Redeclaring math symbol \Gamma on input line 88.
-LaTeX Font Info:    Redeclaring math symbol \Delta on input line 88.
-LaTeX Font Info:    Redeclaring math symbol \Theta on input line 88.
-LaTeX Font Info:    Redeclaring math symbol \Lambda on input line 88.
-LaTeX Font Info:    Redeclaring math symbol \Xi on input line 88.
-LaTeX Font Info:    Redeclaring math symbol \Pi on input line 88.
-LaTeX Font Info:    Redeclaring math symbol \Sigma on input line 88.
-LaTeX Font Info:    Redeclaring math symbol \Upsilon on input line 88.
-LaTeX Font Info:    Redeclaring math symbol \Phi on input line 88.
-LaTeX Font Info:    Redeclaring math symbol \Psi on input line 88.
-LaTeX Font Info:    Redeclaring math symbol \Omega on input line 88.
-LaTeX Font Info:    Redeclaring math symbol \mathdollar on input line 88.
-LaTeX Font Info:    Redeclaring symbol font `operators' on input line 88.
+(Font)                  OT1/cmr/m/n --> OT1/cmr/bx/n on input line 111.
+LaTeX Font Info:    Redeclaring math accent \acute on input line 111.
+LaTeX Font Info:    Redeclaring math accent \grave on input line 111.
+LaTeX Font Info:    Redeclaring math accent \ddot on input line 111.
+LaTeX Font Info:    Redeclaring math accent \tilde on input line 111.
+LaTeX Font Info:    Redeclaring math accent \bar on input line 111.
+LaTeX Font Info:    Redeclaring math accent \breve on input line 111.
+LaTeX Font Info:    Redeclaring math accent \check on input line 111.
+LaTeX Font Info:    Redeclaring math accent \hat on input line 111.
+LaTeX Font Info:    Redeclaring math accent \dot on input line 111.
+LaTeX Font Info:    Redeclaring math accent \mathring on input line 111.
+LaTeX Font Info:    Redeclaring math symbol \Gamma on input line 111.
+LaTeX Font Info:    Redeclaring math symbol \Delta on input line 111.
+LaTeX Font Info:    Redeclaring math symbol \Theta on input line 111.
+LaTeX Font Info:    Redeclaring math symbol \Lambda on input line 111.
+LaTeX Font Info:    Redeclaring math symbol \Xi on input line 111.
+LaTeX Font Info:    Redeclaring math symbol \Pi on input line 111.
+LaTeX Font Info:    Redeclaring math symbol \Sigma on input line 111.
+LaTeX Font Info:    Redeclaring math symbol \Upsilon on input line 111.
+LaTeX Font Info:    Redeclaring math symbol \Phi on input line 111.
+LaTeX Font Info:    Redeclaring math symbol \Psi on input line 111.
+LaTeX Font Info:    Redeclaring math symbol \Omega on input line 111.
+LaTeX Font Info:    Redeclaring math symbol \mathdollar on input line 111.
+LaTeX Font Info:    Redeclaring symbol font `operators' on input line 111.
 LaTeX Font Info:    Encoding `OT1' has changed to `TU' for symbol font
-(Font)              `operators' in the math version `normal' on input line 88.
-LaTeX Font Info:    Overwriting symbol font `operators' in version `normal'
-(Font)                  OT1/cmr/m/n --> TU/lmr/m/n on input line 88.
-LaTeX Font Info:    Encoding `OT1' has changed to `TU' for symbol font
-(Font)              `operators' in the math version `bold' on input line 88.
-LaTeX Font Info:    Overwriting symbol font `operators' in version `bold'
-(Font)                  OT1/cmr/bx/n --> TU/lmr/m/n on input line 88.
-LaTeX Font Info:    Overwriting symbol font `operators' in version `normal'
-(Font)                  TU/lmr/m/n --> TU/lmr/m/n on input line 88.
-LaTeX Font Info:    Overwriting math alphabet `\mathit' in version `normal'
-(Font)                  OT1/cmr/m/it --> TU/lmr/m/it on input line 88.
-LaTeX Font Info:    Overwriting math alphabet `\mathbf' in version `normal'
-(Font)                  OT1/cmr/bx/n --> TU/lmr/b/n on input line 88.
-LaTeX Font Info:    Overwriting math alphabet `\mathsf' in version `normal'
-(Font)                  OT1/cmss/m/n --> TU/lmss/m/n on input line 88.
-LaTeX Font Info:    Overwriting math alphabet `\mathtt' in version `normal'
-(Font)                  OT1/cmtt/m/n --> TU/lmtt/m/n on input line 88.
-LaTeX Font Info:    Overwriting symbol font `operators' in version `bold'
-(Font)                  TU/lmr/m/n --> TU/lmr/b/n on input line 88.
-LaTeX Font Info:    Overwriting math alphabet `\mathit' in version `bold'
-(Font)                  OT1/cmr/bx/it --> TU/lmr/b/it on input line 88.
-LaTeX Font Info:    Overwriting math alphabet `\mathsf' in version `bold'
-(Font)                  OT1/cmss/bx/n --> TU/lmss/b/n on input line 88.
-LaTeX Font Info:    Overwriting math alphabet `\mathtt' in version `bold'
-(Font)                  OT1/cmtt/m/n --> TU/lmtt/b/n on input line 88.
+(Font)              `operators' in the math version `normal' on input line 111.
 
+LaTeX Font Info:    Overwriting symbol font `operators' in version `normal'
+(Font)                  OT1/cmr/m/n --> TU/lmr/m/n on input line 111.
+LaTeX Font Info:    Encoding `OT1' has changed to `TU' for symbol font
+(Font)              `operators' in the math version `bold' on input line 111.
+LaTeX Font Info:    Overwriting symbol font `operators' in version `bold'
+(Font)                  OT1/cmr/bx/n --> TU/lmr/m/n on input line 111.
+LaTeX Font Info:    Overwriting symbol font `operators' in version `normal'
+(Font)                  TU/lmr/m/n --> TU/lmr/m/n on input line 111.
+LaTeX Font Info:    Overwriting math alphabet `\mathit' in version `normal'
+(Font)                  OT1/cmr/m/it --> TU/lmr/m/it on input line 111.
+LaTeX Font Info:    Overwriting math alphabet `\mathbf' in version `normal'
+(Font)                  OT1/cmr/bx/n --> TU/lmr/b/n on input line 111.
+LaTeX Font Info:    Overwriting math alphabet `\mathsf' in version `normal'
+(Font)                  OT1/cmss/m/n --> TU/lmss/m/n on input line 111.
+LaTeX Font Info:    Overwriting math alphabet `\mathtt' in version `normal'
+(Font)                  OT1/cmtt/m/n --> TU/Consolas(0)/m/n on input line 111.
+LaTeX Font Info:    Overwriting symbol font `operators' in version `bold'
+(Font)                  TU/lmr/m/n --> TU/lmr/b/n on input line 111.
+LaTeX Font Info:    Overwriting math alphabet `\mathit' in version `bold'
+(Font)                  OT1/cmr/bx/it --> TU/lmr/b/it on input line 111.
+LaTeX Font Info:    Overwriting math alphabet `\mathsf' in version `bold'
+(Font)                  OT1/cmss/bx/n --> TU/lmss/b/n on input line 111.
+LaTeX Font Info:    Overwriting math alphabet `\mathtt' in version `bold'
+(Font)                  OT1/cmtt/m/n --> TU/Consolas(0)/b/n on input line 111.
 *geometry* driver: auto-detecting
 *geometry* detected driver: xetex
 *geometry* verbose mode - [ preamble ] result:
@@ -1492,7 +1549,7 @@ Package: ltcaption 2021/01/08 v1.4c longtable captions (AR)
 )
 Package caption Info: End \AtBeginDocument code.
 \c@lstlisting=\count391
-Package hyperref Info: Link coloring OFF on input line 88.
+Package hyperref Info: Link coloring OFF on input line 111.
  (sec0_abstract.tex
 
 Package fontspec Info: 
@@ -1509,6 +1566,8 @@ Package fontspec Info:
 (fontspec)             Could not resolve font "FangSong/I" (it probably
 (fontspec)             doesn't exist).
 
+LaTeX Font Info:    Font shape `TU/Consolas(0)/m/n' will be
+(Font)              scaled to size 8.99994pt on input line 1.
 
 Package fontspec Info: 
 (fontspec)             Font family 'FangSong(0)' created for font 'FangSong'
@@ -1547,595 +1606,376 @@ TU/lmr/m/n/9 kW\TU/SimSun(0)/m/n/9 ，|  光 伏 取 值 于
 [5]
 File: figs/fig01_inputs.png Graphic file (type bmp)
 <figs/fig01_inputs.png>
-) (sec6_framework.tex [6] [7]) (sec7_prob1.tex [8]
-Overfull \hbox (3.24554pt too wide) in paragraph at lines 13--14
-[]\TU/SimSun(0)/m/n/10 最 优 全 天 购 电 费 为 $\OML/cmm/m/it/10 C[] \OT1/cmr/m/n/10 = 
-35126\OML/cmm/m/it/10 :\OT1/cmr/m/n/10 948589$ \TU/SimSun(0)/m/n/10 元，|  全 天 购 
-电 量 \TU/lmr/m/n/10 59482.698998 kWh\TU/SimSun(0)/m/n/10 ，|  当 日 净 负 荷 为 \TU/lmr
-/m/n/10 55541.972433
- []
+) (sec6_framework.tex [6]
 
+LaTeX Warning: Citation `ref-csee-2023-mg-ems-review' on page 7 undefined on in
+put line 35.
+
+
+LaTeX Warning: Citation `ref-moradi-2018-standalone' on page 7 undefined on inp
+ut line 35.
+
+
+LaTeX Warning: Citation `ref-alguhi-2025-bess-operation' on page 7 undefined on
+ input line 35.
+
+
+LaTeX Warning: Citation `ref-valibeygi-2020-battery-dispatch-soc' on page 7 und
+efined on input line 35.
+
+
+LaTeX Warning: Citation `ref-wang-2024-complementarity' on page 7 undefined on 
+input line 47.
+
+
+LaTeX Warning: Citation `ref-nazir-2023-realizable-dispatch' on page 7 undefine
+d on input line 47.
+
+
+LaTeX Warning: Citation `ref-grimaldi-2025-arbitrage-curtail' on page 7 undefin
+ed on input line 49.
+
+
+LaTeX Warning: Citation `ref-qing-2025-pv-curtailment' on page 7 undefined on i
+nput line 49.
+
+[7]) (sec7_prob1.tex [8] [9]
 File: figs/fig03_p1_arbitrage.png Graphic file (type bmp)
 <figs/fig03_p1_arbitrage.png>
 File: figs/fig04_p1_dispatch.png Graphic file (type bmp)
 <figs/fig04_p1_dispatch.png>
-[9] [10]
-Underfull \hbox (badness 10000) in paragraph at lines 86--86
-[]|\TU/SimSun(0)/m/n/9 储 电 量 离 散 化 动 态 规 划  |（网 格
+File: figs/fig05_p1_soc.png Graphic file (type bmp)
+<figs/fig05_p1_soc.png>
+
+Underfull \hbox (badness 10000) in paragraph at lines 130--131
+\TU/SimSun(0)/m/n/10 检 验 从 量 级、|  约 束 与 填 报 三 个 层 次 展 开。|  量 级 上，|  费 用 $\OT1/c
+mr/m/n/10 35 126\OML/cmm/m/it/10 :\OT1/cmr/m/n/10 95$ \TU/SimSun(0)/m/n/10 元 落 
+在 独 立 构 造 的 区 间
  []
 
 
-Overfull \hbox (14.48288pt too wide) in paragraph at lines 81--91
- [][] 
+Underfull \hbox (badness 2269) in paragraph at lines 130--131
+\OT1/cmr/m/n/10 [20 622\OML/cmm/m/it/10 :\OT1/cmr/m/n/10 73\OML/cmm/m/it/10 ;  
+\OT1/cmr/m/n/10 48 052\OML/cmm/m/it/10 :\OT1/cmr/m/n/10 05]$ \TU/SimSun(0)/m/n/
+10 元 内；|  其 中 上 界 $\OT1/cmr/m/n/10 48 052\OML/cmm/m/it/10 :\OT1/cmr/m/n/10 0465
+91$ \TU/SimSun(0)/m/n/10 元 是  |“完 全 不 使 用 储 能、|  按 分 时 电 价 直 接 购
  []
 
-) (sec8_prob2.tex
-Missing character: There is no ① in font [lmroman10-regular]:mapping=tex-text;!
-Missing character: There is no ② in font [lmroman10-regular]:mapping=tex-text;!
-Missing character: There is no ③ in font [lmroman10-regular]:mapping=tex-text;!
-Missing character: There is no ④ in font [lmroman10-regular]:mapping=tex-text;!
-[11]
-Overfull \hbox (225.63834pt too wide) in paragraph at lines 32--45
- [][] 
- []
+[10]
+
+LaTeX Warning: Citation `ref-vykhodtsev-2022-bess-review' on page 11 undefined 
+on input line 162.
 
 
-Overfull \hbox (20.22072pt too wide) in paragraph at lines 58--68
- [][] 
- []
+LaTeX Warning: Citation `ref-huang-2022-dynamic-efficiency' on page 11 undefine
+d on input line 162.
 
-[12]
+
+LaTeX Warning: Citation `ref-zhang-2015-dayahead-degradation' on page 11 undefi
+ned on input line 162.
+
+) (sec8_prob2.tex [11]
+
+LaTeX Warning: Citation `ref-silvente-2015-rolling-horizon' on page 12 undefine
+d on input line 19.
+
+
+LaTeX Warning: Citation `ref-holjevac-2017-receding-horizon' on page 12 undefin
+ed on input line 19.
+
+
+LaTeX Warning: Citation `ref-hu-2020-mpc-overview' on page 12 undefined on inpu
+t line 19.
+
+
+LaTeX Warning: Citation `ref-finnah-2021-da-intraday-adp' on page 12 undefined 
+on input line 19.
+
+
+LaTeX Warning: Citation `ref-chazarra-2017-perfect-information' on page 12 unde
+fined on input line 29.
+
+
+LaTeX Warning: Citation `ref-toubeau-2020-da-real-time' on page 12 undefined on
+ input line 29.
+
+
+LaTeX Warning: Citation `ref-vanderveen-2016-balancing-market-design' on page 1
+2 undefined on input line 29.
+
+
+LaTeX Warning: Citation `ref-herre-2020-imbalance-settlement' on page 12 undefi
+ned on input line 29.
+
+
+LaTeX Warning: Citation `ref-joos-2018-integration-costs' on page 12 undefined 
+on input line 29.
+
+[12] [13]
 File: figs/fig06_p2_energy_flow.png Graphic file (type bmp)
 <figs/fig06_p2_energy_flow.png>
 File: figs/fig08_p2_spec_dates.png Graphic file (type bmp)
 <figs/fig08_p2_spec_dates.png>
- [13]
-Overfull \hbox (151.29427pt too wide) in paragraph at lines 132--144
- [][] 
- []
-
 File: figs/fig09_p2_bcap.png Graphic file (type bmp)
 <figs/fig09_p2_bcap.png>
-) (sec9_prob3.tex [14] [15]
-Overfull \hbox (5.10112pt too wide) in paragraph at lines 50--51
+ [14]) (sec9_prob3.tex [15]
+
+LaTeX Warning: Citation `ref-almpantis-2024-minute-downscaling' on page 16 unde
+fined on input line 11.
+
+
+LaTeX Warning: Citation `ref-barbieri-2017-very-short-term-pv' on page 16 undef
+ined on input line 11.
+
+
+LaTeX Warning: Citation `ref-stenzel-2016-temporal-resolution' on page 16 undef
+ined on input line 11.
+
+
+LaTeX Warning: Citation `ref-li-2016-two-stage-rhc' on page 16 undefined on inp
+ut line 38.
+
+
+LaTeX Warning: Citation `ref-bhattacharya-2018-multistage-storage' on page 16 u
+ndefined on input line 38.
+
+
+LaTeX Warning: Citation `ref-elkazaz-2020-convex-mpc-rhc' on page 16 undefined 
+on input line 38.
+
+
+LaTeX Warning: Citation `ref-danti-2019-intraday-rescheduling' on page 16 undef
+ined on input line 38.
+
+
+LaTeX Warning: Citation `ref-matsumoto-2022-imbalance-design' on page 16 undefi
+ned on input line 38.
+
+
+LaTeX Warning: Citation `ref-asgarpoor-1995-deviation-penalty' on page 16 undef
+ined on input line 38.
+
+
+Underfull \hbox (badness 2600) in paragraph at lines 56--57
 \TU/SimSun(0)/m/n/10 交 付 期 总 费 用 为 $\OT1/cmr/m/n/10 14 540 616\OML/cmm/m/it/10 
 :\OT1/cmr/m/n/10 335652$ \TU/SimSun(0)/m/n/10 元，|  构 成 为：|  计 划 购 电 费 $\OT1/cmr
 /m/n/10 12 362 860\OML/cmm/m/it/10 :\OT1/cmr/m/n/10 209641$ \TU/SimSun(0)/m/n/1
-0 元、|  调 整 结 算 费 $\OT1/cmr/m/n/10 510 208\OML/cmm/m/it/10 :\OT1/cmr/m/n/10 9409
-10$
+0 元、|  调 整 结 算 费
  []
 
 [16]
+
+LaTeX Warning: Reference `fig:p3soc' on page 17 undefined on input line 95.
+
+File: figs/fig13_p3_soc.png Graphic file (type bmp)
+<figs/fig13_p3_soc.png>
 File: figs/fig10_p3_forecast.png Graphic file (type bmp)
 <figs/fig10_p3_forecast.png>
 File: figs/fig11_p3_profile.png Graphic file (type bmp)
 <figs/fig11_p3_profile.png>
 
-Overfull \hbox (52.3837pt too wide) in paragraph at lines 113--126
- [][] 
- []
+LaTeX Warning: Reference `tab:p3ab' on page 17 undefined on input line 122.
 
-[17]) (sec10_prob4.tex [18]
+[17]
+
+LaTeX Warning: Reference `tab:p3ab' on page 18 undefined on input line 146.
+
+[18]) (sec10_prob4.tex [19]
+
+LaTeX Warning: Citation `ref-lago-2018-spot-price-deep-learning' on page 20 und
+efined on input line 29.
+
+
+LaTeX Warning: Citation `ref-myttenaere-2016-mape-regression' on page 20 undefi
+ned on input line 29.
+
+
+LaTeX Warning: Citation `ref-chitsaz-2018-price-forecast-btm-storage' on page 2
+0 undefined on input line 29.
+
+
+LaTeX Warning: Citation `ref-khani-2015-online-adaptive-rtod' on page 20 undefi
+ned on input line 29.
+
+
+LaTeX Warning: Citation `ref-staffell-2016-maximising-storage-value' on page 20
+ undefined on input line 29.
+
+
+LaTeX Warning: Citation `ref-mathaba-2014-price-forecast-benefit' on page 20 un
+defined on input line 29.
+
+
+LaTeX Warning: Citation `ref-hodge-2018-forecast-value-storage' on page 20 unde
+fined on input line 29.
+
+
+LaTeX Warning: Reference `tab:p4fc' on page 20 undefined on input line 31.
+
+
+LaTeX Warning: Reference `tab:p4fc' on page 20 undefined on input line 49.
+
 File: figs/fig15_p4_backtest.png Graphic file (type bmp)
 <figs/fig15_p4_backtest.png>
- [19]
-Overfull \hbox (2.15465pt too wide) in paragraph at lines 70--71
-\TU/SimSun(0)/m/n/10 两 条 链 的 交 付 期 主 结 果 列 于 表 []\TU/lmr/m/n/10 13[]\TU/SimSun(
-0)/m/n/10 。|  链 \TU/lmr/m/it/10 4-2 \TU/SimSun(0)/m/n/10 的 交 付 期 费 用 为 $\OT1/cm
-r/m/n/10 13 006 411\OML/cmm/m/it/10 :\OT1/cmr/m/n/10 041148$ \TU/SimSun(0)/m/n/
-10 元，|  链 \TU/lmr/m/it/10 4-3 \TU/SimSun(0)/m/n/10 为 $\OT1/cmr/m/n/10 15 289 05
-0\OML/cmm/m/it/10 :\OT1/cmr/m/n/10 714738$
- []
+
+LaTeX Warning: Citation `ref-krishnamurthy-2018-arbitrage-da-rt' on page 20 und
+efined on input line 72.
 
 
-Overfull \hbox (37.35527pt too wide) in paragraph at lines 83--99
- [][] 
- []
+LaTeX Warning: Citation `ref-yang-2023-da-rt-shared-storage' on page 20 undefin
+ed on input line 72.
 
 
-Overfull \hbox (58.25404pt too wide) in paragraph at lines 103--104
-\OT1/cmr/m/n/10 [0\OML/cmm/m/it/10 ; \OT1/cmr/m/n/10 6469\OML/cmm/m/it/10 :\OT1
-/cmr/m/n/10 73\OML/cmm/m/it/10 ; \OT1/cmr/m/n/10 2777\OML/cmm/m/it/10 :\OT1/cmr
-/m/n/10 38\OML/cmm/m/it/10 ; \OT1/cmr/m/n/10 254\OML/cmm/m/it/10 :\OT1/cmr/m/n/
-10 72\OML/cmm/m/it/10 ; \OT1/cmr/m/n/10 6478\OML/cmm/m/it/10 :\OT1/cmr/m/n/10 0
-6\OML/cmm/m/it/10 ; \OT1/cmr/m/n/10 2836\OML/cmm/m/it/10 :\OT1/cmr/m/n/10 94]$ 
-\TU/lmr/m/n/10 kWh\TU/SimSun(0)/m/n/10 ；|  链 \TU/lmr/m/it/10 4-3 \TU/SimSun(0)/
-m/n/10 的 充 电 量 为 $\OT1/cmr/m/n/10 [8082\OML/cmm/m/it/10 :\OT1/cmr/m/n/10 85\OML
-/cmm/m/it/10 ; \OT1/cmr/m/n/10 3333\OML/cmm/m/it/10 :\OT1/cmr/m/n/10 33\OML/cmm
-/m/it/10 ; \OT1/cmr/m/n/10 2856\OML/cmm/m/it/10 :\OT1/cmr/m/n/10 65\OML/cmm/m/i
-t/10 ; \OT1/cmr/m/n/10 6959\OML/cmm/m/it/10 :\OT1/cmr/m/n/10 71\OML/cmm/m/it/10
- ; \OT1/cmr/m/n/10 522\OML/cmm/m/it/10 :\OT1/cmr/m/n/10 57\OML/cmm/m/it/10 ; \O
-T1/cmr/m/n/10 833\OML/cmm/m/it/10 :\OT1/cmr/m/n/10 33]$
- []
+LaTeX Warning: Citation `ref-bottieau-2020-imbalance-settlement-forecast' on pa
+ge 20 undefined on input line 72.
 
 
-Overfull \hbox (18.52727pt too wide) in paragraph at lines 110--124
- [][] 
+LaTeX Warning: Citation `ref-yang-2020-deviation-penalty-distribution' on page 
+20 undefined on input line 72.
+
+
+LaTeX Warning: Citation `ref-paulauskas-2024-battery-scheduling-arbitrage' on p
+age 20 undefined on input line 72.
+
+
+LaTeX Warning: Reference `tab:p4main' on page 20 undefined on input line 76.
+
+
+Underfull \hbox (badness 2726) in paragraph at lines 76--77
+\TU/SimSun(0)/m/n/10 两 条 链 的 交 付 期 主 结 果 列 于 表 []。|  链 \TU/lmr/m/it/10 4-2 \TU/
+SimSun(0)/m/n/10 的 交 付 期 费 用 为 $\OT1/cmr/m/n/10 13 006 411\OML/cmm/m/it/10 :\OT
+1/cmr/m/n/10 041148$ \TU/SimSun(0)/m/n/10 元，|  链 \TU/lmr/m/it/10 4-3 \TU/SimSun
+(0)/m/n/10 为
  []
 
 [20]
+
+LaTeX Warning: Reference `tab:p4a' on page 21 undefined on input line 111.
+
+
+LaTeX Warning: Reference `fig:p4a' on page 21 undefined on input line 136.
+
+[21]
 File: figs/fig14_p4_price.png Graphic file (type bmp)
 <figs/fig14_p4_price.png>
 File: figs/fig16_p4_cost.png Graphic file (type bmp)
 <figs/fig16_p4_cost.png>
- [21] [22]) (sec11_robust.tex
-Overfull \hbox (12.1994pt too wide) in paragraph at lines 16--27
- [][] 
- []
+
+
+LaTeX Warning: Reference `fig:p4c' on page 22 undefined on input line 156.
+
+
+LaTeX Warning: Reference `fig:p4d' on page 22 undefined on input line 156.
+
+File: figs/fig17_p4_adjust.png Graphic file (type bmp)
+<figs/fig17_p4_adjust.png>
+File: figs/fig18_p4_emergency.png Graphic file (type bmp)
+<figs/fig18_p4_emergency.png>
+[22]
+
+LaTeX Warning: Citation `ref-akbari-2019-stochastic-robust-arbitrage' on page 2
+3 undefined on input line 182.
+
+
+LaTeX Warning: Citation `ref-oconnor-2025-conformal-price-forecast' on page 23 
+undefined on input line 182.
+
+
+LaTeX Warning: Citation `ref-rawa-2023-mg-stochastic' on page 23 undefined on i
+nput line 182.
+
+) (sec11_robust.tex [23]
+
+LaTeX Warning: Reference `tab:rob' on page 24 undefined on input line 9.
 
 File: figs/fig19_robust_tornado.png Graphic file (type bmp)
 <figs/fig19_robust_tornado.png>
-[23] [24]
+
+LaTeX Warning: Citation `ref-vykhodtsev-2022-bess-review' on page 24 undefined 
+on input line 40.
+
+
+LaTeX Warning: Citation `ref-huang-2022-dynamic-efficiency' on page 24 undefine
+d on input line 40.
+
+[24]
+
+LaTeX Warning: Reference `fig:rob2' on page 25 undefined on input line 58.
+
 File: figs/fig20_rh_depth.png Graphic file (type bmp)
 <figs/fig20_rh_depth.png>
-) (sec12_eval.tex [25] [26] [27]) (refs.tex [28] [29] [30])
-(sec13_appendix.tex
+[25]
+
+LaTeX Warning: Citation `ref-akbari-2019-stochastic-robust-arbitrage' on page 2
+6 undefined on input line 90.
+
+
+LaTeX Warning: Citation `ref-oconnor-2025-conformal-price-forecast' on page 26 
+undefined on input line 90.
+
+) (sec12_eval.tex
+
+LaTeX Warning: Reference `tab:rob' on page 26 undefined on input line 11.
+
+[26]
+
+LaTeX Warning: Citation `ref-hai-2025-microgrid-price-ems' on page 27 undefined
+ on input line 13.
+
+[27]) (refs.tex [28] [29]) (sec13_appendix.tex
+LaTeX Font Info:    Font shape `TU/Consolas(0)/m/n' will be
+(Font)              scaled to size 8.09995pt on input line 13.
+
+Underfull \hbox (badness 10000) in paragraph at lines 18--18
+[]|\TU/Consolas(0)/m/n/9 prob01_io.py\TU/SimSun(0)/m/n/9 、| \TU/Consolas(0)/m/n
+/9 prob01_model.py\TU/SimSun(0)/m/n/9 、|
+ []
+
+
 Underfull \hbox (badness 10000) in paragraph at lines 19--19
-[]|\TU/lmtt/m/n/9 prob01_io.py\TU/SimSun(0)/m/n/9 、| \TU/lmtt/m/n/9 prob01_mode
-l.py\TU/SimSun(0)/m/n/9 、|
+[]|\TU/Consolas(0)/m/n/9 prob02_io.py\TU/SimSun(0)/m/n/9 、| \TU/Consolas(0)/m/n
+/9 prob02_model.py\TU/SimSun(0)/m/n/9 、|
  []
 
 
 Underfull \hbox (badness 10000) in paragraph at lines 20--20
-[]|\TU/lmtt/m/n/9 prob02_io.py\TU/SimSun(0)/m/n/9 、| \TU/lmtt/m/n/9 prob02_mode
-l.py\TU/SimSun(0)/m/n/9 、|
+[]|\TU/Consolas(0)/m/n/9 prob03_io.py\TU/SimSun(0)/m/n/9 、| \TU/Consolas(0)/m/n
+/9 prob03_model.py\TU/SimSun(0)/m/n/9 、|
  []
 
 
 Underfull \hbox (badness 10000) in paragraph at lines 21--21
-[]|\TU/lmtt/m/n/9 prob03_io.py\TU/SimSun(0)/m/n/9 、| \TU/lmtt/m/n/9 prob03_mode
-l.py\TU/SimSun(0)/m/n/9 、|
+[]|\TU/Consolas(0)/m/n/9 prob04_io.py\TU/SimSun(0)/m/n/9 、| \TU/Consolas(0)/m/n
+/9 prob04_model.py\TU/SimSun(0)/m/n/9 、|
  []
 
-
-Underfull \hbox (badness 10000) in paragraph at lines 22--22
-[]|\TU/lmtt/m/n/9 prob04_io.py\TU/SimSun(0)/m/n/9 、| \TU/lmtt/m/n/9 prob04_mode
-l.py\TU/SimSun(0)/m/n/9 、|
- []
-
-[31]
+[30]
 (C:\Users\DUANboyang\AppData\Local\Programs\MiKTeX\tex/latex/listings\lstlang1.
 sty
 File: lstlang1.sty 2025/11/14 1.11b listings language file
 )
-Package hyperref Info: bookmark level for unknown lstlisting defaults to 0 on i
-nput line 41.
+LaTeX Font Info:    Font shape `TU/Consolas(0)/m/n' will be
+(Font)              scaled to size 4.9685pt on input line 40.
 
 (../problems/microgrid_2025/prob01/versions/assumption_v003/code/prob01_io.py
-[32] [33])
+[31] [32])
 (../problems/microgrid_2025/prob01/versions/assumption_v003/code/prob01_model.p
-y [34] [35] [36] [37])
+y [33] [34] [35] [36])
 (../problems/microgrid_2025/prob01/versions/assumption_v003/code/run_prob01.py
-[38] [39] [40] [41])
+[37] [38] [39] [40])
 (../problems/microgrid_2025/prob02/versions/assumption_v001/code/prob02_io.py
-[42] [43] [44]
-Missing character: There is no ⁝ in font [lmmono8-regular]:!
-[45]
-Missing character: There is no ⁝ in font [lmmono8-regular]:!
-Missing character: There is no ⁝ in font [lmmono8-regular]:!
-[46] [47])
+[41] [42] [43]
+Missing character: There is no ⁝ in font Consolas/OT:script=latn;language=dflt;
+!
+[44]
+Missing character: There is no ⁝ in font Consolas/OT:script=latn;language=dflt;
+!
+Missing character: There is no ⁝ in font Consolas/OT:script=latn;language=dflt;
+!
+[45] [46])
 (../problems/microgrid_2025/prob02/versions/assumption_v001/code/prob02_model.p
 y
-Missing character: There is no η in font [lmmono8-regular]:!
-Missing character: There is no η in font [lmmono8-regular]:!
-Missing character: There is no ≤ in font [lmmono8-regular]:!
-Missing character: There is no ≤ in font [lmmono8-regular]:!
-Missing character: There is no ∈ in font [lmmono8-regular]:!
-Missing character: There is no α in font [lmmono8-regular]:!
-[48] [49]
-Missing character: There is no τ in font [lmmono8-regular]:!
-Missing character: There is no τ in font [lmmono8-regular]:!
-Missing character: There is no η in font [lmmono8-regular]:!
-Missing character: There is no τ in font [lmmono8-regular]:!
-Missing character: There is no τ in font [lmmono8-regular]:!
-Missing character: There is no η in font [lmmono8-regular]:!
-Missing character: There is no τ in font [lmmono8-regular]:!
-[50]
-Missing character: There is no ≥ in font [lmmono8-regular]:!
-Missing character: There is no τ in font [lmmono8-regular]:!
-Missing character: There is no τ in font [lmmono8-regular]:!
-[51] [52]
-Missing character: There is no τ in font [lmmono8-regular]:!
-Missing character: There is no τ in font [lmmono8-regular]:!
-Missing character: There is no τ in font [lmmono8-regular]:!
-Missing character: There is no τ in font [lmmono8-regular]:!
-Missing character: There is no τ in font [lmmono8-regular]:!
-Missing character: There is no τ in font [lmmono8-regular]:!
-Missing character: There is no τ in font [lmmono8-regular]:!
-Missing character: There is no τ in font [lmmono8-regular]:!
-Missing character: There is no ⇒ in font [lmmono8-regular]:!
-Missing character: There is no η in font [lmmono8-regular]:!
-Missing character: There is no η in font [lmmono8-regular]:!
-Missing character: There is no η in font [lmmono8-regular]:!
-Missing character: There is no η in font [lmmono8-regular]:!
-[53])
-(../problems/microgrid_2025/prob02/versions/assumption_v001/code/run_prob02.py
-[54] [55] [56] [57] [58]) [59]
-(../problems/microgrid_2025/prob03/versions/assumption_v001/code/prob03_io.py
-[60] [61] [62] [63]
-Missing character: There is no ≤ in font [lmmono8-regular]:!
-[64]
-Missing character: There is no ⁝ in font [lmmono8-regular]:!
-Missing character: There is no ⁝ in font [lmmono8-regular]:!
-[65] [66] [67])
-(../problems/microgrid_2025/prob03/versions/assumption_v001/code/prob03_model.p
-y
-Missing character: There is no ∈ in font [lmmono8-regular]:!
-Missing character: There is no η in font [lmmono8-regular]:!
-Missing character: There is no η in font [lmmono8-regular]:!
-Missing character: There is no ≤ in font [lmmono8-regular]:!
-Missing character: There is no ≤ in font [lmmono8-regular]:!
-Missing character: There is no ∈ in font [lmmono8-regular]:!
-Missing character: There is no α in font [lmmono8-regular]:!
-Missing character: There is no β in font [lmmono8-regular]:!
-Missing character: There is no β in font [lmmono8-regular]:!
-Missing character: There is no ε in font [lmmono8-regular]:!
-Missing character: There is no ε in font [lmmono8-regular]:!
-Missing character: There is no ≤ in font [lmmono8-regular]:!
-Missing character: There is no ε in font [lmmono8-regular]:!
-Missing character: There is no ≤ in font [lmmono8-regular]:!
-Missing character: There is no ≤ in font [lmmono8-regular]:!
-[68]
-Missing character: There is no ε in font [lmmono8-regular]:!
-Missing character: There is no ε in font [lmmono8-regular]:!
-Missing character: There is no ε in font [lmmono8-regular]:!
-Missing character: There is no ε in font [lmmono8-regular]:!
-Missing character: There is no ε in font [lmmono8-regular]:!
-Missing character: There is no ≤ in font [lmmono8-regular]:!
-Missing character: There is no ε in font [lmmono8-regular]:!
-Missing character: There is no ③ in font [lmmono8-regular]:!
-Missing character: There is no ≤ in font [lmmono8-regular]:!
-Missing character: There is no ε in font [lmmono8-regular]:!
-Missing character: There is no ε in font [lmmono8-regular]:!
-[69] [70]
-Missing character: There is no ν in font [lmmono8-regular]:!
-Missing character: There is no ⌈ in font [lmmono8-regular]:!
-Missing character: There is no ⌉ in font [lmmono8-regular]:!
-Missing character: There is no ≤ in font [lmmono8-regular]:!
-Missing character: There is no ≤ in font [lmmono8-regular]:!
-[71] [72]
-Missing character: There is no ε in font [lmmono8-regular]:!
-Missing character: There is no ε in font [lmmono8-regular]:!
-[73]
-Missing character: There is no ① in font [lmmono8-regular]:!
-Missing character: There is no ② in font [lmmono8-regular]:!
-Missing character: There is no ε in font [lmmono8-regular]:!
-Missing character: There is no ε in font [lmmono8-regular]:!
-Missing character: There is no ③ in font [lmmono8-regular]:!
-Missing character: There is no ε in font [lmmono8-regular]:!
-Missing character: There is no ⁺ in font [lmmono8-regular]:!
-Missing character: There is no ≤ in font [lmmono8-regular]:!
-Missing character: There is no ④ in font [lmmono8-regular]:!
-Missing character: There is no ③ in font [lmmono8-regular]:!
-Missing character: There is no ① in font [lmmono8-regular]:!
-Missing character: There is no ② in font [lmmono8-regular]:!
-Missing character: There is no ε in font [lmmono8-regular]:!
-[74]
-Missing character: There is no ③ in font [lmmono8-regular]:!
-Missing character: There is no ④ in font [lmmono8-regular]:!
-[75]
-Missing character: There is no ε in font [lmmono8-regular]:!
-[76]
-Missing character: There is no ∈ in font [lmmono8-regular]:!
-Missing character: There is no β in font [lmmono8-regular]:!
-Missing character: There is no ⁺ in font [lmmono8-regular]:!
-Missing character: There is no β in font [lmmono8-regular]:!
-Missing character: There is no ⁻ in font [lmmono8-regular]:!
-Missing character: There is no ε in font [lmmono8-regular]:!
-Missing character: There is no η in font [lmmono8-regular]:!
-Missing character: There is no η in font [lmmono8-regular]:!
-[77]
-Missing character: There is no ⁺ in font [lmmono8-regular]:!
-Missing character: There is no ≥ in font [lmmono8-regular]:!
-Missing character: There is no ⁻ in font [lmmono8-regular]:!
-Missing character: There is no ≥ in font [lmmono8-regular]:!
-[78] [79]
-Missing character: There is no ≥ in font [lmmono8-regular]:!
-Missing character: There is no τ in font [lmmono8-regular]:!
-Missing character: There is no τ in font [lmmono8-regular]:!
-[80]
-Missing character: There is no ν in font [lmmono8-regular]:!
-Missing character: There is no ≤ in font [lmmono8-regular]:!
-[81]
-Missing character: There is no ≤ in font [lmmono8-regular]:!
-Missing character: There is no ν in font [lmmono8-regular]:!
-Missing character: There is no ≤ in font [lmmono8-regular]:!
-Missing character: There is no ≥ in font [lmmono8-regular]:!
-Missing character: There is no ≤ in font [lmmono8-regular]:!
-Missing character: There is no ≤ in font [lmmono8-regular]:!
-Missing character: There is no ≥ in font [lmmono8-regular]:!
-Missing character: There is no ≤ in font [lmmono8-regular]:!
-Missing character: There is no ≤ in font [lmmono8-regular]:!
-Missing character: There is no ≤ in font [lmmono8-regular]:!
-Missing character: There is no ≤ in font [lmmono8-regular]:!
-Missing character: There is no ≥ in font [lmmono8-regular]:!
-Missing character: There is no ≥ in font [lmmono8-regular]:!
-Missing character: There is no ≥ in font [lmmono8-regular]:!
-Missing character: There is no ≤ in font [lmmono8-regular]:!
-Missing character: There is no ≤ in font [lmmono8-regular]:!
-Missing character: There is no η in font [lmmono8-regular]:!
-Missing character: There is no η in font [lmmono8-regular]:!
-Missing character: There is no η in font [lmmono8-regular]:!
-Missing character: There is no ≤ in font [lmmono8-regular]:!
-Missing character: There is no ≤ in font [lmmono8-regular]:!
-Missing character: There is no ε in font [lmmono8-regular]:!
-Missing character: There is no ε in font [lmmono8-regular]:!
-Missing character: There is no ≪ in font [lmmono8-regular]:!
-Missing character: There is no ≤ in font [lmmono8-regular]:!
-[82]
-Missing character: There is no ≤ in font [lmmono8-regular]:!
-Missing character: There is no ≤ in font [lmmono8-regular]:!
-Missing character: There is no ≤ in font [lmmono8-regular]:!
-Missing character: There is no ≤ in font [lmmono8-regular]:!
-Missing character: There is no ≤ in font [lmmono8-regular]:!
-Missing character: There is no η in font [lmmono8-regular]:!
-[83]
-Missing character: There is no ≥ in font [lmmono8-regular]:!
-Missing character: There is no η in font [lmmono8-regular]:!
-Missing character: There is no ≤ in font [lmmono8-regular]:!
-[84]
-Missing character: There is no ε in font [lmmono8-regular]:!
-Missing character: There is no ③ in font [lmmono8-regular]:!
-Missing character: There is no ε in font [lmmono8-regular]:!
-Missing character: There is no ⁺ in font [lmmono8-regular]:!
-Missing character: There is no ② in font [lmmono8-regular]:!
-[85])
-(../problems/microgrid_2025/prob03/versions/assumption_v001/code/run_prob03.py
-Missing character: There is no ≤ in font [lmmono8-regular]:!
-Missing character: There is no ≤ in font [lmmono8-regular]:!
-Missing character: There is no ∈ in font [lmmono8-regular]:!
-Missing character: There is no ε in font [lmmono8-regular]:!
-[86] [87] [88]
-Missing character: There is no ε in font [lmmono8-regular]:!
-[89] [90]
-Missing character: There is no ① in font [lmmono8-regular]:!
-Missing character: There is no ② in font [lmmono8-regular]:!
-Missing character: There is no ③ in font [lmmono8-regular]:!
-Missing character: There is no ④ in font [lmmono8-regular]:!
-Missing character: There is no ε in font [lmmono8-regular]:!
-Missing character: There is no ε in font [lmmono8-regular]:!
-[91] [92] [93])
-(../problems/microgrid_2025/prob04/versions/assumption_v001/code/prob04_io.py
-[94] [95] [96] [97]
-Missing character: There is no ⁝ in font [lmmono8-regular]:!
-[98]
-Missing character: There is no ⁝ in font [lmmono8-regular]:!
-[99] [100]
-Missing character: There is no ⁝ in font [lmmono8-regular]:!
-Missing character: There is no ⁝ in font [lmmono8-regular]:!
-[101] [102] [103] [104]
-Missing character: There is no ≥ in font [lmmono8-regular]:!
-Missing character: There is no τ in font [lmmono8-regular]:!
-Missing character: There is no τ in font [lmmono8-regular]:!
-) [105]
-(../problems/microgrid_2025/prob04/versions/assumption_v001/code/prob04_model.p
-y
-Missing character: There is no α in font [lmmono8-regular]:!
-Missing character: There is no ∈ in font [lmmono8-regular]:!
-Missing character: There is no κ in font [lmmono8-regular]:!
-Missing character: There is no ≤ in font [lmmono8-regular]:!
-Missing character: There is no η in font [lmmono8-regular]:!
-Missing character: There is no η in font [lmmono8-regular]:!
-Missing character: There is no ≤ in font [lmmono8-regular]:!
-Missing character: There is no ≤ in font [lmmono8-regular]:!
-Missing character: There is no ∈ in font [lmmono8-regular]:!
-Missing character: There is no α in font [lmmono8-regular]:!
-Missing character: There is no β in font [lmmono8-regular]:!
-Missing character: There is no β in font [lmmono8-regular]:!
-Missing character: There is no ε in font [lmmono8-regular]:!
-[106]
-Missing character: There is no ε in font [lmmono8-regular]:!
-Missing character: There is no ε in font [lmmono8-regular]:!
-[107] [108]
-Missing character: There is no ν in font [lmmono8-regular]:!
-Missing character: There is no ⌈ in font [lmmono8-regular]:!
-Missing character: There is no ⌉ in font [lmmono8-regular]:!
-Missing character: There is no ≤ in font [lmmono8-regular]:!
-Missing character: There is no ≤ in font [lmmono8-regular]:!
-[109]
-Missing character: There is no ≥ in font [lmmono8-regular]:!
-[110]
-Missing character: There is no ε in font [lmmono8-regular]:!
-Missing character: There is no ε in font [lmmono8-regular]:!
-[111]
-Missing character: There is no ① in font [lmmono8-regular]:!
-Missing character: There is no ② in font [lmmono8-regular]:!
-Missing character: There is no ε in font [lmmono8-regular]:!
-Missing character: There is no ε in font [lmmono8-regular]:!
-Missing character: There is no ③ in font [lmmono8-regular]:!
-Missing character: There is no ε in font [lmmono8-regular]:!
-Missing character: There is no ⁺ in font [lmmono8-regular]:!
-Missing character: There is no ≤ in font [lmmono8-regular]:!
-Missing character: There is no ④ in font [lmmono8-regular]:!
-[112] [113] [114]
-Missing character: There is no α in font [lmmono8-regular]:!
-[115] [116]
-Missing character: There is no ∈ in font [lmmono8-regular]:!
-Missing character: There is no ≤ in font [lmmono8-regular]:!
-Missing character: There is no ⁺ in font [lmmono8-regular]:!
-Missing character: There is no ⁻ in font [lmmono8-regular]:!
-Missing character: There is no β in font [lmmono8-regular]:!
-Missing character: There is no ⁺ in font [lmmono8-regular]:!
-Missing character: There is no β in font [lmmono8-regular]:!
-Missing character: There is no ⁻ in font [lmmono8-regular]:!
-Missing character: There is no ⁺ in font [lmmono8-regular]:!
-Missing character: There is no ≥ in font [lmmono8-regular]:!
-Missing character: There is no ⁻ in font [lmmono8-regular]:!
-Missing character: There is no ≥ in font [lmmono8-regular]:!
-Missing character: There is no ≥ in font [lmmono8-regular]:!
-[117] [118]
-Missing character: There is no ⇒ in font [lmmono8-regular]:!
-Missing character: There is no ⇒ in font [lmmono8-regular]:!
-[119]
-Missing character: There is no ≥ in font [lmmono8-regular]:!
-[120] [121]
-Missing character: There is no τ in font [lmmono8-regular]:!
-Missing character: There is no τ in font [lmmono8-regular]:!
-Missing character: There is no ν in font [lmmono8-regular]:!
-Missing character: There is no ν in font [lmmono8-regular]:!
-[122]
-Missing character: There is no ν in font [lmmono8-regular]:!
-[123]
-Missing character: There is no ≤ in font [lmmono8-regular]:!
-Missing character: There is no ≤ in font [lmmono8-regular]:!
-Missing character: There is no ν in font [lmmono8-regular]:!
-Missing character: There is no ≤ in font [lmmono8-regular]:!
-Missing character: There is no ν in font [lmmono8-regular]:!
-Missing character: There is no ν in font [lmmono8-regular]:!
-Missing character: There is no ≥ in font [lmmono8-regular]:!
-Missing character: There is no ≤ in font [lmmono8-regular]:!
-Missing character: There is no ≥ in font [lmmono8-regular]:!
-Missing character: There is no ≤ in font [lmmono8-regular]:!
-Missing character: There is no ≤ in font [lmmono8-regular]:!
-Missing character: There is no ≤ in font [lmmono8-regular]:!
-Missing character: There is no ≤ in font [lmmono8-regular]:!
-Missing character: There is no ≥ in font [lmmono8-regular]:!
-Missing character: There is no ≥ in font [lmmono8-regular]:!
-Missing character: There is no ≥ in font [lmmono8-regular]:!
-Missing character: There is no ≤ in font [lmmono8-regular]:!
-Missing character: There is no η in font [lmmono8-regular]:!
-Missing character: There is no η in font [lmmono8-regular]:!
-Missing character: There is no η in font [lmmono8-regular]:!
-Missing character: There is no ≤ in font [lmmono8-regular]:!
-Missing character: There is no ∪ in font [lmmono8-regular]:!
-Missing character: There is no ∪ in font [lmmono8-regular]:!
-Missing character: There is no ∪ in font [lmmono8-regular]:!
-Missing character: There is no ⇒ in font [lmmono8-regular]:!
-Missing character: There is no ≤ in font [lmmono8-regular]:!
-Missing character: There is no ≡ in font [lmmono8-regular]:!
-Missing character: There is no α in font [lmmono8-regular]:!
-Missing character: There is no ≡ in font [lmmono8-regular]:!
-Missing character: There is no ⇒ in font [lmmono8-regular]:!
-Missing character: There is no ≥ in font [lmmono8-regular]:!
-[124]
-Missing character: There is no ≤ in font [lmmono8-regular]:!
-Missing character: There is no ε in font [lmmono8-regular]:!
-Missing character: There is no ε in font [lmmono8-regular]:!
-Missing character: There is no ≪ in font [lmmono8-regular]:!
-Missing character: There is no ≤ in font [lmmono8-regular]:!
-Missing character: There is no η in font [lmmono8-regular]:!
-[125]
-Missing character: There is no ≥ in font [lmmono8-regular]:!
-Missing character: There is no ≥ in font [lmmono8-regular]:!
-Missing character: There is no ≥ in font [lmmono8-regular]:!
-Missing character: There is no ≤ in font [lmmono8-regular]:!
-Missing character: There is no ν in font [lmmono8-regular]:!
-Missing character: There is no κ in font [lmmono8-regular]:!
-Missing character: There is no ≡ in font [lmmono8-regular]:!
-Missing character: There is no κ in font [lmmono8-regular]:!
-Missing character: There is no κ in font [lmmono8-regular]:!
-Missing character: There is no κ in font [lmmono8-regular]:!
-[126] [127]
-Missing character: There is no ε in font [lmmono8-regular]:!
-Missing character: There is no ⁺ in font [lmmono8-regular]:!
-Missing character: There is no ε in font [lmmono8-regular]:!
-[128])
-(../problems/microgrid_2025/prob04/versions/assumption_v001/code/prob04_predict
-.py
-Missing character: There is no κ in font [lmmono8-regular]:!
-Missing character: There is no ① in font [lmmono8-regular]:!
-Missing character: There is no ③ in font [lmmono8-regular]:!
-Missing character: There is no ⑤ in font [lmmono8-regular]:!
-Missing character: There is no ⑥ in font [lmmono8-regular]:!
-Missing character: There is no ∈ in font [lmmono8-regular]:!
-Missing character: There is no μ in font [lmmono8-regular]:!
-Missing character: There is no ∈ in font [lmmono8-regular]:!
-Missing character: There is no μ in font [lmmono8-regular]:!
-Missing character: There is no φ in font [lmmono8-regular]:!
-Missing character: There is no κ in font [lmmono8-regular]:!
-Missing character: There is no ≤ in font [lmmono8-regular]:!
-Missing character: There is no κ in font [lmmono8-regular]:!
-Missing character: There is no ≡ in font [lmmono8-regular]:!
-Missing character: There is no ≥ in font [lmmono8-regular]:!
-Missing character: There is no ∅ in font [lmmono8-regular]:!
-Missing character: There is no ≡ in font [lmmono8-regular]:!
-Missing character: There is no ⇒ in font [lmmono8-regular]:!
-Missing character: There is no ⇒ in font [lmmono8-regular]:!
-[129]
-Missing character: There is no ∅ in font [lmmono8-regular]:!
-Missing character: There is no ≡ in font [lmmono8-regular]:!
-Missing character: There is no ∅ in font [lmmono8-regular]:!
-Missing character: There is no ∅ in font [lmmono8-regular]:!
-Missing character: There is no ∅ in font [lmmono8-regular]:!
-Missing character: There is no φ in font [lmmono8-regular]:!
-[130]
-Missing character: There is no ∅ in font [lmmono8-regular]:!
-[131] [132]
-Missing character: There is no κ in font [lmmono8-regular]:!
-Missing character: There is no ≤ in font [lmmono8-regular]:!
-Missing character: There is no ≤ in font [lmmono8-regular]:!
-Missing character: There is no κ in font [lmmono8-regular]:!
-Missing character: There is no κ in font [lmmono8-regular]:!
-Missing character: There is no ≡ in font [lmmono8-regular]:!
-Missing character: There is no κ in font [lmmono8-regular]:!
-[133]
-Missing character: There is no ≤ in font [lmmono8-regular]:!
-Missing character: There is no κ in font [lmmono8-regular]:!
-Missing character: There is no κ in font [lmmono8-regular]:!
-Missing character: There is no ≡ in font [lmmono8-regular]:!
-Missing character: There is no ν in font [lmmono8-regular]:!
-Missing character: There is no ν in font [lmmono8-regular]:!
-Missing character: There is no ⌊ in font [lmmono8-regular]:!
-Missing character: There is no ⌋ in font [lmmono8-regular]:!
-Missing character: There is no ∈ in font [lmmono8-regular]:!
-Missing character: There is no κ in font [lmmono8-regular]:!
-Missing character: There is no ν in font [lmmono8-regular]:!
-Missing character: There is no κ in font [lmmono8-regular]:!
-Missing character: There is no ≡ in font [lmmono8-regular]:!
-) [134]
-(../problems/microgrid_2025/prob04/versions/assumption_v001/code/run_prob04.py
-Missing character: There is no ≙ in font [lmmono8-regular]:!
-Missing character: There is no ≙ in font [lmmono8-regular]:!
-Missing character: There is no κ in font [lmmono8-regular]:!
-Missing character: There is no ≤ in font [lmmono8-regular]:!
-Missing character: There is no ≤ in font [lmmono8-regular]:!
-Missing character: There is no ∈ in font [lmmono8-regular]:!
-Missing character: There is no ⑤ in font [lmmono8-regular]:!
-[135]
-Missing character: There is no ≙ in font [lmmono8-regular]:!
-Missing character: There is no ≙ in font [lmmono8-regular]:!
-[136]
-Missing character: There is no ∅ in font [lmmono8-regular]:!
-Missing character: There is no ⇒ in font [lmmono8-regular]:!
-Missing character: There is no ⇒ in font [lmmono8-regular]:!
-Missing character: There is no ≤ in font [lmmono8-regular]:!
-[137] [138]
-Missing character: There is no τ in font [lmmono8-regular]:!
-Missing character: There is no τ in font [lmmono8-regular]:!
-Missing character: There is no ≡ in font [lmmono8-regular]:!
-Missing character: There is no ε in font [lmmono8-regular]:!
-Missing character: There is no κ in font [lmmono8-regular]:!
-[139]
-Missing character: There is no ≤ in font [lmmono8-regular]:!
-Missing character: There is no ≤ in font [lmmono8-regular]:!
-Missing character: There is no ⑤ in font [lmmono8-regular]:!
-Missing character: There is no κ in font [lmmono8-regular]:!
-Missing character: There is no ≡ in font [lmmono8-regular]:!
-[140]
-Missing character: There is no ε in font [lmmono8-regular]:!
-[141]
-Missing character: There is no ≙ in font [lmmono8-regular]:!
-Missing character: There is no ≡ in font [lmmono8-regular]:!
-Missing character: There is no ≡ in font [lmmono8-regular]:!
-Missing character: There is no ≙ in font [lmmono8-regular]:!
-Missing character: There is no κ in font [lmmono8-regular]:!
-Missing character: There is no κ in font [lmmono8-regular]:!
-Missing character: There is no ≡ in font [lmmono8-regular]:!
-[142] [143] [144]
-Missing character: There is no ⇒ in font [lmmono8-regular]:!
-)) [145] (main.aux)
- ***********
-LaTeX2e <2025-11-01>
-L3 programming layer <2026/08/21>
- ***********
- ) 
-Here is how much of TeX's memory you used:
- 34724 strings out of 402987
- 782527 string characters out of 5447489
- 2739919 words of memory out of 5000000
- 62831 multiletter control sequences out of 15000+600000
- 641973 words of font info for 135 fonts, out of 8000000 for 9000
- 1348 hyphenation exceptions out of 8191
- 93i,15n,111p,1188b,2040s stack positions out of 10000i,1000n,20000p,200000b,200000s
-
-Output written on main.pdf (145 pages).
+Missing character: There is no ∈ in font Consolas/OT:script=latn;language=dflt;
+!
+[47] [48] [49] [50] [51]
+Missing character: There is no ⇒ in font Consolas/OT:script=latn;language=dfl

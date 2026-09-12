@@ -45,7 +45,7 @@
 
 % ---------- 图（150 dpi、宽度 ≤ 0.92 行宽；图注在下） ----------
 \graphicspath{{figs/}}
-\captionsetup{font=small,labelfont=bf,skip=4pt}
+\captionsetup{font=small,labelfont=bf,skip=3pt}
 \renewcommand{\figurename}{图}
 \renewcommand{\tablename}{表}
 
@@ -61,17 +61,27 @@
   numbers=left, numberstyle=\tiny, numbersep=6pt,
   keywordstyle=\color{blue!70!black}, commentstyle=\color{green!40!black},
   stringstyle=\color{red!60!black},
-  extendedchars=true, inputencoding=utf8, escapeinside={(*@}{@*)}
+  extendedchars=true, inputencoding=utf8, escapeinside={(*@}{@*)},
+  % 不生成“代码目录”条目：本文不设目录，而这些条目会把含长路径的行写进 .aux
+  nolol=true,
+  % Consolas 缺少若干数学符号；用 literate 在排版时替换为数学字形（不改动任何源程序文件）
+  literate={∈}{{$\in$}}1 {⇒}{{$\Rightarrow$}}1 {⁝}{{$\vdots$}}1 {∅}{{$\varnothing$}}1 {≙}{{$\triangleq$}}1 {∪}{{$\cup$}}1 {≪}{{$\ll$}}1 {⌈}{{$\lceil$}}1 {⌉}{{$\rceil$}}1 {⌊}{{$\lfloor$}}1 {⌋}{{$\rfloor$}}1
 }
 \lstdefinelanguage{PyEx}{language=Python, morekeywords={as,with,None,True,False}}
 
 % ---------- 超链接（不打印彩色边框） ----------
 \usepackage[hidelinks,bookmarks=false]{hyperref}
 
+% ---------- 引用编号：排序 + 连续序号压缩为区间（GB/T 7714 写法，如 [28-30]） ----------
+% cite 包默认即对同一处 \cite 的多个序号排序并压缩；nocompress / nosort 可关闭。
+\usepackage{cite}
+% 区间连接符改为中文期刊常用的短横线：如 [28-30]（cite 默认输出 en-dash）
+\renewcommand{\citedash}{\hbox{-}\penalty\citepunctpenalty}
+
 % ---------- 浮动体排版：压缩图注间距、允许每页容纳更多图，避免空白页 ----------
-\setlength{\textfloatsep}{7pt plus 2pt minus 2pt}
-\setlength{\floatsep}{6pt plus 2pt minus 2pt}
-\setlength{\intextsep}{6pt plus 2pt minus 2pt}
+\setlength{\textfloatsep}{4.5pt plus 1.5pt minus 1.5pt}
+\setlength{\floatsep}{4pt plus 1.5pt minus 1.5pt}
+\setlength{\intextsep}{4pt plus 1.5pt minus 1.5pt}
 \setcounter{topnumber}{3}
 \setcounter{bottomnumber}{2}
 \setcounter{totalnumber}{5}
@@ -79,11 +89,23 @@
 \renewcommand{\bottomfraction}{0.65}
 \renewcommand{\textfraction}{0.06}
 \renewcommand{\floatpagefraction}{0.72}
-\setlength{\abovedisplayskip}{6pt plus 2pt minus 2pt}
-\setlength{\belowdisplayskip}{6pt plus 2pt minus 2pt}
-\titlespacing*{\section}{0pt}{9pt}{5pt}
-\titlespacing*{\subsection}{0pt}{7pt}{4pt}
-\titlespacing*{\subsubsection}{0pt}{5pt}{3pt}
+\setlength{\abovedisplayskip}{4.5pt plus 1.5pt minus 1.5pt}
+\setlength{\belowdisplayskip}{4.5pt plus 1.5pt minus 1.5pt}
+\setlength{\abovedisplayshortskip}{2pt plus 1pt}
+\setlength{\belowdisplayshortskip}{2.5pt plus 1pt}
+\setlength{\jot}{2pt}
+\setlength{\parskip}{0pt plus 0.5pt}
+\titlespacing*{\section}{0pt}{7pt}{3.5pt}
+\titlespacing*{\subsection}{0pt}{5.5pt}{3pt}
+\titlespacing*{\subsubsection}{0pt}{4pt}{2pt}
+
+% ---------- 溢出防护（团队补充，2026-09-12）----------
+% 正文含大量 ``13\,758\,182.573724`` 型长数字（\, 处不可断行），行末易产生轻微 Overfull；
+% 给行留出弹性伸缩量即可消除，不改变任何内容与数据。
+\setlength{\emergencystretch}{3em}
+\tolerance=1500
+% 表格统一用 tabcolsep 压缩列间距的工具宏（需要时在 table 环境内调用）
+\newcommand{\tighttable}{\setlength{\tabcolsep}{4pt}}
 
 % ---------------------------------------------------------------------
 \begin{document}
@@ -121,7 +143,7 @@
 
 % ============ AI 工具使用声明（规范要求，置于参考文献前） ============
 \section*{AI 工具使用声明}
-本参赛队在竞赛过程中使用了 AI 工具，主要用于文献检索与元数据核验、模型与公式的推导辅助、代码实现与调试、结果一致性检查以及语言润色。全部模型的选型、参数取值、口径裁定与最终结论均由参赛队员判断与复核，AI 工具未参与任何结果的直接生成；详细使用情况见支撑材料《AI 工具使用详情》。
+本参赛队在竞赛过程中使用了 AI 工具，主要用于文献检索与元数据核验、模型与公式推导辅助、代码实现与调试、结果一致性检查与语言润色，详细使用情况见支撑材料。
 
 % ============ 参考文献（GB/T 7714 数字标注） ============
 \input{refs.tex}
