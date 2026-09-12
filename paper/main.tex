@@ -117,6 +117,9 @@
 \vspace{2pt}
 
 \section*{摘\quad 要}
+% 中文排版：段落首行缩进两格。\section* 默认让标题后的首段顶格（\@afterindentfalse），
+% 此处对摘要首段恢复缩进，使其与摘要其余段落的缩进一致（不改动正文其他版式）。
+\makeatletter\@afterindenttrue\makeatother
 \input{sec0_abstract.tex}
 
 \vspace{4pt}
