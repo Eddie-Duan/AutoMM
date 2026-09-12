@@ -117,12 +117,51 @@ def appendix_section(problem_id: str, config: dict) -> str:
     return "\n".join(lines).rstrip() + "\n"
 
 
+APPENDIX_HEADING_RE = re.compile(r"(?m)^## 附录[ \t]*\r?$")
+# 论文附录的第一行必然是「支撑材料文件列表」小节标题；题面自带的
+# `## 附录 1 储能设备的参数` / `## 附录 2 附件说明` 之后没有它，据此可靠区分。
+APPENDIX_SECTION_RE = re.compile(r"(?m)^#{2,4} 附录 A[ \t]*支撑材料文件列表")
+
+# 正文未填模板占位符：`paper_template.md` 用 `{{NAME}}`（大写占位名），
+# 而正文里的 `\Bigr\}`、f-string 之类不会命中。
+PLACEHOLDER_RE = re.compile(r"(?m)^>[ \t]*待|待 paper-writer|\{\{[A-Z_]+\}\}")
+
+
+def find_appendix_start(text: str) -> int | None:
+    """返回**真正的**附录起点，找不到返回 None。
+
+    修复（2026-09-12）：题面引文自带 `## 附录 1 储能设备的参数` / `## 附录 2 附件说明`，
+    二者与论文附录标题 `## 附录` 同形（前者带后缀）。原实现只做 `APPENDIX_HEADING_RE.search`，
+    会命中题面里独占一行的 `## 附录`（若出现），把正文（数据与假设、四问总结、
+    敏感性/鲁棒性与消融、模型评价）整段当成附录之前的"正文"，从而漏检正文占位符、
+    并让 `splice_appendix` 截掉正文。
+
+    现在改为：优先找**最后一个** `### 附录 A 支撑材料文件列表`（论文附录的唯一可靠标记），
+    再回退到它前面最近的独占一行 `## 附录`；若两者都找不到，才退化为最后一个同形标题。
+    """
+    section = None
+    for match in APPENDIX_SECTION_RE.finditer(text):
+        section = match
+    if section is not None:
+        heading = None
+        for match in APPENDIX_HEADING_RE.finditer(text[: section.start()]):
+            heading = match
+        return heading.start() if heading is not None else section.start()
+    matches = list(APPENDIX_HEADING_RE.finditer(text))
+    if not matches:
+        return None
+    return matches[-1].start()
+
+
 def splice_appendix(draft_path: Path, appendix: str) -> None:
-    """把附录接到正文末尾（参考文献之后）；重复调用不会产生多份附录。"""
+    """把附录接到正文末尾（参考文献之后）；重复调用不会产生多份附录。
+
+    见 `find_appendix_start` 的修复说明。
+    """
     text = draft_path.read_text(encoding="utf-8")
-    marker = "\n## 附录"
-    if marker in text:
-        text = text[: text.index(marker)].rstrip() + "\n\n"
+    start = find_appendix_start(text)
+    if start is not None:
+        text = text[:start].rstrip() + "\n\n"
     else:
         text = text.rstrip() + "\n\n"
     draft_path.write_text(text + appendix, encoding="utf-8")
@@ -276,7 +315,16 @@ def validate(problem_id: str, draft_path: Path, *, update_problem_status: bool =
     config = read_yaml(ROOT / "config" / "paper.yaml")
     text = draft_path.read_text(encoding="utf-8")
     errors: list[str] = []
-    if "> 待" in text or "{{" in text or "}}" in text:
+    # 修复（2026-09-12）：占位符检查只针对**正文**（附录之前的正文段），且只匹配
+    # 「模板占位符」本身。原实现用粗暴的 `"> 待" in body or "{{" in body or "}}" in body`：
+    #   · `{{`/`}}` 会命中公式里的 `\Bigr\}` 与代码里的 f-string 转义（附录内联大量源码），
+    #     使带附录的稿**永远无法通过**校验（`final` 也因此不可达）；
+    #   · 附录起点若被题面里的 `## 附录`/`## 附录 1` 误命中，正文占位符又会被漏检。
+    # 现改为 PLACEHOLDER_RE（`> 待…` 引用式待写、`待 paper-writer`、`{{NAME}}` 大写占位名），
+    # 附录起点统一走 find_appendix_start。
+    _appendix_start = find_appendix_start(text)
+    _body = text[: _appendix_start] if _appendix_start is not None else text
+    if PLACEHOLDER_RE.search(_body):
         errors.append("正文仍包含待写占位符")
     for heading in ("## 摘要", "## 1 问题重述与符号说明", "## 参考文献"):
         if heading not in text:
@@ -294,10 +342,10 @@ def validate(problem_id: str, draft_path: Path, *, update_problem_status: bool =
                 errors.append("AI 工具使用声明必须采用规定第 3 条的两种表述之一")
     if (config.get("appendix") or {}).get("required", False):
         appendix = config.get("appendix") or {}
-        if "## 附录" not in text:
+        if _appendix_start is None:
             errors.append("缺少章节：## 附录（格式规范第五条要求附录含支撑材料文件列表与源程序）")
         else:
-            block = text[text.index("## 附录") :]
+            block = text[_appendix_start:]
             if "支撑材料文件列表" not in block:
                 errors.append("附录缺少支撑材料文件列表（格式规范第五条）")
             elif "|---|---|" not in block and not (

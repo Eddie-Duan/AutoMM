@@ -10,8 +10,12 @@
   ],
   "current_question": "prob04",
   "cross_question_review": "passed",
-  "summary_status": "not_started",
+  "summary_status": "built",
   "completion_notification": "pending",
   "completion_notification_attempts": 0,
-  "cross_question_review_reason": "全题跨小问一致性审查（等价 L5）通过：四问在变量名、单位、参数值、假设承接、数据版本(md5)、时间范围(D_full=365/D_req=334)、约束边界、结论方向、结果数量级与软依赖 conclusion hash 上相互一致；硬门禁失败 0 项、需回退重跑 0 项；跨问锚点逐位通过（C-ANCHOR-P03 复现 prob03 M1 相对差≤1.4e-14、prob02↔4-2 的 Σs'/净负载逐位相同而费用必不同、两链差额三分项归因残差≤1e-6）；上游登记欠账 C4-1/C4-6/C4-7 已权威回写（A8=(b)、AS08 措辞、5000 kW 作用侧）且不改任何 accepted 数值或结论 hash。14 项已登记技术债与强制披露纪律见 reports/cross_question_review.md 与 warnings，不构成阻塞。"
+  "cross_question_review_reason": "全题跨小问一致性审查（等价 L5）通过：四问在变量名、单位、参数值、假设承接、数据版本(md5)、时间范围(D_full=365/D_req=334)、约束边界、结论方向、结果数量级与软依赖 conclusion hash 上相互一致；硬门禁失败 0 项、需回退重跑 0 项；跨问锚点逐位通过（C-ANCHOR-P03 复现 prob03 M1 相对差≤1.4e-14、prob02↔4-2 的 Σs'/净负载逐位相同而费用必不同、两链差额三分项归因残差≤1e-6）；上游登记欠账 C4-1/C4-6/C4-7 已权威回写（A8=(b)、AS08 措辞、5000 kW 作用侧）且不改任何 accepted 数值或结论 hash。14 项已登记技术债与强制披露纪律见 reports/cross_question_review.md 与 warnings，不构成阻塞。",
+  "summary_path": "reports/final_summary.md",
+  "summary_archive_path": "reports/problems/microgrid_2025/final_summary.md",
+  "summary_built_at": "2026-09-12T00:08:12.421031+00:00",
+  "paper_status": "draft_ready"
 }

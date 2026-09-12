@@ -1,0 +1,89 @@
+\section*{附录}
+\addcontentsline{toc}{section}{附录}
+
+\subsection*{附录 A\quad 支撑材料文件列表}
+
+支撑材料包含五个结果文件、四个问题的完整可运行源程序，以及 AI 工具使用记录，清单如下。
+
+\begin{center}
+\small
+\begin{tabular}{p{2.6cm}p{6.4cm}p{5.4cm}}
+\toprule
+类别 & 文件 & 说明 \\
+\midrule
+结果文件 & \texttt{result1.xlsx} & 问题一的计划购电量与储能充放电量 \\
+结果文件 & \texttt{result2.xlsx} & 问题二的计划购电量、充放电量与紧急购电量 \\
+结果文件 & \texttt{result3.xlsx} & 问题三的计划购电量、调整购电量、充放电量与紧急购电量 \\
+结果文件 & \texttt{result4-2.xlsx} & 波动电价下重算问题二的完整结果 \\
+结果文件 & \texttt{result4-3.xlsx} & 波动电价下重算问题三的完整结果 \\
+源程序 & \texttt{prob01\_io.py}、\texttt{prob01\_model.py}、\texttt{run\_prob01.py} & 问题一：输入输出、模型构造、求解主程序 \\
+源程序 & \texttt{prob02\_io.py}、\texttt{prob02\_model.py}、\texttt{run\_prob02.py} & 问题二：输入输出、模型构造、求解主程序 \\
+源程序 & \texttt{prob03\_io.py}、\texttt{prob03\_model.py}、\texttt{run\_prob03.py} & 问题三：输入输出、三层模型、求解主程序 \\
+源程序 & \texttt{prob04\_io.py}、\texttt{prob04\_model.py}、\texttt{prob04\_predict.py}、\texttt{run\_prob04.py} & 问题四：输入输出、两链模型、价格预测器、求解主程序 \\
+其他 & 《AI 工具使用详情》 & AI 工具使用记录与人工复核说明 \\
+\bottomrule
+\end{tabular}
+\end{center}
+
+四个问题的求解程序共用同一套接口约定：输入为附件 \texttt{xlsx} 文件路径与结果模板路径，输出为解序列、交付表格、运行清单与交付工作簿。复现命令形如
+
+\begin{center}
+\small
+\texttt{python run\_prob01.py --data 附件1.xlsx --template result1.xlsx --output <输出目录>}
+\end{center}
+
+所有程序均为 Python 3.14 编写，仅依赖 \texttt{numpy}、\texttt{scipy}、\texttt{openpyxl} 三个第三方库；线性规划统一调用 \texttt{scipy.optimize.linprog} 的 \texttt{highs} 方法在 CPU 上求解，不需要 GPU，也不依赖任何商业求解器。
+
+\subsection*{附录 B\quad 求解程序清单}
+
+\subsubsection*{B.1\quad 问题一：输入输出模块}
+
+\lstinputlisting[language=Python]{../problems/microgrid_2025/prob01/versions/assumption_v003/code/prob01_io.py}
+
+\subsubsection*{B.2\quad 问题一：模型构造模块}
+
+\lstinputlisting[language=Python]{../problems/microgrid_2025/prob01/versions/assumption_v003/code/prob01_model.py}
+
+\subsubsection*{B.3\quad 问题一：求解主程序}
+
+\lstinputlisting[language=Python]{../problems/microgrid_2025/prob01/versions/assumption_v003/code/run_prob01.py}
+
+\subsubsection*{B.4\quad 问题二：输入输出模块}
+
+\lstinputlisting[language=Python]{../problems/microgrid_2025/prob02/versions/assumption_v001/code/prob02_io.py}
+
+\subsubsection*{B.5\quad 问题二：模型构造模块}
+
+\lstinputlisting[language=Python]{../problems/microgrid_2025/prob02/versions/assumption_v001/code/prob02_model.py}
+
+\subsubsection*{B.6\quad 问题二：求解主程序}
+
+\lstinputlisting[language=Python]{../problems/microgrid_2025/prob02/versions/assumption_v001/code/run_prob02.py}
+
+\subsubsection*{B.7\quad 问题三：输入输出模块}
+
+\lstinputlisting[language=Python]{../problems/microgrid_2025/prob03/versions/assumption_v001/code/prob03_io.py}
+
+\subsubsection*{B.8\quad 问题三：三层模型模块}
+
+\lstinputlisting[language=Python]{../problems/microgrid_2025/prob03/versions/assumption_v001/code/prob03_model.py}
+
+\subsubsection*{B.9\quad 问题三：求解主程序}
+
+\lstinputlisting[language=Python]{../problems/microgrid_2025/prob03/versions/assumption_v001/code/run_prob03.py}
+
+\subsubsection*{B.10\quad 问题四：输入输出模块}
+
+\lstinputlisting[language=Python]{../problems/microgrid_2025/prob04/versions/assumption_v001/code/prob04_io.py}
+
+\subsubsection*{B.11\quad 问题四：两条链的模型模块}
+
+\lstinputlisting[language=Python]{../problems/microgrid_2025/prob04/versions/assumption_v001/code/prob04_model.py}
+
+\subsubsection*{B.12\quad 问题四：价格预测器}
+
+\lstinputlisting[language=Python]{../problems/microgrid_2025/prob04/versions/assumption_v001/code/prob04_predict.py}
+
+\subsubsection*{B.13\quad 问题四：求解主程序}
+
+\lstinputlisting[language=Python]{../problems/microgrid_2025/prob04/versions/assumption_v001/code/run_prob04.py}
